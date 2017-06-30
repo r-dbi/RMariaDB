@@ -111,7 +111,7 @@ setGeneric("dbEscapeStrings", function(con, strings, ...) {
 #'
 #' @keywords internal
 #' @export
-mysqlBuildTableDefinition <- function(dbObj, name, obj, field.types = NULL,
+mariadbBuildTableDefinition <- function(dbObj, name, obj, field.types = NULL,
   row.names = TRUE, ...) {
 
   warning("Deprecated. Please use DBI::sqlCreateTable instead.")

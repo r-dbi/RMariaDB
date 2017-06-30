@@ -58,7 +58,7 @@ fetches and clears for you.
 \code{dbFetch()} instead.
 }
 \examples{
-if (mysqlHasDefault()) {
+if (mariadbHasDefault()) {
 con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 dbWriteTable(con, "arrests", datasets::USArrests, overwrite = TRUE)
 

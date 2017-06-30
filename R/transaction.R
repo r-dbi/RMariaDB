@@ -11,7 +11,7 @@ NULL
 #'  \code{\link{dbConnect}}.
 #' @param ... Unused.
 #' @examples
-#' if (mysqlHasDefault()) {
+#' if (mariadbHasDefault()) {
 #' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 #' df <- data.frame(id = 1:5)
 #'
@@ -32,17 +32,17 @@ NULL
 #' @export
 #' @rdname transactions
 setMethod("dbCommit", "MariaDBConnection", function(conn, ...) {
-  mysqlExecQuery(conn, "COMMIT")
+  mariadbExecQuery(conn, "COMMIT")
 })
 
 #' @export
 #' @rdname transactions
 setMethod("dbBegin", "MariaDBConnection", function(conn, ...) {
-  mysqlExecQuery(conn, "START TRANSACTION")
+  mariadbExecQuery(conn, "START TRANSACTION")
 })
 
 #' @export
 #' @rdname transactions
 setMethod("dbRollback", "MariaDBConnection", function(conn, ...) {
-  mysqlExecQuery(conn, "ROLLBACK")
+  mariadbExecQuery(conn, "ROLLBACK")
 })

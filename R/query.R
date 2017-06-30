@@ -24,7 +24,7 @@ NULL
 #' @param ... Unused. Needed for compatibility with generic.
 #' @export
 #' @examples
-#' if (mysqlHasDefault()) {
+#' if (mariadbHasDefault()) {
 #' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 #' dbWriteTable(con, "arrests", datasets::USArrests, overwrite = TRUE)
 #'
@@ -94,7 +94,7 @@ setMethod("dbGetStatement", "MariaDBResult", function(res, ...) {
 #' @param res An object of class \code{\linkS4class{MariaDBResult}}
 #' @param ... Ignored. Needed for compatibility with generic
 #' @examples
-#' if (mysqlHasDefault()) {
+#' if (mariadbHasDefault()) {
 #' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 #' dbWriteTable(con, "t1", datasets::USArrests, overwrite = TRUE)
 #'
@@ -152,6 +152,6 @@ setMethod("dbHasCompleted", "MariaDBResult", function(res, ...) {
 #' @param con A MariaDB connection.
 #' @param sql A sql string to execute
 #' @export
-mysqlExecQuery <- function(con, sql) {
+mariadbExecQuery <- function(con, sql) {
   connection_exec(con@ptr, sql)
 }

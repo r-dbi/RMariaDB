@@ -83,12 +83,12 @@ dbDisconnect(con)
 }
 
 # All examples use the rs-dbi group by default.
-if (mysqlHasDefault()) {
+if (mariadbHasDefault()) {
   con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
   con
   dbDisconnect(con)
 }
-if (mysqlHasDefault()) {
+if (mariadbHasDefault()) {
 # connect to a database and load some data
 con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 dbWriteTable(con, "USArrests", datasets::USArrests, overwrite = TRUE)

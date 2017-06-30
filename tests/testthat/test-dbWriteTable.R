@@ -1,7 +1,7 @@
 context("dbWriteTable")
 
 # test_that("can't override existing table with default options", {
-#   con <- mysqlDefault()
+#   con <- mariadbDefault()
 #
 #   x <- data.frame(col1 = 1:10, col2 = letters[1:10])
 #   dbWriteTable(con, "t1", x, temporary = TRUE)
@@ -11,7 +11,7 @@ context("dbWriteTable")
 
 # Not generic enough for DBItest
 test_that("throws error if constraint violated", {
-  con <- mysqlDefault()
+  con <- mariadbDefault()
 
   x <- data.frame(col1 = 1:10, col2 = letters[1:10])
 
@@ -25,7 +25,7 @@ test_that("throws error if constraint violated", {
 
 # Available only in MariaDB
 test_that("can read file from disk", {
-  con <- mysqlDefault()
+  con <- mariadbDefault()
 
   expected <- data.frame(
     a = c(1:3, NA),

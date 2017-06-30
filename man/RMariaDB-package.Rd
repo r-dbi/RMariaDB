@@ -11,9 +11,9 @@ Implements DBI-compliant Interface to MariaDB and MySQL Databases.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/rstats-db/rmysql}
+  \item \url{https://github.com/rstats-db/RMariaDB}
   \item \url{https://downloads.mariadb.org/connector-c/}
-  \item Report bugs at \url{https://github.com/rstats-db/rmysql/issues}
+  \item Report bugs at \url{https://github.com/rstats-db/RMariaDB/issues}
 }
 
 }

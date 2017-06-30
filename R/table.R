@@ -19,7 +19,7 @@ NULL
 #' @inheritParams DBI::sqlRownamesToColumn
 #' @param ... Unused, needed for compatiblity with generic.
 #' @examples
-#' if (mysqlHasDefault()) {
+#' if (mariadbHasDefault()) {
 #' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 #'
 #' # By default, row names are written in a column to row_names, and
@@ -28,11 +28,11 @@ NULL
 #' dbReadTable(con, "mtcars")
 #' dbReadTable(con, "mtcars", row.names = NULL)
 #' }
-#' @name mysql-tables
+#' @name mariadb-tables
 NULL
 
 #' @export
-#' @rdname mysql-tables
+#' @rdname mariadb-tables
 setMethod("dbReadTable", c("MariaDBConnection", "character"),
   function(conn, name, row.names = NA, check.names = TRUE, ...) {
     name <- dbQuoteIdentifier(conn, name)
@@ -60,7 +60,7 @@ setMethod("dbReadTable", c("MariaDBConnection", "character"),
 #'   when the connection is closed.
 #' @param allow.keywords DEPRECATED.
 #' @export
-#' @rdname mysql-tables
+#' @rdname mariadb-tables
 setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
   function(conn, name, value, field.types = NULL, row.names = NA,
            overwrite = FALSE, append = FALSE, ..., allow.keywords = FALSE,
@@ -134,7 +134,7 @@ setMethod("sqlData", "MariaDBConnection", function(con, value, row.names = NA, .
 })
 
 #' @export
-#' @rdname mysql-tables
+#' @rdname mariadb-tables
 #' @importFrom utils read.table
 #' @param sep field separator character
 #' @param eol End-of-line separator
@@ -191,20 +191,20 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
       "LINES TERMINATED BY ", dbQuoteString(conn, eol), "\n",
       "IGNORE ", skip + as.integer(header), " LINES")
 
-    mysqlExecQuery(conn, sql)
+    mariadbExecQuery(conn, sql)
 
     TRUE
   }
 )
 
 #' @export
-#' @rdname mysql-tables
+#' @rdname mariadb-tables
 setMethod("dbListTables", "MariaDBConnection", function(conn, ...) {
   dbGetQuery(conn, "SHOW TABLES")[[1]]
 })
 
 #' @export
-#' @rdname mysql-tables
+#' @rdname mariadb-tables
 setMethod("dbExistsTable", c("MariaDBConnection", "character"),
   function(conn, name, ...) {
     tryCatch({
@@ -219,7 +219,7 @@ setMethod("dbExistsTable", c("MariaDBConnection", "character"),
 )
 
 #' @export
-#' @rdname mysql-tables
+#' @rdname mariadb-tables
 setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
   function(conn, name, ...){
     name <- dbQuoteIdentifier(conn, name)

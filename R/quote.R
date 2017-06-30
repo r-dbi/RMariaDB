@@ -6,9 +6,9 @@ NULL
 #' In MariaDB, identifiers are enclosed in backticks, e.g. \code{`x`}.
 #'
 #' @keywords internal
-#' @name mysql-quoting
+#' @name mariadb-quoting
 #' @examples
-#' if (mysqlHasDefault()) {
+#' if (mariadbHasDefault()) {
 #'   con <- dbConnect(RMariaDB::MariaDB())
 #'   dbQuoteIdentifier(con, c("a b", "a`b"))
 #'   dbQuoteString(con, c("a b", "a'b"))
@@ -16,7 +16,7 @@ NULL
 #' }
 NULL
 
-#' @rdname mysql-quoting
+#' @rdname mariadb-quoting
 #' @export
 setMethod("dbQuoteIdentifier", c("MariaDBConnection", "character"),
   function(conn, x, ...) {
@@ -25,7 +25,7 @@ setMethod("dbQuoteIdentifier", c("MariaDBConnection", "character"),
   }
 )
 
-#' @rdname mysql-quoting
+#' @rdname mariadb-quoting
 #' @export
 setMethod("dbQuoteString", c("MariaDBConnection", "character"),
   function(conn, x, ...) {

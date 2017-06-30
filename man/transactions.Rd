@@ -26,7 +26,7 @@ Note that in MariaDB DDL statements (e.g. \code{CREATE TABLE}) can not
 be rolled back.
 }
 \examples{
-if (mysqlHasDefault()) {
+if (mariadbHasDefault()) {
 con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 df <- data.frame(id = 1:5)
 

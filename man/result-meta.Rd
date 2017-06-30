@@ -26,7 +26,7 @@
 See documentation of generics for more details.
 }
 \examples{
-if (mysqlHasDefault()) {
+if (mariadbHasDefault()) {
 con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 dbWriteTable(con, "t1", datasets::USArrests, overwrite = TRUE)
 

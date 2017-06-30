@@ -30,7 +30,7 @@ setMethod("dbIsValid", "MariaDBDriver", function(dbObj) {
 #'   representing the loaded client library version.
 #' @export
 #' @examples
-#' mysqlClientLibraryVersions()
-mysqlClientLibraryVersions <- function() {
+#' mariadbClientLibraryVersions()
+mariadbClientLibraryVersions <- function() {
   version()
 }

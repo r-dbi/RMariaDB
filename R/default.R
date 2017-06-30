@@ -3,17 +3,17 @@
 #' RMariaDB examples and tests connect to a database defined by the
 #' \code{rs-dbi} group in \code{~/.my.cnf}. This function checks if that
 #' database is available, and if not, displays an informative message.
-#' \code{mysqlDefault} works similarly but throws a testthat skip condition
+#' \code{mariadbDefault} works similarly but throws a testthat skip condition
 #' on failure, making it suitable for use in tests.
 #'
 #' @export
 #' @examples
-#' if (mysqlHasDefault()) {
+#' if (mariadbHasDefault()) {
 #'   db <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 #'   dbListTables(db)
 #'   dbDisconnect(db)
 #' }
-mysqlHasDefault <- function() {
+mariadbHasDefault <- function() {
   tryCatch({
     dbConnect(MariaDB(), dbname = "test")
     TRUE
@@ -28,8 +28,8 @@ mysqlHasDefault <- function() {
 }
 
 #' @export
-#' @rdname mysqlHasDefault
-mysqlDefault <- function() {
+#' @rdname mariadbHasDefault
+mariadbDefault <- function() {
   tryCatch({
     dbConnect(MariaDB(), dbname = "test")
   }, error = function(...) {
