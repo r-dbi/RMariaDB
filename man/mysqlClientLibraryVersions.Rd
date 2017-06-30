@@ -2,7 +2,7 @@
 % Please edit documentation in R/MySQLDriver.R
 \name{mysqlClientLibraryVersions}
 \alias{mysqlClientLibraryVersions}
-\title{MySQL Check for Compiled Versus Loaded Client Library Versions}
+\title{MariaDB Check for Compiled Versus Loaded Client Library Versions}
 \usage{
 mysqlClientLibraryVersions()
 }

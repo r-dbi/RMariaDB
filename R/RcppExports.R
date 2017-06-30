@@ -2,70 +2,70 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 connection_create <- function(host, user, password, db, port, unix_socket, client_flag, groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher) {
-    .Call('RMySQL_connection_create', PACKAGE = 'RMySQL', host, user, password, db, port, unix_socket, client_flag, groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher)
+    .Call('RMariaDB_connection_create', PACKAGE = 'RMariaDB', host, user, password, db, port, unix_socket, client_flag, groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher)
 }
 
 connection_release <- function(con) {
-    invisible(.Call('RMySQL_connection_release', PACKAGE = 'RMySQL', con))
+    invisible(.Call('RMariaDB_connection_release', PACKAGE = 'RMariaDB', con))
 }
 
 connection_info <- function(con) {
-    .Call('RMySQL_connection_info', PACKAGE = 'RMySQL', con)
+    .Call('RMariaDB_connection_info', PACKAGE = 'RMariaDB', con)
 }
 
 connection_valid <- function(con) {
-    .Call('RMySQL_connection_valid', PACKAGE = 'RMySQL', con)
+    .Call('RMariaDB_connection_valid', PACKAGE = 'RMariaDB', con)
 }
 
 connection_quote_string <- function(con, input) {
-    .Call('RMySQL_connection_quote_string', PACKAGE = 'RMySQL', con, input)
+    .Call('RMariaDB_connection_quote_string', PACKAGE = 'RMariaDB', con, input)
 }
 
 connection_exec <- function(con, sql) {
-    .Call('RMySQL_connection_exec', PACKAGE = 'RMySQL', con, sql)
+    .Call('RMariaDB_connection_exec', PACKAGE = 'RMariaDB', con, sql)
 }
 
 result_create <- function(con, sql) {
-    .Call('RMySQL_result_create', PACKAGE = 'RMySQL', con, sql)
+    .Call('RMariaDB_result_create', PACKAGE = 'RMariaDB', con, sql)
 }
 
 result_column_info <- function(rs) {
-    .Call('RMySQL_result_column_info', PACKAGE = 'RMySQL', rs)
+    .Call('RMariaDB_result_column_info', PACKAGE = 'RMariaDB', rs)
 }
 
 result_fetch <- function(rs, n) {
-    .Call('RMySQL_result_fetch', PACKAGE = 'RMySQL', rs, n)
+    .Call('RMariaDB_result_fetch', PACKAGE = 'RMariaDB', rs, n)
 }
 
 result_bind <- function(rs, params) {
-    invisible(.Call('RMySQL_result_bind', PACKAGE = 'RMySQL', rs, params))
+    invisible(.Call('RMariaDB_result_bind', PACKAGE = 'RMariaDB', rs, params))
 }
 
 result_bind_rows <- function(rs, params) {
-    invisible(.Call('RMySQL_result_bind_rows', PACKAGE = 'RMySQL', rs, params))
+    invisible(.Call('RMariaDB_result_bind_rows', PACKAGE = 'RMariaDB', rs, params))
 }
 
 result_release <- function(rs) {
-    invisible(.Call('RMySQL_result_release', PACKAGE = 'RMySQL', rs))
+    invisible(.Call('RMariaDB_result_release', PACKAGE = 'RMariaDB', rs))
 }
 
 result_rows_affected <- function(rs) {
-    .Call('RMySQL_result_rows_affected', PACKAGE = 'RMySQL', rs)
+    .Call('RMariaDB_result_rows_affected', PACKAGE = 'RMariaDB', rs)
 }
 
 result_rows_fetched <- function(rs) {
-    .Call('RMySQL_result_rows_fetched', PACKAGE = 'RMySQL', rs)
+    .Call('RMariaDB_result_rows_fetched', PACKAGE = 'RMariaDB', rs)
 }
 
 result_complete <- function(rs) {
-    .Call('RMySQL_result_complete', PACKAGE = 'RMySQL', rs)
+    .Call('RMariaDB_result_complete', PACKAGE = 'RMariaDB', rs)
 }
 
 result_active <- function(rs) {
-    .Call('RMySQL_result_active', PACKAGE = 'RMySQL', rs)
+    .Call('RMariaDB_result_active', PACKAGE = 'RMariaDB', rs)
 }
 
 version <- function() {
-    .Call('RMySQL_version', PACKAGE = 'RMySQL')
+    .Call('RMariaDB_version', PACKAGE = 'RMariaDB')
 }
 

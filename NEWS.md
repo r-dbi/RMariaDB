@@ -1,18 +1,18 @@
-## RMySQL 0.11-5 (2016-12-29)
+## RMariaDB 0.11-5 (2016-12-29)
 
 - Add package-level documentation (#159, @Ironholds).
-- The `host` and `db` slots of the `MySQLConnection` object now contain actual host and database names, even if they were retrieved from a configuration file (#127, @peternowee).
+- The `host` and `db` slots of the `MariaDBConnection` object now contain actual host and database names, even if they were retrieved from a configuration file (#127, @peternowee).
 - Fix typos in the documentation of `dbConnect()` (#175, @mcol).
 
 
-## RMySQL 0.11-4 (2016-12-29)
+## RMariaDB 0.11-4 (2016-12-29)
 
 - Adapt to `DBItest` changes.
 - Fix compiler warnings.
 - Improve compatibility with different versions of `libmysql`.
 
 
-# RMySQL 0.11-3 (2016-06-08)
+# RMariaDB 0.11-3 (2016-06-08)
 
 - Fix failing compilation on Linux if a  function is declared elsewhere.
 - More robust check for numeric `NA` values.
@@ -24,19 +24,19 @@
 - Use container-based builds on Travis (#143).
 
 
-# RMySQL 0.11-2 (2016-03-29)
+# RMariaDB 0.11-2 (2016-03-29)
 
 - Use the `DBItest` package for testing (#100).
 
 
-# RMySQL 0.11-1 (2016-03-24)
+# RMariaDB 0.11-1 (2016-03-24)
 
- *  RMySQL fully supports DATE and DATETIME columns. On output, DATE columns
+ *  RMariaDB fully supports DATE and DATETIME columns. On output, DATE columns
     will be converted to vectors of `Date`s and DATETIME will be converted
-    to `POSIXct`. To faciliate correct computation of time zone, RMySQL
+    to `POSIXct`. To faciliate correct computation of time zone, RMariaDB
     always sets the session timezone to UTC.
 
- *  RMySQL has been rewritten (essentially from scratch) in C++ with
+ *  RMariaDB has been rewritten (essentially from scratch) in C++ with
     Rcpp. This has considerably reduced the amount of code, and allow us to
     take advantage of the more sophisticated memory management tools available in
     Rcpp. This rewrite should yield some minor performance improvements, but 
@@ -105,12 +105,12 @@
     `mysqlCloseResult`, `mysqlImportFile`, `mysqlReadTable`, `mysqlWriteTable`,
     `mysqlEscapeStrings`, `mysqlDataType`, `safe.write`.
 
- *  RMySQL gains transaction support with `dbBegin()`, `dbCommit()`,
-    and `dbRollback()`, but note that MySQL does not allow data definition
+ *  RMariaDB gains transaction support with `dbBegin()`, `dbCommit()`,
+    and `dbRollback()`, but note that MariaDB does not allow data definition
     language statements to be rolled back.
 
- *  The MySQLObject base class has been removed - there is no real shared
-    behaviour for MySQLDriver, MySQLConnection and MySQLResult so this
+ *  The MariaDBObject base class has been removed - there is no real shared
+    behaviour for MariaDBDriver, MariaDBConnection and MariaDBResult so this
     simplifies the code
 
  *  Implemented methods for `dbIsValid()`; please use these instead of
@@ -143,5 +143,5 @@
 
  *  Assorted fixes accumulated since last release 3 years ago.
 
- * `MySQL()` no longer has `force.reload` argument - it's not obvious that
+ * `MariaDB()` no longer has `force.reload` argument - it's not obvious that
     this ever worked.

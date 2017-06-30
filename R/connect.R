@@ -1,28 +1,28 @@
-#' @include MySQLConnection.R
+#' @include MariaDBConnection.R
 NULL
 
-#' Connect/disconnect to a MySQL DBMS
+#' Connect/disconnect to a MariaDB DBMS
 #'
 #' These methods are straight-forward implementations of the corresponding
 #' generic functions.
 #'
-#' @param drv an object of class \code{MySQLDriver}, or the character string
-#'   "MySQL" or an \code{MySQLConnection}.
+#' @param drv an object of class \code{MariaDBDriver}, or the character string
+#'   "MariaDB" or an \code{MariaDBConnection}.
 #' @param username,password Username and password. If username omitted,
 #'   defaults to the current user. If password is omitted, only users
 #'   without a password can log in.
 #' @param dbname string with the database name or NULL. If not NULL, the
 #'   connection sets the default database to this value.
-#' @param host string identifying the host machine running the MySQL server or
+#' @param host string identifying the host machine running the MariaDB server or
 #'   NULL. If NULL or the string \code{"localhost"}, a connection to the local
 #'   host is assumed.
 #' @param unix.socket (optional) string of the unix socket or named pipe.
 #' @param port (optional) integer of the TCP/IP default port.
-#' @param client.flag (optional) integer setting various MySQL client flags. See
-#'   the MySQL manual for details.
+#' @param client.flag (optional) integer setting various MariaDB client flags. See
+#'   the MariaDB manual for details.
 #' @param groups string identifying a section in the \code{default.file} to use
-#'   for setting authentication parameters (see \code{\link{MySQL}}).
-#' @param default.file string of the filename with MySQL client options.
+#'   for setting authentication parameters (see \code{\link{MariaDB}}).
+#' @param default.file string of the filename with MariaDB client options.
 #'   Defaults to \code{\$HOME/.my.cnf}
 #' @param ssl.key (optional) string of the filename of the SSL key file to use.
 #' @param ssl.cert (optional) string of the filename of the SSL certificate to
@@ -37,15 +37,15 @@ NULL
 #' @export
 #' @examples
 #' \dontrun{
-#' # Connect to a MySQL database running locally
-#' con <- dbConnect(RMySQL::MySQL(), dbname = "mydb")
+#' # Connect to a MariaDB database running locally
+#' con <- dbConnect(RMariaDB::MariaDB(), dbname = "mydb")
 #' # Connect to a remote database with username and password
-#' con <- dbConnect(RMySQL::MySQL(), host = "mydb.mycompany.com",
+#' con <- dbConnect(RMariaDB::MariaDB(), host = "mydb.mycompany.com",
 #'   user = "abc", password = "def")
 #' # But instead of supplying the username and password in code, it's usually
 #' # better to set up a group in your .my.cnf (usually located in your home
 #' directory). Then it's less likely you'll inadvertently share them.
-#' con <- dbConnect(RMySQL::MySQL(), group = "test")
+#' con <- dbConnect(RMariaDB::MariaDB(), group = "test")
 #'
 #' # Always cleanup by disconnecting the database
 #' dbDisconnect(con)
@@ -53,12 +53,12 @@ NULL
 #'
 #' # All examples use the rs-dbi group by default.
 #' if (mysqlHasDefault()) {
-#'   con <- dbConnect(RMySQL::MySQL(), dbname = "test")
+#'   con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 #'   con
 #'   dbDisconnect(con)
 #' }
 #' @export
-setMethod("dbConnect", "MySQLDriver",
+setMethod("dbConnect", "MariaDBDriver",
   function(drv, dbname = NULL, username = NULL, password = NULL, host = NULL,
     unix.socket = NULL, port = 0, client.flag = 0,
     groups = "rs-dbi", default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
@@ -70,7 +70,7 @@ setMethod("dbConnect", "MySQLDriver",
 
     info <- connection_info(ptr)
 
-    con <- new("MySQLConnection",
+    con <- new("MariaDBConnection",
       ptr = ptr,
       host = info$host,
       db = info$dbname
@@ -86,11 +86,11 @@ setMethod("dbConnect", "MySQLDriver",
 #' @param fetch.default.rec DEPRECATED
 #' @export
 #' @import methods DBI
-#' @rdname dbConnect-MySQLDriver-method
+#' @rdname dbConnect-MariaDBDriver-method
 #' @examples
 #' if (mysqlHasDefault()) {
 #' # connect to a database and load some data
-#' con <- dbConnect(RMySQL::MySQL(), dbname = "test")
+#' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 #' dbWriteTable(con, "USArrests", datasets::USArrests, overwrite = TRUE)
 #'
 #' # query
@@ -106,7 +106,7 @@ setMethod("dbConnect", "MySQLDriver",
 #' dbRemoveTable(con, "USArrests")
 #' dbDisconnect(con)
 #' }
-MySQL <- function(max.con=16, fetch.default.rec = 500) {
+MariaDB <- function(max.con=16, fetch.default.rec = 500) {
   if (!missing(max.con)) {
     warning("`max.con` argument is ignored", call. = FALSE)
   }
@@ -114,25 +114,25 @@ MySQL <- function(max.con=16, fetch.default.rec = 500) {
     warning("`fetch.default.rec` argument is ignored", call. = FALSE)
   }
 
-  new("MySQLDriver")
+  new("MariaDBDriver")
 }
 
 #' Constants
 #'
-#' @aliases .MySQLPkgName .MySQLPkgVersion .MySQLPkgRCS
-#' .MySQLSQLKeywords CLIENT_LONG_PASSWORD CLIENT_FOUND_ROWS CLIENT_LONG_FLAG
+#' @aliases .MariaDBPkgName .MariaDBPkgVersion .MariaDBPkgRCS
+#' .MariaDBSQLKeywords CLIENT_LONG_PASSWORD CLIENT_FOUND_ROWS CLIENT_LONG_FLAG
 #' CLIENT_CONNECT_WITH_DB CLIENT_NO_SCHEMA CLIENT_COMPRESS CLIENT_ODBC
 #' CLIENT_LOCAL_FILES CLIENT_IGNORE_SPACE CLIENT_PROTOCOL_41 CLIENT_INTERACTIVE
 #' CLIENT_SSL CLIENT_IGNORE_SIGPIPE CLIENT_TRANSACTIONS CLIENT_RESERVED
 #' CLIENT_SECURE_CONNECTION CLIENT_MULTI_STATEMENTS CLIENT_MULTI_RESULTS
-#' @section Constants: \code{.MySQLPkgName} (currently \code{"RMySQL"}),
-#' \code{.MySQLPkgVersion} (the R package version), \code{.MySQLPkgRCS} (the
-#' RCS revision), \code{.MySQLSQLKeywords} (a lot!)
+#' @section Constants: \code{.MariaDBPkgName} (currently \code{"RMariaDB"}),
+#' \code{.MariaDBPkgVersion} (the R package version), \code{.MariaDBPkgRCS} (the
+#' RCS revision), \code{.MariaDBSQLKeywords} (a lot!)
 #' @name constants
 NULL
 
 ## The following client flags were copied from mysql_com.h (version 4.1.13)
-## but it may not make sense to set some of this from RMySQL.
+## but it may not make sense to set some of this from RMariaDB.
 
 #' @export
 CLIENT_LONG_PASSWORD <-   1    # new more secure passwords

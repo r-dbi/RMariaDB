@@ -4,7 +4,7 @@
 
 #include <mysql.h>
 
-void R_init_RMySQL(DllInfo *info){
+void R_init_RMariaDB(DllInfo *info){
   mysql_library_init(0,NULL,NULL);
   R_registerRoutines(info, NULL, NULL, NULL, NULL);
   R_useDynamicSymbols(info, TRUE);
@@ -21,12 +21,12 @@ void R_init_RMySQL(DllInfo *info){
    int compiled=MYSQL_VERSION_ID;
    int loaded = (int)mysql_get_client_version();
    if ( (compiled-(compiled%100)) != (loaded-(loaded%100)) ){
-   warning("\n\n   RMySQL was compiled with MySQL %s but loading MySQL %s instead!\n   This may cause problems with your database connections.\n\n   Please install MySQL %s.\n\n   If you have already done so, you may need to set your environment\n   variable MYSQL_HOME to the proper install directory.",MYSQL_SERVER_VERSION,mysql_get_client_info(),MYSQL_SERVER_VERSION);
+   warning("\n\n   RMariaDB was compiled with MariaDB %s but loading MariaDB %s instead!\n   This may cause problems with your database connections.\n\n   Please install MariaDB %s.\n\n   If you have already done so, you may need to set your environment\n   variable MYSQL_HOME to the proper install directory.",MYSQL_SERVER_VERSION,mysql_get_client_info(),MYSQL_SERVER_VERSION);
    }
 
    */
 }
 
-void R_unload_RMySQL(DllInfo *info){
+void R_unload_RMariaDB(DllInfo *info){
   mysql_library_end();
 }

@@ -3,22 +3,22 @@
 \docType{methods}
 \name{result-meta}
 \alias{result-meta}
-\alias{dbColumnInfo,MySQLResult-method}
-\alias{dbGetRowsAffected,MySQLResult-method}
-\alias{dbGetRowCount,MySQLResult-method}
-\alias{dbHasCompleted,MySQLResult-method}
+\alias{dbColumnInfo,MariaDBResult-method}
+\alias{dbGetRowsAffected,MariaDBResult-method}
+\alias{dbGetRowCount,MariaDBResult-method}
+\alias{dbHasCompleted,MariaDBResult-method}
 \title{Database interface meta-data.}
 \usage{
-\S4method{dbColumnInfo}{MySQLResult}(res, ...)
+\S4method{dbColumnInfo}{MariaDBResult}(res, ...)
 
-\S4method{dbGetRowsAffected}{MySQLResult}(res, ...)
+\S4method{dbGetRowsAffected}{MariaDBResult}(res, ...)
 
-\S4method{dbGetRowCount}{MySQLResult}(res, ...)
+\S4method{dbGetRowCount}{MariaDBResult}(res, ...)
 
-\S4method{dbHasCompleted}{MySQLResult}(res, ...)
+\S4method{dbHasCompleted}{MariaDBResult}(res, ...)
 }
 \arguments{
-\item{res}{An object of class \code{\linkS4class{MySQLResult}}}
+\item{res}{An object of class \code{\linkS4class{MariaDBResult}}}
 
 \item{...}{Ignored. Needed for compatibility with generic}
 }
@@ -27,7 +27,7 @@ See documentation of generics for more details.
 }
 \examples{
 if (mysqlHasDefault()) {
-con <- dbConnect(RMySQL::MySQL(), dbname = "test")
+con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 dbWriteTable(con, "t1", datasets::USArrests, overwrite = TRUE)
 
 rs <- dbSendQuery(con, "SELECT * FROM t1 WHERE UrbanPop >= 80")

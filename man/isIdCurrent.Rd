@@ -13,6 +13,6 @@ a logical scalar.
 DEPRECATED
 }
 \examples{
-dbIsValid(MySQL())
+dbIsValid(MariaDB())
 }
 \keyword{internal}

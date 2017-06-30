@@ -3,20 +3,20 @@
 \docType{methods}
 \name{mysql-quoting}
 \alias{mysql-quoting}
-\alias{dbQuoteIdentifier,MySQLConnection,character-method}
-\alias{dbQuoteString,MySQLConnection,character-method}
-\title{Quote MySQL strings and identifiers.}
+\alias{dbQuoteIdentifier,MariaDBConnection,character-method}
+\alias{dbQuoteString,MariaDBConnection,character-method}
+\title{Quote MariaDB strings and identifiers.}
 \usage{
-\S4method{dbQuoteIdentifier}{MySQLConnection,character}(conn, x, ...)
+\S4method{dbQuoteIdentifier}{MariaDBConnection,character}(conn, x, ...)
 
-\S4method{dbQuoteString}{MySQLConnection,character}(conn, x, ...)
+\S4method{dbQuoteString}{MariaDBConnection,character}(conn, x, ...)
 }
 \description{
-In MySQL, identifiers are enclosed in backticks, e.g. \code{`x`}.
+In MariaDB, identifiers are enclosed in backticks, e.g. \code{`x`}.
 }
 \examples{
 if (mysqlHasDefault()) {
-  con <- dbConnect(RMySQL::MySQL())
+  con <- dbConnect(RMariaDB::MariaDB())
   dbQuoteIdentifier(con, c("a b", "a`b"))
   dbQuoteString(con, c("a b", "a'b"))
   dbDisconnect(con)

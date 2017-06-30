@@ -1,5 +1,5 @@
 #include <Rcpp.h>
-#include "RMySQL_types.h"
+#include "RMariaDB_types.h"
 using namespace Rcpp;
 
 // [[Rcpp::export]]

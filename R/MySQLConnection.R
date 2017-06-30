@@ -1,11 +1,11 @@
-#' Class MySQLConnection.
+#' Class MariaDBConnection.
 #'
-#' \code{MySQLConnection.} objects are usually created by
+#' \code{MariaDBConnection.} objects are usually created by
 #' \code{\link[DBI]{dbConnect}}
 #'
 #' @export
 #' @keywords internal
-setClass("MySQLConnection",
+setClass("MariaDBConnection",
   contains = "DBIConnection",
   slots = list(
     ptr = "externalptr",
@@ -15,23 +15,23 @@ setClass("MySQLConnection",
 )
 
 #' @export
-#' @rdname MySQLConnection-class
-setMethod("dbDisconnect", "MySQLConnection", function(conn, ...) {
+#' @rdname MariaDBConnection-class
+setMethod("dbDisconnect", "MariaDBConnection", function(conn, ...) {
   connection_release(conn@ptr)
   TRUE
 })
 
 #' @export
-#' @rdname MySQLConnection-class
-setMethod("dbGetInfo", "MySQLConnection", function(dbObj, what="", ...) {
+#' @rdname MariaDBConnection-class
+setMethod("dbGetInfo", "MariaDBConnection", function(dbObj, what="", ...) {
   connection_info(dbObj@ptr)
 })
 
 #' @export
-#' @rdname MySQLConnection-class
-setMethod("show", "MySQLConnection", function(object) {
+#' @rdname MariaDBConnection-class
+setMethod("show", "MariaDBConnection", function(object) {
   info <- dbGetInfo(object)
-  cat("<MySQLConnection>\n")
+  cat("<MariaDBConnection>\n")
   if (dbIsValid(object)) {
     cat("  Host:    ", info$host, "\n", sep = "")
     cat("  Server:  ", info$serverVersion, "\n", sep = "")
@@ -47,8 +47,8 @@ setMethod("show", "MySQLConnection", function(object) {
 })
 
 #' @export
-#' @rdname MySQLConnection-class
-setMethod("dbIsValid", "MySQLConnection", function(dbObj) {
+#' @rdname MariaDBConnection-class
+setMethod("dbIsValid", "MariaDBConnection", function(dbObj) {
   connection_valid(dbObj@ptr)
 })
 

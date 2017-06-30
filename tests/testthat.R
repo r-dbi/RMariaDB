@@ -1,4 +1,4 @@
 library(testthat)
-library(RMySQL)
+library(RMariaDB)
 
-test_check("RMySQL")
+test_check("RMariaDB")

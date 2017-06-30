@@ -3,34 +3,34 @@
 \docType{methods}
 \name{mysql-tables}
 \alias{mysql-tables}
-\alias{dbReadTable,MySQLConnection,character-method}
-\alias{dbWriteTable,MySQLConnection,character,data.frame-method}
-\alias{dbWriteTable,MySQLConnection,character,character-method}
-\alias{dbListTables,MySQLConnection-method}
-\alias{dbExistsTable,MySQLConnection,character-method}
-\alias{dbRemoveTable,MySQLConnection,character-method}
-\title{Read and write MySQL tables.}
+\alias{dbReadTable,MariaDBConnection,character-method}
+\alias{dbWriteTable,MariaDBConnection,character,data.frame-method}
+\alias{dbWriteTable,MariaDBConnection,character,character-method}
+\alias{dbListTables,MariaDBConnection-method}
+\alias{dbExistsTable,MariaDBConnection,character-method}
+\alias{dbRemoveTable,MariaDBConnection,character-method}
+\title{Read and write MariaDB tables.}
 \usage{
-\S4method{dbReadTable}{MySQLConnection,character}(conn, name, row.names = NA,
-  check.names = TRUE, ...)
+\S4method{dbReadTable}{MariaDBConnection,character}(conn, name,
+  row.names = NA, check.names = TRUE, ...)
 
-\S4method{dbWriteTable}{MySQLConnection,character,data.frame}(conn, name, value,
-  field.types = NULL, row.names = NA, overwrite = FALSE, append = FALSE,
-  ..., allow.keywords = FALSE, temporary = FALSE)
+\S4method{dbWriteTable}{MariaDBConnection,character,data.frame}(conn, name,
+  value, field.types = NULL, row.names = NA, overwrite = FALSE,
+  append = FALSE, ..., allow.keywords = FALSE, temporary = FALSE)
 
-\S4method{dbWriteTable}{MySQLConnection,character,character}(conn, name, value,
-  field.types = NULL, overwrite = FALSE, append = FALSE, header = TRUE,
-  row.names = FALSE, nrows = 50, sep = ",", eol = "\\n", skip = 0,
-  quote = "\\"", temporary = FALSE, ...)
+\S4method{dbWriteTable}{MariaDBConnection,character,character}(conn, name,
+  value, field.types = NULL, overwrite = FALSE, append = FALSE,
+  header = TRUE, row.names = FALSE, nrows = 50, sep = ",",
+  eol = "\\n", skip = 0, quote = "\\"", temporary = FALSE, ...)
 
-\S4method{dbListTables}{MySQLConnection}(conn, ...)
+\S4method{dbListTables}{MariaDBConnection}(conn, ...)
 
-\S4method{dbExistsTable}{MySQLConnection,character}(conn, name, ...)
+\S4method{dbExistsTable}{MariaDBConnection,character}(conn, name, ...)
 
-\S4method{dbRemoveTable}{MySQLConnection,character}(conn, name, ...)
+\S4method{dbRemoveTable}{MariaDBConnection,character}(conn, name, ...)
 }
 \arguments{
-\item{conn}{a \code{\linkS4class{MySQLConnection}} object, produced by
+\item{conn}{a \code{\linkS4class{MariaDBConnection}} object, produced by
 \code{\link[DBI]{dbConnect}}}
 
 \item{name}{a character string specifying a table name.}
@@ -98,7 +98,7 @@ primitive data, e.g., it does not coerce character data to factors.
 }
 \examples{
 if (mysqlHasDefault()) {
-con <- dbConnect(RMySQL::MySQL(), dbname = "test")
+con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 
 # By default, row names are written in a column to row_names, and
 # automatically read back into the row.names()

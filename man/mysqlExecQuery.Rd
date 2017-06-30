@@ -7,12 +7,12 @@
 mysqlExecQuery(con, sql)
 }
 \arguments{
-\item{con}{A MySQL connection.}
+\item{con}{A MariaDB connection.}
 
 \item{sql}{A sql string to execute}
 }
 \description{
-MySQL has two APIs for submitting queries, one for parameterised queries
+MariaDB has two APIs for submitting queries, one for parameterised queries
 and one for unparameterised. In most cases, you can use the parameterised
 query interface even if you have zero parameter. However, some queries
 (e.g. transaction modification) can not be executed through the

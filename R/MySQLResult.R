@@ -1,11 +1,11 @@
-#' Class MySQLResult
+#' Class MariaDBResult
 #'
-#' MySQL's query results class.  This classes encapsulates the result of an SQL
+#' MariaDB's query results class.  This classes encapsulates the result of an SQL
 #' statement (either \code{select} or not).
 #'
 #' @export
 #' @keywords internal
-setClass("MySQLResult",
+setClass("MariaDBResult",
   contains = "DBIResult",
   slots = list(
     ptr = "externalptr",
@@ -13,9 +13,9 @@ setClass("MySQLResult",
   )
 )
 
-#' @rdname MySQLResult-class
+#' @rdname MariaDBResult-class
 #' @export
-setMethod("dbIsValid", "MySQLResult", function(dbObj) {
+setMethod("dbIsValid", "MariaDBResult", function(dbObj) {
   result_active(dbObj@ptr)
 })
 

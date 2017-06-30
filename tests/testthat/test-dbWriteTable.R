@@ -23,7 +23,7 @@ test_that("throws error if constraint violated", {
   dbDisconnect(con)
 })
 
-# Available only in MySQL
+# Available only in MariaDB
 test_that("can read file from disk", {
   con <- mysqlDefault()
 

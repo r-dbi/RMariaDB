@@ -1,27 +1,27 @@
-#' Class MySQLDriver with constructor MySQL.
+#' Class MariaDBDriver with constructor MariaDB.
 #'
-#' An MySQL driver implementing the R database (DBI) API.
-#' This class should always be initialized with the \code{MySQL()} function.
-#' It returns a singleton that allows you to connect to MySQL.
+#' An MariaDB driver implementing the R database (DBI) API.
+#' This class should always be initialized with the \code{MariaDB()} function.
+#' It returns a singleton that allows you to connect to MariaDB.
 #'
 #' @export
 #' @keywords internal
-setClass("MySQLDriver",
+setClass("MariaDBDriver",
   contains = "DBIDriver",
 )
 
-#' @rdname MySQLDriver-class
-setMethod("dbUnloadDriver", "MySQLDriver", function(drv, ...) {
+#' @rdname MariaDBDriver-class
+setMethod("dbUnloadDriver", "MariaDBDriver", function(drv, ...) {
   TRUE
 })
 
-#' @rdname MySQLDriver-class
+#' @rdname MariaDBDriver-class
 #' @export
-setMethod("dbIsValid", "MySQLDriver", function(dbObj) {
+setMethod("dbIsValid", "MariaDBDriver", function(dbObj) {
   TRUE
 })
 
-#' MySQL Check for Compiled Versus Loaded Client Library Versions
+#' MariaDB Check for Compiled Versus Loaded Client Library Versions
 #'
 #' This function prints out the compiled and loaded client library versions.
 #'

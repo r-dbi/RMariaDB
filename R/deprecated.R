@@ -7,7 +7,7 @@ NULL
 #'
 #' @export
 #' @keywords internal
-setMethod("fetch", c("MySQLResult", "numeric"), function(res, n) {
+setMethod("fetch", c("MariaDBResult", "numeric"), function(res, n) {
   result_fetch(res@ptr, n)
 })
 
@@ -18,29 +18,29 @@ setMethod("fetch", c("MySQLResult", "numeric"), function(res, n) {
 #'
 #' @keywords internal
 #' @export
-setMethod("make.db.names", c("MySQLConnection", "character"),
+setMethod("make.db.names", c("MariaDBConnection", "character"),
   function(dbObj, snames, keywords, unique, allow.keywords, ...) {
-    make.db.names.default(snames, .MySQLKeywords, unique, allow.keywords)
+    make.db.names.default(snames, .MariaDBKeywords, unique, allow.keywords)
   }
 )
 
 #' @export
-#' @rdname make.db.names-MySQLConnection-character-method
-setMethod("SQLKeywords", "MySQLConnection", def = function(dbObj, ...) {
-  .MySQLKeywords
+#' @rdname make.db.names-MariaDBConnection-character-method
+setMethod("SQLKeywords", "MariaDBConnection", def = function(dbObj, ...) {
+  .MariaDBKeywords
 })
 
 #' @export
-#' @rdname make.db.names-MySQLConnection-character-method
-setMethod("isSQLKeyword", c("MySQLConnection", "character"),
-  function(dbObj, name, keywords = .MySQLKeywords, case, ...) {
-    isSQLKeyword.default(name, keywords = .MySQLKeywords, case = case)
+#' @rdname make.db.names-MariaDBConnection-character-method
+setMethod("isSQLKeyword", c("MariaDBConnection", "character"),
+  function(dbObj, name, keywords = .MariaDBKeywords, case, ...) {
+    isSQLKeyword.default(name, keywords = .MariaDBKeywords, case = case)
   }
 )
 
 ## the following reserved words were taken from Section 6.1.7
-## of the MySQL Manual, Version 4.1.1-alpha, html format.
-.MySQLKeywords <- c("ADD", "ALL", "ALTER", "ANALYZE", "AND", "AS", "ASC",
+## of the MariaDB Manual, Version 4.1.1-alpha, html format.
+.MariaDBKeywords <- c("ADD", "ALL", "ALTER", "ANALYZE", "AND", "AS", "ASC",
   "ASENSITIVE", "AUTO_INCREMENT", "BDB", "BEFORE", "BERKELEYDB", "BETWEEN",
   "BIGINT", "BINARY", "BLOB", "BOTH", "BY", "CALL", "CASCADE", "CASE", "CHANGE",
   "CHAR", "CHARACTER", "CHECK", "COLLATE", "COLUMN", "COLUMNS",
@@ -87,7 +87,7 @@ setMethod("isSQLKeyword", c("MySQLConnection", "character"),
 #' @return a logical scalar.
 #' @export
 #' @examples
-#' dbIsValid(MySQL())
+#' dbIsValid(MariaDB())
 isIdCurrent <- function(obj)  {
   .Deprecated("dbIsValid")
   dbIsValid(obj)

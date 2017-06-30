@@ -1,12 +1,14 @@
-Package: RMySQL
+Package: RMariaDB
 Version: 0.11-5
-Title: Database Interface and MySQL Driver for R
+Title: Database Interface and MariaDB Driver for R
 Encoding: UTF-8
-Description: Implements DBI-compliant Interface to MySQL and MariaDB Databases.
-Authors@R: c(person("Jeroen", "Ooms", email = "jeroen@berkeley.edu", role = c("aut", "cre")),
+Description: Implements DBI-compliant Interface to MariaDB and MySQL Databases.
+Authors@R: c(
+    person("Kirill", "Müller", email = "krlmlr+r@mailbox.org", role = c("aut", "cre")),
+    person("Jeroen", "Ooms", role = "aut"),
     person("David", "James", role = "aut"),
     person("Saikat", "DebRoy", role = "aut"),
-    person("Hadley", "Wickham", email = "hadley@rstudio.com", role = "aut"),
+    person("Hadley", "Wickham", role = "aut"),
     person("Jeffrey", "Horner", role = "aut"),
     person("RStudio", role = "cph"),
     person("Kungliga Tekniska Högskolan", role = "ctb", comment = "Source code for timegm"))
@@ -41,4 +43,4 @@ Collate:
     'quote.R'
     'table.R'
     'transaction.R'
-RoxygenNote: 5.0.1.9000
+RoxygenNote: 6.0.1

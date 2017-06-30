@@ -10,7 +10,7 @@ mysqlHasDefault()
 mysqlDefault()
 }
 \description{
-RMySQL examples and tests connect to a database defined by the
+RMariaDB examples and tests connect to a database defined by the
 \code{rs-dbi} group in \code{~/.my.cnf}. This function checks if that
 database is available, and if not, displays an informative message.
 \code{mysqlDefault} works similarly but throws a testthat skip condition
@@ -18,7 +18,7 @@ on failure, making it suitable for use in tests.
 }
 \examples{
 if (mysqlHasDefault()) {
-  db <- dbConnect(RMySQL::MySQL(), dbname = "test")
+  db <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
   dbListTables(db)
   dbDisconnect(db)
 }
