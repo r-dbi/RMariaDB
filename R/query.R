@@ -1,5 +1,5 @@
-#' @include MySQLConnection.R
-#' @include MySQLResult.R
+#' @include MariaDBConnection.R
+#' @include MariaDBResult.R
 NULL
 
 #' Execute a SQL statement on a database connection.

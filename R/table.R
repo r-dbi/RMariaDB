@@ -1,4 +1,4 @@
-#' @include MySQLConnection.R
+#' @include MariaDBConnection.R
 NULL
 
 #' Read and write MariaDB tables.

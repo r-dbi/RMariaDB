@@ -31,10 +31,10 @@ SystemRequirements: libmariadb-client-lgpl-dev or libmysqlclient-dev (deb),
     mariadb-connector-c or mysql-connector-c (brew)
 NeedsCompilation: yes
 Collate:
-    'MySQLConnection.R'
-    'MySQLDriver.R'
-    'MySQLResult.R'
-    'RMySQL.R'
+    'MariaDBConnection.R'
+    'MariaDBDriver.R'
+    'MariaDBResult.R'
+    'RMariaDB.R'
     'RcppExports.R'
     'connect.R'
     'default.R'

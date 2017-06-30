@@ -1,4 +1,4 @@
-#' @include MySQLConnection.R
+#' @include MariaDBConnection.R
 NULL
 
 #' Fetch rows (deprecated)
