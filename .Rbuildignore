@@ -25,3 +25,6 @@ src\/RCS
 ^NEWS\.md$
 ^revdep$
 ^appveyor\.yml$
+^src/.*\.d$
+^src/pch\.h\.gch$
+^clion-test\.R$
