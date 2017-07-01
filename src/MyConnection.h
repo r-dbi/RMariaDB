@@ -75,7 +75,7 @@ public:
     return Rcpp::List::create(
       Rcpp::_["host"] = std::string(pConn_->host),
       Rcpp::_["user"] = std::string(pConn_->user),
-      Rcpp::_["dbname"] = std::string(pConn_->db),
+      Rcpp::_["dbname"] = std::string(pConn_->db ? pConn_->db : ""),
       Rcpp::_["conType"] = std::string(mysql_get_host_info(pConn_)),
       Rcpp::_["serverVersion"] = std::string(mysql_get_server_info(pConn_)),
       Rcpp::_["protocolVersion"] = (int) mysql_get_proto_info(pConn_),
