@@ -1,15 +1,16 @@
 RMariaDB
 ======
 
+NOTE: This package will replace the old [RMySQL](https://cran.r-project.org/web/packages/RMySQL/index.html) package. It is currently not yet on CRAN. 
+
 > Database Interface and MariaDB Driver for R
 
-DEVELOPMENT / [@master](https://github.com/rstats-db/RMariaDB/tree/master):
-[![Build Status](https://travis-ci.org/rstats-db/RMariaDB.svg?branch=master)](https://travis-ci.org/rstats-db/RMariaDB)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rstats-db/RMariaDB?branch=master&svg=true)](https://ci.appveyor.com/project/jeroen/RMariaDB?branch=master)
-[![Coverage Status](https://codecov.io/github/rstats-db/RMariaDB/coverage.svg?branch=master)](https://codecov.io/github/rstats-db/RMariaDB?branch=master)
+[![Build Status](https://travis-ci.org/rstats-db/RMariaDB.svg)](https://travis-ci.org/rstats-db/RMariaDB)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rstats-db/RMariaDB?svg=true)](https://ci.appveyor.com/project/jeroen/RMariaDB)
+[![Coverage Status](https://codecov.io/github/rstats-db/RMariaDB/coverage.svg)](https://codecov.io/github/rstats-db/RMariaDB)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RMariaDB)](http://cran.r-project.org/package=RMariaDB)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/RMariaDB)](http://cran.r-project.org/web/packages/RMariaDB/index.html)
-[![Coverage Status](https://codecov.io/github/rstats-db/RMariaDB/coverage.svg?branch=stable)](https://codecov.io/github/rstats-db/RMariaDB?branch=stable)
+[![Coverage Status](https://codecov.io/github/rstats-db/RMariaDB/coverage.svg)](https://codecov.io/github/rstats-db/RMariaDB)
 
 RMariaDB is a database interface and MariaDB driver for R. This version is aimed at full compliance with the [DBI specification](https://cran.r-project.org/web/packages/DBI/vignettes/spec.html).
 
