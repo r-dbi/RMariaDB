@@ -30,8 +30,6 @@ matrix:
       before_install:
         - brew install mariadb
         - mysql.server start
-        - grep -r SERVER_VERSION /usr/local/Cellar/mariadb/10.2.7/include
-        - false
     - os: osx
       osx_image: xcode8.3
       before_install:
