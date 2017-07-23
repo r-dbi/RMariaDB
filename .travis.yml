@@ -37,7 +37,9 @@ matrix:
         - mysql.server start
         - mysql --help
         - env | sort
-        - cat ~/.my.cnf
+        - cat /etc/mysql/my.cnf || true
+        - cat /etc/my.cnf || true
+        - find / -name my.cnf
         - false
     - os: osx
       osx_image: xcode8.3
