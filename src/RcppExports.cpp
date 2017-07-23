@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // connection_create
 XPtr<MyConnectionPtr> connection_create(const Rcpp::Nullable<std::string>& host, const Rcpp::Nullable<std::string>& user, const Rcpp::Nullable<std::string>& password, const Rcpp::Nullable<std::string>& db, unsigned int port, const Rcpp::Nullable<std::string>& unix_socket, unsigned long client_flag, const Rcpp::Nullable<std::string>& groups, const Rcpp::Nullable<std::string>& default_file, const Rcpp::Nullable<std::string>& ssl_key, const Rcpp::Nullable<std::string>& ssl_cert, const Rcpp::Nullable<std::string>& ssl_ca, const Rcpp::Nullable<std::string>& ssl_capath, const Rcpp::Nullable<std::string>& ssl_cipher);
-RcppExport SEXP RMariaDB_connection_create(SEXP hostSEXP, SEXP userSEXP, SEXP passwordSEXP, SEXP dbSEXP, SEXP portSEXP, SEXP unix_socketSEXP, SEXP client_flagSEXP, SEXP groupsSEXP, SEXP default_fileSEXP, SEXP ssl_keySEXP, SEXP ssl_certSEXP, SEXP ssl_caSEXP, SEXP ssl_capathSEXP, SEXP ssl_cipherSEXP) {
+RcppExport SEXP _RMariaDB_connection_create(SEXP hostSEXP, SEXP userSEXP, SEXP passwordSEXP, SEXP dbSEXP, SEXP portSEXP, SEXP unix_socketSEXP, SEXP client_flagSEXP, SEXP groupsSEXP, SEXP default_fileSEXP, SEXP ssl_keySEXP, SEXP ssl_certSEXP, SEXP ssl_caSEXP, SEXP ssl_capathSEXP, SEXP ssl_cipherSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -32,7 +32,7 @@ END_RCPP
 }
 // connection_release
 void connection_release(XPtr<MyConnectionPtr> con);
-RcppExport SEXP RMariaDB_connection_release(SEXP conSEXP) {
+RcppExport SEXP _RMariaDB_connection_release(SEXP conSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtr<MyConnectionPtr> >::type con(conSEXP);
@@ -42,7 +42,7 @@ END_RCPP
 }
 // connection_info
 List connection_info(XPtr<MyConnectionPtr> con);
-RcppExport SEXP RMariaDB_connection_info(SEXP conSEXP) {
+RcppExport SEXP _RMariaDB_connection_info(SEXP conSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -53,7 +53,7 @@ END_RCPP
 }
 // connection_valid
 bool connection_valid(XPtr<MyConnectionPtr> con);
-RcppExport SEXP RMariaDB_connection_valid(SEXP conSEXP) {
+RcppExport SEXP _RMariaDB_connection_valid(SEXP conSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -64,7 +64,7 @@ END_RCPP
 }
 // connection_quote_string
 CharacterVector connection_quote_string(XPtr<MyConnectionPtr> con, CharacterVector input);
-RcppExport SEXP RMariaDB_connection_quote_string(SEXP conSEXP, SEXP inputSEXP) {
+RcppExport SEXP _RMariaDB_connection_quote_string(SEXP conSEXP, SEXP inputSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -76,7 +76,7 @@ END_RCPP
 }
 // connection_exec
 bool connection_exec(XPtr<MyConnectionPtr> con, std::string sql);
-RcppExport SEXP RMariaDB_connection_exec(SEXP conSEXP, SEXP sqlSEXP) {
+RcppExport SEXP _RMariaDB_connection_exec(SEXP conSEXP, SEXP sqlSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -88,7 +88,7 @@ END_RCPP
 }
 // result_create
 XPtr<MyResult> result_create(XPtr<MyConnectionPtr> con, std::string sql);
-RcppExport SEXP RMariaDB_result_create(SEXP conSEXP, SEXP sqlSEXP) {
+RcppExport SEXP _RMariaDB_result_create(SEXP conSEXP, SEXP sqlSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -100,7 +100,7 @@ END_RCPP
 }
 // result_column_info
 List result_column_info(XPtr<MyResult> rs);
-RcppExport SEXP RMariaDB_result_column_info(SEXP rsSEXP) {
+RcppExport SEXP _RMariaDB_result_column_info(SEXP rsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -111,7 +111,7 @@ END_RCPP
 }
 // result_fetch
 List result_fetch(XPtr<MyResult> rs, int n);
-RcppExport SEXP RMariaDB_result_fetch(SEXP rsSEXP, SEXP nSEXP) {
+RcppExport SEXP _RMariaDB_result_fetch(SEXP rsSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -123,7 +123,7 @@ END_RCPP
 }
 // result_bind
 void result_bind(XPtr<MyResult> rs, List params);
-RcppExport SEXP RMariaDB_result_bind(SEXP rsSEXP, SEXP paramsSEXP) {
+RcppExport SEXP _RMariaDB_result_bind(SEXP rsSEXP, SEXP paramsSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtr<MyResult> >::type rs(rsSEXP);
@@ -134,7 +134,7 @@ END_RCPP
 }
 // result_bind_rows
 void result_bind_rows(XPtr<MyResult> rs, List params);
-RcppExport SEXP RMariaDB_result_bind_rows(SEXP rsSEXP, SEXP paramsSEXP) {
+RcppExport SEXP _RMariaDB_result_bind_rows(SEXP rsSEXP, SEXP paramsSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtr<MyResult> >::type rs(rsSEXP);
@@ -145,7 +145,7 @@ END_RCPP
 }
 // result_release
 void result_release(XPtr<MyResult> rs);
-RcppExport SEXP RMariaDB_result_release(SEXP rsSEXP) {
+RcppExport SEXP _RMariaDB_result_release(SEXP rsSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtr<MyResult> >::type rs(rsSEXP);
@@ -155,7 +155,7 @@ END_RCPP
 }
 // result_rows_affected
 int result_rows_affected(XPtr<MyResult> rs);
-RcppExport SEXP RMariaDB_result_rows_affected(SEXP rsSEXP) {
+RcppExport SEXP _RMariaDB_result_rows_affected(SEXP rsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -166,7 +166,7 @@ END_RCPP
 }
 // result_rows_fetched
 int result_rows_fetched(XPtr<MyResult> rs);
-RcppExport SEXP RMariaDB_result_rows_fetched(SEXP rsSEXP) {
+RcppExport SEXP _RMariaDB_result_rows_fetched(SEXP rsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -177,7 +177,7 @@ END_RCPP
 }
 // result_complete
 bool result_complete(XPtr<MyResult> rs);
-RcppExport SEXP RMariaDB_result_complete(SEXP rsSEXP) {
+RcppExport SEXP _RMariaDB_result_complete(SEXP rsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -188,7 +188,7 @@ END_RCPP
 }
 // result_active
 bool result_active(XPtr<MyResult> rs);
-RcppExport SEXP RMariaDB_result_active(SEXP rsSEXP) {
+RcppExport SEXP _RMariaDB_result_active(SEXP rsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -199,7 +199,7 @@ END_RCPP
 }
 // version
 IntegerVector version();
-RcppExport SEXP RMariaDB_version() {
+RcppExport SEXP _RMariaDB_version() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
