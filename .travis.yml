@@ -5,12 +5,15 @@ latex: false
 matrix:
   include:
     - os: linux
-      dist: precise
+      dist: trusty
       sudo: false
       service: mysql
+      addons:
+        apt:
+          packages:
+            - libmariadbclient-dev
     - os: linux
       dist: trusty
-      sudo: required
       env: R_CODECOV=true
       service: mysql
       addons:
@@ -39,8 +42,7 @@ matrix:
       before_script: 'echo no sql server, only testing build'
 
 r_github_packages:
-  - rstats-db/DBI
-  - jimhester/covr
+  - rstats-db/DBI@production
   - rstats-db/DBItest@production
 
 warnings_are_errors: true
