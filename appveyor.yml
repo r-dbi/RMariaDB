@@ -15,9 +15,9 @@ install:
           $newText = ([System.IO.File]::ReadAllText($iniPath)).Replace("# enable-named-pipe", "enable-named-pipe")
           [System.IO.File]::WriteAllText($iniPath, $newText)
           Restart-Service MySQL57
-  - cmd: mysql --user=%MYSQL_USER% --password=%MYSQL_PASSWORD% -e "CREATE DATABASE IF NOT EXISTS test; FLUSH PRIVILEGES;" -uroot
-  - cmd: mysql --user=%MYSQL_USER% --password=%MYSQL_PASSWORD% -e "CREATE USER IF NOT EXISTS 'appveyor'@'localhost'; FLUSH PRIVILEGES;" -uroot
-  - cmd: mysql --user=%MYSQL_USER% --password=%MYSQL_PASSWORD% -e "GRANT ALL PRIVILEGES ON test.* TO 'appveyor'@'localhost'; FLUSH PRIVILEGES;" -uroot
+  - cmd: "%PROGRAMFILES%\MySql\MySQL Server 5.7\bin\mysql" --user=%MYSQL_USER% --password=%MYSQL_PASSWORD% -e "CREATE DATABASE IF NOT EXISTS test; FLUSH PRIVILEGES;" -uroot
+  - cmd: "%PROGRAMFILES%\MySql\MySQL Server 5.7\bin\mysql" --user=%MYSQL_USER% --password=%MYSQL_PASSWORD% -e "CREATE USER IF NOT EXISTS 'appveyor'@'localhost'; FLUSH PRIVILEGES;" -uroot
+  - cmd: "%PROGRAMFILES%\MySql\MySQL Server 5.7\bin\mysql" --user=%MYSQL_USER% --password=%MYSQL_PASSWORD% -e "GRANT ALL PRIVILEGES ON test.* TO 'appveyor'@'localhost'; FLUSH PRIVILEGES;" -uroot
 
 
 # Adapt as necessary starting from here
