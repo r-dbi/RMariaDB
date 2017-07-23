@@ -37,9 +37,8 @@ matrix:
         - mysql.server start
         - mysql --help
         - env | sort
-        - cat /etc/mysql/my.cnf || true
-        - cat /etc/my.cnf || true
-        - find / -name my.cnf
+        - cat /usr/local/Cellar/mysql/5.7.18_1/.bottle/etc/my.cnf || true
+        - cat /usr/local/etc/my.cnf || true
         - false
     - os: osx
       osx_image: xcode8.3
