@@ -10,10 +10,11 @@ init:
 install:
   - ps: Bootstrap
   - cmd: rm -f *.Rproj
-  - ps: $iniPath="C:\ProgramData\MySQL\MySQL Server 5.7\my.ini"
-  - ps: $newText = ([System.IO.File]::ReadAllText($iniPath)).Replace("# enable-named-pipe", "enable-named-pipe")
-  - ps: [System.IO.File]::WriteAllText($iniPath, $newText)
-  - ps: Restart-Service MySQL57
+  - ps: |
+          $iniPath="C:\ProgramData\MySQL\MySQL Server 5.7\my.ini"
+          $newText = ([System.IO.File]::ReadAllText($iniPath)).Replace("# enable-named-pipe", "enable-named-pipe")
+          [System.IO.File]::WriteAllText($iniPath, $newText)
+          Restart-Service MySQL57
 
 # Adapt as necessary starting from here
 
