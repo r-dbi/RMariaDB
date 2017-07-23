@@ -28,8 +28,10 @@ matrix:
     - os: osx
       osx_image: xcode8.3
       before_install:
-        - brew install mariadb libiconv
+        - brew install mariadb
         - mysql.server start
+        - mysql_config --cflags
+        - mysql_config --libs
       script:
         - R -q -e 'devtools::install()'
         - R -q -e 'con <- DBI::dbConnect(RMariaDB::MariaDB(), dbname = "test"); DBI::dbGetQuery(con, "SELECT 1")'
