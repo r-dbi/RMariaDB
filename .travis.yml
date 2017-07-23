@@ -37,7 +37,9 @@ matrix:
       before_install:
         - brew install mysql
         - mysql.server start
-        - env
+        - mysql --help
+        - env | sort
+        - cat ~/.my.cnf
         - false
     - os: osx
       osx_image: xcode8.3
