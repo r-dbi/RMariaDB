@@ -32,7 +32,7 @@ build_script:
   - travis-tool.sh install_deps
 
 test_script:
-  - R -q -e "devtools::install()"
+  - R -q -e "remotes::install_local('.')"
   - R -q -e "con <- DBI::dbConnect(RMariaDB::MariaDB()); dbGetQuery(con, 'SELECT 1')"
 
 on_failure:
