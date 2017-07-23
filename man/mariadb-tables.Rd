@@ -12,10 +12,10 @@
 \title{Read and write MariaDB tables.}
 \usage{
 \S4method{dbReadTable}{MariaDBConnection,character}(conn, name,
-  row.names = NA, check.names = TRUE, ...)
+  row.names = FALSE, check.names = TRUE, ...)
 
 \S4method{dbWriteTable}{MariaDBConnection,character,data.frame}(conn, name,
-  value, field.types = NULL, row.names = NA, overwrite = FALSE,
+  value, field.types = NULL, row.names = FALSE, overwrite = FALSE,
   append = FALSE, ..., allow.keywords = FALSE, temporary = FALSE)
 
 \S4method{dbWriteTable}{MariaDBConnection,character,character}(conn, name,

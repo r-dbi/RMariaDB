@@ -6,7 +6,7 @@
 \alias{RMariaDB-package}
 \title{RMariaDB: Database Interface and MariaDB Driver for R}
 \description{
-Implements DBI-compliant Interface to MariaDB and MariaDB Databases.
+Implements DBI-compliant Interface to MariaDB and MySQL Databases.
 }
 \seealso{
 Useful links:
