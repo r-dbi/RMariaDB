@@ -32,7 +32,8 @@ build_script:
   - travis-tool.sh install_deps
 
 test_script:
-  - travis-tool.sh run_tests
+  - R -q -e 'devtools::install()'
+  - R -q -e 'con <- DBI::dbConnect(RMariaDB::MariaDB()); dbGetQuery(con, "SELECT 1")'
 
 on_failure:
   - 7z a failure.zip *.Rcheck\*
