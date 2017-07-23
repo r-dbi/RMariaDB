@@ -5,16 +5,16 @@ connection_create <- function(host, user, password, db, port, unix_socket, clien
     .Call('_RMariaDB_connection_create', PACKAGE = 'RMariaDB', host, user, password, db, port, unix_socket, client_flag, groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher)
 }
 
+connection_valid <- function(con) {
+    .Call('_RMariaDB_connection_valid', PACKAGE = 'RMariaDB', con)
+}
+
 connection_release <- function(con) {
     invisible(.Call('_RMariaDB_connection_release', PACKAGE = 'RMariaDB', con))
 }
 
 connection_info <- function(con) {
     .Call('_RMariaDB_connection_info', PACKAGE = 'RMariaDB', con)
-}
-
-connection_valid <- function(con) {
-    .Call('_RMariaDB_connection_valid', PACKAGE = 'RMariaDB', con)
 }
 
 connection_quote_string <- function(con, input) {

@@ -30,6 +30,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// connection_valid
+bool connection_valid(XPtr<MyConnectionPtr> con);
+RcppExport SEXP _RMariaDB_connection_valid(SEXP conSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtr<MyConnectionPtr> >::type con(conSEXP);
+    rcpp_result_gen = Rcpp::wrap(connection_valid(con));
+    return rcpp_result_gen;
+END_RCPP
+}
 // connection_release
 void connection_release(XPtr<MyConnectionPtr> con);
 RcppExport SEXP _RMariaDB_connection_release(SEXP conSEXP) {
@@ -48,17 +59,6 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtr<MyConnectionPtr> >::type con(conSEXP);
     rcpp_result_gen = Rcpp::wrap(connection_info(con));
-    return rcpp_result_gen;
-END_RCPP
-}
-// connection_valid
-bool connection_valid(XPtr<MyConnectionPtr> con);
-RcppExport SEXP _RMariaDB_connection_valid(SEXP conSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyConnectionPtr> >::type con(conSEXP);
-    rcpp_result_gen = Rcpp::wrap(connection_valid(con));
     return rcpp_result_gen;
 END_RCPP
 }

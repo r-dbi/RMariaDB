@@ -26,7 +26,17 @@ XPtr<MyConnectionPtr> connection_create(
 }
 
 // [[Rcpp::export]]
+bool connection_valid(XPtr<MyConnectionPtr> con) {
+  return con.get() != NULL;
+}
+
+// [[Rcpp::export]]
 void connection_release(XPtr<MyConnectionPtr> con) {
+  if (!connection_valid(con)) {
+    warning("Already disconnected");
+    return;
+  }
+
   if ((*con)->hasQuery()) {
     warning("%s\n%s",
       "There is a result object still in use.",
@@ -39,11 +49,6 @@ void connection_release(XPtr<MyConnectionPtr> con) {
 // [[Rcpp::export]]
 List connection_info(XPtr<MyConnectionPtr> con) {
   return (*con)->connectionInfo();
-}
-
-// [[Rcpp::export]]
-bool connection_valid(XPtr<MyConnectionPtr> con) {
-  return con.get() != NULL;
 }
 
 // [[Rcpp::export]]
