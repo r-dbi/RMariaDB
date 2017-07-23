@@ -1,39 +1,24 @@
 DBItest::test_all(c(
-  # getting_started
-  "constructor_strict",                         # relaxed version of constructor check still active
-
   # driver
   "get_info_driver",                            # rstats-db/RSQLite#117
 
   # connection
   "get_info_connection",                        # rstats-db/RSQLite#117
   "cannot_forget_disconnect",                   #
-  "cannot_disconnect_twice",                    # TODO
 
   # result
   "cannot_clear_result_twice_.*",               #
   "fetch_n_bad",                                #
   "fetch_n_good_after_bad",                     #
   "fetch_no_return_value",                      #
-  "get_query_empty_.*",                         # syntax not supported
   "get_query_n_.*",                             #
-  "clear_result_return",                        # error: need to warn if closing result twice
   "data_logical",                               # not an error: no logical data type
-  "data_logical_null_.*",                       # not an error: no logical data type
-  "data_logical_int",                           # not an error: no logical data type
-  "data_logical_int_null_.*",                   # not an error: no logical data type
   "data_64_bit_.*",                             # #77
   "data_character",                             # #93
-  "data_character_null_.*",                     # #93
   "data_raw",                                   # not an error: can't cast to blob type
-  "data_raw_null_.*",                           # not an error: can't cast to blob type
   "data_date_typed",                            #
   "data_time",                                  # #95
-  "data_time_null_.*",                          # #95
-  "data_time_parens",                           # #95
-  "data_time_parens_null_.*",                   # #95
   "data_timestamp",                             # #113
-  "data_timestamp_null_.*",                     # #113
 
   # sql
   "quote_string.*",                             # #115
@@ -43,8 +28,8 @@ DBItest::test_all(c(
   "append_table_new",                           #
   "roundtrip_quotes",                           # #101
   "roundtrip_keywords",                         #
-  "roundtrip_numeric_special",                  # #105
-  "roundtrip_64_bit",                           # rstats-db/DBI#48
+  "roundtrip_logical",                          #
+  "roundtrip_64_bit_character",                 # rstats-db/DBI#48
   "roundtrip_character",                        # #93
   "roundtrip_character_native",                 # #93
   "roundtrip_factor",                           # #93
@@ -53,6 +38,7 @@ DBItest::test_all(c(
   "roundtrip_raw",                              # #111
   "roundtrip_blob",                             # #111
   "roundtrip_timestamp",                        # #104
+  "roundtrip_field_types",                      #
   "read_table_error",                           #
   "read_table_name",                            #
   "write_table_error",                          #
@@ -65,8 +51,9 @@ DBItest::test_all(c(
   # meta
   "rows_affected_query",                        #
   "get_statement_error",                        #
-  "get_exception",                              # #106
   "get_info_result",                            # rstats-db/DBI#55
+  "exists_table_closed_connection",             #
+  "exists_table_invalid_connection",            #
   "bind_empty.*",                               # #116
   "bind_return_value.*",                        # #116
   "bind_wrong_name",                            #
@@ -75,8 +62,16 @@ DBItest::test_all(c(
   "bind_character.*",                           # #93
   "bind_timestamp_lt.*",                        # #110
   "bind_raw.*",                                 # #110
-  "bind_.*_positional_dollar",                  # not an error: named binding not supported
+  "bind_factor",                                #
+  "bind_blob",                                  #
   "bind_.*_named_.*",                           # not an error: named binding not supported
+  "bind_named_param_unnamed_placeholders",      #
+  "bind_named_param_empty_placeholders",        #
+  "bind_named_param_na_placeholders",           #
+  "bind_repeated.*",                            #
+  "list_fields_row_names",                      #
+  "row_count_statement",                        #
+  "rows_affected_statement",                    #
 
   # transactions
   "commit_without_begin",                       # 167
@@ -89,7 +84,6 @@ DBItest::test_all(c(
   # compliance
   "compliance",                                 # #112
   "ellipsis",                                   # #171
-  "read_only",                                  # default connection is read-write
 
   # visibility
   "can_disconnect",
