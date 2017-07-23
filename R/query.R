@@ -43,7 +43,8 @@ NULL
 #' }
 #' @rdname query
 setMethod("dbFetch", c("MariaDBResult", "numeric"),
-  function(res, n = -1, ..., row.names = NA) {
+  function(res, n = -1, ..., row.names = FALSE) {
+    if (n == Inf) n <- -1
     sqlColumnToRownames(result_fetch(res@ptr, n), row.names)
   }
 )
