@@ -30,6 +30,9 @@ matrix:
       before_install:
         - brew install mariadb libiconv
         - mysql.server start
+      script:
+        - R -q -e 'devtools::install()'
+        - R -q -e 'con <- DBI::dbConnect(RMariaDB::MariaDB(), dbname = "test"); DBI::dbGetQuery(con, "SELECT 1")'
     - os: osx
       osx_image: xcode8.3
       before_install:
@@ -40,6 +43,9 @@ matrix:
         - cat /usr/local/Cellar/mysql/5.7.18_1/.bottle/etc/my.cnf || true
         - cat /usr/local/etc/my.cnf || true
         - false
+      script:
+        - R -q -e 'devtools::install()'
+        - R -q -e 'con <- DBI::dbConnect(RMariaDB::MariaDB(), dbname = "test"); DBI::dbGetQuery(con, "SELECT 1")'
     - os: osx
       osx_image: xcode8.3
       disable_homebrew: true
