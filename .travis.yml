@@ -50,7 +50,7 @@ warnings_are_errors: true
 
 script:
   - R -q -e 'devtools::install()'
-  - R -q -e 'con <- DBI::dbConnect(RMariaDB::MariaDB(), dbname = "test"); dbGetQuery(con, "SELECT 1")'
+  - R -q -e 'con <- DBI::dbConnect(RMariaDB::MariaDB(), dbname = "test"); DBI::dbGetQuery(con, "SELECT 1")'
 
 notifications:
   email:
