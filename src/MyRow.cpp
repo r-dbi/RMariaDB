@@ -74,7 +74,7 @@ void MyRow::setUp(MYSQL_STMT* pStatement, std::vector<MyFieldType> types) {
   }
 
   if (mysql_stmt_bind_result(pStatement, &bindings_[0]) != 0) {
-    Rcpp::stop(mysql_stmt_error(pStatement));
+    stop(mysql_stmt_error(pStatement));
   }
 }
 
@@ -191,7 +191,7 @@ void MyRow::fetchBuffer(int j) {
   bindings_[j].buffer_length = length;
 
   if (mysql_stmt_fetch_column(pStatement_, &bindings_[j], j, 0) != 0)
-    Rcpp::stop(mysql_stmt_error(pStatement_));
+    stop(mysql_stmt_error(pStatement_));
 
   // Reset buffer length to zero for next row
   bindings_[j].buffer_length = 0;

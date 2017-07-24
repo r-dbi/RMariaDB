@@ -14,7 +14,7 @@ MyResult::MyResult(MyConnectionPtr pConn) :
 {
   pStatement_ = mysql_stmt_init(pConn->conn());
   if (pStatement_ == NULL)
-    Rcpp::stop("Out of memory");
+    stop("Out of memory");
   pConn_->setCurrentResult(this);
 }
 
@@ -65,14 +65,14 @@ void MyResult::execute() {
   rowsAffected_ = mysql_stmt_affected_rows(pStatement_);
 }
 
-void MyResult::bind(Rcpp::List params) {
+void MyResult::bind(List params) {
   bindingInput_.setUp(pStatement_);
   bindingInput_.initBinding(params);
   bindingInput_.bindRow(params, 0);
   execute();
 }
 
-void MyResult::bindRows(Rcpp::List params) {
+void MyResult::bindRows(List params) {
   if (params.size() == 0)
     return;
 
@@ -86,17 +86,17 @@ void MyResult::bindRows(Rcpp::List params) {
   }
 }
 
-Rcpp::List MyResult::columnInfo() {
-  Rcpp::CharacterVector names(nCols_), types(nCols_);
+List MyResult::columnInfo() {
+  CharacterVector names(nCols_), types(nCols_);
   for (size_t i = 0; i < nCols_; i++) {
     names[i] = names_[i];
     types[i] = typeName(types_[i]);
   }
 
-  Rcpp::List out = Rcpp::List::create(names, types);
-  out.attr("row.names") = Rcpp::IntegerVector::create(NA_INTEGER, -nCols_);
+  List out = List::create(names, types);
+  out.attr("row.names") = IntegerVector::create(NA_INTEGER, -nCols_);
   out.attr("class") = "data.frame";
-  out.attr("names") = Rcpp::CharacterVector::create("name", "type");
+  out.attr("names") = CharacterVector::create("name", "type");
 
   return out;
 }
@@ -120,16 +120,16 @@ bool MyResult::fetchRow() {
   return false;
 }
 
-Rcpp::List MyResult::fetch(int n_max) {
+List MyResult::fetch(int n_max) {
   if (!bound_)
-    Rcpp::stop("Query needs to be bound before fetching");
+    stop("Query needs to be bound before fetching");
   if (!active())
-    Rcpp::stop("Inactive result set");
+    stop("Inactive result set");
   if (pSpec_ == NULL)
     return dfCreate(types_, names_, 0);
 
   int n = (n_max < 0) ? 100 : n_max;
-  Rcpp::List out = dfCreate(types_, names_, n);
+  List out = dfCreate(types_, names_, n);
   if (n == 0)
     return out;
 
@@ -150,14 +150,14 @@ Rcpp::List MyResult::fetch(int n_max) {
     }
 
     for (size_t j = 0; j < nCols_; ++j) {
-      // Rcpp::Rcout << i << "," << j << "\n";
+      // Rcout << i << "," << j << "\n";
       bindingOutput_.setListValue(out[j], i, j);
     }
 
     fetchRow();
     ++i;
     if (i % 1000 == 0)
-      Rcpp::checkUserInterrupt();
+      checkUserInterrupt();
   }
 
   // Trim back to what we actually used
@@ -189,7 +189,7 @@ bool MyResult::active() {
 }
 
 void MyResult::throwError() {
-  Rcpp::stop(
+  stop(
     "%s [%i]",
     mysql_stmt_error(pStatement_),
     mysql_stmt_errno(pStatement_)

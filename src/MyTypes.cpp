@@ -100,17 +100,17 @@ SEXPTYPE typeSEXP(MyFieldType type) {
   throw std::runtime_error("Invalid typeSEXP");
 }
 
-std::string rClass(Rcpp::RObject x) {
-  Rcpp::RObject klass_ = x.attr("class");
+std::string rClass(RObject x) {
+  RObject klass_ = x.attr("class");
   std::string klass;
   if (klass_ == R_NilValue)
     return "";
 
-  Rcpp::CharacterVector klassv = Rcpp::as<Rcpp::CharacterVector>(klass_);
+  CharacterVector klassv = as<CharacterVector>(klass_);
   return std::string(klassv[0]);
 }
 
-MyFieldType variableType(Rcpp::RObject type) {
+MyFieldType variableType(RObject type) {
   std::string klass = rClass(type);
 
   switch (TYPEOF(type)) {
@@ -127,6 +127,6 @@ MyFieldType variableType(Rcpp::RObject type) {
     return MY_STR;
   }
 
-  Rcpp::stop("Unsupported column type %s", Rf_type2char(TYPEOF(type)));
+  stop("Unsupported column type %s", Rf_type2char(TYPEOF(type)));
   return MY_STR;
 }

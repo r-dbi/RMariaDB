@@ -18,8 +18,8 @@ MyFieldType variableType(enum_field_types type, bool binary);
 std::string typeName(MyFieldType type);
 SEXPTYPE typeSEXP(MyFieldType type);
 
-std::string rClass(Rcpp::RObject x);
-MyFieldType variableType(Rcpp::RObject type);
+std::string rClass(RObject x);
+MyFieldType variableType(RObject type);
 
 
 #endif

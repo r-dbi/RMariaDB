@@ -20,8 +20,8 @@ public:
 public:
   void setUp(MYSQL_STMT* pStatement);
 
-  void initBinding(Rcpp::List params);
-  void bindRow(Rcpp::List params, int i);
+  void initBinding(List params);
+  void bindRow(List params, int i);
   void bindingUpdate(int j, enum_field_types type, int size);
 
   void setTimeBuffer(int j, time_t time);

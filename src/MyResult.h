@@ -32,13 +32,13 @@ public:
 
   void execute();
 
-  void bind(Rcpp::List params);
-  void bindRows(Rcpp::List params);
+  void bind(List params);
+  void bindRows(List params);
 
-  Rcpp::List columnInfo();
+  List columnInfo();
 
   bool fetchRow();
-  Rcpp::List fetch(int n_max = -1);
+  List fetch(int n_max = -1);
 
   int rowsAffected();
   int rowsFetched();

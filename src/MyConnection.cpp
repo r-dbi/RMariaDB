@@ -2,13 +2,13 @@
 #include "MyConnection.h"
 #include "MyResult.h"
 
-MyConnection::MyConnection(const Rcpp::Nullable<std::string>& host, const Rcpp::Nullable<std::string>& user,
-                           const Rcpp::Nullable<std::string>& password, const Rcpp::Nullable<std::string>& db,
-                           unsigned int port, const Rcpp::Nullable<std::string>& unix_socket, unsigned long client_flag,
-                           const Rcpp::Nullable<std::string>& groups, const Rcpp::Nullable<std::string>& default_file,
-                           const Rcpp::Nullable<std::string>& ssl_key, const Rcpp::Nullable<std::string>& ssl_cert,
-                           const Rcpp::Nullable<std::string>& ssl_ca, const Rcpp::Nullable<std::string>& ssl_capath,
-                           const Rcpp::Nullable<std::string>& ssl_cipher) :
+MyConnection::MyConnection(const Nullable<std::string>& host, const Nullable<std::string>& user,
+                           const Nullable<std::string>& password, const Nullable<std::string>& db,
+                           unsigned int port, const Nullable<std::string>& unix_socket, unsigned long client_flag,
+                           const Nullable<std::string>& groups, const Nullable<std::string>& default_file,
+                           const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
+                           const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
+                           const Nullable<std::string>& ssl_cipher) :
   pCurrentResult_(NULL)
 {
   pConn_ = mysql_init(NULL);
@@ -18,33 +18,33 @@ MyConnection::MyConnection(const Rcpp::Nullable<std::string>& host, const Rcpp::
   mysql_options(pConn_, MYSQL_SET_CHARSET_NAME, "UTF8");
   if (!groups.isNull())
     mysql_options(pConn_, MYSQL_READ_DEFAULT_GROUP,
-                  Rcpp::as<std::string>(groups).c_str());
+                  as<std::string>(groups).c_str());
   if (!default_file.isNull())
     mysql_options(pConn_, MYSQL_READ_DEFAULT_FILE,
-                  Rcpp::as<std::string>(default_file).c_str());
+                  as<std::string>(default_file).c_str());
 
   if (!ssl_key.isNull() || !ssl_cert.isNull() || !ssl_ca.isNull() ||
       !ssl_capath.isNull() || !ssl_cipher.isNull()) {
     mysql_ssl_set(
       pConn_,
-      ssl_key.isNull() ? NULL : Rcpp::as<std::string>(ssl_key).c_str(),
-      ssl_cert.isNull() ? NULL : Rcpp::as<std::string>(ssl_cert).c_str(),
-      ssl_ca.isNull() ? NULL : Rcpp::as<std::string>(ssl_ca).c_str(),
-      ssl_capath.isNull() ? NULL : Rcpp::as<std::string>(ssl_capath).c_str(),
-      ssl_cipher.isNull() ? NULL : Rcpp::as<std::string>(ssl_cipher).c_str()
+      ssl_key.isNull() ? NULL : as<std::string>(ssl_key).c_str(),
+      ssl_cert.isNull() ? NULL : as<std::string>(ssl_cert).c_str(),
+      ssl_ca.isNull() ? NULL : as<std::string>(ssl_ca).c_str(),
+      ssl_capath.isNull() ? NULL : as<std::string>(ssl_capath).c_str(),
+      ssl_cipher.isNull() ? NULL : as<std::string>(ssl_cipher).c_str()
     );
   }
 
   if (!mysql_real_connect(pConn_,
-                          host.isNull() ? NULL : Rcpp::as<std::string>(host).c_str(),
-                          user.isNull() ? NULL : Rcpp::as<std::string>(user).c_str(),
-                          password.isNull() ? NULL : Rcpp::as<std::string>(password).c_str(),
-                          db.isNull() ? NULL : Rcpp::as<std::string>(db).c_str(),
+                          host.isNull() ? NULL : as<std::string>(host).c_str(),
+                          user.isNull() ? NULL : as<std::string>(user).c_str(),
+                          password.isNull() ? NULL : as<std::string>(password).c_str(),
+                          db.isNull() ? NULL : as<std::string>(db).c_str(),
                           port,
-                          unix_socket.isNull() ? NULL : Rcpp::as<std::string>(unix_socket).c_str(),
+                          unix_socket.isNull() ? NULL : as<std::string>(unix_socket).c_str(),
                           client_flag)) {
     mysql_close(pConn_);
-    Rcpp::stop("Failed to connect: %s", mysql_error(pConn_));
+    stop("Failed to connect: %s", mysql_error(pConn_));
   }
 }
 
@@ -54,17 +54,17 @@ MyConnection::~MyConnection() {
   } catch (...) {};
 }
 
-Rcpp::List MyConnection::connectionInfo() {
+List MyConnection::connectionInfo() {
   return
-    Rcpp::List::create(
-      Rcpp::_["host"] = std::string(pConn_->host),
-      Rcpp::_["user"] = std::string(pConn_->user),
-      Rcpp::_["dbname"] = std::string(pConn_->db ? pConn_->db : ""),
-      Rcpp::_["conType"] = std::string(mysql_get_host_info(pConn_)),
-      Rcpp::_["serverVersion"] = std::string(mysql_get_server_info(pConn_)),
-      Rcpp::_["protocolVersion"] = (int) mysql_get_proto_info(pConn_),
-      Rcpp::_["threadId"] = (int) mysql_thread_id(pConn_),
-      Rcpp::_["client"] = std::string(mysql_get_client_info())
+    List::create(
+      _["host"] = std::string(pConn_->host),
+      _["user"] = std::string(pConn_->user),
+      _["dbname"] = std::string(pConn_->db ? pConn_->db : ""),
+      _["conType"] = std::string(mysql_get_host_info(pConn_)),
+      _["serverVersion"] = std::string(mysql_get_server_info(pConn_)),
+      _["protocolVersion"] = (int) mysql_get_proto_info(pConn_),
+      _["threadId"] = (int) mysql_thread_id(pConn_),
+      _["client"] = std::string(mysql_get_client_info())
     );
 }
 
@@ -90,7 +90,7 @@ void MyConnection::setCurrentResult(MyResult* pResult) {
 
   if (pCurrentResult_ != NULL) {
     if (pResult != NULL)
-      Rcpp::warning("Cancelling previous query");
+      warning("Cancelling previous query");
 
     pCurrentResult_->close();
   }
@@ -109,7 +109,7 @@ bool MyConnection::exec(std::string sql) {
   setCurrentResult(NULL);
 
   if (mysql_real_query(pConn_, sql.data(), sql.size()) != 0)
-    Rcpp::stop(mysql_error(pConn_));
+    stop(mysql_error(pConn_));
 
   MYSQL_RES* res = mysql_store_result(pConn_);
   if (res != NULL)

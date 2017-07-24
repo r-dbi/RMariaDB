@@ -18,9 +18,9 @@ void MyBinding::setUp(MYSQL_STMT* pStatement) {
   timeBuffers_.resize(p_);
 }
 
-void MyBinding::initBinding(Rcpp::List params) {
+void MyBinding::initBinding(List params) {
   if (p_ != params.size()) {
-    Rcpp::stop("Number of params don't match (%i vs %i)", p_, params.size());
+    stop("Number of params don't match (%i vs %i)", p_, params.size());
   }
 
   for (int j = 0; j < p_; ++j) {
@@ -60,10 +60,10 @@ void MyBinding::initBinding(Rcpp::List params) {
   }
 }
 
-void MyBinding::bindRow(Rcpp::List params, int i) {
+void MyBinding::bindRow(List params, int i) {
   for (int j = 0; j < p_; ++j) {
     bool missing = false;
-    Rcpp::RObject col = params[j];
+    RObject col = params[j];
 
     switch (types_[j]) {
     case MY_LGL:
@@ -115,7 +115,7 @@ void MyBinding::bindRow(Rcpp::List params, int i) {
       }
       break;
     case MY_FACTOR:
-      Rcpp::stop("Not yet supported");
+      stop("Not yet supported");
     case MY_INT64:
     case MY_TIME:
       // output only

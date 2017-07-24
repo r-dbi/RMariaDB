@@ -16,24 +16,24 @@ class MyConnection : boost::noncopyable {
 
 public:
 
-  MyConnection(const Rcpp::Nullable<std::string>& host,
-               const Rcpp::Nullable<std::string>& user,
-               const Rcpp::Nullable<std::string>& password,
-               const Rcpp::Nullable<std::string>& db,
+  MyConnection(const Nullable<std::string>& host,
+               const Nullable<std::string>& user,
+               const Nullable<std::string>& password,
+               const Nullable<std::string>& db,
                unsigned int port,
-               const Rcpp::Nullable<std::string>& unix_socket,
+               const Nullable<std::string>& unix_socket,
                unsigned long client_flag,
-               const Rcpp::Nullable<std::string>& groups,
-               const Rcpp::Nullable<std::string>& default_file,
-               const Rcpp::Nullable<std::string>& ssl_key,
-               const Rcpp::Nullable<std::string>& ssl_cert,
-               const Rcpp::Nullable<std::string>& ssl_ca,
-               const Rcpp::Nullable<std::string>& ssl_capath,
-               const Rcpp::Nullable<std::string>& ssl_cipher);
+               const Nullable<std::string>& groups,
+               const Nullable<std::string>& default_file,
+               const Nullable<std::string>& ssl_key,
+               const Nullable<std::string>& ssl_cert,
+               const Nullable<std::string>& ssl_ca,
+               const Nullable<std::string>& ssl_capath,
+               const Nullable<std::string>& ssl_cipher);
   ~MyConnection();
 
 public:
-  Rcpp::List connectionInfo();
+  List connectionInfo();
   MYSQL* conn();
 
   std::string quoteString(std::string input);
