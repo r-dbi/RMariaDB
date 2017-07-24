@@ -1,6 +1,5 @@
-#include <Rcpp.h>
+#include "pch.h"
 #include "RMariaDB_types.h"
-using namespace Rcpp;
 
 // [[Rcpp::export]]
 XPtr<MyConnectionPtr> connection_create(

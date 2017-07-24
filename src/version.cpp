@@ -1,8 +1,6 @@
-#include <Rcpp.h>
-#include <mysql.h>
-#include <mysql_version.h>
+#include "pch.h"
 
-using namespace Rcpp;
+#include <mysql_version.h>
 
 // [[Rcpp::export]]
 IntegerVector version() {

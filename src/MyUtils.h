@@ -1,7 +1,6 @@
 #ifndef __RSQLITE_MY_UTILS__
 #define __RSQLITE_MY_UTILS__
 
-#include <Rcpp.h>
 #include "MyTypes.h"
 
 #ifdef WIN32

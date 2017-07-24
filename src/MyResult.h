@@ -1,8 +1,6 @@
 #ifndef __RMYSQL_MY_RESULT__
 #define __RMYSQL_MY_RESULT__
 
-#include <Rcpp.h>
-#include <mysql.h>
 #include <boost/noncopyable.hpp>
 #include "MyBinding.h"
 #include "MyRow.h"

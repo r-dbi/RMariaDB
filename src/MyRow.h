@@ -1,8 +1,6 @@
 #ifndef __RMYSQL_MY_ROW__
 #define __RMYSQL_MY_ROW__
 
-#include <Rcpp.h>
-#include <mysql.h>
 #include "MyTypes.h"
 #include <ctime>
 

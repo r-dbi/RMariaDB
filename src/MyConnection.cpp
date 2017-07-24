@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "MyConnection.h"
 #include "MyResult.h"
 
