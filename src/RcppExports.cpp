@@ -225,3 +225,31 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_RMariaDB_connection_create", (DL_FUNC) &_RMariaDB_connection_create, 14},
+    {"_RMariaDB_connection_valid", (DL_FUNC) &_RMariaDB_connection_valid, 1},
+    {"_RMariaDB_connection_release", (DL_FUNC) &_RMariaDB_connection_release, 1},
+    {"_RMariaDB_connection_info", (DL_FUNC) &_RMariaDB_connection_info, 1},
+    {"_RMariaDB_connection_quote_string", (DL_FUNC) &_RMariaDB_connection_quote_string, 2},
+    {"_RMariaDB_connection_exec", (DL_FUNC) &_RMariaDB_connection_exec, 2},
+    {"_RMariaDB_driver_init", (DL_FUNC) &_RMariaDB_driver_init, 0},
+    {"_RMariaDB_driver_done", (DL_FUNC) &_RMariaDB_driver_done, 0},
+    {"_RMariaDB_version", (DL_FUNC) &_RMariaDB_version, 0},
+    {"_RMariaDB_result_create", (DL_FUNC) &_RMariaDB_result_create, 2},
+    {"_RMariaDB_result_column_info", (DL_FUNC) &_RMariaDB_result_column_info, 1},
+    {"_RMariaDB_result_fetch", (DL_FUNC) &_RMariaDB_result_fetch, 2},
+    {"_RMariaDB_result_bind", (DL_FUNC) &_RMariaDB_result_bind, 2},
+    {"_RMariaDB_result_bind_rows", (DL_FUNC) &_RMariaDB_result_bind_rows, 2},
+    {"_RMariaDB_result_release", (DL_FUNC) &_RMariaDB_result_release, 1},
+    {"_RMariaDB_result_rows_affected", (DL_FUNC) &_RMariaDB_result_rows_affected, 1},
+    {"_RMariaDB_result_rows_fetched", (DL_FUNC) &_RMariaDB_result_rows_fetched, 1},
+    {"_RMariaDB_result_complete", (DL_FUNC) &_RMariaDB_result_complete, 1},
+    {"_RMariaDB_result_active", (DL_FUNC) &_RMariaDB_result_active, 1},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_RMariaDB(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
+}
