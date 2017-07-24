@@ -30,12 +30,9 @@ matrix:
       before_install:
         - brew install mariadb
         - mysql.server start
-        - mysql_config --cflags
-        - mysql_config --libs
         - mariadb_config --cflags
         - mariadb_config --libs
         - ls -l /usr/lib
-        - find / -name libiconv.dylib
       script:
         - R -q -e 'devtools::install()'
         - R -q -e 'con <- DBI::dbConnect(RMariaDB::MariaDB(), dbname = "test"); DBI::dbGetQuery(con, "SELECT 1")'
