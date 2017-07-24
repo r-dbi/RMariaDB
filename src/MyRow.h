@@ -2,6 +2,8 @@
 #define __RMYSQL_MY_ROW__
 
 #include <boost/core/noncopyable.hpp>
+#include <boost/cstdint.hpp>
+
 #include "MyTypes.h"
 
 class MyRow : public boost::noncopyable {
@@ -26,7 +28,7 @@ public:
   bool isNull(int j);
 
   int valueInt(int j);
-  int valueInt64(int j);
+  int64_t valueInt64(int j);
   double valueDouble(int j);
   SEXP valueString(int j);
   SEXP valueRaw(int j);

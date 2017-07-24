@@ -6,7 +6,7 @@ src/*.so
 src/*.dll
 src/*.a
 src/*.d
-src/pch.h.gch
+src/*.h.gch
 src/Makevars
 config.status
 a.out.dSYM

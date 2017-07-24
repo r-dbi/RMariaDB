@@ -86,8 +86,8 @@ int MyRow::valueInt(int j) {
   return isNull(j) ? NA_INTEGER : *((int*) &buffers_[j][0]);
 }
 
-int MyRow::valueInt64(int j) {
-  return isNull(j) ? NA_INTEGER : *((long long int*) &buffers_[j][0]);
+int64_t MyRow::valueInt64(int j) {
+  return isNull(j) ? NA_INTEGER : *((int64_t*) &buffers_[j][0]);
 }
 
 double MyRow::valueDouble(int j) {
@@ -122,7 +122,7 @@ double MyRow::valueDateTime(int j) {
 
   MYSQL_TIME* mytime = (MYSQL_TIME*) &buffers_[j][0];
 
-  struct tm t = { 0 };
+  struct tm t = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL };
   t.tm_year = mytime->year - 1900;
   t.tm_mon = mytime->month - 1;
   t.tm_mday = mytime->day;
