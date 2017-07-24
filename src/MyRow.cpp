@@ -122,7 +122,7 @@ double MyRow::valueDateTime(int j) {
 
   MYSQL_TIME* mytime = (MYSQL_TIME*) &buffers_[j][0];
 
-  struct tm t = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL };
+  struct tm t = {};
   t.tm_year = mytime->year - 1900;
   t.tm_mon = mytime->month - 1;
   t.tm_mday = mytime->day;
