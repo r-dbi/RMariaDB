@@ -31,7 +31,7 @@ SystemRequirements: libmariadb-client-lgpl-dev or libmysqlclient-dev (deb),
     mariadb-connector-c-devel or mariadb-devel (rpm),
     mariadb-connector-c or mysql-connector-c (brew)
 NeedsCompilation: yes
-Collate:
+Collate: 
     'MariaDBConnection.R'
     'MariaDBDriver.R'
     'MariaDBResult.R'
@@ -44,4 +44,5 @@ Collate:
     'quote.R'
     'table.R'
     'transaction.R'
+    'zzz.R'
 RoxygenNote: 6.0.1

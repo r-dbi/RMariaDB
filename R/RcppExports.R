@@ -25,6 +25,18 @@ connection_exec <- function(con, sql) {
     .Call('_RMariaDB_connection_exec', PACKAGE = 'RMariaDB', con, sql)
 }
 
+driver_init <- function() {
+    invisible(.Call('_RMariaDB_driver_init', PACKAGE = 'RMariaDB'))
+}
+
+driver_done <- function() {
+    invisible(.Call('_RMariaDB_driver_done', PACKAGE = 'RMariaDB'))
+}
+
+version <- function() {
+    .Call('_RMariaDB_version', PACKAGE = 'RMariaDB')
+}
+
 result_create <- function(con, sql) {
     .Call('_RMariaDB_result_create', PACKAGE = 'RMariaDB', con, sql)
 }
@@ -63,9 +75,5 @@ result_complete <- function(rs) {
 
 result_active <- function(rs) {
     .Call('_RMariaDB_result_active', PACKAGE = 'RMariaDB', rs)
-}
-
-version <- function() {
-    .Call('_RMariaDB_version', PACKAGE = 'RMariaDB')
 }
 

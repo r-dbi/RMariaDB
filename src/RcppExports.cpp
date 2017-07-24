@@ -86,6 +86,34 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// driver_init
+void driver_init();
+RcppExport SEXP _RMariaDB_driver_init() {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    driver_init();
+    return R_NilValue;
+END_RCPP
+}
+// driver_done
+void driver_done();
+RcppExport SEXP _RMariaDB_driver_done() {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    driver_done();
+    return R_NilValue;
+END_RCPP
+}
+// version
+IntegerVector version();
+RcppExport SEXP _RMariaDB_version() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(version());
+    return rcpp_result_gen;
+END_RCPP
+}
 // result_create
 XPtr<MyResult> result_create(XPtr<MyConnectionPtr> con, std::string sql);
 RcppExport SEXP _RMariaDB_result_create(SEXP conSEXP, SEXP sqlSEXP) {
@@ -194,16 +222,6 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtr<MyResult> >::type rs(rsSEXP);
     rcpp_result_gen = Rcpp::wrap(result_active(rs));
-    return rcpp_result_gen;
-END_RCPP
-}
-// version
-IntegerVector version();
-RcppExport SEXP _RMariaDB_version() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(version());
     return rcpp_result_gen;
 END_RCPP
 }

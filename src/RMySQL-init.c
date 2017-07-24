@@ -5,7 +5,6 @@
 #include <mysql.h>
 
 void R_init_RMariaDB(DllInfo *info){
-  mysql_library_init(0,NULL,NULL);
   R_registerRoutines(info, NULL, NULL, NULL, NULL);
   R_useDynamicSymbols(info, TRUE);
 
@@ -28,5 +27,4 @@ void R_init_RMariaDB(DllInfo *info){
 }
 
 void R_unload_RMariaDB(DllInfo *info){
-  mysql_library_end();
 }
