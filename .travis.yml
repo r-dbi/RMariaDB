@@ -12,7 +12,6 @@ matrix:
         apt:
           packages:
             - libmariadbclient-dev
-            - astyle
     - os: linux
       dist: trusty
       sudo: false
