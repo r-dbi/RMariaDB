@@ -19,6 +19,8 @@ DBItest::test_all(c(
   "data_date_typed",                            #
   "data_time",                                  # #95
   "data_timestamp",                             # #113
+  "data_timestamp_current",                     # #113
+  "data_timestamp_current_typed",               # #113
 
   # sql
   "quote_string.*",                             # #115
@@ -64,6 +66,7 @@ DBItest::test_all(c(
   "bind_raw.*",                                 # #110
   "bind_factor",                                #
   "bind_blob",                                  #
+  "bind_timestamp",                             #
   "bind_.*_named_.*",                           # not an error: named binding not supported
   "bind_named_param_unnamed_placeholders",      #
   "bind_named_param_empty_placeholders",        #
