@@ -42,9 +42,6 @@ matrix:
       before_install:
         - brew install mysql
         - mysql.server start
-      script:
-        - R -q -e 'devtools::install()'
-        - R -q -e 'con <- DBI::dbConnect(RMariaDB::MariaDB(), dbname = "test"); DBI::dbGetQuery(con, "SELECT 1")'
     - os: osx
       osx_image: xcode8.3
       disable_homebrew: true
