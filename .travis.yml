@@ -26,6 +26,9 @@ r_github_packages:
   - rstats-db/DBI@production
   - rstats-db/DBItest@production
 
+r_packages:
+  - covr
+
 warnings_are_errors: true
 #r_check_revdep: true
 
