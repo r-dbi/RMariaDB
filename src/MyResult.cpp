@@ -29,7 +29,7 @@ void MyResult::sendQuery(std::string sql) {
   if (mysql_stmt_prepare(pStatement_, sql.data(), sql.size()) != 0)
     throwError();
 
-  nParams_ = mysql_stmt_param_count(pStatement_);
+  nParams_ = static_cast<int>(mysql_stmt_param_count(pStatement_));
   if (nParams_ == 0) {
     // Not parameterised so we can execute immediately
     execute();
@@ -88,7 +88,7 @@ void MyResult::bindRows(List params) {
 
 List MyResult::columnInfo() {
   CharacterVector names(nCols_), types(nCols_);
-  for (size_t i = 0; i < nCols_; i++) {
+  for (int i = 0; i < nCols_; i++) {
     names[i] = names_[i];
     types[i] = typeName(types_[i]);
   }
@@ -149,7 +149,7 @@ List MyResult::fetch(int n_max) {
       }
     }
 
-    for (size_t j = 0; j < nCols_; ++j) {
+    for (int j = 0; j < nCols_; ++j) {
       // Rcout << i << "," << j << "\n";
       bindingOutput_.setListValue(out[j], i, j);
     }
@@ -171,11 +171,13 @@ List MyResult::fetch(int n_max) {
 }
 
 int MyResult::rowsAffected() {
-  return rowsAffected_;
+  // FIXME: > 2^32 rows?
+  return static_cast<int>(rowsAffected_);
 }
 
 int MyResult::rowsFetched() {
-  return rowsFetched_ == 0 ? 0 : rowsFetched_ - 1;
+  // FIXME: > 2^32 rows?
+  return static_cast<int>(rowsFetched_ == 0 ? 0 : rowsFetched_ - 1);
 }
 
 bool MyResult::complete() {
@@ -200,7 +202,7 @@ void MyResult::cacheMetadata() {
   nCols_ = mysql_num_fields(pSpec_);
   MYSQL_FIELD* fields = mysql_fetch_fields(pSpec_);
 
-  for (size_t i = 0; i < nCols_; ++i) {
+  for (int i = 0; i < nCols_; ++i) {
     names_.push_back(fields[i].name);
 
     bool binary = fields[i].charsetnr == 63;

@@ -56,10 +56,10 @@ List connection_info(XPtr<MyConnectionPtr> con) {
 // [[Rcpp::export]]
 CharacterVector connection_quote_string(XPtr<MyConnectionPtr> con,
                                         CharacterVector input) {
-  int n = input.size();
+  R_xlen_t n = input.size();
   CharacterVector output(n);
 
-  for (int i = 0; i < n; ++i) {
+  for (R_xlen_t i = 0; i < n; ++i) {
     if (input[i] == NA_STRING) {
       output[i] = NA_STRING;
     } else {

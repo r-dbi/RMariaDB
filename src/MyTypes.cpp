@@ -101,7 +101,7 @@ SEXPTYPE typeSEXP(MyFieldType type) {
 }
 
 std::string rClass(RObject x) {
-  RObject klass_ = x.attr("class");
+  RObject klass_(x.attr("class"));
   std::string klass;
   if (klass_ == R_NilValue)
     return "";
@@ -110,7 +110,7 @@ std::string rClass(RObject x) {
   return std::string(klassv[0]);
 }
 
-MyFieldType variableType(RObject type) {
+MyFieldType variableType(const RObject& type) {
   std::string klass = rClass(type);
 
   switch (TYPEOF(type)) {

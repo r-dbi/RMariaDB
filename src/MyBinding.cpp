@@ -10,7 +10,7 @@ MyBinding::~MyBinding() {
 
 void MyBinding::setUp(MYSQL_STMT* pStatement) {
   pStatement_ = pStatement;
-  p_ = mysql_stmt_param_count(pStatement_);
+  p_ = static_cast<int>(mysql_stmt_param_count(pStatement_));
 
   bindings_.resize(p_);
   types_.resize(p_);
@@ -24,7 +24,7 @@ void MyBinding::initBinding(List params) {
   }
 
   for (int j = 0; j < p_; ++j) {
-    MyFieldType type = variableType(params[j]);
+    MyFieldType type = variableType(RObject(params[j]));
     types_[j] = type;
 
     switch (type) {
@@ -63,7 +63,7 @@ void MyBinding::initBinding(List params) {
 void MyBinding::bindRow(List params, int i) {
   for (int j = 0; j < p_; ++j) {
     bool missing = false;
-    RObject col = params[j];
+    RObject col(params[j]);
 
     switch (types_[j]) {
     case MY_LGL:
@@ -109,7 +109,7 @@ void MyBinding::bindRow(List params, int i) {
         break;
       } else {
         double val = REAL(col)[i];
-        setTimeBuffer(j, val * (types_[j] == MY_DATE ? 86400 : 1));
+        setTimeBuffer(j, static_cast<int>(val * (types_[j] == MY_DATE ? 86400.0 : 1.0)));
         bindings_[j].buffer_length = sizeof(MYSQL_TIME);
         bindings_[j].buffer = &timeBuffers_[j];
       }

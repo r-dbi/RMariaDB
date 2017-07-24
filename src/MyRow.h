@@ -22,7 +22,7 @@ public:
   ~MyRow();
 
 public:
-  void setUp(MYSQL_STMT* pStatement, std::vector<MyFieldType> types);
+  void setUp(MYSQL_STMT* pStatement, const std::vector<MyFieldType>& types);
 
   // Value accessors -----------------------------------------------------------
   bool isNull(int j);

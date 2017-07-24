@@ -12,9 +12,9 @@ class MyResult : boost::noncopyable {
   MyConnectionPtr pConn_;
   MYSQL_STMT* pStatement_;
   MYSQL_RES* pSpec_;
-  int rowsAffected_, rowsFetched_;
+  uint64_t rowsAffected_, rowsFetched_;
 
-  unsigned int nCols_, nParams_;
+  int nCols_, nParams_;
   bool bound_, complete_;
 
   std::vector<MyFieldType> types_;

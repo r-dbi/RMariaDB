@@ -15,10 +15,10 @@ MyRow::MyRow() {
 MyRow::~MyRow() {
 }
 
-void MyRow::setUp(MYSQL_STMT* pStatement, std::vector<MyFieldType> types) {
+void MyRow::setUp(MYSQL_STMT* pStatement, const std::vector<MyFieldType>& types) {
   pStatement_ = pStatement;
   types_ = types;
-  n_ = types_.size();
+  n_ = static_cast<int>(types_.size());
 
   bindings_.resize(n_);
   buffers_.resize(n_);
@@ -130,14 +130,14 @@ double MyRow::valueDateTime(int j) {
   t.tm_min = mytime->minute;
   t.tm_sec = mytime->second;
 
-  return timegm(&t);
+  return static_cast<double>(timegm(&t));
 }
 
 int MyRow::valueDate(int j) {
   if (isNull(j))
     return NA_INTEGER;
 
-  return valueDateTime(j) / 86400;
+  return static_cast<int>(std::floor(valueDateTime(j) / 86400.0));
 }
 
 int MyRow::valueTime(int j) {
@@ -154,7 +154,8 @@ void MyRow::setListValue(SEXP x, int i, int j) {
     INTEGER(x)[i] = valueInt(j);
     break;
   case MY_INT64:
-    INTEGER(x)[i] = valueInt64(j);
+    // FIXME: 64-bit values
+    INTEGER(x)[i] = static_cast<int>(valueInt64(j));
     break;
   case MY_DBL:
     REAL(x)[i] = valueDouble(j);

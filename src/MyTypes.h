@@ -19,7 +19,7 @@ std::string typeName(MyFieldType type);
 SEXPTYPE typeSEXP(MyFieldType type);
 
 std::string rClass(RObject x);
-MyFieldType variableType(RObject type);
+MyFieldType variableType(const RObject& type);
 
 
 #endif
