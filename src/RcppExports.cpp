@@ -7,25 +7,25 @@
 using namespace Rcpp;
 
 // connection_create
-XPtr<MyConnectionPtr> connection_create(const Rcpp::Nullable<std::string>& host, const Rcpp::Nullable<std::string>& user, const Rcpp::Nullable<std::string>& password, const Rcpp::Nullable<std::string>& db, unsigned int port, const Rcpp::Nullable<std::string>& unix_socket, unsigned long client_flag, const Rcpp::Nullable<std::string>& groups, const Rcpp::Nullable<std::string>& default_file, const Rcpp::Nullable<std::string>& ssl_key, const Rcpp::Nullable<std::string>& ssl_cert, const Rcpp::Nullable<std::string>& ssl_ca, const Rcpp::Nullable<std::string>& ssl_capath, const Rcpp::Nullable<std::string>& ssl_cipher);
+XPtr<MyConnectionPtr> connection_create(const Nullable<std::string>& host, const Nullable<std::string>& user, const Nullable<std::string>& password, const Nullable<std::string>& db, unsigned int port, const Nullable<std::string>& unix_socket, unsigned long client_flag, const Nullable<std::string>& groups, const Nullable<std::string>& default_file, const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert, const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath, const Nullable<std::string>& ssl_cipher);
 RcppExport SEXP _RMariaDB_connection_create(SEXP hostSEXP, SEXP userSEXP, SEXP passwordSEXP, SEXP dbSEXP, SEXP portSEXP, SEXP unix_socketSEXP, SEXP client_flagSEXP, SEXP groupsSEXP, SEXP default_fileSEXP, SEXP ssl_keySEXP, SEXP ssl_certSEXP, SEXP ssl_caSEXP, SEXP ssl_capathSEXP, SEXP ssl_cipherSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const Rcpp::Nullable<std::string>& >::type host(hostSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::Nullable<std::string>& >::type user(userSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::Nullable<std::string>& >::type password(passwordSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::Nullable<std::string>& >::type db(dbSEXP);
+    Rcpp::traits::input_parameter< const Nullable<std::string>& >::type host(hostSEXP);
+    Rcpp::traits::input_parameter< const Nullable<std::string>& >::type user(userSEXP);
+    Rcpp::traits::input_parameter< const Nullable<std::string>& >::type password(passwordSEXP);
+    Rcpp::traits::input_parameter< const Nullable<std::string>& >::type db(dbSEXP);
     Rcpp::traits::input_parameter< unsigned int >::type port(portSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::Nullable<std::string>& >::type unix_socket(unix_socketSEXP);
+    Rcpp::traits::input_parameter< const Nullable<std::string>& >::type unix_socket(unix_socketSEXP);
     Rcpp::traits::input_parameter< unsigned long >::type client_flag(client_flagSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::Nullable<std::string>& >::type groups(groupsSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::Nullable<std::string>& >::type default_file(default_fileSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::Nullable<std::string>& >::type ssl_key(ssl_keySEXP);
-    Rcpp::traits::input_parameter< const Rcpp::Nullable<std::string>& >::type ssl_cert(ssl_certSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::Nullable<std::string>& >::type ssl_ca(ssl_caSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::Nullable<std::string>& >::type ssl_capath(ssl_capathSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::Nullable<std::string>& >::type ssl_cipher(ssl_cipherSEXP);
+    Rcpp::traits::input_parameter< const Nullable<std::string>& >::type groups(groupsSEXP);
+    Rcpp::traits::input_parameter< const Nullable<std::string>& >::type default_file(default_fileSEXP);
+    Rcpp::traits::input_parameter< const Nullable<std::string>& >::type ssl_key(ssl_keySEXP);
+    Rcpp::traits::input_parameter< const Nullable<std::string>& >::type ssl_cert(ssl_certSEXP);
+    Rcpp::traits::input_parameter< const Nullable<std::string>& >::type ssl_ca(ssl_caSEXP);
+    Rcpp::traits::input_parameter< const Nullable<std::string>& >::type ssl_capath(ssl_capathSEXP);
+    Rcpp::traits::input_parameter< const Nullable<std::string>& >::type ssl_cipher(ssl_cipherSEXP);
     rcpp_result_gen = Rcpp::wrap(connection_create(host, user, password, db, port, unix_socket, client_flag, groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher));
     return rcpp_result_gen;
 END_RCPP
@@ -83,6 +83,34 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtr<MyConnectionPtr> >::type con(conSEXP);
     Rcpp::traits::input_parameter< std::string >::type sql(sqlSEXP);
     rcpp_result_gen = Rcpp::wrap(connection_exec(con, sql));
+    return rcpp_result_gen;
+END_RCPP
+}
+// driver_init
+void driver_init();
+RcppExport SEXP _RMariaDB_driver_init() {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    driver_init();
+    return R_NilValue;
+END_RCPP
+}
+// driver_done
+void driver_done();
+RcppExport SEXP _RMariaDB_driver_done() {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    driver_done();
+    return R_NilValue;
+END_RCPP
+}
+// version
+IntegerVector version();
+RcppExport SEXP _RMariaDB_version() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(version());
     return rcpp_result_gen;
 END_RCPP
 }
@@ -197,13 +225,31 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// version
-IntegerVector version();
-RcppExport SEXP _RMariaDB_version() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(version());
-    return rcpp_result_gen;
-END_RCPP
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_RMariaDB_connection_create", (DL_FUNC) &_RMariaDB_connection_create, 14},
+    {"_RMariaDB_connection_valid", (DL_FUNC) &_RMariaDB_connection_valid, 1},
+    {"_RMariaDB_connection_release", (DL_FUNC) &_RMariaDB_connection_release, 1},
+    {"_RMariaDB_connection_info", (DL_FUNC) &_RMariaDB_connection_info, 1},
+    {"_RMariaDB_connection_quote_string", (DL_FUNC) &_RMariaDB_connection_quote_string, 2},
+    {"_RMariaDB_connection_exec", (DL_FUNC) &_RMariaDB_connection_exec, 2},
+    {"_RMariaDB_driver_init", (DL_FUNC) &_RMariaDB_driver_init, 0},
+    {"_RMariaDB_driver_done", (DL_FUNC) &_RMariaDB_driver_done, 0},
+    {"_RMariaDB_version", (DL_FUNC) &_RMariaDB_version, 0},
+    {"_RMariaDB_result_create", (DL_FUNC) &_RMariaDB_result_create, 2},
+    {"_RMariaDB_result_column_info", (DL_FUNC) &_RMariaDB_result_column_info, 1},
+    {"_RMariaDB_result_fetch", (DL_FUNC) &_RMariaDB_result_fetch, 2},
+    {"_RMariaDB_result_bind", (DL_FUNC) &_RMariaDB_result_bind, 2},
+    {"_RMariaDB_result_bind_rows", (DL_FUNC) &_RMariaDB_result_bind_rows, 2},
+    {"_RMariaDB_result_release", (DL_FUNC) &_RMariaDB_result_release, 1},
+    {"_RMariaDB_result_rows_affected", (DL_FUNC) &_RMariaDB_result_rows_affected, 1},
+    {"_RMariaDB_result_rows_fetched", (DL_FUNC) &_RMariaDB_result_rows_fetched, 1},
+    {"_RMariaDB_result_complete", (DL_FUNC) &_RMariaDB_result_complete, 1},
+    {"_RMariaDB_result_active", (DL_FUNC) &_RMariaDB_result_active, 1},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_RMariaDB(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }
