@@ -14,6 +14,7 @@ matrix:
             - libmariadbclient-dev
     - os: linux
       dist: trusty
+      sudo: false
       env: R_CODECOV=true
       service: mysql
       addons:
