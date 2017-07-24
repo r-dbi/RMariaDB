@@ -28,6 +28,7 @@ matrix:
     - os: osx
       osx_image: xcode8.3
       before_install:
+        - xcode-select --install
         - brew install mariadb
         - mysql.server start
         - mariadb_config --cflags
