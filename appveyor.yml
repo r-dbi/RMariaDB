@@ -36,8 +36,7 @@ build_script:
   - travis-tool.sh install_deps
 
 test_script:
-  - R -q -e "remotes::install_local('.')"
-  - R -q -e "con <- DBI::dbConnect(RMariaDB::MariaDB()); DBI::dbGetQuery(con, 'SELECT 1')"
+  - travis-tool.sh run_tests
 
 on_failure:
   - 7z a failure.zip *.Rcheck\*

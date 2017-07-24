@@ -29,10 +29,6 @@ r_github_packages:
 warnings_are_errors: true
 #r_check_revdep: true
 
-script:
-  - R -q -e 'devtools::install()'
-  - R -q -e 'con <- DBI::dbConnect(RMariaDB::MariaDB(), dbname = "test"); DBI::dbGetQuery(con, "SELECT 1")'
-
 notifications:
   email:
     on_success: change
