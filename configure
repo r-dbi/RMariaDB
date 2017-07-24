@@ -17,10 +17,11 @@ PKG_LIBS="-lmysqlclient"
 PKG_LIBS_STATIC="-lmysqlclient -lssl -lcrypto -lz"
 
 # Use mysql_config (on Solaris /opt/csw/bin must be in PATH)
-if [ $(command -v mariadb_config) ]; then
-  PKGCONFIG_CFLAGS=$(mariadb_config --cflags)
-  PKGCONFIG_LIBS=$(mariadb_config --libs)
-elif [ $(command -v mysql_config) ]; then
+# mariadb_config creates -l switches with full paths to .dylib files on OS X,
+# failed (at least) with libiconv.dylib .
+# mysql_config is available also for MariaDB, and seems to work more reliable:
+#https://jira.mariadb.org/browse/MDEV-12938
+if [ $(command -v mysql_config) ]; then
   PKGCONFIG_CFLAGS=$(mysql_config --cflags)
   PKGCONFIG_LIBS=$(mysql_config --libs)
 fi
