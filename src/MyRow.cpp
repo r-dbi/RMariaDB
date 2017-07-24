@@ -2,7 +2,7 @@
 #include <ctime>
 
 #ifdef WIN32
-  #define timegm _mkgmtime
+#define timegm _mkgmtime
 #endif
 
 #include "MyRow.h"
