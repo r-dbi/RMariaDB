@@ -34,7 +34,7 @@ NULL
 #' @export
 #' @rdname mariadb-tables
 setMethod("dbReadTable", c("MariaDBConnection", "character"),
-  function(conn, name, row.names = NA, check.names = TRUE, ...) {
+  function(conn, name, row.names = FALSE, check.names = TRUE, ...) {
     name <- dbQuoteIdentifier(conn, name)
     out <- dbGetQuery(conn, paste("SELECT * FROM ", name),
       row.names = row.names)
@@ -62,7 +62,7 @@ setMethod("dbReadTable", c("MariaDBConnection", "character"),
 #' @export
 #' @rdname mariadb-tables
 setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
-  function(conn, name, value, field.types = NULL, row.names = NA,
+  function(conn, name, value, field.types = NULL, row.names = FALSE,
            overwrite = FALSE, append = FALSE, ..., allow.keywords = FALSE,
            temporary = FALSE) {
 
@@ -119,7 +119,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
   }
 )
 
-setMethod("sqlData", "MariaDBConnection", function(con, value, row.names = NA, ...) {
+setMethod("sqlData", "MariaDBConnection", function(con, value, row.names = FALSE, ...) {
   value <- sqlRownamesToColumn(value, row.names)
 
   # Convert factors to strings

@@ -1,5 +1,7 @@
 #include <Rcpp.h>
 #include <mysql.h>
+#include <mysql_version.h>
+
 using namespace Rcpp;
 
 // [[Rcpp::export]]

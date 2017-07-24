@@ -9,7 +9,8 @@
 \alias{dbGetStatement,MariaDBResult-method}
 \title{Execute a SQL statement on a database connection.}
 \usage{
-\S4method{dbFetch}{MariaDBResult,numeric}(res, n = -1, ..., row.names = NA)
+\S4method{dbFetch}{MariaDBResult,numeric}(res, n = -1, ...,
+  row.names = FALSE)
 
 \S4method{dbSendQuery}{MariaDBConnection,character}(conn, statement,
   params = NULL, ...)
