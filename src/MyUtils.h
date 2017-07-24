@@ -9,7 +9,7 @@ List dfResize(const List& df, int n);
 void dfS3(const List& df, const std::vector<MyFieldType>& types);
 
 List dfCreate(const std::vector<MyFieldType>& types,
-                    const std::vector<std::string>& names,
-                    int n);
+              const std::vector<std::string>& names,
+              int n);
 
 #endif
