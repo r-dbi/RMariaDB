@@ -9,7 +9,7 @@ MyConnection::MyConnection(const Rcpp::Nullable<std::string>& host, const Rcpp::
                            const Rcpp::Nullable<std::string>& ssl_key, const Rcpp::Nullable<std::string>& ssl_cert,
                            const Rcpp::Nullable<std::string>& ssl_ca, const Rcpp::Nullable<std::string>& ssl_capath,
                            const Rcpp::Nullable<std::string>& ssl_cipher) :
-pCurrentResult_(NULL)
+  pCurrentResult_(NULL)
 {
   pConn_ = mysql_init(NULL);
   // Enable LOCAL INFILE for fast data ingest
@@ -26,12 +26,12 @@ pCurrentResult_(NULL)
   if (!ssl_key.isNull() || !ssl_cert.isNull() || !ssl_ca.isNull() ||
       !ssl_capath.isNull() || !ssl_cipher.isNull()) {
     mysql_ssl_set(
-    pConn_,
-    ssl_key.isNull() ? NULL : Rcpp::as<std::string>(ssl_key).c_str(),
-    ssl_cert.isNull() ? NULL : Rcpp::as<std::string>(ssl_cert).c_str(),
-    ssl_ca.isNull() ? NULL : Rcpp::as<std::string>(ssl_ca).c_str(),
-    ssl_capath.isNull() ? NULL : Rcpp::as<std::string>(ssl_capath).c_str(),
-    ssl_cipher.isNull() ? NULL : Rcpp::as<std::string>(ssl_cipher).c_str()
+      pConn_,
+      ssl_key.isNull() ? NULL : Rcpp::as<std::string>(ssl_key).c_str(),
+      ssl_cert.isNull() ? NULL : Rcpp::as<std::string>(ssl_cert).c_str(),
+      ssl_ca.isNull() ? NULL : Rcpp::as<std::string>(ssl_ca).c_str(),
+      ssl_capath.isNull() ? NULL : Rcpp::as<std::string>(ssl_capath).c_str(),
+      ssl_cipher.isNull() ? NULL : Rcpp::as<std::string>(ssl_cipher).c_str()
     );
   }
 
@@ -51,20 +51,21 @@ pCurrentResult_(NULL)
 MyConnection::~MyConnection() {
   try {
     mysql_close(pConn_);
-  } catch(...) {};
+  } catch (...) {};
 }
 
 Rcpp::List MyConnection::connectionInfo() {
-  return Rcpp::List::create(
-  Rcpp::_["host"] = std::string(pConn_->host),
-  Rcpp::_["user"] = std::string(pConn_->user),
-  Rcpp::_["dbname"] = std::string(pConn_->db ? pConn_->db : ""),
-  Rcpp::_["conType"] = std::string(mysql_get_host_info(pConn_)),
-  Rcpp::_["serverVersion"] = std::string(mysql_get_server_info(pConn_)),
-  Rcpp::_["protocolVersion"] = (int) mysql_get_proto_info(pConn_),
-  Rcpp::_["threadId"] = (int) mysql_thread_id(pConn_),
-  Rcpp::_["client"] = std::string(mysql_get_client_info())
-  );
+  return
+    Rcpp::List::create(
+      Rcpp::_["host"] = std::string(pConn_->host),
+      Rcpp::_["user"] = std::string(pConn_->user),
+      Rcpp::_["dbname"] = std::string(pConn_->db ? pConn_->db : ""),
+      Rcpp::_["conType"] = std::string(mysql_get_host_info(pConn_)),
+      Rcpp::_["serverVersion"] = std::string(mysql_get_server_info(pConn_)),
+      Rcpp::_["protocolVersion"] = (int) mysql_get_proto_info(pConn_),
+      Rcpp::_["threadId"] = (int) mysql_thread_id(pConn_),
+      Rcpp::_["client"] = std::string(mysql_get_client_info())
+    );
 }
 
 MYSQL* MyConnection::conn() {

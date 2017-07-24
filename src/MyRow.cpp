@@ -2,7 +2,7 @@
 #include <ctime>
 
 #ifdef WIN32
-#define timegm _mkgmtime
+  #define timegm _mkgmtime
 #endif
 
 #include "MyRow.h"
@@ -28,7 +28,7 @@ void MyRow::setUp(MYSQL_STMT* pStatement, std::vector<MyFieldType> types) {
 
   for (int i = 0; i < n_; ++i) {
     // http://dev.mysql.com/doc/refman/5.0/en/c-api-prepared-statement-type-codes.html
-    switch(types_[i]) {
+    switch (types_[i]) {
     case MY_INT32:
       bindings_[i].buffer_type = MYSQL_TYPE_LONG;
       buffers_[i].resize(4);
@@ -149,7 +149,7 @@ int MyRow::valueTime(int j) {
 }
 
 void MyRow::setListValue(SEXP x, int i, int j) {
-  switch(types_[j]) {
+  switch (types_[j]) {
   case MY_INT32:
     INTEGER(x)[i] = valueInt(j);
     break;

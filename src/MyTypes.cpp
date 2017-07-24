@@ -2,7 +2,7 @@
 #include "MyTypes.h"
 
 MyFieldType variableType(enum_field_types type, bool binary) {
-  switch(type) {
+  switch (type) {
   case MYSQL_TYPE_TINY:
   case MYSQL_TYPE_SHORT:
   case MYSQL_TYPE_LONG:
@@ -49,33 +49,53 @@ MyFieldType variableType(enum_field_types type, bool binary) {
 }
 
 std::string typeName(MyFieldType type) {
-  switch(type) {
-  case MY_INT32:       return "integer";
-  case MY_INT64:       return "integer64";
-  case MY_DBL:         return "double";
-  case MY_STR:         return "string";
-  case MY_DATE:        return "Date";
-  case MY_DATE_TIME:   return "POSIXct";
-  case MY_TIME:        return "time";
-  case MY_RAW:         return "raw";
-  case MY_FACTOR:      return "factor";
-  case MY_LGL:         return "logical";
+  switch (type) {
+  case MY_INT32:
+    return "integer";
+  case MY_INT64:
+    return "integer64";
+  case MY_DBL:
+    return "double";
+  case MY_STR:
+    return "string";
+  case MY_DATE:
+    return "Date";
+  case MY_DATE_TIME:
+    return "POSIXct";
+  case MY_TIME:
+    return "time";
+  case MY_RAW:
+    return "raw";
+  case MY_FACTOR:
+    return "factor";
+  case MY_LGL:
+    return "logical";
   }
   throw std::runtime_error("Invalid typeName");
 }
 
 SEXPTYPE typeSEXP(MyFieldType type) {
-  switch(type) {
-  case MY_INT32:       return INTSXP;
-  case MY_INT64:       return INTSXP;
-  case MY_DBL:         return REALSXP;
-  case MY_STR:         return STRSXP;
-  case MY_DATE:        return INTSXP;
-  case MY_DATE_TIME:   return REALSXP;
-  case MY_TIME:        return INTSXP;
-  case MY_RAW:         return VECSXP;
-  case MY_FACTOR:      return INTSXP;
-  case MY_LGL:         return LGLSXP;
+  switch (type) {
+  case MY_INT32:
+    return INTSXP;
+  case MY_INT64:
+    return INTSXP;
+  case MY_DBL:
+    return REALSXP;
+  case MY_STR:
+    return STRSXP;
+  case MY_DATE:
+    return INTSXP;
+  case MY_DATE_TIME:
+    return REALSXP;
+  case MY_TIME:
+    return INTSXP;
+  case MY_RAW:
+    return VECSXP;
+  case MY_FACTOR:
+    return INTSXP;
+  case MY_LGL:
+    return LGLSXP;
   }
   throw std::runtime_error("Invalid typeSEXP");
 }

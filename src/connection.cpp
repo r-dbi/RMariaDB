@@ -3,22 +3,24 @@
 
 // [[Rcpp::export]]
 XPtr<MyConnectionPtr> connection_create(
-    const Rcpp::Nullable<std::string>& host,
-    const Rcpp::Nullable<std::string>& user,
-    const Rcpp::Nullable<std::string>& password,
-    const Rcpp::Nullable<std::string>& db,
-    unsigned int port,
-    const Rcpp::Nullable<std::string>& unix_socket,
-    unsigned long client_flag,
-    const Rcpp::Nullable<std::string>& groups,
-    const Rcpp::Nullable<std::string>& default_file,
-    const Rcpp::Nullable<std::string>& ssl_key,
-    const Rcpp::Nullable<std::string>& ssl_cert,
-    const Rcpp::Nullable<std::string>& ssl_ca,
-    const Rcpp::Nullable<std::string>& ssl_capath,
-    const Rcpp::Nullable<std::string>& ssl_cipher) {
+  const Rcpp::Nullable<std::string>& host,
+  const Rcpp::Nullable<std::string>& user,
+  const Rcpp::Nullable<std::string>& password,
+  const Rcpp::Nullable<std::string>& db,
+  unsigned int port,
+  const Rcpp::Nullable<std::string>& unix_socket,
+  unsigned long client_flag,
+  const Rcpp::Nullable<std::string>& groups,
+  const Rcpp::Nullable<std::string>& default_file,
+  const Rcpp::Nullable<std::string>& ssl_key,
+  const Rcpp::Nullable<std::string>& ssl_cert,
+  const Rcpp::Nullable<std::string>& ssl_ca,
+  const Rcpp::Nullable<std::string>& ssl_capath,
+  const Rcpp::Nullable<std::string>& ssl_cipher
+) {
   MyConnectionPtr* pConn = new MyConnectionPtr(
-    new MyConnection(host, user, password, db, port, unix_socket, client_flag,
+    new MyConnection(
+      host, user, password, db, port, unix_socket, client_flag,
       groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher)
   );
   return XPtr<MyConnectionPtr>(pConn, true);
@@ -37,7 +39,8 @@ void connection_release(XPtr<MyConnectionPtr> con) {
   }
 
   if ((*con)->hasQuery()) {
-    warning("%s\n%s",
+    warning(
+      "%s\n%s",
       "There is a result object still in use.",
       "The connection will be automatically released when it is closed"
     );
@@ -52,7 +55,7 @@ List connection_info(XPtr<MyConnectionPtr> con) {
 
 // [[Rcpp::export]]
 CharacterVector connection_quote_string(XPtr<MyConnectionPtr> con,
-                                         CharacterVector input) {
+                                        CharacterVector input) {
   int n = input.size();
   CharacterVector output(n);
 

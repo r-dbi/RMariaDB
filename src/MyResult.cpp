@@ -4,13 +4,13 @@
 #include "MyConnection.h"
 
 MyResult::MyResult(MyConnectionPtr pConn) :
-pConn_(pConn),
-pStatement_(NULL),
-pSpec_(NULL),
-rowsAffected_(0),
-rowsFetched_(0),
-bound_(false),
-complete_(false)
+  pConn_(pConn),
+  pStatement_(NULL),
+  pSpec_(NULL),
+  rowsAffected_(0),
+  rowsFetched_(0),
+  bound_(false),
+  complete_(false)
 {
   pStatement_ = mysql_stmt_init(pConn->conn());
   if (pStatement_ == NULL)
@@ -22,7 +22,7 @@ MyResult::~MyResult() {
   try {
     pConn_->setCurrentResult(NULL);
     close();
-  } catch(...) {};
+  } catch (...) {};
 }
 
 void MyResult::sendQuery(std::string sql) {
@@ -104,8 +104,8 @@ Rcpp::List MyResult::columnInfo() {
 bool MyResult::fetchRow() {
   int result = mysql_stmt_fetch(pStatement_);
 
-  switch(result) {
-    // We expect truncation whenever there's a string or blob
+  switch (result) {
+  // We expect truncation whenever there's a string or blob
   case MYSQL_DATA_TRUNCATED:
   case 0:
     rowsFetched_++;
@@ -139,7 +139,7 @@ Rcpp::List MyResult::fetch(int n_max) {
     fetchRow();
   }
 
-  while(!complete_) {
+  while (!complete_) {
     if (i >= n) {
       if (n_max < 0) {
         n *= 2;
@@ -180,8 +180,8 @@ int MyResult::rowsFetched() {
 
 bool MyResult::complete() {
   return
-  (pSpec_ == NULL) || // query doesn't have results
-  complete_;          // we've fetched all available results
+    (pSpec_ == NULL) || // query doesn't have results
+    complete_;          // we've fetched all available results
 }
 
 bool MyResult::active() {
@@ -189,15 +189,16 @@ bool MyResult::active() {
 }
 
 void MyResult::throwError() {
-  Rcpp::stop("%s [%i]",
-             mysql_stmt_error(pStatement_),
-             mysql_stmt_errno(pStatement_)
+  Rcpp::stop(
+    "%s [%i]",
+    mysql_stmt_error(pStatement_),
+    mysql_stmt_errno(pStatement_)
   );
 }
 
 void MyResult::cacheMetadata() {
   nCols_ = mysql_num_fields(pSpec_);
-  MYSQL_FIELD *fields = mysql_fetch_fields(pSpec_);
+  MYSQL_FIELD* fields = mysql_fetch_fields(pSpec_);
 
   for (size_t i = 0; i < nCols_; ++i) {
     names_.push_back(fields[i].name);

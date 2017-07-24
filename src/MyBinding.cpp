@@ -27,15 +27,31 @@ void MyBinding::initBinding(Rcpp::List params) {
     MyFieldType type = variableType(params[j]);
     types_[j] = type;
 
-    switch(type) {
-    case MY_LGL:       bindingUpdate(j, MYSQL_TYPE_TINY, 1); break;
-    case MY_INT32:     bindingUpdate(j, MYSQL_TYPE_LONG, 4); break;
-    case MY_DBL:       bindingUpdate(j, MYSQL_TYPE_DOUBLE, 8); break;
-    case MY_DATE:      bindingUpdate(j, MYSQL_TYPE_DATE, sizeof(MYSQL_TIME)); break;
-    case MY_DATE_TIME: bindingUpdate(j, MYSQL_TYPE_DATETIME, sizeof(MYSQL_TIME)); break;
-    case MY_FACTOR:    bindingUpdate(j, MYSQL_TYPE_DOUBLE, 8); break;
-    case MY_STR:       bindingUpdate(j, MYSQL_TYPE_STRING, 0); break;
-    case MY_RAW:       bindingUpdate(j, MYSQL_TYPE_BLOB, 0); break;
+    switch (type) {
+    case MY_LGL:
+      bindingUpdate(j, MYSQL_TYPE_TINY, 1);
+      break;
+    case MY_INT32:
+      bindingUpdate(j, MYSQL_TYPE_LONG, 4);
+      break;
+    case MY_DBL:
+      bindingUpdate(j, MYSQL_TYPE_DOUBLE, 8);
+      break;
+    case MY_DATE:
+      bindingUpdate(j, MYSQL_TYPE_DATE, sizeof(MYSQL_TIME));
+      break;
+    case MY_DATE_TIME:
+      bindingUpdate(j, MYSQL_TYPE_DATETIME, sizeof(MYSQL_TIME));
+      break;
+    case MY_FACTOR:
+      bindingUpdate(j, MYSQL_TYPE_DOUBLE, 8);
+      break;
+    case MY_STR:
+      bindingUpdate(j, MYSQL_TYPE_STRING, 0);
+      break;
+    case MY_RAW:
+      bindingUpdate(j, MYSQL_TYPE_BLOB, 0);
+      break;
     case MY_INT64:
     case MY_TIME:
       // output only
@@ -49,7 +65,7 @@ void MyBinding::bindRow(Rcpp::List params, int i) {
     bool missing = false;
     Rcpp::RObject col = params[j];
 
-    switch(types_[j]) {
+    switch (types_[j]) {
     case MY_LGL:
       if (LOGICAL(col)[i] == NA_LOGICAL) {
         missing = true;
