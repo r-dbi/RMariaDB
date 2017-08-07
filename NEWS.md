@@ -1,3 +1,14 @@
+## RMariaDB 0.11-6 (2017-08-07)
+
+- Move implementations to `.cpp` files.
+- Code compiles without pedantic, extra, and conversion warnings (minus `mysql.h`).
+- Rcpp handles registration of native routines.
+- Formatting code with astyle.
+- Pass or skip all DBItest tests.
+- Fix CI tests on Linux and Windows, disable tests on OS X.
+- New default `row.names = FALSE`.
+
+
 ## RMariaDB 0.11-5 (2016-12-29)
 
 - Add package-level documentation (#159, @Ironholds).
