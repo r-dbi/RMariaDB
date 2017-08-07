@@ -1,18 +1,18 @@
-#' @include MySQLConnection.R
+#' @include MariaDBConnection.R
 NULL
 
 #' DBMS Transaction Management
 #'
-#' Commits or roll backs the current transaction in an MySQL connection.
-#' Note that in MySQL DDL statements (e.g. \code{CREATE TABLE}) can not
+#' Commits or roll backs the current transaction in an MariaDB connection.
+#' Note that in MariaDB DDL statements (e.g. \code{CREATE TABLE}) can not
 #' be rolled back.
 #'
-#' @param conn a \code{MySQLConnection} object, as produced by
+#' @param conn a \code{MariaDBConnection} object, as produced by
 #'  \code{\link{dbConnect}}.
 #' @param ... Unused.
 #' @examples
-#' if (mysqlHasDefault()) {
-#' con <- dbConnect(RMySQL::MySQL(), dbname = "test")
+#' if (mariadbHasDefault()) {
+#' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 #' df <- data.frame(id = 1:5)
 #'
 #' dbWriteTable(con, "df", df)
@@ -31,18 +31,18 @@ NULL
 
 #' @export
 #' @rdname transactions
-setMethod("dbCommit", "MySQLConnection", function(conn, ...) {
-  mysqlExecQuery(conn, "COMMIT")
+setMethod("dbCommit", "MariaDBConnection", function(conn, ...) {
+  mariadbExecQuery(conn, "COMMIT")
 })
 
 #' @export
 #' @rdname transactions
-setMethod("dbBegin", "MySQLConnection", function(conn, ...) {
-  mysqlExecQuery(conn, "START TRANSACTION")
+setMethod("dbBegin", "MariaDBConnection", function(conn, ...) {
+  mariadbExecQuery(conn, "START TRANSACTION")
 })
 
 #' @export
 #' @rdname transactions
-setMethod("dbRollback", "MySQLConnection", function(conn, ...) {
-  mysqlExecQuery(conn, "ROLLBACK")
+setMethod("dbRollback", "MariaDBConnection", function(conn, ...) {
+  mariadbExecQuery(conn, "ROLLBACK")
 })

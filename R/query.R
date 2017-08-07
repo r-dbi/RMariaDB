@@ -1,5 +1,5 @@
-#' @include MySQLConnection.R
-#' @include MySQLResult.R
+#' @include MariaDBConnection.R
+#' @include MariaDBResult.R
 NULL
 
 #' Execute a SQL statement on a database connection.
@@ -12,8 +12,8 @@ NULL
 #' \code{fetch()} will be deprecated in the near future; please use
 #' \code{dbFetch()} instead.
 #'
-#' @param conn an \code{\linkS4class{MySQLConnection}} object.
-#' @param res A  \code{\linkS4class{MySQLResult}} object.
+#' @param conn an \code{\linkS4class{MariaDBConnection}} object.
+#' @param res A  \code{\linkS4class{MariaDBResult}} object.
 #' @inheritParams DBI::sqlRownamesToColumn
 #' @param n Number of rows to retrieve. Use -1 to retrieve all rows.
 #' @param params A list of query parameters to be substituted into
@@ -24,8 +24,8 @@ NULL
 #' @param ... Unused. Needed for compatibility with generic.
 #' @export
 #' @examples
-#' if (mysqlHasDefault()) {
-#' con <- dbConnect(RMySQL::MySQL(), dbname = "test")
+#' if (mariadbHasDefault()) {
+#' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 #' dbWriteTable(con, "arrests", datasets::USArrests, overwrite = TRUE)
 #'
 #' # Run query to get results as dataframe
@@ -42,19 +42,20 @@ NULL
 #' dbDisconnect(con)
 #' }
 #' @rdname query
-setMethod("dbFetch", c("MySQLResult", "numeric"),
-  function(res, n = -1, ..., row.names = NA) {
+setMethod("dbFetch", c("MariaDBResult", "numeric"),
+  function(res, n = -1, ..., row.names = FALSE) {
+    if (n == Inf) n <- -1
     sqlColumnToRownames(result_fetch(res@ptr, n), row.names)
   }
 )
 
 #' @rdname query
 #' @export
-setMethod("dbSendQuery", c("MySQLConnection", "character"),
+setMethod("dbSendQuery", c("MariaDBConnection", "character"),
   function(conn, statement, params = NULL, ...) {
     statement <- enc2utf8(statement)
 
-    rs <- new("MySQLResult",
+    rs <- new("MariaDBResult",
       sql = statement,
       ptr = result_create(conn@ptr, statement)
     )
@@ -69,21 +70,21 @@ setMethod("dbSendQuery", c("MySQLConnection", "character"),
 
 #' @rdname query
 #' @export
-setMethod("dbBind", "MySQLResult", function(res, params, ...) {
+setMethod("dbBind", "MariaDBResult", function(res, params, ...) {
   result_bind(res@ptr, params)
   TRUE
 })
 
 #' @rdname query
 #' @export
-setMethod("dbClearResult", "MySQLResult", function(res, ...) {
+setMethod("dbClearResult", "MariaDBResult", function(res, ...) {
   result_release(res@ptr)
   TRUE
 })
 
 #' @rdname query
 #' @export
-setMethod("dbGetStatement", "MySQLResult", function(res, ...) {
+setMethod("dbGetStatement", "MariaDBResult", function(res, ...) {
   res@sql
 })
 
@@ -91,11 +92,11 @@ setMethod("dbGetStatement", "MySQLResult", function(res, ...) {
 #'
 #' See documentation of generics for more details.
 #'
-#' @param res An object of class \code{\linkS4class{MySQLResult}}
+#' @param res An object of class \code{\linkS4class{MariaDBResult}}
 #' @param ... Ignored. Needed for compatibility with generic
 #' @examples
-#' if (mysqlHasDefault()) {
-#' con <- dbConnect(RMySQL::MySQL(), dbname = "test")
+#' if (mariadbHasDefault()) {
+#' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 #' dbWriteTable(con, "t1", datasets::USArrests, overwrite = TRUE)
 #'
 #' rs <- dbSendQuery(con, "SELECT * FROM t1 WHERE UrbanPop >= 80")
@@ -117,41 +118,41 @@ NULL
 
 #' @export
 #' @rdname result-meta
-setMethod("dbColumnInfo", "MySQLResult", function(res, ...) {
+setMethod("dbColumnInfo", "MariaDBResult", function(res, ...) {
   result_column_info(res@ptr)
 })
 
 #' @export
 #' @rdname result-meta
-setMethod("dbGetRowsAffected", "MySQLResult", function(res, ...) {
+setMethod("dbGetRowsAffected", "MariaDBResult", function(res, ...) {
   result_rows_affected(res@ptr)
 })
 
 #' @export
 #' @rdname result-meta
-setMethod("dbGetRowCount", "MySQLResult", function(res, ...) {
+setMethod("dbGetRowCount", "MariaDBResult", function(res, ...) {
   result_rows_fetched(res@ptr)
 })
 
 #' @export
 #' @rdname result-meta
-setMethod("dbHasCompleted", "MySQLResult", function(res, ...) {
+setMethod("dbHasCompleted", "MariaDBResult", function(res, ...) {
   result_complete(res@ptr)
 })
 
 
 #' Execute a query on the server (no binding).
 #'
-#' MySQL has two APIs for submitting queries, one for parameterised queries
+#' MariaDB has two APIs for submitting queries, one for parameterised queries
 #' and one for unparameterised. In most cases, you can use the parameterised
 #' query interface even if you have zero parameter. However, some queries
 #' (e.g. transaction modification) can not be executed through the
 #' paramaterised interface. This function allows you to submit those queries
 #' directly.
 #'
-#' @param con A MySQL connection.
+#' @param con A MariaDB connection.
 #' @param sql A sql string to execute
 #' @export
-mysqlExecQuery <- function(con, sql) {
+mariadbExecQuery <- function(con, sql) {
   connection_exec(con@ptr, sql)
 }

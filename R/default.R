@@ -1,25 +1,25 @@
 #' Check if default database is available.
 #'
-#' RMySQL examples and tests connect to a database defined by the
+#' RMariaDB examples and tests connect to a database defined by the
 #' \code{rs-dbi} group in \code{~/.my.cnf}. This function checks if that
 #' database is available, and if not, displays an informative message.
-#' \code{mysqlDefault} works similarly but throws a testthat skip condition
+#' \code{mariadbDefault} works similarly but throws a testthat skip condition
 #' on failure, making it suitable for use in tests.
 #'
 #' @export
 #' @examples
-#' if (mysqlHasDefault()) {
-#'   db <- dbConnect(RMySQL::MySQL(), dbname = "test")
+#' if (mariadbHasDefault()) {
+#'   db <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 #'   dbListTables(db)
 #'   dbDisconnect(db)
 #' }
-mysqlHasDefault <- function() {
+mariadbHasDefault <- function() {
   tryCatch({
-    dbConnect(MySQL(), dbname = "test")
+    dbConnect(MariaDB(), dbname = "test")
     TRUE
   }, error = function(...) {
     message(
-      "Could not initialise default MySQL database. If MySQL is running\n",
+      "Could not initialise default MariaDB database. If MariaDB is running\n",
       "check that you have a ~/.my.cnf file that contains a [rs-dbi] section\n",
       "describing how to connect to a test database."
     )
@@ -28,10 +28,10 @@ mysqlHasDefault <- function() {
 }
 
 #' @export
-#' @rdname mysqlHasDefault
-mysqlDefault <- function() {
+#' @rdname mariadbHasDefault
+mariadbDefault <- function() {
   tryCatch({
-    dbConnect(MySQL(), dbname = "test")
+    dbConnect(MariaDB(), dbname = "test")
   }, error = function(...) {
     testthat::skip("Test database not available")
   })

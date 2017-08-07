@@ -1,7 +1,7 @@
-#' @include MySQLConnection.R
+#' @include MariaDBConnection.R
 NULL
 
-#' Read and write MySQL tables.
+#' Read and write MariaDB tables.
 #'
 #' These functions mimic their R counterpart \code{get}, \code{assign},
 #' \code{exists}, \code{remove}, and \code{ls}.
@@ -11,7 +11,7 @@ NULL
 #' @note Note that the data.frame returned by \code{dbReadTable} only has
 #' primitive data, e.g., it does not coerce character data to factors.
 #'
-#' @param conn a \code{\linkS4class{MySQLConnection}} object, produced by
+#' @param conn a \code{\linkS4class{MariaDBConnection}} object, produced by
 #'   \code{\link[DBI]{dbConnect}}
 #' @param name a character string specifying a table name.
 #' @param check.names If \code{TRUE}, the default, column names will be
@@ -19,8 +19,8 @@ NULL
 #' @inheritParams DBI::sqlRownamesToColumn
 #' @param ... Unused, needed for compatiblity with generic.
 #' @examples
-#' if (mysqlHasDefault()) {
-#' con <- dbConnect(RMySQL::MySQL(), dbname = "test")
+#' if (mariadbHasDefault()) {
+#' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 #'
 #' # By default, row names are written in a column to row_names, and
 #' # automatically read back into the row.names()
@@ -28,13 +28,13 @@ NULL
 #' dbReadTable(con, "mtcars")
 #' dbReadTable(con, "mtcars", row.names = NULL)
 #' }
-#' @name mysql-tables
+#' @name mariadb-tables
 NULL
 
 #' @export
-#' @rdname mysql-tables
-setMethod("dbReadTable", c("MySQLConnection", "character"),
-  function(conn, name, row.names = NA, check.names = TRUE, ...) {
+#' @rdname mariadb-tables
+setMethod("dbReadTable", c("MariaDBConnection", "character"),
+  function(conn, name, row.names = FALSE, check.names = TRUE, ...) {
     name <- dbQuoteIdentifier(conn, name)
     out <- dbGetQuery(conn, paste("SELECT * FROM ", name),
       row.names = row.names)
@@ -60,9 +60,9 @@ setMethod("dbReadTable", c("MySQLConnection", "character"),
 #'   when the connection is closed.
 #' @param allow.keywords DEPRECATED.
 #' @export
-#' @rdname mysql-tables
-setMethod("dbWriteTable", c("MySQLConnection", "character", "data.frame"),
-  function(conn, name, value, field.types = NULL, row.names = NA,
+#' @rdname mariadb-tables
+setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
+  function(conn, name, value, field.types = NULL, row.names = FALSE,
            overwrite = FALSE, append = FALSE, ..., allow.keywords = FALSE,
            temporary = FALSE) {
 
@@ -119,7 +119,7 @@ setMethod("dbWriteTable", c("MySQLConnection", "character", "data.frame"),
   }
 )
 
-setMethod("sqlData", "MySQLConnection", function(con, value, row.names = NA, ...) {
+setMethod("sqlData", "MariaDBConnection", function(con, value, row.names = FALSE, ...) {
   value <- sqlRownamesToColumn(value, row.names)
 
   # Convert factors to strings
@@ -134,7 +134,7 @@ setMethod("sqlData", "MySQLConnection", function(con, value, row.names = NA, ...
 })
 
 #' @export
-#' @rdname mysql-tables
+#' @rdname mariadb-tables
 #' @importFrom utils read.table
 #' @param sep field separator character
 #' @param eol End-of-line separator
@@ -146,7 +146,7 @@ setMethod("sqlData", "MySQLConnection", function(con, value, row.names = NA, ...
 #'    line has one fewer column that the second line.
 #' @param nrows number of lines to rows to import using \code{read.table} from
 #'   the input file to create the proper table definition. Default is 50.
-setMethod("dbWriteTable", c("MySQLConnection", "character", "character"),
+setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
   function(conn, name, value, field.types = NULL, overwrite = FALSE,
            append = FALSE, header = TRUE, row.names = FALSE, nrows = 50,
            sep = ",", eol = "\n", skip = 0, quote = '"', temporary = FALSE,
@@ -191,21 +191,21 @@ setMethod("dbWriteTable", c("MySQLConnection", "character", "character"),
       "LINES TERMINATED BY ", dbQuoteString(conn, eol), "\n",
       "IGNORE ", skip + as.integer(header), " LINES")
 
-    mysqlExecQuery(conn, sql)
+    mariadbExecQuery(conn, sql)
 
     TRUE
   }
 )
 
 #' @export
-#' @rdname mysql-tables
-setMethod("dbListTables", "MySQLConnection", function(conn, ...) {
+#' @rdname mariadb-tables
+setMethod("dbListTables", "MariaDBConnection", function(conn, ...) {
   dbGetQuery(conn, "SHOW TABLES")[[1]]
 })
 
 #' @export
-#' @rdname mysql-tables
-setMethod("dbExistsTable", c("MySQLConnection", "character"),
+#' @rdname mariadb-tables
+setMethod("dbExistsTable", c("MariaDBConnection", "character"),
   function(conn, name, ...) {
     tryCatch({
       dbGetQuery(conn, paste0(
@@ -219,8 +219,8 @@ setMethod("dbExistsTable", c("MySQLConnection", "character"),
 )
 
 #' @export
-#' @rdname mysql-tables
-setMethod("dbRemoveTable", c("MySQLConnection", "character"),
+#' @rdname mariadb-tables
+setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
   function(conn, name, ...){
     name <- dbQuoteIdentifier(conn, name)
     dbGetQuery(conn, paste0("DROP TABLE ", name))
@@ -233,25 +233,26 @@ setMethod("dbRemoveTable", c("MySQLConnection", "character"),
 #' This method is a straight-forward implementation of the corresponding
 #' generic function.
 #'
-#' @param dbObj A \code{MySQLDriver} or \code{MySQLConnection}.
+#' @param dbObj A \code{MariaDBDriver} or \code{MariaDBConnection}.
 #' @param obj R/S-Plus object whose SQL type we want to determine.
 #' @param \dots any other parameters that individual methods may need.
 #' @export
 #' @rdname dbDataType
 #' @examples
-#' dbDataType(RMySQL::MySQL(), "a")
-#' dbDataType(RMySQL::MySQL(), 1:3)
-#' dbDataType(RMySQL::MySQL(), 2.5)
-setMethod("dbDataType", "MySQLConnection", function(dbObj, obj, ...) {
-  dbDataType(MySQL(), obj, ...)
+#' dbDataType(RMariaDB::MariaDB(), "a")
+#' dbDataType(RMariaDB::MariaDB(), 1:3)
+#' dbDataType(RMariaDB::MariaDB(), 2.5)
+setMethod("dbDataType", "MariaDBConnection", function(dbObj, obj, ...) {
+  dbDataType(MariaDB(), obj, ...)
 })
 
 #' @export
 #' @rdname dbDataType
-setMethod("dbDataType", "MySQLDriver", function(dbObj, obj, ...) {
+setMethod("dbDataType", "MariaDBDriver", function(dbObj, obj, ...) {
   if (is.factor(obj)) return("TEXT")
   if (inherits(obj, "POSIXct")) return("DATETIME")
   if (inherits(obj, "Date")) return("DATE")
+  if (is.data.frame(obj)) return(callNextMethod(dbObj, obj))
 
   switch(typeof(obj),
     logical = "TINYINT",

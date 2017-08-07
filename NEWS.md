@@ -1,18 +1,29 @@
-## RMySQL 0.11-5 (2016-12-29)
+## RMariaDB 0.11-6 (2017-08-07)
+
+- Move implementations to `.cpp` files.
+- Code compiles without pedantic, extra, and conversion warnings (minus `mysql.h`).
+- Rcpp handles registration of native routines.
+- Formatting code with astyle.
+- Pass or skip all DBItest tests.
+- Fix CI tests on Linux and Windows, disable tests on OS X.
+- New default `row.names = FALSE`.
+
+
+## RMariaDB 0.11-5 (2016-12-29)
 
 - Add package-level documentation (#159, @Ironholds).
-- The `host` and `db` slots of the `MySQLConnection` object now contain actual host and database names, even if they were retrieved from a configuration file (#127, @peternowee).
+- The `host` and `db` slots of the `MariaDBConnection` object now contain actual host and database names, even if they were retrieved from a configuration file (#127, @peternowee).
 - Fix typos in the documentation of `dbConnect()` (#175, @mcol).
 
 
-## RMySQL 0.11-4 (2016-12-29)
+## RMariaDB 0.11-4 (2016-12-29)
 
 - Adapt to `DBItest` changes.
 - Fix compiler warnings.
 - Improve compatibility with different versions of `libmysql`.
 
 
-# RMySQL 0.11-3 (2016-06-08)
+# RMariaDB 0.11-3 (2016-06-08)
 
 - Fix failing compilation on Linux if a  function is declared elsewhere.
 - More robust check for numeric `NA` values.
@@ -24,19 +35,19 @@
 - Use container-based builds on Travis (#143).
 
 
-# RMySQL 0.11-2 (2016-03-29)
+# RMariaDB 0.11-2 (2016-03-29)
 
 - Use the `DBItest` package for testing (#100).
 
 
-# RMySQL 0.11-1 (2016-03-24)
+# RMariaDB 0.11-1 (2016-03-24)
 
- *  RMySQL fully supports DATE and DATETIME columns. On output, DATE columns
+ *  RMariaDB fully supports DATE and DATETIME columns. On output, DATE columns
     will be converted to vectors of `Date`s and DATETIME will be converted
-    to `POSIXct`. To faciliate correct computation of time zone, RMySQL
+    to `POSIXct`. To faciliate correct computation of time zone, RMariaDB
     always sets the session timezone to UTC.
 
- *  RMySQL has been rewritten (essentially from scratch) in C++ with
+ *  RMariaDB has been rewritten (essentially from scratch) in C++ with
     Rcpp. This has considerably reduced the amount of code, and allow us to
     take advantage of the more sophisticated memory management tools available in
     Rcpp. This rewrite should yield some minor performance improvements, but 
@@ -46,7 +57,7 @@
  *  Support for prepared queries: create prepared query with `dbSendQuery()` 
     and bind values with `dbBind()`. `dbSendQuery()` and `dbGetQuery()` also 
     support inline parameterised queries, like 
-    `dbGetQuery(mysqlDefault(), "SELECT * FROM mtcars WHERE cyl = :cyl", 
+    `dbGetQuery(mariadbDefault(), "SELECT * FROM mtcars WHERE cyl = :cyl", 
     params = list(cyl = 4))`. This has no performance benefits but protects you 
     from SQL injection attacks.
 
@@ -81,67 +92,4 @@
  *  Reenable Travis-CI, switch to R Travis, collect coverage
 
 
-# Version 0.10.1
-
- *  Fix configure script for OSX 10.6 Snow Leopard
- 
- *  Issue in `dbWriteTable()` with temporary files on Windows fixed.
-
-# Version 0.10
-
- *  New maintainer: Jeroen Ooms
-
- *  Internal changes to support static linking on Windows; this means that
-    windows a binary is now available on CRAN.
-
- *  The following internal functions are no longer exported: please
-    use the corresponding DBI generic instead:
-
-    `mysqlInitDriver`, `mysqlCloseDriver`, `mysqlDescribeDriver`,
-    `mysqlDriverInfo`, `mysqlNewConnection`, `mysqlCloneConnection`,
-    `mysqlDescribeConnection`, `mysqlConnectionInfo`, `mysqlCloseConnection`,
-    `mysqlExecStatement`, `mysqlQuickSQL`, `mysqlDBApply`, `mysqlFetch`,
-    `mysqlResultInfo`, `mysqlDescribeResult`, `mysqlDescribeFields`,
-    `mysqlCloseResult`, `mysqlImportFile`, `mysqlReadTable`, `mysqlWriteTable`,
-    `mysqlEscapeStrings`, `mysqlDataType`, `safe.write`.
-
- *  RMySQL gains transaction support with `dbBegin()`, `dbCommit()`,
-    and `dbRollback()`, but note that MySQL does not allow data definition
-    language statements to be rolled back.
-
- *  The MySQLObject base class has been removed - there is no real shared
-    behaviour for MySQLDriver, MySQLConnection and MySQLResult so this
-    simplifies the code
-
- *  Implemented methods for `dbIsValid()`; please use these instead of
-    `isIdCurrent()`.
-
- *  Implement `dbFetch()` method; please use this in preference to `fetch()`.
-    `dbFetch()` now returns a 0-row data frame (instead of an 0-col data frame)
-    if there are no results.
-
- *  Methods no longer automatically close open result sets. This was implemented 
-    inconsistently in a handful of places.
-
- *  `dbBuildTableDefinition()` has been renamed to `mysqlBuildTableDefinition()`.
- 
- *  `dbWriteTable()` has been rewritten:
-
-    * It quotes field names using `dbQuoteIdentifier()`, rather
-      than use a flawed black-list based approach with name munging.
-
-    * It now throws errors on failure, rather than returning FALSE. 
-    
-    * It will automatically add row names only if they are character, not integer.
-    
-    * When loading a file from disk, `dbWriteTable()` will no longer
-      attempt to guess the correct values for `row.names` and `header` - instead
-      supply them explicitly if the defaults are incorrect. 
-    
-    * When given a zero-row data frame it will just creates the table 
-      definition. 
-
- *  Assorted fixes accumulated since last release 3 years ago.
-
- * `MySQL()` no longer has `force.reload` argument - it's not obvious that
-    this ever worked.
+# Version 0.10.1 and older: See RMySQL

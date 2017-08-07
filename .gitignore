@@ -5,8 +5,11 @@ src/*.o
 src/*.so
 src/*.dll
 src/*.a
+src/*.d
+src/*.h.gch
 src/Makevars
 config.status
 a.out.dSYM
 homebrew
 TAGS
+/clion-test.R

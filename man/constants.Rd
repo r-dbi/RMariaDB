@@ -2,10 +2,10 @@
 % Please edit documentation in R/connect.R
 \name{constants}
 \alias{constants}
-\alias{.MySQLPkgName}
-\alias{.MySQLPkgVersion}
-\alias{.MySQLPkgRCS}
-\alias{.MySQLSQLKeywords}
+\alias{.MariaDBPkgName}
+\alias{.MariaDBPkgVersion}
+\alias{.MariaDBPkgRCS}
+\alias{.MariaDBSQLKeywords}
 \alias{CLIENT_LONG_PASSWORD}
 \alias{CLIENT_FOUND_ROWS}
 \alias{CLIENT_LONG_FLAG}
@@ -29,8 +29,8 @@
 Constants
 }
 \section{Constants}{
- \code{.MySQLPkgName} (currently \code{"RMySQL"}),
-\code{.MySQLPkgVersion} (the R package version), \code{.MySQLPkgRCS} (the
-RCS revision), \code{.MySQLSQLKeywords} (a lot!)
+ \code{.MariaDBPkgName} (currently \code{"RMariaDB"}),
+\code{.MariaDBPkgVersion} (the R package version), \code{.MariaDBPkgRCS} (the
+RCS revision), \code{.MariaDBSQLKeywords} (a lot!)
 }
 

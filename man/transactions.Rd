@@ -3,31 +3,31 @@
 \docType{methods}
 \name{transactions}
 \alias{transactions}
-\alias{dbCommit,MySQLConnection-method}
-\alias{dbBegin,MySQLConnection-method}
-\alias{dbRollback,MySQLConnection-method}
+\alias{dbCommit,MariaDBConnection-method}
+\alias{dbBegin,MariaDBConnection-method}
+\alias{dbRollback,MariaDBConnection-method}
 \title{DBMS Transaction Management}
 \usage{
-\S4method{dbCommit}{MySQLConnection}(conn, ...)
+\S4method{dbCommit}{MariaDBConnection}(conn, ...)
 
-\S4method{dbBegin}{MySQLConnection}(conn, ...)
+\S4method{dbBegin}{MariaDBConnection}(conn, ...)
 
-\S4method{dbRollback}{MySQLConnection}(conn, ...)
+\S4method{dbRollback}{MariaDBConnection}(conn, ...)
 }
 \arguments{
-\item{conn}{a \code{MySQLConnection} object, as produced by
+\item{conn}{a \code{MariaDBConnection} object, as produced by
 \code{\link{dbConnect}}.}
 
 \item{...}{Unused.}
 }
 \description{
-Commits or roll backs the current transaction in an MySQL connection.
-Note that in MySQL DDL statements (e.g. \code{CREATE TABLE}) can not
+Commits or roll backs the current transaction in an MariaDB connection.
+Note that in MariaDB DDL statements (e.g. \code{CREATE TABLE}) can not
 be rolled back.
 }
 \examples{
-if (mysqlHasDefault()) {
-con <- dbConnect(RMySQL::MySQL(), dbname = "test")
+if (mariadbHasDefault()) {
+con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 df <- data.frame(id = 1:5)
 
 dbWriteTable(con, "df", df)

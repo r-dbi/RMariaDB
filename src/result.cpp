@@ -1,6 +1,6 @@
-#include <Rcpp.h>
-#include "RMySQL_types.h"
-using namespace Rcpp;
+#include "pch.h"
+
+#include "RMariaDB_types.h"
 
 // [[Rcpp::export]]
 XPtr<MyResult> result_create(XPtr<MyConnectionPtr> con, std::string sql) {

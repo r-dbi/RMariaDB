@@ -2,70 +2,78 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 connection_create <- function(host, user, password, db, port, unix_socket, client_flag, groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher) {
-    .Call('RMySQL_connection_create', PACKAGE = 'RMySQL', host, user, password, db, port, unix_socket, client_flag, groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher)
-}
-
-connection_release <- function(con) {
-    invisible(.Call('RMySQL_connection_release', PACKAGE = 'RMySQL', con))
-}
-
-connection_info <- function(con) {
-    .Call('RMySQL_connection_info', PACKAGE = 'RMySQL', con)
+    .Call(`_RMariaDB_connection_create`, host, user, password, db, port, unix_socket, client_flag, groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher)
 }
 
 connection_valid <- function(con) {
-    .Call('RMySQL_connection_valid', PACKAGE = 'RMySQL', con)
+    .Call(`_RMariaDB_connection_valid`, con)
+}
+
+connection_release <- function(con) {
+    invisible(.Call(`_RMariaDB_connection_release`, con))
+}
+
+connection_info <- function(con) {
+    .Call(`_RMariaDB_connection_info`, con)
 }
 
 connection_quote_string <- function(con, input) {
-    .Call('RMySQL_connection_quote_string', PACKAGE = 'RMySQL', con, input)
+    .Call(`_RMariaDB_connection_quote_string`, con, input)
 }
 
 connection_exec <- function(con, sql) {
-    .Call('RMySQL_connection_exec', PACKAGE = 'RMySQL', con, sql)
+    .Call(`_RMariaDB_connection_exec`, con, sql)
 }
 
-result_create <- function(con, sql) {
-    .Call('RMySQL_result_create', PACKAGE = 'RMySQL', con, sql)
+driver_init <- function() {
+    invisible(.Call(`_RMariaDB_driver_init`))
 }
 
-result_column_info <- function(rs) {
-    .Call('RMySQL_result_column_info', PACKAGE = 'RMySQL', rs)
-}
-
-result_fetch <- function(rs, n) {
-    .Call('RMySQL_result_fetch', PACKAGE = 'RMySQL', rs, n)
-}
-
-result_bind <- function(rs, params) {
-    invisible(.Call('RMySQL_result_bind', PACKAGE = 'RMySQL', rs, params))
-}
-
-result_bind_rows <- function(rs, params) {
-    invisible(.Call('RMySQL_result_bind_rows', PACKAGE = 'RMySQL', rs, params))
-}
-
-result_release <- function(rs) {
-    invisible(.Call('RMySQL_result_release', PACKAGE = 'RMySQL', rs))
-}
-
-result_rows_affected <- function(rs) {
-    .Call('RMySQL_result_rows_affected', PACKAGE = 'RMySQL', rs)
-}
-
-result_rows_fetched <- function(rs) {
-    .Call('RMySQL_result_rows_fetched', PACKAGE = 'RMySQL', rs)
-}
-
-result_complete <- function(rs) {
-    .Call('RMySQL_result_complete', PACKAGE = 'RMySQL', rs)
-}
-
-result_active <- function(rs) {
-    .Call('RMySQL_result_active', PACKAGE = 'RMySQL', rs)
+driver_done <- function() {
+    invisible(.Call(`_RMariaDB_driver_done`))
 }
 
 version <- function() {
-    .Call('RMySQL_version', PACKAGE = 'RMySQL')
+    .Call(`_RMariaDB_version`)
+}
+
+result_create <- function(con, sql) {
+    .Call(`_RMariaDB_result_create`, con, sql)
+}
+
+result_column_info <- function(rs) {
+    .Call(`_RMariaDB_result_column_info`, rs)
+}
+
+result_fetch <- function(rs, n) {
+    .Call(`_RMariaDB_result_fetch`, rs, n)
+}
+
+result_bind <- function(rs, params) {
+    invisible(.Call(`_RMariaDB_result_bind`, rs, params))
+}
+
+result_bind_rows <- function(rs, params) {
+    invisible(.Call(`_RMariaDB_result_bind_rows`, rs, params))
+}
+
+result_release <- function(rs) {
+    invisible(.Call(`_RMariaDB_result_release`, rs))
+}
+
+result_rows_affected <- function(rs) {
+    .Call(`_RMariaDB_result_rows_affected`, rs)
+}
+
+result_rows_fetched <- function(rs) {
+    .Call(`_RMariaDB_result_rows_fetched`, rs)
+}
+
+result_complete <- function(rs) {
+    .Call(`_RMariaDB_result_complete`, rs)
+}
+
+result_active <- function(rs) {
+    .Call(`_RMariaDB_result_active`, rs)
 }
 
