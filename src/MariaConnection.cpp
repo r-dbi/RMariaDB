@@ -9,9 +9,7 @@ MariaConnection::MariaConnection() :
 }
 
 MariaConnection::~MariaConnection() {
-  try {
-    mysql_close(pConn_);
-  } catch (...) {};
+  disconnect();
 }
 
 void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<std::string>& user,
@@ -57,6 +55,16 @@ void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<
     mysql_close(this->pConn_);
     stop("Failed to connect: %s", mysql_error(this->pConn_));
   }
+}
+
+void MariaConnection::disconnect() {
+  if (!conn()) return;
+
+  try {
+    mysql_close(conn());
+  } catch (...) {};
+
+  pConn_ = NULL;
 }
 
 List MariaConnection::connectionInfo() {

@@ -27,6 +27,7 @@ public:
           const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
           const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
           const Nullable<std::string>& ssl_cipher);
+  void disconnect();
 
   List connectionInfo();
   MYSQL* conn();
