@@ -11,22 +11,42 @@ MariaConnection::MariaConnection(const Nullable<std::string>& host, const Nullab
                                  const Nullable<std::string>& ssl_cipher) :
   pCurrentResult_(NULL)
 {
-  pConn_ = mysql_init(NULL);
+  connect(
+    host, user, password, db, port, unix_socket, client_flag, groups, default_file,
+    ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher
+  );
+}
+
+MariaConnection::~MariaConnection() {
+  try {
+    mysql_close(pConn_);
+  } catch (...) {};
+}
+
+void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<std::string>& user,
+                              const Nullable<std::string>& password, const Nullable<std::string>& db,
+                              unsigned int port, const Nullable<std::string>& unix_socket,
+                              unsigned long client_flag, const Nullable<std::string>& groups,
+                              const Nullable<std::string>& default_file,
+                              const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
+                              const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
+                              const Nullable<std::string>& ssl_cipher) {
+  this->pConn_ = mysql_init(NULL);
   // Enable LOCAL INFILE for fast data ingest
-  mysql_options(pConn_, MYSQL_OPT_LOCAL_INFILE, 0);
+  mysql_options(this->pConn_, MYSQL_OPT_LOCAL_INFILE, 0);
   // Default to UTF-8
-  mysql_options(pConn_, MYSQL_SET_CHARSET_NAME, "UTF8");
+  mysql_options(this->pConn_, MYSQL_SET_CHARSET_NAME, "UTF8");
   if (!groups.isNull())
-    mysql_options(pConn_, MYSQL_READ_DEFAULT_GROUP,
+    mysql_options(this->pConn_, MYSQL_READ_DEFAULT_GROUP,
                   as<std::string>(groups).c_str());
   if (!default_file.isNull())
-    mysql_options(pConn_, MYSQL_READ_DEFAULT_FILE,
+    mysql_options(this->pConn_, MYSQL_READ_DEFAULT_FILE,
                   as<std::string>(default_file).c_str());
 
   if (!ssl_key.isNull() || !ssl_cert.isNull() || !ssl_ca.isNull() ||
       !ssl_capath.isNull() || !ssl_cipher.isNull()) {
     mysql_ssl_set(
-      pConn_,
+      this->pConn_,
       ssl_key.isNull() ? NULL : as<std::string>(ssl_key).c_str(),
       ssl_cert.isNull() ? NULL : as<std::string>(ssl_cert).c_str(),
       ssl_ca.isNull() ? NULL : as<std::string>(ssl_ca).c_str(),
@@ -35,7 +55,7 @@ MariaConnection::MariaConnection(const Nullable<std::string>& host, const Nullab
     );
   }
 
-  if (!mysql_real_connect(pConn_,
+  if (!mysql_real_connect(this->pConn_,
                           host.isNull() ? NULL : as<std::string>(host).c_str(),
                           user.isNull() ? NULL : as<std::string>(user).c_str(),
                           password.isNull() ? NULL : as<std::string>(password).c_str(),
@@ -43,15 +63,9 @@ MariaConnection::MariaConnection(const Nullable<std::string>& host, const Nullab
                           port,
                           unix_socket.isNull() ? NULL : as<std::string>(unix_socket).c_str(),
                           client_flag)) {
-    mysql_close(pConn_);
-    stop("Failed to connect: %s", mysql_error(pConn_));
+    mysql_close(this->pConn_);
+    stop("Failed to connect: %s", mysql_error(this->pConn_));
   }
-}
-
-MariaConnection::~MariaConnection() {
-  try {
-    mysql_close(pConn_);
-  } catch (...) {};
 }
 
 List MariaConnection::connectionInfo() {
