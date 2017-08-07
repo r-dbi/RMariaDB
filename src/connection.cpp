@@ -18,12 +18,13 @@ XPtr<MariaConnectionPtr> connection_create(
   const Nullable<std::string>& ssl_capath,
   const Nullable<std::string>& ssl_cipher
 ) {
-  MariaConnectionPtr* pConn = new MariaConnectionPtr(
-    new MariaConnection(
-      host, user, password, db, port, unix_socket, client_flag,
-      groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher)
+  std::auto_ptr<MariaConnection> pConnPtr(new MariaConnection);
+  pConnPtr->connect(
+    host, user, password, db, port, unix_socket, client_flag, groups, default_file,
+    ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher
   );
-  return XPtr<MariaConnectionPtr>(pConn, true);
+
+  return XPtr<MariaConnectionPtr>(new MariaConnectionPtr(pConnPtr.release()), true);
 }
 
 // [[Rcpp::export]]

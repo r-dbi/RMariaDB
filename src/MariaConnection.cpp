@@ -2,19 +2,10 @@
 #include "MariaConnection.h"
 #include "MariaResult.h"
 
-MariaConnection::MariaConnection(const Nullable<std::string>& host, const Nullable<std::string>& user,
-                                 const Nullable<std::string>& password, const Nullable<std::string>& db,
-                                 unsigned int port, const Nullable<std::string>& unix_socket, unsigned long client_flag,
-                                 const Nullable<std::string>& groups, const Nullable<std::string>& default_file,
-                                 const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
-                                 const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
-                                 const Nullable<std::string>& ssl_cipher) :
+MariaConnection::MariaConnection() :
+  pConn_(NULL),
   pCurrentResult_(NULL)
 {
-  connect(
-    host, user, password, db, port, unix_socket, client_flag, groups, default_file,
-    ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher
-  );
 }
 
 MariaConnection::~MariaConnection() {
