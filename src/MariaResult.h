@@ -1,15 +1,15 @@
-#ifndef __RMYSQL_MY_RESULT__
-#define __RMYSQL_MY_RESULT__
+#ifndef __RMARIADB_MARIA_RESULT__
+#define __RMARIADB_MARIA_RESULT__
 
 #include <boost/noncopyable.hpp>
-#include "MyConnection.h"
-#include "MyBinding.h"
-#include "MyRow.h"
-#include "MyTypes.h"
-#include "MyUtils.h"
+#include "MariaConnection.h"
+#include "MariaBinding.h"
+#include "MariaRow.h"
+#include "MariaTypes.h"
+#include "MariaUtils.h"
 
-class MyResult : boost::noncopyable {
-  MyConnectionPtr pConn_;
+class MariaResult : boost::noncopyable {
+  MariaConnectionPtr pConn_;
   MYSQL_STMT* pStatement_;
   MYSQL_RES* pSpec_;
   uint64_t rowsAffected_, rowsFetched_;
@@ -17,14 +17,14 @@ class MyResult : boost::noncopyable {
   int nCols_, nParams_;
   bool bound_, complete_;
 
-  std::vector<MyFieldType> types_;
+  std::vector<MariaFieldType> types_;
   std::vector<std::string> names_;
-  MyBinding bindingInput_;
-  MyRow bindingOutput_;
+  MariaBinding bindingInput_;
+  MariaRow bindingOutput_;
 
 public:
-  MyResult(MyConnectionPtr pConn);
-  ~MyResult();
+  MariaResult(MariaConnectionPtr pConn);
+  ~MariaResult();
 
 public:
   void sendQuery(std::string sql);

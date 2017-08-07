@@ -1,21 +1,21 @@
-#ifndef __RMYSQL_MY_BINDING__
-#define __RMYSQL_MY_BINDING__
+#ifndef __RMARIADB_MARIA_BINDING__
+#define __RMARIADB_MARIA_BINDING__
 
 #include <boost/noncopyable.hpp>
-#include "MyTypes.h"
+#include "MariaTypes.h"
 
-class MyBinding : public boost::noncopyable {
+class MariaBinding : public boost::noncopyable {
   MYSQL_STMT* pStatement_;
 
   int p_;
   std::vector<MYSQL_BIND> bindings_;
   std::vector<my_bool> isNull_;
-  std::vector<MyFieldType> types_;
+  std::vector<MariaFieldType> types_;
   std::vector<MYSQL_TIME> timeBuffers_;
 
 public:
-  MyBinding();
-  ~MyBinding();
+  MariaBinding();
+  ~MariaBinding();
 
 public:
   void setUp(MYSQL_STMT* pStatement);

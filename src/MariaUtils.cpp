@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "MyTypes.h"
+#include "MariaTypes.h"
 
 List dfResize(const List& df, int n) {
   R_xlen_t p = df.size();
@@ -16,7 +16,7 @@ List dfResize(const List& df, int n) {
   return out;
 }
 
-void dfS3(const List& df, const std::vector<MyFieldType>& types) {
+void dfS3(const List& df, const std::vector<MariaFieldType>& types) {
   R_xlen_t p = df.size();
 
   for (R_xlen_t j = 0; j < p; ++j) {
@@ -35,7 +35,7 @@ void dfS3(const List& df, const std::vector<MyFieldType>& types) {
   }
 }
 
-List dfCreate(const std::vector<MyFieldType>& types, const std::vector<std::string>& names, int n) {
+List dfCreate(const std::vector<MariaFieldType>& types, const std::vector<std::string>& names, int n) {
   R_xlen_t p = types.size();
 
   List out(p);

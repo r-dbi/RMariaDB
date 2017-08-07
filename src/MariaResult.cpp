@@ -1,9 +1,9 @@
 #include "pch.h"
 
-#include "MyResult.h"
-#include "MyConnection.h"
+#include "MariaResult.h"
+#include "MariaConnection.h"
 
-MyResult::MyResult(MyConnectionPtr pConn) :
+MariaResult::MariaResult(MariaConnectionPtr pConn) :
   pConn_(pConn),
   pStatement_(NULL),
   pSpec_(NULL),
@@ -18,14 +18,14 @@ MyResult::MyResult(MyConnectionPtr pConn) :
   pConn_->setCurrentResult(this);
 }
 
-MyResult::~MyResult() {
+MariaResult::~MariaResult() {
   try {
     pConn_->setCurrentResult(NULL);
     close();
   } catch (...) {};
 }
 
-void MyResult::sendQuery(std::string sql) {
+void MariaResult::sendQuery(std::string sql) {
   if (mysql_stmt_prepare(pStatement_, sql.data(), sql.size()) != 0)
     throwError();
 
@@ -43,7 +43,7 @@ void MyResult::sendQuery(std::string sql) {
   }
 }
 
-void MyResult::close() {
+void MariaResult::close() {
   if (pSpec_ != NULL) {
     mysql_free_result(pSpec_);
     pSpec_ = NULL;
@@ -55,7 +55,7 @@ void MyResult::close() {
   }
 }
 
-void MyResult::execute() {
+void MariaResult::execute() {
   complete_ = false;
   rowsFetched_ = 0;
   bound_ = true;
@@ -65,14 +65,14 @@ void MyResult::execute() {
   rowsAffected_ = mysql_stmt_affected_rows(pStatement_);
 }
 
-void MyResult::bind(List params) {
+void MariaResult::bind(List params) {
   bindingInput_.setUp(pStatement_);
   bindingInput_.initBinding(params);
   bindingInput_.bindRow(params, 0);
   execute();
 }
 
-void MyResult::bindRows(List params) {
+void MariaResult::bindRows(List params) {
   if (params.size() == 0)
     return;
 
@@ -86,7 +86,7 @@ void MyResult::bindRows(List params) {
   }
 }
 
-List MyResult::columnInfo() {
+List MariaResult::columnInfo() {
   CharacterVector names(nCols_), types(nCols_);
   for (int i = 0; i < nCols_; i++) {
     names[i] = names_[i];
@@ -101,7 +101,7 @@ List MyResult::columnInfo() {
   return out;
 }
 
-bool MyResult::fetchRow() {
+bool MariaResult::fetchRow() {
   int result = mysql_stmt_fetch(pStatement_);
 
   switch (result) {
@@ -120,7 +120,7 @@ bool MyResult::fetchRow() {
   return false;
 }
 
-List MyResult::fetch(int n_max) {
+List MariaResult::fetch(int n_max) {
   if (!bound_)
     stop("Query needs to be bound before fetching");
   if (!active())
@@ -170,27 +170,27 @@ List MyResult::fetch(int n_max) {
   return out;
 }
 
-int MyResult::rowsAffected() {
+int MariaResult::rowsAffected() {
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsAffected_);
 }
 
-int MyResult::rowsFetched() {
+int MariaResult::rowsFetched() {
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsFetched_ == 0 ? 0 : rowsFetched_ - 1);
 }
 
-bool MyResult::complete() {
+bool MariaResult::complete() {
   return
     (pSpec_ == NULL) || // query doesn't have results
     complete_;          // we've fetched all available results
 }
 
-bool MyResult::active() {
+bool MariaResult::active() {
   return pConn_->isCurrentResult(this);
 }
 
-void MyResult::throwError() {
+void MariaResult::throwError() {
   stop(
     "%s [%i]",
     mysql_stmt_error(pStatement_),
@@ -198,7 +198,7 @@ void MyResult::throwError() {
   );
 }
 
-void MyResult::cacheMetadata() {
+void MariaResult::cacheMetadata() {
   nCols_ = mysql_num_fields(pSpec_);
   MYSQL_FIELD* fields = mysql_fetch_fields(pSpec_);
 
@@ -206,7 +206,7 @@ void MyResult::cacheMetadata() {
     names_.push_back(fields[i].name);
 
     bool binary = fields[i].charsetnr == 63;
-    MyFieldType type = variableType(fields[i].type, binary);
+    MariaFieldType type = variableType(fields[i].type, binary);
     types_.push_back(type);
   }
 }

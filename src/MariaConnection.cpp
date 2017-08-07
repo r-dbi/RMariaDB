@@ -1,14 +1,14 @@
 #include "pch.h"
-#include "MyConnection.h"
-#include "MyResult.h"
+#include "MariaConnection.h"
+#include "MariaResult.h"
 
-MyConnection::MyConnection(const Nullable<std::string>& host, const Nullable<std::string>& user,
-                           const Nullable<std::string>& password, const Nullable<std::string>& db,
-                           unsigned int port, const Nullable<std::string>& unix_socket, unsigned long client_flag,
-                           const Nullable<std::string>& groups, const Nullable<std::string>& default_file,
-                           const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
-                           const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
-                           const Nullable<std::string>& ssl_cipher) :
+MariaConnection::MariaConnection(const Nullable<std::string>& host, const Nullable<std::string>& user,
+                                 const Nullable<std::string>& password, const Nullable<std::string>& db,
+                                 unsigned int port, const Nullable<std::string>& unix_socket, unsigned long client_flag,
+                                 const Nullable<std::string>& groups, const Nullable<std::string>& default_file,
+                                 const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
+                                 const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
+                                 const Nullable<std::string>& ssl_cipher) :
   pCurrentResult_(NULL)
 {
   pConn_ = mysql_init(NULL);
@@ -48,13 +48,13 @@ MyConnection::MyConnection(const Nullable<std::string>& host, const Nullable<std
   }
 }
 
-MyConnection::~MyConnection() {
+MariaConnection::~MariaConnection() {
   try {
     mysql_close(pConn_);
   } catch (...) {};
 }
 
-List MyConnection::connectionInfo() {
+List MariaConnection::connectionInfo() {
   return
     List::create(
       _["host"] = std::string(pConn_->host),
@@ -68,11 +68,11 @@ List MyConnection::connectionInfo() {
     );
 }
 
-MYSQL* MyConnection::conn() {
+MYSQL* MariaConnection::conn() {
   return pConn_;
 }
 
-std::string MyConnection::quoteString(std::string input) {
+std::string MariaConnection::quoteString(std::string input) {
   // Create buffer with enough room to escape every character
   std::string output;
   output.resize(input.size() * 2 + 1);
@@ -84,7 +84,7 @@ std::string MyConnection::quoteString(std::string input) {
   return output;
 }
 
-void MyConnection::setCurrentResult(MyResult* pResult) {
+void MariaConnection::setCurrentResult(MariaResult* pResult) {
   if (pResult == pCurrentResult_)
     return;
 
@@ -97,15 +97,15 @@ void MyConnection::setCurrentResult(MyResult* pResult) {
   pCurrentResult_ = pResult;
 }
 
-bool MyConnection::isCurrentResult(MyResult* pResult) {
+bool MariaConnection::isCurrentResult(MariaResult* pResult) {
   return pCurrentResult_ == pResult;
 }
 
-bool MyConnection::hasQuery() {
+bool MariaConnection::hasQuery() {
   return pCurrentResult_ != NULL;
 }
 
-bool MyConnection::exec(std::string sql) {
+bool MariaConnection::exec(std::string sql) {
   setCurrentResult(NULL);
 
   if (mysql_real_query(pConn_, sql.data(), sql.size()) != 0)

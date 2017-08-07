@@ -5,17 +5,17 @@
 #define timegm _mkgmtime
 #endif
 
-#include "MyRow.h"
-#include "MyTypes.h"
+#include "MariaRow.h"
+#include "MariaTypes.h"
 
 
-MyRow::MyRow() {
+MariaRow::MariaRow() {
 }
 
-MyRow::~MyRow() {
+MariaRow::~MariaRow() {
 }
 
-void MyRow::setUp(MYSQL_STMT* pStatement, const std::vector<MyFieldType>& types) {
+void MariaRow::setUp(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& types) {
   pStatement_ = pStatement;
   types_ = types;
   n_ = static_cast<int>(types_.size());
@@ -78,23 +78,23 @@ void MyRow::setUp(MYSQL_STMT* pStatement, const std::vector<MyFieldType>& types)
   }
 }
 
-bool MyRow::isNull(int j) {
+bool MariaRow::isNull(int j) {
   return nulls_[j] == 1;
 }
 
-int MyRow::valueInt(int j) {
+int MariaRow::valueInt(int j) {
   return isNull(j) ? NA_INTEGER : *((int*) &buffers_[j][0]);
 }
 
-int64_t MyRow::valueInt64(int j) {
+int64_t MariaRow::valueInt64(int j) {
   return isNull(j) ? NA_INTEGER : *((int64_t*) &buffers_[j][0]);
 }
 
-double MyRow::valueDouble(int j) {
+double MariaRow::valueDouble(int j) {
   return isNull(j) ? NA_REAL : *((double*) &buffers_[j][0]);
 }
 
-SEXP MyRow::valueString(int j) {
+SEXP MariaRow::valueString(int j) {
   if (isNull(j))
     return NA_STRING;
 
@@ -105,7 +105,7 @@ SEXP MyRow::valueString(int j) {
   return Rf_mkCharCE(val, CE_UTF8);
 }
 
-SEXP MyRow::valueRaw(int j) {
+SEXP MariaRow::valueRaw(int j) {
   if (isNull(j))
     return Rf_allocVector(RAWSXP, 0);
 
@@ -116,7 +116,7 @@ SEXP MyRow::valueRaw(int j) {
   return bytes;
 }
 
-double MyRow::valueDateTime(int j) {
+double MariaRow::valueDateTime(int j) {
   if (isNull(j))
     return NA_REAL;
 
@@ -133,14 +133,14 @@ double MyRow::valueDateTime(int j) {
   return static_cast<double>(timegm(&t));
 }
 
-int MyRow::valueDate(int j) {
+int MariaRow::valueDate(int j) {
   if (isNull(j))
     return NA_INTEGER;
 
   return static_cast<int>(std::floor(valueDateTime(j) / 86400.0));
 }
 
-int MyRow::valueTime(int j) {
+int MariaRow::valueTime(int j) {
   if (isNull(j))
     return NA_INTEGER;
 
@@ -148,7 +148,7 @@ int MyRow::valueTime(int j) {
   return mytime->hour * 3600 + mytime->minute * 60 + mytime->second;
 }
 
-void MyRow::setListValue(SEXP x, int i, int j) {
+void MariaRow::setListValue(SEXP x, int i, int j) {
   switch (types_[j]) {
   case MY_INT32:
     INTEGER(x)[i] = valueInt(j);
@@ -182,7 +182,7 @@ void MyRow::setListValue(SEXP x, int i, int j) {
   }
 }
 
-void MyRow::fetchBuffer(int j) {
+void MariaRow::fetchBuffer(int j) {
   unsigned long length = lengths_[j];
   buffers_[j].resize(length);
   if (length == 0)

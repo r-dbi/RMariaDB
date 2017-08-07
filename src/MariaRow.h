@@ -1,28 +1,28 @@
-#ifndef __RMYSQL_MY_ROW__
-#define __RMYSQL_MY_ROW__
+#ifndef __RMARIADB_MARIA_ROW__
+#define __RMARIADB_MARIA_ROW__
 
 #include <boost/core/noncopyable.hpp>
 #include <boost/cstdint.hpp>
 
-#include "MyTypes.h"
+#include "MariaTypes.h"
 
-class MyRow : public boost::noncopyable {
+class MariaRow : public boost::noncopyable {
   MYSQL_STMT* pStatement_;
 
   int n_;
   std::vector<MYSQL_BIND> bindings_;
 
-  std::vector<MyFieldType> types_;
+  std::vector<MariaFieldType> types_;
   std::vector<std::vector<unsigned char> > buffers_;
   std::vector<unsigned long> lengths_;
   std::vector<my_bool> nulls_, errors_;
 
 public:
-  MyRow();
-  ~MyRow();
+  MariaRow();
+  ~MariaRow();
 
 public:
-  void setUp(MYSQL_STMT* pStatement, const std::vector<MyFieldType>& types);
+  void setUp(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& types);
 
   // Value accessors -----------------------------------------------------------
   bool isNull(int j);

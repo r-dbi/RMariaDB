@@ -1,14 +1,14 @@
 #include "pch.h"
 #include <ctime>
-#include "MyBinding.h"
+#include "MariaBinding.h"
 
-MyBinding::MyBinding() {
+MariaBinding::MariaBinding() {
 }
 
-MyBinding::~MyBinding() {
+MariaBinding::~MariaBinding() {
 }
 
-void MyBinding::setUp(MYSQL_STMT* pStatement) {
+void MariaBinding::setUp(MYSQL_STMT* pStatement) {
   pStatement_ = pStatement;
   p_ = static_cast<int>(mysql_stmt_param_count(pStatement_));
 
@@ -18,13 +18,13 @@ void MyBinding::setUp(MYSQL_STMT* pStatement) {
   timeBuffers_.resize(p_);
 }
 
-void MyBinding::initBinding(List params) {
+void MariaBinding::initBinding(List params) {
   if (p_ != params.size()) {
     stop("Number of params don't match (%i vs %i)", p_, params.size());
   }
 
   for (int j = 0; j < p_; ++j) {
-    MyFieldType type = variableType(RObject(params[j]));
+    MariaFieldType type = variableType(RObject(params[j]));
     types_[j] = type;
 
     switch (type) {
@@ -60,7 +60,7 @@ void MyBinding::initBinding(List params) {
   }
 }
 
-void MyBinding::bindRow(List params, int i) {
+void MariaBinding::bindRow(List params, int i) {
   for (int j = 0; j < p_; ++j) {
     bool missing = false;
     RObject col(params[j]);
@@ -126,13 +126,13 @@ void MyBinding::bindRow(List params, int i) {
   mysql_stmt_bind_param(pStatement_, &bindings_[0]);
 }
 
-void MyBinding::bindingUpdate(int j, enum_field_types type, int size) {
+void MariaBinding::bindingUpdate(int j, enum_field_types type, int size) {
   bindings_[j].buffer_length = size;
   bindings_[j].buffer_type = type;
   bindings_[j].is_null = &isNull_[j];
 }
 
-void MyBinding::setTimeBuffer(int j, time_t time) {
+void MariaBinding::setTimeBuffer(int j, time_t time) {
   struct tm* tm = gmtime(&time);
 
   timeBuffers_[j].year = tm->tm_year + 1900;

@@ -2,7 +2,7 @@
 #include "RMariaDB_types.h"
 
 // [[Rcpp::export]]
-XPtr<MyConnectionPtr> connection_create(
+XPtr<MariaConnectionPtr> connection_create(
   const Nullable<std::string>& host,
   const Nullable<std::string>& user,
   const Nullable<std::string>& password,
@@ -18,21 +18,21 @@ XPtr<MyConnectionPtr> connection_create(
   const Nullable<std::string>& ssl_capath,
   const Nullable<std::string>& ssl_cipher
 ) {
-  MyConnectionPtr* pConn = new MyConnectionPtr(
-    new MyConnection(
+  MariaConnectionPtr* pConn = new MariaConnectionPtr(
+    new MariaConnection(
       host, user, password, db, port, unix_socket, client_flag,
       groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher)
   );
-  return XPtr<MyConnectionPtr>(pConn, true);
+  return XPtr<MariaConnectionPtr>(pConn, true);
 }
 
 // [[Rcpp::export]]
-bool connection_valid(XPtr<MyConnectionPtr> con) {
+bool connection_valid(XPtr<MariaConnectionPtr> con) {
   return con.get() != NULL;
 }
 
 // [[Rcpp::export]]
-void connection_release(XPtr<MyConnectionPtr> con) {
+void connection_release(XPtr<MariaConnectionPtr> con) {
   if (!connection_valid(con)) {
     warning("Already disconnected");
     return;
@@ -49,12 +49,12 @@ void connection_release(XPtr<MyConnectionPtr> con) {
 }
 
 // [[Rcpp::export]]
-List connection_info(XPtr<MyConnectionPtr> con) {
+List connection_info(XPtr<MariaConnectionPtr> con) {
   return (*con)->connectionInfo();
 }
 
 // [[Rcpp::export]]
-CharacterVector connection_quote_string(XPtr<MyConnectionPtr> con,
+CharacterVector connection_quote_string(XPtr<MariaConnectionPtr> con,
                                         CharacterVector input) {
   R_xlen_t n = input.size();
   CharacterVector output(n);
@@ -72,6 +72,6 @@ CharacterVector connection_quote_string(XPtr<MyConnectionPtr> con,
 }
 
 // [[Rcpp::export]]
-bool connection_exec(XPtr<MyConnectionPtr> con, std::string sql) {
+bool connection_exec(XPtr<MariaConnectionPtr> con, std::string sql) {
   return (*con)->exec(sql);
 }

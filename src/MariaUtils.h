@@ -6,9 +6,9 @@
 List dfResize(const List& df, int n);
 
 // Set up S3 classes correctly
-void dfS3(const List& df, const std::vector<MyFieldType>& types);
+void dfS3(const List& df, const std::vector<MariaFieldType>& types);
 
-List dfCreate(const std::vector<MyFieldType>& types,
+List dfCreate(const std::vector<MariaFieldType>& types,
               const std::vector<std::string>& names,
               int n);
 

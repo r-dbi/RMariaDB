@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "MyTypes.h"
+#include "MariaTypes.h"
 
-MyFieldType variableType(enum_field_types type, bool binary) {
+MariaFieldType variableType(enum_field_types type, bool binary) {
   switch (type) {
   case MYSQL_TYPE_TINY:
   case MYSQL_TYPE_SHORT:
@@ -48,7 +48,7 @@ MyFieldType variableType(enum_field_types type, bool binary) {
   }
 }
 
-std::string typeName(MyFieldType type) {
+std::string typeName(MariaFieldType type) {
   switch (type) {
   case MY_INT32:
     return "integer";
@@ -74,7 +74,7 @@ std::string typeName(MyFieldType type) {
   throw std::runtime_error("Invalid typeName");
 }
 
-SEXPTYPE typeSEXP(MyFieldType type) {
+SEXPTYPE typeSEXP(MariaFieldType type) {
   switch (type) {
   case MY_INT32:
     return INTSXP;
@@ -110,7 +110,7 @@ std::string rClass(RObject x) {
   return std::string(klassv[0]);
 }
 
-MyFieldType variableType(const RObject& type) {
+MariaFieldType variableType(const RObject& type) {
   std::string klass = rClass(type);
 
   switch (TYPEOF(type)) {
