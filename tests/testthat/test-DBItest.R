@@ -18,7 +18,7 @@ DBItest::test_all(c(
   "data_timestamp_current_typed",               # #113
 
   # sql
-  "list_fields",                                # #137
+  "list_fields",                                # requires DBI > 0.7
   "list_tables",                                #
   "append_table_new",                           #
   "roundtrip_quotes",                           # #101
