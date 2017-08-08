@@ -84,7 +84,7 @@ DBItest::test_all(c(
 
   # compliance
   "compliance",                                 # #112
-  "ellipsis",                                   # #171
+  "ellipsis",                                   # requires DBItest > 1.5-11
 
   NULL
 ))

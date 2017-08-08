@@ -17,7 +17,7 @@ setMethod("dbUnloadDriver", "MariaDBDriver", function(drv, ...) {
 
 #' @rdname MariaDBDriver-class
 #' @export
-setMethod("dbIsValid", "MariaDBDriver", function(dbObj) {
+setMethod("dbIsValid", "MariaDBDriver", function(dbObj, ...) {
   TRUE
 })
 

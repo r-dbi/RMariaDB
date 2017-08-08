@@ -48,7 +48,7 @@ setMethod("show", "MariaDBConnection", function(object) {
 
 #' @export
 #' @rdname MariaDBConnection-class
-setMethod("dbIsValid", "MariaDBConnection", function(dbObj) {
+setMethod("dbIsValid", "MariaDBConnection", function(dbObj, ...) {
   connection_valid(dbObj@ptr)
 })
 
