@@ -78,8 +78,12 @@ setMethod("dbBind", "MariaDBResult", function(res, params, ...) {
 #' @rdname query
 #' @export
 setMethod("dbClearResult", "MariaDBResult", function(res, ...) {
+  if (!dbIsValid(res)) {
+    warningc("Expired, result set already closed")
+    return(invisible(TRUE))
+  }
   result_release(res@ptr)
-  TRUE
+  invisible(TRUE)
 })
 
 #' @rdname query
