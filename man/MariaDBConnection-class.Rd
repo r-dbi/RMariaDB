@@ -15,7 +15,7 @@
 
 \S4method{show}{MariaDBConnection}(object)
 
-\S4method{dbIsValid}{MariaDBConnection}(dbObj)
+\S4method{dbIsValid}{MariaDBConnection}(dbObj, ...)
 }
 \description{
 \code{MariaDBConnection.} objects are usually created by

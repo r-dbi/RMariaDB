@@ -4,12 +4,18 @@
 \name{mariadb-quoting}
 \alias{mariadb-quoting}
 \alias{dbQuoteIdentifier,MariaDBConnection,character-method}
+\alias{dbQuoteIdentifier,MariaDBConnection,SQL-method}
 \alias{dbQuoteString,MariaDBConnection,character-method}
+\alias{dbQuoteString,MariaDBConnection,SQL-method}
 \title{Quote MariaDB strings and identifiers.}
 \usage{
 \S4method{dbQuoteIdentifier}{MariaDBConnection,character}(conn, x, ...)
 
+\S4method{dbQuoteIdentifier}{MariaDBConnection,SQL}(conn, x, ...)
+
 \S4method{dbQuoteString}{MariaDBConnection,character}(conn, x, ...)
+
+\S4method{dbQuoteString}{MariaDBConnection,SQL}(conn, x, ...)
 }
 \description{
 In MariaDB, identifiers are enclosed in backticks, e.g. \code{`x`}.

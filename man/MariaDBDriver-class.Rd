@@ -9,7 +9,7 @@
 \usage{
 \S4method{dbUnloadDriver}{MariaDBDriver}(drv, ...)
 
-\S4method{dbIsValid}{MariaDBDriver}(dbObj)
+\S4method{dbIsValid}{MariaDBDriver}(dbObj, ...)
 }
 \description{
 An MariaDB driver implementing the R database (DBI) API.
