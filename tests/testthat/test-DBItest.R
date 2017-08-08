@@ -4,7 +4,6 @@ DBItest::test_all(c(
 
   # connection
   "get_info_connection",                        # rstats-db/RSQLite#117
-  "cannot_forget_disconnect",                   #
 
   # result
   "cannot_clear_result_twice_.*",               #

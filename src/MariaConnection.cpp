@@ -9,7 +9,10 @@ MariaConnection::MariaConnection() :
 }
 
 MariaConnection::~MariaConnection() {
-  disconnect();
+  if (is_connected()) {
+    warning("call dbDisconnect() when finished working with a connection");
+    disconnect();
+  }
 }
 
 void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<std::string>& user,
@@ -58,13 +61,31 @@ void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<
 }
 
 void MariaConnection::disconnect() {
-  if (!conn()) return;
+  if (!is_connected()) return;
+
+  if (hasQuery()) {
+    warning(
+      "%s\n%s",
+      "There is a result object still in use.",
+      "The connection will be automatically released when it is closed"
+    );
+  }
 
   try {
     mysql_close(conn());
   } catch (...) {};
 
   pConn_ = NULL;
+}
+
+bool MariaConnection::is_connected() {
+  return !!conn();
+}
+
+void MariaConnection::check_connection() {
+  if (!is_connected()) {
+    stop("Invalid or closed connection");
+  }
 }
 
 List MariaConnection::connectionInfo() {
@@ -119,6 +140,8 @@ bool MariaConnection::hasQuery() {
 }
 
 bool MariaConnection::exec(std::string sql) {
+  check_connection();
+
   setCurrentResult(NULL);
 
   if (mysql_real_query(pConn_, sql.data(), sql.size()) != 0)

@@ -29,7 +29,7 @@ XPtr<MariaConnectionPtr> connection_create(
 
 // [[Rcpp::export]]
 bool connection_valid(XPtr<MariaConnectionPtr> con) {
-  return con.get() != NULL;
+  return con.get() != NULL && (*con)->is_connected();
 }
 
 // [[Rcpp::export]]
@@ -39,14 +39,8 @@ void connection_release(XPtr<MariaConnectionPtr> con) {
     return;
   }
 
-  if ((*con)->hasQuery()) {
-    warning(
-      "%s\n%s",
-      "There is a result object still in use.",
-      "The connection will be automatically released when it is closed"
-    );
-  }
-  return con.release();
+  (*con)->disconnect();
+  con.release();
 }
 
 // [[Rcpp::export]]
