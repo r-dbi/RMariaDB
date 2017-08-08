@@ -44,7 +44,10 @@ NULL
 #' @rdname query
 setMethod("dbFetch", c("MariaDBResult", "numeric"),
   function(res, n = -1, ..., row.names = FALSE) {
-    if (n == Inf) n <- -1
+    if (length(n) != 1) stopc("n must be scalar")
+    if (n < -1) stopc("n must be nonnegative or -1")
+    if (is.infinite(n)) n <- -1
+    if (trunc(n) != n) stopc("n must be a whole number")
     sqlColumnToRownames(result_fetch(res@ptr, n), row.names)
   }
 )
