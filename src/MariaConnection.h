@@ -34,7 +34,7 @@ public:
   List connectionInfo();
   MYSQL* conn();
 
-  std::string quoteString(std::string input);
+  std::string quoteString(const Rcpp::String& input);
 
   // Cancels previous query, if needed.
   void setCurrentResult(MariaResult* pResult);

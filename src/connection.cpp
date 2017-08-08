@@ -55,12 +55,8 @@ CharacterVector connection_quote_string(XPtr<MariaConnectionPtr> con,
   CharacterVector output(n);
 
   for (R_xlen_t i = 0; i < n; ++i) {
-    if (input[i] == NA_STRING) {
-      output[i] = NA_STRING;
-    } else {
-      String x = input[i];
-      output[i] = "'" + (*con)->quoteString(x) + "'";
-    }
+    String x = input[i];
+    output[i] = (*con)->quoteString(x);
   }
 
   return output;

@@ -29,6 +29,14 @@ setMethod("dbQuoteIdentifier", c("MariaDBConnection", "character"),
 #' @export
 setMethod("dbQuoteString", c("MariaDBConnection", "character"),
   function(conn, x, ...) {
-    SQL(connection_quote_string(conn@ptr, enc2utf8(x)));
+    SQL(connection_quote_string(conn@ptr, enc2utf8(x)))
+  }
+)
+
+#' @rdname mariadb-quoting
+#' @export
+setMethod("dbQuoteString", c("MariaDBConnection", "SQL"),
+  function(conn, x, ...) {
+    x
   }
 )

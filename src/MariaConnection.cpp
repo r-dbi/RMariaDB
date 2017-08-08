@@ -106,14 +106,21 @@ MYSQL* MariaConnection::conn() {
   return pConn_;
 }
 
-std::string MariaConnection::quoteString(std::string input) {
-  // Create buffer with enough room to escape every character
-  std::string output;
-  output.resize(input.size() * 2 + 1);
+std::string MariaConnection::quoteString(const Rcpp::String& input) {
+  if (input == NA_STRING)
+    return "NULL";
 
-  size_t end = mysql_real_escape_string(pConn_, &output[0],
-                                        input.data(), input.size());
-  output.resize(end);
+  const char* input_cstr = input.get_cstring();
+  size_t input_len = strlen(input_cstr);
+
+  // Create buffer with enough room to escape every character
+  std::string output = "'";
+  output.resize(input_len * 2 + 3);
+
+  size_t end = mysql_real_escape_string(pConn_, &output[1], input_cstr, input_len);
+
+  output.resize(end + 1);
+  output.append("'");
 
   return output;
 }
