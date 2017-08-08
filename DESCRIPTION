@@ -44,5 +44,6 @@ Collate:
     'quote.R'
     'table.R'
     'transaction.R'
+    'utils.R'
     'zzz.R'
 RoxygenNote: 6.0.1
