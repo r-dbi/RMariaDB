@@ -19,7 +19,6 @@ DBItest::test_all(c(
   "data_timestamp_current_typed",               # #113
 
   # sql
-  "quote_identifier_vectorized",                #
   "list_fields",                                # #137
   "list_tables",                                #
   "append_table_new",                           #

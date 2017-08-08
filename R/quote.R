@@ -20,8 +20,24 @@ NULL
 #' @export
 setMethod("dbQuoteIdentifier", c("MariaDBConnection", "character"),
   function(conn, x, ...) {
-    x <- gsub('`', '``', x, fixed = TRUE)
-    SQL(paste('`', x, '`', sep = ""))
+    if (any(is.na(x))) {
+      stop("Cannot pass NA to dbQuoteIdentifier()", call. = FALSE)
+    }
+    x <- gsub("`", "``", x, fixed = TRUE)
+    if (length(x) == 0L) {
+      SQL(character())
+    } else {
+      # Not calling encodeString() here to keep things simple
+      SQL(paste("`", x, "`", sep = ""))
+    }
+  }
+)
+
+#' @rdname mariadb-quoting
+#' @export
+setMethod("dbQuoteIdentifier", c("MariaDBConnection", "SQL"),
+  function(conn, x, ...) {
+    x
   }
 )
 
