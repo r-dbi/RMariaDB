@@ -115,7 +115,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     on.exit(NULL)
     dbCommit(conn)
 
-    TRUE
+    invisible(TRUE)
   }
 )
 
@@ -193,7 +193,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
 
     mariadbExecQuery(conn, sql)
 
-    TRUE
+    invisible(TRUE)
   }
 )
 
@@ -224,7 +224,7 @@ setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
   function(conn, name, ...){
     name <- dbQuoteIdentifier(conn, name)
     dbGetQuery(conn, paste0("DROP TABLE ", name))
-    TRUE
+    invisible(TRUE)
   }
 )
 

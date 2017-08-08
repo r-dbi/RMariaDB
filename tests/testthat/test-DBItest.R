@@ -78,19 +78,13 @@ DBItest::test_all(c(
   "begin_begin",                                # 167
   "begin_write_rollback",                       #
   "begin_write_disconnect",                     #
+  "begin_commit_return_value",                  #
+  "begin_rollback_return_value",                #
   "with_transaction_.*",                        #
 
   # compliance
   "compliance",                                 # #112
   "ellipsis",                                   # #171
-
-  # visibility
-  "can_disconnect",
-  "write_table_return",
-  "remove_table_return",
-  "begin_commit_return_value",
-  "begin_rollback_return_value",
-  "clear_result_return_.*",
 
   NULL
 ))

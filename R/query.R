@@ -75,7 +75,7 @@ setMethod("dbSendQuery", c("MariaDBConnection", "character"),
 #' @export
 setMethod("dbBind", "MariaDBResult", function(res, params, ...) {
   result_bind(res@ptr, params)
-  TRUE
+  invisible(TRUE)
 })
 
 #' @rdname query

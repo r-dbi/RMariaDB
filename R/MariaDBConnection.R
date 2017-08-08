@@ -18,7 +18,7 @@ setClass("MariaDBConnection",
 #' @rdname MariaDBConnection-class
 setMethod("dbDisconnect", "MariaDBConnection", function(conn, ...) {
   connection_release(conn@ptr)
-  TRUE
+  invisible(TRUE)
 })
 
 #' @export
