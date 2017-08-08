@@ -7,7 +7,6 @@ DBItest::test_all(c(
 
   # result
   "fetch_no_return_value",                      #
-  "get_query_n_.*",                             #
   "data_logical",                               # not an error: no logical data type
   "data_64_bit_.*",                             # #77
   "data_character",                             # #93
