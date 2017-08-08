@@ -7,7 +7,7 @@ DBItest::test_all(c(
 
   # result
   "fetch_no_return_value",                      #
-  "data_logical",                               # not an error: no logical data type
+  "data_logical",                               # not an error: cannot cast to logical
   "data_64_bit_.*",                             # #77
   "data_character",                             # #93
   "data_raw",                                   # not an error: can't cast to blob type
