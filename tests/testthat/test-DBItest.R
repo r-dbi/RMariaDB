@@ -8,31 +8,30 @@ DBItest::test_all(c(
   # result
   "fetch_no_return_value",                      #
   "data_logical",                               # not an error: cannot cast to logical
-  "data_64_bit_.*",                             # #77
-  "data_character",                             # #93
+  "data_64_bit_.*",                             # #12
+  "data_character",                             # #15
   "data_raw",                                   # not an error: can't cast to blob type
   "data_date_typed",                            #
-  "data_time",                                  # #95
-  "data_timestamp",                             # #113
-  "data_timestamp_current",                     # #113
-  "data_timestamp_current_typed",               # #113
+  "data_time",                                  # #16
+  "data_timestamp",                             # #24
+  "data_timestamp_current",                     # #24
+  "data_timestamp_current_typed",               # #24
 
   # sql
   "list_fields",                                # requires DBI > 0.7
   "list_tables",                                #
   "append_table_new",                           #
-  "roundtrip_quotes",                           # #101
   "roundtrip_keywords",                         #
   "roundtrip_logical",                          #
   "roundtrip_64_bit_character",                 # rstats-db/DBI#48
-  "roundtrip_character",                        # #93
-  "roundtrip_character_native",                 # #93
-  "roundtrip_factor",                           # #93
+  "roundtrip_character",                        # #15
+  "roundtrip_character_native",                 # #15
+  "roundtrip_factor",                           # #15
   "roundtrip_date",                             #
   "roundtrip_time",                             #
-  "roundtrip_raw",                              # #111
-  "roundtrip_blob",                             # #111
-  "roundtrip_timestamp",                        # #104
+  "roundtrip_raw",                              # #1
+  "roundtrip_blob",                             # #1
+  "roundtrip_timestamp",                        # #20
   "roundtrip_field_types",                      #
   "read_table_error",                           #
   "read_table_name",                            #
@@ -49,14 +48,14 @@ DBItest::test_all(c(
   "get_info_result",                            # rstats-db/DBI#55
   "exists_table_closed_connection",             #
   "exists_table_invalid_connection",            #
-  "bind_empty.*",                               # #116
-  "bind_return_value.*",                        # #116
+  "bind_empty.*",                               # #27
+  "bind_return_value.*",                        # #27
   "bind_wrong_name",                            #
-  "bind_multi_row.*",                           # #170
+  "bind_multi_row.*",                           # #39
   "bind_logical.*",                             # not an error: no logical data type
-  "bind_character.*",                           # #93
-  "bind_timestamp_lt.*",                        # #110
-  "bind_raw.*",                                 # #110
+  "bind_character.*",                           # #15
+  "bind_timestamp_lt.*",                        # #22
+  "bind_raw.*",                                 # #22
   "bind_factor",                                #
   "bind_blob",                                  #
   "bind_timestamp",                             #
@@ -70,9 +69,9 @@ DBItest::test_all(c(
   "rows_affected_statement",                    #
 
   # transactions
-  "commit_without_begin",                       # 167
-  "rollback_without_begin",                     # 167
-  "begin_begin",                                # 167
+  "commit_without_begin",                       # 38
+  "rollback_without_begin",                     # 38
+  "begin_begin",                                # 38
   "begin_write_rollback",                       #
   "begin_write_disconnect",                     #
   "begin_commit_return_value",                  #
@@ -80,7 +79,7 @@ DBItest::test_all(c(
   "with_transaction_.*",                        #
 
   # compliance
-  "compliance",                                 # #112
+  "compliance",                                 # #23
   "ellipsis",                                   # requires DBItest > 1.5-11
 
   NULL
