@@ -76,8 +76,8 @@ setMethod("dbConnect", "MariaDBDriver",
       db = info$dbname
     )
 
-    dbGetQuery(con, 'SET time_zone = "+00:00"')
-    dbGetQuery(con, 'SET character set utf8')
+    dbExecute(con, "SET time_zone = '+00:00'")
+    dbExecute(con, "SET CHARACTER SET 'utf8'")
     con
   }
 )
