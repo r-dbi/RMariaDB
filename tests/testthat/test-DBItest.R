@@ -38,7 +38,7 @@ DBItest::test_all(c(
   "bind_return_value.*",                        # #27
   "bind_wrong_name",                            #
   "bind_multi_row.*",                           # #39
-  "bind_logical.*",                             # not an error: no logical data type
+  "bind_logical.*",                             #
   "bind_timestamp_lt.*",                        # #22
   "bind_raw.*",                                 # #22
   "bind_factor",                                #
