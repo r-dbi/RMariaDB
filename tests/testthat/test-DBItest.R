@@ -11,9 +11,6 @@ DBItest::test_all(c(
   "data_raw",                                   # not an error: can't cast to blob type
   "data_character",                             # failing on Windows
   "data_64_bit_.*",                             # #12
-  "data_timestamp",                             # #24
-  "data_timestamp_current",                     # #24
-  "data_timestamp_current_typed",               # #24
 
   # sql
   "list_tables",                                #
@@ -22,7 +19,6 @@ DBItest::test_all(c(
   "roundtrip_time",                             #
   "roundtrip_raw",                              # #1
   "roundtrip_blob",                             # #1
-  "roundtrip_timestamp",                        # #20
   "roundtrip_field_types",                      #
   "read_table_error",                           #
   "read_table_name",                            #
