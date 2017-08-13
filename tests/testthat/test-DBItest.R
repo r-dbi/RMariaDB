@@ -15,7 +15,8 @@ DBItest::test_all(c(
   # sql
   "list_tables",                                #
   "roundtrip_timestamp",                        #
-  "roundtrip_64_bit_character",                 # rstats-db/DBI#48
+  "roundtrip_64_bit_numeric",                   #
+  "roundtrip_64_bit_character",                 #
   "roundtrip_raw",                              # #1
   "roundtrip_blob",                             # #1
   "read_table_error",                           #
