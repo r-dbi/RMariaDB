@@ -19,7 +19,6 @@ DBItest::test_all(c(
   "roundtrip_64_bit_character",                 # rstats-db/DBI#48
   "roundtrip_raw",                              # #1
   "roundtrip_blob",                             # #1
-  "roundtrip_field_types",                      #
   "read_table_error",                           #
   "read_table_name",                            #
   "write_table_error",                          #
