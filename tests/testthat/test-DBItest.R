@@ -13,7 +13,6 @@ DBItest::test_all(c(
 
   # sql
   "list_tables",                                #
-  "roundtrip_timestamp",                        #
   "roundtrip_64_bit_numeric",                   #
   "roundtrip_64_bit_character",                 #
   "roundtrip_raw",                              # #1
