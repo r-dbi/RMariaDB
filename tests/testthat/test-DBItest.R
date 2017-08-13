@@ -19,8 +19,6 @@ DBItest::test_all(c(
   # sql
   "list_tables",                                #
   "append_table_new",                           #
-  "roundtrip_keywords",                         #
-  "roundtrip_logical",                          #
   "roundtrip_64_bit_character",                 # rstats-db/DBI#48
   "roundtrip_date",                             #
   "roundtrip_time",                             #
