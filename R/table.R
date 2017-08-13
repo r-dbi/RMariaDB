@@ -84,9 +84,6 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     if (found && overwrite) {
       dbRemoveTable(conn, name)
     }
-    if (!found && append) {
-      stop("Table ", name, " does not exists when appending")
-    }
 
     if (!found || overwrite) {
       sql <- sqlCreateTable(
