@@ -133,11 +133,11 @@ double MariaRow::valueDateTime(int j) {
   return static_cast<double>(timegm(&t));
 }
 
-int MariaRow::valueDate(int j) {
+double MariaRow::valueDate(int j) {
   if (isNull(j))
-    return NA_INTEGER;
+    return NA_REAL;
 
-  return static_cast<int>(std::floor(valueDateTime(j) / 86400.0));
+  return std::floor(valueDateTime(j) / 86400.0);
 }
 
 int MariaRow::valueTime(int j) {
@@ -161,7 +161,7 @@ void MariaRow::setListValue(SEXP x, int i, int j) {
     REAL(x)[i] = valueDouble(j);
     break;
   case MY_DATE:
-    INTEGER(x)[i] = valueDate(j);
+    REAL(x)[i] = valueDate(j);
     break;
   case MY_DATE_TIME:
     REAL(x)[i] = valueDateTime(j);

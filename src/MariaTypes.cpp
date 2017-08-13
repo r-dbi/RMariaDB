@@ -85,7 +85,7 @@ SEXPTYPE typeSEXP(MariaFieldType type) {
   case MY_STR:
     return STRSXP;
   case MY_DATE:
-    return INTSXP;
+    return REALSXP;
   case MY_DATE_TIME:
     return REALSXP;
   case MY_TIME:

@@ -10,7 +10,6 @@ DBItest::test_all(c(
   "data_logical",                               # not an error: cannot cast to logical
   "data_raw",                                   # not an error: can't cast to blob type
   "data_64_bit_.*",                             # #12
-  "data_date_typed",                            #
   "data_time",                                  # #16
   "data_timestamp",                             # #24
   "data_timestamp_current",                     # #24
@@ -20,7 +19,6 @@ DBItest::test_all(c(
   "list_tables",                                #
   "append_table_new",                           #
   "roundtrip_64_bit_character",                 # rstats-db/DBI#48
-  "roundtrip_date",                             #
   "roundtrip_time",                             #
   "roundtrip_raw",                              # #1
   "roundtrip_blob",                             # #1
