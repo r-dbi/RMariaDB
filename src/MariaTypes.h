@@ -8,7 +8,7 @@ enum MariaFieldType {
   MY_STR,
   MY_DATE,
   MY_DATE_TIME,
-  MY_TIME,   // output only
+  MY_TIME,
   MY_RAW,
   MY_FACTOR, // input only
   MY_LGL     // input only

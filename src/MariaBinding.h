@@ -24,7 +24,8 @@ public:
   void bindRow(List params, int i);
   void bindingUpdate(int j, enum_field_types type, int size);
 
-  void setTimeBuffer(int j, time_t time);
+  void setDateTimeBuffer(int j, time_t time);
+  void setTimeBuffer(int j, double time);
 };
 
 #endif

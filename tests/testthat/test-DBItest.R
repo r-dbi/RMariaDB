@@ -16,7 +16,6 @@ DBItest::test_all(c(
   "list_tables",                                #
   "append_table_new",                           #
   "roundtrip_64_bit_character",                 # rstats-db/DBI#48
-  "roundtrip_time",                             #
   "roundtrip_raw",                              # #1
   "roundtrip_blob",                             # #1
   "roundtrip_field_types",                      #

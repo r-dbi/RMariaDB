@@ -30,6 +30,7 @@ void dfS3(const List& df, const std::vector<MariaFieldType>& types) {
       break;
     case MY_TIME:
       col.attr("class") = CharacterVector::create("hms", "difftime");
+      col.attr("units") = "secs";
       break;
     default:
       break;

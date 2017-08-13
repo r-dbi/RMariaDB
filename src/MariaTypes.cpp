@@ -107,7 +107,7 @@ std::string rClass(RObject x) {
     return "";
 
   CharacterVector klassv = as<CharacterVector>(klass_);
-  return std::string(klassv[0]);
+  return std::string(klassv[klassv.length() - 1]);
 }
 
 MariaFieldType variableType(const RObject& type) {
@@ -120,8 +120,9 @@ MariaFieldType variableType(const RObject& type) {
     if (klass == "factor")  return MY_FACTOR;
     return MY_INT32;
   case REALSXP:
-    if (klass == "Date")    return MY_DATE;
-    if (klass == "POSIXct") return MY_DATE_TIME;
+    if (klass == "Date")     return MY_DATE;
+    if (klass == "POSIXt")   return MY_DATE_TIME;
+    if (klass == "difftime") return MY_TIME;
     return MY_DBL;
   case STRSXP:
     return MY_STR;

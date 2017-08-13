@@ -1,5 +1,6 @@
 #include "pch.h"
 #include <ctime>
+#include <math.h>
 #include "MariaBinding.h"
 
 MariaBinding::MariaBinding() {
@@ -43,6 +44,9 @@ void MariaBinding::initBinding(List params) {
     case MY_DATE_TIME:
       bindingUpdate(j, MYSQL_TYPE_DATETIME, sizeof(MYSQL_TIME));
       break;
+    case MY_TIME:
+      bindingUpdate(j, MYSQL_TYPE_TIME, sizeof(MYSQL_TIME));
+      break;
     case MY_FACTOR:
       bindingUpdate(j, MYSQL_TYPE_DOUBLE, 8);
       break;
@@ -53,8 +57,7 @@ void MariaBinding::initBinding(List params) {
       bindingUpdate(j, MYSQL_TYPE_BLOB, 0);
       break;
     case MY_INT64:
-    case MY_TIME:
-      // output only
+      // FIXME: 64-bit handling
       break;
     }
   }
@@ -109,7 +112,18 @@ void MariaBinding::bindRow(List params, int i) {
         break;
       } else {
         double val = REAL(col)[i];
-        setTimeBuffer(j, static_cast<int>(val * (types_[j] == MY_DATE ? 86400.0 : 1.0)));
+        setDateTimeBuffer(j, static_cast<int>(val * (types_[j] == MY_DATE ? 86400.0 : 1.0)));
+        bindings_[j].buffer_length = sizeof(MYSQL_TIME);
+        bindings_[j].buffer = &timeBuffers_[j];
+      }
+      break;
+    case MY_TIME:
+      if (ISNAN(REAL(col)[i])) {
+        missing = true;
+        break;
+      } else {
+        double val = REAL(col)[i];
+        setTimeBuffer(j, val);
         bindings_[j].buffer_length = sizeof(MYSQL_TIME);
         bindings_[j].buffer = &timeBuffers_[j];
       }
@@ -117,8 +131,7 @@ void MariaBinding::bindRow(List params, int i) {
     case MY_FACTOR:
       stop("Not yet supported");
     case MY_INT64:
-    case MY_TIME:
-      // output only
+      // FIXME: 64-bit handling
       break;
     }
     isNull_[j] = missing;
@@ -132,7 +145,7 @@ void MariaBinding::bindingUpdate(int j, enum_field_types type, int size) {
   bindings_[j].is_null = &isNull_[j];
 }
 
-void MariaBinding::setTimeBuffer(int j, time_t time) {
+void MariaBinding::setDateTimeBuffer(int j, time_t time) {
   struct tm* tm = gmtime(&time);
 
   timeBuffers_[j].year = tm->tm_year + 1900;
@@ -141,4 +154,27 @@ void MariaBinding::setTimeBuffer(int j, time_t time) {
   timeBuffers_[j].hour = tm->tm_hour;
   timeBuffers_[j].minute = tm->tm_min;
   timeBuffers_[j].second = tm->tm_sec;
+}
+
+void MariaBinding::setTimeBuffer(int j, double time) {
+  bool neg = false;
+  if (time < 0) {
+    neg = true;
+    time = -time;
+  }
+  double whole_seconds = ::trunc(time);
+  double frac_seconds = time - whole_seconds;
+  double whole_minutes = ::trunc(time / 60.0);
+  double seconds = whole_seconds - whole_minutes * 60.0;
+  double hours = ::trunc(time / 3600.0);
+  double minutes = whole_minutes - hours * 60.0;
+
+  timeBuffers_[j].year = 0;
+  timeBuffers_[j].month = 0;
+  timeBuffers_[j].day = 0;
+  timeBuffers_[j].hour = static_cast<unsigned int>(hours);
+  timeBuffers_[j].minute = static_cast<unsigned int>(minutes);
+  timeBuffers_[j].second = static_cast<unsigned int>(seconds);
+  timeBuffers_[j].second_part = static_cast<unsigned long>(frac_seconds * 1000000.0);
+  timeBuffers_[j].neg = neg;
 }
