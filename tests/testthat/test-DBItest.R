@@ -11,7 +11,6 @@ DBItest::test_all(c(
   "data_raw",                                   # not an error: can't cast to blob type
   "data_character",                             # failing on Windows
   "data_64_bit_.*",                             # #12
-  "data_time",                                  # #16
   "data_timestamp",                             # #24
   "data_timestamp_current",                     # #24
   "data_timestamp_current_typed",               # #24

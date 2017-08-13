@@ -86,6 +86,7 @@ setMethod("dbConnect", "MariaDBDriver",
 #' @param fetch.default.rec DEPRECATED
 #' @export
 #' @import methods DBI
+#' @importFrom hms hms
 #' @rdname dbConnect-MariaDBDriver-method
 #' @examples
 #' if (mariadbHasDefault()) {

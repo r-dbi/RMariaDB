@@ -140,12 +140,12 @@ double MariaRow::valueDate(int j) {
   return std::floor(valueDateTime(j) / 86400.0);
 }
 
-int MariaRow::valueTime(int j) {
+double MariaRow::valueTime(int j) {
   if (isNull(j))
-    return NA_INTEGER;
+    return NA_REAL;
 
   MYSQL_TIME* mytime = (MYSQL_TIME*) &buffers_[j][0];
-  return mytime->hour * 3600 + mytime->minute * 60 + mytime->second;
+  return static_cast<double>(mytime->hour * 3600 + mytime->minute * 60 + mytime->second);
 }
 
 void MariaRow::setListValue(SEXP x, int i, int j) {
@@ -167,7 +167,7 @@ void MariaRow::setListValue(SEXP x, int i, int j) {
     REAL(x)[i] = valueDateTime(j);
     break;
   case MY_TIME:
-    INTEGER(x)[i] = valueTime(j);
+    REAL(x)[i] = valueTime(j);
     break;
   case MY_STR:
     SET_STRING_ELT(x, i, valueString(j));

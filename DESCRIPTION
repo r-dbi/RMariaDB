@@ -16,6 +16,7 @@ Depends:
     R (>= 2.8.0)
 Imports:
     DBI (>= 0.7-12),
+    hms,
     methods,
     Rcpp (>= 0.12.4)
 Suggests:

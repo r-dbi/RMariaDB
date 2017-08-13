@@ -34,7 +34,7 @@ public:
   SEXP valueRaw(int j);
   double valueDateTime(int j);
   double valueDate(int j);
-  int valueTime(int j);
+  double valueTime(int j);
 
   void setListValue(SEXP x, int i, int j);
 

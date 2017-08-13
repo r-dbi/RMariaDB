@@ -63,7 +63,7 @@ std::string typeName(MariaFieldType type) {
   case MY_DATE_TIME:
     return "POSIXct";
   case MY_TIME:
-    return "time";
+    return "hms";
   case MY_RAW:
     return "raw";
   case MY_FACTOR:
@@ -89,7 +89,7 @@ SEXPTYPE typeSEXP(MariaFieldType type) {
   case MY_DATE_TIME:
     return REALSXP;
   case MY_TIME:
-    return INTSXP;
+    return REALSXP;
   case MY_RAW:
     return VECSXP;
   case MY_FACTOR:
