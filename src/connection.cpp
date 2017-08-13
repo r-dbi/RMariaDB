@@ -56,7 +56,7 @@ CharacterVector connection_quote_string(XPtr<MariaConnectionPtr> con,
 
   for (R_xlen_t i = 0; i < n; ++i) {
     String x = input[i];
-    output[i] = (*con)->quoteString(x);
+    output[i] = String((*con)->quoteString(x), CE_UTF8);
   }
 
   return output;
