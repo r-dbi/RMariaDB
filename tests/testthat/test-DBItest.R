@@ -9,7 +9,6 @@ DBItest::test_all(c(
   "fetch_no_return_value",                      #
   "data_logical",                               # not an error: cannot cast to logical
   "data_64_bit_.*",                             # #12
-  "data_character",                             # #15
   "data_raw",                                   # not an error: can't cast to blob type
   "data_date_typed",                            #
   "data_time",                                  # #16
@@ -23,9 +22,6 @@ DBItest::test_all(c(
   "roundtrip_keywords",                         #
   "roundtrip_logical",                          #
   "roundtrip_64_bit_character",                 # rstats-db/DBI#48
-  "roundtrip_character",                        # #15
-  "roundtrip_character_native",                 # #15
-  "roundtrip_factor",                           # #15
   "roundtrip_date",                             #
   "roundtrip_time",                             #
   "roundtrip_raw",                              # #1
@@ -52,7 +48,6 @@ DBItest::test_all(c(
   "bind_wrong_name",                            #
   "bind_multi_row.*",                           # #39
   "bind_logical.*",                             # not an error: no logical data type
-  "bind_character.*",                           # #15
   "bind_timestamp_lt.*",                        # #22
   "bind_raw.*",                                 # #22
   "bind_factor",                                #
