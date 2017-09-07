@@ -107,7 +107,7 @@ SEXP MariaRow::valueString(int j) {
 
 SEXP MariaRow::valueRaw(int j) {
   if (isNull(j))
-    return Rf_allocVector(RAWSXP, 0);
+    return R_NilValue;
 
   fetchBuffer(j);
   SEXP bytes = Rf_allocVector(RAWSXP, lengths_[j]);

@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "MariaTypes.h"
 
+bool all_raw(SEXP x);
+
 MariaFieldType variableType(enum_field_types type, bool binary) {
   switch (type) {
   case MYSQL_TYPE_TINY:
@@ -126,8 +128,27 @@ MariaFieldType variableType(const RObject& type) {
     return MY_DBL;
   case STRSXP:
     return MY_STR;
+  case VECSXP:
+    if (klass == "blob")     return MY_RAW;
+    if (all_raw(type))       return MY_RAW;
+    break;
   }
 
   stop("Unsupported column type %s", Rf_type2char(TYPEOF(type)));
   return MY_STR;
+}
+
+bool all_raw(SEXP x) {
+  List xx(x);
+  for (R_xlen_t i = 0; i < xx.length(); ++i) {
+    switch (TYPEOF(xx[i])) {
+    case RAWSXP:
+    case NILSXP:
+      break;
+
+    default:
+      return false;
+    }
+  }
+  return true;
 }

@@ -102,14 +102,18 @@ void MariaBinding::bindRow(List params, int i) {
       break;
     case MY_RAW: {
       SEXP raw = VECTOR_ELT(col, i);
-      bindings_[j].buffer_length = Rf_length(raw);
-      bindings_[j].buffer = RAW(raw);
+      if (Rf_isNull(raw)) {
+        missing = true;
+      } else {
+        bindings_[j].buffer_length = Rf_length(raw);
+        bindings_[j].buffer = RAW(raw);
+      }
+      break;
     }
     case MY_DATE:
     case MY_DATE_TIME:
       if (ISNAN(REAL(col)[i])) {
         missing = true;
-        break;
       } else {
         double val = REAL(col)[i];
         setDateTimeBuffer(j, static_cast<int>(val * (types_[j] == MY_DATE ? 86400.0 : 1.0)));

@@ -15,7 +15,6 @@ DBItest::test_all(c(
   "list_tables",                                #
   "roundtrip_64_bit_numeric",                   #
   "roundtrip_64_bit_character",                 #
-  "roundtrip_raw",                              # #1
   "roundtrip_blob",                             # #1
   "read_table_error",                           #
   "read_table_name",                            #
@@ -38,7 +37,6 @@ DBItest::test_all(c(
   "bind_multi_row.*",                           # #39
   "bind_logical.*",                             #
   "bind_timestamp_lt.*",                        # #22
-  "bind_raw.*",                                 # #22
   "bind_factor",                                #
   "bind_blob",                                  #
   "bind_timestamp",                             #
