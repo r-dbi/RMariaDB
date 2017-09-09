@@ -93,7 +93,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
         row.names = row.names,
         temporary = temporary
       )
-      dbGetQuery(conn, sql)
+      dbExecute(conn, sql)
     }
 
     if (nrow(value) > 0) {
@@ -107,7 +107,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
         "INSERT INTO ", name, " (", paste0(fields, collapse = ", "), ")\n",
         "VALUES (", paste0(params, collapse = ", "), ")"
       )
-      rs <- dbSendQuery(conn, sql)
+      rs <- dbSendStatement(conn, sql)
       tryCatch(
         result_bind_rows(rs@ptr, values),
         finally = dbClearResult(rs)
@@ -181,7 +181,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
 
       sql <- sqlCreateTable(conn, name, field.types,
         row.names = row.names, temporary = temporary)
-      dbGetQuery(conn, sql)
+      dbExecute(conn, sql)
     }
 
     path <- normalizePath(value, winslash = "/", mustWork = TRUE)
@@ -225,7 +225,7 @@ setMethod("dbExistsTable", c("MariaDBConnection", "character"),
 setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
   function(conn, name, ...){
     name <- dbQuoteIdentifier(conn, name)
-    dbGetQuery(conn, paste0("DROP TABLE ", name))
+    dbExecute(conn, paste0("DROP TABLE ", name))
     invisible(TRUE)
   }
 )

@@ -125,8 +125,12 @@ List MariaResult::fetch(int n_max) {
     stop("Query needs to be bound before fetching");
   if (!active())
     stop("Inactive result set");
-  if (pSpec_ == NULL)
+  if (pSpec_ == NULL) {
+    if (names_.size() == 0) {
+      warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
+    }
     return dfCreate(types_, names_, 0);
+  }
 
   int n = (n_max < 0) ? 100 : n_max;
   List out = dfCreate(types_, names_, n);

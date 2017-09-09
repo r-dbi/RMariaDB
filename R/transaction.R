@@ -17,7 +17,7 @@ NULL
 #'
 #' dbWriteTable(con, "df", df)
 #' dbBegin(con)
-#' dbGetQuery(con, "UPDATE df SET id = id * 10")
+#' dbExecute(con, "UPDATE df SET id = id * 10")
 #' dbGetQuery(con, "SELECT id FROM df")
 #' dbRollback(con)
 #'
