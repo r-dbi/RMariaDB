@@ -6,7 +6,7 @@
 \alias{dbIsValid,MariaDBResult-method}
 \title{Class MariaDBResult}
 \usage{
-\S4method{dbIsValid}{MariaDBResult}(dbObj)
+\S4method{dbIsValid}{MariaDBResult}(dbObj, ...)
 }
 \description{
 MariaDB's query results class.  This classes encapsulates the result of an SQL

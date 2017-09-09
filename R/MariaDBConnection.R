@@ -18,7 +18,7 @@ setClass("MariaDBConnection",
 #' @rdname MariaDBConnection-class
 setMethod("dbDisconnect", "MariaDBConnection", function(conn, ...) {
   connection_release(conn@ptr)
-  TRUE
+  invisible(TRUE)
 })
 
 #' @export
@@ -48,7 +48,7 @@ setMethod("show", "MariaDBConnection", function(object) {
 
 #' @export
 #' @rdname MariaDBConnection-class
-setMethod("dbIsValid", "MariaDBConnection", function(dbObj) {
+setMethod("dbIsValid", "MariaDBConnection", function(dbObj, ...) {
   connection_valid(dbObj@ptr)
 })
 

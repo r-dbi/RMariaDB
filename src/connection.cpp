@@ -18,17 +18,18 @@ XPtr<MariaConnectionPtr> connection_create(
   const Nullable<std::string>& ssl_capath,
   const Nullable<std::string>& ssl_cipher
 ) {
-  MariaConnectionPtr* pConn = new MariaConnectionPtr(
-    new MariaConnection(
-      host, user, password, db, port, unix_socket, client_flag,
-      groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher)
+  std::auto_ptr<MariaConnection> pConnPtr(new MariaConnection);
+  pConnPtr->connect(
+    host, user, password, db, port, unix_socket, client_flag, groups, default_file,
+    ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher
   );
-  return XPtr<MariaConnectionPtr>(pConn, true);
+
+  return XPtr<MariaConnectionPtr>(new MariaConnectionPtr(pConnPtr.release()), true);
 }
 
 // [[Rcpp::export]]
 bool connection_valid(XPtr<MariaConnectionPtr> con) {
-  return con.get() != NULL;
+  return con.get() != NULL && (*con)->is_connected();
 }
 
 // [[Rcpp::export]]
@@ -38,14 +39,8 @@ void connection_release(XPtr<MariaConnectionPtr> con) {
     return;
   }
 
-  if ((*con)->hasQuery()) {
-    warning(
-      "%s\n%s",
-      "There is a result object still in use.",
-      "The connection will be automatically released when it is closed"
-    );
-  }
-  return con.release();
+  (*con)->disconnect();
+  con.release();
 }
 
 // [[Rcpp::export]]
@@ -60,12 +55,8 @@ CharacterVector connection_quote_string(XPtr<MariaConnectionPtr> con,
   CharacterVector output(n);
 
   for (R_xlen_t i = 0; i < n; ++i) {
-    if (input[i] == NA_STRING) {
-      output[i] = NA_STRING;
-    } else {
-      String x = input[i];
-      output[i] = "'" + (*con)->quoteString(x) + "'";
-    }
+    String x = input[i];
+    output[i] = String((*con)->quoteString(x), CE_UTF8);
   }
 
   return output;

@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "MariaTypes.h"
 
+bool all_raw(SEXP x);
+
 MariaFieldType variableType(enum_field_types type, bool binary) {
   switch (type) {
   case MYSQL_TYPE_TINY:
@@ -63,7 +65,7 @@ std::string typeName(MariaFieldType type) {
   case MY_DATE_TIME:
     return "POSIXct";
   case MY_TIME:
-    return "time";
+    return "hms";
   case MY_RAW:
     return "raw";
   case MY_FACTOR:
@@ -85,11 +87,11 @@ SEXPTYPE typeSEXP(MariaFieldType type) {
   case MY_STR:
     return STRSXP;
   case MY_DATE:
-    return INTSXP;
+    return REALSXP;
   case MY_DATE_TIME:
     return REALSXP;
   case MY_TIME:
-    return INTSXP;
+    return REALSXP;
   case MY_RAW:
     return VECSXP;
   case MY_FACTOR:
@@ -107,7 +109,7 @@ std::string rClass(RObject x) {
     return "";
 
   CharacterVector klassv = as<CharacterVector>(klass_);
-  return std::string(klassv[0]);
+  return std::string(klassv[klassv.length() - 1]);
 }
 
 MariaFieldType variableType(const RObject& type) {
@@ -120,13 +122,33 @@ MariaFieldType variableType(const RObject& type) {
     if (klass == "factor")  return MY_FACTOR;
     return MY_INT32;
   case REALSXP:
-    if (klass == "Date")    return MY_DATE;
-    if (klass == "POSIXct") return MY_DATE_TIME;
+    if (klass == "Date")     return MY_DATE;
+    if (klass == "POSIXt")   return MY_DATE_TIME;
+    if (klass == "difftime") return MY_TIME;
     return MY_DBL;
   case STRSXP:
     return MY_STR;
+  case VECSXP:
+    if (klass == "blob")     return MY_RAW;
+    if (all_raw(type))       return MY_RAW;
+    break;
   }
 
   stop("Unsupported column type %s", Rf_type2char(TYPEOF(type)));
   return MY_STR;
+}
+
+bool all_raw(SEXP x) {
+  List xx(x);
+  for (R_xlen_t i = 0; i < xx.length(); ++i) {
+    switch (TYPEOF(xx[i])) {
+    case RAWSXP:
+    case NILSXP:
+      break;
+
+    default:
+      return false;
+    }
+  }
+  return true;
 }

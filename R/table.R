@@ -84,14 +84,16 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     if (found && overwrite) {
       dbRemoveTable(conn, name)
     }
-    if (!found && append) {
-      stop("Table ", name, " does not exists when appending")
-    }
 
     if (!found || overwrite) {
-      sql <- sqlCreateTable(conn, name, value, row.names = row.names,
-        temporary = temporary)
-      dbGetQuery(conn, sql)
+      sql <- sqlCreateTable(
+        conn,
+        name,
+        if (is.null(field.types)) value else field.types,
+        row.names = row.names,
+        temporary = temporary
+      )
+      dbExecute(conn, sql)
     }
 
     if (nrow(value) > 0) {
@@ -105,7 +107,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
         "INSERT INTO ", name, " (", paste0(fields, collapse = ", "), ")\n",
         "VALUES (", paste0(params, collapse = ", "), ")"
       )
-      rs <- dbSendQuery(conn, sql)
+      rs <- dbSendStatement(conn, sql)
       tryCatch(
         result_bind_rows(rs@ptr, values),
         finally = dbClearResult(rs)
@@ -115,7 +117,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     on.exit(NULL)
     dbCommit(conn)
 
-    TRUE
+    invisible(TRUE)
   }
 )
 
@@ -179,7 +181,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
 
       sql <- sqlCreateTable(conn, name, field.types,
         row.names = row.names, temporary = temporary)
-      dbGetQuery(conn, sql)
+      dbExecute(conn, sql)
     }
 
     path <- normalizePath(value, winslash = "/", mustWork = TRUE)
@@ -193,7 +195,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
 
     mariadbExecQuery(conn, sql)
 
-    TRUE
+    invisible(TRUE)
   }
 )
 
@@ -223,8 +225,8 @@ setMethod("dbExistsTable", c("MariaDBConnection", "character"),
 setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
   function(conn, name, ...){
     name <- dbQuoteIdentifier(conn, name)
-    dbGetQuery(conn, paste0("DROP TABLE ", name))
-    TRUE
+    dbExecute(conn, paste0("DROP TABLE ", name))
+    invisible(TRUE)
   }
 )
 
@@ -252,6 +254,7 @@ setMethod("dbDataType", "MariaDBDriver", function(dbObj, obj, ...) {
   if (is.factor(obj)) return("TEXT")
   if (inherits(obj, "POSIXct")) return("DATETIME")
   if (inherits(obj, "Date")) return("DATE")
+  if (inherits(obj, "difftime")) return("TIME")
   if (is.data.frame(obj)) return(callNextMethod(dbObj, obj))
 
   switch(typeof(obj),

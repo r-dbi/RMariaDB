@@ -16,7 +16,7 @@ install:
           [System.IO.File]::WriteAllText($iniPath, $newText)
           Restart-Service MySQL57
   - cmd: |
-           "%PROGRAMFILES%\MySql\MySQL Server 5.7\bin\mysql" --user=%MYSQL_USER% -e "CREATE DATABASE IF NOT EXISTS test; FLUSH PRIVILEGES;"
+           "%PROGRAMFILES%\MySql\MySQL Server 5.7\bin\mysql" --user=%MYSQL_USER% -e "CREATE DATABASE IF NOT EXISTS test; ALTER DATABASE test CHARACTER SET 'utf8'; FLUSH PRIVILEGES;"
            "%PROGRAMFILES%\MySql\MySQL Server 5.7\bin\mysql" --user=%MYSQL_USER% -e "CREATE USER IF NOT EXISTS 'appveyor'@'localhost' IDENTIFIED BY '%MYSQL_PWD%'; FLUSH PRIVILEGES;"
            "%PROGRAMFILES%\MySql\MySQL Server 5.7\bin\mysql" --user=%MYSQL_USER% -e "GRANT ALL PRIVILEGES ON test.* TO 'appveyor'@'localhost'; FLUSH PRIVILEGES;"
 

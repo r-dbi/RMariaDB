@@ -76,8 +76,8 @@ setMethod("dbConnect", "MariaDBDriver",
       db = info$dbname
     )
 
-    dbGetQuery(con, 'SET time_zone = "+00:00"')
-    dbGetQuery(con, 'SET character set utf8')
+    dbExecute(con, "SET time_zone = '+00:00'")
+    dbExecute(con, "SET CHARACTER SET 'utf8'")
     con
   }
 )
@@ -86,6 +86,7 @@ setMethod("dbConnect", "MariaDBDriver",
 #' @param fetch.default.rec DEPRECATED
 #' @export
 #' @import methods DBI
+#' @importFrom hms hms
 #' @rdname dbConnect-MariaDBDriver-method
 #' @examples
 #' if (mariadbHasDefault()) {

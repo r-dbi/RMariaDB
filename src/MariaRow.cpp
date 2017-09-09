@@ -107,7 +107,7 @@ SEXP MariaRow::valueString(int j) {
 
 SEXP MariaRow::valueRaw(int j) {
   if (isNull(j))
-    return Rf_allocVector(RAWSXP, 0);
+    return R_NilValue;
 
   fetchBuffer(j);
   SEXP bytes = Rf_allocVector(RAWSXP, lengths_[j]);
@@ -133,19 +133,19 @@ double MariaRow::valueDateTime(int j) {
   return static_cast<double>(timegm(&t));
 }
 
-int MariaRow::valueDate(int j) {
+double MariaRow::valueDate(int j) {
   if (isNull(j))
-    return NA_INTEGER;
+    return NA_REAL;
 
-  return static_cast<int>(std::floor(valueDateTime(j) / 86400.0));
+  return std::floor(valueDateTime(j) / 86400.0);
 }
 
-int MariaRow::valueTime(int j) {
+double MariaRow::valueTime(int j) {
   if (isNull(j))
-    return NA_INTEGER;
+    return NA_REAL;
 
   MYSQL_TIME* mytime = (MYSQL_TIME*) &buffers_[j][0];
-  return mytime->hour * 3600 + mytime->minute * 60 + mytime->second;
+  return static_cast<double>(mytime->hour * 3600 + mytime->minute * 60 + mytime->second);
 }
 
 void MariaRow::setListValue(SEXP x, int i, int j) {
@@ -161,13 +161,13 @@ void MariaRow::setListValue(SEXP x, int i, int j) {
     REAL(x)[i] = valueDouble(j);
     break;
   case MY_DATE:
-    INTEGER(x)[i] = valueDate(j);
+    REAL(x)[i] = valueDate(j);
     break;
   case MY_DATE_TIME:
     REAL(x)[i] = valueDateTime(j);
     break;
   case MY_TIME:
-    INTEGER(x)[i] = valueTime(j);
+    REAL(x)[i] = valueTime(j);
     break;
   case MY_STR:
     SET_STRING_ELT(x, i, valueString(j));

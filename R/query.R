@@ -44,7 +44,10 @@ NULL
 #' @rdname query
 setMethod("dbFetch", c("MariaDBResult", "numeric"),
   function(res, n = -1, ..., row.names = FALSE) {
-    if (n == Inf) n <- -1
+    if (length(n) != 1) stopc("n must be scalar")
+    if (n < -1) stopc("n must be nonnegative or -1")
+    if (is.infinite(n)) n <- -1
+    if (trunc(n) != n) stopc("n must be a whole number")
     sqlColumnToRownames(result_fetch(res@ptr, n), row.names)
   }
 )
@@ -72,14 +75,18 @@ setMethod("dbSendQuery", c("MariaDBConnection", "character"),
 #' @export
 setMethod("dbBind", "MariaDBResult", function(res, params, ...) {
   result_bind(res@ptr, params)
-  TRUE
+  invisible(TRUE)
 })
 
 #' @rdname query
 #' @export
 setMethod("dbClearResult", "MariaDBResult", function(res, ...) {
+  if (!dbIsValid(res)) {
+    warningc("Expired, result set already closed")
+    return(invisible(TRUE))
+  }
   result_release(res@ptr)
-  TRUE
+  invisible(TRUE)
 })
 
 #' @rdname query
