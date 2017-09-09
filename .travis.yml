@@ -2,6 +2,10 @@ language: r
 cache: packages
 latex: false
 
+env:
+  global:
+  - MAKEFLAGS="-j8"
+
 matrix:
   include:
     - os: linux
