@@ -2,6 +2,10 @@ language: r
 cache: packages
 latex: false
 
+env:
+  global:
+  - MAKEFLAGS="-j 2"
+
 matrix:
   include:
     - os: linux
@@ -21,6 +25,26 @@ matrix:
         apt:
           packages:
             - libmysqlclient-dev
+    - os: osx
+      osx_image: xcode8.3
+      before_install:
+        - brew install mariadb
+        - mysql.server start
+    - os: osx
+      osx_image: xcode8.3
+      before_install:
+        - brew install mysql
+        - mysql.server start
+    - os: osx
+      osx_image: xcode8.3
+      disable_homebrew: true
+      r_check_args: '--no-tests'
+      before_script: 'echo no sql server, only testing build'
+    - os: osx
+      osx_image: beta-xcode7.3
+      disable_homebrew: true
+      r_check_args: '--no-tests'
+      before_script: 'echo no sql server, only testing build'
 
 r_github_packages:
   - rstats-db/DBI@production
