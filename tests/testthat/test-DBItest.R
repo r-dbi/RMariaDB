@@ -15,7 +15,6 @@ DBItest::test_all(c(
   "list_tables",                                #
   "roundtrip_64_bit_numeric",                   #
   "roundtrip_64_bit_character",                 #
-  "roundtrip_blob",                             # #1
   "read_table_error",                           #
   "read_table_name",                            #
   "write_table_error",                          #
