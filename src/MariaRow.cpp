@@ -46,11 +46,11 @@ void MariaRow::setUp(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
       buffers_[i].resize(sizeof(MYSQL_TIME));
       break;
     case MY_DATE_TIME:
-      bindings_[i].buffer_type = MYSQL_TYPE_TIME;
+      bindings_[i].buffer_type = MYSQL_TYPE_DATETIME;
       buffers_[i].resize(sizeof(MYSQL_TIME));
       break;
     case MY_TIME:
-      bindings_[i].buffer_type = MYSQL_TYPE_DATETIME;
+      bindings_[i].buffer_type = MYSQL_TYPE_TIME;
       buffers_[i].resize(sizeof(MYSQL_TIME));
       break;
     case MY_STR:
