@@ -6,7 +6,6 @@ DBItest::test_all(c(
   "get_info_connection",                        # rstats-db/RSQLite#117
 
   # result
-  "fetch_no_return_value",                      #
   "data_logical",                               # not an error: cannot cast to logical
   "data_raw",                                   # not an error: can't cast to blob type
   "data_64_bit_.*",                             # #12
