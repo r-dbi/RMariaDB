@@ -11,7 +11,6 @@ DBItest::test_all(c(
   "data_64_bit_.*",                             # #12
 
   # sql
-  "list_tables",                                # requires DBItest > 1.5-14
   "roundtrip_64_bit_numeric",                   #
   "roundtrip_64_bit_character",                 #
   "read_table_error",                           #
@@ -19,9 +18,6 @@ DBItest::test_all(c(
   "write_table_error",                          #
   "write_table_name",                           #
   "exists_table_error",                         #
-  "exists_table_name",                          # requires DBItest > 1.5-14
-  "remove_table_name",                          # requires DBItest > 1.5-14
-  "remove_table_temporary",                     # requires DBItest > 1.5-14
 
   # meta
   "rows_affected_query",                        #
