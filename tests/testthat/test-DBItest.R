@@ -37,7 +37,6 @@ DBItest::test_all(c(
   "bind_logical.*",                             #
   "bind_timestamp_lt.*",                        # #22
   "bind_factor",                                #
-  "bind_blob",                                  #
   "bind_timestamp",                             #
   "bind_.*_named_.*",                           # not an error: named binding not supported
   "bind_named_param_unnamed_placeholders",      #
