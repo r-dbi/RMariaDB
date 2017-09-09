@@ -22,7 +22,7 @@ Imports:
 Suggests:
     rprojroot,
     testthat,
-    DBItest
+    DBItest (>= 1.5-12)
 Remotes:
     rstats-db/DBI@production,
     rstats-db/DBItest@production
