@@ -64,9 +64,11 @@ setMethod("dbConnect", "MariaDBDriver",
     groups = "rs-dbi", default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
     ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...) {
 
-    ptr <- connection_create(host, username, password, dbname, port, unix.socket,
-      client.flag, groups, default.file, ssl.key, ssl.cert, ssl.ca, ssl.capath,
-      ssl.cipher)
+    ptr <- connection_create(
+      host, username, password, dbname, as.integer(port), unix.socket,
+      as.integer(client.flag), groups, default.file,
+      ssl.key, ssl.cert, ssl.ca, ssl.capath, ssl.cipher
+    )
 
     info <- connection_info(ptr)
 
