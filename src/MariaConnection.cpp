@@ -27,7 +27,7 @@ void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<
   // Enable LOCAL INFILE for fast data ingest
   mysql_options(this->pConn_, MYSQL_OPT_LOCAL_INFILE, 0);
   // Default to UTF-8
-  mysql_options(this->pConn_, MYSQL_SET_CHARSET_NAME, "UTF8");
+  mysql_options(this->pConn_, MYSQL_SET_CHARSET_NAME, "utf8mb4");
   if (!groups.isNull())
     mysql_options(this->pConn_, MYSQL_READ_DEFAULT_GROUP,
                   as<std::string>(groups).c_str());

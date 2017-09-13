@@ -79,7 +79,6 @@ setMethod("dbConnect", "MariaDBDriver",
     )
 
     dbExecute(con, "SET time_zone = '+00:00'")
-    dbExecute(con, "SET CHARACTER SET 'utf8'")
     con
   }
 )
