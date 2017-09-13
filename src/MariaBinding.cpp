@@ -121,7 +121,7 @@ void MariaBinding::bindRow(List params, int i) {
         missing = true;
       } else {
         double val = REAL(col)[i];
-        setDateTimeBuffer(j, static_cast<int>(val * (types_[j] == MY_DATE ? 86400.0 : 1.0)));
+        setDateTimeBuffer(j, static_cast<time_t>(val * (types_[j] == MY_DATE ? 86400.0 : 1.0)));
         bindings_[j].buffer_length = sizeof(MYSQL_TIME);
         bindings_[j].buffer = &timeBuffers_[j];
       }
