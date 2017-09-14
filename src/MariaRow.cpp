@@ -130,14 +130,15 @@ double MariaRow::valueDateTime(int j) {
   t.tm_min = mytime->minute;
   t.tm_sec = mytime->second;
 
-  return static_cast<double>(timegm(&t));
+  double split_seconds = static_cast<double>(mytime->second_part) / 1000000.0;
+  return static_cast<double>(timegm(&t)) + split_seconds;
 }
 
 double MariaRow::valueDate(int j) {
   if (isNull(j))
     return NA_REAL;
 
-  return std::floor(valueDateTime(j) / 86400.0);
+  return valueDateTime(j) / 86400.0;
 }
 
 double MariaRow::valueTime(int j) {
