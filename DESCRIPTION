@@ -15,14 +15,15 @@ Authors@R: c(
 Depends:
     R (>= 2.8.0)
 Imports:
+    bit64,
     DBI (>= 0.7-12),
     hms,
     methods,
     Rcpp (>= 0.12.4)
 Suggests:
+    DBItest (>= 1.5-15),
     rprojroot,
-    testthat,
-    DBItest (>= 1.5-15)
+    testthat
 Remotes:
     rstats-db/DBI@production,
     rstats-db/DBItest@production

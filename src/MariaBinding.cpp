@@ -57,7 +57,7 @@ void MariaBinding::initBinding(List params) {
       bindingUpdate(j, MYSQL_TYPE_BLOB, 0);
       break;
     case MY_INT64:
-      // FIXME: 64-bit handling
+      bindingUpdate(j, MYSQL_TYPE_LONGLONG, 0);
       break;
     }
   }
@@ -141,6 +141,7 @@ void MariaBinding::bindRow(List params, int i) {
       stop("Not yet supported");
     case MY_INT64:
       // FIXME: 64-bit handling
+      stop("Not yet supported");
       break;
     }
     isNull_[j] = missing;

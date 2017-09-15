@@ -81,7 +81,7 @@ SEXPTYPE typeSEXP(MariaFieldType type) {
   case MY_INT32:
     return INTSXP;
   case MY_INT64:
-    return INTSXP;
+    return REALSXP;
   case MY_DBL:
     return REALSXP;
   case MY_STR:
@@ -125,6 +125,7 @@ MariaFieldType variableType(const RObject& type) {
     if (klass == "Date")     return MY_DATE;
     if (klass == "POSIXt")   return MY_DATE_TIME;
     if (klass == "difftime") return MY_TIME;
+    if (klass == "integer64") return MY_INT64;
     return MY_DBL;
   case STRSXP:
     return MY_STR;

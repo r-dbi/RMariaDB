@@ -8,11 +8,8 @@ DBItest::test_all(c(
   # result
   "data_logical",                               # not an error: cannot cast to logical
   "data_raw",                                   # not an error: can't cast to blob type
-  "data_64_bit_.*",                             # #12
 
   # sql
-  "roundtrip_64_bit_numeric",                   #
-  "roundtrip_64_bit_character",                 #
   "read_table_error",                           #
   "read_table_name",                            #
   "write_table_error",                          #

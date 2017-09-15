@@ -7,6 +7,7 @@
 
 #include "MariaRow.h"
 #include "MariaTypes.h"
+#include "integer64.h"
 
 
 MariaRow::MariaRow() {
@@ -87,7 +88,7 @@ int MariaRow::valueInt(int j) {
 }
 
 int64_t MariaRow::valueInt64(int j) {
-  return isNull(j) ? NA_INTEGER : *((int64_t*) &buffers_[j][0]);
+  return isNull(j) ? NA_INTEGER64 : *((int64_t*) &buffers_[j][0]);
 }
 
 double MariaRow::valueDouble(int j) {
@@ -155,8 +156,7 @@ void MariaRow::setListValue(SEXP x, int i, int j) {
     INTEGER(x)[i] = valueInt(j);
     break;
   case MY_INT64:
-    // FIXME: 64-bit values
-    INTEGER(x)[i] = static_cast<int>(valueInt64(j));
+    INTEGER64(x)[i] = valueInt64(j);
     break;
   case MY_DBL:
     REAL(x)[i] = valueDouble(j);

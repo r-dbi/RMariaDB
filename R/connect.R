@@ -88,6 +88,7 @@ setMethod("dbConnect", "MariaDBDriver",
 #' @export
 #' @import methods DBI
 #' @importFrom hms hms
+#' @importFrom bit64 integer64
 #' @rdname dbConnect-MariaDBDriver-method
 #' @examples
 #' if (mariadbHasDefault()) {
