@@ -25,6 +25,22 @@ connection_exec <- function(con, sql) {
     .Call(`_RMariaDB_connection_exec`, con, sql)
 }
 
+connection_begin_transaction <- function(con) {
+    invisible(.Call(`_RMariaDB_connection_begin_transaction`, con))
+}
+
+connection_commit <- function(con) {
+    invisible(.Call(`_RMariaDB_connection_commit`, con))
+}
+
+connection_rollback <- function(con) {
+    invisible(.Call(`_RMariaDB_connection_rollback`, con))
+}
+
+connection_is_transacting <- function(con) {
+    .Call(`_RMariaDB_connection_is_transacting`, con)
+}
+
 driver_init <- function() {
     invisible(.Call(`_RMariaDB_driver_init`))
 }

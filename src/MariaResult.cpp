@@ -53,6 +53,8 @@ void MariaResult::close() {
     mysql_stmt_close(pStatement_);
     pStatement_ = NULL;
   }
+
+  pConn_->autocommit();
 }
 
 void MariaResult::execute() {

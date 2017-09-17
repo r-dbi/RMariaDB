@@ -13,6 +13,7 @@ typedef boost::shared_ptr<MariaConnection> MariaConnectionPtr;
 class MariaConnection : boost::noncopyable {
   MYSQL* pConn_;
   MariaResult* pCurrentResult_;
+  bool transacting_;
 
 public:
 
@@ -42,6 +43,12 @@ public:
   bool hasQuery();
 
   bool exec(std::string sql);
+
+  void begin_transaction();
+  void commit();
+  void rollback();
+  bool is_transacting() const;
+  void autocommit();
 };
 
 #endif
