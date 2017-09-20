@@ -68,9 +68,9 @@ void MariaResult::execute() {
 }
 
 void MariaResult::bind(List params) {
-  bindingInput_.setUp(pStatement_);
-  bindingInput_.initBinding(params);
-  bindingInput_.bindRow(params, 0);
+  bindingInput_.setup(pStatement_);
+  bindingInput_.init_binding(params);
+  bindingInput_.bind_row(params, 0);
   execute();
 }
 
@@ -78,12 +78,12 @@ void MariaResult::bindRows(List params) {
   if (params.size() == 0)
     return;
 
-  bindingInput_.setUp(pStatement_);
-  bindingInput_.initBinding(params);
+  bindingInput_.setup(pStatement_);
+  bindingInput_.init_binding(params);
 
   int n = Rf_length(params[0]);
   for (int i = 0; i < n; ++i) {
-    bindingInput_.bindRow(params, i);
+    bindingInput_.bind_row(params, i);
     execute();
   }
 }

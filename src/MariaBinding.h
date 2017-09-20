@@ -18,14 +18,16 @@ public:
   ~MariaBinding();
 
 public:
-  void setUp(MYSQL_STMT* pStatement);
+  void setup(MYSQL_STMT* pStatement);
 
-  void initBinding(List params);
-  void bindRow(List params, int i);
-  void bindingUpdate(int j, enum_field_types type, int size);
+  void init_binding(List params);
+  void bind_row(List params, int i);
 
-  void setDateTimeBuffer(int j, time_t time);
-  void setTimeBuffer(int j, double time);
+private:
+  void binding_update(int j, enum_field_types type, int size);
+
+  void set_date_time_buffer(int j, time_t time);
+  void set_time_buffer(int j, double time);
 };
 
 #endif

@@ -9,7 +9,7 @@ MariaBinding::MariaBinding() {
 MariaBinding::~MariaBinding() {
 }
 
-void MariaBinding::setUp(MYSQL_STMT* pStatement) {
+void MariaBinding::setup(MYSQL_STMT* pStatement) {
   pStatement_ = pStatement;
   p_ = static_cast<int>(mysql_stmt_param_count(pStatement_));
 
@@ -19,7 +19,7 @@ void MariaBinding::setUp(MYSQL_STMT* pStatement) {
   timeBuffers_.resize(p_);
 }
 
-void MariaBinding::initBinding(List params) {
+void MariaBinding::init_binding(List params) {
   if (p_ != params.size()) {
     stop("Number of params don't match (%i vs %i)", p_, params.size());
   }
@@ -30,40 +30,40 @@ void MariaBinding::initBinding(List params) {
 
     switch (type) {
     case MY_LGL:
-      bindingUpdate(j, MYSQL_TYPE_TINY, 1);
+      binding_update(j, MYSQL_TYPE_TINY, 1);
       break;
     case MY_INT32:
-      bindingUpdate(j, MYSQL_TYPE_LONG, 4);
+      binding_update(j, MYSQL_TYPE_LONG, 4);
       break;
     case MY_DBL:
-      bindingUpdate(j, MYSQL_TYPE_DOUBLE, 8);
+      binding_update(j, MYSQL_TYPE_DOUBLE, 8);
       break;
     case MY_DATE:
-      bindingUpdate(j, MYSQL_TYPE_DATE, sizeof(MYSQL_TIME));
+      binding_update(j, MYSQL_TYPE_DATE, sizeof(MYSQL_TIME));
       break;
     case MY_DATE_TIME:
-      bindingUpdate(j, MYSQL_TYPE_DATETIME, sizeof(MYSQL_TIME));
+      binding_update(j, MYSQL_TYPE_DATETIME, sizeof(MYSQL_TIME));
       break;
     case MY_TIME:
-      bindingUpdate(j, MYSQL_TYPE_TIME, sizeof(MYSQL_TIME));
+      binding_update(j, MYSQL_TYPE_TIME, sizeof(MYSQL_TIME));
       break;
     case MY_FACTOR:
-      bindingUpdate(j, MYSQL_TYPE_DOUBLE, 8);
+      binding_update(j, MYSQL_TYPE_DOUBLE, 8);
       break;
     case MY_STR:
-      bindingUpdate(j, MYSQL_TYPE_STRING, 0);
+      binding_update(j, MYSQL_TYPE_STRING, 0);
       break;
     case MY_RAW:
-      bindingUpdate(j, MYSQL_TYPE_BLOB, 0);
+      binding_update(j, MYSQL_TYPE_BLOB, 0);
       break;
     case MY_INT64:
-      bindingUpdate(j, MYSQL_TYPE_LONGLONG, 0);
+      binding_update(j, MYSQL_TYPE_LONGLONG, 0);
       break;
     }
   }
 }
 
-void MariaBinding::bindRow(List params, int i) {
+void MariaBinding::bind_row(List params, int i) {
   for (int j = 0; j < p_; ++j) {
     bool missing = false;
     RObject col(params[j]);
@@ -121,7 +121,7 @@ void MariaBinding::bindRow(List params, int i) {
         missing = true;
       } else {
         double val = REAL(col)[i];
-        setDateTimeBuffer(j, static_cast<time_t>(val * (types_[j] == MY_DATE ? 86400.0 : 1.0)));
+        set_date_time_buffer(j, static_cast<time_t>(val * (types_[j] == MY_DATE ? 86400.0 : 1.0)));
         bindings_[j].buffer_length = sizeof(MYSQL_TIME);
         bindings_[j].buffer = &timeBuffers_[j];
       }
@@ -132,7 +132,7 @@ void MariaBinding::bindRow(List params, int i) {
         break;
       } else {
         double val = REAL(col)[i];
-        setTimeBuffer(j, val);
+        set_time_buffer(j, val);
         bindings_[j].buffer_length = sizeof(MYSQL_TIME);
         bindings_[j].buffer = &timeBuffers_[j];
       }
@@ -149,13 +149,13 @@ void MariaBinding::bindRow(List params, int i) {
   mysql_stmt_bind_param(pStatement_, &bindings_[0]);
 }
 
-void MariaBinding::bindingUpdate(int j, enum_field_types type, int size) {
+void MariaBinding::binding_update(int j, enum_field_types type, int size) {
   bindings_[j].buffer_length = size;
   bindings_[j].buffer_type = type;
   bindings_[j].is_null = &isNull_[j];
 }
 
-void MariaBinding::setDateTimeBuffer(int j, time_t time) {
+void MariaBinding::set_date_time_buffer(int j, time_t time) {
   struct tm* tm = gmtime(&time);
 
   timeBuffers_[j].year = tm->tm_year + 1900;
@@ -166,7 +166,7 @@ void MariaBinding::setDateTimeBuffer(int j, time_t time) {
   timeBuffers_[j].second = tm->tm_sec;
 }
 
-void MariaBinding::setTimeBuffer(int j, double time) {
+void MariaBinding::set_time_buffer(int j, double time) {
   bool neg = false;
   if (time < 0) {
     neg = true;
