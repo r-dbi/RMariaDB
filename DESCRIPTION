@@ -45,6 +45,7 @@ Collate:
     'connect.R'
     'default.R'
     'deprecated.R'
+    'export.R'
     'query.R'
     'quote.R'
     'table.R'
