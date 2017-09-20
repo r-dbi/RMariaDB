@@ -3,14 +3,14 @@
 \docType{methods}
 \name{transactions}
 \alias{transactions}
-\alias{dbCommit,MariaDBConnection-method}
 \alias{dbBegin,MariaDBConnection-method}
+\alias{dbCommit,MariaDBConnection-method}
 \alias{dbRollback,MariaDBConnection-method}
 \title{DBMS Transaction Management}
 \usage{
-\S4method{dbCommit}{MariaDBConnection}(conn, ...)
-
 \S4method{dbBegin}{MariaDBConnection}(conn, ...)
+
+\S4method{dbCommit}{MariaDBConnection}(conn, ...)
 
 \S4method{dbRollback}{MariaDBConnection}(conn, ...)
 }
