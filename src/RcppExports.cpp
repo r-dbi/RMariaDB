@@ -86,6 +86,47 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// connection_begin_transaction
+void connection_begin_transaction(XPtr<MariaConnectionPtr> con);
+RcppExport SEXP _RMariaDB_connection_begin_transaction(SEXP conSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
+    connection_begin_transaction(con);
+    return R_NilValue;
+END_RCPP
+}
+// connection_commit
+void connection_commit(XPtr<MariaConnectionPtr> con);
+RcppExport SEXP _RMariaDB_connection_commit(SEXP conSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
+    connection_commit(con);
+    return R_NilValue;
+END_RCPP
+}
+// connection_rollback
+void connection_rollback(XPtr<MariaConnectionPtr> con);
+RcppExport SEXP _RMariaDB_connection_rollback(SEXP conSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
+    connection_rollback(con);
+    return R_NilValue;
+END_RCPP
+}
+// connection_is_transacting
+bool connection_is_transacting(XPtr<MariaConnectionPtr> con);
+RcppExport SEXP _RMariaDB_connection_is_transacting(SEXP conSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
+    rcpp_result_gen = Rcpp::wrap(connection_is_transacting(con));
+    return rcpp_result_gen;
+END_RCPP
+}
 // driver_init
 void driver_init();
 RcppExport SEXP _RMariaDB_driver_init() {
@@ -233,6 +274,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_RMariaDB_connection_info", (DL_FUNC) &_RMariaDB_connection_info, 1},
     {"_RMariaDB_connection_quote_string", (DL_FUNC) &_RMariaDB_connection_quote_string, 2},
     {"_RMariaDB_connection_exec", (DL_FUNC) &_RMariaDB_connection_exec, 2},
+    {"_RMariaDB_connection_begin_transaction", (DL_FUNC) &_RMariaDB_connection_begin_transaction, 1},
+    {"_RMariaDB_connection_commit", (DL_FUNC) &_RMariaDB_connection_commit, 1},
+    {"_RMariaDB_connection_rollback", (DL_FUNC) &_RMariaDB_connection_rollback, 1},
+    {"_RMariaDB_connection_is_transacting", (DL_FUNC) &_RMariaDB_connection_is_transacting, 1},
     {"_RMariaDB_driver_init", (DL_FUNC) &_RMariaDB_driver_init, 0},
     {"_RMariaDB_driver_done", (DL_FUNC) &_RMariaDB_driver_done, 0},
     {"_RMariaDB_version", (DL_FUNC) &_RMariaDB_version, 0},

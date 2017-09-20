@@ -4,7 +4,8 @@
 
 MariaConnection::MariaConnection() :
   pConn_(NULL),
-  pCurrentResult_(NULL)
+  pCurrentResult_(NULL),
+  transacting_(false)
 {
 }
 
@@ -159,4 +160,37 @@ bool MariaConnection::exec(std::string sql) {
     mysql_free_result(res);
 
   return true;
+}
+
+void MariaConnection::begin_transaction() {
+  if (is_transacting()) stop("Nested transactions not supported.");
+  check_connection();
+
+  transacting_ = true;
+}
+
+void MariaConnection::commit() {
+  if (!is_transacting()) stop("Call dbBegin() to start a transaction.");
+  check_connection();
+
+  mysql_commit(conn());
+  transacting_ = false;
+}
+
+void MariaConnection::rollback() {
+  if (!is_transacting()) stop("Call dbBegin() to start a transaction.");
+  check_connection();
+
+  mysql_rollback(conn());
+  transacting_ = false;
+}
+
+bool MariaConnection::is_transacting() const {
+  return transacting_;
+}
+
+void MariaConnection::autocommit() {
+  if (!is_transacting() && conn()) {
+    mysql_commit(conn());
+  }
 }

@@ -73,8 +73,11 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     if (overwrite && append)
       stop("overwrite and append cannot both be TRUE", call. = FALSE)
 
-    dbBegin(conn)
-    on.exit(dbRollback(conn))
+    need_transaction <- !connection_is_transacting(conn@ptr)
+    if (need_transaction) {
+      dbBegin(conn)
+      on.exit(dbRollback(conn))
+    }
 
     found <- dbExistsTable(conn, name)
     if (found && !overwrite && !append) {
@@ -114,8 +117,10 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
       )
     }
 
-    on.exit(NULL)
-    dbCommit(conn)
+    if (need_transaction) {
+      on.exit(NULL)
+      dbCommit(conn)
+    }
 
     invisible(TRUE)
   }

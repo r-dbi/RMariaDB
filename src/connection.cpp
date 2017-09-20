@@ -66,3 +66,23 @@ CharacterVector connection_quote_string(XPtr<MariaConnectionPtr> con,
 bool connection_exec(XPtr<MariaConnectionPtr> con, std::string sql) {
   return (*con)->exec(sql);
 }
+
+// [[Rcpp::export]]
+void connection_begin_transaction(XPtr<MariaConnectionPtr> con) {
+  (*con)->begin_transaction();
+}
+
+// [[Rcpp::export]]
+void connection_commit(XPtr<MariaConnectionPtr> con) {
+  (*con)->commit();
+}
+
+// [[Rcpp::export]]
+void connection_rollback(XPtr<MariaConnectionPtr> con) {
+  (*con)->rollback();
+}
+
+// [[Rcpp::export]]
+bool connection_is_transacting(XPtr<MariaConnectionPtr> con) {
+  return (*con)->is_transacting();
+}

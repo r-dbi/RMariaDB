@@ -39,16 +39,6 @@ DBItest::test_all(c(
   "row_count_statement",                        #
   "rows_affected_statement",                    #
 
-  # transactions
-  "commit_without_begin",                       # 38
-  "rollback_without_begin",                     # 38
-  "begin_begin",                                # 38
-  "begin_write_rollback",                       #
-  "begin_write_disconnect",                     #
-  "begin_commit_return_value",                  #
-  "begin_rollback_return_value",                #
-  "with_transaction_.*",                        #
-
   # compliance
   "compliance",                                 # #23
 
