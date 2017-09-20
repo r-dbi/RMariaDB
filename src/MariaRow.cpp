@@ -60,7 +60,6 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
       // buffers might be arbitrary length, so leave size and use
       // alternative strategy: see fetch_buffer() for details
       break;
-    case MY_FACTOR:
     case MY_LGL:
       // input only
       break;
@@ -176,7 +175,6 @@ void MariaRow::set_list_value(SEXP x, int i, int j) {
   case MY_RAW:
     SET_VECTOR_ELT(x, i, value_raw(j));
     break;
-  case MY_FACTOR:
   case MY_LGL:
     // input only
     break;

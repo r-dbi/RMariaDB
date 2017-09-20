@@ -47,9 +47,6 @@ void MariaBinding::init_binding(List params) {
     case MY_TIME:
       binding_update(j, MYSQL_TYPE_TIME, sizeof(MYSQL_TIME));
       break;
-    case MY_FACTOR:
-      binding_update(j, MYSQL_TYPE_DOUBLE, 8);
-      break;
     case MY_STR:
       binding_update(j, MYSQL_TYPE_STRING, 0);
       break;
@@ -137,8 +134,6 @@ void MariaBinding::bind_row(List params, int i) {
         bindings_[j].buffer = &timeBuffers_[j];
       }
       break;
-    case MY_FACTOR:
-      stop("Not yet supported");
     case MY_INT64:
       // FIXME: 64-bit handling
       stop("Not yet supported");

@@ -10,7 +10,6 @@ enum MariaFieldType {
   MY_DATE_TIME,
   MY_TIME,
   MY_RAW,
-  MY_FACTOR, // input only
   MY_LGL     // input only
 };
 
