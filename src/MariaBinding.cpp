@@ -93,13 +93,8 @@ void MariaBinding::bind_row(List params, int i) {
         break;
       } else {
         SEXP string = STRING_ELT(col, i);
-        const char* utf8string = Rf_translateCharUTF8(string);
-        bindings_[j].buffer = const_cast<char*>(utf8string);
-        if (utf8string == CHAR(string)) {
-          bindings_[j].buffer_length = Rf_length(string);
-        } else {
-          bindings_[j].buffer_length = strlen(utf8string);
-        }
+        bindings_[j].buffer = const_cast<char*>(CHAR(string));
+        bindings_[j].buffer_length = Rf_length(string);
       }
       break;
     case MY_RAW: {
