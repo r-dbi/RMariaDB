@@ -3,7 +3,7 @@
 
 bool all_raw(SEXP x);
 
-MariaFieldType variableType(enum_field_types type, bool binary) {
+MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary) {
   switch (type) {
   case MYSQL_TYPE_TINY:
   case MYSQL_TYPE_SHORT:
@@ -50,7 +50,7 @@ MariaFieldType variableType(enum_field_types type, bool binary) {
   }
 }
 
-std::string typeName(MariaFieldType type) {
+std::string type_name(MariaFieldType type) {
   switch (type) {
   case MY_INT32:
     return "integer";
@@ -76,7 +76,7 @@ std::string typeName(MariaFieldType type) {
   throw std::runtime_error("Invalid typeName");
 }
 
-SEXPTYPE typeSEXP(MariaFieldType type) {
+SEXPTYPE type_sexp(MariaFieldType type) {
   switch (type) {
   case MY_INT32:
     return INTSXP;
@@ -102,7 +102,7 @@ SEXPTYPE typeSEXP(MariaFieldType type) {
   throw std::runtime_error("Invalid typeSEXP");
 }
 
-std::string rClass(RObject x) {
+std::string r_class(RObject x) {
   RObject klass_(x.attr("class"));
   std::string klass;
   if (klass_ == R_NilValue)
@@ -112,8 +112,8 @@ std::string rClass(RObject x) {
   return std::string(klassv[klassv.length() - 1]);
 }
 
-MariaFieldType variableType(const RObject& type) {
-  std::string klass = rClass(type);
+MariaFieldType variable_type_from_object(const RObject& type) {
+  std::string klass = r_class(type);
 
   switch (TYPEOF(type)) {
   case LGLSXP:

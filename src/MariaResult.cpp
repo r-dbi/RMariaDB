@@ -92,7 +92,7 @@ List MariaResult::column_info() {
   CharacterVector names(nCols_), types(nCols_);
   for (int i = 0; i < nCols_; i++) {
     names[i] = names_[i];
-    types[i] = typeName(types_[i]);
+    types[i] = type_name(types_[i]);
   }
 
   List out = List::create(names, types);
@@ -131,11 +131,11 @@ List MariaResult::fetch(int n_max) {
     if (names_.size() == 0) {
       warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
     }
-    return dfCreate(types_, names_, 0);
+    return df_create(types_, names_, 0);
   }
 
   int n = (n_max < 0) ? 100 : n_max;
-  List out = dfCreate(types_, names_, n);
+  List out = df_create(types_, names_, n);
   if (n == 0)
     return out;
 
@@ -149,7 +149,7 @@ List MariaResult::fetch(int n_max) {
     if (i >= n) {
       if (n_max < 0) {
         n *= 2;
-        out = dfResize(out, n);
+        out = df_resize(out, n);
       } else {
         break;
       }
@@ -168,10 +168,10 @@ List MariaResult::fetch(int n_max) {
 
   // Trim back to what we actually used
   if (i < n) {
-    out = dfResize(out, i);
+    out = df_resize(out, i);
   }
   // Set up S3 classes
-  dfS3(out, types_);
+  df_s3(out, types_);
 
   return out;
 }
@@ -212,7 +212,7 @@ void MariaResult::cache_metadata() {
     names_.push_back(fields[i].name);
 
     bool binary = fields[i].charsetnr == 63;
-    MariaFieldType type = variableType(fields[i].type, binary);
+    MariaFieldType type = variable_type_from_field_type(fields[i].type, binary);
     types_.push_back(type);
   }
 }

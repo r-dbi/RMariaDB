@@ -25,7 +25,7 @@ void MariaBinding::init_binding(List params) {
   }
 
   for (int j = 0; j < p_; ++j) {
-    MariaFieldType type = variableType(RObject(params[j]));
+    MariaFieldType type = variable_type_from_object(RObject(params[j]));
     types_[j] = type;
 
     switch (type) {
