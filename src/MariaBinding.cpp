@@ -3,6 +3,8 @@
 #include <math.h>
 #include "MariaBinding.h"
 
+#include <plogr.h>
+
 MariaBinding::MariaBinding() {
 }
 
@@ -10,6 +12,8 @@ MariaBinding::~MariaBinding() {
 }
 
 void MariaBinding::setup(MYSQL_STMT* pStatement) {
+  LOG_VERBOSE;
+
   pStatement_ = pStatement;
   p_ = static_cast<int>(mysql_stmt_param_count(pStatement_));
 
@@ -20,6 +24,8 @@ void MariaBinding::setup(MYSQL_STMT* pStatement) {
 }
 
 void MariaBinding::init_binding(List params) {
+  LOG_VERBOSE;
+
   if (p_ != params.size()) {
     stop("Number of params don't match (%i vs %i)", p_, params.size());
   }
@@ -27,6 +33,8 @@ void MariaBinding::init_binding(List params) {
   for (int j = 0; j < p_; ++j) {
     MariaFieldType type = variable_type_from_object(RObject(params[j]));
     types_[j] = type;
+
+    LOG_VERBOSE << j << " -> " << type_name(type);
 
     switch (type) {
     case MY_LGL:
@@ -61,7 +69,11 @@ void MariaBinding::init_binding(List params) {
 }
 
 void MariaBinding::bind_row(List params, int i) {
+  LOG_VERBOSE;
+
   for (int j = 0; j < p_; ++j) {
+    LOG_VERBOSE << j << " -> " << type_name(types_[j]);
+
     bool missing = false;
     RObject col(params[j]);
 
@@ -140,6 +152,8 @@ void MariaBinding::bind_row(List params, int i) {
 }
 
 void MariaBinding::binding_update(int j, enum_field_types type, int size) {
+  LOG_VERBOSE << j << ", " << type << ", " << size;
+
   bindings_[j].buffer_length = size;
   bindings_[j].buffer_type = type;
   bindings_[j].is_null = &isNull_[j];

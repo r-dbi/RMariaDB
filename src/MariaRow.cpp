@@ -9,6 +9,8 @@
 #include "MariaTypes.h"
 #include "integer64.h"
 
+#include <plogr.h>
+
 
 MariaRow::MariaRow() {
 }
@@ -17,6 +19,8 @@ MariaRow::~MariaRow() {
 }
 
 void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& types) {
+  LOG_VERBOSE;
+
   pStatement_ = pStatement;
   types_ = types;
   n_ = static_cast<int>(types_.size());
@@ -28,6 +32,8 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
   errors_.resize(n_);
 
   for (int i = 0; i < n_; ++i) {
+    LOG_VERBOSE << i << " -> " << type_name(types_[i]);
+
     // http://dev.mysql.com/doc/refman/5.0/en/c-api-prepared-statement-type-codes.html
     switch (types_[i]) {
     case MY_INT32:

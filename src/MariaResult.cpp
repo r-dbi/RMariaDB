@@ -3,6 +3,8 @@
 #include "MariaResult.h"
 #include "MariaConnection.h"
 
+#include <plogr.h>
+
 MariaResult::MariaResult(MariaConnectionPtr pConn) :
   pConn_(pConn),
   pStatement_(NULL),
@@ -26,10 +28,14 @@ MariaResult::~MariaResult() {
 }
 
 void MariaResult::send_query(std::string sql) {
+  LOG_DEBUG << sql;
+
   if (mysql_stmt_prepare(pStatement_, sql.data(), sql.size()) != 0)
     throw_error();
 
   nParams_ = static_cast<int>(mysql_stmt_param_count(pStatement_));
+  LOG_DEBUG << nParams_;
+
   if (nParams_ == 0) {
     // Not parameterised so we can execute immediately
     execute();
@@ -105,6 +111,8 @@ List MariaResult::column_info() {
 
 bool MariaResult::fetch_row() {
   int result = mysql_stmt_fetch(pStatement_);
+
+  LOG_VERBOSE << result;
 
   switch (result) {
   // We expect truncation whenever there's a string or blob
@@ -205,6 +213,8 @@ void MariaResult::throw_error() {
 }
 
 void MariaResult::cache_metadata() {
+  LOG_VERBOSE;
+
   nCols_ = mysql_num_fields(pSpec_);
   MYSQL_FIELD* fields = mysql_fetch_fields(pSpec_);
 
@@ -214,5 +224,7 @@ void MariaResult::cache_metadata() {
     bool binary = fields[i].charsetnr == 63;
     MariaFieldType type = variable_type_from_field_type(fields[i].type, binary);
     types_.push_back(type);
+
+    LOG_VERBOSE << i << " -> " << fields[i].name << "(" << fields[i].type << ", " << binary << ") => " << type_name(type);
   }
 }
