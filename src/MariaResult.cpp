@@ -39,7 +39,7 @@ void MariaResult::send_query(std::string sql) {
   if (pSpec_ != NULL) {
     // Query returns results, so cache column names and types
     cache_metadata();
-    bindingOutput_.setUp(pStatement_, types_);
+    bindingOutput_.setup(pStatement_, types_);
   }
 }
 
@@ -157,7 +157,7 @@ List MariaResult::fetch(int n_max) {
 
     for (int j = 0; j < nCols_; ++j) {
       // Rcout << i << "," << j << "\n";
-      bindingOutput_.setListValue(out[j], i, j);
+      bindingOutput_.set_list_value(out[j], i, j);
     }
 
     fetch_row();

@@ -16,7 +16,7 @@ MariaRow::MariaRow() {
 MariaRow::~MariaRow() {
 }
 
-void MariaRow::setUp(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& types) {
+void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& types) {
   pStatement_ = pStatement;
   types_ = types;
   n_ = static_cast<int>(types_.size());
@@ -58,7 +58,7 @@ void MariaRow::setUp(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
     case MY_RAW:
       bindings_[i].buffer_type = MYSQL_TYPE_STRING;
       // buffers might be arbitrary length, so leave size and use
-      // alternative strategy: see fetchBuffer() for details
+      // alternative strategy: see fetch_buffer() for details
       break;
     case MY_FACTOR:
     case MY_LGL:
@@ -79,46 +79,46 @@ void MariaRow::setUp(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
   }
 }
 
-bool MariaRow::isNull(int j) {
+bool MariaRow::is_null(int j) {
   return nulls_[j] == 1;
 }
 
-int MariaRow::valueInt(int j) {
-  return isNull(j) ? NA_INTEGER : *((int*) &buffers_[j][0]);
+int MariaRow::value_int(int j) {
+  return is_null(j) ? NA_INTEGER : *((int*) &buffers_[j][0]);
 }
 
-int64_t MariaRow::valueInt64(int j) {
-  return isNull(j) ? NA_INTEGER64 : *((int64_t*) &buffers_[j][0]);
+int64_t MariaRow::value_int64(int j) {
+  return is_null(j) ? NA_INTEGER64 : *((int64_t*) &buffers_[j][0]);
 }
 
-double MariaRow::valueDouble(int j) {
-  return isNull(j) ? NA_REAL : *((double*) &buffers_[j][0]);
+double MariaRow::value_double(int j) {
+  return is_null(j) ? NA_REAL : *((double*) &buffers_[j][0]);
 }
 
-SEXP MariaRow::valueString(int j) {
-  if (isNull(j))
+SEXP MariaRow::value_string(int j) {
+  if (is_null(j))
     return NA_STRING;
 
-  fetchBuffer(j);
+  fetch_buffer(j);
   buffers_[j].push_back('\0');  // ensure string is null terminated
   char* val = (char*) &buffers_[j][0];
 
   return Rf_mkCharCE(val, CE_UTF8);
 }
 
-SEXP MariaRow::valueRaw(int j) {
-  if (isNull(j))
+SEXP MariaRow::value_raw(int j) {
+  if (is_null(j))
     return R_NilValue;
 
-  fetchBuffer(j);
+  fetch_buffer(j);
   SEXP bytes = Rf_allocVector(RAWSXP, lengths_[j]);
   memcpy(RAW(bytes), &buffers_[j][0], lengths_[j]);
 
   return bytes;
 }
 
-double MariaRow::valueDateTime(int j) {
-  if (isNull(j))
+double MariaRow::value_date_time(int j) {
+  if (is_null(j))
     return NA_REAL;
 
   MYSQL_TIME* mytime = (MYSQL_TIME*) &buffers_[j][0];
@@ -135,46 +135,46 @@ double MariaRow::valueDateTime(int j) {
   return static_cast<double>(timegm(&t)) + split_seconds;
 }
 
-double MariaRow::valueDate(int j) {
-  if (isNull(j))
+double MariaRow::value_date(int j) {
+  if (is_null(j))
     return NA_REAL;
 
-  return valueDateTime(j) / 86400.0;
+  return value_date_time(j) / 86400.0;
 }
 
-double MariaRow::valueTime(int j) {
-  if (isNull(j))
+double MariaRow::value_time(int j) {
+  if (is_null(j))
     return NA_REAL;
 
   MYSQL_TIME* mytime = (MYSQL_TIME*) &buffers_[j][0];
   return static_cast<double>(mytime->hour * 3600 + mytime->minute * 60 + mytime->second);
 }
 
-void MariaRow::setListValue(SEXP x, int i, int j) {
+void MariaRow::set_list_value(SEXP x, int i, int j) {
   switch (types_[j]) {
   case MY_INT32:
-    INTEGER(x)[i] = valueInt(j);
+    INTEGER(x)[i] = value_int(j);
     break;
   case MY_INT64:
-    INTEGER64(x)[i] = valueInt64(j);
+    INTEGER64(x)[i] = value_int64(j);
     break;
   case MY_DBL:
-    REAL(x)[i] = valueDouble(j);
+    REAL(x)[i] = value_double(j);
     break;
   case MY_DATE:
-    REAL(x)[i] = valueDate(j);
+    REAL(x)[i] = value_date(j);
     break;
   case MY_DATE_TIME:
-    REAL(x)[i] = valueDateTime(j);
+    REAL(x)[i] = value_date_time(j);
     break;
   case MY_TIME:
-    REAL(x)[i] = valueTime(j);
+    REAL(x)[i] = value_time(j);
     break;
   case MY_STR:
-    SET_STRING_ELT(x, i, valueString(j));
+    SET_STRING_ELT(x, i, value_string(j));
     break;
   case MY_RAW:
-    SET_VECTOR_ELT(x, i, valueRaw(j));
+    SET_VECTOR_ELT(x, i, value_raw(j));
     break;
   case MY_FACTOR:
   case MY_LGL:
@@ -183,7 +183,7 @@ void MariaRow::setListValue(SEXP x, int i, int j) {
   }
 }
 
-void MariaRow::fetchBuffer(int j) {
+void MariaRow::fetch_buffer(int j) {
   unsigned long length = lengths_[j];
   buffers_[j].resize(length);
   if (length == 0)
