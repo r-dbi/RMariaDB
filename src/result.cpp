@@ -6,13 +6,13 @@
 XPtr<MariaResult> result_create(XPtr<MariaConnectionPtr> con, std::string sql) {
   (*con)->check_connection();
   std::auto_ptr<MariaResult> res(new MariaResult(*con));
-  res->sendQuery(sql);
+  res->send_query(sql);
   return XPtr<MariaResult>(res.release(), true);
 }
 
 // [[Rcpp::export]]
 List result_column_info(XPtr<MariaResult> rs) {
-  return rs->columnInfo();
+  return rs->column_info();
 }
 
 // [[Rcpp::export]]
@@ -27,7 +27,7 @@ void result_bind(XPtr<MariaResult> rs, List params) {
 
 // [[Rcpp::export]]
 void result_bind_rows(XPtr<MariaResult> rs, List params) {
-  return rs->bindRows(params);
+  return rs->bind_rows(params);
 }
 
 // [[Rcpp::export]]
@@ -37,12 +37,12 @@ void result_release(XPtr<MariaResult> rs) {
 
 // [[Rcpp::export]]
 int result_rows_affected(XPtr<MariaResult> rs) {
-  return rs->rowsAffected();
+  return rs->rows_affected();
 }
 
 // [[Rcpp::export]]
 int result_rows_fetched(XPtr<MariaResult> rs) {
-  return rs->rowsFetched();
+  return rs->rows_fetched();
 }
 
 // [[Rcpp::export]]

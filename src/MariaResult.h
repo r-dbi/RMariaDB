@@ -27,28 +27,29 @@ public:
   ~MariaResult();
 
 public:
-  void sendQuery(std::string sql);
+  void send_query(std::string sql);
   void close();
 
   void execute();
 
   void bind(List params);
-  void bindRows(List params);
+  void bind_rows(List params);
 
-  List columnInfo();
+  List column_info();
 
-  bool fetchRow();
   List fetch(int n_max = -1);
 
-  int rowsAffected();
-  int rowsFetched();
+  int rows_affected();
+  int rows_fetched();
   bool complete();
   bool active();
 
-  void throwError();
+private:
+  bool fetch_row();
+  void throw_error();
 
 private:
-  void cacheMetadata();
+  void cache_metadata();
 };
 
 #endif

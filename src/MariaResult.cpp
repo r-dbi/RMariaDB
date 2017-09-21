@@ -25,9 +25,9 @@ MariaResult::~MariaResult() {
   } catch (...) {};
 }
 
-void MariaResult::sendQuery(std::string sql) {
+void MariaResult::send_query(std::string sql) {
   if (mysql_stmt_prepare(pStatement_, sql.data(), sql.size()) != 0)
-    throwError();
+    throw_error();
 
   nParams_ = static_cast<int>(mysql_stmt_param_count(pStatement_));
   if (nParams_ == 0) {
@@ -38,7 +38,7 @@ void MariaResult::sendQuery(std::string sql) {
   pSpec_ = mysql_stmt_result_metadata(pStatement_);
   if (pSpec_ != NULL) {
     // Query returns results, so cache column names and types
-    cacheMetadata();
+    cache_metadata();
     bindingOutput_.setUp(pStatement_, types_);
   }
 }
@@ -63,7 +63,7 @@ void MariaResult::execute() {
   bound_ = true;
 
   if (mysql_stmt_execute(pStatement_) != 0)
-    throwError();
+    throw_error();
   rowsAffected_ = mysql_stmt_affected_rows(pStatement_);
 }
 
@@ -74,7 +74,7 @@ void MariaResult::bind(List params) {
   execute();
 }
 
-void MariaResult::bindRows(List params) {
+void MariaResult::bind_rows(List params) {
   if (params.size() == 0)
     return;
 
@@ -88,7 +88,7 @@ void MariaResult::bindRows(List params) {
   }
 }
 
-List MariaResult::columnInfo() {
+List MariaResult::column_info() {
   CharacterVector names(nCols_), types(nCols_);
   for (int i = 0; i < nCols_; i++) {
     names[i] = names_[i];
@@ -103,7 +103,7 @@ List MariaResult::columnInfo() {
   return out;
 }
 
-bool MariaResult::fetchRow() {
+bool MariaResult::fetch_row() {
   int result = mysql_stmt_fetch(pStatement_);
 
   switch (result) {
@@ -113,7 +113,7 @@ bool MariaResult::fetchRow() {
     rowsFetched_++;
     return true;
   case 1:
-    throwError();
+    throw_error();
   case MYSQL_NO_DATA:
     complete_ = true;
     rowsFetched_++;
@@ -142,7 +142,7 @@ List MariaResult::fetch(int n_max) {
   int i = 0;
 
   if (rowsFetched_ == 0) {
-    fetchRow();
+    fetch_row();
   }
 
   while (!complete_) {
@@ -160,7 +160,7 @@ List MariaResult::fetch(int n_max) {
       bindingOutput_.setListValue(out[j], i, j);
     }
 
-    fetchRow();
+    fetch_row();
     ++i;
     if (i % 1000 == 0)
       checkUserInterrupt();
@@ -176,12 +176,12 @@ List MariaResult::fetch(int n_max) {
   return out;
 }
 
-int MariaResult::rowsAffected() {
+int MariaResult::rows_affected() {
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsAffected_);
 }
 
-int MariaResult::rowsFetched() {
+int MariaResult::rows_fetched() {
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsFetched_ == 0 ? 0 : rowsFetched_ - 1);
 }
@@ -196,7 +196,7 @@ bool MariaResult::active() {
   return pConn_->isCurrentResult(this);
 }
 
-void MariaResult::throwError() {
+void MariaResult::throw_error() {
   stop(
     "%s [%i]",
     mysql_stmt_error(pStatement_),
@@ -204,7 +204,7 @@ void MariaResult::throwError() {
   );
 }
 
-void MariaResult::cacheMetadata() {
+void MariaResult::cache_metadata() {
   nCols_ = mysql_num_fields(pSpec_);
   MYSQL_FIELD* fields = mysql_fetch_fields(pSpec_);
 
