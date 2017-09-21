@@ -26,6 +26,10 @@ void MariaBinding::setup(MYSQL_STMT* pStatement) {
 void MariaBinding::init_binding(List params) {
   LOG_VERBOSE;
 
+  if (params.size() == 0) {
+    stop("Query has no parameters");
+  }
+
   if (p_ != params.size()) {
     stop("Number of params don't match (%i vs %i)", p_, params.size());
   }

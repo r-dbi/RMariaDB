@@ -21,7 +21,6 @@ DBItest::test_all(c(
   "get_info_result",                            # rstats-db/DBI#55
   "exists_table_closed_connection",             #
   "exists_table_invalid_connection",            #
-  "bind_empty.*",                               # #27
   "bind_return_value.*",                        # #27
   "bind_wrong_name",                            #
   "bind_multi_row.*",                           # #39
