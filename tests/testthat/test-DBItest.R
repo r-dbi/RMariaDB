@@ -25,10 +25,8 @@ DBItest::test_all(c(
   "bind_return_value.*",                        # #27
   "bind_wrong_name",                            #
   "bind_multi_row.*",                           # #39
-  "bind_logical.*",                             #
   "bind_timestamp_lt.*",                        # #22
-  "bind_timestamp",                             #
-  "bind_.*_named_.*",                           # not an error: named binding not supported
+  "bind_unnamed_param_named_placeholders",      #
   "bind_named_param_unnamed_placeholders",      #
   "bind_named_param_empty_placeholders",        #
   "bind_named_param_na_placeholders",           #
