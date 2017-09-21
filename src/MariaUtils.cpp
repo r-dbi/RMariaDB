@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "MariaTypes.h"
 
-List dfResize(const List& df, int n) {
+List df_resize(const List& df, int n) {
   R_xlen_t p = df.size();
 
   List out(p);
@@ -16,7 +16,7 @@ List dfResize(const List& df, int n) {
   return out;
 }
 
-void dfS3(const List& df, const std::vector<MariaFieldType>& types) {
+void df_s3(const List& df, const std::vector<MariaFieldType>& types) {
   R_xlen_t p = df.size();
 
   for (R_xlen_t j = 0; j < p; ++j) {
@@ -42,7 +42,7 @@ void dfS3(const List& df, const std::vector<MariaFieldType>& types) {
   }
 }
 
-List dfCreate(const std::vector<MariaFieldType>& types, const std::vector<std::string>& names, int n) {
+List df_create(const std::vector<MariaFieldType>& types, const std::vector<std::string>& names, int n) {
   R_xlen_t p = types.size();
 
   List out(p);
@@ -51,7 +51,7 @@ List dfCreate(const std::vector<MariaFieldType>& types, const std::vector<std::s
   out.attr("row.names") = IntegerVector::create(NA_INTEGER, -n);
 
   for (R_xlen_t j = 0; j < p; ++j) {
-    out[j] = Rf_allocVector(typeSEXP(types[j]), n);
+    out[j] = Rf_allocVector(type_sexp(types[j]), n);
   }
   return out;
 }

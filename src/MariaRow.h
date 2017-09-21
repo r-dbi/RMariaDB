@@ -22,24 +22,23 @@ public:
   ~MariaRow();
 
 public:
-  void setUp(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& types);
-
-  // Value accessors -----------------------------------------------------------
-  bool isNull(int j);
-
-  int valueInt(int j);
-  int64_t valueInt64(int j);
-  double valueDouble(int j);
-  SEXP valueString(int j);
-  SEXP valueRaw(int j);
-  double valueDateTime(int j);
-  double valueDate(int j);
-  double valueTime(int j);
-
-  void setListValue(SEXP x, int i, int j);
+  void setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& types);
+  void set_list_value(SEXP x, int i, int j);
 
 private:
-  void fetchBuffer(int j);
+  // Value accessors -----------------------------------------------------------
+  bool is_null(int j);
+
+  int value_int(int j);
+  int64_t value_int64(int j);
+  double value_double(int j);
+  SEXP value_string(int j);
+  SEXP value_raw(int j);
+  double value_date_time(int j);
+  double value_date(int j);
+  double value_time(int j);
+
+  void fetch_buffer(int j);
 };
 
 #endif

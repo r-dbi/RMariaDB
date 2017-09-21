@@ -14,12 +14,12 @@ enum MariaFieldType {
   MY_LGL     // input only
 };
 
-MariaFieldType variableType(enum_field_types type, bool binary);
-std::string typeName(MariaFieldType type);
-SEXPTYPE typeSEXP(MariaFieldType type);
+MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary);
+std::string type_name(MariaFieldType type);
+SEXPTYPE type_sexp(MariaFieldType type);
 
-std::string rClass(RObject x);
-MariaFieldType variableType(const RObject& type);
+std::string r_class(RObject x);
+MariaFieldType variable_type_from_object(const RObject& type);
 
 
 #endif

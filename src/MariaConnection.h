@@ -32,15 +32,15 @@ public:
   bool is_connected();
   void check_connection();
 
-  List connectionInfo();
+  List connection_info();
   MYSQL* conn();
 
-  std::string quoteString(const Rcpp::String& input);
+  std::string quote_string(const Rcpp::String& input);
 
   // Cancels previous query, if needed.
-  void setCurrentResult(MariaResult* pResult);
-  bool isCurrentResult(MariaResult* pResult);
-  bool hasQuery();
+  void set_current_result(MariaResult* pResult);
+  bool is_current_result(MariaResult* pResult);
+  bool has_query();
 
   bool exec(std::string sql);
 

@@ -64,7 +64,7 @@ void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<
 void MariaConnection::disconnect() {
   if (!is_connected()) return;
 
-  if (hasQuery()) {
+  if (has_query()) {
     warning(
       "%s\n%s",
       "There is a result object still in use.",
@@ -89,7 +89,7 @@ void MariaConnection::check_connection() {
   }
 }
 
-List MariaConnection::connectionInfo() {
+List MariaConnection::connection_info() {
   return
     List::create(
       _["host"] = std::string(pConn_->host),
@@ -107,7 +107,7 @@ MYSQL* MariaConnection::conn() {
   return pConn_;
 }
 
-std::string MariaConnection::quoteString(const Rcpp::String& input) {
+std::string MariaConnection::quote_string(const Rcpp::String& input) {
   if (input == NA_STRING)
     return "NULL";
 
@@ -126,7 +126,7 @@ std::string MariaConnection::quoteString(const Rcpp::String& input) {
   return output;
 }
 
-void MariaConnection::setCurrentResult(MariaResult* pResult) {
+void MariaConnection::set_current_result(MariaResult* pResult) {
   if (pResult == pCurrentResult_)
     return;
 
@@ -139,18 +139,18 @@ void MariaConnection::setCurrentResult(MariaResult* pResult) {
   pCurrentResult_ = pResult;
 }
 
-bool MariaConnection::isCurrentResult(MariaResult* pResult) {
+bool MariaConnection::is_current_result(MariaResult* pResult) {
   return pCurrentResult_ == pResult;
 }
 
-bool MariaConnection::hasQuery() {
+bool MariaConnection::has_query() {
   return pCurrentResult_ != NULL;
 }
 
 bool MariaConnection::exec(std::string sql) {
   check_connection();
 
-  setCurrentResult(NULL);
+  set_current_result(NULL);
 
   if (mysql_real_query(pConn_, sql.data(), sql.size()) != 0)
     stop(mysql_error(pConn_));
