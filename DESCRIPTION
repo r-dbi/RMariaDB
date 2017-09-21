@@ -27,7 +27,7 @@ Suggests:
 Remotes:
     rstats-db/DBI@production,
     rstats-db/DBItest@production
-LinkingTo: Rcpp, BH
+LinkingTo: Rcpp, BH, plogr
 License: GPL-2
 URL: https://github.com/rstats-db/RMariaDB,
     https://downloads.mariadb.org/connector-c/

@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include <mysql_version.h>
+#include <plogr.h>
 
 // [[Rcpp::export]]
 void driver_init() {
@@ -19,4 +20,9 @@ IntegerVector version() {
       _[MYSQL_SERVER_VERSION] = MYSQL_VERSION_ID,
       _[mysql_get_client_info()] = mysql_get_client_version()
     );
+}
+
+// [[Rcpp::export]]
+void init_logging(const std::string& log_level) {
+  plog::init_r(log_level);
 }
