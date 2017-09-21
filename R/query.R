@@ -78,7 +78,7 @@ setMethod("dbBind", "MariaDBResult", function(res, params, ...) {
   params <- string_to_utf8(params)
 
   result_bind(res@ptr, params)
-  invisible(TRUE)
+  invisible(res)
 })
 
 #' @rdname query
