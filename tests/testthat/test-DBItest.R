@@ -17,7 +17,6 @@ DBItest::test_all(c(
   "exists_table_error",                         #
 
   # meta
-  "rows_affected_query",                        #
   "get_statement_error",                        #
   "get_info_result",                            # rstats-db/DBI#55
   "exists_table_closed_connection",             #
@@ -35,8 +34,6 @@ DBItest::test_all(c(
   "bind_named_param_na_placeholders",           #
   "bind_repeated.*",                            #
   "list_fields_row_names",                      #
-  "row_count_statement",                        #
-  "rows_affected_statement",                    #
 
   # compliance
   "compliance",                                 # #23

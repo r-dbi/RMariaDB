@@ -36,16 +36,17 @@ void MariaResult::send_query(std::string sql) {
   nParams_ = static_cast<int>(mysql_stmt_param_count(pStatement_));
   LOG_DEBUG << nParams_;
 
-  if (nParams_ == 0) {
-    // Not parameterised so we can execute immediately
-    execute();
-  }
-
+  // Need to set pSpec_ before calling execute()
   pSpec_ = mysql_stmt_result_metadata(pStatement_);
   if (pSpec_ != NULL) {
     // Query returns results, so cache column names and types
     cache_metadata();
     bindingOutput_.setup(pStatement_, types_);
+  }
+
+  if (nParams_ == 0) {
+    // Not parameterised so we can execute immediately
+    execute();
   }
 }
 
@@ -70,7 +71,9 @@ void MariaResult::execute() {
 
   if (mysql_stmt_execute(pStatement_) != 0)
     throw_error();
-  rowsAffected_ = mysql_stmt_affected_rows(pStatement_);
+  if (pSpec_ == NULL) {
+    rowsAffected_ = mysql_stmt_affected_rows(pStatement_);
+  }
 }
 
 void MariaResult::bind(List params) {
