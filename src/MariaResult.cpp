@@ -15,12 +15,12 @@ MariaResult::MariaResult(MariaConnectionPtr pConn) :
   pStatement_ = mysql_stmt_init(pConn->conn());
   if (pStatement_ == NULL)
     stop("Out of memory");
-  pConn_->setCurrentResult(this);
+  pConn_->set_current_result(this);
 }
 
 MariaResult::~MariaResult() {
   try {
-    pConn_->setCurrentResult(NULL);
+    pConn_->set_current_result(NULL);
     close();
   } catch (...) {};
 }
@@ -193,7 +193,7 @@ bool MariaResult::complete() {
 }
 
 bool MariaResult::active() {
-  return pConn_->isCurrentResult(this);
+  return pConn_->is_current_result(this);
 }
 
 void MariaResult::throw_error() {

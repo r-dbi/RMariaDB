@@ -45,7 +45,7 @@ void connection_release(XPtr<MariaConnectionPtr> con) {
 
 // [[Rcpp::export]]
 List connection_info(XPtr<MariaConnectionPtr> con) {
-  return (*con)->connectionInfo();
+  return (*con)->connection_info();
 }
 
 // [[Rcpp::export]]
@@ -56,7 +56,7 @@ CharacterVector connection_quote_string(XPtr<MariaConnectionPtr> con,
 
   for (R_xlen_t i = 0; i < n; ++i) {
     String x = input[i];
-    output[i] = String((*con)->quoteString(x), CE_UTF8);
+    output[i] = String((*con)->quote_string(x), CE_UTF8);
   }
 
   return output;
