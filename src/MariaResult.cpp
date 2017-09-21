@@ -189,16 +189,19 @@ List MariaResult::fetch(int n_max) {
 }
 
 int MariaResult::rows_affected() {
+  if (!bound_) return NA_INTEGER;
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsAffected_);
 }
 
 int MariaResult::rows_fetched() {
+  if (!bound_) return 0;
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsFetched_ == 0 ? 0 : rowsFetched_ - 1);
 }
 
 bool MariaResult::complete() {
+  if (!bound_) return FALSE;
   return
     (pSpec_ == NULL) || // query doesn't have results
     complete_;          // we've fetched all available results
