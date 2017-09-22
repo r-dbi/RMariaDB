@@ -34,11 +34,21 @@ void MariaBinding::init_binding(List params) {
     stop("Number of params don't match (%i vs %i)", p_, params.size());
   }
 
+  R_xlen_t n;
+
   for (int j = 0; j < p_; ++j) {
-    MariaFieldType type = variable_type_from_object(RObject(params[j]));
+    RObject param(params[j]);
+    MariaFieldType type = variable_type_from_object(param);
     types_[j] = type;
 
     LOG_VERBOSE << j << " -> " << type_name(type);
+
+    if (j == 0) {
+      n = Rf_xlength(param);
+    }
+    else if (n != Rf_xlength(param)) {
+      stop("Parameter %i does not have length %d.", j + 1, n);
+    }
 
     switch (type) {
     case MY_LGL:
