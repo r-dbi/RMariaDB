@@ -1,3 +1,5 @@
+if (identical(Sys.getenv("NOT_CRAN"), "true")) {
+
 DBItest::test_all(c(
   # driver
   "get_info_driver",                            # rstats-db/RSQLite#117
@@ -28,3 +30,5 @@ DBItest::test_all(c(
 
   NULL
 ))
+
+}
