@@ -1,6 +1,5 @@
 #include "pch.h"
 
-#include <mysql_version.h>
 #include <plogr.h>
 
 // [[Rcpp::export]]
