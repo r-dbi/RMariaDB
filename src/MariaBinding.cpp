@@ -11,16 +11,16 @@ MariaBinding::MariaBinding() {
 MariaBinding::~MariaBinding() {
 }
 
-void MariaBinding::setup(MYSQL_STMT* pStatement) {
+void MariaBinding::setup(MYSQL_STMT* statement_) {
   LOG_VERBOSE;
 
-  pStatement_ = pStatement;
-  p_ = static_cast<int>(mysql_stmt_param_count(pStatement_));
+  statement = statement_;
+  p = static_cast<int>(mysql_stmt_param_count(statement));
 
-  bindings_.resize(p_);
-  types_.resize(p_);
-  isNull_.resize(p_);
-  timeBuffers_.resize(p_);
+  bindings.resize(p);
+  types.resize(p);
+  is_null.resize(p);
+  time_buffers.resize(p);
 }
 
 void MariaBinding::init_binding(List params) {
@@ -30,16 +30,16 @@ void MariaBinding::init_binding(List params) {
     stop("Query has no parameters");
   }
 
-  if (p_ != params.size()) {
-    stop("Number of params don't match (%i vs %i)", p_, params.size());
+  if (p != params.size()) {
+    stop("Number of params don't match (%i vs %i)", p, params.size());
   }
 
   R_xlen_t n;
 
-  for (int j = 0; j < p_; ++j) {
+  for (int j = 0; j < p; ++j) {
     RObject param(params[j]);
     MariaFieldType type = variable_type_from_object(param);
-    types_[j] = type;
+    types[j] = type;
 
     LOG_VERBOSE << j << " -> " << type_name(type);
 
@@ -85,33 +85,33 @@ void MariaBinding::init_binding(List params) {
 void MariaBinding::bind_row(List params, int i) {
   LOG_VERBOSE;
 
-  for (int j = 0; j < p_; ++j) {
-    LOG_VERBOSE << j << " -> " << type_name(types_[j]);
+  for (int j = 0; j < p; ++j) {
+    LOG_VERBOSE << j << " -> " << type_name(types[j]);
 
     bool missing = false;
     RObject col(params[j]);
 
-    switch (types_[j]) {
+    switch (types[j]) {
     case MY_LGL:
       if (LOGICAL(col)[i] == NA_LOGICAL) {
         missing = true;
         break;
       }
-      bindings_[j].buffer = &LOGICAL(col)[i];
+      bindings[j].buffer = &LOGICAL(col)[i];
       break;
     case MY_INT32:
       if (INTEGER(col)[i] == NA_INTEGER) {
         missing = true;
         break;
       }
-      bindings_[j].buffer = &INTEGER(col)[i];
+      bindings[j].buffer = &INTEGER(col)[i];
       break;
     case MY_DBL:
       if (ISNA(REAL(col)[i])) {
         missing = true;
         break;
       }
-      bindings_[j].buffer = &REAL(col)[i];
+      bindings[j].buffer = &REAL(col)[i];
       break;
     case MY_STR:
       if (STRING_ELT(col, i) == NA_STRING) {
@@ -119,8 +119,8 @@ void MariaBinding::bind_row(List params, int i) {
         break;
       } else {
         SEXP string = STRING_ELT(col, i);
-        bindings_[j].buffer = const_cast<char*>(CHAR(string));
-        bindings_[j].buffer_length = Rf_length(string);
+        bindings[j].buffer = const_cast<char*>(CHAR(string));
+        bindings[j].buffer_length = Rf_length(string);
       }
       break;
     case MY_RAW: {
@@ -128,8 +128,8 @@ void MariaBinding::bind_row(List params, int i) {
       if (Rf_isNull(raw)) {
         missing = true;
       } else {
-        bindings_[j].buffer_length = Rf_length(raw);
-        bindings_[j].buffer = RAW(raw);
+        bindings[j].buffer_length = Rf_length(raw);
+        bindings[j].buffer = RAW(raw);
       }
       break;
     }
@@ -139,9 +139,9 @@ void MariaBinding::bind_row(List params, int i) {
         missing = true;
       } else {
         double val = REAL(col)[i];
-        set_date_time_buffer(j, static_cast<time_t>(val * (types_[j] == MY_DATE ? 86400.0 : 1.0)));
-        bindings_[j].buffer_length = sizeof(MYSQL_TIME);
-        bindings_[j].buffer = &timeBuffers_[j];
+        set_date_time_buffer(j, static_cast<time_t>(val * (types[j] == MY_DATE ? 86400.0 : 1.0)));
+        bindings[j].buffer_length = sizeof(MYSQL_TIME);
+        bindings[j].buffer = &time_buffers[j];
       }
       break;
     case MY_TIME:
@@ -151,8 +151,8 @@ void MariaBinding::bind_row(List params, int i) {
       } else {
         double val = REAL(col)[i];
         set_time_buffer(j, val);
-        bindings_[j].buffer_length = sizeof(MYSQL_TIME);
-        bindings_[j].buffer = &timeBuffers_[j];
+        bindings[j].buffer_length = sizeof(MYSQL_TIME);
+        bindings[j].buffer = &time_buffers[j];
       }
       break;
     case MY_INT64:
@@ -160,28 +160,28 @@ void MariaBinding::bind_row(List params, int i) {
       stop("Not yet supported");
       break;
     }
-    isNull_[j] = missing;
+    is_null[j] = missing;
   }
-  mysql_stmt_bind_param(pStatement_, &bindings_[0]);
+  mysql_stmt_bind_param(statement, &bindings[0]);
 }
 
 void MariaBinding::binding_update(int j, enum_field_types type, int size) {
   LOG_VERBOSE << j << ", " << type << ", " << size;
 
-  bindings_[j].buffer_length = size;
-  bindings_[j].buffer_type = type;
-  bindings_[j].is_null = &isNull_[j];
+  bindings[j].buffer_length = size;
+  bindings[j].buffer_type = type;
+  bindings[j].is_null = &is_null[j];
 }
 
 void MariaBinding::set_date_time_buffer(int j, time_t time) {
   struct tm* tm = gmtime(&time);
 
-  timeBuffers_[j].year = tm->tm_year + 1900;
-  timeBuffers_[j].month = tm->tm_mon + 1 ;
-  timeBuffers_[j].day = tm->tm_mday;
-  timeBuffers_[j].hour = tm->tm_hour;
-  timeBuffers_[j].minute = tm->tm_min;
-  timeBuffers_[j].second = tm->tm_sec;
+  time_buffers[j].year = tm->tm_year + 1900;
+  time_buffers[j].month = tm->tm_mon + 1 ;
+  time_buffers[j].day = tm->tm_mday;
+  time_buffers[j].hour = tm->tm_hour;
+  time_buffers[j].minute = tm->tm_min;
+  time_buffers[j].second = tm->tm_sec;
 }
 
 void MariaBinding::set_time_buffer(int j, double time) {
@@ -197,12 +197,12 @@ void MariaBinding::set_time_buffer(int j, double time) {
   double hours = ::trunc(time / 3600.0);
   double minutes = whole_minutes - hours * 60.0;
 
-  timeBuffers_[j].year = 0;
-  timeBuffers_[j].month = 0;
-  timeBuffers_[j].day = 0;
-  timeBuffers_[j].hour = static_cast<unsigned int>(hours);
-  timeBuffers_[j].minute = static_cast<unsigned int>(minutes);
-  timeBuffers_[j].second = static_cast<unsigned int>(seconds);
-  timeBuffers_[j].second_part = static_cast<unsigned long>(frac_seconds * 1000000.0);
-  timeBuffers_[j].neg = neg;
+  time_buffers[j].year = 0;
+  time_buffers[j].month = 0;
+  time_buffers[j].day = 0;
+  time_buffers[j].hour = static_cast<unsigned int>(hours);
+  time_buffers[j].minute = static_cast<unsigned int>(minutes);
+  time_buffers[j].second = static_cast<unsigned int>(seconds);
+  time_buffers[j].second_part = static_cast<unsigned long>(frac_seconds * 1000000.0);
+  time_buffers[j].neg = neg;
 }

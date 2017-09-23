@@ -5,20 +5,20 @@
 #include "MariaTypes.h"
 
 class MariaBinding : public boost::noncopyable {
-  MYSQL_STMT* pStatement_;
+  MYSQL_STMT* statement;
 
-  int p_;
-  std::vector<MYSQL_BIND> bindings_;
-  std::vector<my_bool> isNull_;
-  std::vector<MariaFieldType> types_;
-  std::vector<MYSQL_TIME> timeBuffers_;
+  int p;
+  std::vector<MYSQL_BIND> bindings;
+  std::vector<my_bool> is_null;
+  std::vector<MariaFieldType> types;
+  std::vector<MYSQL_TIME> time_buffers;
 
 public:
   MariaBinding();
   ~MariaBinding();
 
 public:
-  void setup(MYSQL_STMT* pStatement);
+  void setup(MYSQL_STMT* statement_);
 
   void init_binding(List params);
   void bind_row(List params, int i);
