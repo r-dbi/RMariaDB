@@ -211,17 +211,6 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// result_bind_rows
-void result_bind_rows(XPtr<MariaResult> rs, List params);
-RcppExport SEXP _RMariaDB_result_bind_rows(SEXP rsSEXP, SEXP paramsSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MariaResult> >::type rs(rsSEXP);
-    Rcpp::traits::input_parameter< List >::type params(paramsSEXP);
-    result_bind_rows(rs, params);
-    return R_NilValue;
-END_RCPP
-}
 // result_release
 void result_release(XPtr<MariaResult> rs);
 RcppExport SEXP _RMariaDB_result_release(SEXP rsSEXP) {
@@ -296,7 +285,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_RMariaDB_result_column_info", (DL_FUNC) &_RMariaDB_result_column_info, 1},
     {"_RMariaDB_result_fetch", (DL_FUNC) &_RMariaDB_result_fetch, 2},
     {"_RMariaDB_result_bind", (DL_FUNC) &_RMariaDB_result_bind, 2},
-    {"_RMariaDB_result_bind_rows", (DL_FUNC) &_RMariaDB_result_bind_rows, 2},
     {"_RMariaDB_result_release", (DL_FUNC) &_RMariaDB_result_release, 1},
     {"_RMariaDB_result_rows_affected", (DL_FUNC) &_RMariaDB_result_rows_affected, 1},
     {"_RMariaDB_result_rows_fetched", (DL_FUNC) &_RMariaDB_result_rows_fetched, 1},

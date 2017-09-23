@@ -80,19 +80,11 @@ void MariaResult::execute() {
 void MariaResult::bind(List params) {
   bindingInput_.setup(pStatement_);
   bindingInput_.init_binding(params);
-  bindingInput_.bind_next_row();
-  execute();
-}
 
-void MariaResult::bind_rows(List params) {
-  if (params.size() == 0)
-    return;
-
-  bindingInput_.setup(pStatement_);
-  bindingInput_.init_binding(params);
-
-  while (bindingInput_.bind_next_row()) {
-    execute();
+  if (!has_result()) {
+    while (bindingInput_.bind_next_row()) {
+      execute();
+    }
   }
 }
 

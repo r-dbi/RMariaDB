@@ -33,7 +33,6 @@ public:
   void execute();
 
   void bind(List params);
-  void bind_rows(List params);
 
   List column_info();
 

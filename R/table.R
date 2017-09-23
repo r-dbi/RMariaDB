@@ -112,7 +112,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
       )
       rs <- dbSendStatement(conn, sql)
       tryCatch(
-        result_bind_rows(rs@ptr, values),
+        result_bind(rs@ptr, values),
         finally = dbClearResult(rs)
       )
     }

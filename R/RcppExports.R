@@ -73,10 +73,6 @@ result_bind <- function(rs, params) {
     invisible(.Call(`_RMariaDB_result_bind`, rs, params))
 }
 
-result_bind_rows <- function(rs, params) {
-    invisible(.Call(`_RMariaDB_result_bind_rows`, rs, params))
-}
-
 result_release <- function(rs) {
     invisible(.Call(`_RMariaDB_result_release`, rs))
 }
