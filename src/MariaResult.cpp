@@ -42,6 +42,7 @@ void MariaResult::send_query(std::string sql) {
   if (nParams_ == 0) {
     // Not parameterised so we can execute immediately
     execute();
+    bound_ = true;
   }
 
   if (has_result()) {
@@ -67,25 +68,26 @@ void MariaResult::close() {
 
 void MariaResult::execute() {
   complete_ = false;
-  rowsFetched_ = 0;
-  bound_ = true;
 
   if (mysql_stmt_execute(pStatement_) != 0)
     throw_error();
   if (!has_result()) {
-    rowsAffected_ = mysql_stmt_affected_rows(pStatement_);
+    rowsAffected_ += mysql_stmt_affected_rows(pStatement_);
   }
 }
 
 void MariaResult::bind(List params) {
+  rowsAffected_ = 0;
+
   bindingInput_.setup(pStatement_);
   bindingInput_.init_binding(params);
 
-  if (!has_result()) {
-    while (bindingInput_.bind_next_row()) {
-      execute();
-    }
+  while (bindingInput_.bind_next_row()) {
+    execute();
+    if (has_result()) break; // only execute once if there are results
   }
+
+  bound_ = true;
 }
 
 List MariaResult::column_info() {
@@ -107,7 +109,19 @@ bool MariaResult::has_result() const {
   return pSpec_ != NULL;
 }
 
+bool MariaResult::step() {
+  while (!fetch_row()) {
+    if (!bindingInput_.bind_next_row()) return false;
+    execute();
+  }
+
+  rowsFetched_++;
+  return true;
+}
+
 bool MariaResult::fetch_row() {
+  if (complete_) return false;
+
   int result = mysql_stmt_fetch(pStatement_);
 
   LOG_VERBOSE << result;
@@ -116,13 +130,11 @@ bool MariaResult::fetch_row() {
   // We expect truncation whenever there's a string or blob
   case MYSQL_DATA_TRUNCATED:
   case 0:
-    rowsFetched_++;
     return true;
   case 1:
     throw_error();
   case MYSQL_NO_DATA:
     complete_ = true;
-    rowsFetched_++;
     return false;
   }
   return false;
@@ -147,18 +159,15 @@ List MariaResult::fetch(int n_max) {
 
   int i = 0;
 
-  if (rowsFetched_ == 0) {
-    fetch_row();
-  }
-
   while (!complete_) {
+    if (i >= n && n_max > 0) break;
+
+    if (!step())
+      break;
+
     if (i >= n) {
-      if (n_max < 0) {
-        n *= 2;
-        out = df_resize(out, n);
-      } else {
-        break;
-      }
+      n *= 2;
+      out = df_resize(out, n);
     }
 
     for (int j = 0; j < nCols_; ++j) {
@@ -166,7 +175,6 @@ List MariaResult::fetch(int n_max) {
       bindingOutput_.set_list_value(out[j], i, j);
     }
 
-    fetch_row();
     ++i;
     if (i % 1000 == 0)
       checkUserInterrupt();
@@ -191,7 +199,7 @@ int MariaResult::rows_affected() {
 int MariaResult::rows_fetched() {
   if (!bound_) return 0;
   // FIXME: > 2^32 rows?
-  return static_cast<int>(rowsFetched_ == 0 ? 0 : rowsFetched_ - 1);
+  return static_cast<int>(rowsFetched_);
 }
 
 bool MariaResult::complete() {
