@@ -88,8 +88,6 @@ setMethod("dbConnect", "MariaDBDriver",
   }
 )
 
-#' @param max.con DEPRECATED
-#' @param fetch.default.rec DEPRECATED
 #' @export
 #' @import methods DBI
 #' @importFrom hms hms
@@ -114,14 +112,7 @@ setMethod("dbConnect", "MariaDBDriver",
 #' dbRemoveTable(con, "USArrests")
 #' dbDisconnect(con)
 #' }
-MariaDB <- function(max.con=16, fetch.default.rec = 500) {
-  if (!missing(max.con)) {
-    warning("`max.con` argument is ignored", call. = FALSE)
-  }
-  if (!fetch.default.rec) {
-    warning("`fetch.default.rec` argument is ignored", call. = FALSE)
-  }
-
+MariaDB <- function() {
   new("MariaDBDriver")
 }
 

@@ -12,7 +12,7 @@
   ssl.key = NULL, ssl.cert = NULL, ssl.ca = NULL, ssl.capath = NULL,
   ssl.cipher = NULL, ...)
 
-MariaDB(max.con = 16, fetch.default.rec = 500)
+MariaDB()
 }
 \arguments{
 \item{drv}{an object of class \linkS4class{MariaDBDriver} or
@@ -59,10 +59,6 @@ the trusted SSL CA certificates in PEM format.}
 encryption.}
 
 \item{...}{Unused, needed for compatibility with generic.}
-
-\item{max.con}{DEPRECATED}
-
-\item{fetch.default.rec}{DEPRECATED}
 }
 \description{
 These methods are straight-forward implementations of the corresponding
