@@ -64,10 +64,6 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
            overwrite = FALSE, append = FALSE, ...,
            temporary = FALSE) {
 
-    if (!missing(allow.keywords)) {
-      warning("allow.keywords is deprecated.")
-    }
-
     if (overwrite && append)
       stop("overwrite and append cannot both be TRUE", call. = FALSE)
 
