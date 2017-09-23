@@ -74,8 +74,7 @@ setMethod("dbSendQuery", c("MariaDBConnection", "character"),
 #' @rdname query
 #' @export
 setMethod("dbBind", "MariaDBResult", function(res, params, ...) {
-  params <- factor_to_string(params, warn = TRUE)
-  params <- string_to_utf8(params)
+  params <- sql_data(params, warn = TRUE)
 
   result_bind(res@ptr, params)
   invisible(res)

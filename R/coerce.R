@@ -1,9 +1,10 @@
-sql_data <- function(value, row.names) {
+sql_data <- function(value, row.names = FALSE, warn = FALSE) {
   row.names <- compatRowNames(row.names)
   value <- sqlRownamesToColumn(value, row.names)
 
-  value <- factor_to_string(value)
+  value <- factor_to_string(value, warn = warn)
   value <- string_to_utf8(value)
+  value <- posixlt_to_posixct(value)
   value
 }
 
@@ -25,5 +26,11 @@ quote_string <- function(value, conn) {
 string_to_utf8 <- function(value) {
   is_char <- vlapply(value, is.character)
   value[is_char] <- lapply(value[is_char], enc2utf8)
+  value
+}
+
+posixlt_to_posixct <- function(value) {
+  is_posixlt <- vlapply(value, inherits, "POSIXlt")
+  value[is_posixlt] <- lapply(value[is_posixlt], as.POSIXct)
   value
 }
