@@ -82,9 +82,13 @@ void MariaResult::bind(List params) {
   bindingInput_.setup(pStatement_);
   bindingInput_.init_binding(params);
 
-  while (bindingInput_.bind_next_row()) {
-    execute();
-    if (has_result()) break; // only execute once if there are results
+  if (has_result()) {
+    complete_ = true;
+  }
+  else {
+    while (bindingInput_.bind_next_row()) {
+      execute();
+    }
   }
 
   bound_ = true;
@@ -159,7 +163,7 @@ List MariaResult::fetch(int n_max) {
 
   int i = 0;
 
-  while (!complete_) {
+  for (;;) {
     if (i >= n && n_max > 0) break;
 
     if (!step())
