@@ -25,8 +25,8 @@ Suggests:
     rprojroot,
     testthat
 Remotes:
-    rstats-db/DBI@production,
-    rstats-db/DBItest@production
+    rstats-db/DBI,
+    rstats-db/DBItest
 LinkingTo: Rcpp, BH, plogr
 License: GPL-2
 URL: https://github.com/rstats-db/RMariaDB,
