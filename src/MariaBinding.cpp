@@ -5,7 +5,7 @@
 
 #include <plogr.h>
 
-MariaBinding::MariaBinding() {
+MariaBinding::MariaBinding() : p(0), i(0), n_rows(0) {
 }
 
 MariaBinding::~MariaBinding() {
@@ -23,8 +23,10 @@ void MariaBinding::setup(MYSQL_STMT* statement_) {
   time_buffers.resize(p);
 }
 
-void MariaBinding::init_binding(List params) {
+void MariaBinding::init_binding(const List& params_) {
   LOG_VERBOSE;
+
+  params = params_;
 
   if (params.size() == 0) {
     stop("Query has no parameters");
@@ -34,7 +36,7 @@ void MariaBinding::init_binding(List params) {
     stop("Number of params don't match (%i vs %i)", p, params.size());
   }
 
-  R_xlen_t n;
+  i = 0;
 
   for (int j = 0; j < p; ++j) {
     RObject param(params[j]);
@@ -44,10 +46,10 @@ void MariaBinding::init_binding(List params) {
     LOG_VERBOSE << j << " -> " << type_name(type);
 
     if (j == 0) {
-      n = Rf_xlength(param);
+      n_rows = Rf_xlength(param);
     }
-    else if (n != Rf_xlength(param)) {
-      stop("Parameter %i does not have length %d.", j + 1, n);
+    else if (n_rows != Rf_xlength(param)) {
+      stop("Parameter %i does not have length %d.", j + 1, n_rows);
     }
 
     switch (type) {
@@ -82,8 +84,10 @@ void MariaBinding::init_binding(List params) {
   }
 }
 
-void MariaBinding::bind_row(List params, int i) {
+bool MariaBinding::bind_next_row() {
   LOG_VERBOSE;
+
+  if (i >= n_rows) return false;
 
   for (int j = 0; j < p; ++j) {
     LOG_VERBOSE << j << " -> " << type_name(types[j]);
@@ -163,6 +167,9 @@ void MariaBinding::bind_row(List params, int i) {
     is_null[j] = missing;
   }
   mysql_stmt_bind_param(statement, &bindings[0]);
+
+  i++;
+  return true;
 }
 
 void MariaBinding::binding_update(int j, enum_field_types type, int size) {

@@ -6,8 +6,10 @@
 
 class MariaBinding : public boost::noncopyable {
   MYSQL_STMT* statement;
+  List params;
 
   int p;
+  R_xlen_t i, n_rows;
   std::vector<MYSQL_BIND> bindings;
   std::vector<my_bool> is_null;
   std::vector<MariaFieldType> types;
@@ -20,8 +22,8 @@ public:
 public:
   void setup(MYSQL_STMT* statement_);
 
-  void init_binding(List params);
-  void bind_row(List params, int i);
+  void init_binding(const List& params);
+  bool bind_next_row();
 
 private:
   void binding_update(int j, enum_field_types type, int size);

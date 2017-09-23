@@ -80,7 +80,7 @@ void MariaResult::execute() {
 void MariaResult::bind(List params) {
   bindingInput_.setup(pStatement_);
   bindingInput_.init_binding(params);
-  bindingInput_.bind_row(params, 0);
+  bindingInput_.bind_next_row();
   execute();
 }
 
@@ -91,9 +91,7 @@ void MariaResult::bind_rows(List params) {
   bindingInput_.setup(pStatement_);
   bindingInput_.init_binding(params);
 
-  int n = Rf_length(params[0]);
-  for (int i = 0; i < n; ++i) {
-    bindingInput_.bind_row(params, i);
+  while (bindingInput_.bind_next_row()) {
     execute();
   }
 }
