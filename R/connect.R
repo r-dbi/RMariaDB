@@ -22,8 +22,10 @@ NULL
 #'   the MariaDB manual for details.
 #' @param groups string identifying a section in the \code{default.file} to use
 #'   for setting authentication parameters (see \code{\link{MariaDB}}).
-#' @param default.file string of the filename with MariaDB client options.
-#'   Defaults to \code{\$HOME/.my.cnf}
+#' @param default.file string of the filename with MariaDB client options,
+#'   only relevant if \code{groups} is given. The default value depends on the
+#'   operating system (see references), on Linux and OS X the files
+#'   \code{~/.my.cnf} and \code{~/.mylogin.cnf} are used.
 #' @param ssl.key (optional) string of the filename of the SSL key file to use.
 #' @param ssl.cert (optional) string of the filename of the SSL certificate to
 #'   use.
@@ -34,6 +36,8 @@ NULL
 #' @param ssl.cipher (optional) string list of permitted ciphers to use for SSL
 #'   encryption.
 #' @param ... Unused, needed for compatibility with generic.
+#' @references
+#' Configuration files: \url{https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/}
 #' @export
 #' @examples
 #' \dontrun{

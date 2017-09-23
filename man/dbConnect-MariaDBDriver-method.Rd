@@ -39,8 +39,10 @@ the MariaDB manual for details.}
 \item{groups}{string identifying a section in the \code{default.file} to use
 for setting authentication parameters (see \code{\link{MariaDB}}).}
 
-\item{default.file}{string of the filename with MariaDB client options.
-Defaults to \code{\$HOME/.my.cnf}}
+\item{default.file}{string of the filename with MariaDB client options,
+only relevant if \code{groups} is given. The default value depends on the
+operating system (see references), on Linux and OS X the files
+\code{~/.my.cnf} and \code{~/.mylogin.cnf} are used.}
 
 \item{ssl.key}{(optional) string of the filename of the SSL key file to use.}
 
@@ -106,4 +108,7 @@ dbListTables(con)
 dbRemoveTable(con, "USArrests")
 dbDisconnect(con)
 }
+}
+\references{
+Configuration files: \url{https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/}
 }
