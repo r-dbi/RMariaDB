@@ -71,8 +71,11 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
       break;
     }
 
-    bindings_[i].buffer = &buffers_[i][0];
     bindings_[i].buffer_length = buffers_[i].size();
+    if (bindings_[i].buffer_length > 0)
+      bindings_[i].buffer = &buffers_[i][0];
+    else
+      bindings_[i].buffer = NULL;
     bindings_[i].length = &lengths_[i];
     bindings_[i].is_null = &nulls_[i];
     bindings_[i].is_unsigned = true;
