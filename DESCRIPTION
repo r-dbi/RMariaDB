@@ -45,7 +45,6 @@ Collate:
     'coerce.R'
     'connect.R'
     'default.R'
-    'deprecated.R'
     'export.R'
     'query.R'
     'quote.R'
@@ -55,3 +54,4 @@ Collate:
     'utils.R'
     'zzz.R'
 RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE)

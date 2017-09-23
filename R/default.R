@@ -1,9 +1,9 @@
 #' Check if default database is available.
 #'
 #' RMariaDB examples and tests connect to a database defined by the
-#' \code{rs-dbi} group in \code{~/.my.cnf}. This function checks if that
+#' `rs-dbi` group in `~/.my.cnf`. This function checks if that
 #' database is available, and if not, displays an informative message.
-#' \code{mariadbDefault} works similarly but throws a testthat skip condition
+#' `mariadbDefault()` works similarly but throws a testthat skip condition
 #' on failure, making it suitable for use in tests.
 #'
 #' @export

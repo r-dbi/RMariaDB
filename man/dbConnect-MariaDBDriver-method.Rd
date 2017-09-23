@@ -15,8 +15,8 @@
 MariaDB(max.con = 16, fetch.default.rec = 500)
 }
 \arguments{
-\item{drv}{an object of class \code{MariaDBDriver}, or the character string
-"MariaDB" or an \code{MariaDBConnection}.}
+\item{drv}{an object of class \linkS4class{MariaDBDriver} or
+\linkS4class{MariaDBConnection}.}
 
 \item{dbname}{string with the database name or NULL. If not NULL, the
 connection sets the default database to this value.}
@@ -37,7 +37,7 @@ host is assumed.}
 the MariaDB manual for details.}
 
 \item{groups}{string identifying a section in the \code{default.file} to use
-for setting authentication parameters (see \code{\link{MariaDB}}).}
+for setting authentication parameters (see \code{\link[=MariaDB]{MariaDB()}}).}
 
 \item{default.file}{string of the filename with MariaDB client options,
 only relevant if \code{groups} is given. The default value depends on the
@@ -110,5 +110,5 @@ dbDisconnect(con)
 }
 }
 \references{
-Configuration files: \url{https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/}
+Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/
 }

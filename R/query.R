@@ -4,16 +4,13 @@ NULL
 
 #' Execute a SQL statement on a database connection.
 #'
-#' To retrieve results a chunk at a time, use \code{dbSendQuery},
-#' \code{dbFetch}, then \code{dbClearResult}. Alternatively, if you want all the
-#' results (and they'll fit in memory) use \code{dbGetQuery} which sends,
+#' To retrieve results a chunk at a time, use [dbSendQuery()],
+#' [dbFetch()], then [dbClearResult()]. Alternatively, if you want all the
+#' results (and they'll fit in memory) use [dbGetQuery()] which sends,
 #' fetches and clears for you.
 #'
-#' \code{fetch()} will be deprecated in the near future; please use
-#' \code{dbFetch()} instead.
-#'
-#' @param conn an \code{\linkS4class{MariaDBConnection}} object.
-#' @param res A  \code{\linkS4class{MariaDBResult}} object.
+#' @param conn an [MariaDBConnection-class] object.
+#' @param res A  [MariaDBResult-class] object.
 #' @inheritParams DBI::sqlRownamesToColumn
 #' @param n Number of rows to retrieve. Use -1 to retrieve all rows.
 #' @param params A list of query parameters to be substituted into
@@ -105,7 +102,7 @@ setMethod("dbGetStatement", "MariaDBResult", function(res, ...) {
 #'
 #' See documentation of generics for more details.
 #'
-#' @param res An object of class \code{\linkS4class{MariaDBResult}}
+#' @param res An object of class [MariaDBResult-class]
 #' @param ... Ignored. Needed for compatibility with generic
 #' @examples
 #' if (mariadbHasDefault()) {

@@ -22,7 +22,7 @@
 \S4method{dbGetStatement}{MariaDBResult}(res, ...)
 }
 \arguments{
-\item{res}{A  \code{\linkS4class{MariaDBResult}} object.}
+\item{res}{A  \linkS4class{MariaDBResult} object.}
 
 \item{n}{Number of rows to retrieve. Use -1 to retrieve all rows.}
 
@@ -39,7 +39,7 @@ default name.
 
 For backward compatibility, \code{NULL} is equivalent to \code{FALSE}.}
 
-\item{conn}{an \code{\linkS4class{MariaDBConnection}} object.}
+\item{conn}{an \linkS4class{MariaDBConnection} object.}
 
 \item{statement}{a character vector of length one specifying the SQL
 statement that should be executed.  Only a single SQL statment should be
@@ -49,14 +49,10 @@ provided.}
 a parameterised query.}
 }
 \description{
-To retrieve results a chunk at a time, use \code{dbSendQuery},
-\code{dbFetch}, then \code{dbClearResult}. Alternatively, if you want all the
-results (and they'll fit in memory) use \code{dbGetQuery} which sends,
+To retrieve results a chunk at a time, use \code{\link[=dbSendQuery]{dbSendQuery()}},
+\code{\link[=dbFetch]{dbFetch()}}, then \code{\link[=dbClearResult]{dbClearResult()}}. Alternatively, if you want all the
+results (and they'll fit in memory) use \code{\link[=dbGetQuery]{dbGetQuery()}} which sends,
 fetches and clears for you.
-}
-\details{
-\code{fetch()} will be deprecated in the near future; please use
-\code{dbFetch()} instead.
 }
 \examples{
 if (mariadbHasDefault()) {

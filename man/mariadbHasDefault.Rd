@@ -13,7 +13,7 @@ mariadbDefault()
 RMariaDB examples and tests connect to a database defined by the
 \code{rs-dbi} group in \code{~/.my.cnf}. This function checks if that
 database is available, and if not, displays an informative message.
-\code{mariadbDefault} works similarly but throws a testthat skip condition
+\code{mariadbDefault()} works similarly but throws a testthat skip condition
 on failure, making it suitable for use in tests.
 }
 \examples{

@@ -16,7 +16,7 @@
 
 \S4method{dbWriteTable}{MariaDBConnection,character,data.frame}(conn, name,
   value, field.types = NULL, row.names = FALSE, overwrite = FALSE,
-  append = FALSE, ..., allow.keywords = FALSE, temporary = FALSE)
+  append = FALSE, ..., temporary = FALSE)
 
 \S4method{dbWriteTable}{MariaDBConnection,character,character}(conn, name,
   value, field.types = NULL, overwrite = FALSE, append = FALSE,
@@ -30,8 +30,8 @@
 \S4method{dbRemoveTable}{MariaDBConnection,character}(conn, name, ...)
 }
 \arguments{
-\item{conn}{a \code{\linkS4class{MariaDBConnection}} object, produced by
-\code{\link[DBI]{dbConnect}}}
+\item{conn}{a \linkS4class{MariaDBConnection} object, produced by
+\code{\link[DBI:dbConnect]{DBI::dbConnect()}}}
 
 \item{name}{a character string specifying a table name.}
 
@@ -57,19 +57,17 @@ converted to valid R identifiers.}
 derived from the classes of the columns in the data frame.}
 
 \item{overwrite}{a logical specifying whether to overwrite an existing table
-or not. Its default is \code{FALSE}. (See the BUGS section below)}
+or not. Its default is \code{FALSE}.}
 
 \item{append}{a logical specifying whether to append to an existing table
 in the DBMS.  If appending, then the table (or temporary table)
 must exist, otherwise an error is reported. Its default is \code{FALSE}.}
 
-\item{allow.keywords}{DEPRECATED.}
-
 \item{temporary}{If \code{TRUE}, creates a temporary table that expires
 when the connection is closed.}
 
 \item{header}{logical, does the input file have a header line? Default is the
-same heuristic used by \code{read.table}, i.e., \code{TRUE} if the first
+same heuristic used by \code{read.table()}, i.e., \code{TRUE} if the first
 line has one fewer column that the second line.}
 
 \item{nrows}{number of lines to rows to import using \code{read.table} from
@@ -85,15 +83,14 @@ the input file to create the proper table definition. Default is 50.}
 \code{\"}.)}
 }
 \value{
-A data.frame in the case of \code{dbReadTable}; otherwise a logical
+A data.frame in the case of \code{dbReadTable()}; otherwise a logical
 indicating whether the operation was successful.
 }
 \description{
-These functions mimic their R counterpart \code{get}, \code{assign},
-\code{exists}, \code{remove}, and \code{ls}.
+These methods read or write entire tables from a MariaDB database.
 }
 \note{
-Note that the data.frame returned by \code{dbReadTable} only has
+Note that the data.frame returned by \code{dbReadTable()} only has
 primitive data, e.g., it does not coerce character data to factors.
 }
 \examples{

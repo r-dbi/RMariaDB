@@ -1,7 +1,7 @@
 #' Class MariaDBConnection.
 #'
-#' \code{MariaDBConnection.} objects are usually created by
-#' \code{\link[DBI]{dbConnect}}
+#' `MariaDBConnection` objects are usually created by
+#' [DBI::dbConnect()]
 #'
 #' @export
 #' @keywords internal
