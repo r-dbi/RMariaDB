@@ -45,6 +45,7 @@ public:
   bool active();
 
 private:
+  bool has_result() const;
   bool fetch_row();
   void throw_error();
 

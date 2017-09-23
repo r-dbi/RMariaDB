@@ -44,7 +44,7 @@ void MariaResult::send_query(std::string sql) {
     execute();
   }
 
-  if (pSpec_ != NULL) {
+  if (has_result()) {
     // Query returns results, so cache column names and types
     cache_metadata();
     bindingOutput_.setup(pStatement_, types_);
@@ -52,7 +52,7 @@ void MariaResult::send_query(std::string sql) {
 }
 
 void MariaResult::close() {
-  if (pSpec_ != NULL) {
+  if (has_result()) {
     mysql_free_result(pSpec_);
     pSpec_ = NULL;
   }
@@ -72,7 +72,7 @@ void MariaResult::execute() {
 
   if (mysql_stmt_execute(pStatement_) != 0)
     throw_error();
-  if (pSpec_ == NULL) {
+  if (!has_result()) {
     rowsAffected_ = mysql_stmt_affected_rows(pStatement_);
   }
 }
@@ -111,6 +111,10 @@ List MariaResult::column_info() {
   return out;
 }
 
+bool MariaResult::has_result() const {
+  return pSpec_ != NULL;
+}
+
 bool MariaResult::fetch_row() {
   int result = mysql_stmt_fetch(pStatement_);
 
@@ -137,7 +141,7 @@ List MariaResult::fetch(int n_max) {
     stop("Query needs to be bound before fetching");
   if (!active())
     stop("Inactive result set");
-  if (pSpec_ == NULL) {
+  if (!has_result()) {
     if (names_.size() == 0) {
       warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
     }
@@ -201,8 +205,8 @@ int MariaResult::rows_fetched() {
 bool MariaResult::complete() {
   if (!bound_) return FALSE;
   return
-    (pSpec_ == NULL) || // query doesn't have results
-    complete_;          // we've fetched all available results
+    !has_result() || // query doesn't have results
+    complete_;       // we've fetched all available results
 }
 
 bool MariaResult::active() {
