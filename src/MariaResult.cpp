@@ -3,6 +3,8 @@
 #include "MariaResult.h"
 #include "MariaConnection.h"
 
+#include <plogr.h>
+
 MariaResult::MariaResult(MariaConnectionPtr pConn) :
   pConn_(pConn),
   pStatement_(NULL),
@@ -26,17 +28,24 @@ MariaResult::~MariaResult() {
 }
 
 void MariaResult::send_query(std::string sql) {
+  LOG_DEBUG << sql;
+
   if (mysql_stmt_prepare(pStatement_, sql.data(), sql.size()) != 0)
     throw_error();
 
   nParams_ = static_cast<int>(mysql_stmt_param_count(pStatement_));
+  LOG_DEBUG << nParams_;
+
+  // Need to set pSpec_ before calling execute()
+  pSpec_ = mysql_stmt_result_metadata(pStatement_);
+
   if (nParams_ == 0) {
     // Not parameterised so we can execute immediately
     execute();
+    bound_ = true;
   }
 
-  pSpec_ = mysql_stmt_result_metadata(pStatement_);
-  if (pSpec_ != NULL) {
+  if (has_result()) {
     // Query returns results, so cache column names and types
     cache_metadata();
     bindingOutput_.setup(pStatement_, types_);
@@ -44,7 +53,7 @@ void MariaResult::send_query(std::string sql) {
 }
 
 void MariaResult::close() {
-  if (pSpec_ != NULL) {
+  if (has_result()) {
     mysql_free_result(pSpec_);
     pSpec_ = NULL;
   }
@@ -59,33 +68,30 @@ void MariaResult::close() {
 
 void MariaResult::execute() {
   complete_ = false;
-  rowsFetched_ = 0;
-  bound_ = true;
 
   if (mysql_stmt_execute(pStatement_) != 0)
     throw_error();
-  rowsAffected_ = mysql_stmt_affected_rows(pStatement_);
+  if (!has_result()) {
+    rowsAffected_ += mysql_stmt_affected_rows(pStatement_);
+  }
 }
 
 void MariaResult::bind(List params) {
-  bindingInput_.setup(pStatement_);
-  bindingInput_.init_binding(params);
-  bindingInput_.bind_row(params, 0);
-  execute();
-}
-
-void MariaResult::bind_rows(List params) {
-  if (params.size() == 0)
-    return;
+  rowsAffected_ = 0;
 
   bindingInput_.setup(pStatement_);
   bindingInput_.init_binding(params);
 
-  int n = Rf_length(params[0]);
-  for (int i = 0; i < n; ++i) {
-    bindingInput_.bind_row(params, i);
-    execute();
+  if (has_result()) {
+    complete_ = true;
   }
+  else {
+    while (bindingInput_.bind_next_row()) {
+      execute();
+    }
+  }
+
+  bound_ = true;
 }
 
 List MariaResult::column_info() {
@@ -103,20 +109,36 @@ List MariaResult::column_info() {
   return out;
 }
 
+bool MariaResult::has_result() const {
+  return pSpec_ != NULL;
+}
+
+bool MariaResult::step() {
+  while (!fetch_row()) {
+    if (!bindingInput_.bind_next_row()) return false;
+    execute();
+  }
+
+  rowsFetched_++;
+  return true;
+}
+
 bool MariaResult::fetch_row() {
+  if (complete_) return false;
+
   int result = mysql_stmt_fetch(pStatement_);
+
+  LOG_VERBOSE << result;
 
   switch (result) {
   // We expect truncation whenever there's a string or blob
   case MYSQL_DATA_TRUNCATED:
   case 0:
-    rowsFetched_++;
     return true;
   case 1:
     throw_error();
   case MYSQL_NO_DATA:
     complete_ = true;
-    rowsFetched_++;
     return false;
   }
   return false;
@@ -127,7 +149,7 @@ List MariaResult::fetch(int n_max) {
     stop("Query needs to be bound before fetching");
   if (!active())
     stop("Inactive result set");
-  if (pSpec_ == NULL) {
+  if (!has_result()) {
     if (names_.size() == 0) {
       warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
     }
@@ -141,18 +163,15 @@ List MariaResult::fetch(int n_max) {
 
   int i = 0;
 
-  if (rowsFetched_ == 0) {
-    fetch_row();
-  }
+  for (;;) {
+    if (i >= n && n_max > 0) break;
 
-  while (!complete_) {
+    if (!step())
+      break;
+
     if (i >= n) {
-      if (n_max < 0) {
-        n *= 2;
-        out = df_resize(out, n);
-      } else {
-        break;
-      }
+      n *= 2;
+      out = df_resize(out, n);
     }
 
     for (int j = 0; j < nCols_; ++j) {
@@ -160,7 +179,6 @@ List MariaResult::fetch(int n_max) {
       bindingOutput_.set_list_value(out[j], i, j);
     }
 
-    fetch_row();
     ++i;
     if (i % 1000 == 0)
       checkUserInterrupt();
@@ -177,19 +195,22 @@ List MariaResult::fetch(int n_max) {
 }
 
 int MariaResult::rows_affected() {
+  if (!bound_) return NA_INTEGER;
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsAffected_);
 }
 
 int MariaResult::rows_fetched() {
+  if (!bound_) return 0;
   // FIXME: > 2^32 rows?
-  return static_cast<int>(rowsFetched_ == 0 ? 0 : rowsFetched_ - 1);
+  return static_cast<int>(rowsFetched_);
 }
 
 bool MariaResult::complete() {
+  if (!bound_) return FALSE;
   return
-    (pSpec_ == NULL) || // query doesn't have results
-    complete_;          // we've fetched all available results
+    !has_result() || // query doesn't have results
+    complete_;       // we've fetched all available results
 }
 
 bool MariaResult::active() {
@@ -205,6 +226,8 @@ void MariaResult::throw_error() {
 }
 
 void MariaResult::cache_metadata() {
+  LOG_VERBOSE;
+
   nCols_ = mysql_num_fields(pSpec_);
   MYSQL_FIELD* fields = mysql_fetch_fields(pSpec_);
 
@@ -214,5 +237,7 @@ void MariaResult::cache_metadata() {
     bool binary = fields[i].charsetnr == 63;
     MariaFieldType type = variable_type_from_field_type(fields[i].type, binary);
     types_.push_back(type);
+
+    LOG_VERBOSE << i << " -> " << fields[i].name << "(" << fields[i].type << ", " << binary << ") => " << type_name(type);
   }
 }

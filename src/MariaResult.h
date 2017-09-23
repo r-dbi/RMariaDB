@@ -33,7 +33,6 @@ public:
   void execute();
 
   void bind(List params);
-  void bind_rows(List params);
 
   List column_info();
 
@@ -45,6 +44,8 @@ public:
   bool active();
 
 private:
+  bool has_result() const;
+  bool step();
   bool fetch_row();
   void throw_error();
 

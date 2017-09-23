@@ -53,6 +53,10 @@ version <- function() {
     .Call(`_RMariaDB_version`)
 }
 
+init_logging <- function(log_level) {
+    invisible(.Call(`_RMariaDB_init_logging`, log_level))
+}
+
 result_create <- function(con, sql) {
     .Call(`_RMariaDB_result_create`, con, sql)
 }
@@ -67,10 +71,6 @@ result_fetch <- function(rs, n) {
 
 result_bind <- function(rs, params) {
     invisible(.Call(`_RMariaDB_result_bind`, rs, params))
-}
-
-result_bind_rows <- function(rs, params) {
-    invisible(.Call(`_RMariaDB_result_bind_rows`, rs, params))
 }
 
 result_release <- function(rs) {

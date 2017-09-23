@@ -155,6 +155,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// init_logging
+void init_logging(const std::string& log_level);
+RcppExport SEXP _RMariaDB_init_logging(SEXP log_levelSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type log_level(log_levelSEXP);
+    init_logging(log_level);
+    return R_NilValue;
+END_RCPP
+}
 // result_create
 XPtr<MariaResult> result_create(XPtr<MariaConnectionPtr> con, std::string sql);
 RcppExport SEXP _RMariaDB_result_create(SEXP conSEXP, SEXP sqlSEXP) {
@@ -198,17 +208,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< XPtr<MariaResult> >::type rs(rsSEXP);
     Rcpp::traits::input_parameter< List >::type params(paramsSEXP);
     result_bind(rs, params);
-    return R_NilValue;
-END_RCPP
-}
-// result_bind_rows
-void result_bind_rows(XPtr<MariaResult> rs, List params);
-RcppExport SEXP _RMariaDB_result_bind_rows(SEXP rsSEXP, SEXP paramsSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MariaResult> >::type rs(rsSEXP);
-    Rcpp::traits::input_parameter< List >::type params(paramsSEXP);
-    result_bind_rows(rs, params);
     return R_NilValue;
 END_RCPP
 }
@@ -281,11 +280,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_RMariaDB_driver_init", (DL_FUNC) &_RMariaDB_driver_init, 0},
     {"_RMariaDB_driver_done", (DL_FUNC) &_RMariaDB_driver_done, 0},
     {"_RMariaDB_version", (DL_FUNC) &_RMariaDB_version, 0},
+    {"_RMariaDB_init_logging", (DL_FUNC) &_RMariaDB_init_logging, 1},
     {"_RMariaDB_result_create", (DL_FUNC) &_RMariaDB_result_create, 2},
     {"_RMariaDB_result_column_info", (DL_FUNC) &_RMariaDB_result_column_info, 1},
     {"_RMariaDB_result_fetch", (DL_FUNC) &_RMariaDB_result_fetch, 2},
     {"_RMariaDB_result_bind", (DL_FUNC) &_RMariaDB_result_bind, 2},
-    {"_RMariaDB_result_bind_rows", (DL_FUNC) &_RMariaDB_result_bind_rows, 2},
     {"_RMariaDB_result_release", (DL_FUNC) &_RMariaDB_result_release, 1},
     {"_RMariaDB_result_rows_affected", (DL_FUNC) &_RMariaDB_result_rows_affected, 1},
     {"_RMariaDB_result_rows_fetched", (DL_FUNC) &_RMariaDB_result_rows_fetched, 1},

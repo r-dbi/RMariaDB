@@ -74,8 +74,14 @@ setMethod("dbSendQuery", c("MariaDBConnection", "character"),
 #' @rdname query
 #' @export
 setMethod("dbBind", "MariaDBResult", function(res, params, ...) {
+  if (!is.null(names(params))) {
+    stopc("Cannot use named parameters for anonymous placeholders")
+  }
+
+  params <- sql_data(params, warn = TRUE)
+
   result_bind(res@ptr, params)
-  invisible(TRUE)
+  invisible(res)
 })
 
 #' @rdname query

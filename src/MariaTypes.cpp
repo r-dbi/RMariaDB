@@ -68,8 +68,6 @@ std::string type_name(MariaFieldType type) {
     return "hms";
   case MY_RAW:
     return "raw";
-  case MY_FACTOR:
-    return "factor";
   case MY_LGL:
     return "logical";
   }
@@ -94,8 +92,6 @@ SEXPTYPE type_sexp(MariaFieldType type) {
     return REALSXP;
   case MY_RAW:
     return VECSXP;
-  case MY_FACTOR:
-    return INTSXP;
   case MY_LGL:
     return LGLSXP;
   }
@@ -119,7 +115,6 @@ MariaFieldType variable_type_from_object(const RObject& type) {
   case LGLSXP:
     return MY_LGL;
   case INTSXP:
-    if (klass == "factor")  return MY_FACTOR;
     return MY_INT32;
   case REALSXP:
     if (klass == "Date")     return MY_DATE;

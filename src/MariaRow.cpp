@@ -9,6 +9,8 @@
 #include "MariaTypes.h"
 #include "integer64.h"
 
+#include <plogr.h>
+
 
 MariaRow::MariaRow() {
 }
@@ -17,6 +19,8 @@ MariaRow::~MariaRow() {
 }
 
 void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& types) {
+  LOG_VERBOSE;
+
   pStatement_ = pStatement;
   types_ = types;
   n_ = static_cast<int>(types_.size());
@@ -28,6 +32,8 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
   errors_.resize(n_);
 
   for (int i = 0; i < n_; ++i) {
+    LOG_VERBOSE << i << " -> " << type_name(types_[i]);
+
     // http://dev.mysql.com/doc/refman/5.0/en/c-api-prepared-statement-type-codes.html
     switch (types_[i]) {
     case MY_INT32:
@@ -55,19 +61,25 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
       buffers_[i].resize(sizeof(MYSQL_TIME));
       break;
     case MY_STR:
-    case MY_RAW:
       bindings_[i].buffer_type = MYSQL_TYPE_STRING;
       // buffers might be arbitrary length, so leave size and use
       // alternative strategy: see fetch_buffer() for details
       break;
-    case MY_FACTOR:
+    case MY_RAW:
+      bindings_[i].buffer_type = MYSQL_TYPE_BLOB;
+      // buffers might be arbitrary length, so leave size and use
+      // alternative strategy: see fetch_buffer() for details
+      break;
     case MY_LGL:
       // input only
       break;
     }
 
-    bindings_[i].buffer = &buffers_[i][0];
     bindings_[i].buffer_length = buffers_[i].size();
+    if (bindings_[i].buffer_length > 0)
+      bindings_[i].buffer = &buffers_[i][0];
+    else
+      bindings_[i].buffer = NULL;
     bindings_[i].length = &lengths_[i];
     bindings_[i].is_null = &nulls_[i];
     bindings_[i].is_unsigned = true;
@@ -176,7 +188,6 @@ void MariaRow::set_list_value(SEXP x, int i, int j) {
   case MY_RAW:
     SET_VECTOR_ELT(x, i, value_raw(j));
     break;
-  case MY_FACTOR:
   case MY_LGL:
     // input only
     break;

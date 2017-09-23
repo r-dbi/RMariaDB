@@ -21,13 +21,13 @@ Imports:
     methods,
     Rcpp (>= 0.12.4)
 Suggests:
-    DBItest (>= 1.5-15),
+    DBItest (>= 1.5-18),
     rprojroot,
     testthat
 Remotes:
     rstats-db/DBI@production,
     rstats-db/DBItest@production
-LinkingTo: Rcpp, BH
+LinkingTo: Rcpp, BH, plogr
 License: GPL-2
 URL: https://github.com/rstats-db/RMariaDB,
     https://downloads.mariadb.org/connector-c/
@@ -42,12 +42,14 @@ Collate:
     'MariaDBResult.R'
     'RMariaDB.R'
     'RcppExports.R'
+    'coerce.R'
     'connect.R'
     'default.R'
     'deprecated.R'
     'export.R'
     'query.R'
     'quote.R'
+    'rownames.R'
     'table.R'
     'transaction.R'
     'utils.R'

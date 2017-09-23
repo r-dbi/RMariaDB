@@ -26,11 +26,6 @@ void result_bind(XPtr<MariaResult> rs, List params) {
 }
 
 // [[Rcpp::export]]
-void result_bind_rows(XPtr<MariaResult> rs, List params) {
-  return rs->bind_rows(params);
-}
-
-// [[Rcpp::export]]
 void result_release(XPtr<MariaResult> rs) {
   rs.release();
 }

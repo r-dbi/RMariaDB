@@ -100,7 +100,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     }
 
     if (nrow(value) > 0) {
-      values <- sqlData(conn, value[, , drop = FALSE], row.names)
+      values <- sql_data(value[, , drop = FALSE], row.names)
 
       name <- dbQuoteIdentifier(conn, name)
       fields <- dbQuoteIdentifier(conn, names(values))
@@ -112,7 +112,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
       )
       rs <- dbSendStatement(conn, sql)
       tryCatch(
-        result_bind_rows(rs@ptr, values),
+        result_bind(rs@ptr, values),
         finally = dbClearResult(rs)
       )
     }
@@ -127,15 +127,8 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
 )
 
 setMethod("sqlData", "MariaDBConnection", function(con, value, row.names = FALSE, ...) {
-  value <- sqlRownamesToColumn(value, row.names)
-
-  # Convert factors to strings
-  is_factor <- vapply(value, is.factor, logical(1))
-  value[is_factor] <- lapply(value[is_factor], as.character)
-
-  # Ensure all in utf-8
-  is_char <- vapply(value, is.character, logical(1))
-  value[is_char] <- lapply(value[is_char], enc2utf8)
+  value <- sql_data(value, row.names)
+  value <- quote_string(value, con)
 
   value
 })
