@@ -61,8 +61,12 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
       buffers_[i].resize(sizeof(MYSQL_TIME));
       break;
     case MY_STR:
-    case MY_RAW:
       bindings_[i].buffer_type = MYSQL_TYPE_STRING;
+      // buffers might be arbitrary length, so leave size and use
+      // alternative strategy: see fetch_buffer() for details
+      break;
+    case MY_RAW:
+      bindings_[i].buffer_type = MYSQL_TYPE_BLOB;
       // buffers might be arbitrary length, so leave size and use
       // alternative strategy: see fetch_buffer() for details
       break;
