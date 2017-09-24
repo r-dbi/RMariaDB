@@ -85,10 +85,26 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
     bindings_[j].is_null = &nulls_[j];
     bindings_[j].is_unsigned = true;
     bindings_[j].error = &errors_[j];
+
+    LOG_VERBOSE << bindings_[j].buffer_length;
+    LOG_VERBOSE << bindings_[j].buffer;
+    LOG_VERBOSE << bindings_[j].length;
+    LOG_VERBOSE << (void*)bindings_[j].is_null;
+    LOG_VERBOSE << bindings_[j].is_unsigned;
+    LOG_VERBOSE << (void*)bindings_[j].error;
   }
 
   if (mysql_stmt_bind_result(pStatement, &bindings_[0]) != 0) {
     stop("Error binding result: %s", mysql_stmt_error(pStatement));
+  }
+
+  for (int j = 0; j < n_; ++j) {
+    LOG_VERBOSE << bindings_[j].buffer_length;
+    LOG_VERBOSE << bindings_[j].buffer;
+    LOG_VERBOSE << bindings_[j].length;
+    LOG_VERBOSE << (void*)bindings_[j].is_null;
+    LOG_VERBOSE << bindings_[j].is_unsigned;
+    LOG_VERBOSE << (void*)bindings_[j].error;
   }
 }
 
@@ -205,6 +221,13 @@ void MariaRow::fetch_buffer(int j) {
 
   bindings_[j].buffer = &buffers_[j][0]; // might have moved
   bindings_[j].buffer_length = length;
+
+  LOG_VERBOSE << bindings_[j].buffer_length;
+  LOG_VERBOSE << bindings_[j].buffer;
+  LOG_VERBOSE << bindings_[j].length;
+  LOG_VERBOSE << (void*)bindings_[j].is_null;
+  LOG_VERBOSE << bindings_[j].is_unsigned;
+  LOG_VERBOSE << (void*)bindings_[j].error;
 
   int result = mysql_stmt_fetch_column(pStatement_, &bindings_[j], j, 0);
   LOG_VERBOSE << result;
