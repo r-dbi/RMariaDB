@@ -116,7 +116,7 @@ SEXP MariaRow::value_string(int j) {
 
   fetch_buffer(j);
   buffers_[j].push_back('\0');  // ensure string is null terminated
-  char* val = (char*) &buffers_[j][0];
+  const char* val = reinterpret_cast<const char*>(&buffers_[j][0]);
 
   return Rf_mkCharCE(val, CE_UTF8);
 }
