@@ -65,6 +65,8 @@ void MariaResult::close() {
 }
 
 void MariaResult::execute() {
+  LOG_VERBOSE;
+
   complete_ = false;
 
   if (mysql_stmt_execute(pStatement_) != 0)
