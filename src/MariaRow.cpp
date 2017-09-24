@@ -9,8 +9,6 @@
 #include "MariaTypes.h"
 #include "integer64.h"
 
-#include <plogr.h>
-
 
 MariaRow::MariaRow() {
 }

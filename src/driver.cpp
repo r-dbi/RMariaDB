@@ -1,7 +1,5 @@
 #include "pch.h"
 
-#include <plogr.h>
-
 #if defined(MYSQL_SERVER_VERSION)
   #define SERVER_VERSION MYSQL_SERVER_VERSION
 #elif defined(MARIADB_CLIENT_VERSION_STR)

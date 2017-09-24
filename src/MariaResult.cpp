@@ -3,8 +3,6 @@
 #include "MariaResult.h"
 #include "MariaConnection.h"
 
-#include <plogr.h>
-
 MariaResult::MariaResult(MariaConnectionPtr pConn) :
   pConn_(pConn),
   pStatement_(NULL),
