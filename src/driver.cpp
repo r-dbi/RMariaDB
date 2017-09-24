@@ -1,11 +1,11 @@
 #include "pch.h"
 
 #if defined(MYSQL_SERVER_VERSION)
-  #define SERVER_VERSION MYSQL_SERVER_VERSION
+#define SERVER_VERSION MYSQL_SERVER_VERSION
 #elif defined(MARIADB_CLIENT_VERSION_STR)
-  #define SERVER_VERSION MARIADB_CLIENT_VERSION_STR
+#define SERVER_VERSION MARIADB_CLIENT_VERSION_STR
 #else
-  #define SERVER_VERSION "<unknown server version>"
+#define SERVER_VERSION "<unknown server version>"
 #endif
 
 
