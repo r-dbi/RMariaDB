@@ -1,0 +1,1 @@
+"${R_HOME}/bin${R_ARCH_BIN}/R.exe" -q -f "tools/winlibs.R"
