@@ -114,16 +114,24 @@ bool MariaResult::has_result() const {
 }
 
 bool MariaResult::step() {
+  LOG_VERBOSE;
+
   while (!fetch_row()) {
+    LOG_VERBOSE;
+
     if (!bindingInput_.bind_next_row()) return false;
     execute();
   }
 
   rowsFetched_++;
+
+  LOG_VERBOSE << rowsFetched_;
   return true;
 }
 
 bool MariaResult::fetch_row() {
+  LOG_VERBOSE;
+
   if (complete_) return false;
 
   int result = mysql_stmt_fetch(pStatement_);
