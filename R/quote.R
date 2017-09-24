@@ -3,7 +3,7 @@ NULL
 
 #' Quote MariaDB strings and identifiers.
 #'
-#' In MariaDB, identifiers are enclosed in backticks, e.g. \code{`x`}.
+#' In MariaDB, identifiers are enclosed in backticks, e.g. `` `x` ``.
 #'
 #' @keywords internal
 #' @name mariadb-quoting

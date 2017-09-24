@@ -3,18 +3,17 @@ NULL
 
 #' Read and write MariaDB tables.
 #'
-#' These functions mimic their R counterpart \code{get}, \code{assign},
-#' \code{exists}, \code{remove}, and \code{ls}.
+#' These methods read or write entire tables from a MariaDB database.
 #'
-#' @return A data.frame in the case of \code{dbReadTable}; otherwise a logical
+#' @return A data.frame in the case of `dbReadTable()`; otherwise a logical
 #' indicating whether the operation was successful.
-#' @note Note that the data.frame returned by \code{dbReadTable} only has
+#' @note Note that the data.frame returned by `dbReadTable()` only has
 #' primitive data, e.g., it does not coerce character data to factors.
 #'
-#' @param conn a \code{\linkS4class{MariaDBConnection}} object, produced by
-#'   \code{\link[DBI]{dbConnect}}
+#' @param conn a [MariaDBConnection-class] object, produced by
+#'   [DBI::dbConnect()]
 #' @param name a character string specifying a table name.
-#' @param check.names If \code{TRUE}, the default, column names will be
+#' @param check.names If `TRUE`, the default, column names will be
 #'   converted to valid R identifiers.
 #' @inheritParams DBI::sqlRownamesToColumn
 #' @param ... Unused, needed for compatiblity with generic.
@@ -49,26 +48,21 @@ setMethod("dbReadTable", c("MariaDBConnection", "character"),
 
 #' @inheritParams DBI::sqlRownamesToColumn
 #' @param overwrite a logical specifying whether to overwrite an existing table
-#'   or not. Its default is \code{FALSE}. (See the BUGS section below)
+#'   or not. Its default is `FALSE`.
 #' @param append a logical specifying whether to append to an existing table
 #'   in the DBMS.  If appending, then the table (or temporary table)
-#'   must exist, otherwise an error is reported. Its default is \code{FALSE}.
+#'   must exist, otherwise an error is reported. Its default is `FALSE`.
 #' @param value A data frame.
 #' @param field.types Optional, overrides default choices of field types,
 #'   derived from the classes of the columns in the data frame.
-#' @param temporary If \code{TRUE}, creates a temporary table that expires
+#' @param temporary If `TRUE`, creates a temporary table that expires
 #'   when the connection is closed.
-#' @param allow.keywords DEPRECATED.
 #' @export
 #' @rdname mariadb-tables
 setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
   function(conn, name, value, field.types = NULL, row.names = FALSE,
-           overwrite = FALSE, append = FALSE, ..., allow.keywords = FALSE,
+           overwrite = FALSE, append = FALSE, ...,
            temporary = FALSE) {
-
-    if (!missing(allow.keywords)) {
-      warning("allow.keywords is deprecated.")
-    }
 
     if (overwrite && append)
       stop("overwrite and append cannot both be TRUE", call. = FALSE)
@@ -140,11 +134,11 @@ setMethod("sqlData", "MariaDBConnection", function(con, value, row.names = FALSE
 #' @param eol End-of-line separator
 #' @param skip number of lines to skip before reading data in the input file.
 #' @param quote the quote character used in the input file (defaults to
-#'    \code{\"}.)
+#'    `\"`.)
 #' @param header logical, does the input file have a header line? Default is the
-#'    same heuristic used by \code{read.table}, i.e., \code{TRUE} if the first
+#'    same heuristic used by `read.table()`, i.e., `TRUE` if the first
 #'    line has one fewer column that the second line.
-#' @param nrows number of lines to rows to import using \code{read.table} from
+#' @param nrows number of lines to rows to import using `read.table` from
 #'   the input file to create the proper table definition. Default is 50.
 setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
   function(conn, name, value, field.types = NULL, overwrite = FALSE,
@@ -233,7 +227,7 @@ setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
 #' This method is a straight-forward implementation of the corresponding
 #' generic function.
 #'
-#' @param dbObj A \code{MariaDBDriver} or \code{MariaDBConnection}.
+#' @param dbObj A [MariaDBDriver-class] or [MariaDBConnection-class] object.
 #' @param obj R/S-Plus object whose SQL type we want to determine.
 #' @param \dots any other parameters that individual methods may need.
 #' @export

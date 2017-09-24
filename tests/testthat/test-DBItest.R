@@ -25,9 +25,6 @@ DBItest::test_all(c(
   "exists_table_invalid_connection",            #
   "list_fields_row_names",                      #
 
-  # compliance
-  "compliance",                                 # #23
-
   NULL
 ))
 

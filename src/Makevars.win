@@ -2,9 +2,9 @@ PKG_CPPFLAGS= -I../windows/libmariadbclient-2.3.3/include/mariadb
 PKG_LIBS= -L../windows/libmariadbclient-2.3.3/lib${R_ARCH} \
 	-lmariadbclient -lssl -lcrypto -lgdi32 -lz -lws2_32 win32/timegm.o -pthread
 
-$(SHLIB): win32/timegm.o winlibs
+$(SHLIB): win32/timegm.o
 
-all: clean
+$(OBJECTS): winlibs
 
 clean:
 	rm -f $(SHLIB) $(OBJECTS) win32/timegm.o

@@ -18,7 +18,7 @@
 \S4method{dbHasCompleted}{MariaDBResult}(res, ...)
 }
 \arguments{
-\item{res}{An object of class \code{\linkS4class{MariaDBResult}}}
+\item{res}{An object of class \linkS4class{MariaDBResult}}
 
 \item{...}{Ignored. Needed for compatibility with generic}
 }

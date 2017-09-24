@@ -13,7 +13,7 @@
 }
 \description{
 An MariaDB driver implementing the R database (DBI) API.
-This class should always be initialized with the \code{MariaDB()} function.
+This class should always be initialized with the \code{\link[=MariaDB]{MariaDB()}} function.
 It returns a singleton that allows you to connect to MariaDB.
 }
 \keyword{internal}
