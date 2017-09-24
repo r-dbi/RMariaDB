@@ -7,9 +7,12 @@ MariaConnection::MariaConnection() :
   pCurrentResult_(NULL),
   transacting_(false)
 {
+  LOG_VERBOSE;
 }
 
 MariaConnection::~MariaConnection() {
+  LOG_VERBOSE;
+
   if (is_connected()) {
     warning("call dbDisconnect() when finished working with a connection");
     disconnect();
@@ -24,6 +27,8 @@ void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<
                               const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
                               const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
                               const Nullable<std::string>& ssl_cipher) {
+  LOG_VERBOSE;
+
   this->pConn_ = mysql_init(NULL);
   // Enable LOCAL INFILE for fast data ingest
   mysql_options(this->pConn_, MYSQL_OPT_LOCAL_INFILE, 0);
@@ -47,6 +52,8 @@ void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<
       ssl_cipher.isNull() ? NULL : as<std::string>(ssl_cipher).c_str()
     );
   }
+
+  LOG_VERBOSE;
 
   if (!mysql_real_connect(this->pConn_,
                           host.isNull() ? NULL : as<std::string>(host).c_str(),
