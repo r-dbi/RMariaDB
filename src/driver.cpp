@@ -1,7 +1,13 @@
 #include "pch.h"
 
-#include <mysql_version.h>
-#include <plogr.h>
+#if defined(MYSQL_SERVER_VERSION)
+#define SERVER_VERSION MYSQL_SERVER_VERSION
+#elif defined(MARIADB_CLIENT_VERSION_STR)
+#define SERVER_VERSION MARIADB_CLIENT_VERSION_STR
+#else
+#define SERVER_VERSION "<unknown server version>"
+#endif
+
 
 // [[Rcpp::export]]
 void driver_init() {
@@ -17,7 +23,7 @@ void driver_done() {
 IntegerVector version() {
   return
     IntegerVector::create(
-      _[MYSQL_SERVER_VERSION] = MYSQL_VERSION_ID,
+      _[SERVER_VERSION] = MYSQL_VERSION_ID,
       _[mysql_get_client_info()] = mysql_get_client_version()
     );
 }
