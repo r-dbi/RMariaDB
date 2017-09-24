@@ -21,7 +21,7 @@ Imports:
     methods,
     Rcpp (>= 0.12.4)
 Suggests:
-    DBItest (>= 1.5-18),
+    DBItest (>= 1.5-21),
     rprojroot,
     testthat
 Remotes:
