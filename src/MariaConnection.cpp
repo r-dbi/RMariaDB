@@ -63,8 +63,11 @@ void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<
                           port,
                           unix_socket.isNull() ? NULL : as<std::string>(unix_socket).c_str(),
                           client_flag)) {
+    std::string error = mysql_error(this->pConn_);
     mysql_close(this->pConn_);
-    stop("Failed to connect: %s", mysql_error(this->pConn_));
+    this->pConn_ = NULL;
+
+    stop("Failed to connect: %s", error.c_str());
   }
 }
 
