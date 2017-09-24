@@ -1,3 +1,18 @@
+## RMariaDB 0.11-7 (2017-09-24)
+
+- Improve documentation for location of option files, with reference (#18).
+- Fully support parametrized queries (#22, #27, #39).
+- Use snake_case in C++ code.
+- Make transactions compliant to the spec (#38, #49).
+- 64-bit integers are now supported through the `bit64` package. Unfortunately, this also means that numeric literals (as in `SELECT 1`) are returned as 64-bit integers (#12).
+- Support timestamp values with sub-second precision on output.
+- The connection now uses the "utf8mb4" charset by default (#7).
+- The `port` and `client.flag` arguments to `dbConnect()` are coerced to integer (#4).
+- Date values with the year beyond 2038 are supported (#56).
+- Improve DBI compliance (#1, #5, #10, #15, #17, #40).
+- Correct handling of DATETIME and TIME columns (#52, @noahwilliamsson).
+
+
 ## RMariaDB 0.11-6 (2017-08-07)
 
 - Move implementations to `.cpp` files.
