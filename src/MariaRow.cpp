@@ -238,5 +238,4 @@ void MariaRow::fetch_buffer(int j) {
   // Reset buffer length to zero for next row
   bindings_[j].buffer = NULL;
   bindings_[j].buffer_length = 0;
-  lengths_[j] = 0;
 }
