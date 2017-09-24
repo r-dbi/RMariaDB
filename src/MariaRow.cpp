@@ -29,44 +29,44 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
   nulls_.resize(n_);
   errors_.resize(n_);
 
-  for (int i = 0; i < n_; ++i) {
-    LOG_VERBOSE << i << " -> " << type_name(types_[i]);
+  for (int j = 0; j < n_; ++j) {
+    LOG_VERBOSE << j << " -> " << type_name(types_[j]);
 
     // http://dev.mysql.com/doc/refman/5.0/en/c-api-prepared-statement-type-codes.html
-    switch (types_[i]) {
+    switch (types_[j]) {
     case MY_INT32:
-      bindings_[i].buffer_type = MYSQL_TYPE_LONG;
-      buffers_[i].resize(4);
+      bindings_[j].buffer_type = MYSQL_TYPE_LONG;
+      buffers_[j].resize(4);
       break;
     case MY_INT64:
-      bindings_[i].buffer_type = MYSQL_TYPE_LONGLONG;
-      buffers_[i].resize(8);
+      bindings_[j].buffer_type = MYSQL_TYPE_LONGLONG;
+      buffers_[j].resize(8);
       break;
     case MY_DBL:
-      bindings_[i].buffer_type = MYSQL_TYPE_DOUBLE;
-      buffers_[i].resize(8);
+      bindings_[j].buffer_type = MYSQL_TYPE_DOUBLE;
+      buffers_[j].resize(8);
       break;
     case MY_DATE:
-      bindings_[i].buffer_type = MYSQL_TYPE_DATE;
-      buffers_[i].resize(sizeof(MYSQL_TIME));
+      bindings_[j].buffer_type = MYSQL_TYPE_DATE;
+      buffers_[j].resize(sizeof(MYSQL_TIME));
       break;
     case MY_DATE_TIME:
-      bindings_[i].buffer_type = MYSQL_TYPE_DATETIME;
-      buffers_[i].resize(sizeof(MYSQL_TIME));
+      bindings_[j].buffer_type = MYSQL_TYPE_DATETIME;
+      buffers_[j].resize(sizeof(MYSQL_TIME));
       break;
     case MY_TIME:
-      bindings_[i].buffer_type = MYSQL_TYPE_TIME;
-      buffers_[i].resize(sizeof(MYSQL_TIME));
+      bindings_[j].buffer_type = MYSQL_TYPE_TIME;
+      buffers_[j].resize(sizeof(MYSQL_TIME));
       break;
     case MY_STR:
-      bindings_[i].buffer_type = MYSQL_TYPE_STRING;
-      buffers_[i].resize(0);
+      bindings_[j].buffer_type = MYSQL_TYPE_STRING;
+      buffers_[j].resize(0);
       // buffers might be arbitrary length, so leave size and use
       // alternative strategy: see fetch_buffer() for details
       break;
     case MY_RAW:
-      bindings_[i].buffer_type = MYSQL_TYPE_BLOB;
-      buffers_[i].resize(0);
+      bindings_[j].buffer_type = MYSQL_TYPE_BLOB;
+      buffers_[j].resize(0);
       // buffers might be arbitrary length, so leave size and use
       // alternative strategy: see fetch_buffer() for details
       break;
@@ -75,16 +75,16 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
       break;
     }
 
-    lengths_[i] = buffers_[i].size();
-    bindings_[i].buffer_length = buffers_[i].size();
-    if (bindings_[i].buffer_length > 0)
-      bindings_[i].buffer = &buffers_[i][0];
+    lengths_[j] = buffers_[j].size();
+    bindings_[j].buffer_length = buffers_[j].size();
+    if (bindings_[j].buffer_length > 0)
+      bindings_[j].buffer = &buffers_[j][0];
     else
-      bindings_[i].buffer = NULL;
-    bindings_[i].length = &lengths_[i];
-    bindings_[i].is_null = &nulls_[i];
-    bindings_[i].is_unsigned = true;
-    bindings_[i].error = &errors_[i];
+      bindings_[j].buffer = NULL;
+    bindings_[j].length = &lengths_[j];
+    bindings_[j].is_null = &nulls_[j];
+    bindings_[j].is_unsigned = true;
+    bindings_[j].error = &errors_[j];
   }
 
   if (mysql_stmt_bind_result(pStatement, &bindings_[0]) != 0) {
