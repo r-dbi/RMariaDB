@@ -4,7 +4,7 @@ PKG_LIBS= -L../windows/libmariadbclient-2.3.3/lib${R_ARCH} \
 
 $(SHLIB): win32/timegm.o
 
-all: clean winlibs
+$(OBJECTS): winlibs
 
 clean:
 	rm -f $(SHLIB) $(OBJECTS) win32/timegm.o
