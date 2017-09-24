@@ -88,7 +88,7 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
   }
 
   if (mysql_stmt_bind_result(pStatement, &bindings_[0]) != 0) {
-    stop(mysql_stmt_error(pStatement));
+    stop("Error binding result: %s", mysql_stmt_error(pStatement));
   }
 }
 
@@ -210,7 +210,7 @@ void MariaRow::fetch_buffer(int j) {
   LOG_VERBOSE << result;
 
   if (result != 0)
-    stop(mysql_stmt_error(pStatement_));
+    stop("Error fetching buffer: %s", mysql_stmt_error(pStatement_));
 
   // Reset buffer length to zero for next row
   bindings_[j].buffer = NULL;

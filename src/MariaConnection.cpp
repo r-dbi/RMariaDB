@@ -163,7 +163,7 @@ bool MariaConnection::exec(std::string sql) {
   set_current_result(NULL);
 
   if (mysql_real_query(pConn_, sql.data(), sql.size()) != 0)
-    stop(mysql_error(pConn_));
+    stop("Error executing query: %s", mysql_error(pConn_));
 
   MYSQL_RES* res = mysql_store_result(pConn_);
   if (res != NULL)
