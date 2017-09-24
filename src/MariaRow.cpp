@@ -196,6 +196,8 @@ void MariaRow::set_list_value(SEXP x, int i, int j) {
 
 void MariaRow::fetch_buffer(int j) {
   unsigned long length = lengths_[j];
+  LOG_VERBOSE << length;
+
   buffers_[j].resize(length);
   if (length == 0)
     return;
@@ -203,7 +205,10 @@ void MariaRow::fetch_buffer(int j) {
   bindings_[j].buffer = &buffers_[j][0]; // might have moved
   bindings_[j].buffer_length = length;
 
-  if (mysql_stmt_fetch_column(pStatement_, &bindings_[j], j, 0) != 0)
+  int result = mysql_stmt_fetch_column(pStatement_, &bindings_[j], j, 0);
+  LOG_VERBOSE << result;
+
+  if (result != 0)
     stop(mysql_stmt_error(pStatement_));
 
   // Reset buffer length to zero for next row
