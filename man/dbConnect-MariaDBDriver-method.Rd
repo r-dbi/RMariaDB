@@ -12,11 +12,11 @@
   ssl.key = NULL, ssl.cert = NULL, ssl.ca = NULL, ssl.capath = NULL,
   ssl.cipher = NULL, ...)
 
-MariaDB(max.con = 16, fetch.default.rec = 500)
+MariaDB()
 }
 \arguments{
-\item{drv}{an object of class \code{MariaDBDriver}, or the character string
-"MariaDB" or an \code{MariaDBConnection}.}
+\item{drv}{an object of class \linkS4class{MariaDBDriver} or
+\linkS4class{MariaDBConnection}.}
 
 \item{dbname}{string with the database name or NULL. If not NULL, the
 connection sets the default database to this value.}
@@ -37,10 +37,12 @@ host is assumed.}
 the MariaDB manual for details.}
 
 \item{groups}{string identifying a section in the \code{default.file} to use
-for setting authentication parameters (see \code{\link{MariaDB}}).}
+for setting authentication parameters (see \code{\link[=MariaDB]{MariaDB()}}).}
 
-\item{default.file}{string of the filename with MariaDB client options.
-Defaults to \code{\$HOME/.my.cnf}}
+\item{default.file}{string of the filename with MariaDB client options,
+only relevant if \code{groups} is given. The default value depends on the
+operating system (see references), on Linux and OS X the files
+\code{~/.my.cnf} and \code{~/.mylogin.cnf} are used.}
 
 \item{ssl.key}{(optional) string of the filename of the SSL key file to use.}
 
@@ -57,10 +59,6 @@ the trusted SSL CA certificates in PEM format.}
 encryption.}
 
 \item{...}{Unused, needed for compatibility with generic.}
-
-\item{max.con}{DEPRECATED}
-
-\item{fetch.default.rec}{DEPRECATED}
 }
 \description{
 These methods are straight-forward implementations of the corresponding
@@ -106,4 +104,7 @@ dbListTables(con)
 dbRemoveTable(con, "USArrests")
 dbDisconnect(con)
 }
+}
+\references{
+Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/
 }

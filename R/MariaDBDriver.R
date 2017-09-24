@@ -1,7 +1,7 @@
 #' Class MariaDBDriver with constructor MariaDB.
 #'
 #' An MariaDB driver implementing the R database (DBI) API.
-#' This class should always be initialized with the \code{MariaDB()} function.
+#' This class should always be initialized with the [MariaDB()] function.
 #' It returns a singleton that allows you to connect to MariaDB.
 #'
 #' @export
@@ -17,7 +17,7 @@ setMethod("dbUnloadDriver", "MariaDBDriver", function(drv, ...) {
 
 #' @rdname MariaDBDriver-class
 #' @export
-setMethod("dbIsValid", "MariaDBDriver", function(dbObj) {
+setMethod("dbIsValid", "MariaDBDriver", function(dbObj, ...) {
   TRUE
 })
 

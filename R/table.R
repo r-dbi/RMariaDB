@@ -3,18 +3,17 @@ NULL
 
 #' Read and write MariaDB tables.
 #'
-#' These functions mimic their R counterpart \code{get}, \code{assign},
-#' \code{exists}, \code{remove}, and \code{ls}.
+#' These methods read or write entire tables from a MariaDB database.
 #'
-#' @return A data.frame in the case of \code{dbReadTable}; otherwise a logical
+#' @return A data.frame in the case of `dbReadTable()`; otherwise a logical
 #' indicating whether the operation was successful.
-#' @note Note that the data.frame returned by \code{dbReadTable} only has
+#' @note Note that the data.frame returned by `dbReadTable()` only has
 #' primitive data, e.g., it does not coerce character data to factors.
 #'
-#' @param conn a \code{\linkS4class{MariaDBConnection}} object, produced by
-#'   \code{\link[DBI]{dbConnect}}
+#' @param conn a [MariaDBConnection-class] object, produced by
+#'   [DBI::dbConnect()]
 #' @param name a character string specifying a table name.
-#' @param check.names If \code{TRUE}, the default, column names will be
+#' @param check.names If `TRUE`, the default, column names will be
 #'   converted to valid R identifiers.
 #' @inheritParams DBI::sqlRownamesToColumn
 #' @param ... Unused, needed for compatiblity with generic.
@@ -49,32 +48,30 @@ setMethod("dbReadTable", c("MariaDBConnection", "character"),
 
 #' @inheritParams DBI::sqlRownamesToColumn
 #' @param overwrite a logical specifying whether to overwrite an existing table
-#'   or not. Its default is \code{FALSE}. (See the BUGS section below)
+#'   or not. Its default is `FALSE`.
 #' @param append a logical specifying whether to append to an existing table
 #'   in the DBMS.  If appending, then the table (or temporary table)
-#'   must exist, otherwise an error is reported. Its default is \code{FALSE}.
+#'   must exist, otherwise an error is reported. Its default is `FALSE`.
 #' @param value A data frame.
 #' @param field.types Optional, overrides default choices of field types,
 #'   derived from the classes of the columns in the data frame.
-#' @param temporary If \code{TRUE}, creates a temporary table that expires
+#' @param temporary If `TRUE`, creates a temporary table that expires
 #'   when the connection is closed.
-#' @param allow.keywords DEPRECATED.
 #' @export
 #' @rdname mariadb-tables
 setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
   function(conn, name, value, field.types = NULL, row.names = FALSE,
-           overwrite = FALSE, append = FALSE, ..., allow.keywords = FALSE,
+           overwrite = FALSE, append = FALSE, ...,
            temporary = FALSE) {
-
-    if (!missing(allow.keywords)) {
-      warning("allow.keywords is deprecated.")
-    }
 
     if (overwrite && append)
       stop("overwrite and append cannot both be TRUE", call. = FALSE)
 
-    dbBegin(conn)
-    on.exit(dbRollback(conn))
+    need_transaction <- !connection_is_transacting(conn@ptr)
+    if (need_transaction) {
+      dbBegin(conn)
+      on.exit(dbRollback(conn))
+    }
 
     found <- dbExistsTable(conn, name)
     if (found && !overwrite && !append) {
@@ -84,18 +81,20 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     if (found && overwrite) {
       dbRemoveTable(conn, name)
     }
-    if (!found && append) {
-      stop("Table ", name, " does not exists when appending")
-    }
 
     if (!found || overwrite) {
-      sql <- sqlCreateTable(conn, name, value, row.names = row.names,
-        temporary = temporary)
-      dbGetQuery(conn, sql)
+      sql <- sqlCreateTable(
+        conn,
+        name,
+        if (is.null(field.types)) value else field.types,
+        row.names = row.names,
+        temporary = temporary
+      )
+      dbExecute(conn, sql)
     }
 
     if (nrow(value) > 0) {
-      values <- sqlData(conn, value[, , drop = FALSE], row.names)
+      values <- sql_data(value[, , drop = FALSE], row.names)
 
       name <- dbQuoteIdentifier(conn, name)
       fields <- dbQuoteIdentifier(conn, names(values))
@@ -105,30 +104,25 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
         "INSERT INTO ", name, " (", paste0(fields, collapse = ", "), ")\n",
         "VALUES (", paste0(params, collapse = ", "), ")"
       )
-      rs <- dbSendQuery(conn, sql)
+      rs <- dbSendStatement(conn, sql)
       tryCatch(
-        result_bind_rows(rs@ptr, values),
+        result_bind(rs@ptr, values),
         finally = dbClearResult(rs)
       )
     }
 
-    on.exit(NULL)
-    dbCommit(conn)
+    if (need_transaction) {
+      on.exit(NULL)
+      dbCommit(conn)
+    }
 
-    TRUE
+    invisible(TRUE)
   }
 )
 
 setMethod("sqlData", "MariaDBConnection", function(con, value, row.names = FALSE, ...) {
-  value <- sqlRownamesToColumn(value, row.names)
-
-  # Convert factors to strings
-  is_factor <- vapply(value, is.factor, logical(1))
-  value[is_factor] <- lapply(value[is_factor], as.character)
-
-  # Ensure all in utf-8
-  is_char <- vapply(value, is.character, logical(1))
-  value[is_char] <- lapply(value[is_char], enc2utf8)
+  value <- sql_data(value, row.names)
+  value <- quote_string(value, con)
 
   value
 })
@@ -140,11 +134,11 @@ setMethod("sqlData", "MariaDBConnection", function(con, value, row.names = FALSE
 #' @param eol End-of-line separator
 #' @param skip number of lines to skip before reading data in the input file.
 #' @param quote the quote character used in the input file (defaults to
-#'    \code{\"}.)
+#'    `\"`.)
 #' @param header logical, does the input file have a header line? Default is the
-#'    same heuristic used by \code{read.table}, i.e., \code{TRUE} if the first
+#'    same heuristic used by `read.table()`, i.e., `TRUE` if the first
 #'    line has one fewer column that the second line.
-#' @param nrows number of lines to rows to import using \code{read.table} from
+#' @param nrows number of lines to rows to import using `read.table` from
 #'   the input file to create the proper table definition. Default is 50.
 setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
   function(conn, name, value, field.types = NULL, overwrite = FALSE,
@@ -179,7 +173,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
 
       sql <- sqlCreateTable(conn, name, field.types,
         row.names = row.names, temporary = temporary)
-      dbGetQuery(conn, sql)
+      dbExecute(conn, sql)
     }
 
     path <- normalizePath(value, winslash = "/", mustWork = TRUE)
@@ -193,7 +187,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
 
     mariadbExecQuery(conn, sql)
 
-    TRUE
+    invisible(TRUE)
   }
 )
 
@@ -223,8 +217,8 @@ setMethod("dbExistsTable", c("MariaDBConnection", "character"),
 setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
   function(conn, name, ...){
     name <- dbQuoteIdentifier(conn, name)
-    dbGetQuery(conn, paste0("DROP TABLE ", name))
-    TRUE
+    dbExecute(conn, paste0("DROP TABLE ", name))
+    invisible(TRUE)
   }
 )
 
@@ -233,7 +227,7 @@ setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
 #' This method is a straight-forward implementation of the corresponding
 #' generic function.
 #'
-#' @param dbObj A \code{MariaDBDriver} or \code{MariaDBConnection}.
+#' @param dbObj A [MariaDBDriver-class] or [MariaDBConnection-class] object.
 #' @param obj R/S-Plus object whose SQL type we want to determine.
 #' @param \dots any other parameters that individual methods may need.
 #' @export
@@ -252,6 +246,7 @@ setMethod("dbDataType", "MariaDBDriver", function(dbObj, obj, ...) {
   if (is.factor(obj)) return("TEXT")
   if (inherits(obj, "POSIXct")) return("DATETIME")
   if (inherits(obj, "Date")) return("DATE")
+  if (inherits(obj, "difftime")) return("TIME")
   if (is.data.frame(obj)) return(callNextMethod(dbObj, obj))
 
   switch(typeof(obj),

@@ -1,7 +1,7 @@
 #' Class MariaDBResult
 #'
 #' MariaDB's query results class.  This classes encapsulates the result of an SQL
-#' statement (either \code{select} or not).
+#' query or statement.
 #'
 #' @export
 #' @keywords internal
@@ -15,7 +15,7 @@ setClass("MariaDBResult",
 
 #' @rdname MariaDBResult-class
 #' @export
-setMethod("dbIsValid", "MariaDBResult", function(dbObj) {
+setMethod("dbIsValid", "MariaDBResult", function(dbObj, ...) {
   result_active(dbObj@ptr)
 })
 

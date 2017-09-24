@@ -2,6 +2,10 @@ language: r
 cache: packages
 latex: false
 
+env:
+  global:
+  - MAKEFLAGS="-j8"
+
 matrix:
   include:
     - os: linux
@@ -38,7 +42,7 @@ notifications:
     on_failure: change
 
 before_script:
-  - travis_retry mysql -e "CREATE DATABASE IF NOT EXISTS test; FLUSH PRIVILEGES;" -uroot
+  - travis_retry mysql -e "CREATE DATABASE IF NOT EXISTS test; ALTER DATABASE test CHARACTER SET 'utf8mb4'; FLUSH PRIVILEGES;" -uroot
   - travis_retry mysql -e "CREATE USER '"${USER}"'@'localhost'; FLUSH PRIVILEGES;" -uroot || true
   - travis_retry mysql -e "GRANT ALL PRIVILEGES ON test.* TO '"${USER}"'@'localhost'; FLUSH PRIVILEGES;" -uroot
 

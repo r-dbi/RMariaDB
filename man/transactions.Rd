@@ -3,26 +3,26 @@
 \docType{methods}
 \name{transactions}
 \alias{transactions}
-\alias{dbCommit,MariaDBConnection-method}
 \alias{dbBegin,MariaDBConnection-method}
+\alias{dbCommit,MariaDBConnection-method}
 \alias{dbRollback,MariaDBConnection-method}
 \title{DBMS Transaction Management}
 \usage{
-\S4method{dbCommit}{MariaDBConnection}(conn, ...)
-
 \S4method{dbBegin}{MariaDBConnection}(conn, ...)
+
+\S4method{dbCommit}{MariaDBConnection}(conn, ...)
 
 \S4method{dbRollback}{MariaDBConnection}(conn, ...)
 }
 \arguments{
-\item{conn}{a \code{MariaDBConnection} object, as produced by
-\code{\link{dbConnect}}.}
+\item{conn}{a \linkS4class{MariaDBConnection} object, as produced by
+\code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 
 \item{...}{Unused.}
 }
 \description{
 Commits or roll backs the current transaction in an MariaDB connection.
-Note that in MariaDB DDL statements (e.g. \code{CREATE TABLE}) can not
+Note that in MariaDB DDL statements (e.g. \code{CREATE TABLE}) cannot
 be rolled back.
 }
 \examples{
@@ -32,7 +32,7 @@ df <- data.frame(id = 1:5)
 
 dbWriteTable(con, "df", df)
 dbBegin(con)
-dbGetQuery(con, "UPDATE df SET id = id * 10")
+dbExecute(con, "UPDATE df SET id = id * 10")
 dbGetQuery(con, "SELECT id FROM df")
 dbRollback(con)
 

@@ -7,7 +7,7 @@
 using namespace Rcpp;
 
 // connection_create
-XPtr<MyConnectionPtr> connection_create(const Nullable<std::string>& host, const Nullable<std::string>& user, const Nullable<std::string>& password, const Nullable<std::string>& db, unsigned int port, const Nullable<std::string>& unix_socket, unsigned long client_flag, const Nullable<std::string>& groups, const Nullable<std::string>& default_file, const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert, const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath, const Nullable<std::string>& ssl_cipher);
+XPtr<MariaConnectionPtr> connection_create(const Nullable<std::string>& host, const Nullable<std::string>& user, const Nullable<std::string>& password, const Nullable<std::string>& db, unsigned int port, const Nullable<std::string>& unix_socket, unsigned long client_flag, const Nullable<std::string>& groups, const Nullable<std::string>& default_file, const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert, const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath, const Nullable<std::string>& ssl_cipher);
 RcppExport SEXP _RMariaDB_connection_create(SEXP hostSEXP, SEXP userSEXP, SEXP passwordSEXP, SEXP dbSEXP, SEXP portSEXP, SEXP unix_socketSEXP, SEXP client_flagSEXP, SEXP groupsSEXP, SEXP default_fileSEXP, SEXP ssl_keySEXP, SEXP ssl_certSEXP, SEXP ssl_caSEXP, SEXP ssl_capathSEXP, SEXP ssl_cipherSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -31,58 +31,99 @@ BEGIN_RCPP
 END_RCPP
 }
 // connection_valid
-bool connection_valid(XPtr<MyConnectionPtr> con);
+bool connection_valid(XPtr<MariaConnectionPtr> con);
 RcppExport SEXP _RMariaDB_connection_valid(SEXP conSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyConnectionPtr> >::type con(conSEXP);
+    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
     rcpp_result_gen = Rcpp::wrap(connection_valid(con));
     return rcpp_result_gen;
 END_RCPP
 }
 // connection_release
-void connection_release(XPtr<MyConnectionPtr> con);
+void connection_release(XPtr<MariaConnectionPtr> con);
 RcppExport SEXP _RMariaDB_connection_release(SEXP conSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyConnectionPtr> >::type con(conSEXP);
+    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
     connection_release(con);
     return R_NilValue;
 END_RCPP
 }
 // connection_info
-List connection_info(XPtr<MyConnectionPtr> con);
+List connection_info(XPtr<MariaConnectionPtr> con);
 RcppExport SEXP _RMariaDB_connection_info(SEXP conSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyConnectionPtr> >::type con(conSEXP);
+    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
     rcpp_result_gen = Rcpp::wrap(connection_info(con));
     return rcpp_result_gen;
 END_RCPP
 }
 // connection_quote_string
-CharacterVector connection_quote_string(XPtr<MyConnectionPtr> con, CharacterVector input);
+CharacterVector connection_quote_string(XPtr<MariaConnectionPtr> con, CharacterVector input);
 RcppExport SEXP _RMariaDB_connection_quote_string(SEXP conSEXP, SEXP inputSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyConnectionPtr> >::type con(conSEXP);
+    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
     Rcpp::traits::input_parameter< CharacterVector >::type input(inputSEXP);
     rcpp_result_gen = Rcpp::wrap(connection_quote_string(con, input));
     return rcpp_result_gen;
 END_RCPP
 }
 // connection_exec
-bool connection_exec(XPtr<MyConnectionPtr> con, std::string sql);
+bool connection_exec(XPtr<MariaConnectionPtr> con, std::string sql);
 RcppExport SEXP _RMariaDB_connection_exec(SEXP conSEXP, SEXP sqlSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyConnectionPtr> >::type con(conSEXP);
+    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
     Rcpp::traits::input_parameter< std::string >::type sql(sqlSEXP);
     rcpp_result_gen = Rcpp::wrap(connection_exec(con, sql));
+    return rcpp_result_gen;
+END_RCPP
+}
+// connection_begin_transaction
+void connection_begin_transaction(XPtr<MariaConnectionPtr> con);
+RcppExport SEXP _RMariaDB_connection_begin_transaction(SEXP conSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
+    connection_begin_transaction(con);
+    return R_NilValue;
+END_RCPP
+}
+// connection_commit
+void connection_commit(XPtr<MariaConnectionPtr> con);
+RcppExport SEXP _RMariaDB_connection_commit(SEXP conSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
+    connection_commit(con);
+    return R_NilValue;
+END_RCPP
+}
+// connection_rollback
+void connection_rollback(XPtr<MariaConnectionPtr> con);
+RcppExport SEXP _RMariaDB_connection_rollback(SEXP conSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
+    connection_rollback(con);
+    return R_NilValue;
+END_RCPP
+}
+// connection_is_transacting
+bool connection_is_transacting(XPtr<MariaConnectionPtr> con);
+RcppExport SEXP _RMariaDB_connection_is_transacting(SEXP conSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
+    rcpp_result_gen = Rcpp::wrap(connection_is_transacting(con));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -114,113 +155,112 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// init_logging
+void init_logging(const std::string& log_level);
+RcppExport SEXP _RMariaDB_init_logging(SEXP log_levelSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type log_level(log_levelSEXP);
+    init_logging(log_level);
+    return R_NilValue;
+END_RCPP
+}
 // result_create
-XPtr<MyResult> result_create(XPtr<MyConnectionPtr> con, std::string sql);
+XPtr<MariaResult> result_create(XPtr<MariaConnectionPtr> con, std::string sql);
 RcppExport SEXP _RMariaDB_result_create(SEXP conSEXP, SEXP sqlSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyConnectionPtr> >::type con(conSEXP);
+    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
     Rcpp::traits::input_parameter< std::string >::type sql(sqlSEXP);
     rcpp_result_gen = Rcpp::wrap(result_create(con, sql));
     return rcpp_result_gen;
 END_RCPP
 }
 // result_column_info
-List result_column_info(XPtr<MyResult> rs);
+List result_column_info(XPtr<MariaResult> rs);
 RcppExport SEXP _RMariaDB_result_column_info(SEXP rsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyResult> >::type rs(rsSEXP);
+    Rcpp::traits::input_parameter< XPtr<MariaResult> >::type rs(rsSEXP);
     rcpp_result_gen = Rcpp::wrap(result_column_info(rs));
     return rcpp_result_gen;
 END_RCPP
 }
 // result_fetch
-List result_fetch(XPtr<MyResult> rs, int n);
+List result_fetch(XPtr<MariaResult> rs, int n);
 RcppExport SEXP _RMariaDB_result_fetch(SEXP rsSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyResult> >::type rs(rsSEXP);
+    Rcpp::traits::input_parameter< XPtr<MariaResult> >::type rs(rsSEXP);
     Rcpp::traits::input_parameter< int >::type n(nSEXP);
     rcpp_result_gen = Rcpp::wrap(result_fetch(rs, n));
     return rcpp_result_gen;
 END_RCPP
 }
 // result_bind
-void result_bind(XPtr<MyResult> rs, List params);
+void result_bind(XPtr<MariaResult> rs, List params);
 RcppExport SEXP _RMariaDB_result_bind(SEXP rsSEXP, SEXP paramsSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyResult> >::type rs(rsSEXP);
+    Rcpp::traits::input_parameter< XPtr<MariaResult> >::type rs(rsSEXP);
     Rcpp::traits::input_parameter< List >::type params(paramsSEXP);
     result_bind(rs, params);
     return R_NilValue;
 END_RCPP
 }
-// result_bind_rows
-void result_bind_rows(XPtr<MyResult> rs, List params);
-RcppExport SEXP _RMariaDB_result_bind_rows(SEXP rsSEXP, SEXP paramsSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyResult> >::type rs(rsSEXP);
-    Rcpp::traits::input_parameter< List >::type params(paramsSEXP);
-    result_bind_rows(rs, params);
-    return R_NilValue;
-END_RCPP
-}
 // result_release
-void result_release(XPtr<MyResult> rs);
+void result_release(XPtr<MariaResult> rs);
 RcppExport SEXP _RMariaDB_result_release(SEXP rsSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyResult> >::type rs(rsSEXP);
+    Rcpp::traits::input_parameter< XPtr<MariaResult> >::type rs(rsSEXP);
     result_release(rs);
     return R_NilValue;
 END_RCPP
 }
 // result_rows_affected
-int result_rows_affected(XPtr<MyResult> rs);
+int result_rows_affected(XPtr<MariaResult> rs);
 RcppExport SEXP _RMariaDB_result_rows_affected(SEXP rsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyResult> >::type rs(rsSEXP);
+    Rcpp::traits::input_parameter< XPtr<MariaResult> >::type rs(rsSEXP);
     rcpp_result_gen = Rcpp::wrap(result_rows_affected(rs));
     return rcpp_result_gen;
 END_RCPP
 }
 // result_rows_fetched
-int result_rows_fetched(XPtr<MyResult> rs);
+int result_rows_fetched(XPtr<MariaResult> rs);
 RcppExport SEXP _RMariaDB_result_rows_fetched(SEXP rsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyResult> >::type rs(rsSEXP);
+    Rcpp::traits::input_parameter< XPtr<MariaResult> >::type rs(rsSEXP);
     rcpp_result_gen = Rcpp::wrap(result_rows_fetched(rs));
     return rcpp_result_gen;
 END_RCPP
 }
 // result_complete
-bool result_complete(XPtr<MyResult> rs);
+bool result_complete(XPtr<MariaResult> rs);
 RcppExport SEXP _RMariaDB_result_complete(SEXP rsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyResult> >::type rs(rsSEXP);
+    Rcpp::traits::input_parameter< XPtr<MariaResult> >::type rs(rsSEXP);
     rcpp_result_gen = Rcpp::wrap(result_complete(rs));
     return rcpp_result_gen;
 END_RCPP
 }
 // result_active
-bool result_active(XPtr<MyResult> rs);
+bool result_active(XPtr<MariaResult> rs);
 RcppExport SEXP _RMariaDB_result_active(SEXP rsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MyResult> >::type rs(rsSEXP);
+    Rcpp::traits::input_parameter< XPtr<MariaResult> >::type rs(rsSEXP);
     rcpp_result_gen = Rcpp::wrap(result_active(rs));
     return rcpp_result_gen;
 END_RCPP
@@ -233,14 +273,18 @@ static const R_CallMethodDef CallEntries[] = {
     {"_RMariaDB_connection_info", (DL_FUNC) &_RMariaDB_connection_info, 1},
     {"_RMariaDB_connection_quote_string", (DL_FUNC) &_RMariaDB_connection_quote_string, 2},
     {"_RMariaDB_connection_exec", (DL_FUNC) &_RMariaDB_connection_exec, 2},
+    {"_RMariaDB_connection_begin_transaction", (DL_FUNC) &_RMariaDB_connection_begin_transaction, 1},
+    {"_RMariaDB_connection_commit", (DL_FUNC) &_RMariaDB_connection_commit, 1},
+    {"_RMariaDB_connection_rollback", (DL_FUNC) &_RMariaDB_connection_rollback, 1},
+    {"_RMariaDB_connection_is_transacting", (DL_FUNC) &_RMariaDB_connection_is_transacting, 1},
     {"_RMariaDB_driver_init", (DL_FUNC) &_RMariaDB_driver_init, 0},
     {"_RMariaDB_driver_done", (DL_FUNC) &_RMariaDB_driver_done, 0},
     {"_RMariaDB_version", (DL_FUNC) &_RMariaDB_version, 0},
+    {"_RMariaDB_init_logging", (DL_FUNC) &_RMariaDB_init_logging, 1},
     {"_RMariaDB_result_create", (DL_FUNC) &_RMariaDB_result_create, 2},
     {"_RMariaDB_result_column_info", (DL_FUNC) &_RMariaDB_result_column_info, 1},
     {"_RMariaDB_result_fetch", (DL_FUNC) &_RMariaDB_result_fetch, 2},
     {"_RMariaDB_result_bind", (DL_FUNC) &_RMariaDB_result_bind, 2},
-    {"_RMariaDB_result_bind_rows", (DL_FUNC) &_RMariaDB_result_bind_rows, 2},
     {"_RMariaDB_result_release", (DL_FUNC) &_RMariaDB_result_release, 1},
     {"_RMariaDB_result_rows_affected", (DL_FUNC) &_RMariaDB_result_rows_affected, 1},
     {"_RMariaDB_result_rows_fetched", (DL_FUNC) &_RMariaDB_result_rows_fetched, 1},

@@ -4,16 +4,13 @@ NULL
 
 #' Execute a SQL statement on a database connection.
 #'
-#' To retrieve results a chunk at a time, use \code{dbSendQuery},
-#' \code{dbFetch}, then \code{dbClearResult}. Alternatively, if you want all the
-#' results (and they'll fit in memory) use \code{dbGetQuery} which sends,
+#' To retrieve results a chunk at a time, use [dbSendQuery()],
+#' [dbFetch()], then [dbClearResult()]. Alternatively, if you want all the
+#' results (and they'll fit in memory) use [dbGetQuery()] which sends,
 #' fetches and clears for you.
 #'
-#' \code{fetch()} will be deprecated in the near future; please use
-#' \code{dbFetch()} instead.
-#'
-#' @param conn an \code{\linkS4class{MariaDBConnection}} object.
-#' @param res A  \code{\linkS4class{MariaDBResult}} object.
+#' @param conn an [MariaDBConnection-class] object.
+#' @param res A  [MariaDBResult-class] object.
 #' @inheritParams DBI::sqlRownamesToColumn
 #' @param n Number of rows to retrieve. Use -1 to retrieve all rows.
 #' @param params A list of query parameters to be substituted into
@@ -42,9 +39,12 @@ NULL
 #' dbDisconnect(con)
 #' }
 #' @rdname query
-setMethod("dbFetch", c("MariaDBResult", "numeric"),
+setMethod("dbFetch", "MariaDBResult",
   function(res, n = -1, ..., row.names = FALSE) {
-    if (n == Inf) n <- -1
+    if (length(n) != 1) stopc("n must be scalar")
+    if (n < -1) stopc("n must be nonnegative or -1")
+    if (is.infinite(n)) n <- -1
+    if (trunc(n) != n) stopc("n must be a whole number")
     sqlColumnToRownames(result_fetch(res@ptr, n), row.names)
   }
 )
@@ -71,15 +71,25 @@ setMethod("dbSendQuery", c("MariaDBConnection", "character"),
 #' @rdname query
 #' @export
 setMethod("dbBind", "MariaDBResult", function(res, params, ...) {
+  if (!is.null(names(params))) {
+    stopc("Cannot use named parameters for anonymous placeholders")
+  }
+
+  params <- sql_data(params, warn = TRUE)
+
   result_bind(res@ptr, params)
-  TRUE
+  invisible(res)
 })
 
 #' @rdname query
 #' @export
 setMethod("dbClearResult", "MariaDBResult", function(res, ...) {
+  if (!dbIsValid(res)) {
+    warningc("Expired, result set already closed")
+    return(invisible(TRUE))
+  }
   result_release(res@ptr)
-  TRUE
+  invisible(TRUE)
 })
 
 #' @rdname query
@@ -92,7 +102,7 @@ setMethod("dbGetStatement", "MariaDBResult", function(res, ...) {
 #'
 #' See documentation of generics for more details.
 #'
-#' @param res An object of class \code{\linkS4class{MariaDBResult}}
+#' @param res An object of class [MariaDBResult-class]
 #' @param ... Ignored. Needed for compatibility with generic
 #' @examples
 #' if (mariadbHasDefault()) {

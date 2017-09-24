@@ -25,6 +25,22 @@ connection_exec <- function(con, sql) {
     .Call(`_RMariaDB_connection_exec`, con, sql)
 }
 
+connection_begin_transaction <- function(con) {
+    invisible(.Call(`_RMariaDB_connection_begin_transaction`, con))
+}
+
+connection_commit <- function(con) {
+    invisible(.Call(`_RMariaDB_connection_commit`, con))
+}
+
+connection_rollback <- function(con) {
+    invisible(.Call(`_RMariaDB_connection_rollback`, con))
+}
+
+connection_is_transacting <- function(con) {
+    .Call(`_RMariaDB_connection_is_transacting`, con)
+}
+
 driver_init <- function() {
     invisible(.Call(`_RMariaDB_driver_init`))
 }
@@ -35,6 +51,10 @@ driver_done <- function() {
 
 version <- function() {
     .Call(`_RMariaDB_version`)
+}
+
+init_logging <- function(log_level) {
+    invisible(.Call(`_RMariaDB_init_logging`, log_level))
 }
 
 result_create <- function(con, sql) {
@@ -51,10 +71,6 @@ result_fetch <- function(rs, n) {
 
 result_bind <- function(rs, params) {
     invisible(.Call(`_RMariaDB_result_bind`, rs, params))
-}
-
-result_bind_rows <- function(rs, params) {
-    invisible(.Call(`_RMariaDB_result_bind_rows`, rs, params))
 }
 
 result_release <- function(rs) {

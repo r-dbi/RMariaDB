@@ -15,10 +15,10 @@
 
 \S4method{show}{MariaDBConnection}(object)
 
-\S4method{dbIsValid}{MariaDBConnection}(dbObj)
+\S4method{dbIsValid}{MariaDBConnection}(dbObj, ...)
 }
 \description{
-\code{MariaDBConnection.} objects are usually created by
-\code{\link[DBI]{dbConnect}}
+\code{MariaDBConnection} objects are usually created by
+\code{\link[DBI:dbConnect]{DBI::dbConnect()}}
 }
 \keyword{internal}

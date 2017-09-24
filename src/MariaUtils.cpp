@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "MyTypes.h"
+#include "MariaTypes.h"
 
-List dfResize(const List& df, int n) {
+List df_resize(const List& df, int n) {
   R_xlen_t p = df.size();
 
   List out(p);
@@ -16,7 +16,7 @@ List dfResize(const List& df, int n) {
   return out;
 }
 
-void dfS3(const List& df, const std::vector<MyFieldType>& types) {
+void df_s3(const List& df, const std::vector<MariaFieldType>& types) {
   R_xlen_t p = df.size();
 
   for (R_xlen_t j = 0; j < p; ++j) {
@@ -28,6 +28,13 @@ void dfS3(const List& df, const std::vector<MyFieldType>& types) {
     case MY_DATE_TIME:
       col.attr("class") = CharacterVector::create("POSIXct", "POSIXt");
       break;
+    case MY_TIME:
+      col.attr("class") = CharacterVector::create("hms", "difftime");
+      col.attr("units") = "secs";
+      break;
+    case MY_INT64:
+      col.attr("class") = CharacterVector::create("integer64");
+      break;
     default:
       break;
     }
@@ -35,7 +42,7 @@ void dfS3(const List& df, const std::vector<MyFieldType>& types) {
   }
 }
 
-List dfCreate(const std::vector<MyFieldType>& types, const std::vector<std::string>& names, int n) {
+List df_create(const std::vector<MariaFieldType>& types, const std::vector<std::string>& names, int n) {
   R_xlen_t p = types.size();
 
   List out(p);
@@ -44,7 +51,7 @@ List dfCreate(const std::vector<MyFieldType>& types, const std::vector<std::stri
   out.attr("row.names") = IntegerVector::create(NA_INTEGER, -n);
 
   for (R_xlen_t j = 0; j < p; ++j) {
-    out[j] = Rf_allocVector(typeSEXP(types[j]), n);
+    out[j] = Rf_allocVector(type_sexp(types[j]), n);
   }
   return out;
 }

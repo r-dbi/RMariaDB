@@ -1,7 +1,9 @@
 #include "pch.h"
-#include "MyTypes.h"
+#include "MariaTypes.h"
 
-MyFieldType variableType(enum_field_types type, bool binary) {
+bool all_raw(SEXP x);
+
+MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary) {
   switch (type) {
   case MYSQL_TYPE_TINY:
   case MYSQL_TYPE_SHORT:
@@ -48,7 +50,7 @@ MyFieldType variableType(enum_field_types type, bool binary) {
   }
 }
 
-std::string typeName(MyFieldType type) {
+std::string type_name(MariaFieldType type) {
   switch (type) {
   case MY_INT32:
     return "integer";
@@ -63,70 +65,86 @@ std::string typeName(MyFieldType type) {
   case MY_DATE_TIME:
     return "POSIXct";
   case MY_TIME:
-    return "time";
+    return "hms";
   case MY_RAW:
     return "raw";
-  case MY_FACTOR:
-    return "factor";
   case MY_LGL:
     return "logical";
   }
   throw std::runtime_error("Invalid typeName");
 }
 
-SEXPTYPE typeSEXP(MyFieldType type) {
+SEXPTYPE type_sexp(MariaFieldType type) {
   switch (type) {
   case MY_INT32:
     return INTSXP;
   case MY_INT64:
-    return INTSXP;
+    return REALSXP;
   case MY_DBL:
     return REALSXP;
   case MY_STR:
     return STRSXP;
   case MY_DATE:
-    return INTSXP;
+    return REALSXP;
   case MY_DATE_TIME:
     return REALSXP;
   case MY_TIME:
-    return INTSXP;
+    return REALSXP;
   case MY_RAW:
     return VECSXP;
-  case MY_FACTOR:
-    return INTSXP;
   case MY_LGL:
     return LGLSXP;
   }
   throw std::runtime_error("Invalid typeSEXP");
 }
 
-std::string rClass(RObject x) {
+std::string r_class(RObject x) {
   RObject klass_(x.attr("class"));
   std::string klass;
   if (klass_ == R_NilValue)
     return "";
 
   CharacterVector klassv = as<CharacterVector>(klass_);
-  return std::string(klassv[0]);
+  return std::string(klassv[klassv.length() - 1]);
 }
 
-MyFieldType variableType(const RObject& type) {
-  std::string klass = rClass(type);
+MariaFieldType variable_type_from_object(const RObject& type) {
+  std::string klass = r_class(type);
 
   switch (TYPEOF(type)) {
   case LGLSXP:
     return MY_LGL;
   case INTSXP:
-    if (klass == "factor")  return MY_FACTOR;
     return MY_INT32;
   case REALSXP:
-    if (klass == "Date")    return MY_DATE;
-    if (klass == "POSIXct") return MY_DATE_TIME;
+    if (klass == "Date")     return MY_DATE;
+    if (klass == "POSIXt")   return MY_DATE_TIME;
+    if (klass == "difftime") return MY_TIME;
+    if (klass == "integer64") return MY_INT64;
     return MY_DBL;
   case STRSXP:
     return MY_STR;
+  case VECSXP:
+    if (klass == "blob")     return MY_RAW;
+    if (all_raw(type))       return MY_RAW;
+    break;
   }
 
   stop("Unsupported column type %s", Rf_type2char(TYPEOF(type)));
   return MY_STR;
+}
+
+bool all_raw(SEXP x) {
+  List xx(x);
+  for (R_xlen_t i = 0; i < xx.length(); ++i) {
+    switch (TYPEOF(xx[i])) {
+    case RAWSXP:
+    case NILSXP:
+      break;
+
+    default:
+      return false;
+    }
+  }
+  return true;
 }

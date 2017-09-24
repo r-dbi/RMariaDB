@@ -1,5 +1,5 @@
 Package: RMariaDB
-Version: 0.11-6
+Version: 0.11-7
 Title: Database Interface and MariaDB Driver for R
 Encoding: UTF-8
 Description: Implements DBI-compliant Interface to MariaDB and MySQL Databases.
@@ -15,14 +15,19 @@ Authors@R: c(
 Depends:
     R (>= 2.8.0)
 Imports:
+    bit64,
+    DBI (>= 0.7-12),
+    hms,
     methods,
-    DBI (>= 0.3.1.9007),
     Rcpp (>= 0.12.4)
 Suggests:
+    DBItest (>= 1.5-18),
     rprojroot,
-    testthat,
-    DBItest
-LinkingTo: Rcpp, BH
+    testthat
+Remotes:
+    rstats-db/DBI,
+    rstats-db/DBItest
+LinkingTo: Rcpp, BH, plogr
 License: GPL-2
 URL: https://github.com/rstats-db/RMariaDB,
     https://downloads.mariadb.org/connector-c/
@@ -37,12 +42,16 @@ Collate:
     'MariaDBResult.R'
     'RMariaDB.R'
     'RcppExports.R'
+    'coerce.R'
     'connect.R'
     'default.R'
-    'deprecated.R'
+    'export.R'
     'query.R'
     'quote.R'
+    'rownames.R'
     'table.R'
     'transaction.R'
+    'utils.R'
     'zzz.R'
 RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE)

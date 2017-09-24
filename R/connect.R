@@ -6,24 +6,26 @@ NULL
 #' These methods are straight-forward implementations of the corresponding
 #' generic functions.
 #'
-#' @param drv an object of class \code{MariaDBDriver}, or the character string
-#'   "MariaDB" or an \code{MariaDBConnection}.
+#' @param drv an object of class [MariaDBDriver-class] or
+#'   [MariaDBConnection-class].
 #' @param username,password Username and password. If username omitted,
 #'   defaults to the current user. If password is omitted, only users
 #'   without a password can log in.
 #' @param dbname string with the database name or NULL. If not NULL, the
 #'   connection sets the default database to this value.
 #' @param host string identifying the host machine running the MariaDB server or
-#'   NULL. If NULL or the string \code{"localhost"}, a connection to the local
+#'   NULL. If NULL or the string `"localhost"`, a connection to the local
 #'   host is assumed.
 #' @param unix.socket (optional) string of the unix socket or named pipe.
 #' @param port (optional) integer of the TCP/IP default port.
 #' @param client.flag (optional) integer setting various MariaDB client flags. See
 #'   the MariaDB manual for details.
-#' @param groups string identifying a section in the \code{default.file} to use
-#'   for setting authentication parameters (see \code{\link{MariaDB}}).
-#' @param default.file string of the filename with MariaDB client options.
-#'   Defaults to \code{\$HOME/.my.cnf}
+#' @param groups string identifying a section in the `default.file` to use
+#'   for setting authentication parameters (see [MariaDB()]).
+#' @param default.file string of the filename with MariaDB client options,
+#'   only relevant if `groups` is given. The default value depends on the
+#'   operating system (see references), on Linux and OS X the files
+#'   `~/.my.cnf` and `~/.mylogin.cnf` are used.
 #' @param ssl.key (optional) string of the filename of the SSL key file to use.
 #' @param ssl.cert (optional) string of the filename of the SSL certificate to
 #'   use.
@@ -34,6 +36,8 @@ NULL
 #' @param ssl.cipher (optional) string list of permitted ciphers to use for SSL
 #'   encryption.
 #' @param ... Unused, needed for compatibility with generic.
+#' @references
+#' Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/
 #' @export
 #' @examples
 #' \dontrun{
@@ -64,9 +68,11 @@ setMethod("dbConnect", "MariaDBDriver",
     groups = "rs-dbi", default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
     ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...) {
 
-    ptr <- connection_create(host, username, password, dbname, port, unix.socket,
-      client.flag, groups, default.file, ssl.key, ssl.cert, ssl.ca, ssl.capath,
-      ssl.cipher)
+    ptr <- connection_create(
+      host, username, password, dbname, as.integer(port), unix.socket,
+      as.integer(client.flag), groups, default.file,
+      ssl.key, ssl.cert, ssl.ca, ssl.capath, ssl.cipher
+    )
 
     info <- connection_info(ptr)
 
@@ -76,16 +82,16 @@ setMethod("dbConnect", "MariaDBDriver",
       db = info$dbname
     )
 
-    dbGetQuery(con, 'SET time_zone = "+00:00"')
-    dbGetQuery(con, 'SET character set utf8')
+    dbExecute(con, "SET time_zone = '+00:00'")
+    dbExecute(con, "SET autocommit = 0")
     con
   }
 )
 
-#' @param max.con DEPRECATED
-#' @param fetch.default.rec DEPRECATED
 #' @export
 #' @import methods DBI
+#' @importFrom hms hms
+#' @importFrom bit64 integer64
 #' @rdname dbConnect-MariaDBDriver-method
 #' @examples
 #' if (mariadbHasDefault()) {
@@ -106,28 +112,17 @@ setMethod("dbConnect", "MariaDBDriver",
 #' dbRemoveTable(con, "USArrests")
 #' dbDisconnect(con)
 #' }
-MariaDB <- function(max.con=16, fetch.default.rec = 500) {
-  if (!missing(max.con)) {
-    warning("`max.con` argument is ignored", call. = FALSE)
-  }
-  if (!fetch.default.rec) {
-    warning("`fetch.default.rec` argument is ignored", call. = FALSE)
-  }
-
+MariaDB <- function() {
   new("MariaDBDriver")
 }
 
 #' Constants
 #'
-#' @aliases .MariaDBPkgName .MariaDBPkgVersion .MariaDBPkgRCS
-#' .MariaDBSQLKeywords CLIENT_LONG_PASSWORD CLIENT_FOUND_ROWS CLIENT_LONG_FLAG
+#' @aliases CLIENT_LONG_PASSWORD CLIENT_FOUND_ROWS CLIENT_LONG_FLAG
 #' CLIENT_CONNECT_WITH_DB CLIENT_NO_SCHEMA CLIENT_COMPRESS CLIENT_ODBC
 #' CLIENT_LOCAL_FILES CLIENT_IGNORE_SPACE CLIENT_PROTOCOL_41 CLIENT_INTERACTIVE
 #' CLIENT_SSL CLIENT_IGNORE_SIGPIPE CLIENT_TRANSACTIONS CLIENT_RESERVED
 #' CLIENT_SECURE_CONNECTION CLIENT_MULTI_STATEMENTS CLIENT_MULTI_RESULTS
-#' @section Constants: \code{.MariaDBPkgName} (currently \code{"RMariaDB"}),
-#' \code{.MariaDBPkgVersion} (the R package version), \code{.MariaDBPkgRCS} (the
-#' RCS revision), \code{.MariaDBSQLKeywords} (a lot!)
 #' @name constants
 NULL
 
