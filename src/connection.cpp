@@ -18,6 +18,8 @@ XPtr<MariaConnectionPtr> connection_create(
   const Nullable<std::string>& ssl_capath,
   const Nullable<std::string>& ssl_cipher
 ) {
+  LOG_VERBOSE;
+
   std::auto_ptr<MariaConnection> pConnPtr(new MariaConnection);
   pConnPtr->connect(
     host, user, password, db, port, unix_socket, client_flag, groups, default_file,

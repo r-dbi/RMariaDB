@@ -3,8 +3,6 @@
 #include <math.h>
 #include "MariaBinding.h"
 
-#include <plogr.h>
-
 MariaBinding::MariaBinding() : p(0), i(0), n_rows(0) {
 }
 

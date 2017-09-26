@@ -1,3 +1,12 @@
+## RMariaDB 0.11-8 (2017-09-24)
+
+- CI for Windows and OS X (#25).
+- The entire result set is now buffered on the client, this is required when linking against MariaDB's Connector/C (#53).
+- Fix segfault that occurs when passing wrong connection parameters.
+- Avoid including `mysql_version.h` because it's missing on Fedora.
+- Add workaround against undefined macros in Connector/C.
+
+
 ## RMariaDB 0.11-7 (2017-09-24)
 
 - Improve documentation for location of option files, with reference (#18).

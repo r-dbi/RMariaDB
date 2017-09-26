@@ -7,9 +7,12 @@ MariaConnection::MariaConnection() :
   pCurrentResult_(NULL),
   transacting_(false)
 {
+  LOG_VERBOSE;
 }
 
 MariaConnection::~MariaConnection() {
+  LOG_VERBOSE;
+
   if (is_connected()) {
     warning("call dbDisconnect() when finished working with a connection");
     disconnect();
@@ -24,6 +27,8 @@ void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<
                               const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
                               const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
                               const Nullable<std::string>& ssl_cipher) {
+  LOG_VERBOSE;
+
   this->pConn_ = mysql_init(NULL);
   // Enable LOCAL INFILE for fast data ingest
   mysql_options(this->pConn_, MYSQL_OPT_LOCAL_INFILE, 0);
@@ -48,6 +53,8 @@ void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<
     );
   }
 
+  LOG_VERBOSE;
+
   if (!mysql_real_connect(this->pConn_,
                           host.isNull() ? NULL : as<std::string>(host).c_str(),
                           user.isNull() ? NULL : as<std::string>(user).c_str(),
@@ -56,8 +63,11 @@ void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<
                           port,
                           unix_socket.isNull() ? NULL : as<std::string>(unix_socket).c_str(),
                           client_flag)) {
+    std::string error = mysql_error(this->pConn_);
     mysql_close(this->pConn_);
-    stop("Failed to connect: %s", mysql_error(this->pConn_));
+    this->pConn_ = NULL;
+
+    stop("Failed to connect: %s", error.c_str());
   }
 }
 
@@ -153,7 +163,7 @@ bool MariaConnection::exec(std::string sql) {
   set_current_result(NULL);
 
   if (mysql_real_query(pConn_, sql.data(), sql.size()) != 0)
-    stop(mysql_error(pConn_));
+    stop("Error executing query: %s", mysql_error(pConn_));
 
   MYSQL_RES* res = mysql_store_result(pConn_);
   if (res != NULL)

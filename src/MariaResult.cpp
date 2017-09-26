@@ -3,8 +3,6 @@
 #include "MariaResult.h"
 #include "MariaConnection.h"
 
-#include <plogr.h>
-
 MariaResult::MariaResult(MariaConnectionPtr pConn) :
   pConn_(pConn),
   pStatement_(NULL),
@@ -67,11 +65,17 @@ void MariaResult::close() {
 }
 
 void MariaResult::execute() {
+  LOG_VERBOSE;
+
   complete_ = false;
 
   if (mysql_stmt_execute(pStatement_) != 0)
     throw_error();
-  if (!has_result()) {
+  if (has_result()) {
+    // This is necessary for Connector/C, otherwise blobs and strings are unavailable
+    mysql_stmt_store_result(pStatement_);
+  }
+  else {
     rowsAffected_ += mysql_stmt_affected_rows(pStatement_);
   }
 }
@@ -114,16 +118,24 @@ bool MariaResult::has_result() const {
 }
 
 bool MariaResult::step() {
+  LOG_VERBOSE;
+
   while (!fetch_row()) {
+    LOG_VERBOSE;
+
     if (!bindingInput_.bind_next_row()) return false;
     execute();
   }
 
   rowsFetched_++;
+
+  LOG_VERBOSE << rowsFetched_;
   return true;
 }
 
 bool MariaResult::fetch_row() {
+  LOG_VERBOSE;
+
   if (complete_) return false;
 
   int result = mysql_stmt_fetch(pStatement_);

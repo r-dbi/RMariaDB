@@ -1,5 +1,5 @@
 Package: RMariaDB
-Version: 0.11-7
+Version: 0.11-8
 Title: Database Interface and MariaDB Driver for R
 Encoding: UTF-8
 Description: Implements DBI-compliant Interface to MariaDB and MySQL Databases.
@@ -21,7 +21,7 @@ Imports:
     methods,
     Rcpp (>= 0.12.4)
 Suggests:
-    DBItest (>= 1.5-18),
+    DBItest (>= 1.5-21),
     rprojroot,
     testthat
 Remotes:
