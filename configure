@@ -18,9 +18,11 @@ PKG_LIBS_STATIC="-lmysqlclient -lssl -lcrypto -lz"
 
 # Use mysql_config (on Solaris /opt/csw/bin must be in PATH)
 if [ $(command -v mariadb_config) ]; then
+  echo "Using mariadb_config"
   PKGCONFIG_CFLAGS=$(mariadb_config --cflags)
   PKGCONFIG_LIBS=$(mariadb_config --libs)
 elif [ $(command -v mysql_config) ]; then
+  echo "Using mysql_config"
   PKGCONFIG_CFLAGS=$(mysql_config --cflags)
   PKGCONFIG_LIBS=$(mysql_config --libs)
 fi
@@ -31,7 +33,7 @@ if [ "$INCLUDE_DIR" ] || [ "$LIB_DIR" ]; then
   PKG_CFLAGS="-I$INCLUDE_DIR $PKG_CFLAGS"
   PKG_LIBS="-L$LIB_DIR $PKG_LIBS"
 elif [ "$PKGCONFIG_CFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
-  echo "Found mysql_config cflags and libs!"
+  echo "Found mysql_config/mariadb_config cflags and libs!"
   PKG_CFLAGS=${PKGCONFIG_CFLAGS}
   PKG_LIBS=${PKGCONFIG_LIBS}
 elif [[ "$OSTYPE" == "darwin"* ]]; then
