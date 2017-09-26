@@ -71,11 +71,7 @@ void MariaResult::execute() {
 
   if (mysql_stmt_execute(pStatement_) != 0)
     throw_error();
-  if (has_result()) {
-    // This is necessary for Connector/C, otherwise blobs and strings are unavailable
-    mysql_stmt_store_result(pStatement_);
-  }
-  else {
+  if (!has_result()) {
     rowsAffected_ += mysql_stmt_affected_rows(pStatement_);
   }
 }
