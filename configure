@@ -17,14 +17,15 @@ PKG_LIBS="-lmysqlclient"
 PKG_LIBS_STATIC="-lmysqlclient -lssl -lcrypto -lz"
 
 # Use mysql_config (on Solaris /opt/csw/bin must be in PATH)
-if [ $(command -v mariadb_config) ]; then
-  echo "Using mariadb_config"
-  PKGCONFIG_CFLAGS=$(mariadb_config --cflags)
-  PKGCONFIG_LIBS=$(mariadb_config --libs)
-elif [ $(command -v mysql_config) ]; then
+if [ $(command -v mysql_config) ]; then
   echo "Using mysql_config"
   PKGCONFIG_CFLAGS=$(mysql_config --cflags)
   PKGCONFIG_LIBS=$(mysql_config --libs)
+elif [ $(command -v mariadb_config) ]; then
+  echo "Using mariadb_config"
+  echo "WARNING: Connector versions prior to 2.3.4/3.0.3 have a known problem with retrieving string and blob data. See https://github.com/rstats-db/RMariaDB/issues/53 for details."
+  PKGCONFIG_CFLAGS=$(mariadb_config --cflags)
+  PKGCONFIG_LIBS=$(mariadb_config --libs)
 fi
 
 # Note that cflags may be empty in case of success

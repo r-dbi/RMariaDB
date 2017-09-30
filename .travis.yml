@@ -11,25 +11,12 @@ matrix:
     - os: linux
       dist: trusty
       sudo: false
-      service: mysql
-      addons:
-        apt:
-          packages:
-            - libmariadbclient-dev
-    - os: linux
-      dist: trusty
-      sudo: false
       env: R_CODECOV=true
       service: mysql
       addons:
         apt:
           packages:
             - libmysqlclient-dev
-    - os: osx
-      osx_image: xcode8.3
-      before_install:
-        - brew install mariadb
-        - mysql.server start
     - os: osx
       osx_image: xcode8.3
       before_install:
