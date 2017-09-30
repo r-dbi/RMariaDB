@@ -8,9 +8,9 @@
 #include "MariaTypes.h"
 #include "MariaUtils.h"
 
-class IMariaResult {
+class MariaResult {
 public:
-  virtual ~IMariaResult();
+  virtual ~MariaResult();
 
   virtual void send_query(std::string sql) = 0;
   virtual void close() = 0;
@@ -27,7 +27,7 @@ public:
   virtual bool active() = 0;
 };
 
-class MariaResult : boost::noncopyable, public IMariaResult {
+class MariaResultPrep : boost::noncopyable, public MariaResult {
   MariaConnectionPtr pConn_;
   MYSQL_STMT* pStatement_;
   MYSQL_RES* pSpec_;
@@ -42,8 +42,8 @@ class MariaResult : boost::noncopyable, public IMariaResult {
   MariaRow bindingOutput_;
 
 public:
-  MariaResult(MariaConnectionPtr pConn);
-  ~MariaResult();
+  MariaResultPrep(MariaConnectionPtr pConn);
+  ~MariaResultPrep();
 
 public:
   virtual void send_query(std::string sql);

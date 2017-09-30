@@ -3,10 +3,10 @@
 #include "MariaResult.h"
 #include "MariaConnection.h"
 
-IMariaResult::~IMariaResult() {
+MariaResult::~MariaResult() {
 }
 
-MariaResult::MariaResult(MariaConnectionPtr pConn) :
+MariaResultPrep::MariaResultPrep(MariaConnectionPtr pConn) :
   pConn_(pConn),
   pStatement_(NULL),
   pSpec_(NULL),
@@ -21,14 +21,14 @@ MariaResult::MariaResult(MariaConnectionPtr pConn) :
   pConn_->set_current_result(this);
 }
 
-MariaResult::~MariaResult() {
+MariaResultPrep::~MariaResultPrep() {
   try {
     pConn_->set_current_result(NULL);
     close();
   } catch (...) {};
 }
 
-void MariaResult::send_query(std::string sql) {
+void MariaResultPrep::send_query(std::string sql) {
   LOG_DEBUG << sql;
 
   if (mysql_stmt_prepare(pStatement_, sql.data(), sql.size()) != 0)
@@ -53,7 +53,7 @@ void MariaResult::send_query(std::string sql) {
   }
 }
 
-void MariaResult::close() {
+void MariaResultPrep::close() {
   if (has_result()) {
     mysql_free_result(pSpec_);
     pSpec_ = NULL;
@@ -67,7 +67,7 @@ void MariaResult::close() {
   pConn_->autocommit();
 }
 
-void MariaResult::execute() {
+void MariaResultPrep::execute() {
   LOG_VERBOSE;
 
   complete_ = false;
@@ -79,7 +79,7 @@ void MariaResult::execute() {
   }
 }
 
-void MariaResult::bind(List params) {
+void MariaResultPrep::bind(List params) {
   rowsAffected_ = 0;
 
   bindingInput_.setup(pStatement_);
@@ -97,7 +97,7 @@ void MariaResult::bind(List params) {
   bound_ = true;
 }
 
-List MariaResult::column_info() {
+List MariaResultPrep::column_info() {
   CharacterVector names(nCols_), types(nCols_);
   for (int i = 0; i < nCols_; i++) {
     names[i] = names_[i];
@@ -112,11 +112,11 @@ List MariaResult::column_info() {
   return out;
 }
 
-bool MariaResult::has_result() const {
+bool MariaResultPrep::has_result() const {
   return pSpec_ != NULL;
 }
 
-bool MariaResult::step() {
+bool MariaResultPrep::step() {
   LOG_VERBOSE;
 
   while (!fetch_row()) {
@@ -132,7 +132,7 @@ bool MariaResult::step() {
   return true;
 }
 
-bool MariaResult::fetch_row() {
+bool MariaResultPrep::fetch_row() {
   LOG_VERBOSE;
 
   if (complete_) return false;
@@ -155,7 +155,7 @@ bool MariaResult::fetch_row() {
   return false;
 }
 
-List MariaResult::fetch(int n_max) {
+List MariaResultPrep::fetch(int n_max) {
   if (!bound_)
     stop("Query needs to be bound before fetching");
   if (!active())
@@ -205,30 +205,30 @@ List MariaResult::fetch(int n_max) {
   return out;
 }
 
-int MariaResult::rows_affected() {
+int MariaResultPrep::rows_affected() {
   if (!bound_) return NA_INTEGER;
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsAffected_);
 }
 
-int MariaResult::rows_fetched() {
+int MariaResultPrep::rows_fetched() {
   if (!bound_) return 0;
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsFetched_);
 }
 
-bool MariaResult::complete() {
+bool MariaResultPrep::complete() {
   if (!bound_) return FALSE;
   return
     !has_result() || // query doesn't have results
     complete_;       // we've fetched all available results
 }
 
-bool MariaResult::active() {
+bool MariaResultPrep::active() {
   return pConn_->is_current_result(this);
 }
 
-void MariaResult::throw_error() {
+void MariaResultPrep::throw_error() {
   stop(
     "%s [%i]",
     mysql_stmt_error(pStatement_),
@@ -236,7 +236,7 @@ void MariaResult::throw_error() {
   );
 }
 
-void MariaResult::cache_metadata() {
+void MariaResultPrep::cache_metadata() {
   LOG_VERBOSE;
 
   nCols_ = mysql_num_fields(pSpec_);
