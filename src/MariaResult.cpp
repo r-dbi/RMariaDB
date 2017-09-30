@@ -3,6 +3,9 @@
 #include "MariaResult.h"
 #include "MariaConnection.h"
 
+IMariaResult::~IMariaResult() {
+}
+
 MariaResult::MariaResult(MariaConnectionPtr pConn) :
   pConn_(pConn),
   pStatement_(NULL),

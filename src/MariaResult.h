@@ -8,7 +8,26 @@
 #include "MariaTypes.h"
 #include "MariaUtils.h"
 
-class MariaResult : boost::noncopyable {
+class IMariaResult {
+public:
+  virtual ~IMariaResult();
+
+  virtual void send_query(std::string sql) = 0;
+  virtual void close() = 0;
+
+  virtual void bind(List params) = 0;
+
+  virtual List column_info() = 0;
+
+  virtual List fetch(int n_max = -1) = 0;
+
+  virtual int rows_affected() = 0;
+  virtual int rows_fetched() = 0;
+  virtual bool complete() = 0;
+  virtual bool active() = 0;
+};
+
+class MariaResult : boost::noncopyable, public IMariaResult {
   MariaConnectionPtr pConn_;
   MYSQL_STMT* pStatement_;
   MYSQL_RES* pSpec_;
@@ -27,19 +46,19 @@ public:
   ~MariaResult();
 
 public:
-  void send_query(std::string sql);
-  void close();
+  virtual void send_query(std::string sql);
+  virtual void close();
 
-  void bind(List params);
+  virtual void bind(List params);
 
-  List column_info();
+  virtual List column_info();
 
-  List fetch(int n_max = -1);
+  virtual List fetch(int n_max = -1);
 
-  int rows_affected();
-  int rows_fetched();
-  bool complete();
-  bool active();
+  virtual int rows_affected();
+  virtual int rows_fetched();
+  virtual bool complete();
+  virtual bool active();
 
 private:
   void execute();
