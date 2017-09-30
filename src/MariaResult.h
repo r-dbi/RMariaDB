@@ -30,8 +30,6 @@ public:
   void send_query(std::string sql);
   void close();
 
-  void execute();
-
   void bind(List params);
 
   List column_info();
@@ -44,6 +42,8 @@ public:
   bool active();
 
 private:
+  void execute();
+
   bool has_result() const;
   bool step();
   bool fetch_row();
