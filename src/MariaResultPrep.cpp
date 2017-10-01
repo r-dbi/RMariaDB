@@ -13,7 +13,7 @@ MariaResultPrep::MariaResultPrep(MariaConnectionPtr pConn) :
   bound_(false),
   complete_(false)
 {
-  pStatement_ = mysql_stmt_init(pConn->conn());
+  pStatement_ = mysql_stmt_init(pConn->get_conn());
   if (pStatement_ == NULL)
     stop("Out of memory");
   pConn_->set_current_result(this);
