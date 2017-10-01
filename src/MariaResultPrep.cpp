@@ -3,7 +3,7 @@
 #include "MariaResultPrep.h"
 #include "MariaConnection.h"
 
-MariaResultPrep::MariaResultPrep(MariaConnectionPtr pConn, const std::string& sql) :
+MariaResultPrep::MariaResultPrep(MariaConnectionPtr pConn) :
   pConn_(pConn),
   pStatement_(NULL),
   pSpec_(NULL),
@@ -15,29 +15,22 @@ MariaResultPrep::MariaResultPrep(MariaConnectionPtr pConn, const std::string& sq
   pStatement_ = mysql_stmt_init(pConn->conn());
   if (pStatement_ == NULL)
     stop("Out of memory");
-
-  LOG_DEBUG << sql;
-
   pConn_->set_current_result(this);
-
-  if (mysql_stmt_prepare(pStatement_, sql.data(), sql.size()) != 0) {
-    // Destructor won't run here
-    throw_error_and_discard();
-  }
 }
 
 MariaResultPrep::~MariaResultPrep() {
   try {
-    discard();
+    pConn_->set_current_result(NULL);
+    close();
   } catch (...) {};
 }
 
-void MariaResultPrep::discard() {
-  pConn_->set_current_result(NULL);
-  close();
-}
+void MariaResultPrep::send_query(std::string sql) {
+  LOG_DEBUG << sql;
 
-void MariaResultPrep::send_query() {
+  if (mysql_stmt_prepare(pStatement_, sql.data(), sql.size()) != 0)
+    throw_error();
+
   nParams_ = static_cast<int>(mysql_stmt_param_count(pStatement_));
   LOG_DEBUG << nParams_;
 
@@ -238,18 +231,6 @@ void MariaResultPrep::throw_error() {
     mysql_stmt_error(pStatement_),
     mysql_stmt_errno(pStatement_)
   );
-}
-
-void MariaResultPrep::throw_error_and_discard() {
-  // Can't use BOOST_SCOPE_EXIT() in C++98
-  struct Discarder {
-    Discarder(MariaResultPrep* obj_) : obj(obj_) {}
-    ~Discarder() { obj->discard(); }
-    MariaResultPrep* obj;
-  };
-
-  Discarder closer(this);
-  throw_error();
 }
 
 void MariaResultPrep::cache_metadata() {

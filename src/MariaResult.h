@@ -7,7 +7,7 @@ class MariaResult {
 public:
   virtual ~MariaResult();
 
-  virtual void send_query() = 0;
+  virtual void send_query(std::string sql) = 0;
   virtual void close() = 0;
 
   virtual void bind(List params) = 0;
