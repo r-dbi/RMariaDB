@@ -95,6 +95,9 @@ setMethod("dbClearResult", "MariaDBResult", function(res, ...) {
 #' @rdname query
 #' @export
 setMethod("dbGetStatement", "MariaDBResult", function(res, ...) {
+  if (!dbIsValid(res)) {
+    stopc("Expired, result set already closed")
+  }
   res@sql
 })
 
@@ -149,20 +152,3 @@ setMethod("dbGetRowCount", "MariaDBResult", function(res, ...) {
 setMethod("dbHasCompleted", "MariaDBResult", function(res, ...) {
   result_complete(res@ptr)
 })
-
-
-#' Execute a query on the server (no binding).
-#'
-#' MariaDB has two APIs for submitting queries, one for parameterised queries
-#' and one for unparameterised. In most cases, you can use the parameterised
-#' query interface even if you have zero parameter. However, some queries
-#' (e.g. transaction modification) can not be executed through the
-#' paramaterised interface. This function allows you to submit those queries
-#' directly.
-#'
-#' @param con A MariaDB connection.
-#' @param sql A sql string to execute
-#' @export
-mariadbExecQuery <- function(con, sql) {
-  connection_exec(con@ptr, sql)
-}

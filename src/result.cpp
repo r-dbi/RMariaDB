@@ -5,9 +5,7 @@
 // [[Rcpp::export]]
 XPtr<MariaResult> result_create(XPtr<MariaConnectionPtr> con, std::string sql) {
   (*con)->check_connection();
-  std::auto_ptr<MariaResult> res(new MariaResult(*con));
-  res->send_query(sql);
-  return XPtr<MariaResult>(res.release(), true);
+  return XPtr<MariaResult>(MariaResult::create_and_send_query(*con, sql), true);
 }
 
 // [[Rcpp::export]]

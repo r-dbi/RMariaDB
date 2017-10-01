@@ -51,6 +51,3 @@ setMethod("show", "MariaDBConnection", function(object) {
 setMethod("dbIsValid", "MariaDBConnection", function(dbObj, ...) {
   connection_valid(dbObj@ptr)
 })
-
-#' @export
-DBI::dbGetQuery

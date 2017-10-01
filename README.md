@@ -1,7 +1,7 @@
 RMariaDB
 ======
 
-NOTE: This package will replace the old [RMySQL](https://cran.r-project.org/web/packages/RMySQL/index.html) package. It is currently not yet on CRAN. 
+NOTE: This package is a drop-in replacement for the old [RMySQL](https://cran.r-project.org/web/packages/RMySQL/index.html) package.
 
 > Database Interface and MariaDB Driver for R
 
@@ -47,7 +47,7 @@ dbDisconnect(con)
 
 ## Installation
 
-Binary packages for __OS-X__ or __Windows__ can be installed directly from CRAN:
+Binary packages for __OS X__ or __Windows__ can be installed directly from CRAN:
 
 ```r
 install.packages("RMariaDB")
@@ -61,21 +61,47 @@ devtools::install_github("rstats-db/DBI")
 devtools::install_github("rstats-db/RMariaDB")
 ```
 
-Installation from source on Linux or OSX requires [`MariaDB Connector/C`](https://downloads.mariadb.org/connector-c/). On some older platforms you can also link against Oracle's [libmysqlclient](https://packages.debian.org/testing/libmysqlclient-dev) driver but the mariadb implementation is much better.
+Installation from source on Linux or OS X currently requires Oracle's [libmysqlclient](https://packages.debian.org/testing/libmysqlclient-dev) or the more modern [`MariaDB Connector/C`](https://downloads.mariadb.org/connector-c/). The latter works best in version 2.3.4/3.0.3 or later, with older versions character and blob columns do not work reliably.
 
-On recent __Debian or Ubuntu__ install [libmariadb-client-lgpl-dev](https://packages.debian.org/testing/libmariadb-client-lgpl-dev). In Ubuntu 14.04 this was called [libmariadbclient-dev](http://packages.ubuntu.com/trusty/libmariadbclient-dev).
+### MySQL client library
+
+On recent __Debian__ or __Ubuntu__ install [libmysqlclient-dev](https://packages.debian.org/testing/libmysqlclient-dev).
+
+```
+sudo apt-get install -y libmysqlclient-dev
+```
+
+On __Fedora__,  __CentOS__ or __RHEL__ we need [mysql-devel](https://apps.fedoraproject.org/packages/mysql-devel):
+
+```
+sudo yum install mysql-devel
+```
+
+Follow [instructions](https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/) to enable the MySQL yum repository if the above command attempts to install MariaDB files.
+
+
+On __OS X__ use [mysql-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/mysql-connector-c.rb) from Homebrew:
+
+```
+brew install mysql-connector-c
+```
+
+
+### Connector/C
+
+On recent __Debian__ or __Ubuntu__ install [libmariadb-client-lgpl-dev](https://packages.debian.org/testing/libmariadb-client-lgpl-dev). In Ubuntu 14.04 this was called [libmariadbclient-dev](http://packages.ubuntu.com/trusty/libmariadbclient-dev).
 
 ```
 sudo apt-get install -y libmariadb-client-lgpl-dev
 ```
 
-On __Fedora__,  __CentOS or RHEL__ we need [mariadb-devel](https://apps.fedoraproject.org/packages/mariadb-devel):
+On __Fedora__,  __CentOS__ or __RHEL__ we need [mariadb-devel](https://apps.fedoraproject.org/packages/mariadb-devel):
 
 ```
 sudo yum install mariadb-devel
 ````
 
-On __OS-X__ use [mariadb-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/mariadb-connector-c.rb) from Homebrew:
+On __OS X__ use [mariadb-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/mariadb-connector-c.rb) from Homebrew:
 
 ```
 brew install mariadb-connector-c
@@ -103,6 +129,4 @@ password=
 
 ## Acknowledgements
 
-Many thanks to Christoph M. Friedrich, John Heuer, Kurt Hornik, Torsten Hothorn, Saikat Debroy, Matthew Kelly, Brian D. Ripley, Mikhail Kondrin, Jake Luciani, Jens Nieschulze, Deepayan Sarkar, Louis Springer, Duncan Temple Lang, Luis Torgo, Arend P. van der Veen, Felix Weninger, J. T. Lindgren, Crespin Miller, and Michal Okonlewski, Seth Falcon and Paul Gilbert for comments, suggestions, bug reports, and patches.
-
-
+Many thanks to Christoph M. Friedrich, John Heuer, Kurt Hornik, Torsten Hothorn, Saikat Debroy, Matthew Kelly, Brian D. Ripley, Mikhail Kondrin, Jake Luciani, Jens Nieschulze, Deepayan Sarkar, Louis Springer, Duncan Temple Lang, Luis Torgo, Arend P. van der Veen, Felix Weninger, J. T. Lindgren, Crespin Miller, and Michal Okonlewski, Seth Falcon and Paul Gilbert for comments, suggestions, bug reports, and patches to the original [RMySQL](https://cran.r-project.org/web/packages/RMySQL/index.html) package, and to all [contributors](https://github.com/rstats-db/RMariaDB/graphs/contributors) to this package.

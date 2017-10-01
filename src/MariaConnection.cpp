@@ -83,14 +83,14 @@ void MariaConnection::disconnect() {
   }
 
   try {
-    mysql_close(conn());
+    mysql_close(get_conn());
   } catch (...) {};
 
   pConn_ = NULL;
 }
 
 bool MariaConnection::is_connected() {
-  return !!conn();
+  return !!get_conn();
 }
 
 void MariaConnection::check_connection() {
@@ -113,7 +113,7 @@ List MariaConnection::connection_info() {
     );
 }
 
-MYSQL* MariaConnection::conn() {
+MYSQL* MariaConnection::get_conn() {
   return pConn_;
 }
 
@@ -149,7 +149,7 @@ void MariaConnection::set_current_result(MariaResult* pResult) {
   pCurrentResult_ = pResult;
 }
 
-bool MariaConnection::is_current_result(MariaResult* pResult) {
+bool MariaConnection::is_current_result(const MariaResult* pResult) const {
   return pCurrentResult_ == pResult;
 }
 
@@ -159,8 +159,6 @@ bool MariaConnection::has_query() {
 
 bool MariaConnection::exec(std::string sql) {
   check_connection();
-
-  set_current_result(NULL);
 
   if (mysql_real_query(pConn_, sql.data(), sql.size()) != 0)
     stop("Error executing query: %s", mysql_error(pConn_));
@@ -183,7 +181,7 @@ void MariaConnection::commit() {
   if (!is_transacting()) stop("Call dbBegin() to start a transaction.");
   check_connection();
 
-  mysql_commit(conn());
+  mysql_commit(get_conn());
   transacting_ = false;
 }
 
@@ -191,7 +189,7 @@ void MariaConnection::rollback() {
   if (!is_transacting()) stop("Call dbBegin() to start a transaction.");
   check_connection();
 
-  mysql_rollback(conn());
+  mysql_rollback(get_conn());
   transacting_ = false;
 }
 
@@ -200,7 +198,7 @@ bool MariaConnection::is_transacting() const {
 }
 
 void MariaConnection::autocommit() {
-  if (!is_transacting() && conn()) {
-    mysql_commit(conn());
+  if (!is_transacting() && get_conn()) {
+    mysql_commit(get_conn());
   }
 }

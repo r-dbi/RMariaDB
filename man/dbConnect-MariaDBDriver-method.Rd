@@ -33,8 +33,8 @@ host is assumed.}
 
 \item{port}{(optional) integer of the TCP/IP default port.}
 
-\item{client.flag}{(optional) integer setting various MariaDB client flags. See
-the MariaDB manual for details.}
+\item{client.flag}{(optional) integer setting various MariaDB client flags,
+see \link{Client-flags} for details.}
 
 \item{groups}{string identifying a section in the \code{default.file} to use
 for setting authentication parameters (see \code{\link[=MariaDB]{MariaDB()}}).}

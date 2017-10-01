@@ -1,7 +1,7 @@
 #include "pch.h"
 
-#ifndef __RMYSQL_TYPES__
-#define __RMYSQL_TYPES__
+#ifndef __RMARIADB_TYPES__
+#define __RMARIADB_TYPES__
 
 #include "MariaConnection.h"
 #include "MariaResult.h"
