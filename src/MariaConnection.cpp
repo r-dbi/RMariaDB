@@ -160,8 +160,6 @@ bool MariaConnection::has_query() {
 bool MariaConnection::exec(std::string sql) {
   check_connection();
 
-  set_current_result(NULL);
-
   if (mysql_real_query(pConn_, sql.data(), sql.size()) != 0)
     stop("Error executing query: %s", mysql_error(pConn_));
 

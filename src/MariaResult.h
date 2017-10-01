@@ -31,6 +31,8 @@ protected:
   void set_current_result();
   void clear_current_result();
   MYSQL* get_conn() const;
+
+  void exec(const std::string& sql);
   void autocommit();
 
 public:

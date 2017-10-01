@@ -2,6 +2,7 @@
 
 #include "MariaResult.h"
 #include "MariaResultPrep.h"
+#include "MariaResultSimple.h"
 
 MariaResult::MariaResult(MariaConnectionPtr maria_conn_) : maria_conn(maria_conn_) {
 }
@@ -25,6 +26,10 @@ bool MariaResult::active() const {
   return maria_conn->is_current_result(this);
 }
 
+void MariaResult::exec(const std::string& sql) {
+  maria_conn->exec(sql);
+}
+
 void MariaResult::autocommit() {
   maria_conn->autocommit();
 }
@@ -35,7 +40,9 @@ MariaResult* MariaResult::create_and_send_query(MariaConnectionPtr con, const st
     res->send_query(sql);
   }
   catch (MariaResultPrep::UnsupportedPS e) {
-    stop("Not yet implemented");
+    res.reset(NULL);
+    res.reset(new MariaResultSimple(con));
+    res->send_query(sql);
   }
 
   return res.release();

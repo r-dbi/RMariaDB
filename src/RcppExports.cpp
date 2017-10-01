@@ -74,18 +74,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// connection_exec
-bool connection_exec(XPtr<MariaConnectionPtr> con, std::string sql);
-RcppExport SEXP _RMariaDB_connection_exec(SEXP conSEXP, SEXP sqlSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
-    Rcpp::traits::input_parameter< std::string >::type sql(sqlSEXP);
-    rcpp_result_gen = Rcpp::wrap(connection_exec(con, sql));
-    return rcpp_result_gen;
-END_RCPP
-}
 // connection_begin_transaction
 void connection_begin_transaction(XPtr<MariaConnectionPtr> con);
 RcppExport SEXP _RMariaDB_connection_begin_transaction(SEXP conSEXP) {
@@ -272,7 +260,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_RMariaDB_connection_release", (DL_FUNC) &_RMariaDB_connection_release, 1},
     {"_RMariaDB_connection_info", (DL_FUNC) &_RMariaDB_connection_info, 1},
     {"_RMariaDB_connection_quote_string", (DL_FUNC) &_RMariaDB_connection_quote_string, 2},
-    {"_RMariaDB_connection_exec", (DL_FUNC) &_RMariaDB_connection_exec, 2},
     {"_RMariaDB_connection_begin_transaction", (DL_FUNC) &_RMariaDB_connection_begin_transaction, 1},
     {"_RMariaDB_connection_commit", (DL_FUNC) &_RMariaDB_connection_commit, 1},
     {"_RMariaDB_connection_rollback", (DL_FUNC) &_RMariaDB_connection_rollback, 1},
