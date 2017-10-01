@@ -67,6 +67,10 @@ time_t
 	return res;
 }
 
+#else
+
+void dummy_to_prevent_empty_unit_warning(){}
+
 #endif /* WIN32 */
 
 
