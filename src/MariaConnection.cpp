@@ -149,7 +149,7 @@ void MariaConnection::set_current_result(MariaResult* pResult) {
   pCurrentResult_ = pResult;
 }
 
-bool MariaConnection::is_current_result(MariaResult* pResult) {
+bool MariaConnection::is_current_result(const MariaResult* pResult) const {
   return pCurrentResult_ == pResult;
 }
 
@@ -159,8 +159,6 @@ bool MariaConnection::has_query() {
 
 bool MariaConnection::exec(std::string sql) {
   check_connection();
-
-  set_current_result(NULL);
 
   if (mysql_real_query(pConn_, sql.data(), sql.size()) != 0)
     stop("Error executing query: %s", mysql_error(pConn_));

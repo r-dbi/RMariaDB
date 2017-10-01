@@ -65,11 +65,6 @@ CharacterVector connection_quote_string(XPtr<MariaConnectionPtr> con,
 }
 
 // [[Rcpp::export]]
-bool connection_exec(XPtr<MariaConnectionPtr> con, std::string sql) {
-  return (*con)->exec(sql);
-}
-
-// [[Rcpp::export]]
 void connection_begin_transaction(XPtr<MariaConnectionPtr> con) {
   (*con)->begin_transaction();
 }

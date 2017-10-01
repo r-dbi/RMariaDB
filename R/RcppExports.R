@@ -21,10 +21,6 @@ connection_quote_string <- function(con, input) {
     .Call(`_RMariaDB_connection_quote_string`, con, input)
 }
 
-connection_exec <- function(con, sql) {
-    .Call(`_RMariaDB_connection_exec`, con, sql)
-}
-
 connection_begin_transaction <- function(con) {
     invisible(.Call(`_RMariaDB_connection_begin_transaction`, con))
 }
