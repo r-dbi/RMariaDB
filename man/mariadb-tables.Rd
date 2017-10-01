@@ -101,6 +101,6 @@ con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 # automatically read back into the row.names()
 dbWriteTable(con, "mtcars", mtcars[1:5, ], temporary = TRUE)
 dbReadTable(con, "mtcars")
-dbReadTable(con, "mtcars", row.names = NULL)
+dbReadTable(con, "mtcars", row.names = FALSE)
 }
 }
