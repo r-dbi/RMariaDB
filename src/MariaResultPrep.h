@@ -27,7 +27,7 @@ public:
   ~MariaResultPrep();
 
 public:
-  virtual void send_query(std::string sql);
+  virtual void send_query(const std::string& sql);
   virtual void close();
 
   virtual void bind(List params);

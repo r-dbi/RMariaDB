@@ -26,7 +26,7 @@ MariaResultPrep::~MariaResultPrep() {
   } catch (...) {};
 }
 
-void MariaResultPrep::send_query(std::string sql) {
+void MariaResultPrep::send_query(const std::string& sql) {
   LOG_DEBUG << sql;
 
   if (mysql_stmt_prepare(pStatement_, sql.data(), sql.size()) != 0) {

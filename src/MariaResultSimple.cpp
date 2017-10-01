@@ -15,8 +15,9 @@ MariaResultSimple::~MariaResultSimple() {
   } catch (...) {};
 }
 
-void MariaResultSimple::send_query(std::string sql) {
+void MariaResultSimple::send_query(const std::string& sql) {
   LOG_DEBUG << sql;
+
   exec(sql);
 }
 
