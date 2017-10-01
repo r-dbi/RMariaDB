@@ -18,8 +18,8 @@ NULL
 #'   host is assumed.
 #' @param unix.socket (optional) string of the unix socket or named pipe.
 #' @param port (optional) integer of the TCP/IP default port.
-#' @param client.flag (optional) integer setting various MariaDB client flags. See
-#'   the MariaDB manual for details.
+#' @param client.flag (optional) integer setting various MariaDB client flags,
+#'   see [Client-flags] for details.
 #' @param groups string identifying a section in the `default.file` to use
 #'   for setting authentication parameters (see [MariaDB()]).
 #' @param default.file string of the filename with MariaDB client options,
@@ -116,14 +116,32 @@ MariaDB <- function() {
   new("MariaDBDriver")
 }
 
-#' Constants
+#' Client flags
+#'
+#' Use for the `client.flag` argument to [dbConnect()], multiple flags can be
+#' combined with a bitwise or (see [Logic]).  The flags are provided for
+#' completeness.
+#'
+#' @seealso
+#' The `flags` argument at https://mariadb.com/kb/en/library/mysql_real_connect.
+#'
+#' @examples
+#' \dontrun{
+#' library(DBI)
+#' library(RMariaDB)
+#' con1 <- dbConnect(MariaDB(), client.flag = CLIENT_COMPRESS)
+#' con2 <- dbConnect(
+#'   MariaDB(),
+#'   client.flag = CLIENT_COMPRESS | CLIENT_SECURE_CONNECTION
+#' )
+#' }
 #'
 #' @aliases CLIENT_LONG_PASSWORD CLIENT_FOUND_ROWS CLIENT_LONG_FLAG
 #' CLIENT_CONNECT_WITH_DB CLIENT_NO_SCHEMA CLIENT_COMPRESS CLIENT_ODBC
 #' CLIENT_LOCAL_FILES CLIENT_IGNORE_SPACE CLIENT_PROTOCOL_41 CLIENT_INTERACTIVE
 #' CLIENT_SSL CLIENT_IGNORE_SIGPIPE CLIENT_TRANSACTIONS CLIENT_RESERVED
 #' CLIENT_SECURE_CONNECTION CLIENT_MULTI_STATEMENTS CLIENT_MULTI_RESULTS
-#' @name constants
+#' @name Client-flags
 NULL
 
 ## The following client flags were copied from mysql_com.h (version 4.1.13)
