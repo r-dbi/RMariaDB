@@ -42,6 +42,9 @@ public:
   virtual bool complete();
   virtual bool active();
 
+public:
+  class UnsupportedPS : public std::exception {};
+
 private:
   void execute();
 

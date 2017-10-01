@@ -2,6 +2,7 @@
 
 #include "MariaResultPrep.h"
 #include "MariaConnection.h"
+#include <mysqld_error.h>
 
 MariaResultPrep::MariaResultPrep(MariaConnectionPtr pConn) :
   pConn_(pConn),
@@ -28,8 +29,13 @@ MariaResultPrep::~MariaResultPrep() {
 void MariaResultPrep::send_query(std::string sql) {
   LOG_DEBUG << sql;
 
-  if (mysql_stmt_prepare(pStatement_, sql.data(), sql.size()) != 0)
+  if (mysql_stmt_prepare(pStatement_, sql.data(), sql.size()) != 0) {
+    if (mysql_stmt_errno(pStatement_) == ER_UNSUPPORTED_PS) {
+      throw UnsupportedPS();
+    }
+
     throw_error();
+  }
 
   nParams_ = static_cast<int>(mysql_stmt_param_count(pStatement_));
   LOG_DEBUG << nParams_;

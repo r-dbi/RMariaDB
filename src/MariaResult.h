@@ -22,7 +22,7 @@ public:
   virtual bool active() = 0;
 
 public:
-  static MariaResult* create(MariaConnectionPtr con, const std::string& sql);
+  static MariaResult* create_and_send_query(MariaConnectionPtr con, const std::string& sql);
 };
 
 #endif
