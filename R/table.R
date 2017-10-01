@@ -34,6 +34,8 @@ NULL
 #' @rdname mariadb-tables
 setMethod("dbReadTable", c("MariaDBConnection", "character"),
   function(conn, name, ..., row.names = FALSE, check.names = TRUE) {
+    row.names <- compatRowNames(row.names)
+
     if ((!is.logical(row.names) && !is.character(row.names)) || length(row.names) != 1L)  {
       stopc("`row.names` must be a logical scalar or a string")
     }
@@ -71,6 +73,8 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
   function(conn, name, value, field.types = NULL, row.names = FALSE,
            overwrite = FALSE, append = FALSE, ...,
            temporary = FALSE) {
+
+    row.names <- compatRowNames(row.names)
 
     if ((!is.logical(row.names) && !is.character(row.names)) || length(row.names) != 1L)  {
       stopc("`row.names` must be a logical scalar or a string")
