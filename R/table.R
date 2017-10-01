@@ -185,7 +185,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
       "LINES TERMINATED BY ", dbQuoteString(conn, eol), "\n",
       "IGNORE ", skip + as.integer(header), " LINES")
 
-    mariadbExecQuery(conn, sql)
+    dbExecute(conn, sql)
 
     invisible(TRUE)
   }
