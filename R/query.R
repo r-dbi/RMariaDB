@@ -95,6 +95,9 @@ setMethod("dbClearResult", "MariaDBResult", function(res, ...) {
 #' @rdname query
 #' @export
 setMethod("dbGetStatement", "MariaDBResult", function(res, ...) {
+  if (!dbIsValid(res)) {
+    stopc("Expired, result set already closed")
+  }
   res@sql
 })
 

@@ -25,7 +25,7 @@ NULL
 #' # automatically read back into the row.names()
 #' dbWriteTable(con, "mtcars", mtcars[1:5, ], temporary = TRUE)
 #' dbReadTable(con, "mtcars")
-#' dbReadTable(con, "mtcars", row.names = NULL)
+#' dbReadTable(con, "mtcars", row.names = FALSE)
 #' }
 #' @name mariadb-tables
 NULL
@@ -33,7 +33,17 @@ NULL
 #' @export
 #' @rdname mariadb-tables
 setMethod("dbReadTable", c("MariaDBConnection", "character"),
-  function(conn, name, row.names = FALSE, check.names = TRUE, ...) {
+  function(conn, name, ..., row.names = FALSE, check.names = TRUE) {
+    row.names <- compatRowNames(row.names)
+
+    if ((!is.logical(row.names) && !is.character(row.names)) || length(row.names) != 1L)  {
+      stopc("`row.names` must be a logical scalar or a string")
+    }
+
+    if (!is.logical(check.names) || length(check.names) != 1L)  {
+      stopc("`check.names` must be a logical scalar")
+    }
+
     name <- dbQuoteIdentifier(conn, name)
     out <- dbGetQuery(conn, paste("SELECT * FROM ", name),
       row.names = row.names)
@@ -64,8 +74,26 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
            overwrite = FALSE, append = FALSE, ...,
            temporary = FALSE) {
 
-    if (overwrite && append)
-      stop("overwrite and append cannot both be TRUE", call. = FALSE)
+    row.names <- compatRowNames(row.names)
+
+    if ((!is.logical(row.names) && !is.character(row.names)) || length(row.names) != 1L)  {
+      stopc("`row.names` must be a logical scalar or a string")
+    }
+    if (!is.logical(overwrite) || length(overwrite) != 1L || is.na(overwrite))  {
+      stopc("`overwrite` must be a logical scalar")
+    }
+    if (!is.logical(append) || length(append) != 1L || is.na(append))  {
+      stopc("`append` must be a logical scalar")
+    }
+    if (!is.logical(temporary) || length(temporary) != 1L)  {
+      stopc("`temporary` must be a logical scalar")
+    }
+    if (overwrite && append) {
+      stopc("overwrite and append cannot both be TRUE")
+    }
+    if (append && !is.null(field.types)) {
+      stopc("Cannot specify field.types with append = TRUE")
+    }
 
     need_transaction <- !connection_is_transacting(conn@ptr)
     if (need_transaction) {
@@ -201,6 +229,10 @@ setMethod("dbListTables", "MariaDBConnection", function(conn, ...) {
 #' @rdname mariadb-tables
 setMethod("dbExistsTable", c("MariaDBConnection", "character"),
   function(conn, name, ...) {
+    stopifnot(length(name) == 1L)
+    if (!dbIsValid(conn)) {
+      stopc("Invalid connection")
+    }
     tryCatch({
       dbGetQuery(conn, paste0(
         "SELECT NULL FROM ", dbQuoteIdentifier(conn, name), " WHERE FALSE"
