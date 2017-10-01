@@ -10,7 +10,6 @@
 #include "MariaUtils.h"
 
 class MariaResultPrep : boost::noncopyable, public MariaResult {
-  MariaConnectionPtr pConn_;
   MYSQL_STMT* pStatement_;
   MYSQL_RES* pSpec_;
   uint64_t rowsAffected_, rowsFetched_;
@@ -24,7 +23,7 @@ class MariaResultPrep : boost::noncopyable, public MariaResult {
   MariaRow bindingOutput_;
 
 public:
-  MariaResultPrep(MariaConnectionPtr pConn);
+  MariaResultPrep(MariaConnectionPtr conn);
   ~MariaResultPrep();
 
 public:
@@ -40,7 +39,6 @@ public:
   virtual int rows_affected();
   virtual int rows_fetched();
   virtual bool complete();
-  virtual bool active();
 
 public:
   class UnsupportedPS : public std::exception {};

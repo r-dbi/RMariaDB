@@ -4,9 +4,13 @@
 #include "MariaConnection.h"
 
 class MariaResult {
+protected:
+  MariaResult(MariaConnectionPtr maria_conn_);
+
 public:
   virtual ~MariaResult();
 
+public:
   virtual void send_query(std::string sql) = 0;
   virtual void close() = 0;
 
@@ -19,10 +23,21 @@ public:
   virtual int rows_affected() = 0;
   virtual int rows_fetched() = 0;
   virtual bool complete() = 0;
-  virtual bool active() = 0;
+
+public:
+  bool active() const;
+
+protected:
+  void set_current_result();
+  void clear_current_result();
+  MYSQL* get_conn() const;
+  void autocommit();
 
 public:
   static MariaResult* create_and_send_query(MariaConnectionPtr con, const std::string& sql);
+
+private:
+  MariaConnectionPtr maria_conn;
 };
 
 #endif

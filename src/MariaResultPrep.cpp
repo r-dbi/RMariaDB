@@ -4,8 +4,8 @@
 #include "MariaConnection.h"
 #include <mysqld_error.h>
 
-MariaResultPrep::MariaResultPrep(MariaConnectionPtr pConn) :
-  pConn_(pConn),
+MariaResultPrep::MariaResultPrep(MariaConnectionPtr conn) :
+  MariaResult(conn),
   pStatement_(NULL),
   pSpec_(NULL),
   rowsAffected_(0),
@@ -13,15 +13,15 @@ MariaResultPrep::MariaResultPrep(MariaConnectionPtr pConn) :
   bound_(false),
   complete_(false)
 {
-  pStatement_ = mysql_stmt_init(pConn->get_conn());
+  pStatement_ = mysql_stmt_init(get_conn());
   if (pStatement_ == NULL)
     stop("Out of memory");
-  pConn_->set_current_result(this);
+  set_current_result();
 }
 
 MariaResultPrep::~MariaResultPrep() {
   try {
-    pConn_->set_current_result(NULL);
+    clear_current_result();
     close();
   } catch (...) {};
 }
@@ -67,7 +67,7 @@ void MariaResultPrep::close() {
     pStatement_ = NULL;
   }
 
-  pConn_->autocommit();
+  autocommit();
 }
 
 void MariaResultPrep::execute() {
@@ -225,10 +225,6 @@ bool MariaResultPrep::complete() {
   return
     !has_result() || // query doesn't have results
     complete_;       // we've fetched all available results
-}
-
-bool MariaResultPrep::active() {
-  return pConn_->is_current_result(this);
 }
 
 void MariaResultPrep::throw_error() {
