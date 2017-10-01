@@ -1,3 +1,10 @@
+## RMariaDB 0.11-9 (2017-10-01)
+
+- Test almost all test cases of the DBI specification.
+- Queries not supported by the prepared statement protocol can now be run via `dbExecute()` or `dbSendStatement()`, the function `mariadbExecQuery()` has been removed (#28).
+- Avoid storing all results on the client due to instability with large datasets (#60, #61).
+
+
 ## RMariaDB 0.11-8 (2017-09-24)
 
 - CI for Windows and OS X (#25).
