@@ -33,7 +33,7 @@ public:
   void check_connection();
 
   List connection_info();
-  MYSQL* conn();
+  MYSQL* get_conn();
 
   std::string quote_string(const Rcpp::String& input);
 
