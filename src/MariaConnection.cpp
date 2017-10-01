@@ -149,7 +149,7 @@ void MariaConnection::set_current_result(MariaResult* pResult) {
   pCurrentResult_ = pResult;
 }
 
-bool MariaConnection::is_current_result(MariaResult* pResult) {
+bool MariaConnection::is_current_result(const MariaResult* pResult) const {
   return pCurrentResult_ == pResult;
 }
 

@@ -39,7 +39,7 @@ public:
 
   // Cancels previous query, if needed.
   void set_current_result(MariaResult* pResult);
-  bool is_current_result(MariaResult* pResult);
+  bool is_current_result(const MariaResult* pResult) const;
   bool has_query();
 
   bool exec(std::string sql);
