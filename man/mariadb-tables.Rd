@@ -11,8 +11,8 @@
 \alias{dbRemoveTable,MariaDBConnection,character-method}
 \title{Read and write MariaDB tables.}
 \usage{
-\S4method{dbReadTable}{MariaDBConnection,character}(conn, name,
-  row.names = FALSE, check.names = TRUE, ...)
+\S4method{dbReadTable}{MariaDBConnection,character}(conn, name, ...,
+  row.names = FALSE, check.names = TRUE)
 
 \S4method{dbWriteTable}{MariaDBConnection,character,data.frame}(conn, name,
   value, field.types = NULL, row.names = FALSE, overwrite = FALSE,
@@ -35,6 +35,8 @@
 
 \item{name}{a character string specifying a table name.}
 
+\item{...}{Unused, needed for compatiblity with generic.}
+
 \item{row.names}{Either \code{TRUE}, \code{FALSE}, \code{NA} or a string.
 
 If \code{TRUE}, always translate row names to a column called "row_names".
@@ -48,8 +50,6 @@ For backward compatibility, \code{NULL} is equivalent to \code{FALSE}.}
 
 \item{check.names}{If \code{TRUE}, the default, column names will be
 converted to valid R identifiers.}
-
-\item{...}{Unused, needed for compatiblity with generic.}
 
 \item{value}{A data frame.}
 
