@@ -10,7 +10,10 @@
 #include "integer64.h"
 
 
-MariaRow::MariaRow() {
+MariaRow::MariaRow() :
+  pStatement_(NULL),
+  n_(0)
+{
 }
 
 MariaRow::~MariaRow() {
