@@ -22,7 +22,6 @@ src\/RCS
 ^windows$
 ^homebrew$
 ^a\.out\.dSYM$
-^NEWS\.md$
 ^revdep$
 ^appveyor\.yml$
 ^src/.*\.d$
