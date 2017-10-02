@@ -41,7 +41,7 @@ For backward compatibility, \code{NULL} is equivalent to \code{FALSE}.}
 \item{conn}{an \linkS4class{MariaDBConnection} object.}
 
 \item{statement}{a character vector of length one specifying the SQL
-statement that should be executed.  Only a single SQL statment should be
+statement that should be executed.  Only a single SQL statement should be
 provided.}
 
 \item{params}{A list of query parameters to be substituted into

@@ -16,7 +16,7 @@ NULL
 #' @param check.names If `TRUE`, the default, column names will be
 #'   converted to valid R identifiers.
 #' @inheritParams DBI::sqlRownamesToColumn
-#' @param ... Unused, needed for compatiblity with generic.
+#' @param ... Unused, needed for compatibility with generic.
 #' @examples
 #' if (mariadbHasDefault()) {
 #' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
