@@ -7,7 +7,7 @@ Initial release, compliant to the DBI specification.
 - Queries not supported by the prepared statement protocol still can be run via `dbExecute()` or `dbSendStatement()`, the function `mariadbExecQuery()` has been removed (#28).
 - Spec-compliant transactions (#38, #49).
 - 64-bit integers are now supported through the `bit64` package. Unfortunately, this also means that numeric literals (as in `SELECT 1`) are returned as 64-bit integers (#12).
-- Correct handling of DATETIME and TIME columns (#52, @noahwilliamsson). §Support timestamp values with sub-second precision on output, and with year beyond 2038 (#56).
+- Correct handling of DATETIME and TIME columns (#52, @noahwilliamsson). Support timestamp values with sub-second precision on output, and with year beyond 2038 (#56).
 - The connection now uses the "utf8mb4" charset by default (#7).
 - New default `row.names = FALSE`.
 - New SSL-related arguments to `dbConnect()`: `ssl.key`, `ssl.cert`, `ssl.ca`, `ssl.capath`, `ssl.cipher` (#131, #148, @adamchainz).
