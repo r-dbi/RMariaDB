@@ -35,7 +35,7 @@
 
 \item{name}{a character string specifying a table name.}
 
-\item{...}{Unused, needed for compatiblity with generic.}
+\item{...}{Unused, needed for compatibility with generic.}
 
 \item{row.names}{Either \code{TRUE}, \code{FALSE}, \code{NA} or a string.
 
