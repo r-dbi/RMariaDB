@@ -1,8 +1,8 @@
 Package: RMariaDB
-Version: 1.0
-Title: Database Interface and 'MariaDB' Driver for R
+Version: 1.0-2
+Title: Database Interface and 'MariaDB' Driver
 Encoding: UTF-8
-Description: Implements a 'DBI'-compliant interface to 'MariaDB' and 'MySQL' databases.
+Description: Implements a 'DBI'-compliant interface to 'MariaDB' (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>) databases.
 Authors@R: c(
     person("Kirill", "Müller", email = "krlmlr+r@mailbox.org", role = c("aut", "cre")),
     person("Jeroen", "Ooms", role = "aut"),
