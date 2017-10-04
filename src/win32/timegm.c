@@ -33,9 +33,9 @@
 
 
 
-#if defined(WIN32) && !defined(_WIN64)
-
 #include <time.h>
+
+#if defined(WIN32) && !defined(_WIN64)
 
 static int
 is_leap(unsigned y) {
@@ -66,6 +66,10 @@ time_t
 	res += tm->tm_sec;
 	return res;
 }
+
+#else
+
+void dummy_to_prevent_empty_unit_warning(){}
 
 #endif /* WIN32 */
 

@@ -8,6 +8,7 @@ R\/tags$
 src\/Makefile$
 src\/Makevars$
 src\/.*\.o$
+src\/.*\.h.gch$
 src\/.*.so$
 src\/.*.a$
 src\/tags
@@ -22,7 +23,6 @@ src\/RCS
 ^windows$
 ^homebrew$
 ^a\.out\.dSYM$
-^NEWS\.md$
 ^revdep$
 ^appveyor\.yml$
 ^src/.*\.d$

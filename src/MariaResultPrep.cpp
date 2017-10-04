@@ -10,6 +10,8 @@ MariaResultPrep::MariaResultPrep(MariaConnectionPtr conn) :
   pSpec_(NULL),
   rowsAffected_(0),
   rowsFetched_(0),
+  nCols_(0),
+  nParams_(0),
   bound_(false),
   complete_(false)
 {
