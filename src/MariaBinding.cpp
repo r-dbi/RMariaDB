@@ -3,7 +3,11 @@
 #include <math.h>
 #include "MariaBinding.h"
 
-MariaBinding::MariaBinding() : p(0), i(0), n_rows(0) {
+MariaBinding::MariaBinding() :
+  statement(NULL),
+  p(0),
+  i(0),
+  n_rows(0) {
 }
 
 MariaBinding::~MariaBinding() {
