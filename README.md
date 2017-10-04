@@ -1,17 +1,17 @@
 RMariaDB
 ======
 
-NOTE: This package is a drop-in replacement for the old [RMySQL](https://cran.r-project.org/web/packages/RMySQL/index.html) package.
+NOTE: This package is a drop-in replacement for the old [RMySQL](https://cran.r-project.org/package=RMariaDB) package.
 
 > Database Interface and MariaDB Driver for R
 
 [![Build Status](https://travis-ci.org/rstats-db/RMariaDB.svg)](https://travis-ci.org/rstats-db/RMariaDB)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rstats-db/RMariaDB?branch=master&svg=true)](https://ci.appveyor.com/project/rstats-db/RMariaDB?branch=master)
 [![Coverage Status](https://codecov.io/github/rstats-db/RMariaDB/coverage.svg)](https://codecov.io/github/rstats-db/RMariaDB)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RMariaDB)](http://cran.r-project.org/package=RMariaDB)
-[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/RMariaDB)](http://cran.r-project.org/web/packages/RMariaDB/index.html)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
 
-RMariaDB is a database interface and MariaDB driver for R. This version is aimed at full compliance with the [DBI specification](https://cran.r-project.org/web/packages/DBI/vignettes/spec.html).
+RMariaDB is a database interface and MariaDB driver for R. This version is aimed at full compliance with the [DBI specification](https://cran.r-project.org/package=DBI/vignettes/spec.html).
 
 ## Hello World
 
@@ -129,4 +129,4 @@ password=
 
 ## Acknowledgements
 
-Many thanks to Christoph M. Friedrich, John Heuer, Kurt Hornik, Torsten Hothorn, Saikat Debroy, Matthew Kelly, Brian D. Ripley, Mikhail Kondrin, Jake Luciani, Jens Nieschulze, Deepayan Sarkar, Louis Springer, Duncan Temple Lang, Luis Torgo, Arend P. van der Veen, Felix Weninger, J. T. Lindgren, Crespin Miller, and Michal Okonlewski, Seth Falcon and Paul Gilbert for comments, suggestions, bug reports, and patches to the original [RMySQL](https://cran.r-project.org/web/packages/RMySQL/index.html) package, and to all [contributors](https://github.com/rstats-db/RMariaDB/graphs/contributors) to this package.
+Many thanks to Christoph M. Friedrich, John Heuer, Kurt Hornik, Torsten Hothorn, Saikat Debroy, Matthew Kelly, Brian D. Ripley, Mikhail Kondrin, Jake Luciani, Jens Nieschulze, Deepayan Sarkar, Louis Springer, Duncan Temple Lang, Luis Torgo, Arend P. van der Veen, Felix Weninger, J. T. Lindgren, Crespin Miller, and Michal Okonlewski, Seth Falcon and Paul Gilbert for comments, suggestions, bug reports, and patches to the original [RMySQL](https://cran.r-project.org/package=RMySQL) package, and to all contributors (of [code](https://github.com/rstats-db/RMariaDB/graphs/contributors) and discussions) to this package.

@@ -1,8 +1,8 @@
 Package: RMariaDB
-Version: 0.11-9
-Title: Database Interface and MariaDB Driver for R
+Version: 1.0-2
+Title: Database Interface and 'MariaDB' Driver
 Encoding: UTF-8
-Description: Implements DBI-compliant Interface to MariaDB and MySQL Databases.
+Description: Implements a 'DBI'-compliant interface to 'MariaDB' (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>) databases.
 Authors@R: c(
     person("Kirill", "Müller", email = "krlmlr+r@mailbox.org", role = c("aut", "cre")),
     person("Jeroen", "Ooms", role = "aut"),
@@ -16,17 +16,14 @@ Depends:
     R (>= 2.8.0)
 Imports:
     bit64,
-    DBI (>= 0.7-12),
+    DBI,
     hms,
     methods,
     Rcpp (>= 0.12.4)
 Suggests:
-    DBItest (>= 1.5-21),
+    DBItest,
     rprojroot,
     testthat
-Remotes:
-    rstats-db/DBI,
-    rstats-db/DBItest
 LinkingTo: Rcpp, BH, plogr
 License: GPL-2
 URL: https://github.com/rstats-db/RMariaDB,
