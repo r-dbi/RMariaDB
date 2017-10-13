@@ -80,6 +80,10 @@ void MariaResultPrep::execute() {
   if (mysql_stmt_execute(pStatement_) != 0)
     throw_error();
   if (!has_result()) {
+    // try again after mysql_stmt_execute, in case pSpec_ == NULL
+    pSpec_ = mysql_stmt_result_metadata(pStatement_);
+  }
+  if (!has_result()) {
     rowsAffected_ += mysql_stmt_affected_rows(pStatement_);
   }
 }

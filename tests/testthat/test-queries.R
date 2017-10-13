@@ -10,3 +10,13 @@ test_that("setting parameter query is always complete", {
   dbClearResult(rs)
   dbDisconnect(conn)
 })
+
+# Maybe also relevant for other backends? move to DBItest?
+test_that("prepared statements and SHOW queries", {
+  conn <- mariadbDefault()
+  rs <- dbGetQuery(conn, "SHOW PLUGINS")
+
+  expect_gte(nrow(rs), 1L)
+ 
+  dbDisconnect(conn)
+})
