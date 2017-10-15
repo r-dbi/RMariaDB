@@ -90,8 +90,13 @@ indicating whether the operation was successful.
 These methods read or write entire tables from a MariaDB database.
 }
 \note{
-Note that the data.frame returned by \code{dbReadTable()} only has
+The data.frame returned by \code{dbReadTable()} only has
 primitive data, e.g., it does not coerce character data to factors.
+Temporary tables are ignored for \code{dbExistsTable()} and \code{dbListTables()} due to
+limitations of the underlying C API. For this reason, a prior existence check
+is performed only before creating a regular persistent table; an attempt to
+create a temporary table with an already existing name will fail with a
+message from the database driver.
 }
 \examples{
 if (mariadbHasDefault()) {
