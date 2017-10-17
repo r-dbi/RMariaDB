@@ -34,8 +34,8 @@ void MariaResult::autocommit() {
   maria_conn->autocommit();
 }
 
-MariaResult* MariaResult::create_and_send_query(MariaConnectionPtr con, const std::string& sql) {
-  std::auto_ptr<MariaResult> res(new MariaResultPrep(con));
+MariaResult* MariaResult::create_and_send_query(MariaConnectionPtr con, const std::string& sql, bool is_stmnt) {
+  std::auto_ptr<MariaResult> res(new MariaResultPrep(con, is_stmnt));
   try {
     res->send_query(sql);
   }

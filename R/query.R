@@ -55,9 +55,11 @@ setMethod("dbSendQuery", c("MariaDBConnection", "character"),
   function(conn, statement, params = NULL, ...) {
     statement <- enc2utf8(statement)
 
+    is_stmnt <- any(grepl("dbSendStatement", sys.calls()))
+
     rs <- new("MariaDBResult",
       sql = statement,
-      ptr = result_create(conn@ptr, statement)
+      ptr = result_create(conn@ptr, statement, is_stmnt)
     )
 
     if (!is.null(params)) {

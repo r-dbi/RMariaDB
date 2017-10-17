@@ -154,14 +154,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // result_create
-XPtr<MariaResult> result_create(XPtr<MariaConnectionPtr> con, std::string sql);
-RcppExport SEXP _RMariaDB_result_create(SEXP conSEXP, SEXP sqlSEXP) {
+XPtr<MariaResult> result_create(XPtr<MariaConnectionPtr> con, std::string sql, bool is_stmnt);
+RcppExport SEXP _RMariaDB_result_create(SEXP conSEXP, SEXP sqlSEXP, SEXP is_stmntSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
     Rcpp::traits::input_parameter< std::string >::type sql(sqlSEXP);
-    rcpp_result_gen = Rcpp::wrap(result_create(con, sql));
+    Rcpp::traits::input_parameter< bool >::type is_stmnt(is_stmntSEXP);
+    rcpp_result_gen = Rcpp::wrap(result_create(con, sql, is_stmnt));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -268,7 +269,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_RMariaDB_driver_done", (DL_FUNC) &_RMariaDB_driver_done, 0},
     {"_RMariaDB_version", (DL_FUNC) &_RMariaDB_version, 0},
     {"_RMariaDB_init_logging", (DL_FUNC) &_RMariaDB_init_logging, 1},
-    {"_RMariaDB_result_create", (DL_FUNC) &_RMariaDB_result_create, 2},
+    {"_RMariaDB_result_create", (DL_FUNC) &_RMariaDB_result_create, 3},
     {"_RMariaDB_result_column_info", (DL_FUNC) &_RMariaDB_result_column_info, 1},
     {"_RMariaDB_result_fetch", (DL_FUNC) &_RMariaDB_result_fetch, 2},
     {"_RMariaDB_result_bind", (DL_FUNC) &_RMariaDB_result_bind, 2},
