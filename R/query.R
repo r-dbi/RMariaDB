@@ -63,8 +63,8 @@ setMethod("dbSendQuery", c("MariaDBConnection", "character"),
 #' @rdname query
 #' @export
 setMethod("dbSendStatement", signature("MariaDBConnection", "character"),
-  function(conn, statement, ...) {
-    dbSend(conn, statement, NULL, TRUE)
+  function(conn, statement, params = NULL, ...) {
+    dbSend(conn, statement, params, TRUE)
   }
 )
 
