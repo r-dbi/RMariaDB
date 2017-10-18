@@ -15,7 +15,8 @@
 \S4method{dbSendQuery}{MariaDBConnection,character}(conn, statement,
   params = NULL, ...)
 
-\S4method{dbSendStatement}{MariaDBConnection,character}(conn, statement, ...)
+\S4method{dbSendStatement}{MariaDBConnection,character}(conn, statement,
+  params = NULL, ...)
 
 \S4method{dbBind}{MariaDBResult}(res, params, ...)
 
@@ -54,7 +55,10 @@ a parameterised query.}
 To retrieve results a chunk at a time, use \code{\link[=dbSendQuery]{dbSendQuery()}},
 \code{\link[=dbFetch]{dbFetch()}}, then \code{\link[=dbClearResult]{dbClearResult()}}. Alternatively, if you want all the
 results (and they'll fit in memory) use \code{\link[=dbGetQuery]{dbGetQuery()}} which sends,
-fetches and clears for you.
+fetches and clears for you. For data manipulation queries (i.e. queries
+that do not return data, such as \code{UPDATE}, \code{DELETE}, etc.),
+\code{\link[=dbSendStatement]{dbSendStatement()}} serves as a counterpart to \code{\link[=dbSendQuery]{dbSendQuery()}}, while
+\code{\link[=dbExecute]{dbExecute()}} corresponds to \code{\link[=dbGetQuery]{dbGetQuery()}}.
 }
 \examples{
 if (mariadbHasDefault()) {
