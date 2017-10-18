@@ -4,6 +4,7 @@
 \name{dbFetch,MariaDBResult-method}
 \alias{dbFetch,MariaDBResult-method}
 \alias{dbSendQuery,MariaDBConnection,character-method}
+\alias{dbSendStatement,MariaDBConnection,character-method}
 \alias{dbBind,MariaDBResult-method}
 \alias{dbClearResult,MariaDBResult-method}
 \alias{dbGetStatement,MariaDBResult-method}
@@ -13,6 +14,8 @@
 
 \S4method{dbSendQuery}{MariaDBConnection,character}(conn, statement,
   params = NULL, ...)
+
+\S4method{dbSendStatement}{MariaDBConnection,character}(conn, statement, ...)
 
 \S4method{dbBind}{MariaDBResult}(res, params, ...)
 
