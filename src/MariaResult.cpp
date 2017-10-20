@@ -34,13 +34,14 @@ void MariaResult::autocommit() {
   maria_conn->autocommit();
 }
 
-MariaResult* MariaResult::create_and_send_query(MariaConnectionPtr con, const std::string& sql, bool is_stmnt) {
-  std::auto_ptr<MariaResult> res(new MariaResultPrep(con, is_stmnt));
+MariaResult* MariaResult::create_and_send_query(MariaConnectionPtr con, const std::string& sql, bool is_statement) {
+  std::auto_ptr<MariaResult> res(new MariaResultPrep(con, is_statement));
   try {
     res->send_query(sql);
   }
   catch (MariaResultPrep::UnsupportedPS e) {
     res.reset(NULL);
+    // is_statement info might be worthwhile to pass to simple queries as well 
     res.reset(new MariaResultSimple(con));
     res->send_query(sql);
   }

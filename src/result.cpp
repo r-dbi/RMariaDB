@@ -3,9 +3,9 @@
 #include "RMariaDB_types.h"
 
 // [[Rcpp::export]]
-XPtr<MariaResult> result_create(XPtr<MariaConnectionPtr> con, std::string sql, bool is_stmnt = false) {
+XPtr<MariaResult> result_create(XPtr<MariaConnectionPtr> con, std::string sql, bool is_statement = false) {
   (*con)->check_connection();
-  return XPtr<MariaResult>(MariaResult::create_and_send_query(*con, sql, is_stmnt), true);
+  return XPtr<MariaResult>(MariaResult::create_and_send_query(*con, sql, is_statement), true);
 }
 
 // [[Rcpp::export]]

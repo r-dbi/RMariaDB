@@ -154,15 +154,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // result_create
-XPtr<MariaResult> result_create(XPtr<MariaConnectionPtr> con, std::string sql, bool is_stmnt);
-RcppExport SEXP _RMariaDB_result_create(SEXP conSEXP, SEXP sqlSEXP, SEXP is_stmntSEXP) {
+XPtr<MariaResult> result_create(XPtr<MariaConnectionPtr> con, std::string sql, bool is_statement);
+RcppExport SEXP _RMariaDB_result_create(SEXP conSEXP, SEXP sqlSEXP, SEXP is_statementSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtr<MariaConnectionPtr> >::type con(conSEXP);
     Rcpp::traits::input_parameter< std::string >::type sql(sqlSEXP);
-    Rcpp::traits::input_parameter< bool >::type is_stmnt(is_stmntSEXP);
-    rcpp_result_gen = Rcpp::wrap(result_create(con, sql, is_stmnt));
+    Rcpp::traits::input_parameter< bool >::type is_statement(is_statementSEXP);
+    rcpp_result_gen = Rcpp::wrap(result_create(con, sql, is_statement));
     return rcpp_result_gen;
 END_RCPP
 }

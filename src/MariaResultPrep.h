@@ -16,7 +16,7 @@ class MariaResultPrep : boost::noncopyable, public MariaResult {
 
   int nCols_, nParams_;
   bool bound_, complete_;
-  bool is_stmnt_;
+  bool is_statement_;
 
   std::vector<MariaFieldType> types_;
   std::vector<std::string> names_;
@@ -24,7 +24,7 @@ class MariaResultPrep : boost::noncopyable, public MariaResult {
   MariaRow bindingOutput_;
 
 public:
-  MariaResultPrep(MariaConnectionPtr conn, bool is_stmnt = false);
+  MariaResultPrep(MariaConnectionPtr conn, bool is_statement = false);
   ~MariaResultPrep();
 
 public:

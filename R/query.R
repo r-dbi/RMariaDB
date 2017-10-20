@@ -56,7 +56,7 @@ setMethod("dbFetch", "MariaDBResult",
 #' @export
 setMethod("dbSendQuery", c("MariaDBConnection", "character"),
   function(conn, statement, params = NULL, ...) {
-    dbSend(conn, statement, params, FALSE)
+    dbSend(conn, statement, params, is_statement = FALSE)
   }
 )
 
@@ -64,16 +64,16 @@ setMethod("dbSendQuery", c("MariaDBConnection", "character"),
 #' @export
 setMethod("dbSendStatement", signature("MariaDBConnection", "character"),
   function(conn, statement, params = NULL, ...) {
-    dbSend(conn, statement, params, TRUE)
+    dbSend(conn, statement, params, is_statement = TRUE)
   }
 )
 
-dbSend <- function(conn, statement, params = NULL, is.stmnt = FALSE) {
+dbSend <- function(conn, statement, params = NULL, is_statement) {
   statement <- enc2utf8(statement)
 
   rs <- new("MariaDBResult",
     sql = statement,
-    ptr = result_create(conn@ptr, statement, is.stmnt)
+    ptr = result_create(conn@ptr, statement, is_statement)
   )
 
   if (!is.null(params)) {
