@@ -36,7 +36,7 @@ protected:
   void autocommit();
 
 public:
-  static MariaResult* create_and_send_query(MariaConnectionPtr con, const std::string& sql);
+  static MariaResult* create_and_send_query(MariaConnectionPtr con, const std::string& sql, bool is_statement);
 
 private:
   MariaConnectionPtr maria_conn;

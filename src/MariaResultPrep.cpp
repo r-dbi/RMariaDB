@@ -4,7 +4,7 @@
 #include "MariaConnection.h"
 #include <mysqld_error.h>
 
-MariaResultPrep::MariaResultPrep(MariaConnectionPtr conn) :
+MariaResultPrep::MariaResultPrep(MariaConnectionPtr conn, bool is_statement) :
   MariaResult(conn),
   pStatement_(NULL),
   pSpec_(NULL),
@@ -13,7 +13,8 @@ MariaResultPrep::MariaResultPrep(MariaConnectionPtr conn) :
   nCols_(0),
   nParams_(0),
   bound_(false),
-  complete_(false)
+  complete_(false),
+  is_statement_(is_statement)
 {
   pStatement_ = mysql_stmt_init(get_conn());
   if (pStatement_ == NULL)
@@ -79,6 +80,10 @@ void MariaResultPrep::execute() {
 
   if (mysql_stmt_execute(pStatement_) != 0)
     throw_error();
+  if (!has_result() && !is_statement_) {
+    // try again after mysql_stmt_execute, in case pSpec_ == NULL
+    pSpec_ = mysql_stmt_result_metadata(pStatement_);
+  }
   if (!has_result()) {
     rowsAffected_ += mysql_stmt_affected_rows(pStatement_);
   }
