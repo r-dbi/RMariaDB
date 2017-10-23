@@ -1,7 +1,7 @@
 #include "pch.h"
 #include <ctime>
 
-#ifdef WIN32
+#if defined(WIN32) || defined(_WIN32)
 #define timegm _mkgmtime
 #endif
 
