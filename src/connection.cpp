@@ -59,14 +59,13 @@ List connection_info(DbConnection* con) {
 // Quoting
 
 // [[Rcpp::export]]
-CharacterVector connection_quote_string(XPtr<DbConnectionPtr> con,
-                                        CharacterVector input) {
-  R_xlen_t n = input.size();
+CharacterVector connection_quote_string(DbConnection* con, CharacterVector xs) {
+  R_xlen_t n = xs.size();
   CharacterVector output(n);
 
   for (R_xlen_t i = 0; i < n; ++i) {
-    String x = input[i];
-    output[i] = Rf_mkCharCE((*con)->quote_string(x).c_str(), CE_UTF8);
+    String x = xs[i];
+    output[i] = con->quote_string(x);
   }
 
   return output;

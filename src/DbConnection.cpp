@@ -117,9 +117,9 @@ MYSQL* DbConnection::get_conn() {
   return pConn_;
 }
 
-std::string DbConnection::quote_string(const Rcpp::String& input) {
+SEXP DbConnection::quote_string(const String& input) {
   if (input == NA_STRING)
-    return "NULL";
+    return get_null_string();
 
   const char* input_cstr = input.get_cstring();
   size_t input_len = strlen(input_cstr);
@@ -132,8 +132,12 @@ std::string DbConnection::quote_string(const Rcpp::String& input) {
 
   output.resize(end + 1);
   output.append("'");
+  return Rf_mkCharCE(output.c_str(), CE_UTF8);
+}
 
-  return output;
+SEXP DbConnection::get_null_string() {
+  static RObject null = Rf_mkCharCE("NULL", CE_UTF8);
+  return null;
 }
 
 void DbConnection::set_current_result(DbResult* pResult) {

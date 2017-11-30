@@ -63,14 +63,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // connection_quote_string
-CharacterVector connection_quote_string(XPtr<DbConnectionPtr> con, CharacterVector input);
-RcppExport SEXP _RMariaDB_connection_quote_string(SEXP conSEXP, SEXP inputSEXP) {
+CharacterVector connection_quote_string(DbConnection* con, CharacterVector xs);
+RcppExport SEXP _RMariaDB_connection_quote_string(SEXP conSEXP, SEXP xsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<DbConnectionPtr> >::type con(conSEXP);
-    Rcpp::traits::input_parameter< CharacterVector >::type input(inputSEXP);
-    rcpp_result_gen = Rcpp::wrap(connection_quote_string(con, input));
+    Rcpp::traits::input_parameter< DbConnection* >::type con(conSEXP);
+    Rcpp::traits::input_parameter< CharacterVector >::type xs(xsSEXP);
+    rcpp_result_gen = Rcpp::wrap(connection_quote_string(con, xs));
     return rcpp_result_gen;
 END_RCPP
 }

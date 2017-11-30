@@ -17,8 +17,8 @@ connection_info <- function(con) {
     .Call(`_RMariaDB_connection_info`, con)
 }
 
-connection_quote_string <- function(con, input) {
-    .Call(`_RMariaDB_connection_quote_string`, con, input)
+connection_quote_string <- function(con, xs) {
+    .Call(`_RMariaDB_connection_quote_string`, con, xs)
 }
 
 connection_begin_transaction <- function(con) {

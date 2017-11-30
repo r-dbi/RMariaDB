@@ -35,7 +35,8 @@ public:
   List info();
   MYSQL* get_conn();
 
-  std::string quote_string(const Rcpp::String& input);
+  SEXP quote_string(const String& input);
+  static SEXP get_null_string();
 
   // Cancels previous query, if needed.
   void set_current_result(DbResult* pResult);
