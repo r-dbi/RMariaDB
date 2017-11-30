@@ -5,15 +5,16 @@
 #include "DbConnection.h"
 #include "MariaBinding.h"
 #include "DbResult.h"
+#include "MariaResultImpl.h"
 #include "MariaRow.h"
 #include "MariaTypes.h"
 #include "MariaUtils.h"
 
-class MariaResultSimple : boost::noncopyable, public DbResult {
-  DbConnectionPtr pConn_;
+class MariaResultSimple : boost::noncopyable, public MariaResultImpl {
+  DbResult* pRes_;
 
 public:
-  MariaResultSimple(DbConnectionPtr conn);
+  MariaResultSimple(DbResult* res);
   ~MariaResultSimple();
 
 public:
@@ -29,6 +30,9 @@ public:
   virtual int n_rows_affected();
   virtual int n_rows_fetched();
   virtual bool complete();
+
+private:
+  void exec(const std::string& sql);
 };
 
 #endif

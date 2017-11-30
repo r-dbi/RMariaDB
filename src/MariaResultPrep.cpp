@@ -4,8 +4,8 @@
 #include "DbConnection.h"
 #include <mysqld_error.h>
 
-MariaResultPrep::MariaResultPrep(DbConnectionPtr conn, bool is_statement) :
-  DbResult(conn),
+MariaResultPrep::MariaResultPrep(DbResult* res, bool is_statement) :
+  pRes_(res),
   pStatement_(NULL),
   pSpec_(NULL),
   rowsAffected_(0),
@@ -16,17 +16,13 @@ MariaResultPrep::MariaResultPrep(DbConnectionPtr conn, bool is_statement) :
   complete_(false),
   is_statement_(is_statement)
 {
-  pStatement_ = mysql_stmt_init(get_conn());
+  pStatement_ = mysql_stmt_init(pRes_->get_conn());
   if (pStatement_ == NULL)
     stop("Out of memory");
-  set_current_result();
 }
 
 MariaResultPrep::~MariaResultPrep() {
-  try {
-    clear_current_result();
-    close();
-  } catch (...) {};
+  MariaResultPrep::close();
 }
 
 void MariaResultPrep::send_query(const std::string& sql) {
@@ -70,7 +66,7 @@ void MariaResultPrep::close() {
     pStatement_ = NULL;
   }
 
-  autocommit();
+  pRes_->get_db_conn()->autocommit();
 }
 
 void MariaResultPrep::execute() {
@@ -168,8 +164,6 @@ bool MariaResultPrep::fetch_row() {
 List MariaResultPrep::fetch(int n_max) {
   if (!bound_)
     stop("Query needs to be bound before fetching");
-  if (!active())
-    stop("Inactive result set");
   if (!has_result()) {
     if (names_.size() == 0) {
       warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");

@@ -2,17 +2,13 @@
 
 #include "MariaResultSimple.h"
 
-MariaResultSimple::MariaResultSimple(DbConnectionPtr conn) :
-  DbResult(conn)
+MariaResultSimple::MariaResultSimple(DbResult* res) :
+pRes_(res)
 {
-  set_current_result();
 }
 
 MariaResultSimple::~MariaResultSimple() {
-  try {
-    clear_current_result();
-    close();
-  } catch (...) {};
+  MariaResultSimple::close();
 }
 
 void MariaResultSimple::send_query(const std::string& sql) {
@@ -59,4 +55,8 @@ int MariaResultSimple::n_rows_fetched() {
 
 bool MariaResultSimple::complete() {
   return true;
+}
+
+void MariaResultSimple::exec(const std::string& sql) {
+  pRes_->get_db_conn()->exec(sql);
 }

@@ -3,43 +3,47 @@
 
 #include "DbConnection.h"
 
+#include <boost/noncopyable.hpp>
+#include <boost/scoped_ptr.hpp>
+
+class MariaResultImpl;
+
 class DbResult : boost::noncopyable {
-protected:
-  DbResult(DbConnectionPtr maria_conn_);
+  DbConnectionPtr maria_conn;
+  boost::scoped_ptr<MariaResultImpl> impl;
 
 public:
+  DbResult(DbConnectionPtr maria_conn_);
   virtual ~DbResult();
 
 public:
-  virtual void send_query(const std::string& sql) = 0;
-  virtual void close() = 0;
+  void send_query(const std::string& sql, bool is_statement);
+  void close();
 
-  virtual void bind(List params) = 0;
+  bool complete();
+  bool active() const;
 
-  virtual List get_column_info() = 0;
+  void bind(List params);
 
-  virtual List fetch(int n_max = -1) = 0;
+  List get_column_info();
 
-  virtual int n_rows_affected() = 0;
-  virtual int n_rows_fetched() = 0;
-  virtual bool complete() = 0;
+  List fetch(int n_max = -1);
+
+  int n_rows_affected();
+  int n_rows_fetched();
 
 public:
-  bool active() const;
+  DbConnection* get_db_conn() const;
+  MYSQL* get_conn() const;
 
 protected:
   void set_current_result();
   void clear_current_result();
-  MYSQL* get_conn() const;
 
-  void exec(const std::string& sql);
   void autocommit();
 
 public:
   static DbResult* create_and_send_query(DbConnectionPtr con, const std::string& sql, bool is_statement);
-
-private:
-  DbConnectionPtr maria_conn;
 };
 
 #endif
