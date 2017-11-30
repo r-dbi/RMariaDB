@@ -61,16 +61,16 @@ result_column_info <- function(rs) {
     .Call(`_RMariaDB_result_column_info`, rs)
 }
 
+result_release <- function(res) {
+    invisible(.Call(`_RMariaDB_result_release`, res))
+}
+
 result_fetch <- function(res, n) {
     .Call(`_RMariaDB_result_fetch`, res, n)
 }
 
 result_bind <- function(rs, params) {
     invisible(.Call(`_RMariaDB_result_bind`, rs, params))
-}
-
-result_release <- function(rs) {
-    invisible(.Call(`_RMariaDB_result_release`, rs))
 }
 
 result_rows_affected <- function(rs) {
