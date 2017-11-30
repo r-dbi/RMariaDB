@@ -83,3 +83,15 @@ void connection_rollback(XPtr<DbConnectionPtr> con) {
 bool connection_is_transacting(XPtr<DbConnectionPtr> con) {
   return (*con)->is_transacting();
 }
+
+namespace Rcpp {
+
+template<>
+DbConnection* as(SEXP x) {
+  DbConnectionPtr* connection = (DbConnectionPtr*)(R_ExternalPtrAddr(x));
+  if (!connection)
+    stop("Invalid connection");
+  return connection->get();
+}
+
+}

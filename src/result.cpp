@@ -47,3 +47,15 @@ bool result_complete(XPtr<DbResult> rs) {
 bool result_active(XPtr<DbResult> rs) {
   return rs.get() != NULL &&  rs->active();
 }
+
+namespace Rcpp {
+
+template<>
+DbResult* as(SEXP x) {
+  DbResult* result = (DbResult*)(R_ExternalPtrAddr(x));
+  if (!result)
+    stop("Invalid result set");
+  return result;
+}
+
+}
