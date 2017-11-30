@@ -39,7 +39,7 @@ bool DbResult::complete() {
   return impl->complete();
 }
 
-void DbResult::bind(List params) {
+void DbResult::bind(const List& params) {
   impl->bind(params);
 }
 
@@ -79,10 +79,6 @@ MYSQL* DbResult::get_conn() const {
 
 bool DbResult::active() const {
   return maria_conn->is_current_result(this);
-}
-
-void DbResult::autocommit() {
-  maria_conn->autocommit();
 }
 
 DbResult* DbResult::create_and_send_query(DbConnectionPtr con, const std::string& sql, bool is_statement) {

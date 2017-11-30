@@ -14,23 +14,21 @@ class DbResult : boost::noncopyable {
 
 public:
   DbResult(DbConnectionPtr maria_conn_);
-  virtual ~DbResult();
+  ~DbResult();
 
 public:
-  void send_query(const std::string& sql, bool is_statement);
   void close();
 
   bool complete();
   bool active() const;
+  int n_rows_fetched();
+  int n_rows_affected();
 
-  void bind(List params);
+  void bind(const List& params);
+  List fetch(int n_max = -1);
 
   List get_column_info();
 
-  List fetch(int n_max = -1);
-
-  int n_rows_affected();
-  int n_rows_fetched();
 
 public:
   DbConnection* get_db_conn() const;
@@ -40,7 +38,8 @@ protected:
   void set_current_result();
   void clear_current_result();
 
-  void autocommit();
+private:
+  void send_query(const std::string& sql, bool is_statement);
 
 public:
   static DbResult* create_and_send_query(DbConnectionPtr con, const std::string& sql, bool is_statement);

@@ -85,7 +85,7 @@ void MariaResultPrep::execute() {
   }
 }
 
-void MariaResultPrep::bind(List params) {
+void MariaResultPrep::bind(const List& params) {
   rowsAffected_ = 0;
 
   bindingInput_.setup(pStatement_);

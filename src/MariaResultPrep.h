@@ -34,7 +34,7 @@ public:
   virtual void send_query(const std::string& sql);
   virtual void close();
 
-  virtual void bind(List params);
+  virtual void bind(const List& params);
 
   virtual List get_column_info();
 

@@ -21,7 +21,7 @@ void MariaResultSimple::close() {
   LOG_VERBOSE;
 }
 
-void MariaResultSimple::bind(List /*params*/) {
+void MariaResultSimple::bind(const List& /*params*/) {
   LOG_VERBOSE;
 
   stop("This query is not supported by the prepared statement protocol, no parameters can be bound.");
