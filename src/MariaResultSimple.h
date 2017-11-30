@@ -9,11 +9,11 @@
 #include "MariaTypes.h"
 #include "MariaUtils.h"
 
-class MariaResultSimple : boost::noncopyable, public MariaResult {
-  MariaConnectionPtr pConn_;
+class MariaResultSimple : boost::noncopyable, public DbResult {
+  DbConnectionPtr pConn_;
 
 public:
-  MariaResultSimple(MariaConnectionPtr conn);
+  MariaResultSimple(DbConnectionPtr conn);
   ~MariaResultSimple();
 
 public:

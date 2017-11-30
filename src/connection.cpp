@@ -2,7 +2,7 @@
 #include "RMariaDB_types.h"
 
 // [[Rcpp::export]]
-XPtr<MariaConnectionPtr> connection_create(
+XPtr<DbConnectionPtr> connection_create(
   const Nullable<std::string>& host,
   const Nullable<std::string>& user,
   const Nullable<std::string>& password,
@@ -20,22 +20,22 @@ XPtr<MariaConnectionPtr> connection_create(
 ) {
   LOG_VERBOSE;
 
-  std::auto_ptr<MariaConnection> pConnPtr(new MariaConnection);
+  std::auto_ptr<DbConnection> pConnPtr(new DbConnection);
   pConnPtr->connect(
     host, user, password, db, port, unix_socket, client_flag, groups, default_file,
     ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher
   );
 
-  return XPtr<MariaConnectionPtr>(new MariaConnectionPtr(pConnPtr.release()), true);
+  return XPtr<DbConnectionPtr>(new DbConnectionPtr(pConnPtr.release()), true);
 }
 
 // [[Rcpp::export]]
-bool connection_valid(XPtr<MariaConnectionPtr> con) {
+bool connection_valid(XPtr<DbConnectionPtr> con) {
   return con.get() != NULL && (*con)->is_connected();
 }
 
 // [[Rcpp::export]]
-void connection_release(XPtr<MariaConnectionPtr> con) {
+void connection_release(XPtr<DbConnectionPtr> con) {
   if (!connection_valid(con)) {
     warning("Already disconnected");
     return;
@@ -46,12 +46,12 @@ void connection_release(XPtr<MariaConnectionPtr> con) {
 }
 
 // [[Rcpp::export]]
-List connection_info(XPtr<MariaConnectionPtr> con) {
+List connection_info(XPtr<DbConnectionPtr> con) {
   return (*con)->connection_info();
 }
 
 // [[Rcpp::export]]
-CharacterVector connection_quote_string(XPtr<MariaConnectionPtr> con,
+CharacterVector connection_quote_string(XPtr<DbConnectionPtr> con,
                                         CharacterVector input) {
   R_xlen_t n = input.size();
   CharacterVector output(n);
@@ -65,21 +65,21 @@ CharacterVector connection_quote_string(XPtr<MariaConnectionPtr> con,
 }
 
 // [[Rcpp::export]]
-void connection_begin_transaction(XPtr<MariaConnectionPtr> con) {
+void connection_begin_transaction(XPtr<DbConnectionPtr> con) {
   (*con)->begin_transaction();
 }
 
 // [[Rcpp::export]]
-void connection_commit(XPtr<MariaConnectionPtr> con) {
+void connection_commit(XPtr<DbConnectionPtr> con) {
   (*con)->commit();
 }
 
 // [[Rcpp::export]]
-void connection_rollback(XPtr<MariaConnectionPtr> con) {
+void connection_rollback(XPtr<DbConnectionPtr> con) {
   (*con)->rollback();
 }
 
 // [[Rcpp::export]]
-bool connection_is_transacting(XPtr<MariaConnectionPtr> con) {
+bool connection_is_transacting(XPtr<DbConnectionPtr> con) {
   return (*con)->is_transacting();
 }

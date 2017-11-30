@@ -3,12 +3,12 @@
 
 #include "DbConnection.h"
 
-class MariaResult {
+class DbResult {
 protected:
-  MariaResult(MariaConnectionPtr maria_conn_);
+  DbResult(DbConnectionPtr maria_conn_);
 
 public:
-  virtual ~MariaResult();
+  virtual ~DbResult();
 
 public:
   virtual void send_query(const std::string& sql) = 0;
@@ -36,10 +36,10 @@ protected:
   void autocommit();
 
 public:
-  static MariaResult* create_and_send_query(MariaConnectionPtr con, const std::string& sql, bool is_statement);
+  static DbResult* create_and_send_query(DbConnectionPtr con, const std::string& sql, bool is_statement);
 
 private:
-  MariaConnectionPtr maria_conn;
+  DbConnectionPtr maria_conn;
 };
 
 #endif

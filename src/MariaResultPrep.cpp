@@ -4,8 +4,8 @@
 #include "DbConnection.h"
 #include <mysqld_error.h>
 
-MariaResultPrep::MariaResultPrep(MariaConnectionPtr conn, bool is_statement) :
-  MariaResult(conn),
+MariaResultPrep::MariaResultPrep(DbConnectionPtr conn, bool is_statement) :
+  DbResult(conn),
   pStatement_(NULL),
   pSpec_(NULL),
   rowsAffected_(0),

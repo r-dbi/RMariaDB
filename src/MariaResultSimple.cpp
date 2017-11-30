@@ -2,8 +2,8 @@
 
 #include "MariaResultSimple.h"
 
-MariaResultSimple::MariaResultSimple(MariaConnectionPtr conn) :
-  MariaResult(conn)
+MariaResultSimple::MariaResultSimple(DbConnectionPtr conn) :
+  DbResult(conn)
 {
   set_current_result();
 }

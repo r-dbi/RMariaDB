@@ -9,7 +9,7 @@
 #include "MariaTypes.h"
 #include "MariaUtils.h"
 
-class MariaResultPrep : boost::noncopyable, public MariaResult {
+class MariaResultPrep : boost::noncopyable, public DbResult {
   MYSQL_STMT* pStatement_;
   MYSQL_RES* pSpec_;
   uint64_t rowsAffected_, rowsFetched_;
@@ -24,7 +24,7 @@ class MariaResultPrep : boost::noncopyable, public MariaResult {
   MariaRow bindingOutput_;
 
 public:
-  MariaResultPrep(MariaConnectionPtr conn, bool is_statement = false);
+  MariaResultPrep(DbConnectionPtr conn, bool is_statement = false);
   ~MariaResultPrep();
 
 public:
