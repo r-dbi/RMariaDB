@@ -1,6 +1,6 @@
 #include "pch.h"
 
-#include "MariaResult.h"
+#include "DbResult.h"
 #include "MariaResultPrep.h"
 #include "MariaResultSimple.h"
 

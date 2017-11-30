@@ -1,7 +1,7 @@
 #ifndef __RMARIADB_MARIA_RESULT__
 #define __RMARIADB_MARIA_RESULT__
 
-#include "MariaConnection.h"
+#include "DbConnection.h"
 
 class MariaResult {
 protected:

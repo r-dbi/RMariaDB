@@ -1,7 +1,7 @@
 #include "pch.h"
 
 #include "MariaResultPrep.h"
-#include "MariaConnection.h"
+#include "DbConnection.h"
 #include <mysqld_error.h>
 
 MariaResultPrep::MariaResultPrep(MariaConnectionPtr conn, bool is_statement) :

@@ -1,6 +1,6 @@
 #include "pch.h"
-#include "MariaConnection.h"
-#include "MariaResult.h"
+#include "DbConnection.h"
+#include "DbResult.h"
 
 MariaConnection::MariaConnection() :
   pConn_(NULL),

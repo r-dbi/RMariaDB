@@ -2,9 +2,9 @@
 #define __RMARIADB_MARIA_RESULT_SIMPLE__
 
 #include <boost/noncopyable.hpp>
-#include "MariaConnection.h"
+#include "DbConnection.h"
 #include "MariaBinding.h"
-#include "MariaResult.h"
+#include "DbResult.h"
 #include "MariaRow.h"
 #include "MariaTypes.h"
 #include "MariaUtils.h"
