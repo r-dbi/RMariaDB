@@ -171,6 +171,8 @@ bool DbConnection::exec(std::string sql) {
   if (res != NULL)
     mysql_free_result(res);
 
+  autocommit();
+
   return true;
 }
 
