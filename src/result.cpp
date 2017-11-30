@@ -14,8 +14,8 @@ List result_column_info(XPtr<DbResult> rs) {
 }
 
 // [[Rcpp::export]]
-List result_fetch(XPtr<DbResult> rs, int n) {
-  return rs->fetch(n);
+List result_fetch(DbResult* res, const int n) {
+  return res->fetch(n);
 }
 
 // [[Rcpp::export]]

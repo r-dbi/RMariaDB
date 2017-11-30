@@ -61,8 +61,8 @@ result_column_info <- function(rs) {
     .Call(`_RMariaDB_result_column_info`, rs)
 }
 
-result_fetch <- function(rs, n) {
-    .Call(`_RMariaDB_result_fetch`, rs, n)
+result_fetch <- function(res, n) {
+    .Call(`_RMariaDB_result_fetch`, res, n)
 }
 
 result_bind <- function(rs, params) {

@@ -178,14 +178,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // result_fetch
-List result_fetch(XPtr<DbResult> rs, int n);
-RcppExport SEXP _RMariaDB_result_fetch(SEXP rsSEXP, SEXP nSEXP) {
+List result_fetch(DbResult* res, const int n);
+RcppExport SEXP _RMariaDB_result_fetch(SEXP resSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<DbResult> >::type rs(rsSEXP);
-    Rcpp::traits::input_parameter< int >::type n(nSEXP);
-    rcpp_result_gen = Rcpp::wrap(result_fetch(rs, n));
+    Rcpp::traits::input_parameter< DbResult* >::type res(resSEXP);
+    Rcpp::traits::input_parameter< const int >::type n(nSEXP);
+    rcpp_result_gen = Rcpp::wrap(result_fetch(res, n));
     return rcpp_result_gen;
 END_RCPP
 }
