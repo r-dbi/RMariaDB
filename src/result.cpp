@@ -5,7 +5,8 @@
 // [[Rcpp::export]]
 XPtr<DbResult> result_create(XPtr<DbConnectionPtr> con, std::string sql, bool is_statement = false) {
   (*con)->check_connection();
-  return XPtr<DbResult>(DbResult::create_and_send_query(*con, sql, is_statement), true);
+  DbResult* res = DbResult::create_and_send_query(*con, sql, is_statement);
+  return XPtr<DbResult>(res, true);
 }
 
 // [[Rcpp::export]]
