@@ -200,13 +200,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // result_bind
-void result_bind(XPtr<DbResult> rs, List params);
-RcppExport SEXP _RMariaDB_result_bind(SEXP rsSEXP, SEXP paramsSEXP) {
+void result_bind(DbResult* res, List params);
+RcppExport SEXP _RMariaDB_result_bind(SEXP resSEXP, SEXP paramsSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<DbResult> >::type rs(rsSEXP);
+    Rcpp::traits::input_parameter< DbResult* >::type res(resSEXP);
     Rcpp::traits::input_parameter< List >::type params(paramsSEXP);
-    result_bind(rs, params);
+    result_bind(res, params);
     return R_NilValue;
 END_RCPP
 }

@@ -69,8 +69,8 @@ result_fetch <- function(res, n) {
     .Call(`_RMariaDB_result_fetch`, res, n)
 }
 
-result_bind <- function(rs, params) {
-    invisible(.Call(`_RMariaDB_result_bind`, rs, params))
+result_bind <- function(res, params) {
+    invisible(.Call(`_RMariaDB_result_bind`, res, params))
 }
 
 result_rows_affected <- function(rs) {
