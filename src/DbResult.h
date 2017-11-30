@@ -16,12 +16,12 @@ public:
 
   virtual void bind(List params) = 0;
 
-  virtual List column_info() = 0;
+  virtual List get_column_info() = 0;
 
   virtual List fetch(int n_max = -1) = 0;
 
-  virtual int rows_affected() = 0;
-  virtual int rows_fetched() = 0;
+  virtual int n_rows_affected() = 0;
+  virtual int n_rows_fetched() = 0;
   virtual bool complete() = 0;
 
 public:

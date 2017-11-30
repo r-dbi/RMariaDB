@@ -9,11 +9,6 @@ XPtr<DbResult> result_create(XPtr<DbConnectionPtr> con, std::string sql, bool is
 }
 
 // [[Rcpp::export]]
-List result_column_info(XPtr<DbResult> rs) {
-  return rs->column_info();
-}
-
-// [[Rcpp::export]]
 void result_release(XPtr<DbResult> res) {
   res.release();
 }
@@ -25,27 +20,33 @@ List result_fetch(DbResult* res, const int n) {
 
 // [[Rcpp::export]]
 void result_bind(DbResult* res, List params) {
-  return res->bind(params);
+  res->bind(params);
 }
 
 // [[Rcpp::export]]
-int result_rows_affected(XPtr<DbResult> rs) {
-  return rs->rows_affected();
+bool result_has_completed(DbResult* res) {
+  return res->complete();
 }
 
 // [[Rcpp::export]]
-int result_rows_fetched(XPtr<DbResult> rs) {
-  return rs->rows_fetched();
+bool result_valid(XPtr<DbResult> res_) {
+  DbResult* res = res_.get();
+  return res != NULL && res->active();
 }
 
 // [[Rcpp::export]]
-bool result_complete(XPtr<DbResult> rs) {
-  return rs->complete();
+int result_rows_fetched(DbResult* res) {
+  return res->n_rows_fetched();
 }
 
 // [[Rcpp::export]]
-bool result_active(XPtr<DbResult> rs) {
-  return rs.get() != NULL &&  rs->active();
+int result_rows_affected(DbResult* res) {
+  return res->n_rows_affected();
+}
+
+// [[Rcpp::export]]
+List result_column_info(DbResult* res) {
+  return res->get_column_info();
 }
 
 namespace Rcpp {

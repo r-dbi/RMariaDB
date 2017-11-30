@@ -22,12 +22,12 @@ public:
 
   virtual void bind(List params);
 
-  virtual List column_info();
+  virtual List get_column_info();
 
   virtual List fetch(int n_max = -1);
 
-  virtual int rows_affected();
-  virtual int rows_fetched();
+  virtual int n_rows_affected();
+  virtual int n_rows_fetched();
   virtual bool complete();
 };
 

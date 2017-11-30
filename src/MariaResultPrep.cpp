@@ -107,7 +107,7 @@ void MariaResultPrep::bind(List params) {
   bound_ = true;
 }
 
-List MariaResultPrep::column_info() {
+List MariaResultPrep::get_column_info() {
   CharacterVector names(nCols_), types(nCols_);
   for (int i = 0; i < nCols_; i++) {
     names[i] = names_[i];
@@ -215,13 +215,13 @@ List MariaResultPrep::fetch(int n_max) {
   return out;
 }
 
-int MariaResultPrep::rows_affected() {
+int MariaResultPrep::n_rows_affected() {
   if (!bound_) return NA_INTEGER;
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsAffected_);
 }
 
-int MariaResultPrep::rows_fetched() {
+int MariaResultPrep::n_rows_fetched() {
   if (!bound_) return 0;
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsFetched_);

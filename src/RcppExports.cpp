@@ -166,17 +166,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// result_column_info
-List result_column_info(XPtr<DbResult> rs);
-RcppExport SEXP _RMariaDB_result_column_info(SEXP rsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<DbResult> >::type rs(rsSEXP);
-    rcpp_result_gen = Rcpp::wrap(result_column_info(rs));
-    return rcpp_result_gen;
-END_RCPP
-}
 // result_release
 void result_release(XPtr<DbResult> res);
 RcppExport SEXP _RMariaDB_result_release(SEXP resSEXP) {
@@ -210,47 +199,58 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// result_rows_affected
-int result_rows_affected(XPtr<DbResult> rs);
-RcppExport SEXP _RMariaDB_result_rows_affected(SEXP rsSEXP) {
+// result_has_completed
+bool result_has_completed(DbResult* res);
+RcppExport SEXP _RMariaDB_result_has_completed(SEXP resSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<DbResult> >::type rs(rsSEXP);
-    rcpp_result_gen = Rcpp::wrap(result_rows_affected(rs));
+    Rcpp::traits::input_parameter< DbResult* >::type res(resSEXP);
+    rcpp_result_gen = Rcpp::wrap(result_has_completed(res));
+    return rcpp_result_gen;
+END_RCPP
+}
+// result_valid
+bool result_valid(XPtr<DbResult> res_);
+RcppExport SEXP _RMariaDB_result_valid(SEXP res_SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtr<DbResult> >::type res_(res_SEXP);
+    rcpp_result_gen = Rcpp::wrap(result_valid(res_));
     return rcpp_result_gen;
 END_RCPP
 }
 // result_rows_fetched
-int result_rows_fetched(XPtr<DbResult> rs);
-RcppExport SEXP _RMariaDB_result_rows_fetched(SEXP rsSEXP) {
+int result_rows_fetched(DbResult* res);
+RcppExport SEXP _RMariaDB_result_rows_fetched(SEXP resSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<DbResult> >::type rs(rsSEXP);
-    rcpp_result_gen = Rcpp::wrap(result_rows_fetched(rs));
+    Rcpp::traits::input_parameter< DbResult* >::type res(resSEXP);
+    rcpp_result_gen = Rcpp::wrap(result_rows_fetched(res));
     return rcpp_result_gen;
 END_RCPP
 }
-// result_complete
-bool result_complete(XPtr<DbResult> rs);
-RcppExport SEXP _RMariaDB_result_complete(SEXP rsSEXP) {
+// result_rows_affected
+int result_rows_affected(DbResult* res);
+RcppExport SEXP _RMariaDB_result_rows_affected(SEXP resSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<DbResult> >::type rs(rsSEXP);
-    rcpp_result_gen = Rcpp::wrap(result_complete(rs));
+    Rcpp::traits::input_parameter< DbResult* >::type res(resSEXP);
+    rcpp_result_gen = Rcpp::wrap(result_rows_affected(res));
     return rcpp_result_gen;
 END_RCPP
 }
-// result_active
-bool result_active(XPtr<DbResult> rs);
-RcppExport SEXP _RMariaDB_result_active(SEXP rsSEXP) {
+// result_column_info
+List result_column_info(DbResult* res);
+RcppExport SEXP _RMariaDB_result_column_info(SEXP resSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<DbResult> >::type rs(rsSEXP);
-    rcpp_result_gen = Rcpp::wrap(result_active(rs));
+    Rcpp::traits::input_parameter< DbResult* >::type res(resSEXP);
+    rcpp_result_gen = Rcpp::wrap(result_column_info(res));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -270,14 +270,14 @@ static const R_CallMethodDef CallEntries[] = {
     {"_RMariaDB_version", (DL_FUNC) &_RMariaDB_version, 0},
     {"_RMariaDB_init_logging", (DL_FUNC) &_RMariaDB_init_logging, 1},
     {"_RMariaDB_result_create", (DL_FUNC) &_RMariaDB_result_create, 3},
-    {"_RMariaDB_result_column_info", (DL_FUNC) &_RMariaDB_result_column_info, 1},
     {"_RMariaDB_result_release", (DL_FUNC) &_RMariaDB_result_release, 1},
     {"_RMariaDB_result_fetch", (DL_FUNC) &_RMariaDB_result_fetch, 2},
     {"_RMariaDB_result_bind", (DL_FUNC) &_RMariaDB_result_bind, 2},
-    {"_RMariaDB_result_rows_affected", (DL_FUNC) &_RMariaDB_result_rows_affected, 1},
+    {"_RMariaDB_result_has_completed", (DL_FUNC) &_RMariaDB_result_has_completed, 1},
+    {"_RMariaDB_result_valid", (DL_FUNC) &_RMariaDB_result_valid, 1},
     {"_RMariaDB_result_rows_fetched", (DL_FUNC) &_RMariaDB_result_rows_fetched, 1},
-    {"_RMariaDB_result_complete", (DL_FUNC) &_RMariaDB_result_complete, 1},
-    {"_RMariaDB_result_active", (DL_FUNC) &_RMariaDB_result_active, 1},
+    {"_RMariaDB_result_rows_affected", (DL_FUNC) &_RMariaDB_result_rows_affected, 1},
+    {"_RMariaDB_result_column_info", (DL_FUNC) &_RMariaDB_result_column_info, 1},
     {NULL, NULL, 0}
 };
 

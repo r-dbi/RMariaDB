@@ -31,7 +31,7 @@ void MariaResultSimple::bind(List /*params*/) {
   stop("This query is not supported by the prepared statement protocol, no parameters can be bound.");
 }
 
-List MariaResultSimple::column_info() {
+List MariaResultSimple::get_column_info() {
   CharacterVector names(0), types(0);
 
   List out = List::create(names, types);
@@ -49,11 +49,11 @@ List MariaResultSimple::fetch(int /*n_max*/) {
   return df_create(std::vector<MariaFieldType>(), std::vector<std::string>(), 0);
 }
 
-int MariaResultSimple::rows_affected() {
+int MariaResultSimple::n_rows_affected() {
   return 0;
 }
 
-int MariaResultSimple::rows_fetched() {
+int MariaResultSimple::n_rows_fetched() {
   return 0;
 }
 

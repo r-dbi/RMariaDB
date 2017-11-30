@@ -16,6 +16,6 @@ setClass("MariaDBResult",
 #' @rdname MariaDBResult-class
 #' @export
 setMethod("dbIsValid", "MariaDBResult", function(dbObj, ...) {
-  result_active(dbObj@ptr)
+  result_valid(dbObj@ptr)
 })
 
