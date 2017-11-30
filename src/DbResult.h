@@ -3,7 +3,7 @@
 
 #include "DbConnection.h"
 
-class DbResult {
+class DbResult : boost::noncopyable {
 protected:
   DbResult(DbConnectionPtr maria_conn_);
 
