@@ -26,29 +26,37 @@ XPtr<DbConnectionPtr> connection_create(
     ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher
   );
 
-  return XPtr<DbConnectionPtr>(new DbConnectionPtr(pConnPtr.release()), true);
+  DbConnectionPtr* pConn = new DbConnectionPtr(
+    pConnPtr.release()
+  );
+
+  return XPtr<DbConnectionPtr>(pConn, true);
 }
 
 // [[Rcpp::export]]
-bool connection_valid(XPtr<DbConnectionPtr> con) {
-  return con.get() != NULL && (*con)->is_connected();
+bool connection_valid(XPtr<DbConnectionPtr> con_) {
+  DbConnectionPtr* con = con_.get();
+  return con && con->get()->is_valid();
 }
 
 // [[Rcpp::export]]
-void connection_release(XPtr<DbConnectionPtr> con) {
-  if (!connection_valid(con)) {
+void connection_release(XPtr<DbConnectionPtr> con_) {
+  if (!connection_valid(con_)) {
     warning("Already disconnected");
     return;
   }
 
-  (*con)->disconnect();
-  con.release();
+  DbConnectionPtr* con = con_.get();
+  con->get()->disconnect();
+  con_.release();
 }
 
 // [[Rcpp::export]]
-List connection_info(XPtr<DbConnectionPtr> con) {
-  return (*con)->connection_info();
+List connection_info(DbConnection* con) {
+  return con->info();
 }
+
+// Quoting
 
 // [[Rcpp::export]]
 CharacterVector connection_quote_string(XPtr<DbConnectionPtr> con,
@@ -63,6 +71,8 @@ CharacterVector connection_quote_string(XPtr<DbConnectionPtr> con,
 
   return output;
 }
+
+// Transactions
 
 // [[Rcpp::export]]
 void connection_begin_transaction(XPtr<DbConnectionPtr> con) {
@@ -80,9 +90,15 @@ void connection_rollback(XPtr<DbConnectionPtr> con) {
 }
 
 // [[Rcpp::export]]
-bool connection_is_transacting(XPtr<DbConnectionPtr> con) {
-  return (*con)->is_transacting();
+bool connection_is_transacting(DbConnection* con) {
+  return con->is_transacting();
 }
+
+
+// Specific functions
+
+
+// as() override
 
 namespace Rcpp {
 

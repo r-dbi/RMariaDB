@@ -13,7 +13,7 @@ DbConnection::DbConnection() :
 DbConnection::~DbConnection() {
   LOG_VERBOSE;
 
-  if (is_connected()) {
+  if (is_valid()) {
     warning("call dbDisconnect() when finished working with a connection");
     disconnect();
   }
@@ -72,7 +72,7 @@ void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std
 }
 
 void DbConnection::disconnect() {
-  if (!is_connected()) return;
+  if (!is_valid()) return;
 
   if (has_query()) {
     warning(
@@ -89,17 +89,17 @@ void DbConnection::disconnect() {
   pConn_ = NULL;
 }
 
-bool DbConnection::is_connected() {
+bool DbConnection::is_valid() {
   return !!get_conn();
 }
 
 void DbConnection::check_connection() {
-  if (!is_connected()) {
+  if (!is_valid()) {
     stop("Invalid or closed connection");
   }
 }
 
-List DbConnection::connection_info() {
+List DbConnection::info() {
   return
     List::create(
       _["host"] = std::string(pConn_->host),

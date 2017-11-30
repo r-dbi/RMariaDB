@@ -5,12 +5,12 @@ connection_create <- function(host, user, password, db, port, unix_socket, clien
     .Call(`_RMariaDB_connection_create`, host, user, password, db, port, unix_socket, client_flag, groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher)
 }
 
-connection_valid <- function(con) {
-    .Call(`_RMariaDB_connection_valid`, con)
+connection_valid <- function(con_) {
+    .Call(`_RMariaDB_connection_valid`, con_)
 }
 
-connection_release <- function(con) {
-    invisible(.Call(`_RMariaDB_connection_release`, con))
+connection_release <- function(con_) {
+    invisible(.Call(`_RMariaDB_connection_release`, con_))
 }
 
 connection_info <- function(con) {
@@ -61,6 +61,10 @@ result_release <- function(res) {
     invisible(.Call(`_RMariaDB_result_release`, res))
 }
 
+result_valid <- function(res_) {
+    .Call(`_RMariaDB_result_valid`, res_)
+}
+
 result_fetch <- function(res, n) {
     .Call(`_RMariaDB_result_fetch`, res, n)
 }
@@ -71,10 +75,6 @@ result_bind <- function(res, params) {
 
 result_has_completed <- function(res) {
     .Call(`_RMariaDB_result_has_completed`, res)
-}
-
-result_valid <- function(res_) {
-    .Call(`_RMariaDB_result_valid`, res_)
 }
 
 result_rows_fetched <- function(res) {

@@ -29,10 +29,10 @@ public:
           const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
           const Nullable<std::string>& ssl_cipher);
   void disconnect();
-  bool is_connected();
+  bool is_valid();
   void check_connection();
 
-  List connection_info();
+  List info();
   MYSQL* get_conn();
 
   std::string quote_string(const Rcpp::String& input);
