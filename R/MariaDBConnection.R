@@ -14,19 +14,7 @@ setClass("MariaDBConnection",
   )
 )
 
-#' @export
-#' @rdname MariaDBConnection-class
-setMethod("dbDisconnect", "MariaDBConnection", function(conn, ...) {
-  connection_release(conn@ptr)
-  invisible(TRUE)
-})
-
-#' @export
-#' @rdname MariaDBConnection-class
-setMethod("dbGetInfo", "MariaDBConnection", function(dbObj, what="", ...) {
-  connection_info(dbObj@ptr)
-})
-
+# show()
 #' @export
 #' @rdname MariaDBConnection-class
 setMethod("show", "MariaDBConnection", function(object) {
@@ -46,8 +34,54 @@ setMethod("show", "MariaDBConnection", function(object) {
   }
 })
 
+# dbIsValid()
 #' @export
 #' @rdname MariaDBConnection-class
 setMethod("dbIsValid", "MariaDBConnection", function(dbObj, ...) {
   connection_valid(dbObj@ptr)
 })
+
+# dbDisconnect()
+#' @export
+#' @rdname MariaDBConnection-class
+setMethod("dbDisconnect", "MariaDBConnection", function(conn, ...) {
+  connection_release(conn@ptr)
+  invisible(TRUE)
+})
+
+# dbSendQuery()
+
+# dbSendStatement()
+
+# dbDataType()
+
+# dbQuoteString()
+
+# dbQuoteIdentifier()
+
+# dbWriteTable()
+
+# dbReadTable()
+
+# dbListTables()
+
+# dbExistsTable()
+
+# dbListFields()
+
+# dbRemoveTable()
+
+# dbGetInfo()
+#' @export
+#' @rdname MariaDBConnection-class
+setMethod("dbGetInfo", "MariaDBConnection", function(dbObj, what="", ...) {
+  connection_info(dbObj@ptr)
+})
+
+# dbBegin()
+
+# dbCommit()
+
+# dbRollback()
+
+# other

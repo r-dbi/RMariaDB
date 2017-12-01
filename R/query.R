@@ -166,5 +166,5 @@ setMethod("dbGetRowCount", "MariaDBResult", function(res, ...) {
 #' @export
 #' @rdname result-meta
 setMethod("dbHasCompleted", "MariaDBResult", function(res, ...) {
-  result_complete(res@ptr)
+  result_has_completed(res@ptr)
 })

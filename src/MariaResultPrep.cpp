@@ -1,11 +1,11 @@
 #include "pch.h"
 
 #include "MariaResultPrep.h"
-#include "MariaConnection.h"
+#include "DbConnection.h"
 #include <mysqld_error.h>
 
-MariaResultPrep::MariaResultPrep(MariaConnectionPtr conn, bool is_statement) :
-  MariaResult(conn),
+MariaResultPrep::MariaResultPrep(DbResult* res, bool is_statement) :
+  pRes_(res),
   pStatement_(NULL),
   pSpec_(NULL),
   rowsAffected_(0),
@@ -16,17 +16,13 @@ MariaResultPrep::MariaResultPrep(MariaConnectionPtr conn, bool is_statement) :
   complete_(false),
   is_statement_(is_statement)
 {
-  pStatement_ = mysql_stmt_init(get_conn());
+  pStatement_ = mysql_stmt_init(pRes_->get_conn());
   if (pStatement_ == NULL)
     stop("Out of memory");
-  set_current_result();
 }
 
 MariaResultPrep::~MariaResultPrep() {
-  try {
-    clear_current_result();
-    close();
-  } catch (...) {};
+  MariaResultPrep::close();
 }
 
 void MariaResultPrep::send_query(const std::string& sql) {
@@ -70,7 +66,7 @@ void MariaResultPrep::close() {
     pStatement_ = NULL;
   }
 
-  autocommit();
+  pRes_->get_db_conn()->autocommit();
 }
 
 void MariaResultPrep::execute() {
@@ -89,7 +85,7 @@ void MariaResultPrep::execute() {
   }
 }
 
-void MariaResultPrep::bind(List params) {
+void MariaResultPrep::bind(const List& params) {
   rowsAffected_ = 0;
 
   bindingInput_.setup(pStatement_);
@@ -107,7 +103,7 @@ void MariaResultPrep::bind(List params) {
   bound_ = true;
 }
 
-List MariaResultPrep::column_info() {
+List MariaResultPrep::get_column_info() {
   CharacterVector names(nCols_), types(nCols_);
   for (int i = 0; i < nCols_; i++) {
     names[i] = names_[i];
@@ -168,8 +164,6 @@ bool MariaResultPrep::fetch_row() {
 List MariaResultPrep::fetch(int n_max) {
   if (!bound_)
     stop("Query needs to be bound before fetching");
-  if (!active())
-    stop("Inactive result set");
   if (!has_result()) {
     if (names_.size() == 0) {
       warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
@@ -215,13 +209,13 @@ List MariaResultPrep::fetch(int n_max) {
   return out;
 }
 
-int MariaResultPrep::rows_affected() {
+int MariaResultPrep::n_rows_affected() {
   if (!bound_) return NA_INTEGER;
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsAffected_);
 }
 
-int MariaResultPrep::rows_fetched() {
+int MariaResultPrep::n_rows_fetched() {
   if (!bound_) return 0;
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsFetched_);
