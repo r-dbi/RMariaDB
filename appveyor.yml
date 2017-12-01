@@ -32,7 +32,7 @@ environment:
 
 build_script:
   - travis-tool.sh install_github rstats-db/DBI
-  - travis-tool.sh install_github rstats-db/DBItest@production
+  - travis-tool.sh install_github rstats-db/DBItest
   - travis-tool.sh install_deps
 
 test_script:
