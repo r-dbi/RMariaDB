@@ -29,6 +29,7 @@ services:
 environment:
   MYSQL_USER: root
   MYSQL_PWD: Password12!
+  NOT_CRAN: true
 
 build_script:
   - travis-tool.sh install_github rstats-db/DBI

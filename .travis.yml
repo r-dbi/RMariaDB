@@ -6,6 +6,11 @@ latex: false
 sudo: false
 warnings_are_errors: true
 
+service: mysql
+addons:
+  apt:
+    packages:
+    - libmysqlclient-dev
 env:
   global:
   - NOT_CRAN: true
@@ -14,13 +19,9 @@ env:
 matrix:
   include:
   - os: linux
-    dist: trusty
-    sudo: false
-    service: mysql
-    addons:
-      apt:
-        packages:
-          - libmysqlclient-dev
+    r: release
+    env:
+    - R_CODECOV: true
   - os: linux
     r: devel
   - os: linux
@@ -42,7 +43,6 @@ matrix:
     disable_homebrew: true
     r_check_args: '--no-tests'
     before_script: 'echo no sql server, only testing build'
-
 
 r_packages:
   - covr
