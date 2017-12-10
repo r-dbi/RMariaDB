@@ -24,9 +24,6 @@ Suggests:
     DBItest,
     rprojroot,
     testthat
-Remotes:
-    r-dbi/DBI,
-    r-dbi/DBItest
 LinkingTo: Rcpp, BH, plogr
 License: GPL-2
 URL: https://github.com/rstats-db/RMariaDB,
