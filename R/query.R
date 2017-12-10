@@ -26,7 +26,7 @@ NULL
 #' @examples
 #' if (mariadbHasDefault()) {
 #' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
-#' dbWriteTable(con, "arrests", datasets::USArrests, temporary = TRUE, overwrite = TRUE)
+#' dbWriteTable(con, "arrests", datasets::USArrests, temporary = TRUE)
 #'
 #' # Run query to get results as dataframe
 #' dbGetQuery(con, "SELECT * FROM arrests limit 3")
@@ -125,7 +125,7 @@ setMethod("dbGetStatement", "MariaDBResult", function(res, ...) {
 #' @examples
 #' if (mariadbHasDefault()) {
 #' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
-#' dbWriteTable(con, "t1", datasets::USArrests, temporary = TRUE, overwrite = TRUE)
+#' dbWriteTable(con, "t1", datasets::USArrests, temporary = TRUE)
 #'
 #' rs <- dbSendQuery(con, "SELECT * FROM t1 WHERE UrbanPop >= 80")
 #' rs
