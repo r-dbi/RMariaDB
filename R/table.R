@@ -29,7 +29,7 @@ NULL
 #'
 #' # By default, row names are written in a column to row_names, and
 #' # automatically read back into the row.names()
-#' dbWriteTable(con, "mtcars", mtcars[1:5, ], temporary = TRUE)
+#' dbWriteTable(con, "mtcars", mtcars[1:5, ], temporary = TRUE, overwrite = TRUE)
 #' dbReadTable(con, "mtcars")
 #' dbReadTable(con, "mtcars", row.names = FALSE)
 #' }
