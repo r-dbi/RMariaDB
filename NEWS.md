@@ -1,3 +1,12 @@
+## RMariaDB 1.0-3 (2017-12-10)
+
+- Fix examples running on CRAN by using only temporary tables and `overwrite = TRUE`.
+- Refactor connection and result handling to be more similar to other backends.
+- Add support for R 3.1, but DBI >= 0.5 is required (#68).
+- Queries that bypass the prepared statement framework (like `SHOW PLUGINS`) return data (#70, @nbenn).
+- A temporary table can be created via `dbWriteTable()` if a table by the same name exists. If a temporary table of the same name exists, the error will be raised by the database itself, because this condition cannot be checked beforehand.
+
+
 # RMariaDB 1.0-2 (2017-10-01)
 
 Initial release, compliant to the DBI specification.
