@@ -1,18 +1,16 @@
-Update that only changes the package title and package description in the DESCRIPTION.
+Update on CRAN's request to fix errors when running examples.
 
 ## Test environments
-* local OS X install, R 3.4.1
-* ubuntu 12.04 (on travis-ci), R 3.4.1
+* local OS X install, R 3.4.3
+* ubuntu 12.04 (on travis-ci), R 3.4.3
 * win-builder (devel and release)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 2 notes
-
-* This is a new release.
+0 errors | 0 warnings | 1 note
 
 * Package links statically with libmariadb or libmysql, hence the size.
 
 ## Reverse dependencies
 
-This is a new release, so there are no reverse dependencies.
+No reverse dependencies.
