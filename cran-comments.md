@@ -1,4 +1,4 @@
-Update on CRAN's request to fix errors when running examples.
+Update on CRAN's request to fix errors when running examples, and also to fix Solaris build errors.
 
 ## Test environments
 * local OS X install, R 3.4.3

@@ -1,5 +1,6 @@
-## RMariaDB 1.0-3 (2017-12-10)
+## RMariaDB 1.0-4 (2017-12-11)
 
+- Attempt to fix Solaris builds by redefining `timegm` symbol if the macro `sun` is defined.
 - Fix examples running on CRAN by using only temporary tables and `overwrite = TRUE`.
 - Refactor connection and result handling to be more similar to other backends.
 - Add support for R 3.1, but DBI >= 0.5 is required (#68).
