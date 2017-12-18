@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "MariaTypes.h"
+#include "integer64.h"
 
 bool all_raw(SEXP x);
 
@@ -79,7 +80,7 @@ SEXPTYPE type_sexp(MariaFieldType type) {
   case MY_INT32:
     return INTSXP;
   case MY_INT64:
-    return REALSXP;
+    return INT64SXP;
   case MY_DBL:
     return REALSXP;
   case MY_STR:

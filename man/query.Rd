@@ -4,6 +4,7 @@
 \name{dbFetch,MariaDBResult-method}
 \alias{dbFetch,MariaDBResult-method}
 \alias{dbSendQuery,MariaDBConnection,character-method}
+\alias{dbSendStatement,MariaDBConnection,character-method}
 \alias{dbBind,MariaDBResult-method}
 \alias{dbClearResult,MariaDBResult-method}
 \alias{dbGetStatement,MariaDBResult-method}
@@ -12,6 +13,9 @@
 \S4method{dbFetch}{MariaDBResult}(res, n = -1, ..., row.names = FALSE)
 
 \S4method{dbSendQuery}{MariaDBConnection,character}(conn, statement,
+  params = NULL, ...)
+
+\S4method{dbSendStatement}{MariaDBConnection,character}(conn, statement,
   params = NULL, ...)
 
 \S4method{dbBind}{MariaDBResult}(res, params, ...)
@@ -51,12 +55,15 @@ a parameterised query.}
 To retrieve results a chunk at a time, use \code{\link[=dbSendQuery]{dbSendQuery()}},
 \code{\link[=dbFetch]{dbFetch()}}, then \code{\link[=dbClearResult]{dbClearResult()}}. Alternatively, if you want all the
 results (and they'll fit in memory) use \code{\link[=dbGetQuery]{dbGetQuery()}} which sends,
-fetches and clears for you.
+fetches and clears for you. For data manipulation queries (i.e. queries
+that do not return data, such as \code{UPDATE}, \code{DELETE}, etc.),
+\code{\link[=dbSendStatement]{dbSendStatement()}} serves as a counterpart to \code{\link[=dbSendQuery]{dbSendQuery()}}, while
+\code{\link[=dbExecute]{dbExecute()}} corresponds to \code{\link[=dbGetQuery]{dbGetQuery()}}.
 }
 \examples{
 if (mariadbHasDefault()) {
 con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
-dbWriteTable(con, "arrests", datasets::USArrests, overwrite = TRUE)
+dbWriteTable(con, "arrests", datasets::USArrests, temporary = TRUE, overwrite = TRUE)
 
 # Run query to get results as dataframe
 dbGetQuery(con, "SELECT * FROM arrests limit 3")
@@ -68,7 +75,6 @@ data
 dbHasCompleted(res)
 
 dbClearResult(res)
-dbRemoveTable(con, "arrests")
 dbDisconnect(con)
 }
 }

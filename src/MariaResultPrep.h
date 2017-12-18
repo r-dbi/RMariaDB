@@ -2,20 +2,24 @@
 #define __RMARIADB_MARIA_RESULT_PREP__
 
 #include <boost/noncopyable.hpp>
-#include "MariaConnection.h"
+#include "DbConnection.h"
 #include "MariaBinding.h"
-#include "MariaResult.h"
+#include "DbResult.h"
+#include "MariaResultImpl.h"
 #include "MariaRow.h"
 #include "MariaTypes.h"
 #include "MariaUtils.h"
 
-class MariaResultPrep : boost::noncopyable, public MariaResult {
+class MariaResultPrep : boost::noncopyable, public MariaResultImpl {
+  DbResult* pRes_;
+
   MYSQL_STMT* pStatement_;
   MYSQL_RES* pSpec_;
   uint64_t rowsAffected_, rowsFetched_;
 
   int nCols_, nParams_;
   bool bound_, complete_;
+  bool is_statement_;
 
   std::vector<MariaFieldType> types_;
   std::vector<std::string> names_;
@@ -23,21 +27,21 @@ class MariaResultPrep : boost::noncopyable, public MariaResult {
   MariaRow bindingOutput_;
 
 public:
-  MariaResultPrep(MariaConnectionPtr conn);
+  MariaResultPrep(DbResult* res, bool is_statement = false);
   ~MariaResultPrep();
 
 public:
   virtual void send_query(const std::string& sql);
   virtual void close();
 
-  virtual void bind(List params);
+  virtual void bind(const List& params);
 
-  virtual List column_info();
+  virtual List get_column_info();
 
   virtual List fetch(int n_max = -1);
 
-  virtual int rows_affected();
-  virtual int rows_fetched();
+  virtual int n_rows_affected();
+  virtual int n_rows_fetched();
   virtual bool complete();
 
 public:

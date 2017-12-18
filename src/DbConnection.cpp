@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "MariaConnection.h"
-#include "MariaResult.h"
+#include "DbConnection.h"
+#include "DbResult.h"
 
-MariaConnection::MariaConnection() :
+DbConnection::DbConnection() :
   pConn_(NULL),
   pCurrentResult_(NULL),
   transacting_(false)
@@ -10,16 +10,16 @@ MariaConnection::MariaConnection() :
   LOG_VERBOSE;
 }
 
-MariaConnection::~MariaConnection() {
+DbConnection::~DbConnection() {
   LOG_VERBOSE;
 
-  if (is_connected()) {
+  if (is_valid()) {
     warning("call dbDisconnect() when finished working with a connection");
     disconnect();
   }
 }
 
-void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<std::string>& user,
+void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std::string>& user,
                               const Nullable<std::string>& password, const Nullable<std::string>& db,
                               unsigned int port, const Nullable<std::string>& unix_socket,
                               unsigned long client_flag, const Nullable<std::string>& groups,
@@ -71,8 +71,8 @@ void MariaConnection::connect(const Nullable<std::string>& host, const Nullable<
   }
 }
 
-void MariaConnection::disconnect() {
-  if (!is_connected()) return;
+void DbConnection::disconnect() {
+  if (!is_valid()) return;
 
   if (has_query()) {
     warning(
@@ -89,17 +89,17 @@ void MariaConnection::disconnect() {
   pConn_ = NULL;
 }
 
-bool MariaConnection::is_connected() {
+bool DbConnection::is_valid() {
   return !!get_conn();
 }
 
-void MariaConnection::check_connection() {
-  if (!is_connected()) {
+void DbConnection::check_connection() {
+  if (!is_valid()) {
     stop("Invalid or closed connection");
   }
 }
 
-List MariaConnection::connection_info() {
+List DbConnection::info() {
   return
     List::create(
       _["host"] = std::string(pConn_->host),
@@ -113,13 +113,13 @@ List MariaConnection::connection_info() {
     );
 }
 
-MYSQL* MariaConnection::get_conn() {
+MYSQL* DbConnection::get_conn() {
   return pConn_;
 }
 
-std::string MariaConnection::quote_string(const Rcpp::String& input) {
+SEXP DbConnection::quote_string(const String& input) {
   if (input == NA_STRING)
-    return "NULL";
+    return get_null_string();
 
   const char* input_cstr = input.get_cstring();
   size_t input_len = strlen(input_cstr);
@@ -132,11 +132,15 @@ std::string MariaConnection::quote_string(const Rcpp::String& input) {
 
   output.resize(end + 1);
   output.append("'");
-
-  return output;
+  return Rf_mkCharCE(output.c_str(), CE_UTF8);
 }
 
-void MariaConnection::set_current_result(MariaResult* pResult) {
+SEXP DbConnection::get_null_string() {
+  static RObject null = Rf_mkCharCE("NULL", CE_UTF8);
+  return null;
+}
+
+void DbConnection::set_current_result(DbResult* pResult) {
   if (pResult == pCurrentResult_)
     return;
 
@@ -149,15 +153,15 @@ void MariaConnection::set_current_result(MariaResult* pResult) {
   pCurrentResult_ = pResult;
 }
 
-bool MariaConnection::is_current_result(const MariaResult* pResult) const {
+bool DbConnection::is_current_result(const DbResult* pResult) const {
   return pCurrentResult_ == pResult;
 }
 
-bool MariaConnection::has_query() {
+bool DbConnection::has_query() {
   return pCurrentResult_ != NULL;
 }
 
-bool MariaConnection::exec(std::string sql) {
+bool DbConnection::exec(std::string sql) {
   check_connection();
 
   if (mysql_real_query(pConn_, sql.data(), sql.size()) != 0)
@@ -167,17 +171,19 @@ bool MariaConnection::exec(std::string sql) {
   if (res != NULL)
     mysql_free_result(res);
 
+  autocommit();
+
   return true;
 }
 
-void MariaConnection::begin_transaction() {
+void DbConnection::begin_transaction() {
   if (is_transacting()) stop("Nested transactions not supported.");
   check_connection();
 
   transacting_ = true;
 }
 
-void MariaConnection::commit() {
+void DbConnection::commit() {
   if (!is_transacting()) stop("Call dbBegin() to start a transaction.");
   check_connection();
 
@@ -185,7 +191,7 @@ void MariaConnection::commit() {
   transacting_ = false;
 }
 
-void MariaConnection::rollback() {
+void DbConnection::rollback() {
   if (!is_transacting()) stop("Call dbBegin() to start a transaction.");
   check_connection();
 
@@ -193,11 +199,11 @@ void MariaConnection::rollback() {
   transacting_ = false;
 }
 
-bool MariaConnection::is_transacting() const {
+bool DbConnection::is_transacting() const {
   return transacting_;
 }
 
-void MariaConnection::autocommit() {
+void DbConnection::autocommit() {
   if (!is_transacting() && get_conn()) {
     mysql_commit(get_conn());
   }

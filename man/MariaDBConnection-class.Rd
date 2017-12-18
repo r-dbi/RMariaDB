@@ -3,19 +3,19 @@
 \docType{class}
 \name{MariaDBConnection-class}
 \alias{MariaDBConnection-class}
-\alias{dbDisconnect,MariaDBConnection-method}
-\alias{dbGetInfo,MariaDBConnection-method}
 \alias{show,MariaDBConnection-method}
 \alias{dbIsValid,MariaDBConnection-method}
+\alias{dbDisconnect,MariaDBConnection-method}
+\alias{dbGetInfo,MariaDBConnection-method}
 \title{Class MariaDBConnection.}
 \usage{
-\S4method{dbDisconnect}{MariaDBConnection}(conn, ...)
-
-\S4method{dbGetInfo}{MariaDBConnection}(dbObj, what = "", ...)
-
 \S4method{show}{MariaDBConnection}(object)
 
 \S4method{dbIsValid}{MariaDBConnection}(dbObj, ...)
+
+\S4method{dbDisconnect}{MariaDBConnection}(conn, ...)
+
+\S4method{dbGetInfo}{MariaDBConnection}(dbObj, what = "", ...)
 }
 \description{
 \code{MariaDBConnection} objects are usually created by

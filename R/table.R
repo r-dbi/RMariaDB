@@ -7,8 +7,14 @@ NULL
 #'
 #' @return A data.frame in the case of `dbReadTable()`; otherwise a logical
 #' indicating whether the operation was successful.
-#' @note Note that the data.frame returned by `dbReadTable()` only has
+#' @note The data.frame returned by `dbReadTable()` only has
 #' primitive data, e.g., it does not coerce character data to factors.
+#' Temporary tables are ignored for `dbExistsTable()` and `dbListTables()` due to
+#' limitations of the underlying C API. For this reason, a prior existence check
+#' is performed only before creating a regular persistent table; an attempt to
+#' create a temporary table with an already existing name will fail with a
+#' message from the database driver.
+#'
 #'
 #' @param conn a [MariaDBConnection-class] object, produced by
 #'   [DBI::dbConnect()]
@@ -101,13 +107,18 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
       on.exit(dbRollback(conn))
     }
 
-    found <- dbExistsTable(conn, name)
-    if (found && !overwrite && !append) {
-      stop("Table ", name, " exists in database, and both overwrite and",
-        " append are FALSE", call. = FALSE)
+    if (!temporary) {
+      found <- dbExistsTable(conn, name)
+      if (found && !overwrite && !append) {
+        stop("Table ", name, " exists in database, and both overwrite and",
+          " append are FALSE", call. = FALSE)
+      }
+    } else {
+      found <- FALSE
     }
-    if (found && overwrite) {
-      dbRemoveTable(conn, name)
+
+    if (overwrite) {
+      dbRemoveTable(conn, name, temporary = temporary, safe = TRUE)
     }
 
     if (!found || overwrite) {
@@ -248,8 +259,24 @@ setMethod("dbExistsTable", c("MariaDBConnection", "character"),
 #' @rdname mariadb-tables
 setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
   function(conn, name, ...){
+    extra <- list(...)
+    # Don't document or export yet
+    safe <- extra[["safe"]]
+    if (is.null(safe)) safe <- FALSE
+    temporary <- extra[["temporary"]]
+    if (is.null(temporary)) temporary <- FALSE
+
     name <- dbQuoteIdentifier(conn, name)
-    dbExecute(conn, paste0("DROP TABLE ", name))
+    dbExecute(
+      conn,
+      paste0(
+        "DROP ",
+        if (temporary) "TEMPORARY ",
+        "TABLE ",
+        if (safe) "IF EXISTS ",
+        name
+      )
+    )
     invisible(TRUE)
   }
 )

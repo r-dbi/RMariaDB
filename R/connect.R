@@ -97,7 +97,7 @@ setMethod("dbConnect", "MariaDBDriver",
 #' if (mariadbHasDefault()) {
 #' # connect to a database and load some data
 #' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
-#' dbWriteTable(con, "USArrests", datasets::USArrests, overwrite = TRUE)
+#' dbWriteTable(con, "USArrests", datasets::USArrests, temporary = TRUE)
 #'
 #' # query
 #' rs <- dbSendQuery(con, "SELECT * FROM USArrests")
@@ -109,7 +109,6 @@ setMethod("dbConnect", "MariaDBDriver",
 #' dbListTables(con)
 #'
 #' # clean up
-#' dbRemoveTable(con, "USArrests")
 #' dbDisconnect(con)
 #' }
 MariaDB <- function() {

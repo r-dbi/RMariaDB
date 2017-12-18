@@ -4,21 +4,21 @@
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 
-class MariaResult;
+class DbResult;
 
-// convenience typedef for shared_ptr to PqConnection
-class MariaConnection;
-typedef boost::shared_ptr<MariaConnection> MariaConnectionPtr;
+// convenience typedef for shared_ptr to DbConnection
+class DbConnection;
+typedef boost::shared_ptr<DbConnection> DbConnectionPtr;
 
-class MariaConnection : boost::noncopyable {
+class DbConnection : boost::noncopyable {
   MYSQL* pConn_;
-  MariaResult* pCurrentResult_;
+  DbResult* pCurrentResult_;
   bool transacting_;
 
 public:
 
-  MariaConnection();
-  ~MariaConnection();
+  DbConnection();
+  ~DbConnection();
 
 public:
   void
@@ -29,17 +29,18 @@ public:
           const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
           const Nullable<std::string>& ssl_cipher);
   void disconnect();
-  bool is_connected();
+  bool is_valid();
   void check_connection();
 
-  List connection_info();
+  List info();
   MYSQL* get_conn();
 
-  std::string quote_string(const Rcpp::String& input);
+  SEXP quote_string(const String& input);
+  static SEXP get_null_string();
 
   // Cancels previous query, if needed.
-  void set_current_result(MariaResult* pResult);
-  bool is_current_result(const MariaResult* pResult) const;
+  void set_current_result(DbResult* pResult);
+  bool is_current_result(const DbResult* pResult) const;
   bool has_query();
 
   bool exec(std::string sql);

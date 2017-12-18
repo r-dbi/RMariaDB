@@ -2,17 +2,13 @@
 
 #include "MariaResultSimple.h"
 
-MariaResultSimple::MariaResultSimple(MariaConnectionPtr conn) :
-  MariaResult(conn)
+MariaResultSimple::MariaResultSimple(DbResult* res) :
+pRes_(res)
 {
-  set_current_result();
 }
 
 MariaResultSimple::~MariaResultSimple() {
-  try {
-    clear_current_result();
-    close();
-  } catch (...) {};
+  MariaResultSimple::close();
 }
 
 void MariaResultSimple::send_query(const std::string& sql) {
@@ -25,13 +21,13 @@ void MariaResultSimple::close() {
   LOG_VERBOSE;
 }
 
-void MariaResultSimple::bind(List /*params*/) {
+void MariaResultSimple::bind(const List& /*params*/) {
   LOG_VERBOSE;
 
   stop("This query is not supported by the prepared statement protocol, no parameters can be bound.");
 }
 
-List MariaResultSimple::column_info() {
+List MariaResultSimple::get_column_info() {
   CharacterVector names(0), types(0);
 
   List out = List::create(names, types);
@@ -49,14 +45,18 @@ List MariaResultSimple::fetch(int /*n_max*/) {
   return df_create(std::vector<MariaFieldType>(), std::vector<std::string>(), 0);
 }
 
-int MariaResultSimple::rows_affected() {
+int MariaResultSimple::n_rows_affected() {
   return 0;
 }
 
-int MariaResultSimple::rows_fetched() {
+int MariaResultSimple::n_rows_fetched() {
   return 0;
 }
 
 bool MariaResultSimple::complete() {
   return true;
+}
+
+void MariaResultSimple::exec(const std::string& sql) {
+  pRes_->get_db_conn()->exec(sql);
 }

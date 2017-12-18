@@ -1,47 +1,51 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
 language: r
 cache: packages
 latex: false
+sudo: false
+warnings_are_errors: true
 
+service: mysql
+addons:
+  apt:
+    packages:
+    - libmysqlclient-dev
 env:
   global:
+  - NOT_CRAN: true
   - MAKEFLAGS="-j8"
 
 matrix:
   include:
-    - os: linux
-      dist: trusty
-      sudo: false
-      env: R_CODECOV=true
-      service: mysql
-      addons:
-        apt:
-          packages:
-            - libmysqlclient-dev
-    - os: osx
-      osx_image: xcode8.3
-      before_install:
-        - brew install mysql
-        - mysql.server start
-    - os: osx
-      osx_image: xcode8.3
-      disable_homebrew: true
-      r_check_args: '--no-tests'
-      before_script: 'echo no sql server, only testing build'
-    - os: osx
-      osx_image: beta-xcode7.3
-      disable_homebrew: true
-      r_check_args: '--no-tests'
-      before_script: 'echo no sql server, only testing build'
-
-r_github_packages:
-  - rstats-db/DBI@production
-  - rstats-db/DBItest@production
+  - os: linux
+    r: release
+    env:
+    - R_CODECOV: true
+  - os: linux
+    r: devel
+  - os: linux
+    r: oldrel
+  - os: linux
+    r: 3.2
+  - os: osx
+    osx_image: xcode8.3
+    before_install:
+      - brew install mysql
+      - mysql.server start
+  - os: osx
+    osx_image: xcode8.3
+    disable_homebrew: true
+    r_check_args: '--no-tests'
+    before_script: 'echo no sql server, only testing build'
+  - os: osx
+    osx_image: beta-xcode7.3
+    disable_homebrew: true
+    r_check_args: '--no-tests'
+    before_script: 'echo no sql server, only testing build'
 
 r_packages:
   - covr
-
-warnings_are_errors: true
-#r_check_revdep: true
 
 notifications:
   email:

@@ -1,7 +1,7 @@
 RMariaDB
 ======
 
-NOTE: This package is a drop-in replacement for the old [RMySQL](https://cran.r-project.org/package=RMariaDB) package.
+NOTE: This package is a replacement for the old [RMySQL](https://cran.r-project.org/package=RMySQL) package.
 
 > Database Interface and MariaDB Driver for R
 

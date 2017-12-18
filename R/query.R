@@ -7,7 +7,10 @@ NULL
 #' To retrieve results a chunk at a time, use [dbSendQuery()],
 #' [dbFetch()], then [dbClearResult()]. Alternatively, if you want all the
 #' results (and they'll fit in memory) use [dbGetQuery()] which sends,
-#' fetches and clears for you.
+#' fetches and clears for you. For data manipulation queries (i.e. queries
+#' that do not return data, such as \code{UPDATE}, \code{DELETE}, etc.),
+#' [dbSendStatement()] serves as a counterpart to [dbSendQuery()], while
+#' [dbExecute()] corresponds to [dbGetQuery()].
 #'
 #' @param conn an [MariaDBConnection-class] object.
 #' @param res A  [MariaDBResult-class] object.
@@ -23,7 +26,7 @@ NULL
 #' @examples
 #' if (mariadbHasDefault()) {
 #' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
-#' dbWriteTable(con, "arrests", datasets::USArrests, overwrite = TRUE)
+#' dbWriteTable(con, "arrests", datasets::USArrests, temporary = TRUE)
 #'
 #' # Run query to get results as dataframe
 #' dbGetQuery(con, "SELECT * FROM arrests limit 3")
@@ -35,7 +38,6 @@ NULL
 #' dbHasCompleted(res)
 #'
 #' dbClearResult(res)
-#' dbRemoveTable(con, "arrests")
 #' dbDisconnect(con)
 #' }
 #' @rdname query
@@ -53,20 +55,33 @@ setMethod("dbFetch", "MariaDBResult",
 #' @export
 setMethod("dbSendQuery", c("MariaDBConnection", "character"),
   function(conn, statement, params = NULL, ...) {
-    statement <- enc2utf8(statement)
-
-    rs <- new("MariaDBResult",
-      sql = statement,
-      ptr = result_create(conn@ptr, statement)
-    )
-
-    if (!is.null(params)) {
-      dbBind(rs, params)
-    }
-
-    rs
+    dbSend(conn, statement, params, is_statement = FALSE)
   }
 )
+
+#' @rdname query
+#' @export
+setMethod("dbSendStatement", signature("MariaDBConnection", "character"),
+  function(conn, statement, params = NULL, ...) {
+    dbSend(conn, statement, params, is_statement = TRUE)
+  }
+)
+
+dbSend <- function(conn, statement, params = NULL, is_statement) {
+  statement <- enc2utf8(statement)
+
+  rs <- new("MariaDBResult",
+    sql = statement,
+    ptr = result_create(conn@ptr, statement, is_statement)
+  )
+
+  if (!is.null(params)) {
+    dbBind(rs, params)
+  }
+
+  rs
+}
+
 
 #' @rdname query
 #' @export
@@ -110,7 +125,7 @@ setMethod("dbGetStatement", "MariaDBResult", function(res, ...) {
 #' @examples
 #' if (mariadbHasDefault()) {
 #' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
-#' dbWriteTable(con, "t1", datasets::USArrests, overwrite = TRUE)
+#' dbWriteTable(con, "t1", datasets::USArrests, temporary = TRUE)
 #'
 #' rs <- dbSendQuery(con, "SELECT * FROM t1 WHERE UrbanPop >= 80")
 #' rs
@@ -123,7 +138,6 @@ setMethod("dbGetStatement", "MariaDBResult", function(res, ...) {
 #' rs
 #'
 #' dbClearResult(rs)
-#' dbRemoveTable(con, "t1")
 #' dbDisconnect(con)
 #' }
 #' @name result-meta
@@ -150,5 +164,5 @@ setMethod("dbGetRowCount", "MariaDBResult", function(res, ...) {
 #' @export
 #' @rdname result-meta
 setMethod("dbHasCompleted", "MariaDBResult", function(res, ...) {
-  result_complete(res@ptr)
+  result_has_completed(res@ptr)
 })

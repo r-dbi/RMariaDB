@@ -2,7 +2,7 @@
 #include "RMariaDB_types.h"
 
 // [[Rcpp::export]]
-XPtr<MariaConnectionPtr> connection_create(
+XPtr<DbConnectionPtr> connection_create(
   const Nullable<std::string>& host,
   const Nullable<std::string>& user,
   const Nullable<std::string>& password,
@@ -20,66 +20,93 @@ XPtr<MariaConnectionPtr> connection_create(
 ) {
   LOG_VERBOSE;
 
-  std::auto_ptr<MariaConnection> pConnPtr(new MariaConnection);
+  std::auto_ptr<DbConnection> pConnPtr(new DbConnection);
   pConnPtr->connect(
     host, user, password, db, port, unix_socket, client_flag, groups, default_file,
     ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher
   );
 
-  return XPtr<MariaConnectionPtr>(new MariaConnectionPtr(pConnPtr.release()), true);
+  DbConnectionPtr* pConn = new DbConnectionPtr(
+    pConnPtr.release()
+  );
+
+  return XPtr<DbConnectionPtr>(pConn, true);
 }
 
 // [[Rcpp::export]]
-bool connection_valid(XPtr<MariaConnectionPtr> con) {
-  return con.get() != NULL && (*con)->is_connected();
+bool connection_valid(XPtr<DbConnectionPtr> con_) {
+  DbConnectionPtr* con = con_.get();
+  return con && con->get()->is_valid();
 }
 
 // [[Rcpp::export]]
-void connection_release(XPtr<MariaConnectionPtr> con) {
-  if (!connection_valid(con)) {
+void connection_release(XPtr<DbConnectionPtr> con_) {
+  if (!connection_valid(con_)) {
     warning("Already disconnected");
     return;
   }
 
-  (*con)->disconnect();
-  con.release();
+  DbConnectionPtr* con = con_.get();
+  con->get()->disconnect();
+  con_.release();
 }
 
 // [[Rcpp::export]]
-List connection_info(XPtr<MariaConnectionPtr> con) {
-  return (*con)->connection_info();
+List connection_info(DbConnection* con) {
+  return con->info();
 }
 
+// Quoting
+
 // [[Rcpp::export]]
-CharacterVector connection_quote_string(XPtr<MariaConnectionPtr> con,
-                                        CharacterVector input) {
-  R_xlen_t n = input.size();
+CharacterVector connection_quote_string(DbConnection* con, CharacterVector xs) {
+  R_xlen_t n = xs.size();
   CharacterVector output(n);
 
   for (R_xlen_t i = 0; i < n; ++i) {
-    String x = input[i];
-    output[i] = String((*con)->quote_string(x), CE_UTF8);
+    String x = xs[i];
+    output[i] = con->quote_string(x);
   }
 
   return output;
 }
 
+// Transactions
+
 // [[Rcpp::export]]
-void connection_begin_transaction(XPtr<MariaConnectionPtr> con) {
+void connection_begin_transaction(XPtr<DbConnectionPtr> con) {
   (*con)->begin_transaction();
 }
 
 // [[Rcpp::export]]
-void connection_commit(XPtr<MariaConnectionPtr> con) {
+void connection_commit(XPtr<DbConnectionPtr> con) {
   (*con)->commit();
 }
 
 // [[Rcpp::export]]
-void connection_rollback(XPtr<MariaConnectionPtr> con) {
+void connection_rollback(XPtr<DbConnectionPtr> con) {
   (*con)->rollback();
 }
 
 // [[Rcpp::export]]
-bool connection_is_transacting(XPtr<MariaConnectionPtr> con) {
-  return (*con)->is_transacting();
+bool connection_is_transacting(DbConnection* con) {
+  return con->is_transacting();
+}
+
+
+// Specific functions
+
+
+// as() override
+
+namespace Rcpp {
+
+template<>
+DbConnection* as(SEXP x) {
+  DbConnectionPtr* connection = (DbConnectionPtr*)(R_ExternalPtrAddr(x));
+  if (!connection)
+    stop("Invalid connection");
+  return connection->get();
+}
+
 }
