@@ -97,6 +97,7 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
     LOG_VERBOSE << (void*)bindings_[j].error;
   }
 
+  LOG_DEBUG << "mysql_stmt_bind_result()";
   if (mysql_stmt_bind_result(pStatement, &bindings_[0]) != 0) {
     stop("Error binding result: %s", mysql_stmt_error(pStatement));
   }
@@ -164,7 +165,9 @@ double MariaRow::value_date_time(int j) {
   t.tm_sec = mytime->second;
 
   double split_seconds = static_cast<double>(mytime->second_part) / 1000000.0;
-  return static_cast<double>(timegm(&t)) + split_seconds;
+  double date_time = static_cast<double>(timegm(&t)) + split_seconds;
+  LOG_VERBOSE << date_time;
+  return date_time;
 }
 
 double MariaRow::value_date(int j) {
@@ -232,6 +235,7 @@ void MariaRow::fetch_buffer(int j) {
   LOG_VERBOSE << bindings_[j].is_unsigned;
   LOG_VERBOSE << (void*)bindings_[j].error;
 
+  LOG_DEBUG << "mysql_stmt_fetch_column()";
   int result = mysql_stmt_fetch_column(pStatement_, &bindings_[j], j, 0);
   LOG_VERBOSE << result;
 

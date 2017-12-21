@@ -28,6 +28,7 @@ MariaResultPrep::~MariaResultPrep() {
 void MariaResultPrep::send_query(const std::string& sql) {
   LOG_DEBUG << sql;
 
+  LOG_DEBUG << "mysql_stmt_prepare()";
   if (mysql_stmt_prepare(pStatement_, sql.data(), sql.size()) != 0) {
     if (mysql_stmt_errno(pStatement_) == ER_UNSUPPORTED_PS) {
       throw UnsupportedPS();
@@ -74,6 +75,7 @@ void MariaResultPrep::execute() {
 
   complete_ = false;
 
+  LOG_DEBUG << "mysql_stmt_execute()";
   if (mysql_stmt_execute(pStatement_) != 0)
     throw_error();
   if (!has_result() && !is_statement_) {
@@ -143,6 +145,7 @@ bool MariaResultPrep::fetch_row() {
 
   if (complete_) return false;
 
+  LOG_VERBOSE << "mysql_stmt_fetch()";
   int result = mysql_stmt_fetch(pStatement_);
 
   LOG_VERBOSE << result;
