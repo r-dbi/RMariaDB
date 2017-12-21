@@ -133,10 +133,12 @@ SEXP MariaRow::value_string(int j) {
     return NA_STRING;
 
   fetch_buffer(j);
-  buffers_[j].push_back('\0');  // ensure string is null terminated
-  const char* val = reinterpret_cast<const char*>(&buffers_[j][0]);
+  int len = static_cast<int>(buffers_[j].size());
+  if (len == 0)
+    return R_BlankString;
 
-  return Rf_mkCharCE(val, CE_UTF8);
+  const char* val = reinterpret_cast<const char*>(&buffers_[j][0]);
+  return Rf_mkCharLenCE(val, len, CE_UTF8);
 }
 
 SEXP MariaRow::value_raw(int j) {
