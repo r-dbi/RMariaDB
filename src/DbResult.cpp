@@ -5,7 +5,7 @@
 #include "MariaResultSimple.h"
 
 DbResult::DbResult(DbConnectionPtr maria_conn_) :
-maria_conn(maria_conn_) {
+  maria_conn(maria_conn_) {
   set_current_result();
 }
 

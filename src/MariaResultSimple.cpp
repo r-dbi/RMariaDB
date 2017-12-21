@@ -3,7 +3,7 @@
 #include "MariaResultSimple.h"
 
 MariaResultSimple::MariaResultSimple(DbResult* res) :
-pRes_(res)
+  pRes_(res)
 {
 }
 

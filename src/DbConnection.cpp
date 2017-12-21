@@ -20,13 +20,13 @@ DbConnection::~DbConnection() {
 }
 
 void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std::string>& user,
-                              const Nullable<std::string>& password, const Nullable<std::string>& db,
-                              unsigned int port, const Nullable<std::string>& unix_socket,
-                              unsigned long client_flag, const Nullable<std::string>& groups,
-                              const Nullable<std::string>& default_file,
-                              const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
-                              const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
-                              const Nullable<std::string>& ssl_cipher) {
+                           const Nullable<std::string>& password, const Nullable<std::string>& db,
+                           unsigned int port, const Nullable<std::string>& unix_socket,
+                           unsigned long client_flag, const Nullable<std::string>& groups,
+                           const Nullable<std::string>& default_file,
+                           const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
+                           const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
+                           const Nullable<std::string>& ssl_cipher) {
   LOG_VERBOSE;
 
   this->pConn_ = mysql_init(NULL);
