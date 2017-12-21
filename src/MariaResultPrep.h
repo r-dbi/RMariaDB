@@ -53,7 +53,7 @@ private:
   bool has_result() const;
   bool step();
   bool fetch_row();
-  void throw_error();
+  void NORET throw_error();
 
 private:
   void cache_metadata();
