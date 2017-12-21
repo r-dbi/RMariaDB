@@ -96,20 +96,6 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
     LOG_VERBOSE << bindings_[j].is_unsigned;
     LOG_VERBOSE << (void*)bindings_[j].error;
   }
-
-  LOG_DEBUG << "mysql_stmt_bind_result()";
-  if (mysql_stmt_bind_result(pStatement, &bindings_[0]) != 0) {
-    stop("Error binding result: %s", mysql_stmt_error(pStatement));
-  }
-
-  for (int j = 0; j < n_; ++j) {
-    LOG_VERBOSE << bindings_[j].buffer_length;
-    LOG_VERBOSE << bindings_[j].buffer;
-    LOG_VERBOSE << bindings_[j].length;
-    LOG_VERBOSE << (void*)bindings_[j].is_null;
-    LOG_VERBOSE << bindings_[j].is_unsigned;
-    LOG_VERBOSE << (void*)bindings_[j].error;
-  }
 }
 
 bool MariaRow::is_null(int j) {
@@ -132,7 +118,6 @@ SEXP MariaRow::value_string(int j) {
   if (is_null(j))
     return NA_STRING;
 
-  fetch_buffer(j);
   int len = static_cast<int>(buffers_[j].size());
   if (len == 0)
     return R_BlankString;
@@ -145,7 +130,6 @@ SEXP MariaRow::value_raw(int j) {
   if (is_null(j))
     return R_NilValue;
 
-  fetch_buffer(j);
   SEXP bytes = Rf_allocVector(RAWSXP, lengths_[j]);
   memcpy(RAW(bytes), &buffers_[j][0], lengths_[j]);
 
@@ -188,6 +172,8 @@ double MariaRow::value_time(int j) {
 }
 
 void MariaRow::set_list_value(SEXP x, int i, int j) {
+  fetch_buffer(j);
+
   switch (types_[j]) {
   case MY_INT32:
     INTEGER(x)[i] = value_int(j);
@@ -220,13 +206,23 @@ void MariaRow::set_list_value(SEXP x, int i, int j) {
 }
 
 void MariaRow::fetch_buffer(int j) {
+  LOG_DEBUG << "mysql_stmt_fetch_column()";
+  int result = mysql_stmt_fetch_column(pStatement_, &bindings_[j], j, 0);
+  LOG_VERBOSE << result;
+
+  if (result != 0)
+    stop("Error fetching buffer: %s", mysql_stmt_error(pStatement_));
+
+  if (bindings_[j].buffer)
+    return;
+
   unsigned long length = lengths_[j];
   LOG_VERBOSE << length;
 
-  buffers_[j].resize(length);
   if (length == 0)
     return;
 
+  buffers_[j].resize(length);
   bindings_[j].buffer = &buffers_[j][0]; // might have moved
   bindings_[j].buffer_length = length;
 
@@ -238,7 +234,7 @@ void MariaRow::fetch_buffer(int j) {
   LOG_VERBOSE << (void*)bindings_[j].error;
 
   LOG_DEBUG << "mysql_stmt_fetch_column()";
-  int result = mysql_stmt_fetch_column(pStatement_, &bindings_[j], j, 0);
+  result = mysql_stmt_fetch_column(pStatement_, &bindings_[j], j, 0);
   LOG_VERBOSE << result;
 
   if (result != 0)
