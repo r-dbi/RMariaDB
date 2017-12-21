@@ -1,3 +1,7 @@
+## RMariaDB 1.0-5
+
+- Windows: upgrade libmariadbclient to v2.3.4
+
 ## RMariaDB 1.0-4 (2017-12-11)
 
 - Attempt to fix Solaris builds by redefining `timegm` symbol if the macro `sun` is defined.
