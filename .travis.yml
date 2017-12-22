@@ -7,10 +7,6 @@ sudo: false
 warnings_are_errors: true
 
 service: mysql
-addons:
-  apt:
-    packages:
-    - libmysqlclient-dev
 env:
   global:
   - NOT_CRAN: true
@@ -22,12 +18,28 @@ matrix:
     r: release
     env:
     - R_CODECOV: true
+    addons:
+      apt:
+        packages:
+        - libmariadbclient-dev
   - os: linux
     r: devel
+    addons:
+      apt:
+        packages:
+        - libmysqlclient-dev
   - os: linux
     r: oldrel
+    addons:
+      apt:
+        packages:
+        - libmysqlclient-dev
   - os: linux
     r: 3.2
+    addons:
+      apt:
+        packages:
+        - libmysqlclient-dev
   - os: osx
     osx_image: xcode8.3
     before_install:

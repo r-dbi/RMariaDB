@@ -152,7 +152,6 @@ bool MariaResultPrep::fetch_row() {
 
   switch (result) {
   // We expect truncation whenever there's a string or blob
-  case MYSQL_DATA_TRUNCATED:
   case 0:
     return true;
   case 1:
