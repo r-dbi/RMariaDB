@@ -17,10 +17,13 @@ public:
   ~DbResult();
 
 public:
+  static DbResult* create_and_send_query(DbConnectionPtr con, const std::string& sql, bool is_statement);
+
+public:
   void close();
 
   bool complete();
-  bool active() const;
+  bool is_active() const;
   int n_rows_fetched();
   int n_rows_affected();
 
@@ -40,9 +43,6 @@ protected:
 
 private:
   void send_query(const std::string& sql, bool is_statement);
-
-public:
-  static DbResult* create_and_send_query(DbConnectionPtr con, const std::string& sql, bool is_statement);
 };
 
 #endif

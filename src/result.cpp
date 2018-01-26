@@ -1,6 +1,7 @@
 #include "pch.h"
-
+#include "workarounds/XPtr.h"
 #include "RMariaDB_types.h"
+
 
 // [[Rcpp::export]]
 XPtr<DbResult> result_create(XPtr<DbConnectionPtr> con, std::string sql, bool is_statement = false) {
@@ -17,7 +18,7 @@ void result_release(XPtr<DbResult> res) {
 // [[Rcpp::export]]
 bool result_valid(XPtr<DbResult> res_) {
   DbResult* res = res_.get();
-  return res != NULL && res->active();
+  return res != NULL && res->is_active();
 }
 
 // [[Rcpp::export]]
