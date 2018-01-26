@@ -25,7 +25,9 @@ src\/RCS
 ^a\.out\.dSYM$
 ^revdep$
 ^appveyor\.yml$
-^src/.*\.d$
+\.d$
+^pch\.h$
+^RMariaDB_types\.h$
 ^src/pch\.h\.gch$
 ^clion-test\.R$
 ^cran-comments\.md$
