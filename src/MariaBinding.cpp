@@ -129,16 +129,17 @@ bool MariaBinding::bind_next_row() {
         bindings[j].buffer_length = Rf_length(string);
       }
       break;
-    case MY_RAW: {
-      SEXP raw = VECTOR_ELT(col, i);
-      if (Rf_isNull(raw)) {
-        missing = true;
-      } else {
-        bindings[j].buffer_length = Rf_length(raw);
-        bindings[j].buffer = RAW(raw);
+    case MY_RAW:
+      {
+        SEXP raw = VECTOR_ELT(col, i);
+        if (Rf_isNull(raw)) {
+          missing = true;
+        } else {
+          bindings[j].buffer_length = Rf_length(raw);
+          bindings[j].buffer = RAW(raw);
+        }
+        break;
       }
-      break;
-    }
     case MY_DATE:
     case MY_DATE_TIME:
       if (ISNAN(REAL(col)[i])) {
