@@ -31,6 +31,8 @@ LinkingTo:
     BH,
     plogr,
     Rcpp
+Remotes: 
+    r-lib/DBI
 Encoding: UTF-8
 NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
