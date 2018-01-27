@@ -1,8 +1,6 @@
 Package: RMariaDB
-Version: 1.0-4
 Title: Database Interface and 'MariaDB' Driver
-Encoding: UTF-8
-Description: Implements a 'DBI'-compliant interface to 'MariaDB' (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>) databases.
+Version: 1.0-4
 Authors@R: c(
     person("Kirill", "Müller", email = "krlmlr+r@mailbox.org", role = c("aut", "cre")),
     person("Jeroen", "Ooms", role = "aut"),
@@ -12,27 +10,34 @@ Authors@R: c(
     person("Jeffrey", "Horner", role = "aut"),
     person("RStudio", role = "cph"),
     person("Kungliga Tekniska Högskolan", role = "ctb", comment = "Source code for timegm"))
-Depends:
-    R (>= 2.8.0)
-Imports:
-    bit64,
-    DBI (>= 0.5),
-    hms,
-    methods,
-    Rcpp (>= 0.12.4)
-Suggests:
-    DBItest,
-    rprojroot,
-    testthat
-LinkingTo: Rcpp, BH, plogr
+Description: Implements a 'DBI'-compliant interface to 'MariaDB' (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>) databases.
 License: GPL-2
 URL: https://github.com/rstats-db/RMariaDB,
     https://downloads.mariadb.org/connector-c/
 BugReports: https://github.com/rstats-db/RMariaDB/issues
+Depends: 
+    R (>= 2.8.0)
+Imports: 
+    bit64,
+    DBI (>= 0.7-14),
+    hms,
+    methods,
+    Rcpp (>= 0.12.4)
+Suggests: 
+    DBItest,
+    rprojroot,
+    testthat
+LinkingTo: 
+    BH,
+    plogr,
+    Rcpp
+Encoding: UTF-8
+NeedsCompilation: yes
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1
 SystemRequirements: libmariadb-client-lgpl-dev or libmysqlclient-dev (deb),
     mariadb-connector-c-devel or mariadb-devel (rpm),
     mariadb-connector-c or mysql-connector-c (brew)
-NeedsCompilation: yes
 Collate: 
     'MariaDBConnection.R'
     'MariaDBDriver.R'
@@ -50,5 +55,3 @@ Collate:
     'transaction.R'
     'utils.R'
     'zzz.R'
-RoxygenNote: 6.0.1
-Roxygen: list(markdown = TRUE)

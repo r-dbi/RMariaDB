@@ -25,10 +25,10 @@ setMethod("dbQuoteIdentifier", c("MariaDBConnection", "character"),
     }
     x <- gsub("`", "``", x, fixed = TRUE)
     if (length(x) == 0L) {
-      SQL(character())
+      SQL(character(), names = names(x))
     } else {
       # Not calling encodeString() here to keep things simple
-      SQL(paste("`", x, "`", sep = ""))
+      SQL(paste("`", x, "`", sep = ""), names = names(x))
     }
   }
 )
