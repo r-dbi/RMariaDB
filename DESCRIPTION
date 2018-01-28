@@ -37,7 +37,7 @@ Remotes:
 Encoding: UTF-8
 NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
 SystemRequirements: libmariadb-client-lgpl-dev or libmysqlclient-dev (deb),
     mariadb-connector-c-devel or mariadb-devel (rpm),
     mariadb-connector-c or mysql-connector-c (brew)
