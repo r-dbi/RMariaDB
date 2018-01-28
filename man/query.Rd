@@ -63,7 +63,7 @@ that do not return data, such as \code{UPDATE}, \code{DELETE}, etc.),
 \examples{
 if (mariadbHasDefault()) {
 con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
-dbWriteTable(con, "arrests", datasets::USArrests, temporary = TRUE, overwrite = TRUE)
+dbWriteTable(con, "arrests", datasets::USArrests, temporary = TRUE)
 
 # Run query to get results as dataframe
 dbGetQuery(con, "SELECT * FROM arrests limit 3")

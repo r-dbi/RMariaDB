@@ -28,7 +28,7 @@ See documentation of generics for more details.
 \examples{
 if (mariadbHasDefault()) {
 con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
-dbWriteTable(con, "t1", datasets::USArrests, temporary = TRUE, overwrite = TRUE)
+dbWriteTable(con, "t1", datasets::USArrests, temporary = TRUE)
 
 rs <- dbSendQuery(con, "SELECT * FROM t1 WHERE UrbanPop >= 80")
 rs
