@@ -31,3 +31,4 @@ src\/RCS
 ^src/pch\.h\.gch$
 ^clion-test\.R$
 ^cran-comments\.md$
+^tic\.R$

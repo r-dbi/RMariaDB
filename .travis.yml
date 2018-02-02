@@ -1,27 +1,64 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+# Default configuration for use with tic package
+# Usually you shouldn't need to change the first part of the file
 
+# DO NOT CHANGE THE CODE BELOW
+before_install:
+- R -q -e 'install.packages(c("remotes", "curl")); remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages(); tic::before_install()'
+- mysql -e "CREATE DATABASE IF NOT EXISTS test;" -uroot
+- mysql -e "GRANT ALL PRIVILEGES ON test.* TO 'travis'@'localhost'; FLUSH PRIVILEGES;" -uroot
+
+install: R -q -e 'tic::install()'
+after_install: R -q -e 'tic::after_install()'
+
+before_script:
+- R -q -e 'tic::before_script()'
+- travis_retry mysql -e "CREATE DATABASE IF NOT EXISTS test; ALTER DATABASE test CHARACTER SET 'utf8'; FLUSH PRIVILEGES;" -uroot
+- travis_retry mysql -e "CREATE USER '"${USER}"'@'localhost'; FLUSH PRIVILEGES;" -uroot || true
+- travis_retry mysql -e "GRANT ALL PRIVILEGES ON test.* TO '"${USER}"'@'localhost'; FLUSH PRIVILEGES;" -uroot
+- make --keep-going --directory=revdep-dev
+
+script: R -q -e 'tic::script()'
+after_success: R -q -e 'tic::after_success()'
+after_failure: R -q -e 'tic::after_failure()'
+before_deploy: R -q -e 'tic::before_deploy()'
+deploy:
+  provider: script
+  script: R -q -e 'tic::deploy()'
+  on:
+    all_branches: true
+after_deploy: R -q -e 'tic::after_deploy()'
+after_script: R -q -e 'tic::after_script()'
+# DO NOT CHANGE THE CODE ABOVE
+
+# Custom parts:
+
+# Header
 language: r
+sudo: false
 cache: packages
 latex: false
-sudo: false
-warnings_are_errors: true
 
-service: mysql
+#env
+env:
+  global:
+  - _R_CHECK_FORCE_SUGGESTS_=false
+  - MAKEFLAGS="-j 2"
+
+#addons
 addons:
   apt:
     packages:
     - libmysqlclient-dev
-env:
-  global:
-  - NOT_CRAN: true
-  - MAKEFLAGS="-j8"
+    - libmagick++-dev
+    - libssh2-1-dev
 
 matrix:
   include:
   - os: linux
     r: release
     env:
-    - R_CODECOV: true
+    - BUILD_PKGDOWN=true
   - os: linux
     r: devel
   - os: linux
@@ -44,18 +81,14 @@ matrix:
     r_check_args: '--no-tests'
     before_script: 'echo no sql server, only testing build'
 
-r_packages:
-  - covr
-
+#notifications
 notifications:
   email:
     on_success: change
     on_failure: change
 
-before_script:
-  - travis_retry mysql -e "CREATE DATABASE IF NOT EXISTS test; ALTER DATABASE test CHARACTER SET 'utf8mb4'; FLUSH PRIVILEGES;" -uroot
-  - travis_retry mysql -e "CREATE USER '"${USER}"'@'localhost'; FLUSH PRIVILEGES;" -uroot || true
-  - travis_retry mysql -e "GRANT ALL PRIVILEGES ON test.* TO '"${USER}"'@'localhost'; FLUSH PRIVILEGES;" -uroot
+# Custom parts:
 
-after_success:
-  - if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov()'; fi
+#services
+services:
+- MySQL
