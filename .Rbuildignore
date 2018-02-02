@@ -33,3 +33,4 @@ src\/RCS
 ^cran-comments\.md$
 ^tic\.R$
 ^_pkgdown\.yml$
+^docs$
