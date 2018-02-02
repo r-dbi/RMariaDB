@@ -32,3 +32,4 @@ src\/RCS
 ^clion-test\.R$
 ^cran-comments\.md$
 ^tic\.R$
+^_pkgdown\.yml$
