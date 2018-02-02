@@ -1,17 +1,13 @@
 RMariaDB
 ======
 
-NOTE: This package is a replacement for the old [RMySQL](https://cran.r-project.org/package=RMySQL) package.
-
-> Database Interface and MariaDB Driver for R
-
 [![Build Status](https://travis-ci.org/rstats-db/RMariaDB.svg)](https://travis-ci.org/rstats-db/RMariaDB)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-dbi/RMariaDB?branch=master&svg=true)](https://ci.appveyor.com/project/r-dbi/rmariadb?branch=master)
 [![Coverage Status](https://codecov.io/github/rstats-db/RMariaDB/coverage.svg)](https://codecov.io/github/rstats-db/RMariaDB)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
 
-RMariaDB is a database interface and MariaDB driver for R. This version is aimed at full compliance with the [DBI specification](https://cran.r-project.org/package=DBI/vignettes/spec.html).
+RMariaDB is a database interface and MariaDB driver for R. This version is aimed at full compliance with the [DBI specification](https://cran.r-project.org/package=DBI/vignettes/spec.html), as a replacement for the old [RMySQL](https://cran.r-project.org/package=RMySQL) package.
 
 ## Hello World
 
