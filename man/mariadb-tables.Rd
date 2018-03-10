@@ -7,6 +7,7 @@
 \alias{dbWriteTable,MariaDBConnection,character,data.frame-method}
 \alias{dbWriteTable,MariaDBConnection,character,character-method}
 \alias{dbListTables,MariaDBConnection-method}
+\alias{dbListObjects,MariaDBConnection-method}
 \alias{dbExistsTable,MariaDBConnection,character-method}
 \alias{dbRemoveTable,MariaDBConnection,character-method}
 \title{Read and write MariaDB tables.}
@@ -24,6 +25,8 @@
   eol = "\\n", skip = 0, quote = "\\"", temporary = FALSE, ...)
 
 \S4method{dbListTables}{MariaDBConnection}(conn, ...)
+
+\S4method{dbListObjects}{MariaDBConnection}(conn, prefix = NULL, ...)
 
 \S4method{dbExistsTable}{MariaDBConnection,character}(conn, name, ...)
 
