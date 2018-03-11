@@ -245,6 +245,7 @@ setMethod("dbListTables", "MariaDBConnection", function(conn, ...) {
 
 
 #' @export
+#' @inheritParams DBI::dbListObjects
 #' @rdname mariadb-tables
 setMethod("dbListObjects", c("MariaDBConnection", "ANY"), function(conn, prefix = NULL, ...) {
   query <- NULL
