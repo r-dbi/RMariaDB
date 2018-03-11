@@ -18,6 +18,8 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -25,6 +27,10 @@
 <script src="../pkgdown.js"></script>
   
   
+<meta property="og:title" content="Quote MariaDB strings and identifiers. — mariadb-quoting" />
+
+<meta property="og:description" content="In MariaDB, identifiers are enclosed in backticks, e.g. `x`." />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -96,6 +102,12 @@
 <span class='co'># S4 method for MariaDBConnection,SQL</span>
 <span class='fu'>dbQuoteIdentifier</span>(<span class='no'>conn</span>, <span class='no'>x</span>, <span class='no'>...</span>)
 
+<span class='co'># S4 method for MariaDBConnection,Id</span>
+<span class='fu'>dbQuoteIdentifier</span>(<span class='no'>conn</span>, <span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='co'># S4 method for MariaDBConnection,SQL</span>
+<span class='fu'>dbUnquoteIdentifier</span>(<span class='no'>conn</span>, <span class='no'>x</span>, <span class='no'>...</span>)
+
 <span class='co'># S4 method for MariaDBConnection,character</span>
 <span class='fu'>dbQuoteString</span>(<span class='no'>conn</span>, <span class='no'>x</span>, <span class='no'>...</span>)
 
@@ -135,3 +147,4 @@
 
   </body>
 </html>
+

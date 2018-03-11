@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • RMariaDB</title>
+<title>/home/travis/build/r-dbi/RMariaDB/NEWS.md • RMariaDB</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -22,12 +22,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="jquery.sticky-kit.min.js"></script>
+<script src="pkgdown.js"></script>
   
   
-<meta property="og:title" content="All news" />
+<meta property="og:title" content="/home/travis/build/r-dbi/RMariaDB/NEWS.md" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -40,7 +40,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -50,21 +50,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">RMariaDB</a>
+      <a class="navbar-brand" href="index.html">RMariaDB</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
+  <a href="index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="news/index.html">News</a>
 </li>
       </ul>
       
@@ -84,44 +84,43 @@
       </header>
 
       <div class="row">
-
-  <div class="col-md-9">
+  <div class="contents col-md-12">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+      <h1>/home/travis/build/r-dbi/RMariaDB/NEWS.md</h1>
     </div>
 
-    <div class="contents">
-    <div id="rmariadb-1-0-4-2017-12-11" class="section level2">
+
+<div id="rmariadb-1-0-4-2017-12-11" class="section level2">
 <h2 class="hasAnchor">
 <a href="#rmariadb-1-0-4-2017-12-11" class="anchor"></a>RMariaDB 1.0-4 (2017-12-11)</h2>
 <ul>
 <li>Attempt to fix Solaris builds by redefining <code>timegm</code> symbol if the macro <code>sun</code> is defined.</li>
 <li>Fix examples running on CRAN by using only temporary tables and <code>overwrite = TRUE</code>.</li>
 <li>Refactor connection and result handling to be more similar to other backends.</li>
-<li>Add support for R 3.1, but DBI &gt;= 0.5 is required (<a href='https://github.com/rstats-db/RMariaDB/issues/68'>#68</a>).</li>
-<li>Queries that bypass the prepared statement framework (like <code>SHOW PLUGINS</code>) return data (<a href='https://github.com/rstats-db/RMariaDB/issues/70'>#70</a>, <a href='http://github.com/nbenn'>@nbenn</a>).</li>
+<li>Add support for R 3.1, but DBI &gt;= 0.5 is required (#68).</li>
+<li>Queries that bypass the prepared statement framework (like <code>SHOW PLUGINS</code>) return data (#70, @nbenn).</li>
 <li>A temporary table can be created via <code>dbWriteTable()</code> if a table by the same name exists. If a temporary table of the same name exists, the error will be raised by the database itself, because this condition cannot be checked beforehand.</li>
 </ul>
 </div>
-    <div id="rmariadb-1-0-2-2017-10-01" class="section level1">
+<div id="rmariadb-1-0-2-2017-10-01" class="section level1">
 <h1 class="hasAnchor">
 <a href="#rmariadb-1-0-2-2017-10-01" class="anchor"></a>RMariaDB 1.0-2 (2017-10-01)</h1>
 <p>Initial release, compliant to the DBI specification.</p>
 <ul>
 <li>Test almost all test cases of the DBI specification.</li>
-<li>Fully support parametrized queries (<a href='https://github.com/rstats-db/RMariaDB/issues/22'>#22</a>, <a href='https://github.com/rstats-db/RMariaDB/issues/27'>#27</a>, <a href='https://github.com/rstats-db/RMariaDB/issues/39'>#39</a>).</li>
-<li>Queries not supported by the prepared statement protocol still can be run via <code>dbExecute()</code> or <code>dbSendStatement()</code>, the function <code>mariadbExecQuery()</code> has been removed (<a href='https://github.com/rstats-db/RMariaDB/issues/28'>#28</a>).</li>
-<li>Spec-compliant transactions (<a href='https://github.com/rstats-db/RMariaDB/issues/38'>#38</a>, <a href='https://github.com/rstats-db/RMariaDB/issues/49'>#49</a>).</li>
-<li>64-bit integers are now supported through the <code>bit64</code> package. Unfortunately, this also means that numeric literals (as in <code>SELECT 1</code>) are returned as 64-bit integers (<a href='https://github.com/rstats-db/RMariaDB/issues/12'>#12</a>).</li>
-<li>Correct handling of DATETIME and TIME columns (<a href='https://github.com/rstats-db/RMariaDB/issues/52'>#52</a>, <a href='http://github.com/noahwilliamsson'>@noahwilliamsson</a>). Support timestamp values with sub-second precision on output, and with year beyond 2038 (<a href='https://github.com/rstats-db/RMariaDB/issues/56'>#56</a>).</li>
-<li>The connection now uses the “utf8mb4” charset by default (<a href='https://github.com/rstats-db/RMariaDB/issues/7'>#7</a>).</li>
+<li>Fully support parametrized queries (#22, #27, #39).</li>
+<li>Queries not supported by the prepared statement protocol still can be run via <code>dbExecute()</code> or <code>dbSendStatement()</code>, the function <code>mariadbExecQuery()</code> has been removed (#28).</li>
+<li>Spec-compliant transactions (#38, #49).</li>
+<li>64-bit integers are now supported through the <code>bit64</code> package. Unfortunately, this also means that numeric literals (as in <code>SELECT 1</code>) are returned as 64-bit integers (#12).</li>
+<li>Correct handling of DATETIME and TIME columns (#52, @noahwilliamsson). Support timestamp values with sub-second precision on output, and with year beyond 2038 (#56).</li>
+<li>The connection now uses the “utf8mb4” charset by default (#7).</li>
 <li>New default <code>row.names = FALSE</code>.</li>
-<li>New SSL-related arguments to <code>dbConnect()</code>: <code>ssl.key</code>, <code>ssl.cert</code>, <code>ssl.ca</code>, <code>ssl.capath</code>, <code>ssl.cipher</code> (<a href='https://github.com/rstats-db/RMariaDB/issues/131'>#131</a>, <a href='https://github.com/rstats-db/RMariaDB/issues/148'>#148</a>, <a href='http://github.com/adamchainz'>@adamchainz</a>).</li>
-<li>CI for Linux, Windows, and OS X (<a href='https://github.com/rstats-db/RMariaDB/issues/25'>#25</a>).</li>
+<li>New SSL-related arguments to <code>dbConnect()</code>: <code>ssl.key</code>, <code>ssl.cert</code>, <code>ssl.ca</code>, <code>ssl.capath</code>, <code>ssl.cipher</code> (#131, #148, @adamchainz).</li>
+<li>CI for Linux, Windows, and OS X (#25).</li>
 <li>Support for Connector/C from both MariaDB and MySQL.</li>
 </ul>
 </div>
-    <div id="rmariadb-0-11-1-2016-03-24" class="section level1">
+<div id="rmariadb-0-11-1-2016-03-24" class="section level1">
 <h1 class="hasAnchor">
 <a href="#rmariadb-0-11-1-2016-03-24" class="anchor"></a>RMariaDB 0.11-1 (2016-03-24)</h1>
 <ul>
@@ -137,27 +136,18 @@
 <li><p><code>dbEscapeStrings()</code> has been deprecated. Please use <code>dbQuoteStrings()</code> instead.</p></li>
 <li><p>dbObjectId compatibility shim removed</p></li>
 <li><p>Add SSL support on Windows.</p></li>
-<li><p>Fix repetition of strings in subsequent rows (<a href='http://github.com/peternowee'>@peternowee</a>, <a href='https://github.com/rstats-db/RMariaDB/issues/125'>#125</a>).</p></li>
+<li><p>Fix repetition of strings in subsequent rows (@peternowee, #125).</p></li>
 <li><p>Always set connection character set to utf-8</p></li>
 <li><p>Backport build system improvements from stable branch</p></li>
 <li><p>Reenable Travis-CI, switch to R Travis, collect coverage</p></li>
 </ul>
 </div>
-    </div>
-  </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#rmariadb-1-0-4-2017-12-11">1.0-4</a></li>
-        <li><a href="#rmariadb-1-0-2-2017-10-01">1.0-2</a></li>
-        <li><a href="#rmariadb-0-11-1-2016-03-24">0.11-1</a></li>
-      </ul>
-    </div>
+
   </div>
 
 </div>
+
 
       <footer>
       <div class="copyright">
