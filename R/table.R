@@ -233,7 +233,14 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
 #' @export
 #' @rdname mariadb-tables
 setMethod("dbListTables", "MariaDBConnection", function(conn, ...) {
-  dbGetQuery(conn, "SELECT table_name FROM INFORMATION_SCHEMA.tables")[[1]]
+  # DATABASE(): https://stackoverflow.com/a/8096574/946850
+  dbGetQuery(
+    conn,
+    paste0(
+      "SELECT table_name FROM INFORMATION_SCHEMA.tables\n",
+      "WHERE table_schema = DATABASE()"
+    )
+  )[[1]]
 })
 
 
@@ -242,8 +249,10 @@ setMethod("dbListTables", "MariaDBConnection", function(conn, ...) {
 setMethod("dbListObjects", c("MariaDBConnection", "ANY"), function(conn, prefix = NULL, ...) {
   query <- NULL
   if (is.null(prefix)) {
+    # DATABASE(): https://stackoverflow.com/a/8096574/946850
     query <- paste0(
       "SELECT NULL AS `schema`, table_name AS `table` FROM INFORMATION_SCHEMA.tables\n",
+      "WHERE table_schema = DATABASE()\n",
       "UNION ALL\n",
       "SELECT DISTINCT table_schema AS `schema`, NULL AS `table` FROM INFORMATION_SCHEMA.tables"
     )
