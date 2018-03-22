@@ -25,8 +25,6 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
 <meta property="og:title" content="Execute a SQL statement on a database connection. — dbFetch,MariaDBResult-method" />
 
 <meta property="og:description" content="To retrieve results a chunk at a time, use dbSendQuery(),
@@ -37,6 +35,8 @@ that do not return data, such as UPDATE, DELETE, etc.),
 dbSendStatement() serves as a counterpart to dbSendQuery(), while
 dbExecute() corresponds to dbGetQuery()." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -59,8 +59,12 @@ dbExecute() corresponds to dbGetQuery()." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">RMariaDB</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">RMariaDB</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.0.4</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -73,7 +77,7 @@ dbExecute() corresponds to dbGetQuery()." />
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -96,6 +100,7 @@ dbExecute() corresponds to dbGetQuery()." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Execute a SQL statement on a database connection.</h1>
+    <small>Source: <a href='https://github.com/rstats-db/RMariaDB/blob/master/R/query.R'><code>R/query.R</code></a></small>
     </div>
 
     
@@ -128,7 +133,7 @@ that do not return data, such as <code>UPDATE</code>, <code>DELETE</code>, etc.)
 <span class='co'># S4 method for MariaDBResult</span>
 <span class='fu'>dbGetStatement</span>(<span class='no'>res</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
