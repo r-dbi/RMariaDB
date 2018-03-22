@@ -7,6 +7,7 @@
 \alias{dbWriteTable,MariaDBConnection,character,data.frame-method}
 \alias{dbWriteTable,MariaDBConnection,character,character-method}
 \alias{dbListTables,MariaDBConnection-method}
+\alias{dbListObjects,MariaDBConnection-method}
 \alias{dbExistsTable,MariaDBConnection,character-method}
 \alias{dbRemoveTable,MariaDBConnection,character-method}
 \title{Read and write MariaDB tables.}
@@ -24,6 +25,8 @@
   eol = "\\n", skip = 0, quote = "\\"", temporary = FALSE, ...)
 
 \S4method{dbListTables}{MariaDBConnection}(conn, ...)
+
+\S4method{dbListObjects}{MariaDBConnection}(conn, prefix = NULL, ...)
 
 \S4method{dbExistsTable}{MariaDBConnection,character}(conn, name, ...)
 
@@ -81,6 +84,10 @@ the input file to create the proper table definition. Default is 50.}
 
 \item{quote}{the quote character used in the input file (defaults to
 \code{\"}.)}
+
+\item{prefix}{A fully qualified path in the database's namespace, or \code{NULL}.
+will be passed to \code{\link[=dbUnquoteIdentifier]{dbUnquoteIdentifier()}}.
+If given the method will return all objects accessible through this prefix.}
 }
 \value{
 A data.frame in the case of \code{dbReadTable()}; otherwise a logical
