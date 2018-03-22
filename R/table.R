@@ -264,7 +264,7 @@ setMethod("dbListObjects", c("MariaDBConnection", "ANY"), function(conn, prefix 
     if (length(schemas) > 0) {
       schema_strings <- dbQuoteString(conn, schemas)
       query <- paste0(
-        "SELECT table_schema AS schema, table_name AS table FROM INFORMATION_SCHEMA.tables\n",
+        "SELECT table_schema AS `schema`, table_name AS `table` FROM INFORMATION_SCHEMA.tables\n",
         "WHERE ",
         "(table_schema IN (", paste(schema_strings, collapse = ", "), "))"
       )
