@@ -1,6 +1,6 @@
 ## RMariaDB 1.0-5
 
-- Windows: upgrade libmariadbclient to v2.3.4
+- Windows: upgrade libmariadbclient to v2.3.5
 
 ## RMariaDB 1.0-4 (2017-12-11)
 
