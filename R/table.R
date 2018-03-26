@@ -365,6 +365,7 @@ setMethod("dbDataType", "MariaDBDriver", function(dbObj, obj, ...) {
   if (inherits(obj, "POSIXct")) return("DATETIME")
   if (inherits(obj, "Date")) return("DATE")
   if (inherits(obj, "difftime")) return("TIME")
+  if (inherits(obj, "integer64")) return("BIGINT")
   if (is.data.frame(obj)) return(callNextMethod(dbObj, obj))
 
   switch(typeof(obj),

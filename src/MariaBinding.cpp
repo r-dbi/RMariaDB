@@ -2,6 +2,7 @@
 #include <ctime>
 #include <math.h>
 #include "MariaBinding.h"
+#include "integer64.h"
 
 MariaBinding::MariaBinding() :
   statement(NULL),
@@ -163,8 +164,11 @@ bool MariaBinding::bind_next_row() {
       }
       break;
     case MY_INT64:
-      // FIXME: 64-bit handling
-      stop("Not yet supported");
+      if (INTEGER64(col)[i] == NA_INTEGER64) {
+        missing = true;
+        break;
+      }
+      bindings[j].buffer = &INTEGER64(col)[i];
       break;
     }
     is_null[j] = missing;
