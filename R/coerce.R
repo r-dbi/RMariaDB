@@ -5,6 +5,7 @@ sql_data <- function(value, row.names = FALSE, warn = FALSE) {
   value <- factor_to_string(value, warn = warn)
   value <- string_to_utf8(value)
   value <- posixlt_to_posixct(value)
+  value <- numeric_to_finite(value)
   value
 }
 
@@ -32,5 +33,14 @@ string_to_utf8 <- function(value) {
 posixlt_to_posixct <- function(value) {
   is_posixlt <- vlapply(value, inherits, "POSIXlt")
   value[is_posixlt] <- lapply(value[is_posixlt], as.POSIXct)
+  value
+}
+
+numeric_to_finite <- function(value) {
+  is_numeric <- vlapply(value, is.numeric) & !vlapply(value, is.integer)
+  value[is_numeric] <- lapply(value[is_numeric], function(x) {
+    x[!is.finite(x)] <- NA
+    x
+  })
   value
 }

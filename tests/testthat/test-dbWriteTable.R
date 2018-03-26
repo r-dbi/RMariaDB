@@ -39,3 +39,14 @@ test_that("can read file from disk", {
 
   dbDisconnect(con)
 })
+
+test_that("converts NaN and Inf to NULL", {
+  con <- mariadbDefault()
+
+  x <- data.frame(col1 = c(-Inf, NA, 0, NaN, Inf))
+
+  dbWriteTable(con, "t1", x, overwrite = TRUE, temporary = TRUE)
+  expect_equal(dbReadTable(con, "t1"), data.frame(col1 = c(NA, NA, 0, NA, NA)))
+
+  dbDisconnect(con)
+})
