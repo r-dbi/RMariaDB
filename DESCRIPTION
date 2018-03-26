@@ -2,12 +2,13 @@ Package: RMariaDB
 Title: Database Interface and 'MariaDB' Driver
 Version: 1.0-4
 Authors@R: c(
-    person("Kirill", "Müller", email = "krlmlr+r@mailbox.org", role = c("aut", "cre")),
+    person("Kirill", "M\u00fcller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org", comment = c(ORCID = "0000-0002-1416-3412")),
     person("Jeroen", "Ooms", role = "aut"),
     person("David", "James", role = "aut"),
     person("Saikat", "DebRoy", role = "aut"),
     person("Hadley", "Wickham", role = "aut"),
     person("Jeffrey", "Horner", role = "aut"),
+    person("R Consortium", role = "fnd"),
     person("RStudio", role = "cph"),
     person("Kungliga Tekniska Högskolan", role = "ctb", comment = "Source code for timegm"))
 Description: Implements a 'DBI'-compliant interface to 'MariaDB' (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>) databases.
@@ -19,7 +20,7 @@ Depends:
     R (>= 2.8.0)
 Imports: 
     bit64,
-    DBI (>= 0.7-14),
+    DBI (>= 0.8),
     hms,
     methods,
     Rcpp (>= 0.12.4)
@@ -29,7 +30,7 @@ Suggests:
     testthat
 LinkingTo: 
     BH,
-    plogr,
+    plogr (>= 0.2.0),
     Rcpp
 Remotes: 
     r-dbi/DBI,
