@@ -288,8 +288,8 @@ setMethod("dbListObjects", c("MariaDBConnection", "ANY"), function(conn, prefix 
   ret
 })
 
-as_table <- function(schema, table) {
-  args <- c(schema = schema, table = table)
+as_table <- function(schema, table, naked_table = NULL) {
+  args <- c(schema = schema, table = table, table = naked_table)
   # Also omits NA args
   args <- args[!is.na(args) & args != ""]
   do.call(Id, as.list(args))
