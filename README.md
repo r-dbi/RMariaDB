@@ -1,9 +1,9 @@
 RMariaDB
 ======
 
-[![Build Status](https://travis-ci.org/rstats-db/RMariaDB.svg)](https://travis-ci.org/rstats-db/RMariaDB)
+[![Build Status](https://travis-ci.org/r-dbi/RMariaDB.svg)](https://travis-ci.org/r-dbi/RMariaDB)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-dbi/RMariaDB?branch=master&svg=true)](https://ci.appveyor.com/project/r-dbi/rmariadb?branch=master)
-[![Coverage Status](https://codecov.io/github/rstats-db/RMariaDB/coverage.svg)](https://codecov.io/github/rstats-db/RMariaDB)
+[![Coverage Status](https://codecov.io/github/r-dbi/RMariaDB/coverage.svg)](https://codecov.io/github/r-dbi/RMariaDB)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
 
@@ -53,8 +53,8 @@ The development version from github:
 
 ```R
 # install.packages("devtools")
-devtools::install_github("rstats-db/DBI")
-devtools::install_github("rstats-db/RMariaDB")
+devtools::install_github("r-dbi/DBI")
+devtools::install_github("r-dbi/RMariaDB")
 ```
 
 Installation from source on Linux or OS X currently requires Oracle's [libmysqlclient](https://packages.debian.org/testing/libmysqlclient-dev) or the more modern [`MariaDB Connector/C`](https://downloads.mariadb.org/connector-c/). The latter works best in version 2.3.4/3.0.3 or later, with older versions character and blob columns do not work reliably.
@@ -125,4 +125,4 @@ password=
 
 ## Acknowledgements
 
-Many thanks to Christoph M. Friedrich, John Heuer, Kurt Hornik, Torsten Hothorn, Saikat Debroy, Matthew Kelly, Brian D. Ripley, Mikhail Kondrin, Jake Luciani, Jens Nieschulze, Deepayan Sarkar, Louis Springer, Duncan Temple Lang, Luis Torgo, Arend P. van der Veen, Felix Weninger, J. T. Lindgren, Crespin Miller, and Michal Okonlewski, Seth Falcon and Paul Gilbert for comments, suggestions, bug reports, and patches to the original [RMySQL](https://cran.r-project.org/package=RMySQL) package, and to all contributors (of [code](https://github.com/rstats-db/RMariaDB/graphs/contributors) and discussions) to this package.
+Many thanks to Christoph M. Friedrich, John Heuer, Kurt Hornik, Torsten Hothorn, Saikat Debroy, Matthew Kelly, Brian D. Ripley, Mikhail Kondrin, Jake Luciani, Jens Nieschulze, Deepayan Sarkar, Louis Springer, Duncan Temple Lang, Luis Torgo, Arend P. van der Veen, Felix Weninger, J. T. Lindgren, Crespin Miller, and Michal Okonlewski, Seth Falcon and Paul Gilbert for comments, suggestions, bug reports, and patches to the original [RMySQL](https://cran.r-project.org/package=RMySQL) package, and to all contributors (of [code](https://github.com/r-dbi/RMariaDB/graphs/contributors) and discussions) to this package.

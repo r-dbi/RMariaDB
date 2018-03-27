@@ -11,9 +11,9 @@ Implements a 'DBI'-compliant interface to 'MariaDB' (<https://mariadb.org/>) and
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/rstats-db/RMariaDB}
+  \item \url{https://github.com/r-dbi/RMariaDB}
   \item \url{https://downloads.mariadb.org/connector-c/}
-  \item Report bugs at \url{https://github.com/rstats-db/RMariaDB/issues}
+  \item Report bugs at \url{https://github.com/r-dbi/RMariaDB/issues}
 }
 
 }

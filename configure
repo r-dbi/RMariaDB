@@ -21,7 +21,7 @@ if [ $(command -v mysql_config) ]; then
   PKGCONFIG_LIBS=$(mysql_config --libs)
 elif [ $(command -v mariadb_config) ]; then
   echo "Using mariadb_config"
-  echo "WARNING: Connector versions prior to 2.3.4/3.0.3 have a known problem with retrieving string and blob data. See https://github.com/rstats-db/RMariaDB/issues/53 for details."
+  echo "WARNING: Connector versions prior to 2.3.4/3.0.3 have a known problem with retrieving string and blob data. See https://github.com/r-dbi/RMariaDB/issues/53 for details."
   PKGCONFIG_CFLAGS=$(mariadb_config --cflags)
   PKGCONFIG_LIBS=$(mariadb_config --libs)
 fi
