@@ -3,7 +3,7 @@ Title: Database Interface and 'MariaDB' Driver
 Version: 1.0-4
 Authors@R: c(
     person("Kirill", "M\u00fcller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org", comment = c(ORCID = "0000-0002-1416-3412")),
-    person("Jeroen", "Ooms", role = "aut"),
+    person("Jeroen", "Ooms", role = "aut", comment = c(ORCID = "0000-0002-4035-0289")),
     person("David", "James", role = "aut"),
     person("Saikat", "DebRoy", role = "aut"),
     person("Hadley", "Wickham", role = "aut"),
