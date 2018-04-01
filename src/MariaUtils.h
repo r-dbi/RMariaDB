@@ -12,4 +12,6 @@ List df_create(const std::vector<MariaFieldType>& types,
                const std::vector<std::string>& names,
                int n);
 
+int days_from_civil(int y, int m, int d);
+
 #endif
