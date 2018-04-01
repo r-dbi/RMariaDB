@@ -18,11 +18,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Kirill Müller \email{krlmlr+r@mailbox.org}
+\strong{Maintainer}: Kirill Müller \email{krlmlr+r@mailbox.org} (0000-0002-1416-3412)
 
 Authors:
 \itemize{
-  \item Jeroen Ooms
+  \item Jeroen Ooms (0000-0002-4035-0289)
   \item David James
   \item Saikat DebRoy
   \item Hadley Wickham
@@ -31,8 +31,8 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item R Consortium [funder]
   \item RStudio [copyright holder]
-  \item Kungliga Tekniska Högskolan (Source code for timegm) [contributor]
 }
 
 }
