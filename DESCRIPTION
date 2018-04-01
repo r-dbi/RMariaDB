@@ -29,7 +29,7 @@ Suggests:
     testthat
 LinkingTo: 
     BH,
-    plogr (>= 0.2.0),
+    plogr,
     Rcpp
 Remotes: 
     r-dbi/DBI,
