@@ -74,7 +74,7 @@ matrix:
       - mysql -e "CREATE DATABASE IF NOT EXISTS test;" -uroot
       - mysql -e "GRANT ALL PRIVILEGES ON test.* TO 'travis'@'localhost'; FLUSH PRIVILEGES;" -uroot
   - os: osx
-    osx_image: xcode8.3
+    osx_image: xcode9.2
     disable_homebrew: true
     r_check_args: '--no-tests'
     before_script: 'echo no sql server, only testing build'
