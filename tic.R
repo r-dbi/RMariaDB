@@ -1,4 +1,4 @@
-add_package_checks()
+add_package_checks(args = Sys.getenv("R_CHECK_ARGS"))
 
 if (Sys.getenv("BUILD_PKGDOWN") != "" && !ci()$is_tag()) {
   get_stage("deploy") %>%
