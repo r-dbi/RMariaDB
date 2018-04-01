@@ -67,15 +67,22 @@ matrix:
     r: 3.2
   - os: osx
     osx_image: xcode9.2
-    brew_packages: mysql && mysql.server start
+    before_install:
+      - brew install mysql
+      - mysql.server start
+      - R -q -e 'install.packages(c("remotes", "curl")); remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages(); tic::before_install()'
+      - mysql -e "CREATE DATABASE IF NOT EXISTS test;" -uroot
+      - mysql -e "GRANT ALL PRIVILEGES ON test.* TO 'travis'@'localhost'; FLUSH PRIVILEGES;" -uroot
   - os: osx
     osx_image: xcode9.2
     disable_homebrew: true
-    r_check_args: '--no-tests' #only test build
+    r_check_args: '--no-tests'
+    before_script: 'echo no sql server, only testing build'
   - os: osx
     osx_image: xcode7.3
     disable_homebrew: true
-    r_check_args: '--no-tests' #only test build
+    r_check_args: '--no-tests'
+    before_script: 'echo no sql server, only testing build'
 
 #notifications
 notifications:
