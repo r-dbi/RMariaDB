@@ -1,5 +1,5 @@
-#ifndef __RSQLITE_MY_UTILS__
-#define __RSQLITE_MY_UTILS__
+#ifndef __RMARIADB_MY_UTILS__
+#define __RMARIADB_MY_UTILS__
 
 // Generic data frame utils ----------------------------------------------------
 
