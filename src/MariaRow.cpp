@@ -1,9 +1,4 @@
 #include "pch.h"
-#include <ctime>
-
-#if defined(WIN32) || defined(_WIN32) || defined(sun)
-#define timegm _mkgmtime
-#endif
 
 #include "MariaRow.h"
 #include "MariaTypes.h"
