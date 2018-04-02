@@ -3,6 +3,8 @@ PKG_LIBS= -L../windows/libmariadbclient-2.3.5/lib${R_ARCH} \
 	-lmariadbclient -lssl -lcrypto -lgdi32 -lz -lws2_32 -pthread
 CXX_STD=CXX11
 
+$(SHLIB):
+
 $(OBJECTS): winlibs
 
 clean:
