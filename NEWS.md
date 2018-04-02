@@ -1,8 +1,14 @@
-## RMariaDB 1.0-5
+# RMariaDB 1.0.5 (2018-04-02)
 
-- Windows: upgrade libmariadbclient to v2.3.5
+- `dbGetException()` is no longer reexported from DBI.
+- `NaN` and `Inf` are converted to `NULL` when writing to the database (#77).
+- Values of class `"integer64"` are now supported for `dbWriteTable()` and `dbBind()` (#87).
+- Schema support, as specified by DBI: `dbListObjects()`, `dbUnquoteIdentifier()` and `Id()`.
+- Names in the `x` argument to `dbQuoteIdentifier()` are preserved in the output (r-lib/DBI#173).
+- Update libmariadbclient to version 2.3.5 on Windows (#92, @jeroen).
 
-## RMariaDB 1.0-4 (2017-12-11)
+
+# RMariaDB 1.0-4 (2017-12-11)
 
 - Attempt to fix Solaris builds by redefining `timegm` symbol if the macro `sun` is defined.
 - Fix examples running on CRAN by using only temporary tables and `overwrite = TRUE`.
