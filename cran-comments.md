@@ -1,5 +1,3 @@
-Update on CRAN's request to fix errors when running examples, and also to fix Solaris build errors.
-
 ## Test environments
 * local OS X install, R 3.4.3
 * ubuntu 12.04 (on travis-ci), R 3.4.3
@@ -13,4 +11,4 @@ Update on CRAN's request to fix errors when running examples, and also to fix So
 
 ## Reverse dependencies
 
-No reverse dependencies.
+Checked dbplyr without new errors or warnings.
