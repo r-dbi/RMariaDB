@@ -34,3 +34,4 @@ src\/RCS
 ^tic\.R$
 ^_pkgdown\.yml$
 ^docs$
+^CRAN-RELEASE$
