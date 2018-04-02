@@ -76,13 +76,18 @@ void MariaResultPrep::execute() {
   complete_ = false;
 
   LOG_DEBUG << "mysql_stmt_execute()";
-  if (mysql_stmt_execute(pStatement_) != 0)
+  if (mysql_stmt_execute(pStatement_) != 0) {
+    LOG_VERBOSE;
     throw_error();
+  }
+  LOG_VERBOSE << "has_result()";
   if (!has_result() && !is_statement_) {
+    LOG_VERBOSE;
     // try again after mysql_stmt_execute, in case pSpec_ == NULL
     pSpec_ = mysql_stmt_result_metadata(pStatement_);
   }
   if (!has_result()) {
+    LOG_VERBOSE;
     rowsAffected_ += mysql_stmt_affected_rows(pStatement_);
   }
 }
