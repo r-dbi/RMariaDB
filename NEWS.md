@@ -5,6 +5,7 @@
 - Values of class `"integer64"` are now supported for `dbWriteTable()` and `dbBind()` (#87).
 - Schema support, as specified by DBI: `dbListObjects()`, `dbUnquoteIdentifier()` and `Id()`.
 - Names in the `x` argument to `dbQuoteIdentifier()` are preserved in the output (r-lib/DBI#173).
+- Replace non-portable `timegm()` with private implementation (#78).
 - Update libmariadbclient to version 2.3.5 on Windows (#92, @jeroen).
 
 
