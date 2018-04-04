@@ -1,3 +1,8 @@
+# RMariaDB 1.0.5.9000 (2018-04-04)
+
+- Same as previous version.
+
+
 # RMariaDB 1.0.5 (2018-04-02)
 
 - `dbGetException()` is no longer reexported from DBI.
