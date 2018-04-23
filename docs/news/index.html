@@ -21,6 +21,8 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
@@ -54,7 +56,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.0.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.0.5.9000</span>
       </span>
     </div>
 
@@ -97,16 +99,34 @@
       <small>Source: <a href='https://github.com/r-dbi/RMariaDB/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="rmariadb-1-0-5" class="section level2">
-<h2 class="hasAnchor">
-<a href="#rmariadb-1-0-5" class="anchor"></a>RMariaDB 1.0-5</h2>
+    <div id="rmariadb-1-0-5-9000-2018-04-04" class="section level1">
+<h1 class="page-header">
+<a href="#rmariadb-1-0-5-9000-2018-04-04" class="anchor"></a>RMariaDB 1.0.5.9000 (2018-04-04)<small> Unreleased </small>
+</h1>
 <ul>
-<li>Windows: upgrade libmariadbclient to v2.3.5</li>
+<li>Same as previous version.</li>
 </ul>
 </div>
-    <div id="rmariadb-1-0-4-2017-12-11" class="section level2">
-<h2 class="hasAnchor">
-<a href="#rmariadb-1-0-4-2017-12-11" class="anchor"></a>RMariaDB 1.0-4 (2017-12-11)</h2>
+    <div id="rmariadb-1-0-5-2018-04-02" class="section level1">
+<h1 class="page-header">
+<a href="#rmariadb-1-0-5-2018-04-02" class="anchor"></a>RMariaDB 1.0.5 (2018-04-02)<small> 2018-04-03 </small>
+</h1>
+<ul>
+<li>
+<code>dbGetException()</code> is no longer reexported from DBI.</li>
+<li>
+<code>NaN</code> and <code>Inf</code> are converted to <code>NULL</code> when writing to the database (<a href='https://github.com/r-dbi/RMariaDB/issues/77'>#77</a>).</li>
+<li>Values of class <code>"integer64"</code> are now supported for <code>dbWriteTable()</code> and <code>dbBind()</code> (<a href='https://github.com/r-dbi/RMariaDB/issues/87'>#87</a>).</li>
+<li>Schema support, as specified by DBI: <code>dbListObjects()</code>, <code>dbUnquoteIdentifier()</code> and <code>Id()</code>.</li>
+<li>Names in the <code>x</code> argument to <code>dbQuoteIdentifier()</code> are preserved in the output (r-lib/DBI<a href='https://github.com/r-dbi/RMariaDB/issues/173'>#173</a>).</li>
+<li>Replace non-portable <code>timegm()</code> with private implementation (<a href='https://github.com/r-dbi/RMariaDB/issues/78'>#78</a>).</li>
+<li>Update libmariadbclient to version 2.3.5 on Windows (<a href='https://github.com/r-dbi/RMariaDB/issues/92'>#92</a>, <a href='http://github.com/jeroen'>@jeroen</a>).</li>
+</ul>
+</div>
+    <div id="rmariadb-1-0-4-2017-12-11" class="section level1">
+<h1 class="page-header">
+<a href="#rmariadb-1-0-4-2017-12-11" class="anchor"></a>RMariaDB 1.0-4 (2017-12-11)<small> 2017-12-11 </small>
+</h1>
 <ul>
 <li>Attempt to fix Solaris builds by redefining <code>timegm</code> symbol if the macro <code>sun</code> is defined.</li>
 <li>Fix examples running on CRAN by using only temporary tables and <code>overwrite = TRUE</code>.</li>
@@ -164,7 +184,8 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#rmariadb-1-0-5">1.0-5</a></li>
+        <li><a href="#rmariadb-1-0-5-9000-2018-04-04">1.0.5.9000</a></li>
+        <li><a href="#rmariadb-1-0-5-2018-04-02">1.0.5</a></li>
         <li><a href="#rmariadb-1-0-4-2017-12-11">1.0-4</a></li>
         <li><a href="#rmariadb-1-0-2-2017-10-01">1.0-2</a></li>
         <li><a href="#rmariadb-0-11-1-2016-03-24">0.11-1</a></li>

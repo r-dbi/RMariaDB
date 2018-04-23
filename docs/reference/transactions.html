@@ -21,6 +21,8 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
@@ -59,7 +61,7 @@ be rolled back." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.0.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.0.5.9000</span>
       </span>
     </div>
 
@@ -99,14 +101,17 @@ be rolled back." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>DBMS Transaction Management</h1>
-    <small>Source: <a href='https://github.com/r-dbi/RMariaDB/blob/master/R/transaction.R'><code>R/transaction.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/r-dbi/RMariaDB/blob/master/R/transaction.R'><code>R/transaction.R</code></a></small>
+    <div class="hidden name"><code>transactions.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Commits or roll backs the current transaction in an MariaDB connection.
 Note that in MariaDB DDL statements (e.g. <code>CREATE TABLE</code>) cannot
 be rolled back.</p>
     
+    </div>
 
     <pre class="usage"><span class='co'># S4 method for MariaDBConnection</span>
 <span class='fu'>dbBegin</span>(<span class='no'>conn</span>, <span class='no'>...</span>)
