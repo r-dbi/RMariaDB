@@ -118,7 +118,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     }
 
     if (overwrite) {
-      dbRemoveTable(conn, name, temporary = temporary, safe = TRUE)
+      dbRemoveTable(conn, name, temporary = temporary, fail_if_missing = FALSE)
     }
 
     if (!found || overwrite) {
@@ -317,11 +317,9 @@ setMethod("dbExistsTable", c("MariaDBConnection", "character"),
 #' @export
 #' @rdname mariadb-tables
 setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
-  function(conn, name, ...){
+  function(conn, name, ..., fail_if_missing = TRUE){
     extra <- list(...)
     # Don't document or export yet
-    safe <- extra[["safe"]]
-    if (is.null(safe)) safe <- FALSE
     temporary <- extra[["temporary"]]
     if (is.null(temporary)) temporary <- FALSE
 
@@ -332,7 +330,7 @@ setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
         "DROP ",
         if (temporary) "TEMPORARY ",
         "TABLE ",
-        if (safe) "IF EXISTS ",
+        if (!fail_if_missing) "IF EXISTS ",
         name
       )
     )
