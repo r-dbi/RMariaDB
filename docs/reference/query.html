@@ -21,12 +21,13 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
-
-
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Execute a SQL statement on a database connection. — dbFetch,MariaDBResult-method" />
 
 <meta property="og:description" content="To retrieve results a chunk at a time, use dbSendQuery(),
@@ -46,8 +47,6 @@ dbExecute() corresponds to dbGetQuery()." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
-
 
 
   </head>
@@ -200,7 +199,7 @@ a parameterised query.</p></td>
 
 <span class='fu'>dbClearResult</span>(<span class='no'>res</span>)
 <span class='fu'>dbDisconnect</span>(<span class='no'>con</span>)
-}</div></pre>
+}</div><div class='output co'>#&gt; <span class='error'>Error in dbConnect(RMariaDB::MariaDB(), dbname = "test"): could not find function "dbConnect"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

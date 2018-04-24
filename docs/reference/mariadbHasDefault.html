@@ -21,12 +21,13 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
-
-
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Check if default database is available. — mariadbHasDefault" />
 
 <meta property="og:description" content="RMariaDB examples and tests connect to a database defined by the
@@ -44,8 +45,6 @@ on failure, making it suitable for use in tests." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
-
 
 
   </head>
@@ -127,7 +126,7 @@ on failure, making it suitable for use in tests.</p>
   <span class='no'>db</span> <span class='kw'>&lt;-</span> <span class='fu'>dbConnect</span>(<span class='kw pkg'>RMariaDB</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/RMariaDB/topics/dbConnect-MariaDBDriver-method'>MariaDB</a></span>(), <span class='kw'>dbname</span> <span class='kw'>=</span> <span class='st'>"test"</span>)
   <span class='fu'>dbListTables</span>(<span class='no'>db</span>)
   <span class='fu'>dbDisconnect</span>(<span class='no'>db</span>)
-}</div></pre>
+}</div><div class='output co'>#&gt; <span class='error'>Error in dbConnect(RMariaDB::MariaDB(), dbname = "test"): could not find function "dbConnect"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
