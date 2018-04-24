@@ -316,6 +316,8 @@ setMethod("dbExistsTable", c("MariaDBConnection", "character"),
 
 #' @export
 #' @rdname mariadb-tables
+#' @param fail_if_missing If `FALSE`, `dbRemoveTable()` succeeds if the
+#'   table doesn't exist.
 setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
   function(conn, name, ..., fail_if_missing = TRUE){
     extra <- list(...)
