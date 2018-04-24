@@ -3,12 +3,15 @@
 \docType{class}
 \name{MariaDBConnection-class}
 \alias{MariaDBConnection-class}
+\alias{format.MariaDBConnection}
 \alias{show,MariaDBConnection-method}
 \alias{dbIsValid,MariaDBConnection-method}
 \alias{dbDisconnect,MariaDBConnection-method}
 \alias{dbGetInfo,MariaDBConnection-method}
 \title{Class MariaDBConnection.}
 \usage{
+\method{format}{MariaDBConnection}(x, ...)
+
 \S4method{show}{MariaDBConnection}(object)
 
 \S4method{dbIsValid}{MariaDBConnection}(dbObj, ...)
