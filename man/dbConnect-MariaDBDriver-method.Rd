@@ -10,7 +10,8 @@
   password = NULL, host = NULL, unix.socket = NULL, port = 0,
   client.flag = 0, groups = "rs-dbi", default.file = NULL,
   ssl.key = NULL, ssl.cert = NULL, ssl.ca = NULL, ssl.capath = NULL,
-  ssl.cipher = NULL, ...)
+  ssl.cipher = NULL, ..., bigint = c("integer64", "integer", "numeric",
+  "character"))
 
 MariaDB()
 }
@@ -59,6 +60,10 @@ the trusted SSL CA certificates in PEM format.}
 encryption.}
 
 \item{...}{Unused, needed for compatibility with generic.}
+
+\item{bigint}{The R type that 64-bit integer types should be mapped to,
+default is \link[bit64:integer64]{bit64::integer64}, which allows the full range of 64 bit
+integers.}
 }
 \description{
 These methods are straight-forward implementations of the corresponding

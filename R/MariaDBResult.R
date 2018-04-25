@@ -9,7 +9,8 @@ setClass("MariaDBResult",
   contains = "DBIResult",
   slots = list(
     ptr = "externalptr",
-    sql = "character"
+    sql = "character",
+    bigint = "character"
   )
 )
 

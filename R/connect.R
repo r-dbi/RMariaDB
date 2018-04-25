@@ -36,6 +36,9 @@ NULL
 #' @param ssl.cipher (optional) string list of permitted ciphers to use for SSL
 #'   encryption.
 #' @param ... Unused, needed for compatibility with generic.
+#' @param bigint The R type that 64-bit integer types should be mapped to,
+#'   default is [bit64::integer64], which allows the full range of 64 bit
+#'   integers.
 #' @references
 #' Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/
 #' @export
@@ -66,7 +69,10 @@ setMethod("dbConnect", "MariaDBDriver",
   function(drv, dbname = NULL, username = NULL, password = NULL, host = NULL,
     unix.socket = NULL, port = 0, client.flag = 0,
     groups = "rs-dbi", default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
-    ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...) {
+    ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...,
+    bigint = c("integer64", "integer", "numeric", "character")) {
+
+    bigint <- match.arg(bigint)
 
     ptr <- connection_create(
       host, username, password, dbname, as.integer(port), unix.socket,
@@ -79,7 +85,8 @@ setMethod("dbConnect", "MariaDBDriver",
     con <- new("MariaDBConnection",
       ptr = ptr,
       host = info$host,
-      db = info$dbname
+      db = info$dbname,
+      bigint = bigint
     )
 
     dbExecute(con, "SET time_zone = '+00:00'")

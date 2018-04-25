@@ -10,7 +10,8 @@ setClass("MariaDBConnection",
   slots = list(
     ptr = "externalptr",
     host = "character",
-    db = "character"
+    db = "character",
+    bigint = "character"
   )
 )
 
