@@ -115,7 +115,8 @@ generic functions.</p>
   <span class='kw'>password</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>host</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>unix.socket</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>client.flag</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>groups</span> <span class='kw'>=</span> <span class='st'>"rs-dbi"</span>, <span class='kw'>default.file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>ssl.key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ssl.cert</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ssl.ca</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ssl.capath</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ssl.cipher</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+  <span class='kw'>ssl.cipher</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>bigint</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"integer64"</span>, <span class='st'>"integer"</span>, <span class='st'>"numeric"</span>,
+  <span class='st'>"character"</span>))
 
 <span class='fu'>MariaDB</span>()</pre>
     
@@ -196,6 +197,12 @@ encryption.</p></td>
     <tr>
       <th>...</th>
       <td><p>Unused, needed for compatibility with generic.</p></td>
+    </tr>
+    <tr>
+      <th>bigint</th>
+      <td><p>The R type that 64-bit integer types should be mapped to,
+default is <a href='http://www.rdocumentation.org/packages/bit64/topics/bit64-package'>bit64::integer64</a>, which allows the full range of 64 bit
+integers.</p></td>
     </tr>
     </table>
     
