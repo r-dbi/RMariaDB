@@ -49,7 +49,8 @@ setMethod("dbFetch", "MariaDBResult",
     if (trunc(n) != n) stopc("n must be a whole number")
     ret <- result_fetch(res@ptr, n = n)
     ret <- convert_bigint(ret, res@bigint)
-    sqlColumnToRownames(ret, row.names)
+    ret <- sqlColumnToRownames(ret, row.names)
+    set_tidy_names(ret)
   }
 )
 
@@ -164,7 +165,9 @@ NULL
 #' @export
 #' @rdname result-meta
 setMethod("dbColumnInfo", "MariaDBResult", function(res, ...) {
-  result_column_info(res@ptr)
+  df <- result_column_info(res@ptr)
+  df$name <- tidy_names(df$name)
+  df
 })
 
 #' @export
