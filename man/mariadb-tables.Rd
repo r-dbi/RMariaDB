@@ -31,7 +31,7 @@
 \S4method{dbExistsTable}{MariaDBConnection,character}(conn, name, ...)
 
 \S4method{dbRemoveTable}{MariaDBConnection,character}(conn, name, ...,
-  fail_if_missing = TRUE)
+  temporary = FALSE, fail_if_missing = TRUE)
 }
 \arguments{
 \item{conn}{a \linkS4class{MariaDBConnection} object, produced by
@@ -92,6 +92,8 @@ If given the method will return all objects accessible through this prefix.}
 
 \item{fail_if_missing}{If \code{FALSE}, \code{dbRemoveTable()} succeeds if the
 table doesn't exist.}
+
+\item{temporary}{If \code{TRUE}, only temporary tables are considered.}
 }
 \value{
 A data.frame in the case of \code{dbReadTable()}; otherwise a logical

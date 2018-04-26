@@ -321,14 +321,12 @@ setMethod("dbExistsTable", c("MariaDBConnection", "character"),
 
 #' @export
 #' @rdname mariadb-tables
+#' @param temporary If `TRUE`, only temporary tables are considered.
 #' @param fail_if_missing If `FALSE`, `dbRemoveTable()` succeeds if the
 #'   table doesn't exist.
 setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
-  function(conn, name, ..., fail_if_missing = TRUE){
+  function(conn, name, ..., temporary = FALSE, fail_if_missing = TRUE) {
     extra <- list(...)
-    # Don't document or export yet
-    temporary <- extra[["temporary"]]
-    if (is.null(temporary)) temporary <- FALSE
 
     name <- dbQuoteIdentifier(conn, name)
     dbExecute(
