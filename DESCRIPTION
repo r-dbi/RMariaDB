@@ -51,6 +51,7 @@ Collate:
     'connect.R'
     'default.R'
     'export.R'
+    'names.R'
     'query.R'
     'quote.R'
     'rownames.R'
