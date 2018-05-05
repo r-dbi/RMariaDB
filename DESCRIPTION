@@ -19,7 +19,7 @@ Depends:
     R (>= 2.8.0)
 Imports: 
     bit64,
-    DBI (>= 0.8.0.9001),
+    DBI (>= 1.0.0),
     hms,
     methods,
     Rcpp (>= 0.12.4)
@@ -31,9 +31,6 @@ LinkingTo:
     BH,
     plogr,
     Rcpp
-Remotes: 
-    r-dbi/DBI,
-    r-dbi/DBItest
 Encoding: UTF-8
 NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
