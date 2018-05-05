@@ -1,3 +1,8 @@
+# RMariaDB 1.0.6 (2018-05-05)
+
+- Now imports DBI 1.0.0.
+
+
 # RMariaDB 1.0.5.9001 (2018-05-01)
 
 - `Id()` is reexported from DBI.
