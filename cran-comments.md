@@ -1,8 +1,8 @@
-Update that includes another attempt to fix build errors on Solaris.
+Minor release for compatibility with DBI 1.0.0.
 
 ## Test environments
-* local OS X install, R 3.4.3
-* ubuntu 12.04 (on travis-ci), R 3.4.3
+* local OS X install, R 3.4.4
+* ubuntu 14.04 (on travis-ci), R 3.4.4
 * win-builder (devel and release)
 
 ## R CMD check results
