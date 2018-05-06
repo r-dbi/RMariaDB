@@ -58,7 +58,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.0.5.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.0.6</span>
       </span>
     </div>
 
@@ -134,7 +134,7 @@
 
 <span class='co'># S4 method for MariaDBConnection,character</span>
 <span class='fu'>dbRemoveTable</span>(<span class='no'>conn</span>, <span class='no'>name</span>, <span class='no'>...</span>,
-  <span class='kw'>fail_if_missing</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>temporary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>fail_if_missing</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -190,7 +190,8 @@ must exist, otherwise an error is reported. Its default is <code>FALSE</code>.</
     <tr>
       <th>temporary</th>
       <td><p>If <code>TRUE</code>, creates a temporary table that expires
-when the connection is closed.</p></td>
+when the connection is closed. For <code>dbRemoveTable()</code>, only temporary
+tables are considered if this argument is set to <code>TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>header</th>

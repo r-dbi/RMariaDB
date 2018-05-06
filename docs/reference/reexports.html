@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Client flags — Client-flags • RMariaDB</title>
+<title>Objects exported from other packages — reexports • RMariaDB</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -28,11 +28,13 @@
 
 
 
-<meta property="og:title" content="Client flags — Client-flags" />
+<meta property="og:title" content="Objects exported from other packages — reexports" />
 
-<meta property="og:description" content="Use for the client.flag argument to dbConnect(), multiple flags can be
-combined with a bitwise or (see Logic).  The flags are provided for
-completeness." />
+<meta property="og:description" content="These objects are imported from other packages. Follow the links
+below to see their documentation.
+
+  DBIId
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -99,45 +101,28 @@ completeness." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Client flags</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-dbi/RMariaDB/blob/master/R/connect.R'><code>R/connect.R</code></a></small>
-    <div class="hidden name"><code>Client-flags.Rd</code></div>
+    <h1>Objects exported from other packages</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-dbi/RMariaDB/blob/master/R/export.R'><code>R/export.R</code></a></small>
+    <div class="hidden name"><code>reexports.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Use for the <code>client.flag</code> argument to <code>dbConnect()</code>, multiple flags can be
-combined with a bitwise or (see Logic).  The flags are provided for
-completeness.</p>
+    <p>These objects are imported from other packages. Follow the links
+below to see their documentation.</p>
+<dl class='dl-horizontal'>
+  <dt>DBI</dt><dd><p><code><a href='http://www.rdocumentation.org/packages/DBI/topics/Id'>Id</a></code></p></dd>
+</dl>
     
     </div>
 
         
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>The <code>flags</code> argument at https://mariadb.com/kb/en/library/mysql_real_connect.</p></div>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>library</span>(<span class='no'>DBI</span>)
-<span class='fu'>library</span>(<span class='no'>RMariaDB</span>)
-<span class='no'>con1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DBI/topics/dbConnect'>dbConnect</a></span>(<span class='fu'><a href='dbConnect-MariaDBDriver-method.html'>MariaDB</a></span>(), <span class='kw'>client.flag</span> <span class='kw'>=</span> <span class='no'>CLIENT_COMPRESS</span>)
-<span class='no'>con2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/DBI/topics/dbConnect'>dbConnect</a></span>(
-  <span class='fu'><a href='dbConnect-MariaDBDriver-method.html'>MariaDB</a></span>(),
-  <span class='kw'>client.flag</span> <span class='kw'>=</span> <span class='no'>CLIENT_COMPRESS</span> <span class='kw'>|</span> <span class='no'>CLIENT_SECURE_CONNECTION</span>
-)
-<span class='co'># }</span><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>
