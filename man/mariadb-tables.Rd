@@ -68,7 +68,8 @@ in the DBMS.  If appending, then the table (or temporary table)
 must exist, otherwise an error is reported. Its default is \code{FALSE}.}
 
 \item{temporary}{If \code{TRUE}, creates a temporary table that expires
-when the connection is closed.}
+when the connection is closed. For \code{dbRemoveTable()}, only temporary
+tables are considered if this argument is set to \code{TRUE}.}
 
 \item{header}{logical, does the input file have a header line? Default is the
 same heuristic used by \code{read.table()}, i.e., \code{TRUE} if the first
@@ -92,8 +93,6 @@ If given the method will return all objects accessible through this prefix.}
 
 \item{fail_if_missing}{If \code{FALSE}, \code{dbRemoveTable()} succeeds if the
 table doesn't exist.}
-
-\item{temporary}{If \code{TRUE}, only temporary tables are considered.}
 }
 \value{
 A data.frame in the case of \code{dbReadTable()}; otherwise a logical

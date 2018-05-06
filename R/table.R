@@ -72,7 +72,8 @@ setMethod("dbReadTable", c("MariaDBConnection", "character"),
 #' @param field.types Optional, overrides default choices of field types,
 #'   derived from the classes of the columns in the data frame.
 #' @param temporary If `TRUE`, creates a temporary table that expires
-#'   when the connection is closed.
+#'   when the connection is closed. For `dbRemoveTable()`, only temporary
+#'   tables are considered if this argument is set to `TRUE`.
 #' @export
 #' @rdname mariadb-tables
 setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
@@ -321,7 +322,6 @@ setMethod("dbExistsTable", c("MariaDBConnection", "character"),
 
 #' @export
 #' @rdname mariadb-tables
-#' @param temporary If `TRUE`, only temporary tables are considered.
 #' @param fail_if_missing If `FALSE`, `dbRemoveTable()` succeeds if the
 #'   table doesn't exist.
 setMethod("dbRemoveTable", c("MariaDBConnection", "character"),
