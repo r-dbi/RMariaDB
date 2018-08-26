@@ -1,6 +1,7 @@
 #ifndef __RMARIADB_MARIA_BINDING__
 #define __RMARIADB_MARIA_BINDING__
 
+#include <boost/container/vector.hpp>
 #include <boost/noncopyable.hpp>
 #include "MariaTypes.h"
 
@@ -11,7 +12,7 @@ class MariaBinding : public boost::noncopyable {
   int p;
   R_xlen_t i, n_rows;
   std::vector<MYSQL_BIND> bindings;
-  std::vector<my_bool> is_null;
+  boost::container::vector<my_bool> is_null;
   std::vector<MariaFieldType> types;
   std::vector<MYSQL_TIME> time_buffers;
 

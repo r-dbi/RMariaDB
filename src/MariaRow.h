@@ -2,6 +2,7 @@
 #define __RMARIADB_MARIA_ROW__
 
 #include <boost/core/noncopyable.hpp>
+#include <boost/container/vector.hpp>
 #include <boost/cstdint.hpp>
 
 #include "MariaTypes.h"
@@ -15,7 +16,7 @@ class MariaRow : public boost::noncopyable {
   std::vector<MariaFieldType> types_;
   std::vector<std::vector<unsigned char> > buffers_;
   std::vector<unsigned long> lengths_;
-  std::vector<my_bool> nulls_, errors_;
+  boost::container::vector<my_bool> nulls_, errors_;
 
 public:
   MariaRow();
