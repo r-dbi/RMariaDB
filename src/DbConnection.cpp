@@ -37,9 +37,13 @@ void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std
   if (!groups.isNull())
     mysql_options(this->pConn_, MYSQL_READ_DEFAULT_GROUP,
                   as<std::string>(groups).c_str());
-  if (!default_file.isNull())
+
+  std::string default_file_str;
+  if (!default_file.isNull()) {
+    default_file_str = as<std::string>(default_file);
     mysql_options(this->pConn_, MYSQL_READ_DEFAULT_FILE,
-                  as<std::string>(default_file).c_str());
+                  default_file_str.c_str());
+  }
 
   if (!ssl_key.isNull() || !ssl_cert.isNull() || !ssl_ca.isNull() ||
       !ssl_capath.isNull() || !ssl_cipher.isNull()) {
