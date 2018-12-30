@@ -55,22 +55,15 @@ addons:
 matrix:
   include:
   - os: linux
-    r: release
-    env:
-    - BUILD_PKGDOWN=true
-  - os: linux
     r: devel
-  - os: linux
-    r: oldrel
+    env:
+    - R_CHECK_ARGS="--no-manual --as-cran"
   - os: linux
     r: 3.2
-  - os: osx
-    osx_image: xcode9.2
-    before_install:
-      - brew install mysql
-      - mysql.server start
-      - R -q -e 'install.packages(c("remotes", "curl")); remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages(); tic::before_install()'
-  - os: osx
+    env:
+    - R_CHECK_ARGS="--no-manual --as-cran"
+  - stage: full
+    os: osx
     osx_image: xcode8.3
     disable_homebrew: true
     env:
@@ -82,6 +75,25 @@ matrix:
     env:
       - R_CHECK_ARGS="--no-manual --no-tests"
     before_script: 'echo no sql server, only testing build'
+  - os: linux
+    r: release
+    env:
+    - BUILD_PKGDOWN=true
+    - R_CHECK_ARGS="--no-manual --as-cran"
+  - os: linux
+    r: oldrel
+    env:
+    - R_CHECK_ARGS="--no-manual --as-cran"
+  - os: linux
+    r: 3.3
+    env:
+    - R_CHECK_ARGS="--no-manual --as-cran"
+  - os: osx
+    osx_image: xcode9.2
+    before_install:
+      - brew install mysql
+      - mysql.server start
+      - R -q -e 'install.packages(c("remotes", "curl")); remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages(); tic::before_install()'
 
 #notifications
 notifications:
