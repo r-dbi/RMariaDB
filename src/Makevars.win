@@ -6,7 +6,12 @@ PKG_CPPFLAGS = -I$(RWINLIB)/include/mariadb
 PKG_LIBS= -L$(RWINLIB)/lib${R_ARCH} \
 	-lmariadbclient -lssl -lcrypto -lcrypt32 -lgdi32 -lz -lws2_32 -pthread
 
-all: clean winlibs
+# Necessary, so that the behavior of make called without arguments
+# is not changed:
+$(SHLIB):
+
+# We need winlibs (=headers) already for compiling each .o file
+$(OBJECTS): winlibs
 
 clean:
 	rm -f $(SHLIB) $(OBJECTS)
