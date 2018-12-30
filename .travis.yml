@@ -29,6 +29,7 @@ sudo: false
 cache: packages
 latex: false
 fortran: false
+pandoc: false
 
 #env
 env:
@@ -49,15 +50,10 @@ matrix:
   include:
   - os: linux
     r: devel
-    env:
-    - R_CHECK_ARGS="--no-manual --as-cran"
   - os: linux
     r: 3.2
-    env:
-    - R_CHECK_ARGS="--no-manual --as-cran"
   - stage: full
     os: osx
-    osx_image: xcode9.2
     before_install:
       - brew install mysql
       - mysql.server start
@@ -76,9 +72,9 @@ matrix:
     before_script: 'echo no sql server, only testing build'
   - os: linux
     r: release
+    pandoc: true
     env:
     - BUILD_PKGDOWN=true
-    - R_CHECK_ARGS="--no-manual --as-cran"
     before_deploy: R -q -e 'tic::before_deploy()'
     deploy:
       provider: script
@@ -88,12 +84,8 @@ matrix:
     after_deploy: R -q -e 'tic::after_deploy()'
   - os: linux
     r: oldrel
-    env:
-    - R_CHECK_ARGS="--no-manual --as-cran"
   - os: linux
     r: 3.3
-    env:
-    - R_CHECK_ARGS="--no-manual --as-cran"
 
 #notifications
 notifications:
