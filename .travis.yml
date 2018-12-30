@@ -64,6 +64,12 @@ matrix:
     - R_CHECK_ARGS="--no-manual --as-cran"
   - stage: full
     os: osx
+    osx_image: xcode9.2
+    before_install:
+      - brew install mysql
+      - mysql.server start
+      - R -q -e 'install.packages(c("remotes", "curl")); remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages(); tic::before_install()'
+  - os: osx
     osx_image: xcode8.3
     disable_homebrew: true
     env:
@@ -88,12 +94,6 @@ matrix:
     r: 3.3
     env:
     - R_CHECK_ARGS="--no-manual --as-cran"
-  - os: osx
-    osx_image: xcode9.2
-    before_install:
-      - brew install mysql
-      - mysql.server start
-      - R -q -e 'install.packages(c("remotes", "curl")); remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages(); tic::before_install()'
 
 #notifications
 notifications:
