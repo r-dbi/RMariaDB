@@ -26,6 +26,11 @@ test_that("throws error if constraint violated", {
 # Available only in MariaDB
 test_that("can read file from disk", {
   con <- mariadbDefault()
+  on.exit(dbDisconnect(con))
+
+  if (dbGetQuery(con, "SHOW VARIABLES LIKE 'local_infile'")$Value == "OFF") {
+    skip("local_infile is set to OFF, can't test LOAD DATA INFILE")
+  }
 
   expected <- data.frame(
     a = c(1:3, NA),
@@ -36,8 +41,6 @@ test_that("can read file from disk", {
   dbWriteTable(con, "dat", "dat-n.bin", sep = "|", eol = "\n",
                temporary = TRUE, overwrite = TRUE)
   expect_equal(dbReadTable(con, "dat"), expected)
-
-  dbDisconnect(con)
 })
 
 test_that("converts NaN and Inf to NULL", {
