@@ -173,8 +173,11 @@ bool MariaBinding::bind_next_row() {
     }
     is_null[j] = missing;
   }
+
+  LOG_VERBOSE << "Binding";
   mysql_stmt_bind_param(statement, &bindings[0]);
 
+  LOG_VERBOSE << "Done binding row" << i;
   i++;
   return true;
 }
