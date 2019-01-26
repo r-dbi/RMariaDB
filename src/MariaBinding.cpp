@@ -195,6 +195,7 @@ void MariaBinding::binding_update(int j, enum_field_types type, int size) {
 void MariaBinding::set_date_time_buffer(int j, time_t time) {
   LOG_VERBOSE << time;
   struct tm* tm = gmtime(&time);
+  LOG_VERBOSE << tm;
 
   time_buffers[j].year = tm->tm_year + 1900;
   time_buffers[j].month = tm->tm_mon + 1 ;
