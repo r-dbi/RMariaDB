@@ -147,7 +147,9 @@ bool MariaBinding::bind_next_row() {
         missing = true;
       } else {
         double val = REAL(col)[i];
+        LOG_VERBOSE << val;
         set_date_time_buffer(j, static_cast<time_t>(val * (types[j] == MY_DATE ? 86400.0 : 1.0)));
+        LOG_VERBOSE;
         bindings[j].buffer_length = sizeof(MYSQL_TIME);
         bindings[j].buffer = &time_buffers[j];
       }
@@ -191,6 +193,7 @@ void MariaBinding::binding_update(int j, enum_field_types type, int size) {
 }
 
 void MariaBinding::set_date_time_buffer(int j, time_t time) {
+  LOG_VERBOSE << time;
   struct tm* tm = gmtime(&time);
 
   time_buffers[j].year = tm->tm_year + 1900;
