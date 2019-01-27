@@ -31,10 +31,17 @@ latex: false
 fortran: false
 pandoc: false
 
+#stages: test, full
+stages:
+- name: test
+- name: full
+  if: branch = master
+
 #env
 env:
   global:
   - _R_CHECK_FORCE_SUGGESTS_=false
+  - _R_CHECK_SYSTEM_CLOCK_=false
   - MAKEFLAGS="-j 2"
   - R_CHECK_ARGS="--no-manual --as-cran"
 
@@ -46,6 +53,7 @@ addons:
     - libmagick++-dev
     - libssh2-1-dev
 
+#jobs
 matrix:
   include:
   - os: linux
@@ -83,9 +91,10 @@ matrix:
         all_branches: true
     after_deploy: R -q -e 'tic::after_deploy()'
   - os: linux
-    r: oldrel
+    r: 3.4
   - os: linux
     r: 3.3
+  fast_finish: true
 
 #notifications
 notifications:
