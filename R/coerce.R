@@ -37,7 +37,7 @@ posixlt_to_posixct <- function(value) {
 }
 
 numeric_to_finite <- function(value) {
-  is_numeric <- vlapply(value, is.numeric) & !vlapply(value, is.integer)
+  is_numeric <- vapply(value, is.double)
   value[is_numeric] <- lapply(value[is_numeric], function(x) {
     x[!is.finite(x)] <- NA
     x
