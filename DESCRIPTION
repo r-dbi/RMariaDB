@@ -20,7 +20,7 @@ Depends:
 Imports: 
     bit64,
     DBI (>= 1.0.0),
-    hms,
+    hms (>= 0.4.2.9005),
     methods,
     Rcpp (>= 0.12.4)
 Suggests: 
@@ -33,7 +33,8 @@ LinkingTo:
     Rcpp
 Remotes: 
     r-dbi/DBI,
-    r-dbi/DBItest
+    r-dbi/DBItest,
+    tidyverse/hms
 Encoding: UTF-8
 NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
