@@ -1,10 +1,12 @@
 #include "pch.h"
 
 #include "MariaResultSimple.h"
+#include "DbConnection.h"
 
-MariaResultSimple::MariaResultSimple(DbResult* res) :
-  pRes_(res)
+MariaResultSimple::MariaResultSimple(const DbConnectionPtr& pConn, bool is_statement) :
+  pConn_(pConn)
 {
+  (void)is_statement;
 }
 
 MariaResultSimple::~MariaResultSimple() {
@@ -30,12 +32,7 @@ void MariaResultSimple::bind(const List& /*params*/) {
 List MariaResultSimple::get_column_info() {
   CharacterVector names(0), types(0);
 
-  List out = List::create(names, types);
-  out.attr("row.names") = IntegerVector::create(NA_INTEGER, 0);
-  out.attr("class") = "data.frame";
-  out.attr("names") = CharacterVector::create("name", "type");
-
-  return out;
+  return List::create(_["name"] = names, _["type"] = types);
 }
 
 List MariaResultSimple::fetch(int /*n_max*/) {
@@ -58,5 +55,5 @@ bool MariaResultSimple::complete() {
 }
 
 void MariaResultSimple::exec(const std::string& sql) {
-  pRes_->get_db_conn()->exec(sql);
+  pConn_->exec(sql);
 }

@@ -3,9 +3,10 @@
 #include "MariaResultPrep.h"
 #include "DbConnection.h"
 #include <mysqld_error.h>
+#include "MariaResult.h"
 
-MariaResultPrep::MariaResultPrep(DbResult* res, bool is_statement) :
-  pRes_(res),
+MariaResultPrep::MariaResultPrep(const DbConnectionPtr& pConn, bool is_statement) :
+  pConn_(pConn),
   pStatement_(NULL),
   pSpec_(NULL),
   rowsAffected_(0),
@@ -16,7 +17,7 @@ MariaResultPrep::MariaResultPrep(DbResult* res, bool is_statement) :
   complete_(false),
   is_statement_(is_statement)
 {
-  pStatement_ = mysql_stmt_init(pRes_->get_conn());
+  pStatement_ = mysql_stmt_init(pConn_->get_conn());
   if (pStatement_ == NULL)
     stop("Out of memory");
 }
@@ -67,7 +68,7 @@ void MariaResultPrep::close() {
     pStatement_ = NULL;
   }
 
-  pRes_->get_db_conn()->autocommit();
+  pConn_->autocommit();
 }
 
 void MariaResultPrep::execute() {
@@ -117,12 +118,7 @@ List MariaResultPrep::get_column_info() {
     types[i] = type_name(types_[i]);
   }
 
-  List out = List::create(names, types);
-  out.attr("row.names") = IntegerVector::create(NA_INTEGER, -nCols_);
-  out.attr("class") = "data.frame";
-  out.attr("names") = CharacterVector::create("name", "type");
-
-  return out;
+  return List::create(_["name"] = names, _["type"] = types);
 }
 
 bool MariaResultPrep::has_result() const {

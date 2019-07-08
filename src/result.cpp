@@ -1,12 +1,13 @@
 #include "pch.h"
 #include "workarounds/XPtr.h"
 #include "RMariaDB_types.h"
+#include "MariaResult.h"
 
 
 // [[Rcpp::export]]
 XPtr<DbResult> result_create(XPtr<DbConnectionPtr> con, std::string sql, bool is_statement = false) {
   (*con)->check_connection();
-  DbResult* res = DbResult::create_and_send_query(*con, sql, is_statement);
+  DbResult* res = MariaResult::create_and_send_query(*con, sql, is_statement);
   return XPtr<DbResult>(res, true);
 }
 

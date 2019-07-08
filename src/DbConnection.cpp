@@ -153,6 +153,15 @@ void DbConnection::set_current_result(DbResult* pResult) {
   pCurrentResult_ = pResult;
 }
 
+void DbConnection::reset_current_result(DbResult* pResult) {
+  // FIXME: What to do if not current result is reset?
+  if (pResult != pCurrentResult_)
+    return;
+
+  pCurrentResult_->close();
+  pCurrentResult_ = NULL;
+}
+
 bool DbConnection::is_current_result(const DbResult* pResult) const {
   return pCurrentResult_ == pResult;
 }

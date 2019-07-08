@@ -2,7 +2,6 @@
 #define __RMARIADB_MARIA_RESULT_SIMPLE__
 
 #include <boost/noncopyable.hpp>
-#include "DbConnection.h"
 #include "MariaBinding.h"
 #include "DbResult.h"
 #include "MariaResultImpl.h"
@@ -10,11 +9,14 @@
 #include "MariaTypes.h"
 #include "MariaUtils.h"
 
+class DbConnection;
+typedef boost::shared_ptr<DbConnection> DbConnectionPtr;
+
 class MariaResultSimple : boost::noncopyable, public MariaResultImpl {
-  DbResult* pRes_;
+  DbConnectionPtr pConn_;
 
 public:
-  MariaResultSimple(DbResult* res);
+  MariaResultSimple(const DbConnectionPtr& pConn, bool is_statement);
   ~MariaResultSimple();
 
 public:
