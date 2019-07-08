@@ -10,12 +10,12 @@
 
 DbResult::DbResult(const DbConnectionPtr& pConn_) :
   pConn(pConn_) {
-  set_current_result();
+  pConn->set_current_result(this);
 }
 
 DbResult::~DbResult() {
   try {
-    clear_current_result();
+    pConn->set_current_result(NULL);
   } catch (...) {};
 }
 
@@ -33,7 +33,7 @@ void DbResult::close() {
 
 // Publics /////////////////////////////////////////////////////////////////////
 
-bool DbResult::complete() {
+bool DbResult::complete() const {
   return impl->complete();
 }
 
@@ -66,14 +66,6 @@ List DbResult::get_column_info() {
 
 DbConnection* DbResult::get_db_conn() const {
   return pConn.get();
-}
-
-void DbResult::set_current_result() {
-  pConn->set_current_result(this);
-}
-
-void DbResult::clear_current_result() {
-  pConn->set_current_result(NULL);
 }
 
 MYSQL* DbResult::get_conn() const {

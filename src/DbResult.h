@@ -1,12 +1,17 @@
-#ifndef __RMARIADB_MARIA_RESULT__
-#define __RMARIADB_MARIA_RESULT__
+#ifndef __RDBI_DB_RESULT__
+#define __RDBI_DB_RESULT__
 
 #include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
 #include <boost/scoped_ptr.hpp>
 
-#include "DbConnection.h"
+#include "DbResultImplDecl.h"
 
-class MariaResultImpl;
+
+class DbConnection;
+typedef boost::shared_ptr<DbConnection> DbConnectionPtr;
+
+// DbResult --------------------------------------------------------------------
 
 class DbResult : boost::noncopyable {
   DbConnectionPtr pConn;
@@ -22,7 +27,7 @@ public:
 public:
   void close();
 
-  bool complete();
+  bool complete() const;
   bool is_active() const;
   int n_rows_fetched();
   int n_rows_affected();
@@ -36,12 +41,8 @@ public:
   DbConnection* get_db_conn() const;
   MYSQL* get_conn() const;
 
-protected:
-  void set_current_result();
-  void clear_current_result();
-
 private:
   void send_query(const std::string& sql, bool is_statement);
 };
 
-#endif
+#endif // __RDBI_DB_RESULT__
