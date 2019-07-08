@@ -40,6 +40,7 @@ public:
 
   // Cancels previous query, if needed.
   void set_current_result(DbResult* pResult);
+  void reset_current_result(DbResult* pResult);
   bool is_current_result(const DbResult* pResult) const;
   bool has_query();
 

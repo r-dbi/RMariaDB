@@ -15,9 +15,6 @@ public:
 
 public:
   void close();
-
-private:
-  void send_query(const std::string& sql, bool is_statement);
 };
 
 #endif // __RMARIADB_MARIA_RESULT__

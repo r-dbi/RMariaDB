@@ -11,13 +11,18 @@ DbResult::DbResult(const DbConnectionPtr& pConn) :
   pConn_(pConn)
 {
   pConn_->check_connection();
+
+  // subclass constructor can throw, the destructor will remove the
+  // current result set
   pConn_->set_current_result(this);
 }
 
 DbResult::~DbResult() {
   try {
-    pConn_->set_current_result(NULL);
-  } catch (...) {};
+    if (is_active()) {
+      pConn_->reset_current_result(this);
+    }
+  } catch (...) {}
 }
 
 
