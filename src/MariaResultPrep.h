@@ -2,7 +2,8 @@
 #define __RMARIADB_MARIA_RESULT_PREP__
 
 #include <boost/noncopyable.hpp>
-#include "DbConnection.h"
+#include <boost/shared_ptr.hpp>
+
 #include "MariaBinding.h"
 #include "MariaResultImpl.h"
 #include "MariaRow.h"

@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "MariaResultSimple.h"
+#include "DbConnection.h"
 
 MariaResultSimple::MariaResultSimple(const DbConnectionPtr& pConn, bool is_statement) :
   pConn_(pConn)

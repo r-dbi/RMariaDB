@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "DbResult.h"
+#include "DbConnection.h"
 #include "MariaResultPrep.h"
 #include "MariaResultSimple.h"
 
