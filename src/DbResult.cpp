@@ -20,17 +20,6 @@ DbResult::~DbResult() {
   } catch (...) {};
 }
 
-DbResult* DbResult::create_and_send_query(const DbConnectionPtr& con, const std::string& sql, bool is_statement) {
-  std::auto_ptr<DbResult> res(new DbResult(con));
-  res->send_query(sql, is_statement);
-
-  return res.release();
-}
-
-void DbResult::close() {
-  // Called from destructor
-  if (impl) impl->close();
-}
 
 // Publics /////////////////////////////////////////////////////////////////////
 
@@ -71,12 +60,9 @@ List DbResult::get_column_info() {
   return out;
 }
 
-DbConnection* DbResult::get_db_conn() const {
-  return pConn_.get();
-}
-
-MYSQL* DbResult::get_conn() const {
-  return pConn_->get_conn();
+void DbResult::close() {
+  // Called from destructor
+  if (impl) impl->close();
 }
 
 // Privates ///////////////////////////////////////////////////////////////////
@@ -92,19 +78,4 @@ void DbResult::validate_params(const List& params) const {
         stop("Parameter %i does not have length %d.", j + 1, n);
     }
   }
-}
-
-void DbResult::send_query(const std::string& sql, bool is_statement) {
-  boost::scoped_ptr<MariaResultImpl> res(new MariaResultPrep(this, is_statement));
-  try {
-    res->send_query(sql);
-  }
-  catch (MariaResultPrep::UnsupportedPS e) {
-    res.reset(NULL);
-    // is_statement info might be worthwhile to pass to simple queries as well
-    res.reset(new MariaResultSimple(this));
-    res->send_query(sql);
-  }
-
-  res.swap(impl);
 }

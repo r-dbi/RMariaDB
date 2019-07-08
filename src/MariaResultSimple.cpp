@@ -2,9 +2,10 @@
 
 #include "MariaResultSimple.h"
 
-MariaResultSimple::MariaResultSimple(DbResult* res) :
-  pRes_(res)
+MariaResultSimple::MariaResultSimple(const DbConnectionPtr& pConn, bool is_statement) :
+  pConn_(pConn)
 {
+  (void)is_statement;
 }
 
 MariaResultSimple::~MariaResultSimple() {
@@ -53,5 +54,5 @@ bool MariaResultSimple::complete() {
 }
 
 void MariaResultSimple::exec(const std::string& sql) {
-  pRes_->get_db_conn()->exec(sql);
+  pConn_->exec(sql);
 }

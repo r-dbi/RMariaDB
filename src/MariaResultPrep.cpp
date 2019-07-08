@@ -3,9 +3,10 @@
 #include "MariaResultPrep.h"
 #include "DbConnection.h"
 #include <mysqld_error.h>
+#include "MariaResult.h"
 
-MariaResultPrep::MariaResultPrep(DbResult* res, bool is_statement) :
-  pRes_(res),
+MariaResultPrep::MariaResultPrep(const DbConnectionPtr& pConn, bool is_statement) :
+  pConn_(pConn),
   pStatement_(NULL),
   pSpec_(NULL),
   rowsAffected_(0),
@@ -16,7 +17,7 @@ MariaResultPrep::MariaResultPrep(DbResult* res, bool is_statement) :
   complete_(false),
   is_statement_(is_statement)
 {
-  pStatement_ = mysql_stmt_init(pRes_->get_conn());
+  pStatement_ = mysql_stmt_init(pConn_->get_conn());
   if (pStatement_ == NULL)
     stop("Out of memory");
 }
@@ -67,7 +68,7 @@ void MariaResultPrep::close() {
     pStatement_ = NULL;
   }
 
-  pRes_->get_db_conn()->autocommit();
+  pConn_->autocommit();
 }
 
 void MariaResultPrep::execute() {
