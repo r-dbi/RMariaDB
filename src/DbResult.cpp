@@ -4,7 +4,11 @@
 #include "MariaResultPrep.h"
 #include "MariaResultSimple.h"
 
-DbResult::DbResult(DbConnectionPtr maria_conn_) :
+
+
+// Construction ////////////////////////////////////////////////////////////////
+
+DbResult::DbResult(const DbConnectionPtr& maria_conn_) :
   maria_conn(maria_conn_) {
   set_current_result();
 }
@@ -15,7 +19,7 @@ DbResult::~DbResult() {
   } catch (...) {};
 }
 
-DbResult* DbResult::create_and_send_query(DbConnectionPtr con, const std::string& sql, bool is_statement) {
+DbResult* DbResult::create_and_send_query(const DbConnectionPtr& con, const std::string& sql, bool is_statement) {
   std::auto_ptr<DbResult> res(new DbResult(con));
   res->send_query(sql, is_statement);
 
@@ -27,16 +31,26 @@ void DbResult::close() {
   if (impl) impl->close();
 }
 
+// Publics /////////////////////////////////////////////////////////////////////
+
 bool DbResult::complete() {
   return impl->complete();
 }
 
-void DbResult::bind(const List& params) {
-  impl->bind(params);
+bool DbResult::is_active() const {
+  return maria_conn->is_current_result(this);
 }
 
-List DbResult::get_column_info() {
-  return impl->get_column_info();
+int DbResult::n_rows_fetched() {
+  return impl->n_rows_fetched();
+}
+
+int DbResult::n_rows_affected() {
+  return impl->n_rows_affected();
+}
+
+void DbResult::bind(const List& params) {
+  impl->bind(params);
 }
 
 List DbResult::fetch(int n_max) {
@@ -45,13 +59,10 @@ List DbResult::fetch(int n_max) {
   return impl->fetch(n_max);
 }
 
-int DbResult::n_rows_affected() {
-  return impl->n_rows_affected();
+List DbResult::get_column_info() {
+  return impl->get_column_info();
 }
 
-int DbResult::n_rows_fetched() {
-  return impl->n_rows_fetched();
-}
 
 DbConnection* DbResult::get_db_conn() const {
   return maria_conn.get();
@@ -69,9 +80,7 @@ MYSQL* DbResult::get_conn() const {
   return maria_conn->get_conn();
 }
 
-bool DbResult::is_active() const {
-  return maria_conn->is_current_result(this);
-}
+// Privates ///////////////////////////////////////////////////////////////////
 
 void DbResult::send_query(const std::string& sql, bool is_statement) {
   boost::scoped_ptr<MariaResultImpl> res(new MariaResultPrep(this, is_statement));

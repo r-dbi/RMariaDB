@@ -1,10 +1,10 @@
 #ifndef __RMARIADB_MARIA_RESULT__
 #define __RMARIADB_MARIA_RESULT__
 
-#include "DbConnection.h"
-
 #include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
+
+#include "DbConnection.h"
 
 class MariaResultImpl;
 
@@ -13,11 +13,11 @@ class DbResult : boost::noncopyable {
   boost::scoped_ptr<MariaResultImpl> impl;
 
 public:
-  DbResult(DbConnectionPtr maria_conn_);
+  DbResult(const DbConnectionPtr& pConn);
   ~DbResult();
 
 public:
-  static DbResult* create_and_send_query(DbConnectionPtr con, const std::string& sql, bool is_statement);
+  static DbResult* create_and_send_query(const DbConnectionPtr& con, const std::string& sql, bool is_statement);
 
 public:
   void close();
@@ -31,7 +31,6 @@ public:
   List fetch(int n_max = -1);
 
   List get_column_info();
-
 
 public:
   DbConnection* get_db_conn() const;
