@@ -8,14 +8,14 @@
 
 // Construction ////////////////////////////////////////////////////////////////
 
-DbResult::DbResult(const DbConnectionPtr& pConn_) :
-  pConn(pConn_) {
-  pConn->set_current_result(this);
+DbResult::DbResult(const DbConnectionPtr& pConn) :
+  pConn_(pConn) {
+  pConn_->set_current_result(this);
 }
 
 DbResult::~DbResult() {
   try {
-    pConn->set_current_result(NULL);
+    pConn_->set_current_result(NULL);
   } catch (...) {};
 }
 
@@ -38,7 +38,7 @@ bool DbResult::complete() const {
 }
 
 bool DbResult::is_active() const {
-  return pConn->is_current_result(this);
+  return pConn_->is_current_result(this);
 }
 
 int DbResult::n_rows_fetched() {
@@ -65,11 +65,11 @@ List DbResult::get_column_info() {
 
 
 DbConnection* DbResult::get_db_conn() const {
-  return pConn.get();
+  return pConn_.get();
 }
 
 MYSQL* DbResult::get_conn() const {
-  return pConn->get_conn();
+  return pConn_->get_conn();
 }
 
 // Privates ///////////////////////////////////////////////////////////////////
