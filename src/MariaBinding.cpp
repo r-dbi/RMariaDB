@@ -51,9 +51,6 @@ void MariaBinding::init_binding(const List& params_) {
     if (j == 0) {
       n_rows = Rf_xlength(param);
     }
-    else if (n_rows != Rf_xlength(param)) {
-      stop("Parameter %i does not have length %d.", j + 1, n_rows);
-    }
 
     switch (type) {
     case MY_LGL:

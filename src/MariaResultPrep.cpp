@@ -117,12 +117,7 @@ List MariaResultPrep::get_column_info() {
     types[i] = type_name(types_[i]);
   }
 
-  List out = List::create(names, types);
-  out.attr("row.names") = IntegerVector::create(NA_INTEGER, -nCols_);
-  out.attr("class") = "data.frame";
-  out.attr("names") = CharacterVector::create("name", "type");
-
-  return out;
+  return List::create(_["name"] = names, _["type"] = types);
 }
 
 bool MariaResultPrep::has_result() const {

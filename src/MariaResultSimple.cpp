@@ -30,12 +30,7 @@ void MariaResultSimple::bind(const List& /*params*/) {
 List MariaResultSimple::get_column_info() {
   CharacterVector names(0), types(0);
 
-  List out = List::create(names, types);
-  out.attr("row.names") = IntegerVector::create(NA_INTEGER, 0);
-  out.attr("class") = "data.frame";
-  out.attr("names") = CharacterVector::create("name", "type");
-
-  return out;
+  return List::create(_["name"] = names, _["type"] = types);
 }
 
 List MariaResultSimple::fetch(int /*n_max*/) {

@@ -13,9 +13,10 @@ typedef boost::shared_ptr<DbConnection> DbConnectionPtr;
 
 // DbResult --------------------------------------------------------------------
 
-class DbResult : boost::noncopyable {
+class
+  DbResult : boost::noncopyable {
   DbConnectionPtr pConn_;
-  boost::scoped_ptr<MariaResultImpl> impl;
+  boost::scoped_ptr<DbResultImpl> impl;
 
 public:
   DbResult(const DbConnectionPtr& pConn);
@@ -42,6 +43,7 @@ public:
   MYSQL* get_conn() const;
 
 private:
+  void validate_params(const List& params) const;
   void send_query(const std::string& sql, bool is_statement);
 };
 
