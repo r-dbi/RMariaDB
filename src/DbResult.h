@@ -9,7 +9,7 @@
 class MariaResultImpl;
 
 class DbResult : boost::noncopyable {
-  DbConnectionPtr maria_conn;
+  DbConnectionPtr pConn;
   boost::scoped_ptr<MariaResultImpl> impl;
 
 public:

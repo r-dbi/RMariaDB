@@ -8,8 +8,8 @@
 
 // Construction ////////////////////////////////////////////////////////////////
 
-DbResult::DbResult(const DbConnectionPtr& maria_conn_) :
-  maria_conn(maria_conn_) {
+DbResult::DbResult(const DbConnectionPtr& pConn_) :
+  pConn(pConn_) {
   set_current_result();
 }
 
@@ -38,7 +38,7 @@ bool DbResult::complete() {
 }
 
 bool DbResult::is_active() const {
-  return maria_conn->is_current_result(this);
+  return pConn->is_current_result(this);
 }
 
 int DbResult::n_rows_fetched() {
@@ -65,19 +65,19 @@ List DbResult::get_column_info() {
 
 
 DbConnection* DbResult::get_db_conn() const {
-  return maria_conn.get();
+  return pConn.get();
 }
 
 void DbResult::set_current_result() {
-  maria_conn->set_current_result(this);
+  pConn->set_current_result(this);
 }
 
 void DbResult::clear_current_result() {
-  maria_conn->set_current_result(NULL);
+  pConn->set_current_result(NULL);
 }
 
 MYSQL* DbResult::get_conn() const {
-  return maria_conn->get_conn();
+  return pConn->get_conn();
 }
 
 // Privates ///////////////////////////////////////////////////////////////////
