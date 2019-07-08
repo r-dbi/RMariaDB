@@ -10,6 +10,7 @@
 DbResult::DbResult(const DbConnectionPtr& pConn) :
   pConn_(pConn)
 {
+  pConn_->check_connection();
   pConn_->set_current_result(this);
 }
 

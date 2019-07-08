@@ -13,8 +13,7 @@ typedef boost::shared_ptr<DbConnection> DbConnectionPtr;
 
 // DbResult --------------------------------------------------------------------
 
-class
-  DbResult : boost::noncopyable {
+class DbResult : boost::noncopyable {
   DbConnectionPtr pConn_;
   boost::scoped_ptr<DbResultImpl> impl;
 
