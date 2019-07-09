@@ -4,7 +4,11 @@
 
 # DO NOT CHANGE THE CODE BELOW
 before_install:
-- R -q -e 'install.packages(c("remotes", "curl")); remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages(); tic::before_install()'
+- if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install mysql && mysql.server start; fi
+- R -q -e 'install.packages("remotes"); remotes::install_github("r-lib/remotes")'
+- R -q -e 'remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages(); tic::before_install()'
+- mysql -e "CREATE DATABASE IF NOT EXISTS test;" -uroot
+- mysql -e "GRANT ALL PRIVILEGES ON test.* TO 'travis'@'localhost'; FLUSH PRIVILEGES;" -uroot
 
 install: R -q -e 'tic::install()'
 after_install: R -q -e 'tic::after_install()'
@@ -62,10 +66,6 @@ matrix:
     r: 3.2
   - stage: full
     os: osx
-    before_install:
-      - brew install mysql
-      - mysql.server start
-      - R -q -e 'install.packages(c("remotes", "curl")); remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages(); tic::before_install()'
   - os: osx
     osx_image: xcode8.3
     disable_homebrew: true
