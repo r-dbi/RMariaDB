@@ -74,6 +74,8 @@ matrix:
   - stage: full
     os: linux
     r: devel
+    env:
+      - DEV_VERSIONS=true
   - os: linux
     r: 3.2
   - os: linux
