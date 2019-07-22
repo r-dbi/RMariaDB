@@ -58,12 +58,7 @@ addons:
 #jobs
 matrix:
   include:
-  - os: linux
-    r: devel
-  - os: linux
-    r: 3.2
-  - stage: full
-    os: osx
+  - os: osx
   - os: osx
     osx_image: xcode8.3
     disable_homebrew: true
@@ -76,6 +71,11 @@ matrix:
     env:
       - R_CHECK_ARGS="--no-manual --no-tests"
     before_script: 'echo no sql server, only testing build'
+  - stage: full
+    os: linux
+    r: devel
+  - os: linux
+    r: 3.2
   - os: linux
     r: release
     pandoc: true
