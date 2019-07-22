@@ -4,11 +4,9 @@
 
 # DO NOT CHANGE THE CODE BELOW
 before_install:
-- if [ "$TRAVIS_OS_NAME" = "osx" ]; then brew install mysql && mysql.server start; fi
+- if which brew; then brew install mysql && mysql.server start; fi
 - R -q -e 'install.packages("remotes"); remotes::install_github("r-lib/remotes")'
 - R -q -e 'remotes::install_github("ropenscilabs/tic"); tic::prepare_all_stages(); tic::before_install()'
-- mysql -e "CREATE DATABASE IF NOT EXISTS test;" -uroot
-- mysql -e "GRANT ALL PRIVILEGES ON test.* TO 'travis'@'localhost'; FLUSH PRIVILEGES;" -uroot
 
 install: R -q -e 'tic::install()'
 after_install: R -q -e 'tic::after_install()'
