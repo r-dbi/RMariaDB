@@ -6,8 +6,5 @@ if (ci_has_env("DEV_VERSIONS")) {
 }
 
 if (ci_has_env("BUILD_PKGDOWN") && !ci_is_tag()) {
-  get_stage("install") %>%
-    add_step(step_install_github("r-lib/pkgload"))
-
   do_pkgdown()
 }
