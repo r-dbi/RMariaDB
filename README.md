@@ -4,7 +4,7 @@ RMariaDB
 [![Build Status](https://travis-ci.org/r-dbi/RMariaDB.svg)](https://travis-ci.org/r-dbi/RMariaDB)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-dbi/RMariaDB?branch=master&svg=true)](https://ci.appveyor.com/project/r-dbi/rmariadb?branch=master)
 [![Coverage Status](https://codecov.io/github/r-dbi/RMariaDB/coverage.svg)](https://codecov.io/github/r-dbi/RMariaDB)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
 
 RMariaDB is a database interface and MariaDB driver for R. This version is aimed at full compliance with the [DBI specification](https://cran.r-project.org/package=DBI/vignettes/spec.html), as a replacement for the old [RMySQL](https://cran.r-project.org/package=RMySQL) package.
@@ -57,11 +57,11 @@ devtools::install_github("r-dbi/DBI")
 devtools::install_github("r-dbi/RMariaDB")
 ```
 
-Installation from source on Linux or OS X currently requires Oracle's [libmysqlclient](https://packages.debian.org/testing/libmysqlclient-dev) or the more modern [`MariaDB Connector/C`](https://downloads.mariadb.org/connector-c/). The latter works best in version 2.3.4/3.0.3 or later, with older versions character and blob columns do not work reliably.
+Installation from source on Linux or OS X currently requires Oracle's [libmysqlclient](https://packages.debian.org/buster/default-libmysqlclient-dev) or the more modern [`MariaDB Connector/C`](https://downloads.mariadb.org/connector-c/). The latter works best in version 2.3.4/3.0.3 or later, with older versions character and blob columns do not work reliably.
 
 ### MySQL client library
 
-On recent __Debian__ or __Ubuntu__ install [libmysqlclient-dev](https://packages.debian.org/testing/libmysqlclient-dev).
+On recent __Debian__ or __Ubuntu__ install [libmysqlclient-dev](https://packages.debian.org/buster/default-libmysqlclient-dev).
 
 ```
 sudo apt-get install -y libmysqlclient-dev
@@ -85,7 +85,7 @@ brew install mysql-connector-c
 
 ### Connector/C
 
-On recent __Debian__ or __Ubuntu__ install [libmariadb-client-lgpl-dev](https://packages.debian.org/testing/libmariadb-client-lgpl-dev). In Ubuntu 14.04 this was called [libmariadbclient-dev](http://packages.ubuntu.com/trusty/libmariadbclient-dev).
+On recent __Debian__ or __Ubuntu__ install [libmariadb-client-lgpl-dev](https://packages.debian.org/buster/libmariadb-client-lgpl-dev-compat). In Ubuntu 14.04 this was called [libmariadbclient-dev](https://packages.ubuntu.com/bionic/libmariadbclient-dev).
 
 ```
 sudo apt-get install -y libmariadb-client-lgpl-dev
