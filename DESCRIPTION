@@ -11,7 +11,7 @@ Authors@R: c(
     person("R Consortium", role = "fnd"),
     person("RStudio", role = "cph"))
 Description: Implements a 'DBI'-compliant interface to 'MariaDB' (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>) databases.
-License: GPL-2
+License: LGPL (>= 2.1)
 URL: https://github.com/r-dbi/RMariaDB,
     https://downloads.mariadb.org/connector-c/
 BugReports: https://github.com/r-dbi/RMariaDB/issues

@@ -36,3 +36,4 @@ src\/RCS
 ^_pkgdown\.yml$
 ^docs$
 ^CRAN-RELEASE$
+^LICENSE\.md$
