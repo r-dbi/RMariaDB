@@ -57,6 +57,9 @@ devtools::install_github("r-dbi/DBI")
 devtools::install_github("r-dbi/RMariaDB")
 ```
 
+Discussions associated with DBI and related database packages take place on [R-SIG-DB](https://stat.ethz.ch/mailman/listinfo/r-sig-db). 
+The website [Databases using R](https://db.rstudio.com/) describes the tools and best practices in this ecosystem.
+
 Installation from source on Linux or OS X currently requires Oracle's [libmysqlclient](https://packages.debian.org/buster/default-libmysqlclient-dev) or the more modern [`MariaDB Connector/C`](https://downloads.mariadb.org/connector-c/). The latter works best in version 2.3.4/3.0.3 or later, with older versions character and blob columns do not work reliably.
 
 ### MySQL client library
