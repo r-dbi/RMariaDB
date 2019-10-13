@@ -20,15 +20,18 @@ XPtr<DbConnectionPtr> connection_create(
 ) {
   LOG_VERBOSE;
 
-  std::auto_ptr<DbConnection> pConnPtr(new DbConnection);
-  pConnPtr->connect(
-    host, user, password, db, port, unix_socket, client_flag, groups, default_file,
-    ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher
-  );
+  DbConnection* pConnPtr = new DbConnection;
+  try {
+    pConnPtr->connect(
+      host, user, password, db, port, unix_socket, client_flag, groups, default_file,
+      ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher
+    );
+  } catch (...) {
+    delete pConnPtr;
+    throw;
+  }
 
-  DbConnectionPtr* pConn = new DbConnectionPtr(
-    pConnPtr.release()
-  );
+  DbConnectionPtr* pConn = new DbConnectionPtr(pConnPtr);
 
   return XPtr<DbConnectionPtr>(pConn, true);
 }
