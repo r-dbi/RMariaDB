@@ -6,12 +6,12 @@
 \alias{MariaDB}
 \title{Connect/disconnect to a MariaDB DBMS}
 \usage{
-\S4method{dbConnect}{MariaDBDriver}(drv, dbname = NULL, username = NULL,
-  password = NULL, host = NULL, unix.socket = NULL, port = 0,
-  client.flag = 0, groups = "rs-dbi", default.file = NULL,
-  ssl.key = NULL, ssl.cert = NULL, ssl.ca = NULL, ssl.capath = NULL,
-  ssl.cipher = NULL, ..., bigint = c("integer64", "integer", "numeric",
-  "character"))
+\S4method{dbConnect}{MariaDBDriver}(drv, dbname = NULL,
+  username = NULL, password = NULL, host = NULL,
+  unix.socket = NULL, port = 0, client.flag = 0, groups = "rs-dbi",
+  default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
+  ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...,
+  bigint = c("integer64", "integer", "numeric", "character"))
 
 MariaDB()
 }
