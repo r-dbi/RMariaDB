@@ -82,16 +82,16 @@ setMethod("dbConnect", "MariaDBDriver",
 
     info <- connection_info(ptr)
 
-    con <- new("MariaDBConnection",
+    conn <- new("MariaDBConnection",
       ptr = ptr,
       host = info$host,
       db = info$dbname,
       bigint = bigint
     )
 
-    dbExecute(con, "SET time_zone = '+00:00'")
-    dbExecute(con, "SET autocommit = 0")
-    con
+    dbExecute(conn, "SET time_zone = '+00:00'")
+    dbExecute(conn, "SET autocommit = 0")
+    conn
   }
 )
 
