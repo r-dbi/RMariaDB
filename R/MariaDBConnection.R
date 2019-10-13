@@ -1,3 +1,6 @@
+#' @include s4.R
+NULL
+
 #' Class MariaDBConnection.
 #'
 #' `MariaDBConnection` objects are usually created by

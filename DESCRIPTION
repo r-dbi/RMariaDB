@@ -1,16 +1,35 @@
 Package: RMariaDB
 Title: Database Interface and 'MariaDB' Driver
 Version: 1.0.6.9000
-Authors@R: c(
-    person("Kirill", "M\u00fcller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org", comment = c(ORCID = "0000-0002-1416-3412")),
-    person("Jeroen", "Ooms", role = "aut", comment = c(ORCID = "0000-0002-4035-0289")),
-    person("David", "James", role = "aut"),
-    person("Saikat", "DebRoy", role = "aut"),
-    person("Hadley", "Wickham", role = "aut"),
-    person("Jeffrey", "Horner", role = "aut"),
-    person("R Consortium", role = "fnd"),
-    person("RStudio", role = "cph"))
-Description: Implements a 'DBI'-compliant interface to 'MariaDB' (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>) databases.
+Authors@R: 
+    c(person(given = "Kirill",
+             family = "M\u00fcller",
+             role = c("aut", "cre"),
+             email = "krlmlr+r@mailbox.org",
+             comment = c(ORCID = "0000-0002-1416-3412")),
+      person(given = "Jeroen",
+             family = "Ooms",
+             role = "aut",
+             comment = c(ORCID = "0000-0002-4035-0289")),
+      person(given = "David",
+             family = "James",
+             role = "aut"),
+      person(given = "Saikat",
+             family = "DebRoy",
+             role = "aut"),
+      person(given = "Hadley",
+             family = "Wickham",
+             role = "aut"),
+      person(given = "Jeffrey",
+             family = "Horner",
+             role = "aut"),
+      person(given = "R Consortium",
+             role = "fnd"),
+      person(given = "RStudio",
+             role = "cph"))
+Description: Implements a 'DBI'-compliant interface to 'MariaDB'
+    (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>)
+    databases.
 License: GPL-3
 URL: https://github.com/r-dbi/RMariaDB,
     https://downloads.mariadb.org/connector-c/
@@ -19,7 +38,7 @@ Depends:
     R (>= 2.8.0)
 Imports: 
     bit64,
-    DBI (>= 1.0.0),
+    DBI (>= 1.0.0.9003),
     hms (>= 0.4.2.9005),
     methods,
     Rcpp (>= 0.12.4)
@@ -39,10 +58,12 @@ Encoding: UTF-8
 NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-SystemRequirements: libmariadb-client-lgpl-dev or libmariadbclient-dev or libmysqlclient-dev, with libssl-dev (deb),
-    mariadb-connector-c-devel or mariadb-devel (rpm),
-    mariadb-connector-c or mysql-connector-c (brew)
+SystemRequirements: libmariadb-client-lgpl-dev or
+    libmariadbclient-dev or libmysqlclient-dev, with libssl-dev (deb),
+    mariadb-connector-c-devel or mariadb-devel (rpm), mariadb-connector-c
+    or mysql-connector-c (brew)
 Collate: 
+    's4.R'
     'MariaDBConnection.R'
     'MariaDBDriver.R'
     'MariaDBResult.R'
