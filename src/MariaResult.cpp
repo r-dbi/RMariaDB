@@ -13,7 +13,7 @@ MariaResult::MariaResult(const DbConnectionPtr& pConn, const std::string& sql, b
   try {
     res->send_query(sql);
   }
-  catch (MariaResultPrep::UnsupportedPS e) {
+  catch (const MariaResultPrep::UnsupportedPS& e) {
     res.reset(NULL);
     // is_statement info might be worthwhile to pass to simple queries as well
     res.reset(new MariaResultSimple(pConn, is_statement));
