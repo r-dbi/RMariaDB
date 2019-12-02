@@ -1,4 +1,4 @@
-Minor release for compatibility with DBI 1.0.0.
+Minor release for keepsake.
 
 ## Test environments
 * local OS X install, R 3.4.4
@@ -13,4 +13,4 @@ Minor release for compatibility with DBI 1.0.0.
 
 ## Reverse dependencies
 
-Checked dbplyr without new errors or warnings.
+Not checked.
