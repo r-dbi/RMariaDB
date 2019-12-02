@@ -76,10 +76,10 @@ sudo yum install mysql-devel
 Follow [instructions](https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/) to enable the MySQL yum repository if the above command attempts to install MariaDB files.
 
 
-On __OS X__ use [mysql-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/mysql-connector-c.rb) from Homebrew:
+On __OS X__ use [mysql-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/mysql-connector-c++.rb) from Homebrew:
 
 ```
-brew install mysql-connector-c
+brew install mysql-connector-c++
 ```
 
 
