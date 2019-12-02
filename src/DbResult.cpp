@@ -16,10 +16,16 @@ DbResult::~DbResult() {
 }
 
 DbResult* DbResult::create_and_send_query(DbConnectionPtr con, const std::string& sql, bool is_statement) {
-  std::auto_ptr<DbResult> res(new DbResult(con));
-  res->send_query(sql, is_statement);
+  DbResult* res = new DbResult(con);
+  try {
+    res->send_query(sql, is_statement);
+  }
+  catch (...) {
+    delete res;
+    throw;
+  }
 
-  return res.release();
+  return res;
 }
 
 void DbResult::close() {
