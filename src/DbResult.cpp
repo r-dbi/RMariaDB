@@ -84,7 +84,7 @@ void DbResult::send_query(const std::string& sql, bool is_statement) {
   try {
     res->send_query(sql);
   }
-  catch (MariaResultPrep::UnsupportedPS e) {
+  catch (const MariaResultPrep::UnsupportedPS& e) {
     res.reset(NULL);
     // is_statement info might be worthwhile to pass to simple queries as well
     res.reset(new MariaResultSimple(this));
