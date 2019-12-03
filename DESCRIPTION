@@ -38,7 +38,7 @@ Depends:
     R (>= 2.8.0)
 Imports: 
     bit64,
-    DBI (>= 1.0.0.9003),
+    DBI (>= 1.0.0),
     hms (>= 0.4.2.9005),
     methods,
     Rcpp (>= 0.12.4)
@@ -58,12 +58,10 @@ Encoding: UTF-8
 NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
-SystemRequirements: libmariadb-client-lgpl-dev or
-    libmariadbclient-dev or libmysqlclient-dev, with libssl-dev (deb),
-    mariadb-connector-c-devel or mariadb-devel (rpm), mariadb-connector-c
-    or mysql-connector-c (brew)
+SystemRequirements: libmariadb-client-lgpl-dev or libmariadbclient-dev or libmysqlclient-dev, with libssl-dev (deb),
+    mariadb-connector-c-devel or mariadb-devel (rpm),
+    mariadb-connector-c or mysql-connector-c (brew)
 Collate: 
-    's4.R'
     'MariaDBConnection.R'
     'MariaDBDriver.R'
     'MariaDBResult.R'
