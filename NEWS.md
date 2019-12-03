@@ -1,6 +1,11 @@
-# RMariaDB 1.0.6.9000
+# RMariaDB 1.0.7.9000
 
 - Include information about `libssl-dev` in `configure` and `DESCRIPTION` (#101).
+
+
+# RMariaDB 1.0.7
+
+- Get rid of `auto_ptr`, which causes `R CMD check` warnings on R-devel.
 
 
 # RMariaDB 1.0.6 (2018-05-05)
