@@ -5,11 +5,14 @@
 \alias{MariaDBDriver-class}
 \alias{dbUnloadDriver,MariaDBDriver-method}
 \alias{dbIsValid,MariaDBDriver-method}
+\alias{dbGetInfo,MariaDBDriver-method}
 \title{Class MariaDBDriver with constructor MariaDB.}
 \usage{
 \S4method{dbUnloadDriver}{MariaDBDriver}(drv, ...)
 
 \S4method{dbIsValid}{MariaDBDriver}(dbObj, ...)
+
+\S4method{dbGetInfo}{MariaDBDriver}(dbObj, ...)
 }
 \description{
 An MariaDB driver implementing the R database (DBI) API.

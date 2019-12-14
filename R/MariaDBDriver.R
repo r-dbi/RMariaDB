@@ -40,6 +40,7 @@ mariadbClientLibraryVersions <- function() {
 # Set during installation time for the correct library
 PACKAGE_VERSION <- utils::packageVersion(utils::packageName())
 
+#' @rdname MariaDBDriver-class
 #' @export
 setMethod("dbGetInfo", "MariaDBDriver", function(dbObj, ...) {
   client_version <- names(version())[[2]]
