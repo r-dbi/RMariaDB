@@ -70,7 +70,7 @@ generic functions." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.7.9000</span>
       </span>
     </div>
 
@@ -120,12 +120,25 @@ generic functions.</p>
     </div>
 
     <pre class="usage"><span class='co'># S4 method for MariaDBDriver</span>
-<span class='fu'>dbConnect</span>(<span class='no'>drv</span>, <span class='kw'>dbname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>username</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>password</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>host</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>unix.socket</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>client.flag</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>groups</span> <span class='kw'>=</span> <span class='st'>"rs-dbi"</span>,
-  <span class='kw'>default.file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ssl.key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ssl.cert</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ssl.ca</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ssl.capath</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ssl.cipher</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>,
-  <span class='kw'>bigint</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"integer64"</span>, <span class='st'>"integer"</span>, <span class='st'>"numeric"</span>, <span class='st'>"character"</span>))
+<span class='fu'>dbConnect</span>(
+  <span class='no'>drv</span>,
+  <span class='kw'>dbname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>username</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>password</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>host</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>unix.socket</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>port</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>client.flag</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>groups</span> <span class='kw'>=</span> <span class='st'>"rs-dbi"</span>,
+  <span class='kw'>default.file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ssl.key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ssl.cert</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ssl.ca</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ssl.capath</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ssl.cipher</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>bigint</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"integer64"</span>, <span class='st'>"integer"</span>, <span class='st'>"numeric"</span>, <span class='st'>"character"</span>)
+)
 
 <span class='fu'>MariaDB</span>()</pre>
 
