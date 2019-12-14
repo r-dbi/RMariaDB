@@ -44,7 +44,6 @@ PACKAGE_VERSION <- utils::packageVersion(utils::packageName())
 setMethod("dbGetInfo", "MariaDBDriver", function(dbObj, ...) {
   client_version <- names(version())[[2]]
 
-  version <- RSQLite::rsqliteVersion()
   list(
     driver.version = PACKAGE_VERSION,
     client.version = package_version(client_version)
