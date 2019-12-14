@@ -31,7 +31,8 @@ Description: Implements a 'DBI'-compliant interface to 'MariaDB'
     (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>)
     databases.
 License: GPL-3
-URL: https://rmariadb.r-dbi.org, https://github.com/r-dbi/RMariaDB,
+URL: https://rmariadb.r-dbi.org,
+    https://github.com/r-dbi/RMariaDB,
     https://downloads.mariadb.org/connector-c/
 BugReports: https://github.com/r-dbi/RMariaDB/issues
 Depends: 
@@ -58,7 +59,8 @@ Encoding: UTF-8
 NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.1
-SystemRequirements: libmariadb-client-lgpl-dev or libmariadbclient-dev or libmysqlclient-dev, with libssl-dev (deb),
+SystemRequirements: libmariadb-client-lgpl-dev or
+    libmariadbclient-dev or libmysqlclient-dev, with libssl-dev (deb),
     mariadb-connector-c-devel or mariadb-devel (rpm),
     mariadb-connector-c or mysql-connector-c (brew)
 Collate: 
