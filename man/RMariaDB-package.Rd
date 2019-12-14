@@ -13,6 +13,7 @@ Implements a 'DBI'-compliant interface to 'MariaDB'
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://rmariadb.r-dbi.org}
   \item \url{https://github.com/r-dbi/RMariaDB}
   \item \url{https://downloads.mariadb.org/connector-c/}
   \item Report bugs at \url{https://github.com/r-dbi/RMariaDB/issues}
