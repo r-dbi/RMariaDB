@@ -103,13 +103,13 @@ List DbConnection::info() {
   return
     List::create(
       _["host"] = std::string(pConn_->host),
-      _["user"] = std::string(pConn_->user),
+      _["username"] = std::string(pConn_->user),
       _["dbname"] = std::string(pConn_->db ? pConn_->db : ""),
-      _["conType"] = std::string(mysql_get_host_info(pConn_)),
-      _["serverVersion"] = std::string(mysql_get_server_info(pConn_)),
-      _["protocolVersion"] = (int) mysql_get_proto_info(pConn_),
-      _["threadId"] = (int) mysql_thread_id(pConn_),
-      _["client"] = std::string(mysql_get_client_info())
+      _["con.type"] = std::string(mysql_get_host_info(pConn_)),
+      _["db.version"] = std::string(mysql_get_server_info(pConn_)),
+      _["port"] = NA_INTEGER,
+      _["protocol.version"] = (int) mysql_get_proto_info(pConn_),
+      _["thread.id"] = (int) mysql_thread_id(pConn_)
     );
 }
 
