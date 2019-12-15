@@ -71,7 +71,7 @@ completeness." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.0.7.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.0.7.9001</span>
       </span>
     </div>
 
@@ -131,8 +131,8 @@ completeness.</p>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>DBI</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>RMariaDB</span>)
-<span class='no'>con1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/DBI/man/dbConnect.html'>dbConnect</a></span>(<span class='fu'><a href='dbConnect-MariaDBDriver-method.html'>MariaDB</a></span>(), <span class='kw'>client.flag</span> <span class='kw'>=</span> <span class='no'>CLIENT_COMPRESS</span>)
-<span class='no'>con2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/DBI/man/dbConnect.html'>dbConnect</a></span>(
+<span class='no'>con1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://dbi.r-dbi.org/reference/dbConnect.html'>dbConnect</a></span>(<span class='fu'><a href='dbConnect-MariaDBDriver-method.html'>MariaDB</a></span>(), <span class='kw'>client.flag</span> <span class='kw'>=</span> <span class='no'>CLIENT_COMPRESS</span>)
+<span class='no'>con2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://dbi.r-dbi.org/reference/dbConnect.html'>dbConnect</a></span>(
   <span class='fu'><a href='dbConnect-MariaDBDriver-method.html'>MariaDB</a></span>(),
   <span class='kw'>client.flag</span> <span class='kw'>=</span> <span class='no'>CLIENT_COMPRESS</span> <span class='kw'>|</span> <span class='no'>CLIENT_SECURE_CONNECTION</span>
 )
