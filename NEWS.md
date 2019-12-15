@@ -1,3 +1,8 @@
+# RMariaDB 1.0.7.9001
+
+- Implement `dbGetInfo()` according to the specification.
+
+
 # RMariaDB 1.0.7.9000
 
 - Include information about `libssl-dev` in `configure` and `DESCRIPTION` (#101).
