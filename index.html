@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">RMariaDB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
       </span>
     </div>
 
@@ -81,31 +81,31 @@
 <a href="#hello-world" class="anchor"></a>Hello World</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(DBI)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co"># Connect to my-db as defined in ~/.my.cnf</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">con &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbConnect.html">dbConnect</a></span>(RMariaDB<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RMariaDB/man/dbConnect-MariaDBDriver-method.html">MariaDB</a></span>(), <span class="dt">group =</span> <span class="st">"my-db"</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">con &lt;-<span class="st"> </span><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span>(RMariaDB<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/RMariaDB/man/dbConnect-MariaDBDriver-method.html">MariaDB</a></span>(), <span class="dt">group =</span> <span class="st">"my-db"</span>)</a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbListTables.html">dbListTables</a></span>(con)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbWriteTable.html">dbWriteTable</a></span>(con, <span class="st">"mtcars"</span>, mtcars)</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbListTables.html">dbListTables</a></span>(con)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbListTables.html">dbListTables</a></span>(con)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html">dbWriteTable</a></span>(con, <span class="st">"mtcars"</span>, mtcars)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbListTables.html">dbListTables</a></span>(con)</a>
 <a class="sourceLine" id="cb1-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbListFields.html">dbListFields</a></span>(con, <span class="st">"mtcars"</span>)</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbReadTable.html">dbReadTable</a></span>(con, <span class="st">"mtcars"</span>)</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbListFields.html">dbListFields</a></span>(con, <span class="st">"mtcars"</span>)</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbReadTable.html">dbReadTable</a></span>(con, <span class="st">"mtcars"</span>)</a>
 <a class="sourceLine" id="cb1-11" data-line-number="11"></a>
 <a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co"># You can fetch all results:</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">res &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbSendQuery.html">dbSendQuery</a></span>(con, <span class="st">"SELECT * FROM mtcars WHERE cyl = 4"</span>)</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbFetch.html">dbFetch</a></span>(res)</a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbClearResult.html">dbClearResult</a></span>(res)</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">res &lt;-<span class="st"> </span><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html">dbSendQuery</a></span>(con, <span class="st">"SELECT * FROM mtcars WHERE cyl = 4"</span>)</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbFetch.html">dbFetch</a></span>(res)</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html">dbClearResult</a></span>(res)</a>
 <a class="sourceLine" id="cb1-16" data-line-number="16"></a>
 <a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co"># Or a chunk at a time</span></a>
-<a class="sourceLine" id="cb1-18" data-line-number="18">res &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbSendQuery.html">dbSendQuery</a></span>(con, <span class="st">"SELECT * FROM mtcars WHERE cyl = 4"</span>)</a>
-<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="cf">while</span>(<span class="op">!</span><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbHasCompleted.html">dbHasCompleted</a></span>(res)){</a>
-<a class="sourceLine" id="cb1-20" data-line-number="20">  chunk &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbFetch.html">dbFetch</a></span>(res, <span class="dt">n =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb1-18" data-line-number="18">res &lt;-<span class="st"> </span><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html">dbSendQuery</a></span>(con, <span class="st">"SELECT * FROM mtcars WHERE cyl = 4"</span>)</a>
+<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="cf">while</span>(<span class="op">!</span><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbHasCompleted.html">dbHasCompleted</a></span>(res)){</a>
+<a class="sourceLine" id="cb1-20" data-line-number="20">  chunk &lt;-<span class="st"> </span><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbFetch.html">dbFetch</a></span>(res, <span class="dt">n =</span> <span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb1-21" data-line-number="21">  <span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(chunk))</a>
 <a class="sourceLine" id="cb1-22" data-line-number="22">}</a>
 <a class="sourceLine" id="cb1-23" data-line-number="23"><span class="co"># Clear the result</span></a>
-<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbClearResult.html">dbClearResult</a></span>(res)</a>
+<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html">dbClearResult</a></span>(res)</a>
 <a class="sourceLine" id="cb1-25" data-line-number="25"></a>
 <a class="sourceLine" id="cb1-26" data-line-number="26"><span class="co"># Disconnect from the database</span></a>
-<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="kw"><a href="https://rdrr.io/pkg/DBI/man/dbDisconnect.html">dbDisconnect</a></span>(con)</a></code></pre></div>
+<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="kw"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span>(con)</a></code></pre></div>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -143,7 +143,7 @@
 <div id="mariadb-configuration-file" class="section level2">
 <h2 class="hasAnchor">
 <a href="#mariadb-configuration-file" class="anchor"></a>MariaDB configuration file</h2>
-<p>Instead of specifying a username and password in calls to <code><a href="https://rdrr.io/pkg/DBI/man/dbConnect.html">dbConnect()</a></code>, it’s better to set up a MariaDB configuration file that names the databases that you connect to most commonly. This file should live in <code>~/.my.cnf</code> and look like:</p>
+<p>Instead of specifying a username and password in calls to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect()</a></code>, it’s better to set up a MariaDB configuration file that names the databases that you connect to most commonly. This file should live in <code>~/.my.cnf</code> and look like:</p>
 <pre><code>[database_name]
 option1=value1
 option2=value2</code></pre>
@@ -173,7 +173,9 @@ password=</code></pre>
 </li>
 <li>Report a bug at <br><a href="https://github.com/r-dbi/RMariaDB/issues">https://​github.com/​r-dbi/​RMariaDB/​issues</a>
 </li>
-<li>Report a security vulnerability at <br><a href="https://github.com/r-dbi/RMariaDB/security.html">https://​github.com/​r-dbi/​RMariaDB/​security.html</a>
+<li>Report a security vulnerability at <br><a href="https://rmariadb.r-dbi.org/security.html">https://​rmariadb.r-dbi.org/​security.html</a>
+</li>
+<li>DBI project website at <br><a href="https://r-dbi.org">https://​r-dbi.org</a>
 </li>
 </ul>
 </div>

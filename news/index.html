@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
       </span>
     </div>
 
@@ -110,11 +110,12 @@
       <small>Source: <a href='https://github.com/r-dbi/RMariaDB/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="rmariadb-1-0-7-9000" class="section level1">
+    <div id="rmariadb-1-0-8" class="section level1">
 <h1 class="page-header">
-<a href="#rmariadb-1-0-7-9000" class="anchor"></a>RMariaDB 1.0.7.9000<small> Unreleased </small>
+<a href="#rmariadb-1-0-8" class="anchor"></a>RMariaDB 1.0.8<small> Unreleased </small>
 </h1>
 <ul>
+<li>Implement <code>dbGetInfo()</code> according to the specification.</li>
 <li>Include information about <code>libssl-dev</code> in <code>configure</code> and <code>DESCRIPTION</code> (<a href='https://github.com/r-dbi/RMariaDB/issues/101'>#101</a>).</li>
 </ul>
 </div>
@@ -136,7 +137,7 @@
 <li>New arguments <code>temporary</code> and <code>fail_if_missing</code> (default: <code>TRUE</code>) to <code>dbRemoveTable()</code> (r-dbi/DBI<a href='https://github.com/r-dbi/RMariaDB/issues/141'>#141</a>, r-dbi/DBI<a href='https://github.com/r-dbi/RMariaDB/issues/197'>#197</a>).</li>
 <li>Using <code>dbCreateTable()</code> and <code>dbAppendTable()</code> internally (r-dbi/DBI<a href='https://github.com/r-dbi/RMariaDB/issues/74'>#74</a>).</li>
 <li>Implement <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> method for <code>MariaDBConnection</code> (r-dbi/DBI<a href='https://github.com/r-dbi/RMariaDB/issues/163'>#163</a>).</li>
-<li>Reexporting <code><a href="https://rdrr.io/pkg/DBI/man/Id.html">Id()</a></code>, <code><a href="https://rdrr.io/pkg/DBI/man/dbIsReadOnly.html">DBI::dbIsReadOnly()</a></code> and <code><a href="https://rdrr.io/pkg/DBI/man/dbCanConnect.html">DBI::dbCanConnect()</a></code>.</li>
+<li>Reexporting <code><a href="https://dbi.r-dbi.org/reference/Id.html">Id()</a></code>, <code><a href="https://dbi.r-dbi.org/reference/dbIsReadOnly.html">DBI::dbIsReadOnly()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbCanConnect.html">DBI::dbCanConnect()</a></code>.</li>
 <li>Now imports DBI 1.0.0.</li>
 </ul>
 </div>
@@ -150,7 +151,7 @@
 <li>
 <code>NaN</code> and <code>Inf</code> are converted to <code>NULL</code> when writing to the database (<a href='https://github.com/r-dbi/RMariaDB/issues/77'>#77</a>).</li>
 <li>Values of class <code>"integer64"</code> are now supported for <code>dbWriteTable()</code> and <code>dbBind()</code> (<a href='https://github.com/r-dbi/RMariaDB/issues/87'>#87</a>).</li>
-<li>Schema support, as specified by DBI: <code>dbListObjects()</code>, <code>dbUnquoteIdentifier()</code> and <code><a href="https://rdrr.io/pkg/DBI/man/Id.html">Id()</a></code>.</li>
+<li>Schema support, as specified by DBI: <code>dbListObjects()</code>, <code>dbUnquoteIdentifier()</code> and <code><a href="https://dbi.r-dbi.org/reference/Id.html">Id()</a></code>.</li>
 <li>Names in the <code>x</code> argument to <code>dbQuoteIdentifier()</code> are preserved in the output (r-lib/DBI<a href='https://github.com/r-dbi/RMariaDB/issues/173'>#173</a>).</li>
 <li>Replace non-portable <code>timegm()</code> with private implementation (<a href='https://github.com/r-dbi/RMariaDB/issues/78'>#78</a>).</li>
 <li>Update libmariadbclient to version 2.3.5 on Windows (<a href='https://github.com/r-dbi/RMariaDB/issues/92'>#92</a>, <a href='https://github.com/jeroen'>@jeroen</a>).</li>
@@ -217,7 +218,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#rmariadb-1-0-7-9000">1.0.7.9000</a></li>
+        <li><a href="#rmariadb-1-0-8">1.0.8</a></li>
         <li><a href="#rmariadb-1-0-7">1.0.7</a></li>
         <li><a href="#rmariadb-1-0-6-2018-05-05">1.0.6</a></li>
         <li><a href="#rmariadb-1-0-5-2018-04-02">1.0.5</a></li>
