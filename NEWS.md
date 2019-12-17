@@ -1,3 +1,8 @@
+# RMariaDB 1.0.8
+
+- Same as previous version.
+
+
 # RMariaDB 1.0.7.9001
 
 - Implement `dbGetInfo()` according to the specification.
