@@ -133,7 +133,7 @@ on failure, making it suitable for use in tests.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'>mariadbHasDefault</span>()) {
-  <span class='no'>db</span> <span class='kw'>&lt;-</span> <span class='fu'>dbConnect</span>(<span class='kw pkg'>RMariaDB</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/RMariaDB/man/dbConnect-MariaDBDriver-method.html'>MariaDB</a></span>(), <span class='kw'>dbname</span> <span class='kw'>=</span> <span class='st'>"test"</span>)
+  <span class='no'>db</span> <span class='kw'>&lt;-</span> <span class='fu'>dbConnect</span>(<span class='kw pkg'>RMariaDB</span><span class='kw ns'>::</span><span class='fu'><a href='https://rmariadb.r-dbi.org/reference/dbConnect-MariaDBDriver-method.html'>MariaDB</a></span>(), <span class='kw'>dbname</span> <span class='kw'>=</span> <span class='st'>"test"</span>)
   <span class='fu'>dbListTables</span>(<span class='no'>db</span>)
   <span class='fu'>dbDisconnect</span>(<span class='no'>db</span>)
 }</div></pre>
