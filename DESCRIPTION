@@ -39,22 +39,18 @@ Depends:
     R (>= 2.8.0)
 Imports: 
     bit64,
-    DBI (>= 1.0.0),
-    hms (>= 0.4.2.9005),
+    DBI (>= 1.1.0),
+    hms (>= 0.5.0),
     methods,
     Rcpp (>= 0.12.4)
 Suggests: 
-    DBItest (>= 1.6.0.9002),
+    DBItest (>= 1.7.0),
     rprojroot,
     testthat
 LinkingTo: 
     BH,
     plogr,
     Rcpp
-Remotes: 
-    r-dbi/DBI,
-    r-dbi/DBItest,
-    tidyverse/hms
 Encoding: UTF-8
 NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
