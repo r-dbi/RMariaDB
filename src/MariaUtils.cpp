@@ -46,7 +46,11 @@ List df_create(const std::vector<MariaFieldType>& types, const std::vector<std::
   R_xlen_t p = types.size();
 
   List out(p);
-  out.attr("names") = names;
+  StringVector names_utf8 = wrap(names);
+  for (int j = 0; j < names_utf8.size(); ++j) {
+    names_utf8[j] = Rf_mkCharCE(names_utf8[j], CE_UTF8);
+  }
+  out.attr("names") = names_utf8;
   out.attr("class") = "data.frame";
   out.attr("row.names") = IntegerVector::create(NA_INTEGER, -n);
 
