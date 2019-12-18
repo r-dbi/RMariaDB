@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.0.7.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.0.8.9000</span>
       </span>
     </div>
 
@@ -145,7 +145,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='mariadbHasDefault.html'>mariadbHasDefault</a></span>()) {
-<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'>dbConnect</span>(<span class='kw pkg'>RMariaDB</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/RMariaDB/man/dbConnect-MariaDBDriver-method.html'>MariaDB</a></span>(), <span class='kw'>dbname</span> <span class='kw'>=</span> <span class='st'>"test"</span>)
+<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'>dbConnect</span>(<span class='kw pkg'>RMariaDB</span><span class='kw ns'>::</span><span class='fu'><a href='https://rmariadb.r-dbi.org/reference/dbConnect-MariaDBDriver-method.html'>MariaDB</a></span>(), <span class='kw'>dbname</span> <span class='kw'>=</span> <span class='st'>"test"</span>)
 <span class='fu'>dbWriteTable</span>(<span class='no'>con</span>, <span class='st'>"t1"</span>, <span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/USArrests.html'>USArrests</a></span>, <span class='kw'>temporary</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
 <span class='no'>rs</span> <span class='kw'>&lt;-</span> <span class='fu'>dbSendQuery</span>(<span class='no'>con</span>, <span class='st'>"SELECT * FROM t1 WHERE UrbanPop &gt;= 80"</span>)
