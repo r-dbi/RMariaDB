@@ -1,4 +1,7 @@
-do_package_checks(args = strsplit(Sys.getenv("R_CHECK_ARGS"), " ")[[1]])
+do_package_checks(
+  args = strsplit(Sys.getenv("R_CHECK_ARGS"), " ")[[1]]),
+  error_on = if (getRversion() >= "3.4") "note" else "warning"
+)
 
 if (ci_has_env("DEV_VERSIONS")) {
   get_stage("install") %>%
