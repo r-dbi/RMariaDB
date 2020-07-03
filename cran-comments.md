@@ -1,12 +1,19 @@
-Minor release to trigger build against new libraries.
+RMariaDB 1.0.9
 
-## Test environments
-* local Ubuntu, R 3.6.1
-* ubuntu 18.04 (on travis-ci), R 3.4.4
-* win-builder (devel and release)
+## Cran Repository Policy
+
+- [x] Reviewed CRP last edited 2020-05-21.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+- [x] Checked locally, R 4.0.1
+- [ ] Checked on CI system, R 4.0.2
+- [ ] Checked on win-builder, R devel
 
-* Package links statically with libmariadb or libmysql, hence the size.
+OK
+
+- [ ] Explain R CMD check failures or remove this line.
+
+## CRAN failures
+
+Initial release.
