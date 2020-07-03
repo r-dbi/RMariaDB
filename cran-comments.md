@@ -16,4 +16,7 @@ OK
 
 ## CRAN failures
 
-Initial release.
+- [x] Checked on 2020-07-03, errors found: https://cran.r-project.org/web/checks/check_results_RMariaDB.html
+- [ ] NOTE: r-devel-windows-ix86+x86_64, r-release-osx-x86_64, r-release-windows-ix86+x86_64, r-oldrel-osx-x86_64, r-oldrel-windows-ix86+x86_64
+
+Check results at: https://cran.r-project.org/web/checks/check_results_RMariaDB.html
