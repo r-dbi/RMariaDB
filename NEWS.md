@@ -1,3 +1,8 @@
+# RMariaDB 1.0.9.9000
+
+- Same as previous version.
+
+
 # RMariaDB 1.0.9
 
 - Use `VARCHAR` as data type for string columns (#159).
