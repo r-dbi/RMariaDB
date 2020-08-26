@@ -39,7 +39,7 @@ stages:
 - name: test
   if: branch != docs
 - name: docs
-  if: branch = docs OR branch = master
+  if: branch = docs OR branch = master OR branch =~ /^cran-/
 - name: full
   if: branch = master
 
@@ -83,12 +83,10 @@ matrix:
     after_deploy: R -q -e 'tic::after_deploy()'
   - stage: full
     os: osx
-  - os: osx
-    osx_image: xcode8.3
-    disable_homebrew: true
-    env:
-      - R_CHECK_ARGS="--no-manual --no-tests"
-    before_script: 'echo no sql server, only testing build'
+  - os: linux
+    r: 3.6
+  - os: linux
+    r: 3.5
   - os: linux
     r: 3.4
   - os: linux
