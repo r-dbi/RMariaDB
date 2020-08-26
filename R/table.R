@@ -379,7 +379,7 @@ setMethod("dbDataType", "MariaDBDriver", function(dbObj, obj, ...) {
 })
 
 get_char_type <- function(x) {
-  width <- max(max(nchar(enc2utf8(x)), na.rm = TRUE), 1)
+  width <- max(nchar(enc2utf8(x)), 1, na.rm = TRUE)
   if (width > 255) {
     "TEXT"
   } else {
