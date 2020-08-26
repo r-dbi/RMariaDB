@@ -361,7 +361,7 @@ setMethod("dbDataType", "MariaDBConnection", function(dbObj, obj, ...) {
 #' @export
 #' @rdname dbDataType
 setMethod("dbDataType", "MariaDBDriver", function(dbObj, obj, ...) {
-  if (is.factor(obj)) get_char_type(levels(obj))
+  if (is.factor(obj)) return(get_char_type(levels(obj)))
   if (inherits(obj, "POSIXct")) return("DATETIME")
   if (inherits(obj, "Date")) return("DATE")
   if (inherits(obj, "difftime")) return("TIME")
