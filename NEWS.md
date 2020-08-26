@@ -1,3 +1,8 @@
+# RMariaDB 1.0.10 (2020-08-26)
+
+- Internal changes only.
+
+
 # RMariaDB 1.0.9.9002 (2020-08-26)
 
 - `dbDataType()` returns `VARCHAR(1)` for length-0 character vectors.
