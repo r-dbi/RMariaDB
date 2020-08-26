@@ -81,6 +81,10 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
            overwrite = FALSE, append = FALSE, ...,
            temporary = FALSE) {
 
+    if (!is.data.frame(value))  {
+      stopc("`value` must be data frame")
+    }
+    
     row.names <- compatRowNames(row.names)
 
     if ((!is.logical(row.names) && !is.character(row.names)) || length(row.names) != 1L)  {
