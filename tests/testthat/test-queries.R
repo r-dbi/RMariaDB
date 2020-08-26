@@ -22,7 +22,7 @@ test_that("prepared statements and SHOW queries", {
 })
 
 test_that("fractional seconds in datetime (#170)", {
-  conn <- mariadbDefault()
+  con <- mariadbDefault()
 
   dataframe <- data.frame(DateTime = Sys.time())
 
@@ -43,5 +43,5 @@ test_that("fractional seconds in datetime (#170)", {
   seconds <- as.numeric(out$DateTime)
   expect_equal(seconds - floor(seconds), 0.5)
 
-  dbDisconnect(conn)
+  dbDisconnect(con)
 })
