@@ -1,3 +1,8 @@
+# RMariaDB 1.0.10 (2020-08-26)
+
+- Internal changes only.
+
+
 # RMariaDB 1.0.9.9001 (2020-08-26)
 
 - `dbConnect()` gains a `timeout` argument, defaults to 10. Use `Inf` or a negative value for no timeout (#169).
