@@ -7,8 +7,8 @@
 using namespace Rcpp;
 
 // connection_create
-XPtr<DbConnectionPtr> connection_create(const Nullable<std::string>& host, const Nullable<std::string>& user, const Nullable<std::string>& password, const Nullable<std::string>& db, unsigned int port, const Nullable<std::string>& unix_socket, unsigned long client_flag, const Nullable<std::string>& groups, const Nullable<std::string>& default_file, const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert, const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath, const Nullable<std::string>& ssl_cipher);
-RcppExport SEXP _RMariaDB_connection_create(SEXP hostSEXP, SEXP userSEXP, SEXP passwordSEXP, SEXP dbSEXP, SEXP portSEXP, SEXP unix_socketSEXP, SEXP client_flagSEXP, SEXP groupsSEXP, SEXP default_fileSEXP, SEXP ssl_keySEXP, SEXP ssl_certSEXP, SEXP ssl_caSEXP, SEXP ssl_capathSEXP, SEXP ssl_cipherSEXP) {
+XPtr<DbConnectionPtr> connection_create(const Nullable<std::string>& host, const Nullable<std::string>& user, const Nullable<std::string>& password, const Nullable<std::string>& db, unsigned int port, const Nullable<std::string>& unix_socket, unsigned long client_flag, const Nullable<std::string>& groups, const Nullable<std::string>& default_file, const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert, const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath, const Nullable<std::string>& ssl_cipher, int timeout);
+RcppExport SEXP _RMariaDB_connection_create(SEXP hostSEXP, SEXP userSEXP, SEXP passwordSEXP, SEXP dbSEXP, SEXP portSEXP, SEXP unix_socketSEXP, SEXP client_flagSEXP, SEXP groupsSEXP, SEXP default_fileSEXP, SEXP ssl_keySEXP, SEXP ssl_certSEXP, SEXP ssl_caSEXP, SEXP ssl_capathSEXP, SEXP ssl_cipherSEXP, SEXP timeoutSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -26,7 +26,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const Nullable<std::string>& >::type ssl_ca(ssl_caSEXP);
     Rcpp::traits::input_parameter< const Nullable<std::string>& >::type ssl_capath(ssl_capathSEXP);
     Rcpp::traits::input_parameter< const Nullable<std::string>& >::type ssl_cipher(ssl_cipherSEXP);
-    rcpp_result_gen = Rcpp::wrap(connection_create(host, user, password, db, port, unix_socket, client_flag, groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher));
+    Rcpp::traits::input_parameter< int >::type timeout(timeoutSEXP);
+    rcpp_result_gen = Rcpp::wrap(connection_create(host, user, password, db, port, unix_socket, client_flag, groups, default_file, ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher, timeout));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -256,7 +257,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_RMariaDB_connection_create", (DL_FUNC) &_RMariaDB_connection_create, 14},
+    {"_RMariaDB_connection_create", (DL_FUNC) &_RMariaDB_connection_create, 15},
     {"_RMariaDB_connection_valid", (DL_FUNC) &_RMariaDB_connection_valid, 1},
     {"_RMariaDB_connection_release", (DL_FUNC) &_RMariaDB_connection_release, 1},
     {"_RMariaDB_connection_info", (DL_FUNC) &_RMariaDB_connection_info, 1},

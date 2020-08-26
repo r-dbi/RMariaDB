@@ -39,6 +39,8 @@ NULL
 #' @param bigint The R type that 64-bit integer types should be mapped to,
 #'   default is [bit64::integer64], which allows the full range of 64 bit
 #'   integers.
+#' @param timeout Connection timeout, in seconds. Use `Inf` or a negative value
+#'   for no timeout.
 #' @references
 #' Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/
 #' @export
@@ -70,14 +72,22 @@ setMethod("dbConnect", "MariaDBDriver",
     unix.socket = NULL, port = 0, client.flag = 0,
     groups = "rs-dbi", default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
     ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...,
-    bigint = c("integer64", "integer", "numeric", "character")) {
+    bigint = c("integer64", "integer", "numeric", "character"),
+    timeout = 10) {
 
     bigint <- match.arg(bigint)
+
+    if (is.infinite(timeout)) {
+      timeout <- -1L
+    } else {
+      timeout <- as.integer(timeout)
+    }
 
     ptr <- connection_create(
       host, username, password, dbname, as.integer(port), unix.socket,
       as.integer(client.flag), groups, default.file,
-      ssl.key, ssl.cert, ssl.ca, ssl.capath, ssl.cipher
+      ssl.key, ssl.cert, ssl.ca, ssl.capath, ssl.cipher,
+      timeout
     )
 
     info <- connection_info(ptr)
