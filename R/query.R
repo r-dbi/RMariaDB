@@ -94,10 +94,13 @@ dbSend <- function(conn, statement, params = NULL, is_statement) {
     bigint = conn@bigint
   )
 
+  on.exit(dbClearResult(rs))
+
   if (!is.null(params)) {
     dbBind(rs, params)
   }
 
+  on.exit(NULL)
   rs
 }
 
