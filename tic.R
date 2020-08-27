@@ -9,6 +9,6 @@ if (ci_has_env("DEV_VERSIONS")) {
 }
 
 # Build only for master or release branches
-if (ci_has_env("BUILD_PKGDOWN") && grepl("^master$|^r-|^docs$", ci_get_branch())) {
+if (ci_has_env("BUILD_PKGDOWN") && grepl("^master$|^cran-|^docs$", ci_get_branch())) {
   do_pkgdown(deploy = ci_can_push())
 }
