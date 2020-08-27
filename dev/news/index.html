@@ -126,14 +126,18 @@
 <h1 class="page-header" data-toc-text="1.0.10">
 <a href="#rmariadb-1-0-10-2020-08-26" class="anchor"></a>RMariaDB 1.0.10 (2020-08-26)<small> Unreleased </small>
 </h1>
+<div id="features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#features" class="anchor"></a>Features</h2>
 <ul>
-<li>Internal changes only.</li>
+<li>
+<code>dbConnect()</code> gains a <code>timeout</code> argument, defaults to 10. Use <code>Inf</code> or a negative value for no timeout (<a href='https://github.com/r-dbi/RMariaDB/issues/169'>#169</a>).</li>
+<li>Support fractional seconds in datetime values for reading and writing (<a href='https://github.com/r-dbi/RMariaDB/issues/157'>#157</a>).</li>
 </ul>
 </div>
-    <div id="rmariadb-1-0-9-9002-2020-08-26" class="section level1">
-<h1 class="page-header" data-toc-text="1.0.9.9002">
-<a href="#rmariadb-1-0-9-9002-2020-08-26" class="anchor"></a>RMariaDB 1.0.9.9002 (2020-08-26)<small> Unreleased </small>
-</h1>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>
 <code>dbDataType()</code> returns <code>VARCHAR(1)</code> for length-0 character vectors.</li>
@@ -141,26 +145,9 @@
 <code>dbDataType()</code> returns <code>VARCHAR()</code> for factors.</li>
 <li>
 <code>dbSendQuery()</code> and <code>dbSendStatement()</code> clear the result set if <code>dbBind()</code> throws an error.</li>
-</ul>
-</div>
-    <div id="rmariadb-1-0-9-9001-2020-08-26" class="section level1">
-<h1 class="page-header" data-toc-text="1.0.9.9001">
-<a href="#rmariadb-1-0-9-9001-2020-08-26" class="anchor"></a>RMariaDB 1.0.9.9001 (2020-08-26)<small> Unreleased </small>
-</h1>
-<ul>
-<li>
-<code>dbConnect()</code> gains a <code>timeout</code> argument, defaults to 10. Use <code>Inf</code> or a negative value for no timeout (<a href='https://github.com/r-dbi/RMariaDB/issues/169'>#169</a>).</li>
 <li>Check that input to <code>dbWriteTable()</code> is a data frame (<a href='https://github.com/r-dbi/RMariaDB/issues/160'>#160</a>, <a href='https://github.com/rossholmberg'>@rossholmberg</a>).</li>
-<li>Support fractional seconds in datetime values for reading and writing (<a href='https://github.com/r-dbi/RMariaDB/issues/157'>#157</a>).</li>
 </ul>
 </div>
-    <div id="rmariadb-1-0-9-9000" class="section level1">
-<h1 class="page-header" data-toc-text="1.0.9.9000">
-<a href="#rmariadb-1-0-9-9000" class="anchor"></a>RMariaDB 1.0.9.9000<small> Unreleased </small>
-</h1>
-<ul>
-<li>Same as previous version.</li>
-</ul>
 </div>
     <div id="rmariadb-1-0-9" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.9">
