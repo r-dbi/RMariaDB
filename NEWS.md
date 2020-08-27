@@ -5,26 +5,18 @@
 
 # RMariaDB 1.0.10 (2020-08-26)
 
-- Internal changes only.
+## Features
+
+- `dbConnect()` gains a `timeout` argument, defaults to 10. Use `Inf` or a negative value for no timeout (#169).
+- Support fractional seconds in datetime values for reading and writing (#157).
 
 
-# RMariaDB 1.0.9.9002 (2020-08-26)
+## Bug fixes
 
 - `dbDataType()` returns `VARCHAR(1)` for length-0 character vectors.
 - `dbDataType()` returns `VARCHAR()` for factors.
 - `dbSendQuery()` and `dbSendStatement()` clear the result set if `dbBind()` throws an error.
-
-
-# RMariaDB 1.0.9.9001 (2020-08-26)
-
-- `dbConnect()` gains a `timeout` argument, defaults to 10. Use `Inf` or a negative value for no timeout (#169).
 - Check that input to `dbWriteTable()` is a data frame (#160, @rossholmberg).
-- Support fractional seconds in datetime values for reading and writing (#157).
-
-
-# RMariaDB 1.0.9.9000
-
-- Same as previous version.
 
 
 # RMariaDB 1.0.9
