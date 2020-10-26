@@ -4,6 +4,7 @@ sql_data <- function(value, row.names = FALSE, warn = FALSE) {
 
   value <- factor_to_string(value, warn = warn)
   value <- string_to_utf8(value)
+  value <- difftime_to_hms(value)
   value <- posixlt_to_posixct(value)
   value <- numeric_to_finite(value)
   value
@@ -27,6 +28,12 @@ quote_string <- function(value, conn) {
 string_to_utf8 <- function(value) {
   is_char <- vlapply(value, is.character)
   value[is_char] <- lapply(value[is_char], enc2utf8)
+  value
+}
+
+difftime_to_hms <- function(value) {
+  is_difftime <- vlapply(value, inherits, "difftime")
+  value[is_difftime] <- lapply(value[is_difftime], hms::as_hms)
   value
 }
 
