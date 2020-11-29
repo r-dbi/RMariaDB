@@ -41,6 +41,10 @@ NULL
 #'   integers.
 #' @param timeout Connection timeout, in seconds. Use `Inf` or a negative value
 #'   for no timeout.
+#' @param timezone (optional) string with the a valid timezone
+#'   default is the timezone of the system.
+#'   in case the timezone doesn't exist on the database, a message will be displayed
+#'   and the UTC will be the selected timezone (+00:00)
 #' @references
 #' Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/
 #' @export
@@ -99,7 +103,18 @@ setMethod("dbConnect", "MariaDBDriver",
       bigint = bigint
     )
 
-    dbExecute(conn, "SET time_zone = '+00:00'")
+    if(exists('timezone')) {
+      tryCatch(
+        dbExecute(conn, paste0("SET time_zone = '", timezone, "'"))
+        ,
+        error = function(e) {
+          dbExecute(conn, "SET time_zone = '+00:00'")
+          message("Unknown or incorrect time zone: '", timezone, "'")
+        }
+      )
+    } else {
+      dbExecute(conn, "SET time_zone = '+00:00'")
+    }
     dbExecute(conn, "SET autocommit = 0")
     conn
   }
