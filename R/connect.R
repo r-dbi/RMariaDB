@@ -103,19 +103,8 @@ setMethod("dbConnect", "MariaDBDriver",
       bigint = bigint
     )
 
-    if (!missing("timezone")) {
-      tryCatch(
-        dbExecute(conn, paste0("SET time_zone = '", timezone, "'"))
-        ,
-        error = function(e) {
-          dbExecute(conn, "SET time_zone = '+00:00'")
-          message("Unknown or incorrect time zone: '", timezone, "'")
-        }
-      )
-    } else {
-      dbExecute(conn, "SET time_zone = '+00:00'")
-    }
-
+    dbExecute(conn, paste0("SET time_zone = ", dbQuoteString(conn, timezone)))
+    dbExecute(conn, "SET autocommit = 0")
     conn
   }
 )
