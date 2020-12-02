@@ -77,7 +77,7 @@ setMethod("dbConnect", "MariaDBDriver",
     groups = "rs-dbi", default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
     ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...,
     bigint = c("integer64", "integer", "numeric", "character"),
-    timeout = 10) {
+    timeout = 10, timezone = "+0000") {
 
     bigint <- match.arg(bigint)
 
@@ -115,7 +115,7 @@ setMethod("dbConnect", "MariaDBDriver",
     } else {
       dbExecute(conn, "SET time_zone = '+00:00'")
     }
-    dbExecute(conn, "SET autocommit = 0")
+
     conn
   }
 )
