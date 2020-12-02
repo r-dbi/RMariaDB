@@ -103,7 +103,7 @@ setMethod("dbConnect", "MariaDBDriver",
       bigint = bigint
     )
 
-    if(exists('timezone')) {
+    if (!missing("timezone")) {
       tryCatch(
         dbExecute(conn, paste0("SET time_zone = '", timezone, "'"))
         ,
