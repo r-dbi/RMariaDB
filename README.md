@@ -1,11 +1,12 @@
 RMariaDB
 ======
 
-[![Build Status](https://travis-ci.org/r-dbi/RMariaDB.svg)](https://travis-ci.org/r-dbi/RMariaDB)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-dbi/RMariaDB?branch=master&svg=true)](https://ci.appveyor.com/project/r-dbi/rmariadb?branch=master)
-[![Coverage Status](https://codecov.io/github/r-dbi/RMariaDB/coverage.svg)](https://codecov.io/github/r-dbi/RMariaDB)
+<!-- badges: start -->
+[![rcc](https://github.com/r-dbi/RMariaDB/workflows/rcc/badge.svg)](https://github.com/r-dbi/RMariaDB/actions)
+[![Codecov test coverage](https://codecov.io/gh/r-dbi/RMariaDB/branch/master/graph/badge.svg)](https://codecov.io/gh/r-dbi/RMariaDB?branch=master)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
+<!-- badges: end -->
 
 RMariaDB is a database interface and MariaDB driver for R. This version is aimed at full compliance with the [DBI specification](https://cran.r-project.org/package=DBI/vignettes/spec.html), as a replacement for the old [RMySQL](https://cran.r-project.org/package=RMySQL) package.
 

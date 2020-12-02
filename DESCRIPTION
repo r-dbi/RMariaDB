@@ -44,6 +44,7 @@ Imports:
     methods,
     Rcpp (>= 0.12.4)
 Suggests: 
+    covr,
     DBItest (>= 1.7.0),
     rprojroot,
     testthat
