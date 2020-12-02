@@ -23,7 +23,8 @@
   ssl.cipher = NULL,
   ...,
   bigint = c("integer64", "integer", "numeric", "character"),
-  timeout = 10
+  timeout = 10,
+  timezone = "+0000"
 )
 
 MariaDB()
