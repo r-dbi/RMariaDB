@@ -103,6 +103,8 @@ setMethod("dbConnect", "MariaDBDriver",
       bigint = bigint
     )
 
+    on.exit(dbDisconnect(conn))
+
     dbExecute(conn, paste0("SET time_zone = ", dbQuoteString(conn, timezone)))
     dbExecute(conn, "SET autocommit = 0")
     on.exit(NULL)
