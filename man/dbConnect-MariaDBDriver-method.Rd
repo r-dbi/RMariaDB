@@ -24,7 +24,7 @@
   ...,
   bigint = c("integer64", "integer", "numeric", "character"),
   timeout = 10,
-  timezone = "+0000"
+  timezone = "+00:00"
 )
 
 MariaDB()
