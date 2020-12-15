@@ -16,3 +16,4 @@ TAGS
 /windows
 CRAN-RELEASE
 tests/testthat/testthat-problems.rds
+configure.log
