@@ -89,19 +89,13 @@ brew install mysql-connector-c++
 
 ### Connector/C
 
-On recent __Debian__ or __Ubuntu__ install [libmariadb-client-lgpl-dev](https://packages.debian.org/buster/libmariadb-client-lgpl-dev-compat).
-
-```
-sudo apt-get install -y libmariadb-client-lgpl-dev
-```
-
-In Ubuntu 18.04 this was called [libmariadbclient-dev](https://packages.ubuntu.com/bionic/libmariadbclient-dev).
+On recent __Debian__ or __Ubuntu__ install [libmariadbclient-dev](https://packages.debian.org/testing/libmariadbclient-dev).
 
 ```
 sudo apt-get install -y libmariadbclient-dev
 ```
 
-On __Fedora__,  __CentOS__ or __RHEL__ we need [mariadb-devel](https://apps.fedoraproject.org/packages/mariadb-devel):
+On __Fedora__,  __CentOS__ or __RHEL__ we need [mariadb-devel](https://src.fedoraproject.org/rpms/mariadb):
 
 ```
 sudo yum install mariadb-devel
