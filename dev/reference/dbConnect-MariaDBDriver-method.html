@@ -135,7 +135,8 @@ generic functions.</p>
   ssl.cipher <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>,
   bigint <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"integer64"</span>, <span class='st'>"integer"</span>, <span class='st'>"numeric"</span>, <span class='st'>"character"</span><span class='op'>)</span>,
-  timeout <span class='op'>=</span> <span class='fl'>10</span>
+  timeout <span class='op'>=</span> <span class='fl'>10</span>,
+  timezone <span class='op'>=</span> <span class='st'>"+00:00"</span>
 <span class='op'>)</span>
 
 <span class='fu'>MariaDB</span><span class='op'>(</span><span class='op'>)</span></pre>
@@ -228,6 +229,13 @@ integers.</p></td>
       <th>timeout</th>
       <td><p>Connection timeout, in seconds. Use <code>Inf</code> or a negative value
 for no timeout.</p></td>
+    </tr>
+    <tr>
+      <th>timezone</th>
+      <td><p>(optional) time zone for the connection,
+the default corresponds to UTC.
+Set this argument if your server or database is configured with a different
+time zone than UTC.</p></td>
     </tr>
     </table>
 
