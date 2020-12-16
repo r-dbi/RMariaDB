@@ -72,19 +72,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.11</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -121,16 +115,16 @@
     </div>
 
     <pre class="usage"><span class='co'># S4 method for MariaDBResult</span>
-<span class='fu'>dbColumnInfo</span>(<span class='no'>res</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://dbi.r-dbi.org/reference/dbColumnInfo.html'>dbColumnInfo</a></span><span class='op'>(</span><span class='va'>res</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for MariaDBResult</span>
-<span class='fu'>dbGetRowsAffected</span>(<span class='no'>res</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://dbi.r-dbi.org/reference/dbGetRowsAffected.html'>dbGetRowsAffected</a></span><span class='op'>(</span><span class='va'>res</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for MariaDBResult</span>
-<span class='fu'>dbGetRowCount</span>(<span class='no'>res</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://dbi.r-dbi.org/reference/dbGetRowCount.html'>dbGetRowCount</a></span><span class='op'>(</span><span class='va'>res</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='co'># S4 method for MariaDBResult</span>
-<span class='fu'>dbHasCompleted</span>(<span class='no'>res</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://dbi.r-dbi.org/reference/dbHasCompleted.html'>dbHasCompleted</a></span><span class='op'>(</span><span class='va'>res</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,23 +141,26 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='mariadbHasDefault.html'>mariadbHasDefault</a></span>()) {
-<span class='no'>con</span> <span class='kw'>&lt;-</span> <span class='fu'>dbConnect</span>(<span class='kw pkg'>RMariaDB</span><span class='kw ns'>::</span><span class='fu'><a href='dbConnect-MariaDBDriver-method.html'>MariaDB</a></span>(), <span class='kw'>dbname</span> <span class='kw'>=</span> <span class='st'>"test"</span>)
-<span class='fu'>dbWriteTable</span>(<span class='no'>con</span>, <span class='st'>"t1"</span>, <span class='kw pkg'>datasets</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/r/datasets/USArrests.html'>USArrests</a></span>, <span class='kw'>temporary</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='mariadbHasDefault.html'>mariadbHasDefault</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>con</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dbi.r-dbi.org/reference/dbConnect.html'>dbConnect</a></span><span class='op'>(</span><span class='fu'>RMariaDB</span><span class='fu'>::</span><span class='fu'><a href='dbConnect,MariaDBDriver-method.html'>MariaDB</a></span><span class='op'>(</span><span class='op'>)</span>, dbname <span class='op'>=</span> <span class='st'>"test"</span><span class='op'>)</span>
+<span class='fu'><a href='https://dbi.r-dbi.org/reference/dbWriteTable.html'>dbWriteTable</a></span><span class='op'>(</span><span class='va'>con</span>, <span class='st'>"t1"</span>, <span class='fu'>datasets</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/r/datasets/USArrests.html'>USArrests</a></span>, temporary <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 
-<span class='no'>rs</span> <span class='kw'>&lt;-</span> <span class='fu'>dbSendQuery</span>(<span class='no'>con</span>, <span class='st'>"SELECT * FROM t1 WHERE UrbanPop &gt;= 80"</span>)
-<span class='no'>rs</span>
+<span class='va'>rs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dbi.r-dbi.org/reference/dbSendQuery.html'>dbSendQuery</a></span><span class='op'>(</span><span class='va'>con</span>, <span class='st'>"SELECT * FROM t1 WHERE UrbanPop &gt;= 80"</span><span class='op'>)</span>
+<span class='va'>rs</span>
 
-<span class='fu'>dbGetStatement</span>(<span class='no'>rs</span>)
-<span class='fu'>dbHasCompleted</span>(<span class='no'>rs</span>)
-<span class='fu'>dbColumnInfo</span>(<span class='no'>rs</span>)
+<span class='fu'><a href='https://dbi.r-dbi.org/reference/dbGetStatement.html'>dbGetStatement</a></span><span class='op'>(</span><span class='va'>rs</span><span class='op'>)</span>
+<span class='fu'><a href='https://dbi.r-dbi.org/reference/dbHasCompleted.html'>dbHasCompleted</a></span><span class='op'>(</span><span class='va'>rs</span><span class='op'>)</span>
+<span class='fu'><a href='https://dbi.r-dbi.org/reference/dbColumnInfo.html'>dbColumnInfo</a></span><span class='op'>(</span><span class='va'>rs</span><span class='op'>)</span>
 
-<span class='fu'>dbFetch</span>(<span class='no'>rs</span>)
-<span class='no'>rs</span>
+<span class='fu'><a href='https://dbi.r-dbi.org/reference/dbFetch.html'>dbFetch</a></span><span class='op'>(</span><span class='va'>rs</span><span class='op'>)</span>
+<span class='va'>rs</span>
 
-<span class='fu'>dbClearResult</span>(<span class='no'>rs</span>)
-<span class='fu'>dbDisconnect</span>(<span class='no'>con</span>)
-}</div></pre>
+<span class='fu'><a href='https://dbi.r-dbi.org/reference/dbClearResult.html'>dbClearResult</a></span><span class='op'>(</span><span class='va'>rs</span><span class='op'>)</span>
+<span class='fu'><a href='https://dbi.r-dbi.org/reference/dbDisconnect.html'>dbDisconnect</a></span><span class='op'>(</span><span class='va'>con</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Could not initialise default MariaDB database. If MariaDB is running</span>
+#&gt; <span class='message'>check that you have a ~/.my.cnf file that contains a [rs-dbi] section</span>
+#&gt; <span class='message'>describing how to connect to a test database.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -179,7 +176,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
