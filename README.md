@@ -71,7 +71,7 @@ On recent __Debian__ or __Ubuntu__ install [libmysqlclient-dev](https://packages
 sudo apt-get install -y libmysqlclient-dev
 ```
 
-On __Fedora__,  __CentOS__ or __RHEL__ we need [mysql-devel](https://apps.fedoraproject.org/packages/mysql-devel):
+On __Fedora__,  __CentOS__ or __RHEL__ we need mysql-devel, see https://apps.fedoraproject.org/packages/mysql-devel:
 
 ```
 sudo yum install mysql-devel
