@@ -1,3 +1,8 @@
+# RMariaDB 1.0.11 (2020-12-16)
+
+- Add `timezone` argument to `dbConnect()` (#184, @ycphs).
+
+
 # RMariaDB 1.0.10.9101 (2020-12-16)
 
 - Windows: update to libmariadbclient 3.1.11
