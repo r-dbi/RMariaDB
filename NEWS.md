@@ -1,6 +1,13 @@
+# RMariaDB 1.0.10.9101 (2020-12-16)
+
+- Windows: update to libmariadbclient 3.1.11
+- Switch to GitHub Actions (#185, thanks @ankane).
+- `dbWriteTable()` and `dbBind()` correctly interpret difftime values with units other than `"secs"`.
+
+
 # RMariaDB 1.0.10.9000 (2020-08-26)
 
-- Internal changes only.
+- Internal changes.
 
 
 # RMariaDB 1.0.10 (2020-08-26)

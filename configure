@@ -1,12 +1,11 @@
-#!/usr/bin/env bash
-# Anticonf script by Jeroen Ooms (2018)
+# Anticonf script by Jeroen Ooms (2020)
 # The script will try 'mariadb_config' and 'mysql_config' to find required
 # cflags and ldflags. Make sure this executable is in PATH when installing
 # the package. Alternatively, you can set INCLUDE_DIR and LIB_DIR manually:
 # R CMD INSTALL --configure-vars='INCLUDE_DIR=/.../include LIB_DIR=/.../lib'
 
 # Library settings
-PKG_DEB_NAME="libmariadbclient-dev | libmariadb-client-lgpl-dev, libssl-dev"
+PKG_DEB_NAME="libmariadbclient-dev"
 PKG_RPM_NAME="mariadb-connector-c-devel | mariadb-devel | mysql-devel"
 PKG_CSW_NAME="mysql56_dev"
 PKG_BREW_NAME="mariadb-connector-c"
@@ -14,15 +13,14 @@ PKG_TEST_HEADER="<mysql.h>"
 PKG_LIBS="-lmysqlclient"
 
 # Use mysql_config (on Solaris /opt/csw/bin must be in PATH)
-if [ $(command -v mysql_config) ]; then
+if [ `command -v mysql_config` ]; then
   echo "Using mysql_config"
-  PKGCONFIG_CFLAGS=$(mysql_config --cflags)
-  PKGCONFIG_LIBS=$(mysql_config --libs)
-elif [ $(command -v mariadb_config) ]; then
+  PKGCONFIG_CFLAGS=`mysql_config --cflags`
+  PKGCONFIG_LIBS=`mysql_config --libs`
+elif [ `command -v mariadb_config` ]; then
   echo "Using mariadb_config"
-  echo "WARNING: Connector versions prior to 2.3.4/3.0.3 have a known problem with retrieving string and blob data. See https://github.com/r-dbi/RMariaDB/issues/53 for details."
-  PKGCONFIG_CFLAGS=$(mariadb_config --cflags)
-  PKGCONFIG_LIBS=$(mariadb_config --libs)
+  PKGCONFIG_CFLAGS=`mariadb_config --cflags`
+  PKGCONFIG_LIBS=`mariadb_config --libs`
 fi
 
 # Note that cflags may be empty in case of success
@@ -31,38 +29,39 @@ if [ "$INCLUDE_DIR" ] || [ "$LIB_DIR" ]; then
   PKG_CFLAGS="-I$INCLUDE_DIR $PKG_CFLAGS"
   PKG_LIBS="-L$LIB_DIR $PKG_LIBS"
 elif [ "$PKGCONFIG_CFLAGS" ] || [ "$PKGCONFIG_LIBS" ]; then
-  echo "Found mysql_config/mariadb_config cflags and libs!"
+  echo "Found mysql_config cflags and libs!"
   PKG_CFLAGS=${PKGCONFIG_CFLAGS}
   PKG_LIBS=${PKGCONFIG_LIBS}
   # Workaround for homebrew linkin bug
-  if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [ `uname` = "Darwin" ]; then
     PKG_LIBS="-L/usr/local/opt/openssl/lib $PKG_LIBS"
   fi
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-  if [ $(command -v brew) ]; then
-    BREWDIR=$(brew --prefix)
+elif [ `uname` = "Darwin" ]; then
+  brew --version 2>/dev/null
+  if [ $? -eq 0 ]; then
+    BREWDIR=`brew --prefix`
   else
-    curl -sfL "https://jeroen.github.io/autobrew/$PKG_BREW_NAME" > autobrew
-    source autobrew
+    curl -sfL "https://autobrew.github.io/scripts/$PKG_BREW_NAME" > autobrew
+    . ./autobrew
   fi
 fi
 
 # Find compiler
-CC=$(${R_HOME}/bin/R CMD config CC)
-CFLAGS=$(${R_HOME}/bin/R CMD config CFLAGS)
-CPPFLAGS=$(${R_HOME}/bin/R CMD config CPPFLAGS)
+CC=`${R_HOME}/bin/R CMD config CC`
+CFLAGS=`${R_HOME}/bin/R CMD config CFLAGS`
+CPPFLAGS=`${R_HOME}/bin/R CMD config CPPFLAGS`
 
 # For debugging
 echo "Using PKG_CFLAGS=$PKG_CFLAGS"
 echo "Using PKG_LIBS=$PKG_LIBS"
 
 # Test configuration
-echo "#include $PKG_TEST_HEADER" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E -xc - >/dev/null 2>&1 || R_CONFIG_ERROR=1;
+echo "#include $PKG_TEST_HEADER" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E -xc - >/dev/null 2> configure.log
 
 # Customize the error
-if [ $R_CONFIG_ERROR ]; then
-  echo "------------------------- ANTICONF ERROR ---------------------------"
-  echo "Configuration failed because no mysql client library was found. Try installing:"
+if [ $? -ne 0 ]; then
+  echo "-----------------------------[ ANTICONF ]-----------------------------"
+  echo "Configure could not find suitable mysql/mariadb client library. Try installing:"
   echo " * deb: $PKG_DEB_NAME (Debian, Ubuntu)"
   echo " * rpm: $PKG_RPM_NAME (Fedora, CentOS, RHEL)"
   echo " * csw: $PKG_CSW_NAME (Solaris)"
@@ -71,8 +70,10 @@ if [ $R_CONFIG_ERROR ]; then
   echo "mariadb_config or mysql_config is on your PATH. If these are unavailable"
   echo "you can also set INCLUDE_DIR and LIB_DIR manually via:"
   echo "R CMD INSTALL --configure-vars='INCLUDE_DIR=... LIB_DIR=...'"
-  echo "--------------------------------------------------------------------"
-  exit 1;
+  echo "--------------------------[ ERROR MESSAGE ]----------------------------"
+  cat configure.log
+  echo "-----------------------------------------------------------------------"
+  exit 1
 fi
 
 # Write to Makevars

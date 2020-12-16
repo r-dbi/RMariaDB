@@ -1,11 +1,12 @@
 RMariaDB
 ======
 
-[![Build Status](https://travis-ci.org/r-dbi/RMariaDB.svg)](https://travis-ci.org/r-dbi/RMariaDB)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-dbi/RMariaDB?branch=master&svg=true)](https://ci.appveyor.com/project/r-dbi/rmariadb?branch=master)
-[![Coverage Status](https://codecov.io/github/r-dbi/RMariaDB/coverage.svg)](https://codecov.io/github/r-dbi/RMariaDB)
+<!-- badges: start -->
+[![rcc](https://github.com/r-dbi/RMariaDB/workflows/rcc/badge.svg)](https://github.com/r-dbi/RMariaDB/actions)
+[![Codecov test coverage](https://codecov.io/gh/r-dbi/RMariaDB/branch/master/graph/badge.svg)](https://codecov.io/gh/r-dbi/RMariaDB?branch=master)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
+<!-- badges: end -->
 
 RMariaDB is a database interface and MariaDB driver for R. This version is aimed at full compliance with the [DBI specification](https://cran.r-project.org/package=DBI/vignettes/spec.html), as a replacement for the old [RMySQL](https://cran.r-project.org/package=RMySQL) package.
 
@@ -88,19 +89,13 @@ brew install mysql-connector-c++
 
 ### Connector/C
 
-On recent __Debian__ or __Ubuntu__ install [libmariadb-client-lgpl-dev](https://packages.debian.org/buster/libmariadb-client-lgpl-dev-compat).
-
-```
-sudo apt-get install -y libmariadb-client-lgpl-dev
-```
-
-In Ubuntu 18.04 this was called [libmariadbclient-dev](https://packages.ubuntu.com/bionic/libmariadbclient-dev).
+On recent __Debian__ or __Ubuntu__ install [libmariadbclient-dev](https://packages.debian.org/testing/libmariadbclient-dev).
 
 ```
 sudo apt-get install -y libmariadbclient-dev
 ```
 
-On __Fedora__,  __CentOS__ or __RHEL__ we need [mariadb-devel](https://apps.fedoraproject.org/packages/mariadb-devel):
+On __Fedora__,  __CentOS__ or __RHEL__ we need [mariadb-devel](https://src.fedoraproject.org/rpms/mariadb):
 
 ```
 sudo yum install mariadb-devel
