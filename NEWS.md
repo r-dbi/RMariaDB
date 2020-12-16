@@ -12,11 +12,6 @@
 - Switch to GitHub Actions (#185, thanks @ankane).
 
 
-# RMariaDB 1.0.10.9000 (2020-08-26)
-
-- Internal changes.
-
-
 # RMariaDB 1.0.10 (2020-08-26)
 
 ## Features
