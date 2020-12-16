@@ -41,6 +41,10 @@ NULL
 #'   integers.
 #' @param timeout Connection timeout, in seconds. Use `Inf` or a negative value
 #'   for no timeout.
+#' @param timezone (optional) time zone for the connection,
+#'   the default corresponds to UTC.
+#'   Set this argument if your server or database is configured with a different
+#'   time zone than UTC.
 #' @references
 #' Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/
 #' @export
@@ -73,7 +77,7 @@ setMethod("dbConnect", "MariaDBDriver",
     groups = "rs-dbi", default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
     ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...,
     bigint = c("integer64", "integer", "numeric", "character"),
-    timeout = 10) {
+    timeout = 10, timezone = "+00:00") {
 
     bigint <- match.arg(bigint)
 
@@ -99,8 +103,12 @@ setMethod("dbConnect", "MariaDBDriver",
       bigint = bigint
     )
 
-    dbExecute(conn, "SET time_zone = '+00:00'")
+    on.exit(dbDisconnect(conn))
+
+    dbExecute(conn, paste0("SET time_zone = ", dbQuoteString(conn, timezone)))
     dbExecute(conn, "SET autocommit = 0")
+    on.exit(NULL)
+
     conn
   }
 )

@@ -23,7 +23,8 @@
   ssl.cipher = NULL,
   ...,
   bigint = c("integer64", "integer", "numeric", "character"),
-  timeout = 10
+  timeout = 10,
+  timezone = "+00:00"
 )
 
 MariaDB()
@@ -80,6 +81,11 @@ integers.}
 
 \item{timeout}{Connection timeout, in seconds. Use \code{Inf} or a negative value
 for no timeout.}
+
+\item{timezone}{(optional) time zone for the connection,
+the default corresponds to UTC.
+Set this argument if your server or database is configured with a different
+time zone than UTC.}
 }
 \description{
 These methods are straight-forward implementations of the corresponding

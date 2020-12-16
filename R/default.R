@@ -30,8 +30,12 @@ mariadbHasDefault <- function() {
 #' @export
 #' @rdname mariadbHasDefault
 mariadbDefault <- function() {
+  mariadb_default()
+}
+
+mariadb_default <- function(...) {
   tryCatch({
-    dbConnect(MariaDB(), dbname = "test")
+    dbConnect(MariaDB(), dbname = "test", ...)
   }, error = function(...) {
     testthat::skip("Test database not available")
   })
