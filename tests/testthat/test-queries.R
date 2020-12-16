@@ -45,3 +45,10 @@ test_that("fractional seconds in datetime (#170)", {
 
   dbDisconnect(con)
 })
+
+test_that("timezone argument (#184)", {
+  conn <- mariadb_default(timezone = "+02:00")
+  tz <- dbGetQuery(conn, "SELECT @@session.time_zone")
+  expect_equal(tz[[1]], "+02:00")
+  dbDisconnect(conn)
+})
