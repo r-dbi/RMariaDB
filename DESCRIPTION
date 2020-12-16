@@ -1,6 +1,6 @@
 Package: RMariaDB
 Title: Database Interface and 'MariaDB' Driver
-Version: 1.0.11
+Version: 1.0.11.9000
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",

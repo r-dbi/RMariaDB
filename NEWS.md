@@ -1,3 +1,8 @@
+# RMariaDB 1.0.11.9000 (2020-12-16)
+
+- Add `timezone` argument to `dbConnect()` (#184, @ycphs).
+
+
 # RMariaDB 1.0.11 (2020-12-16)
 
 - Add `timezone` argument to `dbConnect()` (#184, @ycphs).
