@@ -82,10 +82,10 @@ integers.}
 \item{timeout}{Connection timeout, in seconds. Use \code{Inf} or a negative value
 for no timeout.}
 
-\item{timezone}{(optional) string with the a valid timezone
-default is the timezone of the system.
-in case the timezone doesn't exist on the database, a message will be displayed
-and the UTC will be the selected timezone (+00:00)}
+\item{timezone}{(optional) time zone for the connection,
+the default corresponds to UTC.
+Set this argument if your server or database is configured with a different
+time zone than UTC.}
 }
 \description{
 These methods are straight-forward implementations of the corresponding

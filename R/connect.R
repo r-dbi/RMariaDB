@@ -41,10 +41,10 @@ NULL
 #'   integers.
 #' @param timeout Connection timeout, in seconds. Use `Inf` or a negative value
 #'   for no timeout.
-#' @param timezone (optional) string with the a valid timezone
-#'   default is the timezone of the system.
-#'   in case the timezone doesn't exist on the database, a message will be displayed
-#'   and the UTC will be the selected timezone (+00:00)
+#' @param timezone (optional) time zone for the connection,
+#'   the default corresponds to UTC.
+#'   Set this argument if your server or database is configured with a different
+#'   time zone than UTC.
 #' @references
 #' Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/
 #' @export
@@ -102,8 +102,6 @@ setMethod("dbConnect", "MariaDBDriver",
       db = info$dbname,
       bigint = bigint
     )
-
-    on.exit(dbDisconnect(conn))
 
     on.exit(dbDisconnect(conn))
 
