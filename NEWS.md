@@ -1,3 +1,9 @@
+# RMariaDB 1.0.11.9001 (2020-12-22)
+
+- `dbQuoteLiteral()` now correctly quotes difftime values (#188).
+- `dbBind()` also works for `"Date"` values that are stored as integers (#187).
+
+
 # RMariaDB 1.0.11.9000 (2020-12-16)
 
 - Add `timezone` argument to `dbConnect()` (#184, @ycphs).
