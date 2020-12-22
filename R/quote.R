@@ -105,3 +105,20 @@ setMethod("dbQuoteString", c("MariaDBConnection", "SQL"),
     x
   }
 )
+
+#' @rdname mariadb-quoting
+#' @export
+setMethod("dbQuoteLiteral", signature("MariaDBConnection"),
+  function(conn, x, ...) {
+    # Switchpatching to avoid ambiguous S4 dispatch, so that our method
+    # is used only if no alternatives are available.
+
+    if (inherits(x, "difftime")) return(cast_difftime(callNextMethod()))
+
+    callNextMethod()
+  }
+)
+
+cast_difftime <- function(x) {
+  SQL(paste0("CAST(", x, " AS time)"))
+}

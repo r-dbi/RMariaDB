@@ -34,7 +34,11 @@ string_to_utf8 <- function(value) {
 
 difftime_to_hms <- function(value) {
   is_difftime <- vlapply(value, inherits, "difftime")
-  value[is_difftime] <- lapply(value[is_difftime], hms::as_hms)
+  # https://github.com/tidyverse/hms/issues/84
+  value[is_difftime] <- lapply(value[is_difftime], function(x) {
+    mode(x) <- "double"
+    hms::as_hms(x)
+  })
   value
 }
 
