@@ -7,6 +7,7 @@ sql_data <- function(value, row.names = FALSE, warn = FALSE) {
   value <- difftime_to_hms(value)
   value <- posixlt_to_posixct(value)
   value <- numeric_to_finite(value)
+  value <- date_to_double(value)
   value
 }
 
@@ -47,6 +48,15 @@ numeric_to_finite <- function(value) {
   is_numeric <- vlapply(value, is.numeric) & !vlapply(value, is.integer)
   value[is_numeric] <- lapply(value[is_numeric], function(x) {
     x[!is.finite(x)] <- NA
+    x
+  })
+  value
+}
+
+date_to_double <- function(value) {
+  is_date <- vlapply(value, inherits, "Date")
+  value[is_date] <- lapply(value[is_date], function(x) {
+    mode(x) <- "double"
     x
   })
   value
