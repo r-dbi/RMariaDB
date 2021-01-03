@@ -10,10 +10,10 @@ enum MariaFieldType {
   MY_DATE_TIME,
   MY_TIME,
   MY_RAW,
-  MY_LGL     // input only
+  MY_LGL     // for BIT(1)
 };
 
-MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary);
+MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary, bool length1);
 std::string type_name(MariaFieldType type);
 SEXPTYPE type_sexp(MariaFieldType type);
 
