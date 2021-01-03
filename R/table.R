@@ -84,7 +84,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     if (!is.data.frame(value))  {
       stopc("`value` must be data frame")
     }
-    
+
     row.names <- compatRowNames(row.names)
 
     if ((!is.logical(row.names) && !is.character(row.names)) || length(row.names) != 1L)  {
@@ -369,7 +369,7 @@ setMethod("dbDataType", "MariaDBDriver", function(dbObj, obj, ...) {
   if (is.data.frame(obj)) return(callNextMethod(dbObj, obj))
 
   switch(typeof(obj),
-    logical = "TINYINT",
+    logical = "TINYINT", # works better than BIT(1), https://stackoverflow.com/q/289727/946850
     integer = "INTEGER",
     double = "DOUBLE",
     character = get_char_type(obj),
