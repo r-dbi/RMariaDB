@@ -55,44 +55,18 @@ test_that("timestamp with time zone is returned correctly (#205)", {
   con <- mariadb_default(timezone = "America/Chicago")
 
   query <- "CREATE TEMPORARY TABLE junk AS
-            (SELECT '2020-05-04'::TIMESTAMPTZ AS ts)"
+            (SELECT CAST('2020-05-04' AS DATETIME) AS ts)"
   res <- dbExecute(con, query)
 
   res <- dbGetQuery(con, "SELECT * FROM junk")
   expect_equal(res[[1]], as.POSIXct("2020-05-04", tz = "America/Chicago"))
 })
 
-test_that("timestamp with time zone is returned correctly for time zones", {
-  con <- mariadb_default(timezone = "Europe/Zurich", timezone_out = "UTC")
-  on.exit(dbDisconnect(con))
-
-  query <- "SELECT '1970-01-01 12:00:00+00:00'::TIMESTAMPTZ AS ts"
-  res <- dbGetQuery(con, query)
-  expect_equal(res[[1]], as.POSIXct("1970-01-01 12:00:00", tz = "UTC"))
-})
-
-test_that("timestamp with time zone is returned correctly for half-hour time zones", {
-  con <- mariadb_default(timezone = "Asia/Calcutta", timezone_out = "UTC")
-  on.exit(dbDisconnect(con))
-
-  query <- "SELECT '1970-01-01 12:00:00+00:00'::TIMESTAMPTZ AS ts"
-  res <- dbGetQuery(con, query)
-  expect_equal(res[[1]], as.POSIXct("1970-01-01 12:00:00", tz = "UTC"))
-})
-
 test_that("timestamp without time zone is returned correctly (#221)", {
   con <- mariadb_default()
   on.exit(dbDisconnect(con))
 
-  out <- dbGetQuery(con, "SELECT CAST('1960-01-01 12:00:00' AS timestamp) AS before_epoch")
-  expect_equal(as.Date(out[[1]]), as.Date("1960-01-01"))
-})
-
-test_that("timestamp without time zone is returned correctly (#221)", {
-  con <- mariadb_default()
-  on.exit(dbDisconnect(con))
-
-  out <- dbGetQuery(con, "SELECT CAST('1960-01-01 12:00:00' AS timestamp) AS before_epoch")
+  out <- dbGetQuery(con, "SELECT CAST('1960-01-01 12:00:00' AS DATETIME) AS before_epoch")
   expect_equal(as.Date(out[[1]]), as.Date("1960-01-01"))
 })
 
@@ -111,16 +85,18 @@ test_that("timezone is passed on to the connection (#229)", {
     con, "example", example, temporary = TRUE,
     overwrite = TRUE, append = FALSE
   )
+  res <- dbReadTable(con, "example")
+  expect_equal(res, example)
 
   query <- '
-    SELECT date("ts") AS "dte", MIN("val") AS "min", MAX("val") AS "max"
-    FROM "example"
-    GROUP BY "dte"
-    ORDER BY "dte"'
+    SELECT date(ts) AS dte, MIN(val) AS min_val, MAX(val) AS max_val
+    FROM example
+    GROUP BY dte
+    ORDER BY dte'
   expected <- data.frame(
     dte = as.Date("2019-04-30") + 0:2,
-    min = 0:2 * 24,
-    max = 0:2 * 24 + 23
+    min_val = 0:2 * 24,
+    max_val = 0:2 * 24 + 23
   )
 
   res <- dbGetQuery(con, query)
