@@ -1,3 +1,5 @@
+skip_on_cran()
+
 test_that("timestamp without time zone is returned correctly for TZ set (#190)", {
   withr::local_timezone("America/Chicago")
 
