@@ -172,7 +172,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
 )
 
 setMethod("sqlData", "MariaDBConnection", function(con, value, row.names = FALSE, ...) {
-  value <- sql_data(value, row.names)
+  value <- sql_data(value, con, row.names)
   value <- quote_string(value, con)
 
   value

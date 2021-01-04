@@ -198,7 +198,12 @@ void MariaBinding::set_date_time_buffer(int j, double time) {
 
   LOG_VERBOSE << time;
   struct tm* tm = gmtime(&int_time);
-  LOG_VERBOSE << tm;
+  LOG_VERBOSE << tm->tm_year;
+  LOG_VERBOSE << tm->tm_mon;
+  LOG_VERBOSE << tm->tm_mday;
+  LOG_VERBOSE << tm->tm_hour;
+  LOG_VERBOSE << tm->tm_min;
+  LOG_VERBOSE << tm->tm_sec;
 
   time_buffers[j].year = tm->tm_year + 1900;
   time_buffers[j].month = tm->tm_mon + 1 ;

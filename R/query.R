@@ -127,7 +127,7 @@ setMethod("dbBind", "MariaDBResult", function(res, params, ...) {
     stopc("Cannot use named parameters for anonymous placeholders")
   }
 
-  params <- sql_data(as.list(params), warn = TRUE)
+  params <- sql_data(as.list(params), res@conn, warn = TRUE)
 
   result_bind(res@ptr, params)
   invisible(res)
