@@ -129,7 +129,9 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
       dbRemoveTable(conn, name, temporary = temporary, fail_if_missing = FALSE)
     }
 
-    value <- sql_data(value[, , drop = FALSE], row.names)
+    # dbAppendTable() calls sql_data(), we only need to take care of row names
+    row.names <- compatRowNames(row.names)
+    value <- sqlRownamesToColumn(value, row.names)
 
     if (!found || overwrite) {
       if (is.null(field.types)) {
