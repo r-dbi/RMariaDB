@@ -132,6 +132,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     # dbAppendTable() calls sql_data(), we only need to take care of row names
     row.names <- compatRowNames(row.names)
     value <- sqlRownamesToColumn(value, row.names)
+    value <- factor_to_string(value)
 
     if (!found || overwrite) {
       if (is.null(field.types)) {
