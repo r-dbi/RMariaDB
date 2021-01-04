@@ -102,6 +102,8 @@ jobs:
       - name: Create database, set it to UTF-8
         run: |
           mysql -e "CREATE DATABASE IF NOT EXISTS test; ALTER DATABASE test CHARACTER SET 'utf8'; FLUSH PRIVILEGES;"
+          mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -D mysql
+          mysql -e "SET GLOBAL time_zone = 'Europe/Zurich';"
       # End custom: after install
 
       - name: Check
