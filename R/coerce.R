@@ -44,9 +44,6 @@ difftime_to_hms <- function(value) {
 
 posixlt_to_posixct <- function(value, timezone) {
   is_posixlt <- vlapply(value, inherits, "POSIXt")
-  if (any(is_posixlt)) {
-    print(value[is_posixlt][[1]])
-  }
   value[is_posixlt] <- lapply(value[is_posixlt], function(x) {
     x <- as.POSIXct(x)
 
