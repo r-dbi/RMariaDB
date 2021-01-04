@@ -131,16 +131,10 @@ setMethod("dbConnect", "MariaDBDriver",
     timezone <- check_tz(timezone)
 
     if (is.null(timezone_out)) {
-      if (timezone == "+00:00") {
-        timezone_out <- "UTC"
-      } else {
-        timezone_out <- timezone
-      }
+      timezone_out <- timezone
     } else {
       timezone_out <- check_tz(timezone_out)
     }
-
-    timezone_out <- check_tz(timezone_out)
 
     conn@timezone <- timezone
     conn@timezone_out <- timezone_out
@@ -154,6 +148,10 @@ setMethod("dbConnect", "MariaDBDriver",
 
 check_tz <- function(timezone) {
   arg_name <- deparse(substitute(timezone))
+
+  if (timezone == "+00:00") {
+    timezone <- "UTC"
+  }
 
   tryCatch(
     lubridate::force_tz(as.POSIXct("2021-03-01 10:40"), timezone),
