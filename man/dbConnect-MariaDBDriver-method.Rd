@@ -24,7 +24,8 @@
   ...,
   bigint = c("integer64", "integer", "numeric", "character"),
   timeout = 10,
-  timezone = "+00:00"
+  timezone = "+00:00",
+  timezone_out = NULL
 )
 
 MariaDB()
@@ -85,12 +86,30 @@ for no timeout.}
 \item{timezone}{(optional) time zone for the connection,
 the default corresponds to UTC.
 Set this argument if your server or database is configured with a different
-time zone than UTC.}
+time zone than UTC.
+Set to \code{NULL} to automatically determine the server time zone.}
+
+\item{timezone_out}{The time zone returned to R.
+The default is to use the value of the \code{timezone} argument,
+\code{"+00:00"} is converted to \code{"UTC"}
+If you want to display datetime values in the local timezone,
+set to \code{\link[=Sys.timezone]{Sys.timezone()}} or \code{""}.
+This setting does not change the time values returned, only their display.}
 }
 \description{
 These methods are straight-forward implementations of the corresponding
 generic functions.
 }
+\section{Time zones}{
+
+MySQL and MariaDB support named time zones,
+they must be installed on the server.
+See \url{https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html}
+for more details.
+Without installation, time zone support is restricted to UTC offset,
+which cannot take into account DST offsets.
+}
+
 \examples{
 \dontrun{
 # Connect to a MariaDB database running locally

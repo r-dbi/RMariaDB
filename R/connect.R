@@ -6,6 +6,14 @@ NULL
 #' These methods are straight-forward implementations of the corresponding
 #' generic functions.
 #'
+#' @section Time zones:
+#' MySQL and MariaDB support named time zones,
+#' they must be installed on the server.
+#' See <https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html>
+#' for more details.
+#' Without installation, time zone support is restricted to UTC offset,
+#' which cannot take into account DST offsets.
+#'
 #' @param drv an object of class [MariaDBDriver-class] or
 #'   [MariaDBConnection-class].
 #' @param username,password Username and password. If username omitted,
@@ -45,6 +53,13 @@ NULL
 #'   the default corresponds to UTC.
 #'   Set this argument if your server or database is configured with a different
 #'   time zone than UTC.
+#'   Set to `NULL` to automatically determine the server time zone.
+#' @param timezone_out The time zone returned to R.
+#'   The default is to use the value of the `timezone` argument,
+#'   `"+00:00"` is converted to `"UTC"`
+#'   If you want to display datetime values in the local timezone,
+#'   set to [Sys.timezone()] or `""`.
+#'   This setting does not change the time values returned, only their display.
 #' @references
 #' Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/
 #' @export
@@ -77,7 +92,7 @@ setMethod("dbConnect", "MariaDBDriver",
     groups = "rs-dbi", default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
     ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...,
     bigint = c("integer64", "integer", "numeric", "character"),
-    timeout = 10, timezone = "+00:00") {
+    timeout = 10, timezone = "+00:00", timezone_out = NULL) {
 
     bigint <- match.arg(bigint)
 
@@ -105,13 +120,55 @@ setMethod("dbConnect", "MariaDBDriver",
 
     on.exit(dbDisconnect(conn))
 
-    dbExecute(conn, paste0("SET time_zone = ", dbQuoteString(conn, timezone)))
+    if (!is.null(timezone)) {
+      # Side effect: check if time zone valid
+      dbExecute(conn, paste0("SET time_zone = ", dbQuoteString(conn, timezone)))
+    } else {
+      timezone <- dbGetQuery(conn, "SELECT @@SESSION.time_zone")[[1]]
+    }
+
+    # Check if this is a valid time zone in R:
+    timezone <- check_tz(timezone)
+
+    if (is.null(timezone_out)) {
+      timezone_out <- timezone
+    } else {
+      timezone_out <- check_tz(timezone_out)
+    }
+
+    conn@timezone <- timezone
+    conn@timezone_out <- timezone_out
+
     dbExecute(conn, "SET autocommit = 0")
     on.exit(NULL)
 
     conn
   }
 )
+
+check_tz <- function(timezone) {
+  arg_name <- deparse(substitute(timezone))
+
+  if (timezone == "+00:00") {
+    timezone <- "UTC"
+  }
+
+  tryCatch(
+    lubridate::force_tz(as.POSIXct("2021-03-01 10:40"), timezone),
+    error = function(e) {
+      warning(
+        "Invalid time zone '", timezone, "', ",
+        "falling back to local time.\n",
+        "Set the `", arg_name, "` argument to a valid time zone.\n",
+        conditionMessage(e),
+        call. = FALSE
+      )
+      timezone <- ""
+    }
+  )
+
+  timezone
+}
 
 #' @export
 #' @import methods DBI

@@ -1,11 +1,11 @@
-sql_data <- function(value, row.names = FALSE, warn = FALSE) {
+sql_data <- function(value, conn, row.names = FALSE, warn = FALSE) {
   row.names <- compatRowNames(row.names)
   value <- sqlRownamesToColumn(value, row.names)
 
   value <- factor_to_string(value, warn = warn)
   value <- string_to_utf8(value)
   value <- difftime_to_hms(value)
-  value <- posixlt_to_posixct(value)
+  value <- posixlt_to_posixct(value, conn@timezone)
   value <- numeric_to_finite(value)
   value <- date_to_double(value)
   value
@@ -42,9 +42,19 @@ difftime_to_hms <- function(value) {
   value
 }
 
-posixlt_to_posixct <- function(value) {
-  is_posixlt <- vlapply(value, inherits, "POSIXlt")
-  value[is_posixlt] <- lapply(value[is_posixlt], as.POSIXct)
+posixlt_to_posixct <- function(value, timezone) {
+  is_posixlt <- vlapply(value, inherits, "POSIXt")
+  value[is_posixlt] <- lapply(value[is_posixlt], function(x) {
+    x <- as.POSIXct(x)
+
+    # The database expects times as local time
+    if (timezone != "UTC") {
+      x <- lubridate::with_tz(x, timezone)
+      x <- lubridate::force_tz(x, "UTC")
+    }
+
+    x
+  })
   value
 }
 
