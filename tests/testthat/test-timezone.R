@@ -7,7 +7,7 @@ test_that("timestamp without time zone is returned correctly for TZ set (#190)",
 
   db <- mariadb_default(timezone = NULL)
   res <- dbGetQuery(db, query)
-  expect_equal(res[[1]], as.POSIXct("2018-01-01 12:30:00", tzone = res[[2]]))
+  expect_equal(res[[1]], as.POSIXct("2018-01-01 12:30:00", tz = res[[2]]))
   dbDisconnect(db)
 
   db <- mariadb_default(timezone = "UTC")
