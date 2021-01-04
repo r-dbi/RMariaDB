@@ -1,3 +1,9 @@
+# RMariaDB 1.0.11.9002 (2021-01-04)
+
+- Timestamp roundtrip no longer fails on Windows i386 (#117).
+- `BIT(1)` columns are returned as `logical` (#84).
+
+
 # RMariaDB 1.0.11.9001 (2020-12-22)
 
 - `dbQuoteLiteral()` now correctly quotes difftime values (#188).
