@@ -41,6 +41,7 @@ Imports:
     bit64,
     DBI (>= 1.1.0),
     hms (>= 0.5.0),
+    lubridate,
     methods,
     Rcpp (>= 0.12.4)
 Suggests: 
