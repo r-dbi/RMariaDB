@@ -48,7 +48,8 @@ Suggests:
     covr,
     DBItest (>= 1.7.0),
     rprojroot,
-    testthat
+    testthat,
+    withr
 LinkingTo: 
     BH,
     plogr,
