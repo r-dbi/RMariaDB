@@ -131,10 +131,11 @@ jobs:
         with:
           mariadb-version: 10.5
 
+      # Use hard-coded time zone info so that it also works on Windows
       - name: Create database, set it to UTF-8, add time zone info
         run: |
           mysql -e "CREATE DATABASE IF NOT EXISTS test; ALTER DATABASE test CHARACTER SET 'utf8'; FLUSH PRIVILEGES;"
-          mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -D mysql
+          mysql -D mysql < tools/tz.sql
           mysql -e "SET GLOBAL time_zone = 'Europe/Zurich';"
       # End custom: after install
 
