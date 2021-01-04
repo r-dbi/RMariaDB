@@ -137,6 +137,7 @@ jobs:
           mysql -e "CREATE DATABASE IF NOT EXISTS test; ALTER DATABASE test CHARACTER SET 'utf8'; FLUSH PRIVILEGES;"
           mysql -D mysql < tools/tz.sql
           mysql -e "SET GLOBAL time_zone = 'Europe/Zurich';"
+        shell: bash
       # End custom: after install
 
       - name: Check
