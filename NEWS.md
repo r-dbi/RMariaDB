@@ -1,3 +1,11 @@
+# RMariaDB 1.1.0 (2021-01-05)
+
+- `dbConnect()` now supports `timezone_out` argument. Explicitly setting `timezone` to `NULL` tries to detect the database time zone (#116).
+- Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (#116).
+- Timestamp roundtrip no longer fails on Windows i386 (#117).
+- `BIT(1)` columns are returned as `logical` (#84).
+
+
 # RMariaDB 1.0.11.9001 (2020-12-22)
 
 - `dbQuoteLiteral()` now correctly quotes difftime values (#188).
