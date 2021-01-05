@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.0.11.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.0.12.9000</span>
       </span>
     </div>
 
@@ -108,6 +108,32 @@
       <small>Source: <a href='https://github.com/r-dbi/RMariaDB/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="rmariadb-10129000-2021-01-05" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.12.9000">
+<a href="#rmariadb-10129000-2021-01-05" class="anchor"></a>RMariaDB 1.0.12.9000 (2021-01-05)<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect()</a></code> now supports <code>timezone_out</code> argument. Explicitly setting <code>timezone</code> to <code>NULL</code> tries to detect the database time zone (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
+<li>Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
+<li>Timestamp roundtrip no longer fails on Windows i386 (<a href='https://github.com/r-dbi/RMariaDB/issues/117'>#117</a>).</li>
+<li>
+<code>BIT(1)</code> columns are returned as <code>logical</code> (<a href='https://github.com/r-dbi/RMariaDB/issues/84'>#84</a>).</li>
+</ul>
+</div>
+    <div id="rmariadb-1012-2021-01-05" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.12">
+<a href="#rmariadb-1012-2021-01-05" class="anchor"></a>RMariaDB 1.0.12 (2021-01-05)<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect()</a></code> now supports <code>timezone_out</code> argument. Explicitly setting <code>timezone</code> to <code>NULL</code> tries to detect the database time zone (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
+<li>Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
+<li>Timestamp roundtrip no longer fails on Windows i386 (<a href='https://github.com/r-dbi/RMariaDB/issues/117'>#117</a>).</li>
+<li>
+<code>BIT(1)</code> columns are returned as <code>logical</code> (<a href='https://github.com/r-dbi/RMariaDB/issues/84'>#84</a>).</li>
+</ul>
+</div>
     <div id="rmariadb-10119001-2020-12-22" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.11.9001">
 <a href="#rmariadb-10119001-2020-12-22" class="anchor"></a>RMariaDB 1.0.11.9001 (2020-12-22)<small> Unreleased </small>
