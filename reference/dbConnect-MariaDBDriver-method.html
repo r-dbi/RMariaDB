@@ -73,7 +73,7 @@ generic functions." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -136,7 +136,8 @@ generic functions.</p>
   <span class='va'>...</span>,
   bigint <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"integer64"</span>, <span class='st'>"integer"</span>, <span class='st'>"numeric"</span>, <span class='st'>"character"</span><span class='op'>)</span>,
   timeout <span class='op'>=</span> <span class='fl'>10</span>,
-  timezone <span class='op'>=</span> <span class='st'>"+00:00"</span>
+  timezone <span class='op'>=</span> <span class='st'>"+00:00"</span>,
+  timezone_out <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span>
 
 <span class='fu'>MariaDB</span><span class='op'>(</span><span class='op'>)</span></pre>
@@ -235,10 +236,30 @@ for no timeout.</p></td>
       <td><p>(optional) time zone for the connection,
 the default corresponds to UTC.
 Set this argument if your server or database is configured with a different
-time zone than UTC.</p></td>
+time zone than UTC.
+Set to <code>NULL</code> to automatically determine the server time zone.</p></td>
+    </tr>
+    <tr>
+      <th>timezone_out</th>
+      <td><p>The time zone returned to R.
+The default is to use the value of the <code>timezone</code> argument,
+<code>"+00:00"</code> is converted to <code>"UTC"</code>
+If you want to display datetime values in the local timezone,
+set to <code><a href='https://rdrr.io/r/base/timezones.html'>Sys.timezone()</a></code> or <code>""</code>.
+This setting does not change the time values returned, only their display.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="time-zones"><a class="anchor" href="#time-zones"></a>Time zones</h2>
+
+    
+
+<p>MySQL and MariaDB support named time zones,
+they must be installed on the server.
+See <a href='https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html'>https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html</a>
+for more details.
+Without installation, time zone support is restricted to UTC offset,
+which cannot take into account DST offsets.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/</p>

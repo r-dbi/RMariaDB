@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -108,9 +108,41 @@
       <small>Source: <a href='https://github.com/r-dbi/RMariaDB/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="rmariadb-110-2021-01-05" class="section level1">
+<h1 class="page-header" data-toc-text="1.1.0">
+<a href="#rmariadb-110-2021-01-05" class="anchor"></a>RMariaDB 1.1.0 (2021-01-05)<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect()</a></code> now supports <code>timezone_out</code> argument. Explicitly setting <code>timezone</code> to <code>NULL</code> tries to detect the database time zone (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
+<li>Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
+<li>Timestamp roundtrip no longer fails on Windows i386 (<a href='https://github.com/r-dbi/RMariaDB/issues/117'>#117</a>).</li>
+<li>
+<code>BIT(1)</code> columns are returned as <code>logical</code> (<a href='https://github.com/r-dbi/RMariaDB/issues/84'>#84</a>).</li>
+</ul>
+</div>
+    <div id="rmariadb-10119001-2020-12-22" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.11.9001">
+<a href="#rmariadb-10119001-2020-12-22" class="anchor"></a>RMariaDB 1.0.11.9001 (2020-12-22)<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code><a href="https://dbi.r-dbi.org/reference/dbQuoteLiteral.html">dbQuoteLiteral()</a></code> now correctly quotes difftime values (<a href='https://github.com/r-dbi/RMariaDB/issues/188'>#188</a>).</li>
+<li>
+<code><a href="https://dbi.r-dbi.org/reference/dbBind.html">dbBind()</a></code> also works for <code>"Date"</code> values that are stored as integers (<a href='https://github.com/r-dbi/RMariaDB/issues/187'>#187</a>).</li>
+</ul>
+</div>
+    <div id="rmariadb-10119000-2020-12-16" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.11.9000">
+<a href="#rmariadb-10119000-2020-12-16" class="anchor"></a>RMariaDB 1.0.11.9000 (2020-12-16)<small> Unreleased </small>
+</h1>
+<ul>
+<li>Internal changes only.</li>
+</ul>
+</div>
     <div id="rmariadb-1011-2020-12-16" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.11">
-<a href="#rmariadb-1011-2020-12-16" class="anchor"></a>RMariaDB 1.0.11 (2020-12-16)<small> Unreleased </small>
+<a href="#rmariadb-1011-2020-12-16" class="anchor"></a>RMariaDB 1.0.11 (2020-12-16)<small> 2020-12-16 </small>
 </h1>
 <div id="features" class="section level2">
 <h2 class="hasAnchor">
