@@ -125,41 +125,36 @@
 <h1 class="page-header" data-toc-text="1.1.0">
 <a href="#rmariadb-110-2021-01-05" class="anchor"></a>RMariaDB 1.1.0 (2021-01-05)<small> Unreleased </small>
 </h1>
+<div id="features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#features" class="anchor"></a>Features</h2>
 <ul>
 <li>
 <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect()</a></code> now supports <code>timezone_out</code> argument. Explicitly setting <code>timezone</code> to <code>NULL</code> tries to detect the database time zone (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
-<li>Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
-<li>Timestamp roundtrip no longer fails on Windows i386 (<a href='https://github.com/r-dbi/RMariaDB/issues/117'>#117</a>).</li>
 <li>
 <code>BIT(1)</code> columns are returned as <code>logical</code> (<a href='https://github.com/r-dbi/RMariaDB/issues/84'>#84</a>).</li>
-</ul>
-</div>
-    <div id="rmariadb-10119001-2020-12-22" class="section level1">
-<h1 class="page-header" data-toc-text="1.0.11.9001">
-<a href="#rmariadb-10119001-2020-12-22" class="anchor"></a>RMariaDB 1.0.11.9001 (2020-12-22)<small> Unreleased </small>
-</h1>
-<ul>
 <li>
 <code><a href="https://dbi.r-dbi.org/reference/dbQuoteLiteral.html">dbQuoteLiteral()</a></code> now correctly quotes difftime values (<a href='https://github.com/r-dbi/RMariaDB/issues/188'>#188</a>).</li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
+<li>Timestamp roundtrip no longer fails on Windows i386 (<a href='https://github.com/r-dbi/RMariaDB/issues/117'>#117</a>).</li>
 <li>
 <code><a href="https://dbi.r-dbi.org/reference/dbBind.html">dbBind()</a></code> also works for <code>"Date"</code> values that are stored as integers (<a href='https://github.com/r-dbi/RMariaDB/issues/187'>#187</a>).</li>
 </ul>
 </div>
-    <div id="rmariadb-10119000-2020-12-16" class="section level1">
-<h1 class="page-header" data-toc-text="1.0.11.9000">
-<a href="#rmariadb-10119000-2020-12-16" class="anchor"></a>RMariaDB 1.0.11.9000 (2020-12-16)<small> Unreleased </small>
-</h1>
-<ul>
-<li>Internal changes only.</li>
-</ul>
 </div>
     <div id="rmariadb-1011-2020-12-16" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.11">
 <a href="#rmariadb-1011-2020-12-16" class="anchor"></a>RMariaDB 1.0.11 (2020-12-16)<small> 2020-12-16 </small>
 </h1>
-<div id="features" class="section level2">
+<div id="features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features" class="anchor"></a>Features</h2>
+<a href="#features-1" class="anchor"></a>Features</h2>
 <ul>
 <li>Windows: update to libmariadbclient 3.1.11</li>
 <li>Add <code>timezone</code> argument to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect()</a></code> (<a href='https://github.com/r-dbi/RMariaDB/issues/184'>#184</a>, <a href='https://github.com/ycphs'>@ycphs</a>).</li>
@@ -181,18 +176,18 @@
 <h1 class="page-header" data-toc-text="1.0.10">
 <a href="#rmariadb-1010-2020-08-26" class="anchor"></a>RMariaDB 1.0.10 (2020-08-26)<small> 2020-08-27 </small>
 </h1>
-<div id="features-1" class="section level2">
+<div id="features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features-1" class="anchor"></a>Features</h2>
+<a href="#features-2" class="anchor"></a>Features</h2>
 <ul>
 <li>
 <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect()</a></code> gains a <code>timeout</code> argument, defaults to 10. Use <code>Inf</code> or a negative value for no timeout (<a href='https://github.com/r-dbi/RMariaDB/issues/169'>#169</a>).</li>
 <li>Support fractional seconds in datetime values for reading and writing (<a href='https://github.com/r-dbi/RMariaDB/issues/157'>#157</a>).</li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>
 <code><a href="https://dbi.r-dbi.org/reference/dbDataType.html">dbDataType()</a></code> returns <code>VARCHAR(1)</code> for length-0 character vectors.</li>
