@@ -102,6 +102,11 @@ setMethod("dbConnect", "MariaDBDriver",
       timeout <- as.integer(timeout)
     }
 
+    # Make sure that `~` is resolved correctly:
+    if (!is.null(default.file)) {
+      default.file <- normalizePath(default.file)
+    }
+
     ptr <- connection_create(
       host, username, password, dbname, as.integer(port), unix.socket,
       as.integer(client.flag), groups, default.file,
