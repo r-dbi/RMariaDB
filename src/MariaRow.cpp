@@ -214,7 +214,7 @@ void MariaRow::set_list_value(SEXP x, int i, int j) {
     SET_VECTOR_ELT(x, i, value_raw(j));
     break;
   case MY_LGL:
-    LOGICAL(x)[i] = value_int(j) ? 1 : 0;
+    LOGICAL(x)[i] = value_int(j);
     break;
   }
 }
