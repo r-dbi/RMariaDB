@@ -51,7 +51,6 @@ Suggests:
     testthat,
     withr
 LinkingTo: 
-    BH,
     plogr,
     Rcpp
 Encoding: UTF-8

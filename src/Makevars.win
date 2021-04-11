@@ -2,7 +2,7 @@ VERSION = 3.1.11
 RWINLIB = ../windows/libmariadbclient-$(VERSION)
 
 CXX_STD=CXX11
-PKG_CPPFLAGS = -I$(RWINLIB)/include/mariadb -DRCPP_DEFAULT_INCLUDE_CALL=false -DRCPP_USING_UTF8_ERROR_STRING -DBOOST_NO_AUTO_PTR
+PKG_CPPFLAGS = -I$(RWINLIB)/include/mariadb -Ivendor -DRCPP_DEFAULT_INCLUDE_CALL=false -DRCPP_USING_UTF8_ERROR_STRING -DBOOST_NO_AUTO_PTR
 PKG_LIBS= -L$(RWINLIB)/lib${R_ARCH} \
 	-lmariadbclient -lssl -lcrypto -lz -lsecur32 -lshlwapi -lcrypt32 -lgdi32 -lws2_32 -pthread
 
