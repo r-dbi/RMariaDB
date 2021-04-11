@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "workarounds/XPtr.h"
 #include "RMariaDB_types.h"
 #include "MariaResult.h"
 
