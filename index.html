@@ -21,6 +21,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -33,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">RMariaDB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -49,7 +51,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/r-dbi/RMariaDB/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -70,78 +72,78 @@
 <a href="#rmariadb" class="anchor"></a>RMariaDB</h1></div>
 <!-- badges: start -->
 
-<p>RMariaDB is a database interface and MariaDB driver for R. This version is aimed at full compliance with the <a href="https://cran.r-project.org/package=DBI/vignettes/spec.html">DBI specification</a>, as a replacement for the old <a href="https://cran.r-project.org/package=RMySQL">RMySQL</a> package.</p>
+<p>RMariaDB is a database interface and MariaDB driver for R. This version is aimed at full compliance with the <a href="https://cran.r-project.org/package=DBI/vignettes/spec.html" class="external-link">DBI specification</a>, as a replacement for the old <a href="https://cran.r-project.org/package=RMySQL" class="external-link">RMySQL</a> package.</p>
 <div id="hello-world" class="section level2">
 <h2 class="hasAnchor">
 <a href="#hello-world" class="anchor"></a>Hello World</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://r-dbi.github.io/DBI">DBI</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org" class="external-link">DBI</a></span><span class="op">)</span>
 <span class="co"># Connect to my-db as defined in ~/.my.cnf</span>
-<span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu">RMariaDB</span><span class="fu">::</span><span class="fu"><a href="reference/dbConnect,MariaDBDriver-method.html">MariaDB</a></span><span class="op">(</span><span class="op">)</span>, group <span class="op">=</span> <span class="st">"my-db"</span><span class="op">)</span>
+<span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">RMariaDB</span><span class="fu">::</span><span class="fu"><a href="reference/dbConnect-MariaDBDriver-method.html">MariaDB</a></span><span class="op">(</span><span class="op">)</span>, group <span class="op">=</span> <span class="st">"my-db"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListTables.html">dbListTables</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html">dbWriteTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"mtcars"</span>, <span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListTables.html">dbListTables</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListTables.html" class="external-link">dbListTables</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"mtcars"</span>, <span class="va">mtcars</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListTables.html" class="external-link">dbListTables</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span>
 
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListFields.html">dbListFields</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"mtcars"</span><span class="op">)</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbReadTable.html">dbReadTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"mtcars"</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListFields.html" class="external-link">dbListFields</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"mtcars"</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"mtcars"</span><span class="op">)</span>
 
 <span class="co"># You can fetch all results:</span>
-<span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html">dbSendQuery</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * FROM mtcars WHERE cyl = 4"</span><span class="op">)</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html">dbFetch</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html">dbClearResult</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
+<span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * FROM mtcars WHERE cyl = 4"</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetch</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html" class="external-link">dbClearResult</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
 
 <span class="co"># Or a chunk at a time</span>
-<span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html">dbSendQuery</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * FROM mtcars WHERE cyl = 4"</span><span class="op">)</span>
-<span class="kw">while</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbHasCompleted.html">dbHasCompleted</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
-  <span class="va">chunk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html">dbFetch</a></span><span class="op">(</span><span class="va">res</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">chunk</span><span class="op">)</span><span class="op">)</span>
+<span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * FROM mtcars WHERE cyl = 4"</span><span class="op">)</span>
+<span class="kw">while</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbHasCompleted.html" class="external-link">dbHasCompleted</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+  <span class="va">chunk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetch</a></span><span class="op">(</span><span class="va">res</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">chunk</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="co"># Clear the result</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html">dbClearResult</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html" class="external-link">dbClearResult</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span>
 
 <span class="co"># Disconnect from the database</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html" class="external-link">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Binary packages for <strong>OS X</strong> or <strong>Windows</strong> can be installed directly from CRAN:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"RMariaDB"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"RMariaDB"</span><span class="op">)</span></code></pre></div>
 <p>The development version from github:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-dbi/DBI"</span><span class="op">)</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-dbi/RMariaDB"</span><span class="op">)</span></code></pre></div>
-<p>Discussions associated with DBI and related database packages take place on <a href="https://stat.ethz.ch/mailman/listinfo/r-sig-db">R-SIG-DB</a>. The website <a href="https://db.rstudio.com/">Databases using R</a> describes the tools and best practices in this ecosystem.</p>
-<p>Installation from source on Linux or OS X currently requires Oracle’s <a href="https://packages.debian.org/buster/default-libmysqlclient-dev">libmysqlclient</a> or the more modern <a href="https://downloads.mariadb.org/connector-c/"><code>MariaDB Connector/C</code></a>. The latter works best in version 2.3.4/3.0.3 or later, with older versions character and blob columns do not work reliably.</p>
+<p>Discussions associated with DBI and related database packages take place on <a href="https://stat.ethz.ch/mailman/listinfo/r-sig-db" class="external-link">R-SIG-DB</a>. The website <a href="https://db.rstudio.com/" class="external-link">Databases using R</a> describes the tools and best practices in this ecosystem.</p>
+<p>Installation from source on Linux or OS X currently requires Oracle’s <a href="https://packages.debian.org/buster/default-libmysqlclient-dev" class="external-link">libmysqlclient</a> or the more modern <a href="https://downloads.mariadb.org/connector-c/" class="external-link"><code>MariaDB Connector/C</code></a>. The latter works best in version 2.3.4/3.0.3 or later, with older versions character and blob columns do not work reliably.</p>
 <div id="mysql-client-library" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mysql-client-library" class="anchor"></a>MySQL client library</h3>
-<p>On recent <strong>Debian</strong> or <strong>Ubuntu</strong> install <a href="https://packages.debian.org/buster/default-libmysqlclient-dev">libmysqlclient-dev</a>.</p>
+<p>On recent <strong>Debian</strong> or <strong>Ubuntu</strong> install <a href="https://packages.debian.org/buster/default-libmysqlclient-dev" class="external-link">libmysqlclient-dev</a>.</p>
 <pre><code>sudo apt-get install -y libmysqlclient-dev</code></pre>
-<p>On <strong>Fedora</strong>, <strong>CentOS</strong> or <strong>RHEL</strong> we need mysql-devel, see <a href="https://apps.fedoraproject.org/packages/mysql-devel" class="uri">https://apps.fedoraproject.org/packages/mysql-devel</a>:</p>
+<p>On <strong>Fedora</strong>, <strong>CentOS</strong> or <strong>RHEL</strong> we need mysql-devel, see https://apps.fedoraproject.org/packages/mysql-devel:</p>
 <pre><code>sudo yum install mysql-devel</code></pre>
-<p>Follow <a href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/">instructions</a> to enable the MySQL yum repository if the above command attempts to install MariaDB files.</p>
-<p>On <strong>OS X</strong> use <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/mysql-connector-c++.rb">mysql-connector-c</a> from Homebrew:</p>
+<p>Follow <a href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/" class="external-link">instructions</a> to enable the MySQL yum repository if the above command attempts to install MariaDB files.</p>
+<p>On <strong>OS X</strong> use <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/mysql-connector-c++.rb" class="external-link">mysql-connector-c</a> from Homebrew:</p>
 <pre><code>brew install mysql-connector-c++</code></pre>
 </div>
 <div id="connectorc" class="section level3">
 <h3 class="hasAnchor">
 <a href="#connectorc" class="anchor"></a>Connector/C</h3>
-<p>On recent <strong>Debian</strong> or <strong>Ubuntu</strong> install <a href="https://packages.debian.org/testing/libmariadbclient-dev">libmariadbclient-dev</a>.</p>
+<p>On recent <strong>Debian</strong> or <strong>Ubuntu</strong> install <a href="https://packages.debian.org/testing/libmariadbclient-dev" class="external-link">libmariadbclient-dev</a>.</p>
 <pre><code>sudo apt-get install -y libmariadbclient-dev</code></pre>
-<p>On <strong>Fedora</strong>, <strong>CentOS</strong> or <strong>RHEL</strong> we need <a href="https://src.fedoraproject.org/rpms/mariadb">mariadb-devel</a>:</p>
+<p>On <strong>Fedora</strong>, <strong>CentOS</strong> or <strong>RHEL</strong> we need <a href="https://src.fedoraproject.org/rpms/mariadb" class="external-link">mariadb-devel</a>:</p>
 <pre><code>sudo yum install mariadb-devel</code></pre>
-<p>On <strong>OS X</strong> use <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/mariadb-connector-c.rb">mariadb-connector-c</a> from Homebrew:</p>
+<p>On <strong>OS X</strong> use <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/mariadb-connector-c.rb" class="external-link">mariadb-connector-c</a> from Homebrew:</p>
 <pre><code>brew install mariadb-connector-c</code></pre>
 </div>
 </div>
 <div id="mariadb-configuration-file" class="section level2">
 <h2 class="hasAnchor">
 <a href="#mariadb-configuration-file" class="anchor"></a>MariaDB configuration file</h2>
-<p>Instead of specifying a username and password in calls to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect()</a></code>, it’s better to set up a MariaDB configuration file that names the databases that you connect to most commonly. This file should live in <code>~/.my.cnf</code> and look like:</p>
+<p>Instead of specifying a username and password in calls to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code>, it’s better to set up a MariaDB configuration file that names the databases that you connect to most commonly. This file should live in <code>~/.my.cnf</code> and look like:</p>
 <pre><code>[database_name]
 option1=value1
 option2=value2</code></pre>
@@ -154,7 +156,7 @@ password=</code></pre>
 <div id="acknowledgements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
-<p>Many thanks to Christoph M. Friedrich, John Heuer, Kurt Hornik, Torsten Hothorn, Saikat Debroy, Matthew Kelly, Brian D. Ripley, Mikhail Kondrin, Jake Luciani, Jens Nieschulze, Deepayan Sarkar, Louis Springer, Duncan Temple Lang, Luis Torgo, Arend P. van der Veen, Felix Weninger, J. T. Lindgren, Crespin Miller, and Michal Okonlewski, Seth Falcon and Paul Gilbert for comments, suggestions, bug reports, and patches to the original <a href="https://cran.r-project.org/package=RMySQL">RMySQL</a> package, and to all contributors (of <a href="https://github.com/r-dbi/RMariaDB/graphs/contributors">code</a> and discussions) to this package.</p>
+<p>Many thanks to Christoph M. Friedrich, John Heuer, Kurt Hornik, Torsten Hothorn, Saikat Debroy, Matthew Kelly, Brian D. Ripley, Mikhail Kondrin, Jake Luciani, Jens Nieschulze, Deepayan Sarkar, Louis Springer, Duncan Temple Lang, Luis Torgo, Arend P. van der Veen, Felix Weninger, J. T. Lindgren, Crespin Miller, and Michal Okonlewski, Seth Falcon and Paul Gilbert for comments, suggestions, bug reports, and patches to the original <a href="https://cran.r-project.org/package=RMySQL" class="external-link">RMySQL</a> package, and to all contributors (of <a href="https://github.com/r-dbi/RMariaDB/graphs/contributors" class="external-link">code</a> and discussions) to this package.</p>
 <hr>
 <p>Please note that the ‘RMariaDB’ project is released with a <a href="https://rmariadb.r-dbi.org/code_of_conduct">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
@@ -163,7 +165,7 @@ password=</code></pre>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=RMariaDB">https://​cloud.r-project.org/​package=RMariaDB</a>
 </li>
@@ -177,25 +179,28 @@ password=</code></pre>
 </li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="http://krlmlr.info">Kirill Müller</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1416-3412" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="https://krlmlr.info">Kirill Müller</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1416-3412" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Jeroen Ooms <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4035-0289" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>David James <br><small class="roles"> Author </small>  </li>
 <li>Saikat DebRoy <br><small class="roles"> Author </small>  </li>
@@ -204,29 +209,32 @@ password=</code></pre>
 <li>Jeffrey Horner <br><small class="roles"> Author </small>  </li>
 <li>
 <a href="https://www.r-consortium.org">R Consortium</a> <br><small class="roles"> Funder </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html">More on authors...</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/r-dbi/RMariaDB/actions"><img src="https://github.com/r-dbi/RMariaDB/workflows/rcc/badge.svg" alt="rcc"></a></li>
-<li><a href="https://codecov.io/gh/r-dbi/RMariaDB?branch=master"><img src="https://codecov.io/gh/r-dbi/RMariaDB/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://cran.r-project.org/package=RMariaDB"><img src="https://www.r-pkg.org/badges/version/RMariaDB" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://cran.r-project.org/package=RMariaDB"><img src="https://cranlogs.r-pkg.org/badges/RMariaDB" alt="CRAN RStudio mirror downloads"></a></li>
+<li><a href="https://github.com/r-dbi/RMariaDB/actions" class="external-link"><img src="https://github.com/r-dbi/RMariaDB/workflows/rcc/badge.svg" alt="rcc"></a></li>
+<li><a href="https://codecov.io/gh/r-dbi/RMariaDB?branch=master" class="external-link"><img src="https://codecov.io/gh/r-dbi/RMariaDB/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://cran.r-project.org/package=RMariaDB" class="external-link"><img src="https://www.r-pkg.org/badges/version/RMariaDB" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://cran.r-project.org/package=RMariaDB" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/RMariaDB" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="http://krlmlr.info">Kirill Müller</a>, Jeroen Ooms, David James, Saikat DebRoy, <a href="http://hadley.nz">Hadley Wickham</a>, Jeffrey Horner, <a href="https://www.r-consortium.org">R Consortium</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, Jeroen Ooms, David James, Saikat DebRoy, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>, Jeffrey Horner, <a href="https://www.r-consortium.org" class="external-link">R Consortium</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -234,6 +242,8 @@ password=</code></pre>
 
   
 
+
+  
 
   </body>
 </html>
