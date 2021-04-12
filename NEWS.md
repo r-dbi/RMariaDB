@@ -2,16 +2,19 @@
 
 # RMariaDB 1.1.1 (2021-04-12)
 
-- Remove BH dependency by inlining the header files (#208).
-- Map `NULL` to `NA` for `bit(1)` columns (#201, @dirkschumacher).
+## Features
 
-
-# RMariaDB 1.1.0.9000 (2021-01-05)
-
+- `BIT(1)` columns are returned as `logical` (#84). `NULL` is mapped to `NA` for `bit(1)` columns (#201, @dirkschumacher).
 - `dbConnect()` now supports `timezone_out` argument. Explicitly setting `timezone` to `NULL` tries to detect the database time zone (#116).
+
+## Bug fixes
+
 - Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (#116).
 - Timestamp roundtrip no longer fails on Windows i386 (#117).
-- `BIT(1)` columns are returned as `logical` (#84).
+
+## Internal
+
+- Remove BH dependency by inlining the header files (#208).
 
 
 # RMariaDB 1.1.0 (2021-01-05)
@@ -135,27 +138,27 @@ Initial release, compliant to the DBI specification.
  *  RMariaDB has been rewritten (essentially from scratch) in C++ with
     Rcpp. This has considerably reduced the amount of code, and allow us to
     take advantage of the more sophisticated memory management tools available in
-    Rcpp. This rewrite should yield some minor performance improvements, but 
+    Rcpp. This rewrite should yield some minor performance improvements, but
     most importantly protect against memory leaks and crashes. It also provides
     a better base for future development.
 
- *  Support for prepared queries: create prepared query with `dbSendQuery()` 
-    and bind values with `dbBind()`. `dbSendQuery()` and `dbGetQuery()` also 
-    support inline parameterised queries, like 
-    `dbGetQuery(mariadbDefault(), "SELECT * FROM mtcars WHERE cyl = :cyl", 
-    params = list(cyl = 4))`. This has no performance benefits but protects you 
+ *  Support for prepared queries: create prepared query with `dbSendQuery()`
+    and bind values with `dbBind()`. `dbSendQuery()` and `dbGetQuery()` also
+    support inline parameterised queries, like
+    `dbGetQuery(mariadbDefault(), "SELECT * FROM mtcars WHERE cyl = :cyl",
+    params = list(cyl = 4))`. This has no performance benefits but protects you
     from SQL injection attacks.
 
  * `dbListFields()` has been removed. Please use `dbColumnInfo()` instead.
 
- * `dbGetInfo()` has been removed. Please use the individual metadata 
+ * `dbGetInfo()` has been removed. Please use the individual metadata
     functions.
 
  *  Information formerly contain in `summary()` methods has now been integrated
     into `show()` methods.
 
  *  `make.db.names()` has been deprecated. Use `dbQuoteIdentifier()` instead.
- 
+
  *  `isIdCurrent()` has been deprecated. Use `dbIsValid()` instead.
 
  *  `dbApply()`, `dbMoreResults()` and `dbNextResults()` have been removed.
