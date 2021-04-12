@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RMariaDB 1.1.1.9000 (2021-04-12)
+
+- Remove BH dependency by inlining the header files (#208).
+- Map `NULL` to `NA` for `bit(1)` columns (#201, @dirkschumacher).
+
+
 # RMariaDB 1.1.1 (2021-04-12)
 
 - Remove BH dependency by inlining the header files (#208).
