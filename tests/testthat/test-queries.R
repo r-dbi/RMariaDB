@@ -56,8 +56,9 @@ test_that("timezone argument (#184)", {
 })
 
 test_that("bit(1) fields support NA values (#201)", {
-  con <- mariadb_default()
+  con <- mariadbDefault()
   on.exit(dbDisconnect(con))
+
   dbWriteTable(con, "testbit1",
     data.frame(a = c(NA_integer_, 0:1), b = c(1, 2, 3)),
     field.types = c(a = "BIT(1)"), overwrite = TRUE
