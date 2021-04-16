@@ -122,9 +122,9 @@ If you want to run the examples, you'll need to set the proper options in the `[
 
 ```
 [rs-dbi]
-database=test
-user=root
-password=
+database="test"
+user="root"
+password=""
 ```
 
 ## Acknowledgements
