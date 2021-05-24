@@ -119,197 +119,152 @@
 
     <div id="rmariadb-1119000-2021-04-12" class="section level1">
 <h1 class="page-header" data-toc-text="1.1.1.9000">
-<a href="#rmariadb-1119000-2021-04-12" class="anchor"></a>RMariaDB 1.1.1.9000 (2021-04-12)<small> Unreleased </small>
-</h1>
-<ul>
-<li>Remove BH dependency by inlining the header files (<a href='https://github.com/r-dbi/RMariaDB/issues/208'>#208</a>).</li>
+<a href="#rmariadb-1119000-2021-04-12" class="anchor" aria-hidden="true"></a>RMariaDB 1.1.1.9000 (2021-04-12)<small> Unreleased </small></h1>
+<ul><li>Remove BH dependency by inlining the header files (<a href='https://github.com/r-dbi/RMariaDB/issues/208'>#208</a>).</li>
 <li>Map <code>NULL</code> to <code>NA</code> for <code>bit(1)</code> columns (<a href='https://github.com/r-dbi/RMariaDB/issues/201'>#201</a>, <a href='https://github.com/dirkschumacher'>@dirkschumacher</a>).</li>
-</ul>
-</div>
+</ul></div>
     <div id="rmariadb-111-2021-04-12" class="section level1">
 <h1 class="page-header" data-toc-text="1.1.1">
-<a href="#rmariadb-111-2021-04-12" class="anchor"></a>RMariaDB 1.1.1 (2021-04-12)<small> 2021-04-13 </small>
-</h1>
+<a href="#rmariadb-111-2021-04-12" class="anchor" aria-hidden="true"></a>RMariaDB 1.1.1 (2021-04-12)<small> 2021-04-13 </small></h1>
 <div id="features" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features" class="anchor"></a>Features</h2>
-<ul>
-<li>
+<a href="#features" class="anchor" aria-hidden="true"></a>Features</h2>
+<ul><li>
 <code>BIT(1)</code> columns are returned as <code>logical</code> (<a href='https://github.com/r-dbi/RMariaDB/issues/84'>#84</a>). <code>NULL</code> is mapped to <code>NA</code> for <code>bit(1)</code> columns (<a href='https://github.com/r-dbi/RMariaDB/issues/201'>#201</a>, <a href='https://github.com/dirkschumacher'>@dirkschumacher</a>).</li>
 <li>
 <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> now supports <code>timezone_out</code> argument. Explicitly setting <code>timezone</code> to <code>NULL</code> tries to detect the database time zone (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
-</ul>
-</div>
+</ul></div>
 <div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
-<ul>
-<li>Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
+<a href="#bug-fixes" class="anchor" aria-hidden="true"></a>Bug fixes</h2>
+<ul><li>Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
 <li>Timestamp roundtrip no longer fails on Windows i386 (<a href='https://github.com/r-dbi/RMariaDB/issues/117'>#117</a>).</li>
-</ul>
-</div>
+</ul></div>
 <div id="internal" class="section level2">
 <h2 class="hasAnchor">
-<a href="#internal" class="anchor"></a>Internal</h2>
-<ul>
-<li>Remove BH dependency by inlining the header files (<a href='https://github.com/r-dbi/RMariaDB/issues/208'>#208</a>).</li>
-</ul>
-</div>
+<a href="#internal" class="anchor" aria-hidden="true"></a>Internal</h2>
+<ul><li>Remove BH dependency by inlining the header files (<a href='https://github.com/r-dbi/RMariaDB/issues/208'>#208</a>).</li>
+</ul></div>
 </div>
     <div id="rmariadb-110-2021-01-05" class="section level1">
 <h1 class="page-header" data-toc-text="1.1.0">
-<a href="#rmariadb-110-2021-01-05" class="anchor"></a>RMariaDB 1.1.0 (2021-01-05)<small> 2021-01-07 </small>
-</h1>
+<a href="#rmariadb-110-2021-01-05" class="anchor" aria-hidden="true"></a>RMariaDB 1.1.0 (2021-01-05)<small> 2021-01-07 </small></h1>
 <div id="features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features-1" class="anchor"></a>Features</h2>
-<ul>
-<li>
+<a href="#features-1" class="anchor" aria-hidden="true"></a>Features</h2>
+<ul><li>
 <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> now supports <code>timezone_out</code> argument. Explicitly setting <code>timezone</code> to <code>NULL</code> tries to detect the database time zone (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
 <li>
 <code>BIT(1)</code> columns are returned as <code>logical</code> (<a href='https://github.com/r-dbi/RMariaDB/issues/84'>#84</a>).</li>
 <li>
 <code><a href="https://dbi.r-dbi.org/reference/dbQuoteLiteral.html" class="external-link">dbQuoteLiteral()</a></code> now correctly quotes difftime values (<a href='https://github.com/r-dbi/RMariaDB/issues/188'>#188</a>).</li>
-</ul>
-</div>
+</ul></div>
 <div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
-<ul>
-<li>Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
+<a href="#bug-fixes-1" class="anchor" aria-hidden="true"></a>Bug fixes</h2>
+<ul><li>Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
 <li>Timestamp roundtrip no longer fails on Windows i386 (<a href='https://github.com/r-dbi/RMariaDB/issues/117'>#117</a>).</li>
 <li>
 <code><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind()</a></code> also works for <code>"Date"</code> values that are stored as integers (<a href='https://github.com/r-dbi/RMariaDB/issues/187'>#187</a>).</li>
-</ul>
-</div>
+</ul></div>
 </div>
     <div id="rmariadb-1011-2020-12-16" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.11">
-<a href="#rmariadb-1011-2020-12-16" class="anchor"></a>RMariaDB 1.0.11 (2020-12-16)<small> 2020-12-16 </small>
-</h1>
+<a href="#rmariadb-1011-2020-12-16" class="anchor" aria-hidden="true"></a>RMariaDB 1.0.11 (2020-12-16)<small> 2020-12-16 </small></h1>
 <div id="features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features-2" class="anchor"></a>Features</h2>
-<ul>
-<li>Windows: update to libmariadbclient 3.1.11</li>
+<a href="#features-2" class="anchor" aria-hidden="true"></a>Features</h2>
+<ul><li>Windows: update to libmariadbclient 3.1.11</li>
 <li>Add <code>timezone</code> argument to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> (<a href='https://github.com/r-dbi/RMariaDB/issues/184'>#184</a>, <a href='https://github.com/ycphs'>@ycphs</a>).</li>
 <li>
 <code><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind()</a></code> correctly interpret difftime values with units other than <code>"secs"</code>.</li>
-</ul>
-</div>
+</ul></div>
 <div id="internal-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#internal-1" class="anchor"></a>Internal</h2>
-<ul>
-<li>
+<a href="#internal-1" class="anchor" aria-hidden="true"></a>Internal</h2>
+<ul><li>
 <code>./configure</code> no longer requires <code>bash</code> (<a href='https://github.com/jeroen'>@jeroen</a>).</li>
 <li>Switch to GitHub Actions (<a href='https://github.com/r-dbi/RMariaDB/issues/185'>#185</a>, thanks <a href='https://github.com/ankane'>@ankane</a>).</li>
-</ul>
-</div>
+</ul></div>
 </div>
     <div id="rmariadb-1010-2020-08-26" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.10">
-<a href="#rmariadb-1010-2020-08-26" class="anchor"></a>RMariaDB 1.0.10 (2020-08-26)<small> 2020-08-27 </small>
-</h1>
+<a href="#rmariadb-1010-2020-08-26" class="anchor" aria-hidden="true"></a>RMariaDB 1.0.10 (2020-08-26)<small> 2020-08-27 </small></h1>
 <div id="features-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features-3" class="anchor"></a>Features</h2>
-<ul>
-<li>
+<a href="#features-3" class="anchor" aria-hidden="true"></a>Features</h2>
+<ul><li>
 <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> gains a <code>timeout</code> argument, defaults to 10. Use <code>Inf</code> or a negative value for no timeout (<a href='https://github.com/r-dbi/RMariaDB/issues/169'>#169</a>).</li>
 <li>Support fractional seconds in datetime values for reading and writing (<a href='https://github.com/r-dbi/RMariaDB/issues/157'>#157</a>).</li>
-</ul>
-</div>
+</ul></div>
 <div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
-<ul>
-<li>
+<a href="#bug-fixes-2" class="anchor" aria-hidden="true"></a>Bug fixes</h2>
+<ul><li>
 <code><a href="https://dbi.r-dbi.org/reference/dbDataType.html" class="external-link">dbDataType()</a></code> returns <code>VARCHAR(1)</code> for length-0 character vectors.</li>
 <li>
 <code><a href="https://dbi.r-dbi.org/reference/dbDataType.html" class="external-link">dbDataType()</a></code> returns <code>VARCHAR()</code> for factors.</li>
 <li>
 <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbSendStatement.html" class="external-link">dbSendStatement()</a></code> clear the result set if <code><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind()</a></code> throws an error.</li>
 <li>Check that input to <code><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable()</a></code> is a data frame (<a href='https://github.com/r-dbi/RMariaDB/issues/160'>#160</a>, <a href='https://github.com/rossholmberg'>@rossholmberg</a>).</li>
-</ul>
-</div>
+</ul></div>
 </div>
     <div id="rmariadb-109" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.9">
-<a href="#rmariadb-109" class="anchor"></a>RMariaDB 1.0.9<small> 2020-07-03 </small>
-</h1>
-<ul>
-<li>Use <code>VARCHAR</code> as data type for string columns (<a href='https://github.com/r-dbi/RMariaDB/issues/159'>#159</a>).</li>
+<a href="#rmariadb-109" class="anchor" aria-hidden="true"></a>RMariaDB 1.0.9<small> 2020-07-03 </small></h1>
+<ul><li>Use <code>VARCHAR</code> as data type for string columns (<a href='https://github.com/r-dbi/RMariaDB/issues/159'>#159</a>).</li>
 <li>Encode column names as UTF-8 (<a href='https://github.com/r-dbi/RMariaDB/issues/109'>#109</a>).</li>
-</ul>
-</div>
+</ul></div>
     <div id="rmariadb-108" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.8">
-<a href="#rmariadb-108" class="anchor"></a>RMariaDB 1.0.8<small> 2019-12-17 </small>
-</h1>
-<ul>
-<li>Implement <code><a href="https://dbi.r-dbi.org/reference/dbGetInfo.html" class="external-link">dbGetInfo()</a></code> according to the specification.</li>
+<a href="#rmariadb-108" class="anchor" aria-hidden="true"></a>RMariaDB 1.0.8<small> 2019-12-17 </small></h1>
+<ul><li>Implement <code><a href="https://dbi.r-dbi.org/reference/dbGetInfo.html" class="external-link">dbGetInfo()</a></code> according to the specification.</li>
 <li>Include information about <code>libssl-dev</code> in <code>configure</code> and <code>DESCRIPTION</code> (<a href='https://github.com/r-dbi/RMariaDB/issues/101'>#101</a>).</li>
-</ul>
-</div>
+</ul></div>
     <div id="rmariadb-107" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.7">
-<a href="#rmariadb-107" class="anchor"></a>RMariaDB 1.0.7<small> 2019-12-02 </small>
-</h1>
-<ul>
-<li>Get rid of <code>auto_ptr</code>, which causes <code>R CMD check</code> warnings on R-devel.</li>
-</ul>
-</div>
+<a href="#rmariadb-107" class="anchor" aria-hidden="true"></a>RMariaDB 1.0.7<small> 2019-12-02 </small></h1>
+<ul><li>Get rid of <code>auto_ptr</code>, which causes <code>R CMD check</code> warnings on R-devel.</li>
+</ul></div>
     <div id="rmariadb-106-2018-05-05" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.6">
-<a href="#rmariadb-106-2018-05-05" class="anchor"></a>RMariaDB 1.0.6 (2018-05-05)<small> 2018-05-06 </small>
-</h1>
-<ul>
-<li>Add support for <code>bigint</code> argument to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code>, supported values are <code>"integer64"</code>, <code>"integer"</code>, <code>"numeric"</code> and <code>"character"</code>. Large integers are returned as values of that type (r-dbi/DBItest<a href='https://github.com/r-dbi/RMariaDB/issues/133'>#133</a>).</li>
-<li>Data frames resulting from a query always have unique non-empty column names (r-dbi/DBItest<a href='https://github.com/r-dbi/RMariaDB/issues/137'>#137</a>).</li>
-<li>New arguments <code>temporary</code> and <code>fail_if_missing</code> (default: <code>TRUE</code>) to <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code> (r-dbi/DBI<a href='https://github.com/r-dbi/RMariaDB/issues/141'>#141</a>, r-dbi/DBI<a href='https://github.com/r-dbi/RMariaDB/issues/197'>#197</a>).</li>
-<li>Using <code><a href="https://dbi.r-dbi.org/reference/dbCreateTable.html" class="external-link">dbCreateTable()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbAppendTable.html" class="external-link">dbAppendTable()</a></code> internally (r-dbi/DBI<a href='https://github.com/r-dbi/RMariaDB/issues/74'>#74</a>).</li>
-<li>Implement <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> method for <code>MariaDBConnection</code> (r-dbi/DBI<a href='https://github.com/r-dbi/RMariaDB/issues/163'>#163</a>).</li>
+<a href="#rmariadb-106-2018-05-05" class="anchor" aria-hidden="true"></a>RMariaDB 1.0.6 (2018-05-05)<small> 2018-05-06 </small></h1>
+<ul><li>Add support for <code>bigint</code> argument to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code>, supported values are <code>"integer64"</code>, <code>"integer"</code>, <code>"numeric"</code> and <code>"character"</code>. Large integers are returned as values of that type (r-dbi/DBItest#133).</li>
+<li>Data frames resulting from a query always have unique non-empty column names (r-dbi/DBItest#137).</li>
+<li>New arguments <code>temporary</code> and <code>fail_if_missing</code> (default: <code>TRUE</code>) to <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code> (r-dbi/DBI#141, r-dbi/DBI#197).</li>
+<li>Using <code><a href="https://dbi.r-dbi.org/reference/dbCreateTable.html" class="external-link">dbCreateTable()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbAppendTable.html" class="external-link">dbAppendTable()</a></code> internally (r-dbi/DBI#74).</li>
+<li>Implement <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> method for <code>MariaDBConnection</code> (r-dbi/DBI#163).</li>
 <li>Reexporting <code><a href="https://dbi.r-dbi.org/reference/Id.html" class="external-link">Id()</a></code>, <code><a href="https://dbi.r-dbi.org/reference/dbIsReadOnly.html" class="external-link">DBI::dbIsReadOnly()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbCanConnect.html" class="external-link">DBI::dbCanConnect()</a></code>.</li>
 <li>Now imports DBI 1.0.0.</li>
-</ul>
-</div>
+</ul></div>
     <div id="rmariadb-105-2018-04-02" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.5">
-<a href="#rmariadb-105-2018-04-02" class="anchor"></a>RMariaDB 1.0.5 (2018-04-02)<small> 2018-04-03 </small>
-</h1>
-<ul>
-<li>
+<a href="#rmariadb-105-2018-04-02" class="anchor" aria-hidden="true"></a>RMariaDB 1.0.5 (2018-04-02)<small> 2018-04-03 </small></h1>
+<ul><li>
 <code><a href="https://dbi.r-dbi.org/reference/dbGetException.html" class="external-link">dbGetException()</a></code> is no longer reexported from DBI.</li>
 <li>
 <code>NaN</code> and <code>Inf</code> are converted to <code>NULL</code> when writing to the database (<a href='https://github.com/r-dbi/RMariaDB/issues/77'>#77</a>).</li>
 <li>Values of class <code>"integer64"</code> are now supported for <code><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind()</a></code> (<a href='https://github.com/r-dbi/RMariaDB/issues/87'>#87</a>).</li>
 <li>Schema support, as specified by DBI: <code><a href="https://dbi.r-dbi.org/reference/dbListObjects.html" class="external-link">dbListObjects()</a></code>, <code><a href="https://dbi.r-dbi.org/reference/dbUnquoteIdentifier.html" class="external-link">dbUnquoteIdentifier()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/Id.html" class="external-link">Id()</a></code>.</li>
-<li>Names in the <code>x</code> argument to <code><a href="https://dbi.r-dbi.org/reference/dbQuoteIdentifier.html" class="external-link">dbQuoteIdentifier()</a></code> are preserved in the output (r-lib/DBI<a href='https://github.com/r-dbi/RMariaDB/issues/173'>#173</a>).</li>
+<li>Names in the <code>x</code> argument to <code><a href="https://dbi.r-dbi.org/reference/dbQuoteIdentifier.html" class="external-link">dbQuoteIdentifier()</a></code> are preserved in the output (r-lib/DBI#173).</li>
 <li>Replace non-portable <code>timegm()</code> with private implementation (<a href='https://github.com/r-dbi/RMariaDB/issues/78'>#78</a>).</li>
 <li>Update libmariadbclient to version 2.3.5 on Windows (<a href='https://github.com/r-dbi/RMariaDB/issues/92'>#92</a>, <a href='https://github.com/jeroen'>@jeroen</a>).</li>
-</ul>
-</div>
+</ul></div>
     <div id="rmariadb-10-4-2017-12-11" class="section level1">
 <h1 class="page-header" data-toc-text="1.0-4">
-<a href="#rmariadb-10-4-2017-12-11" class="anchor"></a>RMariaDB 1.0-4 (2017-12-11)<small> 2017-12-11 </small>
-</h1>
-<ul>
-<li>Attempt to fix Solaris builds by redefining <code>timegm</code> symbol if the macro <code>sun</code> is defined.</li>
+<a href="#rmariadb-10-4-2017-12-11" class="anchor" aria-hidden="true"></a>RMariaDB 1.0-4 (2017-12-11)<small> 2017-12-11 </small></h1>
+<ul><li>Attempt to fix Solaris builds by redefining <code>timegm</code> symbol if the macro <code>sun</code> is defined.</li>
 <li>Fix examples running on CRAN by using only temporary tables and <code>overwrite = TRUE</code>.</li>
 <li>Refactor connection and result handling to be more similar to other backends.</li>
 <li>Add support for R 3.1, but DBI &gt;= 0.5 is required (<a href='https://github.com/r-dbi/RMariaDB/issues/68'>#68</a>).</li>
 <li>Queries that bypass the prepared statement framework (like <code>SHOW PLUGINS</code>) return data (<a href='https://github.com/r-dbi/RMariaDB/issues/70'>#70</a>, <a href='https://github.com/nbenn'>@nbenn</a>).</li>
 <li>A temporary table can be created via <code><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable()</a></code> if a table by the same name exists. If a temporary table of the same name exists, the error will be raised by the database itself, because this condition cannot be checked beforehand.</li>
-</ul>
-</div>
+</ul></div>
     <div id="rmariadb-10-2-2017-10-01" class="section level1">
 <h1 class="page-header" data-toc-text="1.0-2">
-<a href="#rmariadb-10-2-2017-10-01" class="anchor"></a>RMariaDB 1.0-2 (2017-10-01)<small> 2017-10-04 </small>
-</h1>
+<a href="#rmariadb-10-2-2017-10-01" class="anchor" aria-hidden="true"></a>RMariaDB 1.0-2 (2017-10-01)<small> 2017-10-04 </small></h1>
 <p>Initial release, compliant to the DBI specification.</p>
-<ul>
-<li>Test almost all test cases of the DBI specification.</li>
+<ul><li>Test almost all test cases of the DBI specification.</li>
 <li>Fully support parametrized queries (<a href='https://github.com/r-dbi/RMariaDB/issues/22'>#22</a>, <a href='https://github.com/r-dbi/RMariaDB/issues/27'>#27</a>, <a href='https://github.com/r-dbi/RMariaDB/issues/39'>#39</a>).</li>
 <li>Queries not supported by the prepared statement protocol still can be run via <code><a href="https://dbi.r-dbi.org/reference/dbExecute.html" class="external-link">dbExecute()</a></code> or <code><a href="https://dbi.r-dbi.org/reference/dbSendStatement.html" class="external-link">dbSendStatement()</a></code>, the function <code>mariadbExecQuery()</code> has been removed (<a href='https://github.com/r-dbi/RMariaDB/issues/28'>#28</a>).</li>
 <li>Spec-compliant transactions (<a href='https://github.com/r-dbi/RMariaDB/issues/38'>#38</a>, <a href='https://github.com/r-dbi/RMariaDB/issues/49'>#49</a>).</li>
@@ -320,19 +275,16 @@
 <li>New SSL-related arguments to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code>: <code>ssl.key</code>, <code>ssl.cert</code>, <code>ssl.ca</code>, <code>ssl.capath</code>, <code>ssl.cipher</code> (<a href='https://github.com/r-dbi/RMariaDB/issues/131'>#131</a>, <a href='https://github.com/r-dbi/RMariaDB/issues/148'>#148</a>, <a href='https://github.com/adamchainz'>@adamchainz</a>).</li>
 <li>CI for Linux, Windows, and OS X (<a href='https://github.com/r-dbi/RMariaDB/issues/25'>#25</a>).</li>
 <li>Support for Connector/C from both MariaDB and MySQL.</li>
-</ul>
-</div>
+</ul></div>
     <div id="rmariadb-011-1-2016-03-24" class="section level1">
 <h1 class="page-header" data-toc-text="0.11-1">
-<a href="#rmariadb-011-1-2016-03-24" class="anchor"></a>RMariaDB 0.11-1 (2016-03-24)<small> Unreleased </small>
-</h1>
-<ul>
-<li><p>RMariaDB fully supports DATE and DATETIME columns. On output, DATE columns will be converted to vectors of <code>Date</code>s and DATETIME will be converted to <code>POSIXct</code>. To faciliate correct computation of time zone, RMariaDB always sets the session timezone to UTC.</p></li>
+<a href="#rmariadb-011-1-2016-03-24" class="anchor" aria-hidden="true"></a>RMariaDB 0.11-1 (2016-03-24)<small> Unreleased </small></h1>
+<ul><li><p>RMariaDB fully supports DATE and DATETIME columns. On output, DATE columns will be converted to vectors of <code>Date</code>s and DATETIME will be converted to <code>POSIXct</code>. To faciliate correct computation of time zone, RMariaDB always sets the session timezone to UTC.</p></li>
 <li><p>RMariaDB has been rewritten (essentially from scratch) in C++ with Rcpp. This has considerably reduced the amount of code, and allow us to take advantage of the more sophisticated memory management tools available in Rcpp. This rewrite should yield some minor performance improvements, but most importantly protect against memory leaks and crashes. It also provides a better base for future development.</p></li>
-<li><p>Support for prepared queries: create prepared query with <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery()</a></code> and bind values with <code><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind()</a></code>. <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQuery()</a></code> also support inline parameterised queries, like <code><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQuery(mariadbDefault(), "SELECT * FROM mtcars WHERE cyl = :cyl", params = list(cyl = 4))</a></code>. This has no performance benefits but protects you from SQL injection attacks.</p></li>
+<li><p>Support for prepared queries: create prepared query with <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery()</a></code> and bind values with <code><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind()</a></code>. <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQuery()</a></code> also support inline parameterised queries, like <code>dbGetQuery(mariadbDefault(), "SELECT * FROM mtcars WHERE cyl = :cyl", params = list(cyl = 4))</code>. This has no performance benefits but protects you from SQL injection attacks.</p></li>
 <li><p><code><a href="https://dbi.r-dbi.org/reference/dbListFields.html" class="external-link">dbListFields()</a></code> has been removed. Please use <code><a href="https://dbi.r-dbi.org/reference/dbColumnInfo.html" class="external-link">dbColumnInfo()</a></code> instead.</p></li>
 <li><p><code><a href="https://dbi.r-dbi.org/reference/dbGetInfo.html" class="external-link">dbGetInfo()</a></code> has been removed. Please use the individual metadata functions.</p></li>
-<li><p>Information formerly contain in <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> methods has now been integrated into <code>show()</code> methods.</p></li>
+<li><p>Information formerly contain in <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> methods has now been integrated into <code><a href="https://rdrr.io/r/methods/show.html" class="external-link">show()</a></code> methods.</p></li>
 <li><p><code><a href="https://dbi.r-dbi.org/reference/make.db.names.html" class="external-link">make.db.names()</a></code> has been deprecated. Use <code><a href="https://dbi.r-dbi.org/reference/dbQuoteIdentifier.html" class="external-link">dbQuoteIdentifier()</a></code> instead.</p></li>
 <li><p><code>isIdCurrent()</code> has been deprecated. Use <code><a href="https://dbi.r-dbi.org/reference/dbIsValid.html" class="external-link">dbIsValid()</a></code> instead.</p></li>
 <li><p><code>dbApply()</code>, <code>dbMoreResults()</code> and <code>dbNextResults()</code> have been removed. These were always flagged as experimental, and now the experiment is over.</p></li>
@@ -343,8 +295,7 @@
 <li><p>Always set connection character set to utf-8</p></li>
 <li><p>Backport build system improvements from stable branch</p></li>
 <li><p>Reenable Travis-CI, switch to R Travis, collect coverage</p></li>
-</ul>
-</div>
+</ul></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
