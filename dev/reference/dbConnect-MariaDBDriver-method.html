@@ -198,26 +198,28 @@ for setting authentication parameters (see <code>MariaDB()</code>).</p></td>
       <td><p>string of the filename with MariaDB client options,
 only relevant if <code>groups</code> is given. The default value depends on the
 operating system (see references), on Linux and OS X the files
-<code>~/.my.cnf</code> and <code>~/.mylogin.cnf</code> are used.</p></td>
+<code>~/.my.cnf</code> and <code>~/.mylogin.cnf</code> are used. Expanded with <code><a href='https://rdrr.io/r/base/normalizePath.html'>normalizePath()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ssl.key</th>
-      <td><p>(optional) string of the filename of the SSL key file to use.</p></td>
+      <td><p>(optional) string of the filename of the SSL key file to use.
+Expanded with <code><a href='https://rdrr.io/r/base/normalizePath.html'>normalizePath()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ssl.cert</th>
       <td><p>(optional) string of the filename of the SSL certificate to
-use.</p></td>
+use. Expanded with <code><a href='https://rdrr.io/r/base/normalizePath.html'>normalizePath()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ssl.ca</th>
       <td><p>(optional) string of the filename of an SSL certificate
-authority file to use.</p></td>
+authority file to use. Expanded with <code><a href='https://rdrr.io/r/base/normalizePath.html'>normalizePath()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ssl.capath</th>
       <td><p>(optional) string of the path to a directory containing
-the trusted SSL CA certificates in PEM format.</p></td>
+the trusted SSL CA certificates in PEM format. Expanded with
+<code><a href='https://rdrr.io/r/base/normalizePath.html'>normalizePath()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ssl.cipher</th>
