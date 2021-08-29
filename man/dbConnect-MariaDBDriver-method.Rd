@@ -58,20 +58,20 @@ for setting authentication parameters (see \code{\link[=MariaDB]{MariaDB()}}).}
 \item{default.file}{string of the filename with MariaDB client options,
 only relevant if \code{groups} is given. The default value depends on the
 operating system (see references), on Linux and OS X the files
-\verb{~/.my.cnf} and \verb{~/.mylogin.cnf} are used. Expanded with \link{normalizePath}.}
+\verb{~/.my.cnf} and \verb{~/.mylogin.cnf} are used. Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.key}{(optional) string of the filename of the SSL key file to use.
-Expanded with \link{normalizePath}.}
+Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.cert}{(optional) string of the filename of the SSL certificate to
-use. Expanded with \link{normalizePath}.}
+use. Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.ca}{(optional) string of the filename of an SSL certificate
-authority file to use. Expanded with \link{normalizePath}.}
+authority file to use. Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.capath}{(optional) string of the path to a directory containing
 the trusted SSL CA certificates in PEM format. Expanded with
-\link{normalizePath}.}
+\code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.cipher}{(optional) string list of permitted ciphers to use for SSL
 encryption.}

@@ -33,16 +33,16 @@ NULL
 #' @param default.file string of the filename with MariaDB client options,
 #'   only relevant if `groups` is given. The default value depends on the
 #'   operating system (see references), on Linux and OS X the files
-#'   `~/.my.cnf` and `~/.mylogin.cnf` are used. Expanded with [normalizePath].
+#'   `~/.my.cnf` and `~/.mylogin.cnf` are used. Expanded with [normalizePath()].
 #' @param ssl.key (optional) string of the filename of the SSL key file to use.
-#'   Expanded with [normalizePath].
+#'   Expanded with [normalizePath()].
 #' @param ssl.cert (optional) string of the filename of the SSL certificate to
-#'   use. Expanded with [normalizePath].
+#'   use. Expanded with [normalizePath()].
 #' @param ssl.ca (optional) string of the filename of an SSL certificate
-#'   authority file to use. Expanded with [normalizePath].
+#'   authority file to use. Expanded with [normalizePath()].
 #' @param ssl.capath (optional) string of the path to a directory containing
 #'   the trusted SSL CA certificates in PEM format. Expanded with
-#'   [normalizePath].
+#'   [normalizePath()].
 #' @param ssl.cipher (optional) string list of permitted ciphers to use for SSL
 #'   encryption.
 #' @param ... Unused, needed for compatibility with generic.
