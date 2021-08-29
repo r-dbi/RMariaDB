@@ -54,3 +54,15 @@ test_that("timezone argument (#184)", {
   expect_equal(tz[[1]], "+02:00")
   dbDisconnect(conn)
 })
+
+test_that("bit(1) fields support NA values (#201)", {
+  con <- mariadbDefault()
+  on.exit(dbDisconnect(con))
+
+  dbWriteTable(con, "testbit1",
+    data.frame(a = c(NA_integer_, 0:1), b = c(1, 2, 3)),
+    field.types = c(a = "BIT(1)"), overwrite = TRUE
+  )
+  result <- dbGetQuery(con, "SELECT a FROM testbit1 ORDER BY b")$a
+  expect_equal(result, c(NA, FALSE, TRUE))
+})
