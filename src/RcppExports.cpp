@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // connection_create
 XPtr<DbConnectionPtr> connection_create(const Nullable<std::string>& host, const Nullable<std::string>& user, const Nullable<std::string>& password, const Nullable<std::string>& db, unsigned int port, const Nullable<std::string>& unix_socket, unsigned long client_flag, const Nullable<std::string>& groups, const Nullable<std::string>& default_file, const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert, const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath, const Nullable<std::string>& ssl_cipher, int timeout);
 RcppExport SEXP _RMariaDB_connection_create(SEXP hostSEXP, SEXP userSEXP, SEXP passwordSEXP, SEXP dbSEXP, SEXP portSEXP, SEXP unix_socketSEXP, SEXP client_flagSEXP, SEXP groupsSEXP, SEXP default_fileSEXP, SEXP ssl_keySEXP, SEXP ssl_certSEXP, SEXP ssl_caSEXP, SEXP ssl_capathSEXP, SEXP ssl_cipherSEXP, SEXP timeoutSEXP) {
