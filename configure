@@ -13,8 +13,20 @@ PKG_TEST_HEADER="<mysql.h>"
 PKG_LIBS="-lmysqlclient"
 
 # Use mysql_config (on Solaris /opt/csw/bin must be in PATH)
-if [ `command -v mysql_config` ]; then
+if [ -n "$RMARIADB_FORCE_MARIADBCONFIG" ]; then
+  echo "Using mariadb_config (forced)"
+  PKGCONFIG_CFLAGS=`mariadb_config --cflags`
+  PKGCONFIG_LIBS=`mariadb_config --libs`
+elif [ -n "$RMARIADB_FORCE_MYSQLCONFIG" ]; then
+  echo "Using mysql_config (forced)"
+  PKGCONFIG_CFLAGS=`mysql_config --cflags`
+  PKGCONFIG_LIBS=`mysql_config --libs`
+elif [ `command -v mysql_config` ]; then
   echo "Using mysql_config"
+  if [ `command -v mariadb_config` ]; then
+    echo "Warning: RMariaDB 1.2.0 will default to use mariadb_config."
+    echo "Set the RMARIADB_FORCE_MYSQLCONFIG environment variable to a nonempty value to force mysql_config."
+  fi
   PKGCONFIG_CFLAGS=`mysql_config --cflags`
   PKGCONFIG_LIBS=`mysql_config --libs`
 elif [ `command -v mariadb_config` ]; then
