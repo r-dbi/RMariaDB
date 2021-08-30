@@ -365,9 +365,9 @@ setMethod("dbDataType", "MariaDBConnection", function(dbObj, obj, ...) {
 #' @rdname dbDataType
 setMethod("dbDataType", "MariaDBDriver", function(dbObj, obj, ...) {
   if (is.factor(obj)) return(get_char_type(levels(obj)))
-  if (inherits(obj, "POSIXct")) return("DATETIME")
+  if (inherits(obj, "POSIXct")) return("DATETIME(6)")
   if (inherits(obj, "Date")) return("DATE")
-  if (inherits(obj, "difftime")) return("TIME")
+  if (inherits(obj, "difftime")) return("TIME(6)")
   if (inherits(obj, "integer64")) return("BIGINT")
   if (is.data.frame(obj)) return(callNextMethod(dbObj, obj))
 
