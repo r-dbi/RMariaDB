@@ -10,20 +10,32 @@ context("dbWriteTable")
 # })
 
 # Not generic enough for DBItest
-test_that("throws error if constraint violated", {
+test_that("dbWriteTable() throws error if constraint violated", {
   con <- mariadbDefault()
   on.exit(dbDisconnect(con))
 
   x <- data.frame(col1 = 1:10, col2 = letters[1:10])
 
-  dbWriteTable(con, "t1", x, overwrite = TRUE)
+  dbWriteTable(con, "t1", x[1:3, ], overwrite = TRUE)
   dbExecute(con, "CREATE UNIQUE INDEX t1_c1_c2_idx ON t1(col1, col2(1))")
-  expect_error(dbWriteTable(con, "t1", x, append = TRUE), "added 0 rows")
-  expect_error(dbAppendTable(con, "t1", x), "added 0 rows")
+  expect_error(dbWriteTable(con, "t1", x, append = TRUE), "added 7 rows")
   dbWithTransaction(
     con,
-    expect_warning(dbWriteTable(con, "t1", x, append = TRUE), "added 0 rows")
+    expect_warning(dbWriteTable(con, "t1", x, append = TRUE), "added 7 rows")
   )
+  expect_equal(dbReadTable(con, "t1"), x)
+})
+
+test_that("dbAppendTable() throws error if constraint violated", {
+  con <- mariadbDefault()
+  on.exit(dbDisconnect(con))
+
+  x <- data.frame(col1 = 1:10, col2 = letters[1:10])
+
+  dbWriteTable(con, "t1", x[1:3, ], overwrite = TRUE)
+  dbExecute(con, "CREATE UNIQUE INDEX t1_c1_c2_idx ON t1(col1, col2(1))")
+  expect_error(dbAppendTable(con, "t1", x), "added 7 rows")
+  expect_equal(dbAppendTable(con, "t1", x, safe = FALSE), 7)
 })
 
 # Available only in MariaDB
