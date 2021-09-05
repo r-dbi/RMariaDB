@@ -244,6 +244,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
 )
 #' @export
 #' @rdname mariadb-tables
+#' @importFrom utils write.table
 setMethod("dbAppendTable", "MariaDBConnection",
   function(conn, name, value, ..., row.names = NULL) {
     if (!is.null(row.names)) {
@@ -252,10 +253,55 @@ setMethod("dbAppendTable", "MariaDBConnection",
     stopifnot(is.character(name), length(name) == 1)
     stopifnot(is.data.frame(value))
 
-    stop("NYI", call. = FALSE)
+    path <- tempfile("RMariaDB", fileext = ".tsv")
+    sql <- paste0(
+      "LOAD DATA LOCAL INFILE ", dbQuoteString(conn, path), "\n",
+      "INTO TABLE ", dbQuoteIdentifier(conn, name), "\n"
+    )
+
+    file <- file(path, "wb")
+
+    write.table(
+      csv_quote(value), file, quote = FALSE, sep = "\t", na = "\\N",
+      row.names = FALSE, col.names = FALSE
+    )
+
+    close(file)
+
+    dbExecute(conn, sql)
   }
 )
 
+csv_quote <- function(x) {
+  x[] <- lapply(x, csv_quote_one)
+  x
+}
+
+csv_quote_one <- function(x) {
+  if (is.character(x)) {
+    x <- enc2utf8(x)
+    x <- gsub("\\", "\\\\", x, fixed = TRUE)
+    x <- gsub("\r", "\\r", x, fixed = TRUE)
+    x <- gsub("\n", "\\n", x, fixed = TRUE)
+    x[is.na(x)] <- "\\N"
+  } else if (is.integer(x)) {
+    x <- as.character(x)
+    x[is.na(x)] <- "\\N"
+  } else if (is.numeric(x)) {
+    x_orig <- x
+    if (all(x >= -2147483647) && all(x <= 2147483647) && identical(as.numeric(as.integer(x)), x)) {
+      x <- formatC(x, format = "d")
+    } else {
+      # https://dev.mysql.com/doc/refman/5.7/en/number-literals.html
+      formatC(x, digits = 17, format = "E")
+    }
+    x[is.na(x_orig)] <- "\\N"
+  } else {
+    stop("NYI: ", paste(class(x), collapse = "/"), call. = FALSE)
+  }
+
+  x
+}
 
 #' @export
 #' @rdname mariadb-tables
