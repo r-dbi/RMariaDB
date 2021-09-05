@@ -299,6 +299,9 @@ csv_quote_one <- function(x) {
       formatC(x, digits = 17, format = "E")
     }
     x[is.na(x_orig)] <- "\\N"
+  } else if (is.logical(x)) {
+    x <- as.character(as.integer(x))
+    x[is.na(x)] <- "\\N"
   } else {
     stop("NYI: ", paste(class(x), collapse = "/"), call. = FALSE)
   }
