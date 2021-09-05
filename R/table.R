@@ -165,8 +165,13 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
         transact = FALSE
       )
 
-      if (out < nrow(value) && !need_transaction) {
-        warningc("Error writing table: sent ", nrow(value), " rows, added ", out, " rows.")
+      if (out < nrow(value)) {
+        msg <- paste0("Error writing table: sent ", nrow(value), " rows, added ", out, " rows.")
+        if (need_transaction) {
+          stopc(msg)
+        } else {
+          warningc(msg)
+        }
       }
     }
 
