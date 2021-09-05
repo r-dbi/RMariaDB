@@ -24,7 +24,7 @@ elif [ -n "$RMARIADB_FORCE_MYSQLCONFIG" ]; then
 elif [ `command -v mysql_config` ]; then
   echo "Using mysql_config"
   if [ `command -v mariadb_config` ]; then
-    echo "Warning: RMariaDB 1.2.0 will default to use mariadb_config."
+    echo "RMariaDB 1.2.0 will default to use mariadb_config."
     echo "Set the RMARIADB_FORCE_MYSQLCONFIG environment variable to a nonempty value to force mysql_config."
   fi
   PKGCONFIG_CFLAGS=`mysql_config --cflags`
