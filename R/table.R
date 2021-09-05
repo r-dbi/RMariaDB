@@ -365,9 +365,9 @@ csv_quote_one <- function(x, conn) {
       x <- formatC(x, format = "d")
     } else {
       # https://dev.mysql.com/doc/refman/5.7/en/number-literals.html
-      formatC(x, digits = 17, format = "E")
+      x <- formatC(x, digits = 17, format = "E")
     }
-    x[is.nan(x_orig) | is.infinite(x_orig)] <- NA_character_
+    x[is.na(x_orig) | is.infinite(x_orig)] <- NA_character_
   } else if (is.logical(x)) {
     x <- as.character(as.integer(x))
   } else if (inherits(x, "Date")) {
