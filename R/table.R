@@ -254,9 +254,11 @@ setMethod("dbAppendTable", "MariaDBConnection",
     stopifnot(is.data.frame(value))
 
     path <- tempfile("RMariaDB", fileext = ".tsv")
+    colnames <- dbQuoteIdentifier(conn, names(value))
     sql <- paste0(
       "LOAD DATA LOCAL INFILE ", dbQuoteString(conn, path), "\n",
-      "INTO TABLE ", dbQuoteIdentifier(conn, name), "\n"
+      "INTO TABLE ", dbQuoteIdentifier(conn, name), "\n",
+      "(", paste0(colnames, collapse = ", "), ")"
     )
 
     file <- file(path, "wb")
