@@ -57,10 +57,10 @@ void MariaBinding::init_binding(const List& params_) {
       binding_update(j, MYSQL_TYPE_TINY, 1);
       break;
     case MY_INT32:
-      binding_update(j, MYSQL_TYPE_LONG, 4);
+      binding_update(j, MYSQL_TYPE_LONG, 4 * n_rows);
       break;
     case MY_DBL:
-      binding_update(j, MYSQL_TYPE_DOUBLE, 8);
+      binding_update(j, MYSQL_TYPE_DOUBLE, 8 * n_rows);
       break;
     case MY_DATE:
       binding_update(j, MYSQL_TYPE_DATE, sizeof(MYSQL_TIME));
@@ -88,6 +88,8 @@ bool MariaBinding::bind_next_row() {
   LOG_VERBOSE;
 
   if (i >= n_rows) return false;
+
+  R_xlen_t delta = n_rows - i;
 
   for (int j = 0; j < p; ++j) {
     LOG_VERBOSE << j << " -> " << type_name(types[j]);
@@ -180,8 +182,10 @@ bool MariaBinding::bind_next_row() {
   LOG_DEBUG << "Binding";
   mysql_stmt_bind_param(statement, &bindings[0]);
 
-  LOG_DEBUG << "Done binding row " << i;
-  i++;
+  mysql_stmt_attr_set(statement, STMT_ATTR_ARRAY_SIZE, &delta);
+
+  LOG_DEBUG << "Done binding row " << i << " (" << delta << ")";
+  i += delta;
   return true;
 }
 
