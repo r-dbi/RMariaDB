@@ -310,12 +310,17 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE) 
 
   if (safe) {
     dbBegin(conn)
+    on.exit(dbRollback(conn), add = TRUE)
     out <- dbExecute(conn, sql)
     if (out < nrow(value)) {
-      dbRollback(conn)
       stopc("Error writing table: sent ", nrow(value), " rows, added ", out, " rows.")
     }
     dbCommit(conn)
+
+    # Manual cleanup
+    unlink(path)
+    on.exit(NULL, add = FALSE)
+
     out
   } else {
     dbExecute(conn, sql)
