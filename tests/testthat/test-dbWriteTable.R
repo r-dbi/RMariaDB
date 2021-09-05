@@ -19,11 +19,6 @@ test_that("dbWriteTable() throws error if constraint violated", {
   dbWriteTable(con, "t1", x[1:3, ], overwrite = TRUE)
   dbExecute(con, "CREATE UNIQUE INDEX t1_c1_c2_idx ON t1(col1, col2(1))")
   expect_error(dbWriteTable(con, "t1", x, append = TRUE), "added 7 rows")
-  dbWithTransaction(
-    con,
-    expect_warning(dbWriteTable(con, "t1", x, append = TRUE), "added 7 rows")
-  )
-  expect_equal(dbReadTable(con, "t1"), x)
 })
 
 test_that("dbAppendTable() throws error if constraint violated", {
@@ -35,7 +30,6 @@ test_that("dbAppendTable() throws error if constraint violated", {
   dbWriteTable(con, "t1", x[1:3, ], overwrite = TRUE)
   dbExecute(con, "CREATE UNIQUE INDEX t1_c1_c2_idx ON t1(col1, col2(1))")
   expect_error(dbAppendTable(con, "t1", x), "added 7 rows")
-  expect_equal(dbAppendTable(con, "t1", x, safe = FALSE), 7)
 })
 
 # Available only in MariaDB
