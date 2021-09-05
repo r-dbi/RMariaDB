@@ -270,7 +270,7 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE) {
   file <- file(path, "wb")
 
   write.table(
-    csv_quote(value, warn_factor), file, quote = FALSE, sep = "\t", na = "\\N",
+    csv_quote(value, warn_factor, conn), file, quote = FALSE, sep = "\t", na = "\\N",
     row.names = FALSE, col.names = FALSE
   )
 
@@ -279,12 +279,15 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE) {
   dbExecute(conn, sql)
 }
 
-csv_quote <- function(x, warn_factor) {
-  x[] <- lapply(x, csv_quote_one)
+csv_quote <- function(x, warn_factor, conn) {
+  old <- options(digits.secs = 6)
+  on.exit(options(old))
+
+  x[] <- lapply(x, csv_quote_one, conn)
   factor_to_string(x, warn = warn_factor)
 }
 
-csv_quote_one <- function(x) {
+csv_quote_one <- function(x, conn) {
   if (is.factor(x)) {
     levels(x) <- csv_quote_char(levels(x))
   } else if (is.character(x)) {
@@ -304,6 +307,8 @@ csv_quote_one <- function(x) {
     x <- as.character(as.integer(x))
   } else if (inherits(x, "Date")) {
     x <- as.character(x)
+  } else if (inherits(x, "POSIXt")) {
+    x <- format(x, format = "%Y-%m-%dT%H:%M:%OS", tz = conn@timezone)
   } else {
     stop("NYI: ", paste(class(x), collapse = "/"), call. = FALSE)
   }

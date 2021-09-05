@@ -15,8 +15,6 @@ DBItest::make_context(
 
     # bad tests
     "list_objects_features",
-    "append_roundtrip_timestamp",
-    "roundtrip_timestamp",
 
     NULL
   )
