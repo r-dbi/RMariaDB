@@ -5,6 +5,7 @@
 \alias{dbReadTable,MariaDBConnection,character-method}
 \alias{dbWriteTable,MariaDBConnection,character,data.frame-method}
 \alias{dbWriteTable,MariaDBConnection,character,character-method}
+\alias{dbAppendTable,MariaDBConnection-method}
 \alias{dbListTables,MariaDBConnection-method}
 \alias{dbListObjects,MariaDBConnection-method}
 \alias{dbExistsTable,MariaDBConnection,character-method}
@@ -42,6 +43,8 @@
   temporary = FALSE,
   ...
 )
+
+\S4method{dbAppendTable}{MariaDBConnection}(conn, name, value, ..., row.names = NULL)
 
 \S4method{dbListTables}{MariaDBConnection}(conn, ...)
 
