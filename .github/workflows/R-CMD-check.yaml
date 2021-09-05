@@ -156,7 +156,7 @@ jobs:
           sudo apt purge -y mysql-server
 
       - uses: ankane/setup-mariadb@v1
-        if: (matrix.config.mysql_server = '') || ! matrix.config.mysql_server
+        if: (matrix.config.mysql_server == '') || ! matrix.config.mysql_server
         with:
           mariadb-version: 10.5
 
@@ -174,7 +174,7 @@ jobs:
         shell: bash
 
       - name: Install MariaDB client
-        if: runner.os == 'Linux' && ((matrix.config.mysql_client = '' )|| ! matrix.config.mysql_client)
+        if: runner.os == 'Linux' && ((matrix.config.mysql_client == '' )|| ! matrix.config.mysql_client)
         run: |
           sudo apt purge -y libmysqlclient-dev
           sudo apt install -y libmariadb-dev
