@@ -63,6 +63,10 @@ jobs:
           # Begin custom: matrix elements
           - { os: macOS-latest,                 r: 'release',    RMARIADB_FORCE_MARIADBCONFIG: 1, desc: mariadb_config }
           - { os: macOS-latest,                 r: 'release',    RMARIADB_FORCE_MYSQLCONFIG: 1, desc: mysql_config }
+          - { os: ubuntu-, os-version: 20.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", mysql_client: true, mysql_server: true, desc: "MySQL server + client" }
+          - { os: ubuntu-, os-version: 20.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", mysql_client: true, mysql_server: false, desc: "MariaDB server, MySQL client" }
+          - { os: ubuntu-, os-version: 20.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", mysql_client: false, mysql_server: true, desc: "MySQL server, MariaDB client" }
+          - { os: ubuntu-, os-version: 20.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest", mysql_client: false, mysql_server: false, desc: "MariaDB server + client" }
           # End custom: matrix elements
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -146,9 +150,20 @@ jobs:
       # Begin custom: after install
       # Must happen after installing system dependencies,
       # https://github.com/ankane/setup-mariadb/issues/2
+      - name: Purge MySQL server
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt purge -y mysql-server
+
       - uses: ankane/setup-mariadb@v1
+        if: ! matrix.config.mysql_server
         with:
           mariadb-version: 10.5
+
+      - uses: ankane/setup-mysql@v1
+        if: matrix.config.mysql_server
+        with:
+          mysql-version: 8.0
 
       # Use hard-coded time zone info so that it also works on Windows
       - name: Create database, set it to UTF-8, add time zone info
@@ -157,6 +172,12 @@ jobs:
           mysql -D mysql < tools/tz.sql
           mysql -e "SET GLOBAL time_zone = 'Europe/Zurich';"
         shell: bash
+
+      - name: Install MariaDB client
+        if: runner.os == 'Linux' && ! matrix.config.mysql_client
+        run: |
+          sudo apt purge -y libmysqlclient-dev
+          sudo apt install -y libmariadb-dev
       # End custom: after install
 
       - name: Check
