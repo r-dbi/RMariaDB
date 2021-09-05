@@ -161,16 +161,12 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
         name = name,
         value = value,
         warn_factor = FALSE,
-        safe = FALSE
+        safe = need_transaction,
+        transact = FALSE
       )
 
-      if (out < nrow(value)) {
-        msg <- paste0("Error writing table: sent ", nrow(value), " rows, added ", out, " rows.")
-        if (need_transaction) {
-          stopc(msg)
-        } else {
-          warningc(msg)
-        }
+      if (out < nrow(value) && !need_transaction) {
+        warningc("Error writing table: sent ", nrow(value), " rows, added ", out, " rows.")
       }
     }
 
@@ -268,11 +264,11 @@ setMethod("dbAppendTable", "MariaDBConnection",
     stopifnot(is.character(name), length(name) == 1)
     stopifnot(is.data.frame(value))
 
-    db_append_table(conn, name, value, ...)
+    db_append_table(conn, name, value, ..., warn_factor = TRUE, transact = TRUE)
   }
 )
 
-db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE) {
+db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE, transact = TRUE) {
   path <- tempfile("RMariaDB", fileext = ".tsv")
   is_list <- vlapply(value, is.list)
   colnames <- dbQuoteIdentifier(conn, names(value))
@@ -288,9 +284,10 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE) 
   } else {
     set <- ""
   }
+  quoted_name <- dbQuoteIdentifier(conn, name)
   sql <- paste0(
     "LOAD DATA LOCAL INFILE ", dbQuoteString(conn, path), "\n",
-    "INTO TABLE ", dbQuoteIdentifier(conn, name), "\n",
+    "INTO TABLE ", quoted_name, "\n",
     "CHARACTER SET utf8 \n",
     "(", paste0(colnames, collapse = ", "), ")",
     set
@@ -309,13 +306,29 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE) 
   close(file)
 
   if (safe) {
-    dbBegin(conn)
-    on.exit(dbRollback(conn), add = TRUE)
+    if (transact) {
+      dbBegin(conn)
+      on.exit(dbRollback(conn), add = TRUE)
+    }
+
+    sql_count <- paste0("SELECT COUNT(*) FROM ", quoted_name)
+    count_before <- dbGetQuery(conn, sql_count)[[1]]
+
     out <- dbExecute(conn, sql)
+
+    # Some servers don't return a record count here,
+    # need to count manually
+    if (out == 0) {
+      count_after <- dbGetQuery(conn, sql_count)[[1]]
+      out <- as.numeric(count_after - count_before)
+    }
+
     if (out < nrow(value)) {
       stopc("Error writing table: sent ", nrow(value), " rows, added ", out, " rows.")
     }
-    dbCommit(conn)
+    if (transact) {
+      dbCommit(conn)
+    }
 
     # Manual cleanup
     unlink(path)
