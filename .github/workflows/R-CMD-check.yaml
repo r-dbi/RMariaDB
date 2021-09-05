@@ -61,6 +61,8 @@ jobs:
           # End custom: R 3.3
 
           # Begin custom: matrix elements
+          - { os: macOS-latest,                 r: 'release',    RMARIADB_FORCE_MARIADBCONFIG: 1, desc: mariadb_config }
+          - { os: macOS-latest,                 r: 'release',    RMARIADB_FORCE_MYSQLCONFIG: 1, desc: mysql_config }
           # End custom: matrix elements
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -69,6 +71,8 @@ jobs:
       # prevent rgl issues because no X11 display is available
       RGL_USE_NULL: true
       # Begin custom: env vars
+      RMARIADB_FORCE_MARIADBCONFIG: ${{ matrix.config.RMARIADB_FORCE_MARIADBCONFIG }}
+      RMARIADB_FORCE_MYSQLCONFIG: ${{ matrix.config.RMARIADB_FORCE_MYSQLCONFIG }}
       # End custom: env vars
 
     steps:
