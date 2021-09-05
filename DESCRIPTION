@@ -30,7 +30,7 @@ Authors@R:
 Description: Implements a 'DBI'-compliant interface to 'MariaDB'
     (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>)
     databases.
-License: GPL-3
+License: MIT + file LICENSE
 URL: https://rmariadb.r-dbi.org,
     https://github.com/r-dbi/RMariaDB,
     https://downloads.mariadb.org/connector-c/
