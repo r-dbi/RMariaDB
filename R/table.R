@@ -302,6 +302,8 @@ csv_quote_one <- function(x) {
     x[is.na(x_orig)] <- NA_character_
   } else if (is.logical(x)) {
     x <- as.character(as.integer(x))
+  } else if (inherits(x, "Date")) {
+    x <- as.character(x)
   } else {
     stop("NYI: ", paste(class(x), collapse = "/"), call. = FALSE)
   }
