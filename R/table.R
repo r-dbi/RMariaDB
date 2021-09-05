@@ -358,7 +358,17 @@ csv_quote_one <- function(x, conn) {
   } else if (is.character(x)) {
     x <- csv_quote_char(x)
   } else if (is.integer(x)) {
+    x_orig <- x
     x <- as.character(x)
+    # Failure to load BIT(1) columns with a verbatim 0 (???)
+    # https://stackoverflow.com/a/17836602/946850
+    x[!is.na(x_orig) & x_orig == 0] <- ""
+  } else if (is.integer64(x)) {
+    x_orig <- x
+    x <- as.character(x)
+    # Failure to load BIT(1) columns with a verbatim 0 (???)
+    # https://stackoverflow.com/a/17836602/946850
+    x[!is.na(x_orig) & x_orig == 0] <- ""
   } else if (is.numeric(x)) {
     x_orig <- x
     if (all_integerish(x)) {
