@@ -287,6 +287,7 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE, 
   quoted_name <- dbQuoteIdentifier(conn, name)
   sql <- paste0(
     "LOAD DATA LOCAL INFILE ", dbQuoteString(conn, path), "\n",
+    "IGNORE\n",
     "INTO TABLE ", quoted_name, "\n",
     "CHARACTER SET utf8 \n",
     "(", paste0(colnames, collapse = ", "), ")",
