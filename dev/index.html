@@ -118,7 +118,17 @@
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-dbi/DBI"</span><span class="op">)</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-dbi/RMariaDB"</span><span class="op">)</span></code></pre></div>
 <p>Discussions associated with DBI and related database packages take place on <a href="https://stat.ethz.ch/mailman/listinfo/r-sig-db" class="external-link">R-SIG-DB</a>. The website <a href="https://db.rstudio.com/" class="external-link">Databases using R</a> describes the tools and best practices in this ecosystem.</p>
-<p>Installation from source on Linux or OS X currently requires Oracle’s <a href="https://packages.debian.org/buster/default-libmysqlclient-dev" class="external-link">libmysqlclient</a> or the more modern <a href="https://downloads.mariadb.org/connector-c/" class="external-link"><code>MariaDB Connector/C</code></a>. The latter works best in version 2.3.4/3.0.3 or later, with older versions character and blob columns do not work reliably.</p>
+<p>Installation from source on Linux or OS X currently requires <a href="https://downloads.mariadb.org/connector-c/" class="external-link"><code>MariaDB Connector/C</code></a>, preferably in version 2.3.4/3.0.3 or later. With older versions, character and blob columns do not work reliably. Alternatively, Oracle’s <a href="https://packages.debian.org/buster/default-libmysqlclient-dev" class="external-link">libmysqlclient</a> can be used.</p>
+<div id="connectorc" class="section level3">
+<h3 class="hasAnchor">
+<a href="#connectorc" class="anchor" aria-hidden="true"></a>Connector/C</h3>
+<p>On recent <strong>Debian</strong> or <strong>Ubuntu</strong> install <a href="https://packages.debian.org/testing/libmariadbclient-dev" class="external-link">libmariadbclient-dev</a>.</p>
+<pre><code>sudo apt-get install -y libmariadbclient-dev</code></pre>
+<p>On <strong>Fedora</strong>, <strong>CentOS</strong> or <strong>RHEL</strong> we need <a href="https://src.fedoraproject.org/rpms/mariadb" class="external-link">mariadb-devel</a>:</p>
+<pre><code>sudo yum install mariadb-devel</code></pre>
+<p>On <strong>OS X</strong> use <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/mariadb-connector-c.rb" class="external-link">mariadb-connector-c</a> from Homebrew:</p>
+<pre><code>brew install mariadb-connector-c</code></pre>
+</div>
 <div id="mysql-client-library" class="section level3">
 <h3 class="hasAnchor">
 <a href="#mysql-client-library" class="anchor" aria-hidden="true"></a>MySQL client library</h3>
@@ -129,16 +139,6 @@
 <p>Follow <a href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/" class="external-link">instructions</a> to enable the MySQL yum repository if the above command attempts to install MariaDB files.</p>
 <p>On <strong>OS X</strong> use <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/mysql-connector-c++.rb" class="external-link">mysql-connector-c</a> from Homebrew:</p>
 <pre><code>brew install mysql-connector-c++</code></pre>
-</div>
-<div id="connectorc" class="section level3">
-<h3 class="hasAnchor">
-<a href="#connectorc" class="anchor" aria-hidden="true"></a>Connector/C</h3>
-<p>On recent <strong>Debian</strong> or <strong>Ubuntu</strong> install <a href="https://packages.debian.org/testing/libmariadbclient-dev" class="external-link">libmariadbclient-dev</a>.</p>
-<pre><code>sudo apt-get install -y libmariadbclient-dev</code></pre>
-<p>On <strong>Fedora</strong>, <strong>CentOS</strong> or <strong>RHEL</strong> we need <a href="https://src.fedoraproject.org/rpms/mariadb" class="external-link">mariadb-devel</a>:</p>
-<pre><code>sudo yum install mariadb-devel</code></pre>
-<p>On <strong>OS X</strong> use <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/mariadb-connector-c.rb" class="external-link">mariadb-connector-c</a> from Homebrew:</p>
-<pre><code>brew install mariadb-connector-c</code></pre>
 </div>
 </div>
 <div id="mariadb-configuration-file" class="section level2">
