@@ -283,6 +283,7 @@ csv_quote_one <- function(x) {
   if (is.character(x)) {
     x <- enc2utf8(x)
     x <- gsub("\\", "\\\\", x, fixed = TRUE)
+    x <- gsub("\t", "\\t", x, fixed = TRUE)
     x <- gsub("\r", "\\r", x, fixed = TRUE)
     x <- gsub("\n", "\\n", x, fixed = TRUE)
     x[is.na(x)] <- "\\N"
