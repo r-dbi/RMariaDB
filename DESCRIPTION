@@ -58,7 +58,7 @@ NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9001
 SystemRequirements: libmariadb-client-lgpl-dev or
-    libmariadbclient-dev or libmysqlclient-dev, with libssl-dev (deb),
+    libmariadb-dev or libmysqlclient-dev, with libssl-dev (deb),
     mariadb-connector-c-devel or mariadb-devel (rpm),
     mariadb-connector-c or mysql-connector-c (brew)
 Collate: 
