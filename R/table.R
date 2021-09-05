@@ -282,12 +282,14 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE) {
   )
 
   file <- file(path, "wb")
+  on.exit(close(file))
 
   write.table(
     csv_quote(value, warn_factor, conn), file, quote = FALSE, sep = "\t", na = "\\N",
     row.names = FALSE, col.names = FALSE
   )
 
+  on.exit(NULL)
   close(file)
 
   dbExecute(conn, sql)
