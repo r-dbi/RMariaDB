@@ -307,6 +307,9 @@ csv_quote_one <- function(x, conn) {
     x <- as.character(as.integer(x))
   } else if (inherits(x, "Date")) {
     x <- as.character(x)
+  } else if (inherits(x, "difftime")) {
+    x <- hms::as_hms(x)
+    x <- as.character(x)
   } else if (inherits(x, "POSIXt")) {
     x <- format(x, format = "%Y-%m-%dT%H:%M:%OS", tz = conn@timezone)
   } else {
