@@ -156,10 +156,11 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     }
 
     if (nrow(value) > 0) {
-      dbAppendTable(
+      db_append_table(
         conn = conn,
         name = name,
-        value = value
+        value = value,
+        warn_factor = FALSE
       )
     }
 
@@ -253,43 +254,43 @@ setMethod("dbAppendTable", "MariaDBConnection",
     stopifnot(is.character(name), length(name) == 1)
     stopifnot(is.data.frame(value))
 
-    path <- tempfile("RMariaDB", fileext = ".tsv")
-    colnames <- dbQuoteIdentifier(conn, names(value))
-    sql <- paste0(
-      "LOAD DATA LOCAL INFILE ", dbQuoteString(conn, path), "\n",
-      "INTO TABLE ", dbQuoteIdentifier(conn, name), "\n",
-      "(", paste0(colnames, collapse = ", "), ")"
-    )
-
-    file <- file(path, "wb")
-
-    write.table(
-      csv_quote(value), file, quote = FALSE, sep = "\t", na = "\\N",
-      row.names = FALSE, col.names = FALSE
-    )
-
-    close(file)
-
-    dbExecute(conn, sql)
+    db_append_table(conn, name, value)
   }
 )
 
-csv_quote <- function(x) {
+db_append_table <- function(conn, name, value, warn_factor = TRUE) {
+  path <- tempfile("RMariaDB", fileext = ".tsv")
+  colnames <- dbQuoteIdentifier(conn, names(value))
+  sql <- paste0(
+    "LOAD DATA LOCAL INFILE ", dbQuoteString(conn, path), "\n",
+    "INTO TABLE ", dbQuoteIdentifier(conn, name), "\n",
+    "(", paste0(colnames, collapse = ", "), ")"
+  )
+
+  file <- file(path, "wb")
+
+  write.table(
+    csv_quote(value, warn_factor), file, quote = FALSE, sep = "\t", na = "\\N",
+    row.names = FALSE, col.names = FALSE
+  )
+
+  close(file)
+
+  dbExecute(conn, sql)
+}
+
+csv_quote <- function(x, warn_factor) {
   x[] <- lapply(x, csv_quote_one)
-  x
+  factor_to_string(x, warn = warn_factor)
 }
 
 csv_quote_one <- function(x) {
-  if (is.character(x)) {
-    x <- enc2utf8(x)
-    x <- gsub("\\", "\\\\", x, fixed = TRUE)
-    x <- gsub("\t", "\\t", x, fixed = TRUE)
-    x <- gsub("\r", "\\r", x, fixed = TRUE)
-    x <- gsub("\n", "\\n", x, fixed = TRUE)
-    x[is.na(x)] <- "\\N"
+  if (is.factor(x)) {
+    levels(x) <- csv_quote_char(levels(x))
+  } else if (is.character(x)) {
+    x <- csv_quote_char(x)
   } else if (is.integer(x)) {
     x <- as.character(x)
-    x[is.na(x)] <- "\\N"
   } else if (is.numeric(x)) {
     x_orig <- x
     if (all(x >= -2147483647) && all(x <= 2147483647) && identical(as.numeric(as.integer(x)), x)) {
@@ -298,14 +299,22 @@ csv_quote_one <- function(x) {
       # https://dev.mysql.com/doc/refman/5.7/en/number-literals.html
       formatC(x, digits = 17, format = "E")
     }
-    x[is.na(x_orig)] <- "\\N"
+    x[is.na(x_orig)] <- NA_character_
   } else if (is.logical(x)) {
     x <- as.character(as.integer(x))
-    x[is.na(x)] <- "\\N"
   } else {
     stop("NYI: ", paste(class(x), collapse = "/"), call. = FALSE)
   }
 
+  x
+}
+
+csv_quote_char <- function(x) {
+  x <- enc2utf8(x)
+  x <- gsub("\\", "\\\\", x, fixed = TRUE)
+  x <- gsub("\t", "\\t", x, fixed = TRUE)
+  x <- gsub("\r", "\\r", x, fixed = TRUE)
+  x <- gsub("\n", "\\n", x, fixed = TRUE)
   x
 }
 
