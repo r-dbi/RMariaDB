@@ -161,7 +161,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
         name = name,
         value = value,
         warn_factor = FALSE,
-        safe = need_transaction,
+        safe = TRUE,
         transact = FALSE
       )
 
@@ -324,10 +324,10 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE, 
       out <- as.numeric(count_after - count_before)
     }
 
-    if (out < nrow(value)) {
-      stopc("Error writing table: sent ", nrow(value), " rows, added ", out, " rows.")
-    }
     if (transact) {
+      if (out < nrow(value)) {
+        stopc("Error writing table: sent ", nrow(value), " rows, added ", out, " rows.")
+      }
       dbCommit(conn)
     }
 
