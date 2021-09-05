@@ -18,8 +18,12 @@ test_that("throws error if constraint violated", {
 
   dbWriteTable(con, "t1", x, overwrite = TRUE)
   dbExecute(con, "CREATE UNIQUE INDEX t1_c1_c2_idx ON t1(col1, col2(1))")
-  expect_error(dbWriteTable(con, "t1", x, append = TRUE),
-    "Duplicate entry")
+  expect_error(dbWriteTable(con, "t1", x, append = TRUE), "added 0 rows")
+  expect_error(dbAppendTable(con, "t1", x), "added 0 rows")
+  dbWithTransaction(
+    con,
+    expect_warning(dbWriteTable(con, "t1", x, append = TRUE), "added 0 rows")
+  )
 })
 
 # Available only in MariaDB

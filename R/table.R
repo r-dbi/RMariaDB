@@ -156,12 +156,22 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     }
 
     if (nrow(value) > 0) {
-      db_append_table(
+      out <- db_append_table(
         conn = conn,
         name = name,
         value = value,
-        warn_factor = FALSE
+        warn_factor = FALSE,
+        safe = FALSE
       )
+
+      if (out < nrow(value)) {
+        msg <- paste0("Error writing table: sent ", nrow(value), " rows, added ", out, " rows.")
+        if (need_transaction) {
+          stopc(msg)
+        } else {
+          warningc(msg)
+        }
+      }
     }
 
     if (need_transaction) {
@@ -245,6 +255,10 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
 )
 #' @export
 #' @rdname mariadb-tables
+#' @details
+#' Pass `safe = FALSE` to `dbAppendTable()` to avoid transactions.
+#' Because `LOAD DATA INFILE` is used internally, this means that
+#' rows violating primary key constraints are now silently ignored.
 #' @importFrom utils write.table
 setMethod("dbAppendTable", "MariaDBConnection",
   function(conn, name, value, ..., row.names = NULL) {
@@ -254,11 +268,11 @@ setMethod("dbAppendTable", "MariaDBConnection",
     stopifnot(is.character(name), length(name) == 1)
     stopifnot(is.data.frame(value))
 
-    db_append_table(conn, name, value)
+    db_append_table(conn, name, value, ...)
   }
 )
 
-db_append_table <- function(conn, name, value, warn_factor = TRUE) {
+db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE) {
   path <- tempfile("RMariaDB", fileext = ".tsv")
   is_list <- vlapply(value, is.list)
   colnames <- dbQuoteIdentifier(conn, names(value))
@@ -290,10 +304,22 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE) {
     row.names = FALSE, col.names = FALSE
   )
 
-  on.exit(NULL)
+  # Close connection manually, unlink when done to save disk space
+  on.exit(unlink(path), add = FALSE)
   close(file)
 
-  dbExecute(conn, sql)
+  if (safe) {
+    dbBegin(conn)
+    out <- dbExecute(conn, sql)
+    if (out < nrow(value)) {
+      dbRollback(conn)
+      stopc("Error writing table: sent ", nrow(value), " rows, added ", out, " rows.")
+    }
+    dbCommit(conn)
+    out
+  } else {
+    dbExecute(conn, sql)
+  }
 }
 
 csv_quote <- function(x, warn_factor, conn) {

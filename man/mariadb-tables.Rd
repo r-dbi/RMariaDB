@@ -122,6 +122,11 @@ indicating whether the operation was successful.
 \description{
 These methods read or write entire tables from a MariaDB database.
 }
+\details{
+Pass \code{safe = FALSE} to \code{dbAppendTable()} to avoid transactions.
+Because \verb{LOAD DATA INFILE} is used internally, this means that
+rows violating primary key constraints are now silently ignored.
+}
 \note{
 The data.frame returned by \code{dbReadTable()} only has
 primitive data, e.g., it does not coerce character data to factors.
