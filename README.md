@@ -61,7 +61,31 @@ devtools::install_github("r-dbi/RMariaDB")
 Discussions associated with DBI and related database packages take place on [R-SIG-DB](https://stat.ethz.ch/mailman/listinfo/r-sig-db). 
 The website [Databases using R](https://db.rstudio.com/) describes the tools and best practices in this ecosystem.
 
-Installation from source on Linux or OS X currently requires Oracle's [libmysqlclient](https://packages.debian.org/buster/default-libmysqlclient-dev) or the more modern [`MariaDB Connector/C`](https://downloads.mariadb.org/connector-c/). The latter works best in version 2.3.4/3.0.3 or later, with older versions character and blob columns do not work reliably.
+Installation from source on Linux or OS X currently requires [`MariaDB Connector/C`](https://downloads.mariadb.org/connector-c/), preferably in version 2.3.4/3.0.3 or later.
+With older versions, character and blob columns do not work reliably.
+Alternatively, Oracle's [libmysqlclient](https://packages.debian.org/buster/default-libmysqlclient-dev) can be used.
+
+
+### Connector/C
+
+On recent __Debian__ or __Ubuntu__ install [libmariadbclient-dev](https://packages.debian.org/testing/libmariadbclient-dev).
+
+```
+sudo apt-get install -y libmariadbclient-dev
+```
+
+On __Fedora__,  __CentOS__ or __RHEL__ we need [mariadb-devel](https://src.fedoraproject.org/rpms/mariadb):
+
+```
+sudo yum install mariadb-devel
+````
+
+On __OS X__ use [mariadb-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/mariadb-connector-c.rb) from Homebrew:
+
+```
+brew install mariadb-connector-c
+```
+
 
 ### MySQL client library
 
@@ -84,27 +108,6 @@ On __OS X__ use [mysql-connector-c](https://github.com/Homebrew/homebrew-core/bl
 
 ```
 brew install mysql-connector-c++
-```
-
-
-### Connector/C
-
-On recent __Debian__ or __Ubuntu__ install [libmariadbclient-dev](https://packages.debian.org/testing/libmariadbclient-dev).
-
-```
-sudo apt-get install -y libmariadbclient-dev
-```
-
-On __Fedora__,  __CentOS__ or __RHEL__ we need [mariadb-devel](https://src.fedoraproject.org/rpms/mariadb):
-
-```
-sudo yum install mariadb-devel
-````
-
-On __OS X__ use [mariadb-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/mariadb-connector-c.rb) from Homebrew:
-
-```
-brew install mariadb-connector-c
 ```
 
 
