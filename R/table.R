@@ -260,11 +260,25 @@ setMethod("dbAppendTable", "MariaDBConnection",
 
 db_append_table <- function(conn, name, value, warn_factor = TRUE) {
   path <- tempfile("RMariaDB", fileext = ".tsv")
+  is_list <- vlapply(value, is.list)
   colnames <- dbQuoteIdentifier(conn, names(value))
+  if (any(is_list)) {
+    set <- paste0(
+      "SET ",
+      paste0(
+        colnames[is_list], " = UNHEX(@X", which(is_list), ")",
+        collapse = ", "
+      )
+    )
+    colnames[is_list] <- paste0("@X", which(is_list))
+  } else {
+    set <- ""
+  }
   sql <- paste0(
     "LOAD DATA LOCAL INFILE ", dbQuoteString(conn, path), "\n",
     "INTO TABLE ", dbQuoteIdentifier(conn, name), "\n",
-    "(", paste0(colnames, collapse = ", "), ")"
+    "(", paste0(colnames, collapse = ", "), ")",
+    set
   )
 
   file <- file(path, "wb")
@@ -288,6 +302,10 @@ csv_quote <- function(x, warn_factor, conn) {
 }
 
 csv_quote_one <- function(x, conn) {
+  if (inherits(x, "AsIs")) {
+    class(x) <- setdiff(class(x), "AsIs")
+  }
+
   if (is.factor(x)) {
     levels(x) <- csv_quote_char(levels(x))
   } else if (is.character(x)) {
@@ -312,6 +330,10 @@ csv_quote_one <- function(x, conn) {
     x <- as.character(x)
   } else if (inherits(x, "POSIXt")) {
     x <- format(x, format = "%Y-%m-%dT%H:%M:%OS", tz = conn@timezone)
+  } else if (inherits(x, "list")) {
+    x_orig <- x
+    x <- vcapply(x, function(x) paste(format(x), collapse = ""))
+    x[vlapply(x_orig, is.null)] <- NA_character_
   } else {
     stop("NYI: ", paste(class(x), collapse = "/"), call. = FALSE)
   }
