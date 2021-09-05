@@ -316,7 +316,7 @@ csv_quote_one <- function(x, conn) {
     x <- as.character(x)
   } else if (is.numeric(x)) {
     x_orig <- x
-    if (all(x >= -2147483647) && all(x <= 2147483647) && identical(as.numeric(as.integer(x)), x)) {
+    if (all_integerish(x)) {
       x <- formatC(x, format = "d")
     } else {
       # https://dev.mysql.com/doc/refman/5.7/en/number-literals.html
@@ -350,6 +350,14 @@ csv_quote_char <- function(x) {
   x <- gsub("\r", "\\r", x, fixed = TRUE)
   x <- gsub("\n", "\\n", x, fixed = TRUE)
   x
+}
+
+all_integerish <- function(x) {
+  x <- x[!is.na(x)]
+  if (any(is.infinite(x))) {
+    return(FALSE)
+  }
+  all(x >= -2147483647) && all(x <= 2147483647) && all(x == as.integer(x))
 }
 
 #' @export
