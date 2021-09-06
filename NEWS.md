@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RMariaDB 1.1.1.9002 (2021-09-06)
+
+- Refer to libmariadb-dev in documentation and configuration scripts (#219).
+- Test MySQL and MariaDB Server and client libraries in all combinations on GitHub Actions (#224).
+- `?dbConnect` gains a section on secure passwords and the `.mylogin.cnf` file (#156).
+
+
 # RMariaDB 1.1.1.9001 (2021-09-05)
 
 - The `configure` script now queries the `RMARIADB_FORCE_MARIADBCONFIG` and `RMARIADB_FORCE_MYSQLCONFIG` environment variables to force use of `mariadb_config` or `mysql_config`, respectively (#218).
