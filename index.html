@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">RMariaDB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -69,13 +69,13 @@
   <div class="contents col-md-9">
 <div id="rmariadb" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#rmariadb" class="anchor"></a>RMariaDB</h1></div>
+<a href="#rmariadb" class="anchor" aria-hidden="true"></a>RMariaDB</h1></div>
 <!-- badges: start -->
 
 <p>RMariaDB is a database interface and MariaDB driver for R. This version is aimed at full compliance with the <a href="https://cran.r-project.org/package=DBI/vignettes/spec.html" class="external-link">DBI specification</a>, as a replacement for the old <a href="https://cran.r-project.org/package=RMySQL" class="external-link">RMySQL</a> package.</p>
 <div id="hello-world" class="section level2">
 <h2 class="hasAnchor">
-<a href="#hello-world" class="anchor"></a>Hello World</h2>
+<a href="#hello-world" class="anchor" aria-hidden="true"></a>Hello World</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org" class="external-link">DBI</a></span><span class="op">)</span>
 <span class="co"># Connect to my-db as defined in ~/.my.cnf</span>
@@ -107,7 +107,7 @@
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
 <p>Binary packages for <strong>OS X</strong> or <strong>Windows</strong> can be installed directly from CRAN:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"RMariaDB"</span><span class="op">)</span></code></pre></div>
@@ -117,45 +117,45 @@
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-dbi/DBI"</span><span class="op">)</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-dbi/RMariaDB"</span><span class="op">)</span></code></pre></div>
 <p>Discussions associated with DBI and related database packages take place on <a href="https://stat.ethz.ch/mailman/listinfo/r-sig-db" class="external-link">R-SIG-DB</a>. The website <a href="https://db.rstudio.com/" class="external-link">Databases using R</a> describes the tools and best practices in this ecosystem.</p>
-<p>Installation from source on Linux or OS X currently requires Oracle’s <a href="https://packages.debian.org/buster/default-libmysqlclient-dev" class="external-link">libmysqlclient</a> or the more modern <a href="https://downloads.mariadb.org/connector-c/" class="external-link"><code>MariaDB Connector/C</code></a>. The latter works best in version 2.3.4/3.0.3 or later, with older versions character and blob columns do not work reliably.</p>
-<div id="mysql-client-library" class="section level3">
-<h3 class="hasAnchor">
-<a href="#mysql-client-library" class="anchor"></a>MySQL client library</h3>
-<p>On recent <strong>Debian</strong> or <strong>Ubuntu</strong> install <a href="https://packages.debian.org/buster/default-libmysqlclient-dev" class="external-link">libmysqlclient-dev</a>.</p>
-<pre><code>sudo apt-get install -y libmysqlclient-dev</code></pre>
-<p>On <strong>Fedora</strong>, <strong>CentOS</strong> or <strong>RHEL</strong> we need mysql-devel, see https://apps.fedoraproject.org/packages/mysql-devel:</p>
-<pre><code>sudo yum install mysql-devel</code></pre>
-<p>Follow <a href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/" class="external-link">instructions</a> to enable the MySQL yum repository if the above command attempts to install MariaDB files.</p>
-<p>On <strong>OS X</strong> use <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/mysql-connector-c++.rb" class="external-link">mysql-connector-c</a> from Homebrew:</p>
-<pre><code>brew install mysql-connector-c++</code></pre>
-</div>
+<p>Installation from source on Linux or OS X currently requires <a href="https://downloads.mariadb.org/connector-c/" class="external-link"><code>MariaDB Connector/C</code></a>, preferably in version 2.3.4/3.0.3 or later. With older versions, character and blob columns do not work reliably. Alternatively, Oracle’s <a href="https://packages.debian.org/buster/default-libmysqlclient-dev" class="external-link">libmysqlclient</a> can be used.</p>
 <div id="connectorc" class="section level3">
 <h3 class="hasAnchor">
-<a href="#connectorc" class="anchor"></a>Connector/C</h3>
-<p>On recent <strong>Debian</strong> or <strong>Ubuntu</strong> install <a href="https://packages.debian.org/testing/libmariadbclient-dev" class="external-link">libmariadbclient-dev</a>.</p>
-<pre><code>sudo apt-get install -y libmariadbclient-dev</code></pre>
+<a href="#connectorc" class="anchor" aria-hidden="true"></a>Connector/C</h3>
+<p>On recent <strong>Debian</strong> or <strong>Ubuntu</strong> install <a href="https://packages.debian.org/testing/libmariadb-dev" class="external-link">libmariadb-dev</a>.</p>
+<pre><code>sudo apt-get install -y libmariadb-dev</code></pre>
 <p>On <strong>Fedora</strong>, <strong>CentOS</strong> or <strong>RHEL</strong> we need <a href="https://src.fedoraproject.org/rpms/mariadb" class="external-link">mariadb-devel</a>:</p>
 <pre><code>sudo yum install mariadb-devel</code></pre>
 <p>On <strong>OS X</strong> use <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/mariadb-connector-c.rb" class="external-link">mariadb-connector-c</a> from Homebrew:</p>
 <pre><code>brew install mariadb-connector-c</code></pre>
 </div>
+<div id="mysql-client-library" class="section level3">
+<h3 class="hasAnchor">
+<a href="#mysql-client-library" class="anchor" aria-hidden="true"></a>MySQL client library</h3>
+<p>On recent <strong>Debian</strong> or <strong>Ubuntu</strong> install <a href="https://packages.debian.org/buster/default-libmysqlclient-dev" class="external-link">libmysqlclient-dev</a>.</p>
+<pre><code>sudo apt-get install -y libmysqlclient-dev</code></pre>
+<p>On <strong>Fedora</strong>, <strong>CentOS</strong> or <strong>RHEL</strong> we need mysql-devel, see <a href="https://apps.fedoraproject.org/packages/mysql-devel" class="external-link uri">https://apps.fedoraproject.org/packages/mysql-devel</a>:</p>
+<pre><code>sudo yum install mysql-devel</code></pre>
+<p>Follow <a href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/" class="external-link">instructions</a> to enable the MySQL yum repository if the above command attempts to install MariaDB files.</p>
+<p>On <strong>OS X</strong> use <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/mysql-connector-c++.rb" class="external-link">mysql-connector-c</a> from Homebrew:</p>
+<pre><code>brew install mysql-connector-c++</code></pre>
+</div>
 </div>
 <div id="mariadb-configuration-file" class="section level2">
 <h2 class="hasAnchor">
-<a href="#mariadb-configuration-file" class="anchor"></a>MariaDB configuration file</h2>
+<a href="#mariadb-configuration-file" class="anchor" aria-hidden="true"></a>MariaDB configuration file</h2>
 <p>Instead of specifying a username and password in calls to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code>, it’s better to set up a MariaDB configuration file that names the databases that you connect to most commonly. This file should live in <code>~/.my.cnf</code> and look like:</p>
 <pre><code>[database_name]
 option1=value1
 option2=value2</code></pre>
 <p>If you want to run the examples, you’ll need to set the proper options in the <code>[rs-dbi]</code> group of any MariaDB option file, such as /etc/my.cnf or the .my.cnf file in your home directory. For a default single user install of MariaDB, the following code should work:</p>
 <pre><code>[rs-dbi]
-database=test
-user=root
-password=</code></pre>
+database="test"
+user="root"
+password=""</code></pre>
 </div>
 <div id="acknowledgements" class="section level2">
 <h2 class="hasAnchor">
-<a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
+<a href="#acknowledgements" class="anchor" aria-hidden="true"></a>Acknowledgements</h2>
 <p>Many thanks to Christoph M. Friedrich, John Heuer, Kurt Hornik, Torsten Hothorn, Saikat Debroy, Matthew Kelly, Brian D. Ripley, Mikhail Kondrin, Jake Luciani, Jens Nieschulze, Deepayan Sarkar, Louis Springer, Duncan Temple Lang, Luis Torgo, Arend P. van der Veen, Felix Weninger, J. T. Lindgren, Crespin Miller, and Michal Okonlewski, Seth Falcon and Paul Gilbert for comments, suggestions, bug reports, and patches to the original <a href="https://cran.r-project.org/package=RMySQL" class="external-link">RMySQL</a> package, and to all contributors (of <a href="https://github.com/r-dbi/RMariaDB/graphs/contributors" class="external-link">code</a> and discussions) to this package.</p>
 <hr>
 <p>Please note that the ‘RMariaDB’ project is released with a <a href="https://rmariadb.r-dbi.org/code_of_conduct">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
@@ -184,7 +184,7 @@ password=</code></pre>
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 

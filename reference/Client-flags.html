@@ -60,9 +60,6 @@ completeness." />
 
 
 
-<!-- dependencies from examples -->
-
-
   
 
   
@@ -85,7 +82,7 @@ completeness." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -125,7 +122,7 @@ completeness." />
 
     <div class="ref-description">
     <p>Use for the <code>client.flag</code> argument to <code><a href='https://dbi.r-dbi.org/reference/dbConnect.html'>dbConnect()</a></code>, multiple flags can be
-combined with a bitwise or (see <a href='https://rdrr.io/r/base/Logic.html'>Logic</a>).  The flags are provided for
+combined with a bitwise or (see <a href='https://rdrr.io/r/methods/S4groupGeneric.html'>Logic</a>).  The flags are provided for
 completeness.</p>
     </div>
 
@@ -136,17 +133,17 @@ completeness.</p>
     <div class='dont-index'><p>The <code>flags</code> argument at https://mariadb.com/kb/en/library/mysql_real_connect.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dbi.r-dbi.org'>DBI</a></span><span class='op'>)</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rmariadb.r-dbi.org'>RMariaDB</a></span><span class='op'>)</span>
-<span class='va'>con1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dbi.r-dbi.org/reference/dbConnect.html'>dbConnect</a></span><span class='op'>(</span><span class='fu'><a href='dbConnect-MariaDBDriver-method.html'>MariaDB</a></span><span class='op'>(</span><span class='op'>)</span>, client.flag <span class='op'>=</span> <span class='va'>CLIENT_COMPRESS</span><span class='op'>)</span>
-<span class='va'>con2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dbi.r-dbi.org/reference/dbConnect.html'>dbConnect</a></span><span class='op'>(</span>
-  <span class='fu'><a href='dbConnect-MariaDBDriver-method.html'>MariaDB</a></span><span class='op'>(</span><span class='op'>)</span>,
-  client.flag <span class='op'>=</span> <span class='va'>CLIENT_COMPRESS</span> <span class='op'>|</span> <span class='va'>CLIENT_SECURE_CONNECTION</span>
-<span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dbi.r-dbi.org'>DBI</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://rmariadb.r-dbi.org'>RMariaDB</a></span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>con1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dbi.r-dbi.org/reference/dbConnect.html'>dbConnect</a></span><span class='op'>(</span><span class='fu'><a href='dbConnect-MariaDBDriver-method.html'>MariaDB</a></span><span class='op'>(</span><span class='op'>)</span>, client.flag <span class='op'>=</span> <span class='va'>CLIENT_COMPRESS</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>con2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dbi.r-dbi.org/reference/dbConnect.html'>dbConnect</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='fu'><a href='dbConnect-MariaDBDriver-method.html'>MariaDB</a></span><span class='op'>(</span><span class='op'>)</span>,</span>
+<span class='r-in'>  client.flag <span class='op'>=</span> <span class='va'>CLIENT_COMPRESS</span> <span class='op'>|</span> <span class='va'>CLIENT_SECURE_CONNECTION</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -59,7 +59,6 @@ generic functions." />
 
 
 
-
   
 
   
@@ -82,7 +81,7 @@ generic functions." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
       </span>
     </div>
 
@@ -125,7 +124,7 @@ generic functions." />
 generic functions.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S4 method for MariaDBDriver</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S4 method for MariaDBDriver</span>
 <span class='fu'><a href='https://dbi.r-dbi.org/reference/dbConnect.html'>dbConnect</a></span><span class='op'>(</span>
   <span class='va'>drv</span>,
   dbname <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -149,7 +148,7 @@ generic functions.</p>
   timezone_out <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span>
 
-<span class='fu'><a href='dbConnect-MariaDBDriver-method.html'>MariaDB</a></span><span class='op'>(</span><span class='op'>)</span></pre>
+<span class='fu'>MariaDB</span><span class='op'>(</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -192,33 +191,35 @@ see <a href='Client-flags.html'>Client-flags</a> for details.</p></td>
     <tr>
       <th>groups</th>
       <td><p>string identifying a section in the <code>default.file</code> to use
-for setting authentication parameters (see <code><a href='dbConnect-MariaDBDriver-method.html'>MariaDB()</a></code>).</p></td>
+for setting authentication parameters (see <code>MariaDB()</code>).</p></td>
     </tr>
     <tr>
       <th>default.file</th>
       <td><p>string of the filename with MariaDB client options,
 only relevant if <code>groups</code> is given. The default value depends on the
 operating system (see references), on Linux and OS X the files
-<code>~/.my.cnf</code> and <code>~/.mylogin.cnf</code> are used.</p></td>
+<code>~/.my.cnf</code> and <code>~/.mylogin.cnf</code> are used. Expanded with <code><a href='https://rdrr.io/r/base/normalizePath.html'>normalizePath()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ssl.key</th>
-      <td><p>(optional) string of the filename of the SSL key file to use.</p></td>
+      <td><p>(optional) string of the filename of the SSL key file to use.
+Expanded with <code><a href='https://rdrr.io/r/base/normalizePath.html'>normalizePath()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ssl.cert</th>
       <td><p>(optional) string of the filename of the SSL certificate to
-use.</p></td>
+use. Expanded with <code><a href='https://rdrr.io/r/base/normalizePath.html'>normalizePath()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ssl.ca</th>
       <td><p>(optional) string of the filename of an SSL certificate
-authority file to use.</p></td>
+authority file to use. Expanded with <code><a href='https://rdrr.io/r/base/normalizePath.html'>normalizePath()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ssl.capath</th>
       <td><p>(optional) string of the path to a directory containing
-the trusted SSL CA certificates in PEM format.</p></td>
+the trusted SSL CA certificates in PEM format. Expanded with
+<code><a href='https://rdrr.io/r/base/normalizePath.html'>normalizePath()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ssl.cipher</th>
@@ -269,12 +270,27 @@ See <a href='https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-suppo
 for more details.
 Without installation, time zone support is restricted to UTC offset,
 which cannot take into account DST offsets.</p>
+    <h2 class="hasAnchor" id="secure-passwords"><a class="anchor" href="#secure-passwords"></a>Secure passwords</h2>
+
+    
+
+<p>Avoid storing passwords hard-coded in the code, use e.g. the <span class="pkg">keyring</span>
+package to store and retrieve passwords in a secure way.</p>
+<p>The MySQL client library (but not MariaDB) supports a <code>.mylogin.cnf</code> file
+that can be passed in the <code>default.file</code> argument.
+This file can contain an obfuscated password, which is not a secure way
+to store passwords but may be acceptable if the user is aware of the
+restrictions.
+The availability of this feature depends on the client library used
+for compiling the <span class="pkg">RMariaDB</span> package.
+Windows and macOS binaries on CRAN are compiled against the MariaDB Connector/C
+client library which do not support this feature.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"></pre>
+    <div class="ref-examples sourceCode"></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
