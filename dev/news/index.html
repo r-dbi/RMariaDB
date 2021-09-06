@@ -123,39 +123,40 @@
 </ul></div>
     <div id="rmariadb-112-2021-09-06" class="section level1">
 <h1 class="page-header" data-toc-text="1.1.2">
-<a href="#rmariadb-112-2021-09-06" class="anchor" aria-hidden="true"></a>RMariaDB 1.1.2 (2021-09-06)<small> Unreleased </small></h1>
-<ul><li>Same as previous version.</li>
+<a href="#rmariadb-112-2021-09-06" class="anchor" aria-hidden="true"></a>RMariaDB 1.1.2 (2021-09-06)<small> 2021-09-06 </small></h1>
+<div id="licensing" class="section level2">
+<h2 class="hasAnchor">
+<a href="#licensing" class="anchor" aria-hidden="true"></a>Licensing</h2>
+<ul><li>RMariaDB is now licensed under the MIT license (<a href='https://github.com/r-dbi/RMariaDB/issues/213'>#213</a>).</li>
 </ul></div>
-    <div id="rmariadb-1119002-2021-09-06" class="section level1">
-<h1 class="page-header" data-toc-text="1.1.1.9002">
-<a href="#rmariadb-1119002-2021-09-06" class="anchor" aria-hidden="true"></a>RMariaDB 1.1.1.9002 (2021-09-06)<small> Unreleased </small></h1>
-<ul><li>Refer to libmariadb-dev in documentation and configuration scripts (<a href='https://github.com/r-dbi/RMariaDB/issues/219'>#219</a>).</li>
-<li>Test MySQL and MariaDB Server and client libraries in all combinations on GitHub Actions (<a href='https://github.com/r-dbi/RMariaDB/issues/224'>#224</a>).</li>
-<li>
-<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">?dbConnect</a></code> gains a section on secure passwords and the <code>.mylogin.cnf</code> file (<a href='https://github.com/r-dbi/RMariaDB/issues/156'>#156</a>).</li>
-</ul></div>
-    <div id="rmariadb-1119001-2021-09-05" class="section level1">
-<h1 class="page-header" data-toc-text="1.1.1.9001">
-<a href="#rmariadb-1119001-2021-09-05" class="anchor" aria-hidden="true"></a>RMariaDB 1.1.1.9001 (2021-09-05)<small> Unreleased </small></h1>
-<ul><li>The <code>configure</code> script now queries the <code>RMARIADB_FORCE_MARIADBCONFIG</code> and <code>RMARIADB_FORCE_MYSQLCONFIG</code> environment variables to force use of <code>mariadb_config</code> or <code>mysql_config</code>, respectively (<a href='https://github.com/r-dbi/RMariaDB/issues/218'>#218</a>).</li>
-<li>RMariaDB is now licensed under the MIT license (<a href='https://github.com/r-dbi/RMariaDB/issues/213'>#213</a>).</li>
-<li>
-<code><a href="https://dbi.r-dbi.org/reference/dbDataType.html" class="external-link">dbDataType()</a></code> returns <code>TIME(6)</code> for <code>difftime</code>, and <code>DATETIME(6)</code> for <code>POSIXt</code> columns, to create columns with microsecond precision by default (<a href='https://github.com/r-dbi/RMariaDB/issues/214'>#214</a>).</li>
-<li>
-<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> normalizes all input paths (<a href='https://github.com/r-dbi/RMariaDB/issues/197'>#197</a>, <a href='https://github.com/twentytitus'>@twentytitus</a>).</li>
-</ul></div>
-    <div id="rmariadb-1119000-2021-04-12" class="section level1">
-<h1 class="page-header" data-toc-text="1.1.1.9000">
-<a href="#rmariadb-1119000-2021-04-12" class="anchor" aria-hidden="true"></a>RMariaDB 1.1.1.9000 (2021-04-12)<small> Unreleased </small></h1>
-<ul><li>Remove BH dependency by inlining the header files (<a href='https://github.com/r-dbi/RMariaDB/issues/208'>#208</a>).</li>
-<li>Map <code>NULL</code> to <code>NA</code> for <code>bit(1)</code> columns (<a href='https://github.com/r-dbi/RMariaDB/issues/201'>#201</a>, <a href='https://github.com/dirkschumacher'>@dirkschumacher</a>).</li>
-</ul></div>
-    <div id="rmariadb-111-2021-04-12" class="section level1">
-<h1 class="page-header" data-toc-text="1.1.1">
-<a href="#rmariadb-111-2021-04-12" class="anchor" aria-hidden="true"></a>RMariaDB 1.1.1 (2021-04-12)<small> 2021-04-13 </small></h1>
 <div id="features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#features" class="anchor" aria-hidden="true"></a>Features</h2>
+<ul><li>
+<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> normalizes all input paths (<a href='https://github.com/r-dbi/RMariaDB/issues/197'>#197</a>, <a href='https://github.com/twentytitus'>@twentytitus</a>).</li>
+<li>
+<code><a href="https://dbi.r-dbi.org/reference/dbDataType.html" class="external-link">dbDataType()</a></code> returns <code>TIME(6)</code> for <code>difftime</code>, and <code>DATETIME(6)</code> for <code>POSIXt</code> columns, to create columns with microsecond precision by default (<a href='https://github.com/r-dbi/RMariaDB/issues/214'>#214</a>).</li>
+</ul></div>
+<div id="documentation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#documentation" class="anchor" aria-hidden="true"></a>Documentation</h2>
+<ul><li>Now referring to the <code>libmariadb-dev</code> Debian/Ubuntu package in documentation and configuration scripts (<a href='https://github.com/r-dbi/RMariaDB/issues/219'>#219</a>).</li>
+<li>
+<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">?dbConnect</a></code> gains a section on secure passwords and the <code>.mylogin.cnf</code> file (<a href='https://github.com/r-dbi/RMariaDB/issues/156'>#156</a>).</li>
+</ul></div>
+<div id="internal" class="section level2">
+<h2 class="hasAnchor">
+<a href="#internal" class="anchor" aria-hidden="true"></a>Internal</h2>
+<ul><li><p>Test MySQL and MariaDB Server and client libraries in all combinations on GitHub Actions (<a href='https://github.com/r-dbi/RMariaDB/issues/224'>#224</a>).</p></li>
+<li><p>The <code>configure</code> script now queries the <code>RMARIADB_FORCE_MARIADBCONFIG</code> and <code>RMARIADB_FORCE_MYSQLCONFIG</code> environment variables to force use of <code>mariadb_config</code> or <code>mysql_config</code>, respectively (<a href='https://github.com/r-dbi/RMariaDB/issues/218'>#218</a>).</p></li>
+</ul></div>
+</div>
+    <div id="rmariadb-111-2021-04-12" class="section level1">
+<h1 class="page-header" data-toc-text="1.1.1">
+<a href="#rmariadb-111-2021-04-12" class="anchor" aria-hidden="true"></a>RMariaDB 1.1.1 (2021-04-12)<small> 2021-04-13 </small></h1>
+<div id="features-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#features-1" class="anchor" aria-hidden="true"></a>Features</h2>
 <ul><li>
 <code>BIT(1)</code> columns are returned as <code>logical</code> (<a href='https://github.com/r-dbi/RMariaDB/issues/84'>#84</a>). <code>NULL</code> is mapped to <code>NA</code> for <code>bit(1)</code> columns (<a href='https://github.com/r-dbi/RMariaDB/issues/201'>#201</a>, <a href='https://github.com/dirkschumacher'>@dirkschumacher</a>).</li>
 <li>
@@ -167,18 +168,18 @@
 <ul><li>Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
 <li>Timestamp roundtrip no longer fails on Windows i386 (<a href='https://github.com/r-dbi/RMariaDB/issues/117'>#117</a>).</li>
 </ul></div>
-<div id="internal" class="section level2">
+<div id="internal-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#internal" class="anchor" aria-hidden="true"></a>Internal</h2>
+<a href="#internal-1" class="anchor" aria-hidden="true"></a>Internal</h2>
 <ul><li>Remove BH dependency by inlining the header files (<a href='https://github.com/r-dbi/RMariaDB/issues/208'>#208</a>).</li>
 </ul></div>
 </div>
     <div id="rmariadb-110-2021-01-05" class="section level1">
 <h1 class="page-header" data-toc-text="1.1.0">
 <a href="#rmariadb-110-2021-01-05" class="anchor" aria-hidden="true"></a>RMariaDB 1.1.0 (2021-01-05)<small> 2021-01-07 </small></h1>
-<div id="features-1" class="section level2">
+<div id="features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features-1" class="anchor" aria-hidden="true"></a>Features</h2>
+<a href="#features-2" class="anchor" aria-hidden="true"></a>Features</h2>
 <ul><li>
 <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> now supports <code>timezone_out</code> argument. Explicitly setting <code>timezone</code> to <code>NULL</code> tries to detect the database time zone (<a href='https://github.com/r-dbi/RMariaDB/issues/116'>#116</a>).</li>
 <li>
@@ -198,17 +199,17 @@
     <div id="rmariadb-1011-2020-12-16" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.11">
 <a href="#rmariadb-1011-2020-12-16" class="anchor" aria-hidden="true"></a>RMariaDB 1.0.11 (2020-12-16)<small> 2020-12-16 </small></h1>
-<div id="features-2" class="section level2">
+<div id="features-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features-2" class="anchor" aria-hidden="true"></a>Features</h2>
+<a href="#features-3" class="anchor" aria-hidden="true"></a>Features</h2>
 <ul><li>Windows: update to libmariadbclient 3.1.11</li>
 <li>Add <code>timezone</code> argument to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> (<a href='https://github.com/r-dbi/RMariaDB/issues/184'>#184</a>, <a href='https://github.com/ycphs'>@ycphs</a>).</li>
 <li>
 <code><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind()</a></code> correctly interpret difftime values with units other than <code>"secs"</code>.</li>
 </ul></div>
-<div id="internal-1" class="section level2">
+<div id="internal-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#internal-1" class="anchor" aria-hidden="true"></a>Internal</h2>
+<a href="#internal-2" class="anchor" aria-hidden="true"></a>Internal</h2>
 <ul><li>
 <code>./configure</code> no longer requires <code>bash</code> (<a href='https://github.com/jeroen'>@jeroen</a>).</li>
 <li>Switch to GitHub Actions (<a href='https://github.com/r-dbi/RMariaDB/issues/185'>#185</a>, thanks <a href='https://github.com/ankane'>@ankane</a>).</li>
@@ -217,9 +218,9 @@
     <div id="rmariadb-1010-2020-08-26" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.10">
 <a href="#rmariadb-1010-2020-08-26" class="anchor" aria-hidden="true"></a>RMariaDB 1.0.10 (2020-08-26)<small> 2020-08-27 </small></h1>
-<div id="features-3" class="section level2">
+<div id="features-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#features-3" class="anchor" aria-hidden="true"></a>Features</h2>
+<a href="#features-4" class="anchor" aria-hidden="true"></a>Features</h2>
 <ul><li>
 <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> gains a <code>timeout</code> argument, defaults to 10. Use <code>Inf</code> or a negative value for no timeout (<a href='https://github.com/r-dbi/RMariaDB/issues/169'>#169</a>).</li>
 <li>Support fractional seconds in datetime values for reading and writing (<a href='https://github.com/r-dbi/RMariaDB/issues/157'>#157</a>).</li>
