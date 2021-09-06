@@ -7,28 +7,25 @@
 
 # RMariaDB 1.1.2 (2021-09-06)
 
-- Same as previous version.
+## Licensing
 
+- RMariaDB is now licensed under the MIT license (#213).
 
-# RMariaDB 1.1.1.9002 (2021-09-06)
+## Features
 
-- Refer to libmariadb-dev in documentation and configuration scripts (#219).
-- Test MySQL and MariaDB Server and client libraries in all combinations on GitHub Actions (#224).
+- `dbConnect()` normalizes all input paths (#197, @twentytitus).
+- `dbDataType()` returns `TIME(6)` for `difftime`, and `DATETIME(6)` for `POSIXt` columns, to create columns with microsecond precision by default (#214).
+
+## Documentation
+
+- Now referring to the `libmariadb-dev` Debian/Ubuntu package in documentation and configuration scripts (#219).
 - `?dbConnect` gains a section on secure passwords and the `.mylogin.cnf` file (#156).
 
+## Internal
 
-# RMariaDB 1.1.1.9001 (2021-09-05)
+- Test MySQL and MariaDB Server and client libraries in all combinations on GitHub Actions (#224).
 
 - The `configure` script now queries the `RMARIADB_FORCE_MARIADBCONFIG` and `RMARIADB_FORCE_MYSQLCONFIG` environment variables to force use of `mariadb_config` or `mysql_config`, respectively (#218).
-- RMariaDB is now licensed under the MIT license (#213).
-- `dbDataType()` returns `TIME(6)` for `difftime`, and `DATETIME(6)` for `POSIXt` columns, to create columns with microsecond precision by default (#214).
-- `dbConnect()` normalizes all input paths (#197, @twentytitus).
-
-
-# RMariaDB 1.1.1.9000 (2021-04-12)
-
-- Remove BH dependency by inlining the header files (#208).
-- Map `NULL` to `NA` for `bit(1)` columns (#201, @dirkschumacher).
 
 
 # RMariaDB 1.1.1 (2021-04-12)
