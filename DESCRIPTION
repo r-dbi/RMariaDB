@@ -1,5 +1,5 @@
 Package: RMariaDB
-Title: Database Interface and 'MariaDB' Driver
+Title: Database Interface and MariaDB Driver
 Version: 1.1.2.9000
 Authors@R: 
     c(person(given = "Kirill",
@@ -27,8 +27,8 @@ Authors@R:
              role = "fnd"),
       person(given = "RStudio",
              role = "cph"))
-Description: Implements a 'DBI'-compliant interface to 'MariaDB'
-    (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>)
+Description: Implements a DBI-compliant interface to MariaDB
+    (<https://mariadb.org/>) and MySQL (<https://www.mysql.com/>)
     databases.
 License: MIT + file LICENSE
 URL: https://rmariadb.r-dbi.org,

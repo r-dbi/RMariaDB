@@ -4,10 +4,10 @@
 \name{RMariaDB-package}
 \alias{RMariaDB}
 \alias{RMariaDB-package}
-\title{RMariaDB: Database Interface and 'MariaDB' Driver}
+\title{RMariaDB: Database Interface and MariaDB Driver}
 \description{
-Implements a 'DBI'-compliant interface to 'MariaDB'
-    (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>)
+Implements a DBI-compliant interface to MariaDB
+    (<https://mariadb.org/>) and MySQL (<https://www.mysql.com/>)
     databases.
 }
 \seealso{
