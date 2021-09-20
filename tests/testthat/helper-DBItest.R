@@ -14,6 +14,9 @@ DBItest::make_context(
     "data_logical",                               # not an error: cannot cast to logical
     "data_raw",                                   # not an error: can't cast to blob type
 
+    # bad tests
+    "list_objects_features",
+
     NULL
   )
 )
