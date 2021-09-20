@@ -45,7 +45,7 @@ public:
 
   virtual int n_rows_affected();
   virtual int n_rows_fetched();
-  virtual bool complete();
+  virtual bool complete() const;
 
 public:
   class UnsupportedPS : public std::exception {};

@@ -50,7 +50,7 @@ int MariaResultSimple::n_rows_fetched() {
   return 0;
 }
 
-bool MariaResultSimple::complete() {
+bool MariaResultSimple::complete() const {
   return true;
 }
 

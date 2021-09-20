@@ -225,7 +225,7 @@ int MariaResultPrep::n_rows_fetched() {
   return static_cast<int>(rowsFetched_);
 }
 
-bool MariaResultPrep::complete() {
+bool MariaResultPrep::complete() const {
   if (!bound_) return FALSE;
   return
     !has_result() || // query doesn't have results
