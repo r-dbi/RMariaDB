@@ -29,7 +29,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/r-dbi/RMariaDB/">
+  <a href="https://github.com/r-dbi/RMariaDB/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -44,7 +44,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Read and write MariaDB tables.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/r-dbi/RMariaDB/blob/master/R/table.R"><code>R/table.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/r-dbi/RMariaDB/blob/master/R/table.R" class="external-link"><code>R/table.R</code></a></small>
     <div class="hidden name"><code>mariadb-tables.Rd</code></div>
     </div>
 
@@ -53,10 +53,10 @@
     </div>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for MariaDBConnection,character</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbReadTable.html">dbReadTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">...</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span>, check.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">...</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span>, check.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># S4 method for MariaDBConnection,character,data.frame</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html">dbWriteTable</a></span><span class="op">(</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable</a></span><span class="op">(</span>
   <span class="va">conn</span>,
   <span class="va">name</span>,
   <span class="va">value</span>,
@@ -69,7 +69,7 @@
 <span class="op">)</span>
 
 <span class="co"># S4 method for MariaDBConnection,character,character</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html">dbWriteTable</a></span><span class="op">(</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable</a></span><span class="op">(</span>
   <span class="va">conn</span>,
   <span class="va">name</span>,
   <span class="va">value</span>,
@@ -88,104 +88,86 @@
 <span class="op">)</span>
 
 <span class="co"># S4 method for MariaDBConnection</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListTables.html">dbListTables</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">...</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListTables.html" class="external-link">dbListTables</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S4 method for MariaDBConnection</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListObjects.html">dbListObjects</a></span><span class="op">(</span><span class="va">conn</span>, prefix <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListObjects.html" class="external-link">dbListObjects</a></span><span class="op">(</span><span class="va">conn</span>, prefix <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S4 method for MariaDBConnection,character</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExistsTable.html">dbExistsTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">...</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExistsTable.html" class="external-link">dbExistsTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S4 method for MariaDBConnection,character</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html">dbRemoveTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">...</span>, temporary <span class="op">=</span> <span class="cn">FALSE</span>, fail_if_missing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">...</span>, temporary <span class="op">=</span> <span class="cn">FALSE</span>, fail_if_missing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
-    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>conn</th>
-      <td><p>a <a href="MariaDBConnection-class.html">MariaDBConnection</a> object, produced by
-<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html">DBI::dbConnect()</a></code></p></td>
-    </tr><tr><th>name</th>
-      <td><p>a character string specifying a table name.</p></td>
-    </tr><tr><th>...</th>
-      <td><p>Unused, needed for compatibility with generic.</p></td>
-    </tr><tr><th>row.names</th>
-      <td><p>Either <code>TRUE</code>, <code>FALSE</code>, <code>NA</code> or a string.</p>
-<p>If <code>TRUE</code>, always translate row names to a column called "row_names".
-If <code>FALSE</code>, never translate row names. If <code>NA</code>, translate
-rownames only if they're a character vector.</p>
-<p>A string is equivalent to <code>TRUE</code>, but allows you to override the
-default name.</p>
-<p>For backward compatibility, <code>NULL</code> is equivalent to <code>FALSE</code>.</p></td>
-    </tr><tr><th>check.names</th>
-      <td><p>If <code>TRUE</code>, the default, column names will be
-converted to valid R identifiers.</p></td>
-    </tr><tr><th>value</th>
-      <td><p>A data frame.</p></td>
-    </tr><tr><th>field.types</th>
-      <td><p>Optional, overrides default choices of field types,
-derived from the classes of the columns in the data frame.</p></td>
-    </tr><tr><th>overwrite</th>
-      <td><p>a logical specifying whether to overwrite an existing table
-or not. Its default is <code>FALSE</code>.</p></td>
-    </tr><tr><th>append</th>
-      <td><p>a logical specifying whether to append to an existing table
-in the DBMS.  If appending, then the table (or temporary table)
-must exist, otherwise an error is reported. Its default is <code>FALSE</code>.</p></td>
-    </tr><tr><th>temporary</th>
-      <td><p>If <code>TRUE</code>, creates a temporary table that expires
-when the connection is closed. For <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html">dbRemoveTable()</a></code>, only temporary
-tables are considered if this argument is set to <code>TRUE</code>.</p></td>
-    </tr><tr><th>header</th>
-      <td><p>logical, does the input file have a header line? Default is the
-same heuristic used by <code><a href="https://rdrr.io/r/utils/read.table.html">read.table()</a></code>, i.e., <code>TRUE</code> if the first
-line has one fewer column that the second line.</p></td>
-    </tr><tr><th>nrows</th>
-      <td><p>number of lines to rows to import using <code>read.table</code> from
-the input file to create the proper table definition. Default is 50.</p></td>
-    </tr><tr><th>sep</th>
-      <td><p>field separator character</p></td>
-    </tr><tr><th>eol</th>
-      <td><p>End-of-line separator</p></td>
-    </tr><tr><th>skip</th>
-      <td><p>number of lines to skip before reading data in the input file.</p></td>
-    </tr><tr><th>quote</th>
-      <td><p>the quote character used in the input file (defaults to
-<code>\"</code>.)</p></td>
-    </tr><tr><th>prefix</th>
-      <td><p>A fully qualified path in the database's namespace, or <code>NULL</code>.
-This argument will be processed with <code><a href="https://dbi.r-dbi.org/reference/dbUnquoteIdentifier.html">dbUnquoteIdentifier()</a></code>.
-If given the method will return all objects accessible through this prefix.</p></td>
-    </tr><tr><th>fail_if_missing</th>
-      <td><p>If <code>FALSE</code>, <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html">dbRemoveTable()</a></code> succeeds if the
-table doesn't exist.</p></td>
-    </tr></table></div>
+    <h2>Arguments</h2>
+    
 
+<dl><dt>conn</dt><dd><p>a <a href="MariaDBConnection-class.html">MariaDBConnection</a> object, produced by
+<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">DBI::dbConnect()</a></code></p></dd>
+</dl><dl><dt>name</dt><dd><p>a character string specifying a table name.</p></dd>
+</dl><dl><dt>...</dt><dd><p>Unused, needed for compatibility with generic.</p></dd>
+</dl><dl><dt>row.names</dt><dd><p>Either <code>TRUE</code>, <code>FALSE</code>, <code>NA</code> or a string.If <code>TRUE</code>, always translate row names to a column called "row_names".
+If <code>FALSE</code>, never translate row names. If <code>NA</code>, translate
+rownames only if they're a character vector.A string is equivalent to <code>TRUE</code>, but allows you to override the
+default name.For backward compatibility, <code>NULL</code> is equivalent to <code>FALSE</code>.</p></dd>
+</dl><dl><dt>check.names</dt><dd><p>If <code>TRUE</code>, the default, column names will be
+converted to valid R identifiers.</p></dd>
+</dl><dl><dt>value</dt><dd><p>A data frame.</p></dd>
+</dl><dl><dt>field.types</dt><dd><p>Optional, overrides default choices of field types,
+derived from the classes of the columns in the data frame.</p></dd>
+</dl><dl><dt>overwrite</dt><dd><p>a logical specifying whether to overwrite an existing table
+or not. Its default is <code>FALSE</code>.</p></dd>
+</dl><dl><dt>append</dt><dd><p>a logical specifying whether to append to an existing table
+in the DBMS.  If appending, then the table (or temporary table)
+must exist, otherwise an error is reported. Its default is <code>FALSE</code>.</p></dd>
+</dl><dl><dt>temporary</dt><dd><p>If <code>TRUE</code>, creates a temporary table that expires
+when the connection is closed. For <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code>, only temporary
+tables are considered if this argument is set to <code>TRUE</code>.</p></dd>
+</dl><dl><dt>header</dt><dd><p>logical, does the input file have a header line? Default is the
+same heuristic used by <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table()</a></code>, i.e., <code>TRUE</code> if the first
+line has one fewer column that the second line.</p></dd>
+</dl><dl><dt>nrows</dt><dd><p>number of lines to rows to import using <code>read.table</code> from
+the input file to create the proper table definition. Default is 50.</p></dd>
+</dl><dl><dt>sep</dt><dd><p>field separator character</p></dd>
+</dl><dl><dt>eol</dt><dd><p>End-of-line separator</p></dd>
+</dl><dl><dt>skip</dt><dd><p>number of lines to skip before reading data in the input file.</p></dd>
+</dl><dl><dt>quote</dt><dd><p>the quote character used in the input file (defaults to
+<code>\"</code>.)</p></dd>
+</dl><dl><dt>prefix</dt><dd><p>A fully qualified path in the database's namespace, or <code>NULL</code>.
+This argument will be processed with <code><a href="https://dbi.r-dbi.org/reference/dbUnquoteIdentifier.html" class="external-link">dbUnquoteIdentifier()</a></code>.
+If given the method will return all objects accessible through this prefix.</p></dd>
+</dl><dl><dt>fail_if_missing</dt><dd><p>If <code>FALSE</code>, <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code> succeeds if the
+table doesn't exist.</p></dd>
+</dl></div>
     <div id="value">
-    <h2>Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data.frame in the case of <code><a href="https://dbi.r-dbi.org/reference/dbReadTable.html">dbReadTable()</a></code>; otherwise a logical
+    <h2>Value</h2>
+    <p>A data.frame in the case of <code><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable()</a></code>; otherwise a logical
 indicating whether the operation was successful.</p>
     </div>
     <div id="note">
-    <h2>Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>The data.frame returned by <code><a href="https://dbi.r-dbi.org/reference/dbReadTable.html">dbReadTable()</a></code> only has
+    <h2>Note</h2>
+    <p>The data.frame returned by <code><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable()</a></code> only has
 primitive data, e.g., it does not coerce character data to factors.
-Temporary tables are ignored for <code><a href="https://dbi.r-dbi.org/reference/dbExistsTable.html">dbExistsTable()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbListTables.html">dbListTables()</a></code> due to
+Temporary tables are ignored for <code><a href="https://dbi.r-dbi.org/reference/dbExistsTable.html" class="external-link">dbExistsTable()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbListTables.html" class="external-link">dbListTables()</a></code> due to
 limitations of the underlying C API. For this reason, a prior existence check
 is performed only before creating a regular persistent table; an attempt to
 create a temporary table with an already existing name will fail with a
 message from the database driver.</p>
     </div>
+    </div>
 
     <div id="examples">
-    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="mariadbHasDefault.html">mariadbHasDefault</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu">RMariaDB</span><span class="fu">::</span><span class="fu"><a href="dbConnect-MariaDBDriver-method.html">MariaDB</a></span><span class="op">(</span><span class="op">)</span>, dbname <span class="op">=</span> <span class="st">"test"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">RMariaDB</span><span class="fu">::</span><span class="fu"><a href="dbConnect-MariaDBDriver-method.html">MariaDB</a></span><span class="op">(</span><span class="op">)</span>, dbname <span class="op">=</span> <span class="st">"test"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># By default, row names are written in a column to row_names, and</span></span>
 <span class="r-in"><span class="co"># automatically read back into the row.names()</span></span>
-<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html">dbWriteTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"mtcars"</span>, <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>, temporary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbReadTable.html">dbReadTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"mtcars"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbReadTable.html">dbReadTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"mtcars"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"mtcars"</span>, <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>, temporary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"mtcars"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"mtcars"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Could not initialise default MariaDB database. If MariaDB is running</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> check that you have a ~/.my.cnf file that contains a [rs-dbi] section</span>

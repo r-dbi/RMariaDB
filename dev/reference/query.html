@@ -35,7 +35,7 @@ dbExecute() corresponds to dbGetQuery()."><meta name="robots" content="noindex">
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/r-dbi/RMariaDB/">
+  <a href="https://github.com/r-dbi/RMariaDB/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -50,83 +50,76 @@ dbExecute() corresponds to dbGetQuery()."><meta name="robots" content="noindex">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Execute a SQL statement on a database connection.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/r-dbi/RMariaDB/blob/master/R/query.R"><code>R/query.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/r-dbi/RMariaDB/blob/master/R/query.R" class="external-link"><code>R/query.R</code></a></small>
     <div class="hidden name"><code>query.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>To retrieve results a chunk at a time, use <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html">dbSendQuery()</a></code>,
-<code><a href="https://dbi.r-dbi.org/reference/dbFetch.html">dbFetch()</a></code>, then <code><a href="https://dbi.r-dbi.org/reference/dbClearResult.html">dbClearResult()</a></code>. Alternatively, if you want all the
-results (and they'll fit in memory) use <code><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery()</a></code> which sends,
+    <p>To retrieve results a chunk at a time, use <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery()</a></code>,
+<code><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetch()</a></code>, then <code><a href="https://dbi.r-dbi.org/reference/dbClearResult.html" class="external-link">dbClearResult()</a></code>. Alternatively, if you want all the
+results (and they'll fit in memory) use <code><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQuery()</a></code> which sends,
 fetches and clears for you. For data manipulation queries (i.e. queries
 that do not return data, such as <code>UPDATE</code>, <code>DELETE</code>, etc.),
-<code><a href="https://dbi.r-dbi.org/reference/dbSendStatement.html">dbSendStatement()</a></code> serves as a counterpart to <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html">dbSendQuery()</a></code>, while
-<code><a href="https://dbi.r-dbi.org/reference/dbExecute.html">dbExecute()</a></code> corresponds to <code><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery()</a></code>.</p>
+<code><a href="https://dbi.r-dbi.org/reference/dbSendStatement.html" class="external-link">dbSendStatement()</a></code> serves as a counterpart to <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery()</a></code>, while
+<code><a href="https://dbi.r-dbi.org/reference/dbExecute.html" class="external-link">dbExecute()</a></code> corresponds to <code><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQuery()</a></code>.</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for MariaDBResult</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html">dbFetch</a></span><span class="op">(</span><span class="va">res</span>, n <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, <span class="va">...</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetch</a></span><span class="op">(</span><span class="va">res</span>, n <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, <span class="va">...</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 
 <span class="co"># S4 method for MariaDBConnection,character</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html">dbSendQuery</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">statement</span>, params <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">statement</span>, params <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S4 method for MariaDBConnection,character</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendStatement.html">dbSendStatement</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">statement</span>, params <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendStatement.html" class="external-link">dbSendStatement</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">statement</span>, params <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S4 method for MariaDBResult</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbBind.html">dbBind</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">params</span>, <span class="va">...</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">params</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S4 method for MariaDBResult</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html">dbClearResult</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">...</span><span class="op">)</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html" class="external-link">dbClearResult</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">...</span><span class="op">)</span>
 
 <span class="co"># S4 method for MariaDBResult</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetStatement.html">dbGetStatement</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetStatement.html" class="external-link">dbGetStatement</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
-    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>res</th>
-      <td><p>A  <a href="MariaDBResult-class.html">MariaDBResult</a> object.</p></td>
-    </tr><tr><th>n</th>
-      <td><p>Number of rows to retrieve. Use -1 to retrieve all rows.</p></td>
-    </tr><tr><th>...</th>
-      <td><p>Unused. Needed for compatibility with generic.</p></td>
-    </tr><tr><th>row.names</th>
-      <td><p>Either <code>TRUE</code>, <code>FALSE</code>, <code>NA</code> or a string.</p>
-<p>If <code>TRUE</code>, always translate row names to a column called "row_names".
-If <code>FALSE</code>, never translate row names. If <code>NA</code>, translate
-rownames only if they're a character vector.</p>
-<p>A string is equivalent to <code>TRUE</code>, but allows you to override the
-default name.</p>
-<p>For backward compatibility, <code>NULL</code> is equivalent to <code>FALSE</code>.</p></td>
-    </tr><tr><th>conn</th>
-      <td><p>an <a href="MariaDBConnection-class.html">MariaDBConnection</a> object.</p></td>
-    </tr><tr><th>statement</th>
-      <td><p>a character vector of length one specifying the SQL
-statement that should be executed.  Only a single SQL statement should be
-provided.</p></td>
-    </tr><tr><th>params</th>
-      <td><p>A list of query parameters to be substituted into
-a parameterised query.</p></td>
-    </tr></table></div>
+    <h2>Arguments</h2>
+    
 
+<dl><dt>res</dt><dd><p>A  <a href="MariaDBResult-class.html">MariaDBResult</a> object.</p></dd>
+</dl><dl><dt>n</dt><dd><p>Number of rows to retrieve. Use -1 to retrieve all rows.</p></dd>
+</dl><dl><dt>...</dt><dd><p>Unused. Needed for compatibility with generic.</p></dd>
+</dl><dl><dt>row.names</dt><dd><p>Either <code>TRUE</code>, <code>FALSE</code>, <code>NA</code> or a string.If <code>TRUE</code>, always translate row names to a column called "row_names".
+If <code>FALSE</code>, never translate row names. If <code>NA</code>, translate
+rownames only if they're a character vector.A string is equivalent to <code>TRUE</code>, but allows you to override the
+default name.For backward compatibility, <code>NULL</code> is equivalent to <code>FALSE</code>.</p></dd>
+</dl><dl><dt>conn</dt><dd><p>an <a href="MariaDBConnection-class.html">MariaDBConnection</a> object.</p></dd>
+</dl><dl><dt>statement</dt><dd><p>a character vector of length one specifying the SQL
+statement that should be executed.  Only a single SQL statement should be
+provided.</p></dd>
+</dl><dl><dt>params</dt><dd><p>A list of query parameters to be substituted into
+a parameterised query.</p></dd>
+</dl></div>
+    </div>
 
     <div id="examples">
-    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="mariadbHasDefault.html">mariadbHasDefault</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu">RMariaDB</span><span class="fu">::</span><span class="fu"><a href="dbConnect-MariaDBDriver-method.html">MariaDB</a></span><span class="op">(</span><span class="op">)</span>, dbname <span class="op">=</span> <span class="st">"test"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html">dbWriteTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"arrests"</span>, <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/USArrests.html">USArrests</a></span>, temporary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu">RMariaDB</span><span class="fu">::</span><span class="fu"><a href="dbConnect-MariaDBDriver-method.html">MariaDB</a></span><span class="op">(</span><span class="op">)</span>, dbname <span class="op">=</span> <span class="st">"test"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"arrests"</span>, <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/USArrests.html" class="external-link">USArrests</a></span>, temporary <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Run query to get results as dataframe</span></span>
-<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * FROM arrests limit 3"</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQuery</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * FROM arrests limit 3"</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Send query to pull requests in batches</span></span>
-<span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html">dbSendQuery</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * FROM arrests"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html">dbFetch</a></span><span class="op">(</span><span class="va">res</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"SELECT * FROM arrests"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbFetch.html" class="external-link">dbFetch</a></span><span class="op">(</span><span class="va">res</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">data</span></span>
-<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbHasCompleted.html">dbHasCompleted</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbHasCompleted.html" class="external-link">dbHasCompleted</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html">dbClearResult</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbClearResult.html" class="external-link">dbClearResult</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html" class="external-link">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">}</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Could not initialise default MariaDB database. If MariaDB is running</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> check that you have a ~/.my.cnf file that contains a [rs-dbi] section</span>

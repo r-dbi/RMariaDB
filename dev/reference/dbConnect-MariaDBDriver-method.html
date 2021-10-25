@@ -30,7 +30,7 @@ generic functions."><meta name="robots" content="noindex"><!-- mathjax --><scrip
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://github.com/r-dbi/RMariaDB/">
+  <a href="https://github.com/r-dbi/RMariaDB/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -45,7 +45,7 @@ generic functions."><meta name="robots" content="noindex"><!-- mathjax --><scrip
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Connect/disconnect to a MariaDB DBMS</h1>
-    <small class="dont-index">Source: <a href="https://github.com/r-dbi/RMariaDB/blob/master/R/connect.R"><code>R/connect.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/r-dbi/RMariaDB/blob/master/R/connect.R" class="external-link"><code>R/connect.R</code></a></small>
     <div class="hidden name"><code>dbConnect-MariaDBDriver-method.Rd</code></div>
     </div>
 
@@ -55,7 +55,7 @@ generic functions.</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for MariaDBDriver</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span>
   <span class="va">drv</span>,
   dbname <span class="op">=</span> <span class="cn">NULL</span>,
   username <span class="op">=</span> <span class="cn">NULL</span>,
@@ -72,7 +72,7 @@ generic functions.</p>
   ssl.capath <span class="op">=</span> <span class="cn">NULL</span>,
   ssl.cipher <span class="op">=</span> <span class="cn">NULL</span>,
   <span class="va">...</span>,
-  bigint <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"integer64"</span>, <span class="st">"integer"</span>, <span class="st">"numeric"</span>, <span class="st">"character"</span><span class="op">)</span>,
+  bigint <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"integer64"</span>, <span class="st">"integer"</span>, <span class="st">"numeric"</span>, <span class="st">"character"</span><span class="op">)</span>,
   timeout <span class="op">=</span> <span class="fl">10</span>,
   timezone <span class="op">=</span> <span class="st">"+00:00"</span>,
   timezone_out <span class="op">=</span> <span class="cn">NULL</span>
@@ -80,90 +80,73 @@ generic functions.</p>
 
 <span class="fu">MariaDB</span><span class="op">(</span><span class="op">)</span></code></pre></div>
 
+    <div id="ref-sections">
     <div id="arguments">
-    <h2>Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <table class="ref-arguments"><colgroup><col class="name"><col class="desc"></colgroup><tr><th>drv</th>
-      <td><p>an object of class <a href="MariaDBDriver-class.html">MariaDBDriver</a> or
-<a href="MariaDBConnection-class.html">MariaDBConnection</a>.</p></td>
-    </tr><tr><th>dbname</th>
-      <td><p>string with the database name or NULL. If not NULL, the
-connection sets the default database to this value.</p></td>
-    </tr><tr><th>username, password</th>
-      <td><p>Username and password. If username omitted,
+    <h2>Arguments</h2>
+    
+
+<dl><dt>drv</dt><dd><p>an object of class <a href="MariaDBDriver-class.html">MariaDBDriver</a> or
+<a href="MariaDBConnection-class.html">MariaDBConnection</a>.</p></dd>
+</dl><dl><dt>dbname</dt><dd><p>string with the database name or NULL. If not NULL, the
+connection sets the default database to this value.</p></dd>
+</dl><dl><dt>username, password</dt><dd><p>Username and password. If username omitted,
 defaults to the current user. If password is omitted, only users
-without a password can log in.</p></td>
-    </tr><tr><th>host</th>
-      <td><p>string identifying the host machine running the MariaDB server or
+without a password can log in.</p></dd>
+</dl><dl><dt>host</dt><dd><p>string identifying the host machine running the MariaDB server or
 NULL. If NULL or the string <code>"localhost"</code>, a connection to the local
-host is assumed.</p></td>
-    </tr><tr><th>unix.socket</th>
-      <td><p>(optional) string of the unix socket or named pipe.</p></td>
-    </tr><tr><th>port</th>
-      <td><p>(optional) integer of the TCP/IP default port.</p></td>
-    </tr><tr><th>client.flag</th>
-      <td><p>(optional) integer setting various MariaDB client flags,
-see <a href="Client-flags.html">Client-flags</a> for details.</p></td>
-    </tr><tr><th>groups</th>
-      <td><p>string identifying a section in the <code>default.file</code> to use
-for setting authentication parameters (see <code>MariaDB()</code>).</p></td>
-    </tr><tr><th>default.file</th>
-      <td><p>string of the filename with MariaDB client options,
+host is assumed.</p></dd>
+</dl><dl><dt>unix.socket</dt><dd><p>(optional) string of the unix socket or named pipe.</p></dd>
+</dl><dl><dt>port</dt><dd><p>(optional) integer of the TCP/IP default port.</p></dd>
+</dl><dl><dt>client.flag</dt><dd><p>(optional) integer setting various MariaDB client flags,
+see <a href="Client-flags.html">Client-flags</a> for details.</p></dd>
+</dl><dl><dt>groups</dt><dd><p>string identifying a section in the <code>default.file</code> to use
+for setting authentication parameters (see <code>MariaDB()</code>).</p></dd>
+</dl><dl><dt>default.file</dt><dd><p>string of the filename with MariaDB client options,
 only relevant if <code>groups</code> is given. The default value depends on the
 operating system (see references), on Linux and OS X the files
-<code>~/.my.cnf</code> and <code>~/.mylogin.cnf</code> are used. Expanded with <code><a href="https://rdrr.io/r/base/normalizePath.html">normalizePath()</a></code>.</p></td>
-    </tr><tr><th>ssl.key</th>
-      <td><p>(optional) string of the filename of the SSL key file to use.
-Expanded with <code><a href="https://rdrr.io/r/base/normalizePath.html">normalizePath()</a></code>.</p></td>
-    </tr><tr><th>ssl.cert</th>
-      <td><p>(optional) string of the filename of the SSL certificate to
-use. Expanded with <code><a href="https://rdrr.io/r/base/normalizePath.html">normalizePath()</a></code>.</p></td>
-    </tr><tr><th>ssl.ca</th>
-      <td><p>(optional) string of the filename of an SSL certificate
-authority file to use. Expanded with <code><a href="https://rdrr.io/r/base/normalizePath.html">normalizePath()</a></code>.</p></td>
-    </tr><tr><th>ssl.capath</th>
-      <td><p>(optional) string of the path to a directory containing
+<code>~/.my.cnf</code> and <code>~/.mylogin.cnf</code> are used. Expanded with <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code>.</p></dd>
+</dl><dl><dt>ssl.key</dt><dd><p>(optional) string of the filename of the SSL key file to use.
+Expanded with <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code>.</p></dd>
+</dl><dl><dt>ssl.cert</dt><dd><p>(optional) string of the filename of the SSL certificate to
+use. Expanded with <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code>.</p></dd>
+</dl><dl><dt>ssl.ca</dt><dd><p>(optional) string of the filename of an SSL certificate
+authority file to use. Expanded with <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code>.</p></dd>
+</dl><dl><dt>ssl.capath</dt><dd><p>(optional) string of the path to a directory containing
 the trusted SSL CA certificates in PEM format. Expanded with
-<code><a href="https://rdrr.io/r/base/normalizePath.html">normalizePath()</a></code>.</p></td>
-    </tr><tr><th>ssl.cipher</th>
-      <td><p>(optional) string list of permitted ciphers to use for SSL
-encryption.</p></td>
-    </tr><tr><th>...</th>
-      <td><p>Unused, needed for compatibility with generic.</p></td>
-    </tr><tr><th>bigint</th>
-      <td><p>The R type that 64-bit integer types should be mapped to,
-default is <a href="https://rdrr.io/pkg/bit64/man/bit64-package.html">bit64::integer64</a>, which allows the full range of 64 bit
-integers.</p></td>
-    </tr><tr><th>timeout</th>
-      <td><p>Connection timeout, in seconds. Use <code>Inf</code> or a negative value
-for no timeout.</p></td>
-    </tr><tr><th>timezone</th>
-      <td><p>(optional) time zone for the connection,
+<code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code>.</p></dd>
+</dl><dl><dt>ssl.cipher</dt><dd><p>(optional) string list of permitted ciphers to use for SSL
+encryption.</p></dd>
+</dl><dl><dt>...</dt><dd><p>Unused, needed for compatibility with generic.</p></dd>
+</dl><dl><dt>bigint</dt><dd><p>The R type that 64-bit integer types should be mapped to,
+default is <a href="https://rdrr.io/pkg/bit64/man/bit64-package.html" class="external-link">bit64::integer64</a>, which allows the full range of 64 bit
+integers.</p></dd>
+</dl><dl><dt>timeout</dt><dd><p>Connection timeout, in seconds. Use <code>Inf</code> or a negative value
+for no timeout.</p></dd>
+</dl><dl><dt>timezone</dt><dd><p>(optional) time zone for the connection,
 the default corresponds to UTC.
 Set this argument if your server or database is configured with a different
 time zone than UTC.
-Set to <code>NULL</code> to automatically determine the server time zone.</p></td>
-    </tr><tr><th>timezone_out</th>
-      <td><p>The time zone returned to R.
+Set to <code>NULL</code> to automatically determine the server time zone.</p></dd>
+</dl><dl><dt>timezone_out</dt><dd><p>The time zone returned to R.
 The default is to use the value of the <code>timezone</code> argument,
 <code>"+00:00"</code> is converted to <code>"UTC"</code>
 If you want to display datetime values in the local timezone,
-set to <code><a href="https://rdrr.io/r/base/timezones.html">Sys.timezone()</a></code> or <code>""</code>.
-This setting does not change the time values returned, only their display.</p></td>
-    </tr></table></div>
-
+set to <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone()</a></code> or <code>""</code>.
+This setting does not change the time values returned, only their display.</p></dd>
+</dl></div>
     <div id="time-zones">
-    <h2>Time zones<a class="anchor" aria-label="anchor" href="#time-zones"></a></h2>
+    <h2>Time zones</h2>
     
 
 <p>MySQL and MariaDB support named time zones,
 they must be installed on the server.
-See <a href="https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html">https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html</a>
+See <a href="https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html" class="external-link">https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html</a>
 for more details.
 Without installation, time zone support is restricted to UTC offset,
 which cannot take into account DST offsets.</p>
     </div>
     <div id="secure-passwords">
-    <h2>Secure passwords<a class="anchor" aria-label="anchor" href="#secure-passwords"></a></h2>
+    <h2>Secure passwords</h2>
     
 
 <p>Avoid storing passwords hard-coded in the code, use e.g. the <span class="pkg">keyring</span>
@@ -179,12 +162,13 @@ Windows and macOS binaries on CRAN are compiled against the MariaDB Connector/C
 client library which do not support this feature.</p>
     </div>
     <div id="references">
-    <h2>References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <h2>References</h2>
     <p>Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/</p>
+    </div>
     </div>
 
     <div id="examples">
-    <h2>Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
+    <h2>Examples</h2>
     <div class="ref-examples sourceCode"></div>
     </div>
   </div>

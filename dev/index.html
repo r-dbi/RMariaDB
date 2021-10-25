@@ -51,7 +51,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-dbi/RMariaDB/">
+  <a href="https://github.com/r-dbi/RMariaDB/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -68,14 +68,14 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="rmariadb" class="section level1">
-<div class="page-header"><h1>RMariaDB<a class="anchor" aria-label="anchor" href="#rmariadb"></a>
+<div class="section level1">
+<div class="page-header"><h1 id="rmariadb">RMariaDB<a class="anchor" aria-label="anchor" href="#rmariadb"></a>
 </h1></div>
 <!-- badges: start -->
 
 <p>RMariaDB is a database interface and MariaDB driver for R. This version is aimed at full compliance with the <a href="https://cran.r-project.org/package=DBI/vignettes/spec.html" class="external-link">DBI specification</a>, as a replacement for the old <a href="https://cran.r-project.org/package=RMySQL" class="external-link">RMySQL</a> package.</p>
-<div id="hello-world" class="section level2">
-<h2>Hello World<a class="anchor" aria-label="anchor" href="#hello-world"></a>
+<div class="section level2">
+<h2 id="hello-world">Hello World<a class="anchor" aria-label="anchor" href="#hello-world"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org" class="external-link">DBI</a></span><span class="op">)</span>
@@ -106,8 +106,8 @@
 <span class="co"># Disconnect from the database</span>
 <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbDisconnect.html" class="external-link">dbDisconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="installation" class="section level2">
-<h2>Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>Binary packages for <strong>OS X</strong> or <strong>Windows</strong> can be installed directly from CRAN:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -119,8 +119,8 @@
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-dbi/RMariaDB"</span><span class="op">)</span></code></pre></div>
 <p>Discussions associated with DBI and related database packages take place on <a href="https://stat.ethz.ch/mailman/listinfo/r-sig-db" class="external-link">R-SIG-DB</a>. The website <a href="https://db.rstudio.com/" class="external-link">Databases using R</a> describes the tools and best practices in this ecosystem.</p>
 <p>Installation from source on Linux or OS X currently requires <a href="https://downloads.mariadb.org/connector-c/" class="external-link"><code>MariaDB Connector/C</code></a>, preferably in version 2.3.4/3.0.3 or later. With older versions, character and blob columns do not work reliably. Alternatively, Oracle’s <a href="https://packages.debian.org/buster/default-libmysqlclient-dev" class="external-link">libmysqlclient</a> can be used.</p>
-<div id="connectorc" class="section level3">
-<h3>Connector/C<a class="anchor" aria-label="anchor" href="#connectorc"></a>
+<div class="section level3">
+<h3 id="connectorc">Connector/C<a class="anchor" aria-label="anchor" href="#connectorc"></a>
 </h3>
 <p>On recent <strong>Debian</strong> or <strong>Ubuntu</strong> install <a href="https://packages.debian.org/testing/libmariadb-dev" class="external-link">libmariadb-dev</a>.</p>
 <pre><code>sudo apt-get install -y libmariadb-dev</code></pre>
@@ -129,8 +129,8 @@
 <p>On <strong>OS X</strong> use <a href="https://github.com/Homebrew/homebrew-core/blob/master/Formula/mariadb-connector-c.rb" class="external-link">mariadb-connector-c</a> from Homebrew:</p>
 <pre><code>brew install mariadb-connector-c</code></pre>
 </div>
-<div id="mysql-client-library" class="section level3">
-<h3>MySQL client library<a class="anchor" aria-label="anchor" href="#mysql-client-library"></a>
+<div class="section level3">
+<h3 id="mysql-client-library">MySQL client library<a class="anchor" aria-label="anchor" href="#mysql-client-library"></a>
 </h3>
 <p>On recent <strong>Debian</strong> or <strong>Ubuntu</strong> install <a href="https://packages.debian.org/buster/default-libmysqlclient-dev" class="external-link">libmysqlclient-dev</a>.</p>
 <pre><code>sudo apt-get install -y libmysqlclient-dev</code></pre>
@@ -141,8 +141,8 @@
 <pre><code>brew install mysql-connector-c++</code></pre>
 </div>
 </div>
-<div id="mariadb-configuration-file" class="section level2">
-<h2>MariaDB configuration file<a class="anchor" aria-label="anchor" href="#mariadb-configuration-file"></a>
+<div class="section level2">
+<h2 id="mariadb-configuration-file">MariaDB configuration file<a class="anchor" aria-label="anchor" href="#mariadb-configuration-file"></a>
 </h2>
 <p>Instead of specifying a username and password in calls to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code>, it’s better to set up a MariaDB configuration file that names the databases that you connect to most commonly. This file should live in <code>~/.my.cnf</code> and look like:</p>
 <pre><code>[database_name]
@@ -154,8 +154,8 @@ database="test"
 user="root"
 password=""</code></pre>
 </div>
-<div id="acknowledgements" class="section level2">
-<h2>Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
+<div class="section level2">
+<h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
 </h2>
 <p>Many thanks to Christoph M. Friedrich, John Heuer, Kurt Hornik, Torsten Hothorn, Saikat Debroy, Matthew Kelly, Brian D. Ripley, Mikhail Kondrin, Jake Luciani, Jens Nieschulze, Deepayan Sarkar, Louis Springer, Duncan Temple Lang, Luis Torgo, Arend P. van der Veen, Felix Weninger, J. T. Lindgren, Crespin Miller, and Michal Okonlewski, Seth Falcon and Paul Gilbert for comments, suggestions, bug reports, and patches to the original <a href="https://cran.r-project.org/package=RMySQL" class="external-link">RMySQL</a> package, and to all contributors (of <a href="https://github.com/r-dbi/RMariaDB/graphs/contributors" class="external-link">code</a> and discussions) to this package.</p>
 <hr>
@@ -168,15 +168,15 @@ password=""</code></pre>
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=RMariaDB">https://​cloud.r-project.org/​package=RMariaDB</a>
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=RMariaDB" class="external-link">https://​cloud.r-project.org/​package=RMariaDB</a>
 </li>
-<li>Browse source code at <br><a href="https://github.com/r-dbi/RMariaDB/">https://​github.com/​r-dbi/​RMariaDB/​</a>
+<li>Browse source code at <br><a href="https://github.com/r-dbi/RMariaDB/" class="external-link">https://​github.com/​r-dbi/​RMariaDB/​</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/r-dbi/RMariaDB/issues">https://​github.com/​r-dbi/​RMariaDB/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/r-dbi/RMariaDB/issues" class="external-link">https://​github.com/​r-dbi/​RMariaDB/​issues</a>
 </li>
 <li>Report a security vulnerability at <br><a href="https://rmariadb.r-dbi.org/security.html">https://​rmariadb.r-dbi.org/​security.html</a>
 </li>
-<li>DBI project website at <br><a href="https://r-dbi.org">https://​r-dbi.org</a>
+<li>DBI project website at <br><a href="https://r-dbi.org" class="external-link">https://​r-dbi.org</a>
 </li>
 </ul>
 </div>
@@ -185,7 +185,7 @@ password=""</code></pre>
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 
@@ -201,15 +201,15 @@ password=""</code></pre>
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://krlmlr.info">Kirill Müller</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1416-3412" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Jeroen Ooms <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4035-0289" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="https://krlmlr.info" class="external-link">Kirill Müller</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1416-3412" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Jeroen Ooms <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4035-0289" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>David James <br><small class="roles"> Author </small>  </li>
 <li>Saikat DebRoy <br><small class="roles"> Author </small>  </li>
 <li>
-<a href="http://hadley.nz">Hadley Wickham</a> <br><small class="roles"> Author </small>  </li>
+<a href="http://hadley.nz" class="external-link">Hadley Wickham</a> <br><small class="roles"> Author </small>  </li>
 <li>Jeffrey Horner <br><small class="roles"> Author </small>  </li>
 <li>
-<a href="https://www.r-consortium.org">R Consortium</a> <br><small class="roles"> Funder </small>  </li>
+<a href="https://www.r-consortium.org" class="external-link">R Consortium</a> <br><small class="roles"> Funder </small>  </li>
 <li><a href="authors.html">More on authors...</a></li>
 </ul>
 </div>
