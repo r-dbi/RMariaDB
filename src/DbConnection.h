@@ -27,7 +27,8 @@ public:
           unsigned long client_flag, const Nullable<std::string>& groups, const Nullable<std::string>& default_file,
           const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
           const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
-          const Nullable<std::string>& ssl_cipher);
+          const Nullable<std::string>& ssl_cipher,
+          int timeout);
   void disconnect();
   bool is_valid();
   void check_connection();

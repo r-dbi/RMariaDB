@@ -22,7 +22,10 @@
   ssl.capath = NULL,
   ssl.cipher = NULL,
   ...,
-  bigint = c("integer64", "integer", "numeric", "character")
+  bigint = c("integer64", "integer", "numeric", "character"),
+  timeout = 10,
+  timezone = "+00:00",
+  timezone_out = NULL
 )
 
 MariaDB()
@@ -55,18 +58,20 @@ for setting authentication parameters (see \code{\link[=MariaDB]{MariaDB()}}).}
 \item{default.file}{string of the filename with MariaDB client options,
 only relevant if \code{groups} is given. The default value depends on the
 operating system (see references), on Linux and OS X the files
-\verb{~/.my.cnf} and \verb{~/.mylogin.cnf} are used.}
+\verb{~/.my.cnf} and \verb{~/.mylogin.cnf} are used. Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
-\item{ssl.key}{(optional) string of the filename of the SSL key file to use.}
+\item{ssl.key}{(optional) string of the filename of the SSL key file to use.
+Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.cert}{(optional) string of the filename of the SSL certificate to
-use.}
+use. Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.ca}{(optional) string of the filename of an SSL certificate
-authority file to use.}
+authority file to use. Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.capath}{(optional) string of the path to a directory containing
-the trusted SSL CA certificates in PEM format.}
+the trusted SSL CA certificates in PEM format. Expanded with
+\code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.cipher}{(optional) string list of permitted ciphers to use for SSL
 encryption.}
@@ -74,13 +79,55 @@ encryption.}
 \item{...}{Unused, needed for compatibility with generic.}
 
 \item{bigint}{The R type that 64-bit integer types should be mapped to,
-default is \link[bit64:integer64]{bit64::integer64}, which allows the full range of 64 bit
+default is \link[bit64:bit64-package]{bit64::integer64}, which allows the full range of 64 bit
 integers.}
+
+\item{timeout}{Connection timeout, in seconds. Use \code{Inf} or a negative value
+for no timeout.}
+
+\item{timezone}{(optional) time zone for the connection,
+the default corresponds to UTC.
+Set this argument if your server or database is configured with a different
+time zone than UTC.
+Set to \code{NULL} to automatically determine the server time zone.}
+
+\item{timezone_out}{The time zone returned to R.
+The default is to use the value of the \code{timezone} argument,
+\code{"+00:00"} is converted to \code{"UTC"}
+If you want to display datetime values in the local timezone,
+set to \code{\link[=Sys.timezone]{Sys.timezone()}} or \code{""}.
+This setting does not change the time values returned, only their display.}
 }
 \description{
 These methods are straight-forward implementations of the corresponding
 generic functions.
 }
+\section{Time zones}{
+
+MySQL and MariaDB support named time zones,
+they must be installed on the server.
+See \url{https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html}
+for more details.
+Without installation, time zone support is restricted to UTC offset,
+which cannot take into account DST offsets.
+}
+
+\section{Secure passwords}{
+
+Avoid storing passwords hard-coded in the code, use e.g. the \pkg{keyring}
+package to store and retrieve passwords in a secure way.
+
+The MySQL client library (but not MariaDB) supports a \code{.mylogin.cnf} file
+that can be passed in the \code{default.file} argument.
+This file can contain an obfuscated password, which is not a secure way
+to store passwords but may be acceptable if the user is aware of the
+restrictions.
+The availability of this feature depends on the client library used
+for compiling the \pkg{RMariaDB} package.
+Windows and macOS binaries on CRAN are compiled against the MariaDB Connector/C
+client library which do not support this feature.
+}
+
 \examples{
 \dontrun{
 # Connect to a MariaDB database running locally

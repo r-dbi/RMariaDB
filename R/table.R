@@ -81,6 +81,10 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
            overwrite = FALSE, append = FALSE, ...,
            temporary = FALSE) {
 
+    if (!is.data.frame(value))  {
+      stopc("`value` must be data frame")
+    }
+
     row.names <- compatRowNames(row.names)
 
     if ((!is.logical(row.names) && !is.character(row.names)) || length(row.names) != 1L)  {
@@ -125,7 +129,10 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
       dbRemoveTable(conn, name, temporary = temporary, fail_if_missing = FALSE)
     }
 
-    value <- sql_data(value[, , drop = FALSE], row.names)
+    # dbAppendTable() calls sql_data(), we only need to take care of row names
+    row.names <- compatRowNames(row.names)
+    value <- sqlRownamesToColumn(value, row.names)
+    value <- factor_to_string(value)
 
     if (!found || overwrite) {
       if (is.null(field.types)) {
@@ -166,7 +173,7 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
 )
 
 setMethod("sqlData", "MariaDBConnection", function(con, value, row.names = FALSE, ...) {
-  value <- sql_data(value, row.names)
+  value <- sql_data(value, con, row.names)
   value <- quote_string(value, con)
 
   value
@@ -357,19 +364,28 @@ setMethod("dbDataType", "MariaDBConnection", function(dbObj, obj, ...) {
 #' @export
 #' @rdname dbDataType
 setMethod("dbDataType", "MariaDBDriver", function(dbObj, obj, ...) {
-  if (is.factor(obj)) return("TEXT")
-  if (inherits(obj, "POSIXct")) return("DATETIME")
+  if (is.factor(obj)) return(get_char_type(levels(obj)))
+  if (inherits(obj, "POSIXct")) return("DATETIME(6)")
   if (inherits(obj, "Date")) return("DATE")
-  if (inherits(obj, "difftime")) return("TIME")
+  if (inherits(obj, "difftime")) return("TIME(6)")
   if (inherits(obj, "integer64")) return("BIGINT")
   if (is.data.frame(obj)) return(callNextMethod(dbObj, obj))
 
   switch(typeof(obj),
-    logical = "TINYINT",
+    logical = "TINYINT", # works better than BIT(1), https://stackoverflow.com/q/289727/946850
     integer = "INTEGER",
     double = "DOUBLE",
-    character = "TEXT",
+    character = get_char_type(obj),
     list = "BLOB",
     stop("Unsupported type", call. = FALSE)
   )
 })
+
+get_char_type <- function(x) {
+  width <- max(nchar(enc2utf8(x)), 1, na.rm = TRUE)
+  if (width > 255) {
+    "TEXT"
+  } else {
+    paste0("VARCHAR(", width, ")")
+  }
+}

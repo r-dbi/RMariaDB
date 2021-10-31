@@ -1,3 +1,96 @@
+<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+
+# RMariaDB 1.1.2 (2021-09-06)
+
+## Licensing
+
+- RMariaDB is now licensed under the MIT license (#213).
+
+## Features
+
+- `dbConnect()` normalizes all input paths (#197, @twentytitus).
+- `dbDataType()` returns `TIME(6)` for `difftime`, and `DATETIME(6)` for `POSIXt` columns, to create columns with microsecond precision by default (#214).
+
+## Documentation
+
+- Now referring to the `libmariadb-dev` Debian/Ubuntu package in documentation and configuration scripts (#219).
+- `?dbConnect` gains a section on secure passwords and the `.mylogin.cnf` file (#156).
+
+## Internal
+
+- Test MySQL and MariaDB Server and client libraries in all combinations on GitHub Actions (#224).
+
+- The `configure` script now queries the `RMARIADB_FORCE_MARIADBCONFIG` and `RMARIADB_FORCE_MYSQLCONFIG` environment variables to force use of `mariadb_config` or `mysql_config`, respectively (#218).
+
+
+# RMariaDB 1.1.1 (2021-04-12)
+
+## Features
+
+- `BIT(1)` columns are returned as `logical` (#84). `NULL` is mapped to `NA` for `bit(1)` columns (#201, @dirkschumacher).
+- `dbConnect()` now supports `timezone_out` argument. Explicitly setting `timezone` to `NULL` tries to detect the database time zone (#116).
+
+## Bug fixes
+
+- Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (#116).
+- Timestamp roundtrip no longer fails on Windows i386 (#117).
+
+## Internal
+
+- Remove BH dependency by inlining the header files (#208).
+
+
+# RMariaDB 1.1.0 (2021-01-05)
+
+## Features
+
+- `dbConnect()` now supports `timezone_out` argument. Explicitly setting `timezone` to `NULL` tries to detect the database time zone (#116).
+- `BIT(1)` columns are returned as `logical` (#84).
+- `dbQuoteLiteral()` now correctly quotes difftime values (#188).
+
+## Bug fixes
+
+- Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (#116).
+- Timestamp roundtrip no longer fails on Windows i386 (#117).
+- `dbBind()` also works for `"Date"` values that are stored as integers (#187).
+
+
+# RMariaDB 1.0.11 (2020-12-16)
+
+## Features
+
+- Windows: update to libmariadbclient 3.1.11
+- Add `timezone` argument to `dbConnect()` (#184, @ycphs).
+- `dbWriteTable()` and `dbBind()` correctly interpret difftime values with units other than `"secs"`.
+
+## Internal
+
+- `./configure` no longer requires `bash` (@jeroen).
+- Switch to GitHub Actions (#185, thanks @ankane).
+
+
+# RMariaDB 1.0.10 (2020-08-26)
+
+## Features
+
+- `dbConnect()` gains a `timeout` argument, defaults to 10. Use `Inf` or a negative value for no timeout (#169).
+- Support fractional seconds in datetime values for reading and writing (#157).
+
+
+## Bug fixes
+
+- `dbDataType()` returns `VARCHAR(1)` for length-0 character vectors.
+- `dbDataType()` returns `VARCHAR()` for factors.
+- `dbSendQuery()` and `dbSendStatement()` clear the result set if `dbBind()` throws an error.
+- Check that input to `dbWriteTable()` is a data frame (#160, @rossholmberg).
+
+
+# RMariaDB 1.0.9
+
+- Use `VARCHAR` as data type for string columns (#159).
+- Encode column names as UTF-8 (#109).
+
+
 # RMariaDB 1.0.8
 
 - Implement `dbGetInfo()` according to the specification.
@@ -68,27 +161,27 @@ Initial release, compliant to the DBI specification.
  *  RMariaDB has been rewritten (essentially from scratch) in C++ with
     Rcpp. This has considerably reduced the amount of code, and allow us to
     take advantage of the more sophisticated memory management tools available in
-    Rcpp. This rewrite should yield some minor performance improvements, but 
+    Rcpp. This rewrite should yield some minor performance improvements, but
     most importantly protect against memory leaks and crashes. It also provides
     a better base for future development.
 
- *  Support for prepared queries: create prepared query with `dbSendQuery()` 
-    and bind values with `dbBind()`. `dbSendQuery()` and `dbGetQuery()` also 
-    support inline parameterised queries, like 
-    `dbGetQuery(mariadbDefault(), "SELECT * FROM mtcars WHERE cyl = :cyl", 
-    params = list(cyl = 4))`. This has no performance benefits but protects you 
+ *  Support for prepared queries: create prepared query with `dbSendQuery()`
+    and bind values with `dbBind()`. `dbSendQuery()` and `dbGetQuery()` also
+    support inline parameterised queries, like
+    `dbGetQuery(mariadbDefault(), "SELECT * FROM mtcars WHERE cyl = :cyl",
+    params = list(cyl = 4))`. This has no performance benefits but protects you
     from SQL injection attacks.
 
  * `dbListFields()` has been removed. Please use `dbColumnInfo()` instead.
 
- * `dbGetInfo()` has been removed. Please use the individual metadata 
+ * `dbGetInfo()` has been removed. Please use the individual metadata
     functions.
 
  *  Information formerly contain in `summary()` methods has now been integrated
     into `show()` methods.
 
  *  `make.db.names()` has been deprecated. Use `dbQuoteIdentifier()` instead.
- 
+
  *  `isIdCurrent()` has been deprecated. Use `dbIsValid()` instead.
 
  *  `dbApply()`, `dbMoreResults()` and `dbNextResults()` have been removed.

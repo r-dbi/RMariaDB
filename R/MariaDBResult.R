@@ -10,7 +10,8 @@ setClass("MariaDBResult",
   slots = list(
     ptr = "externalptr",
     sql = "character",
-    bigint = "character"
+    bigint = "character",
+    conn = "MariaDBConnection"
   )
 )
 

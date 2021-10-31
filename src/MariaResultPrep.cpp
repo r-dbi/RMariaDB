@@ -250,7 +250,8 @@ void MariaResultPrep::cache_metadata() {
     names_.push_back(fields[i].name);
 
     bool binary = fields[i].charsetnr == 63;
-    MariaFieldType type = variable_type_from_field_type(fields[i].type, binary);
+    bool length1 = fields[i].length == 1;
+    MariaFieldType type = variable_type_from_field_type(fields[i].type, binary, length1);
     types_.push_back(type);
 
     LOG_VERBOSE << i << " -> " << fields[i].name << "(" << fields[i].type << ", " << binary << ") => " << type_name(type);

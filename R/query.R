@@ -49,6 +49,7 @@ setMethod("dbFetch", "MariaDBResult",
     if (trunc(n) != n) stopc("n must be a whole number")
     ret <- result_fetch(res@ptr, n = n)
     ret <- convert_bigint(ret, res@bigint)
+    ret <- fix_timezone(ret, res@conn)
     ret <- sqlColumnToRownames(ret, row.names)
     set_tidy_names(ret)
   }
@@ -67,6 +68,19 @@ convert_bigint <- function(df, bigint) {
 
   df[is_int64] <- suppressWarnings(lapply(df[is_int64], as_bigint))
   df
+}
+
+fix_timezone <- function(ret, conn) {
+  is_datetime <- which(vapply(ret, inherits, "POSIXt", FUN.VALUE = logical(1)))
+  if (length(is_datetime) > 0) {
+    ret[is_datetime] <- lapply(ret[is_datetime], function(x) {
+      x <- lubridate::with_tz(x, "UTC")
+      x <- lubridate::force_tz(x, conn@timezone)
+      lubridate::with_tz(x, conn@timezone_out)
+    })
+  }
+
+  ret
 }
 
 #' @rdname query
@@ -91,13 +105,17 @@ dbSend <- function(conn, statement, params = NULL, is_statement) {
   rs <- new("MariaDBResult",
     sql = statement,
     ptr = result_create(conn@ptr, statement, is_statement),
-    bigint = conn@bigint
+    bigint = conn@bigint,
+    conn = conn
   )
+
+  on.exit(dbClearResult(rs))
 
   if (!is.null(params)) {
     dbBind(rs, params)
   }
 
+  on.exit(NULL)
   rs
 }
 
@@ -109,7 +127,7 @@ setMethod("dbBind", "MariaDBResult", function(res, params, ...) {
     stopc("Cannot use named parameters for anonymous placeholders")
   }
 
-  params <- sql_data(params, warn = TRUE)
+  params <- sql_data(as.list(params), res@conn, warn = TRUE)
 
   result_bind(res@ptr, params)
   invisible(res)

@@ -31,6 +31,7 @@ private:
   bool is_null(int j);
 
   int value_int(int j);
+  int value_bool(int j);
   int64_t value_int64(int j);
   double value_double(int j);
   SEXP value_string(int j);

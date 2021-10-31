@@ -70,7 +70,9 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
       // alternative strategy: see fetch_buffer() for details
       break;
     case MY_LGL:
-      // input only
+      // BIT(1) is bound to logical, in absence of dedicated type
+      bindings_[j].buffer_type = MYSQL_TYPE_BLOB;
+      buffers_[j].resize(4);
       break;
     }
 
@@ -110,6 +112,14 @@ void MariaRow::setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& 
 
 bool MariaRow::is_null(int j) {
   return nulls_[j] == 1;
+}
+
+int MariaRow::value_bool(int j) {
+  if (is_null(j)) {
+    return NA_LOGICAL;
+  } else {
+    return static_cast<int>(value_int(j) == 1);
+  }
 }
 
 int MariaRow::value_int(int j) {
@@ -212,7 +222,7 @@ void MariaRow::set_list_value(SEXP x, int i, int j) {
     SET_VECTOR_ELT(x, i, value_raw(j));
     break;
   case MY_LGL:
-    // input only
+    LOGICAL(x)[i] = value_bool(j);
     break;
   }
 }

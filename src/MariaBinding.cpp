@@ -145,7 +145,11 @@ bool MariaBinding::bind_next_row() {
       } else {
         double val = REAL(col)[i];
         LOG_VERBOSE << val;
-        set_date_time_buffer(j, static_cast<time_t>(val * (types[j] == MY_DATE ? 86400.0 : 1.0)));
+        if (types[j] == MY_DATE) {
+          set_date_time_buffer(j, ::floor(val) * 86400.0);
+        } else {
+          set_date_time_buffer(j, val);
+        }
         LOG_VERBOSE;
         bindings[j].buffer_length = sizeof(MYSQL_TIME);
         bindings[j].buffer = &time_buffers[j];
@@ -173,10 +177,10 @@ bool MariaBinding::bind_next_row() {
     is_null[j] = missing;
   }
 
-  LOG_VERBOSE << "Binding";
+  LOG_DEBUG << "Binding";
   mysql_stmt_bind_param(statement, &bindings[0]);
 
-  LOG_VERBOSE << "Done binding row" << i;
+  LOG_DEBUG << "Done binding row " << i;
   i++;
   return true;
 }
@@ -189,10 +193,18 @@ void MariaBinding::binding_update(int j, enum_field_types type, int size) {
   bindings[j].is_null = &is_null[j];
 }
 
-void MariaBinding::set_date_time_buffer(int j, time_t time) {
+void MariaBinding::set_date_time_buffer(int j, double time) {
+  time_t int_time = static_cast<time_t>(time);
+
   LOG_VERBOSE << time;
-  struct tm* tm = gmtime(&time);
-  LOG_VERBOSE << tm;
+  LOG_VERBOSE << (time - ::floor(time));
+  struct tm* tm = gmtime(&int_time);
+  LOG_VERBOSE << tm->tm_year;
+  LOG_VERBOSE << tm->tm_mon;
+  LOG_VERBOSE << tm->tm_mday;
+  LOG_VERBOSE << tm->tm_hour;
+  LOG_VERBOSE << tm->tm_min;
+  LOG_VERBOSE << tm->tm_sec;
 
   time_buffers[j].year = tm->tm_year + 1900;
   time_buffers[j].month = tm->tm_mon + 1 ;
@@ -200,6 +212,8 @@ void MariaBinding::set_date_time_buffer(int j, time_t time) {
   time_buffers[j].hour = tm->tm_hour;
   time_buffers[j].minute = tm->tm_min;
   time_buffers[j].second = tm->tm_sec;
+  time_buffers[j].second_part = static_cast<unsigned long>((time - ::floor(time)) * 1000000.0);
+  LOG_VERBOSE << time_buffers[j].second_part;
 }
 
 void MariaBinding::set_time_buffer(int j, double time) {

@@ -1,6 +1,6 @@
 Package: RMariaDB
 Title: Database Interface and 'MariaDB' Driver
-Version: 1.0.8
+Version: 1.1.2
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -30,7 +30,7 @@ Authors@R:
 Description: Implements a 'DBI'-compliant interface to 'MariaDB'
     (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>)
     databases.
-License: GPL-3
+License: MIT + file LICENSE
 URL: https://rmariadb.r-dbi.org,
     https://github.com/r-dbi/RMariaDB,
     https://downloads.mariadb.org/connector-c/
@@ -41,22 +41,24 @@ Imports:
     bit64,
     DBI (>= 1.1.0),
     hms (>= 0.5.0),
+    lubridate,
     methods,
     Rcpp (>= 0.12.4)
 Suggests: 
+    covr,
     DBItest (>= 1.7.0),
     rprojroot,
-    testthat
+    testthat,
+    withr
 LinkingTo: 
-    BH,
     plogr,
     Rcpp
 Encoding: UTF-8
 NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1.9001
 SystemRequirements: libmariadb-client-lgpl-dev or
-    libmariadbclient-dev or libmysqlclient-dev, with libssl-dev (deb),
+    libmariadb-dev or libmysqlclient-dev, with libssl-dev (deb),
     mariadb-connector-c-devel or mariadb-devel (rpm),
     mariadb-connector-c or mysql-connector-c (brew)
 Collate: 

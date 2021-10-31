@@ -4,7 +4,7 @@
 
 bool all_raw(SEXP x);
 
-MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary) {
+MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary, bool length1) {
   switch (type) {
   case MYSQL_TYPE_TINY:
   case MYSQL_TYPE_SHORT:
@@ -30,6 +30,10 @@ MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary)
   case MYSQL_TYPE_TIME:
     return MY_TIME;
   case MYSQL_TYPE_BIT:
+    if (length1) {
+      return MY_LGL;
+    }
+    // fallthrough
   case MYSQL_TYPE_ENUM:
   case MYSQL_TYPE_STRING:
   case MYSQL_TYPE_VAR_STRING:
