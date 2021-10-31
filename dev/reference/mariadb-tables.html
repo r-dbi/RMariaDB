@@ -44,7 +44,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Read and write MariaDB tables.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/r-dbi/RMariaDB/blob/master/R/table.R" class="external-link"><code>R/table.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/r-dbi/RMariaDB/blob/HEAD/R/table.R" class="external-link"><code>R/table.R</code></a></small>
     <div class="hidden name"><code>mariadb-tables.Rd</code></div>
     </div>
 
@@ -102,43 +102,62 @@
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>conn</dt><dd><p>a <a href="MariaDBConnection-class.html">MariaDBConnection</a> object, produced by
+    <dl><dt>conn</dt>
+<dd><p>a <a href="MariaDBConnection-class.html">MariaDBConnection</a> object, produced by
 <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">DBI::dbConnect()</a></code></p></dd>
-</dl><dl><dt>name</dt><dd><p>a character string specifying a table name.</p></dd>
-</dl><dl><dt>...</dt><dd><p>Unused, needed for compatibility with generic.</p></dd>
-</dl><dl><dt>row.names</dt><dd><p>Either <code>TRUE</code>, <code>FALSE</code>, <code>NA</code> or a string.If <code>TRUE</code>, always translate row names to a column called "row_names".
+<dt>name</dt>
+<dd><p>a character string specifying a table name.</p></dd>
+<dt>...</dt>
+<dd><p>Unused, needed for compatibility with generic.</p></dd>
+<dt>row.names</dt>
+<dd><p>Either <code>TRUE</code>, <code>FALSE</code>, <code>NA</code> or a string.</p>
+<p>If <code>TRUE</code>, always translate row names to a column called "row_names".
 If <code>FALSE</code>, never translate row names. If <code>NA</code>, translate
-rownames only if they're a character vector.A string is equivalent to <code>TRUE</code>, but allows you to override the
-default name.For backward compatibility, <code>NULL</code> is equivalent to <code>FALSE</code>.</p></dd>
-</dl><dl><dt>check.names</dt><dd><p>If <code>TRUE</code>, the default, column names will be
+rownames only if they're a character vector.</p>
+<p>A string is equivalent to <code>TRUE</code>, but allows you to override the
+default name.</p>
+<p>For backward compatibility, <code>NULL</code> is equivalent to <code>FALSE</code>.</p></dd>
+<dt>check.names</dt>
+<dd><p>If <code>TRUE</code>, the default, column names will be
 converted to valid R identifiers.</p></dd>
-</dl><dl><dt>value</dt><dd><p>A data frame.</p></dd>
-</dl><dl><dt>field.types</dt><dd><p>Optional, overrides default choices of field types,
+<dt>value</dt>
+<dd><p>A data frame.</p></dd>
+<dt>field.types</dt>
+<dd><p>Optional, overrides default choices of field types,
 derived from the classes of the columns in the data frame.</p></dd>
-</dl><dl><dt>overwrite</dt><dd><p>a logical specifying whether to overwrite an existing table
+<dt>overwrite</dt>
+<dd><p>a logical specifying whether to overwrite an existing table
 or not. Its default is <code>FALSE</code>.</p></dd>
-</dl><dl><dt>append</dt><dd><p>a logical specifying whether to append to an existing table
+<dt>append</dt>
+<dd><p>a logical specifying whether to append to an existing table
 in the DBMS.  If appending, then the table (or temporary table)
 must exist, otherwise an error is reported. Its default is <code>FALSE</code>.</p></dd>
-</dl><dl><dt>temporary</dt><dd><p>If <code>TRUE</code>, creates a temporary table that expires
+<dt>temporary</dt>
+<dd><p>If <code>TRUE</code>, creates a temporary table that expires
 when the connection is closed. For <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code>, only temporary
 tables are considered if this argument is set to <code>TRUE</code>.</p></dd>
-</dl><dl><dt>header</dt><dd><p>logical, does the input file have a header line? Default is the
+<dt>header</dt>
+<dd><p>logical, does the input file have a header line? Default is the
 same heuristic used by <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table()</a></code>, i.e., <code>TRUE</code> if the first
 line has one fewer column that the second line.</p></dd>
-</dl><dl><dt>nrows</dt><dd><p>number of lines to rows to import using <code>read.table</code> from
+<dt>nrows</dt>
+<dd><p>number of lines to rows to import using <code>read.table</code> from
 the input file to create the proper table definition. Default is 50.</p></dd>
-</dl><dl><dt>sep</dt><dd><p>field separator character</p></dd>
-</dl><dl><dt>eol</dt><dd><p>End-of-line separator</p></dd>
-</dl><dl><dt>skip</dt><dd><p>number of lines to skip before reading data in the input file.</p></dd>
-</dl><dl><dt>quote</dt><dd><p>the quote character used in the input file (defaults to
+<dt>sep</dt>
+<dd><p>field separator character</p></dd>
+<dt>eol</dt>
+<dd><p>End-of-line separator</p></dd>
+<dt>skip</dt>
+<dd><p>number of lines to skip before reading data in the input file.</p></dd>
+<dt>quote</dt>
+<dd><p>the quote character used in the input file (defaults to
 <code>\"</code>.)</p></dd>
-</dl><dl><dt>prefix</dt><dd><p>A fully qualified path in the database's namespace, or <code>NULL</code>.
+<dt>prefix</dt>
+<dd><p>A fully qualified path in the database's namespace, or <code>NULL</code>.
 This argument will be processed with <code><a href="https://dbi.r-dbi.org/reference/dbUnquoteIdentifier.html" class="external-link">dbUnquoteIdentifier()</a></code>.
 If given the method will return all objects accessible through this prefix.</p></dd>
-</dl><dl><dt>fail_if_missing</dt><dd><p>If <code>FALSE</code>, <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code> succeeds if the
+<dt>fail_if_missing</dt>
+<dd><p>If <code>FALSE</code>, <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code> succeeds if the
 table doesn't exist.</p></dd>
 </dl></div>
     <div id="value">

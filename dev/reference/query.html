@@ -50,7 +50,7 @@ dbExecute() corresponds to dbGetQuery()."><meta name="robots" content="noindex">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Execute a SQL statement on a database connection.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/r-dbi/RMariaDB/blob/master/R/query.R" class="external-link"><code>R/query.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/r-dbi/RMariaDB/blob/HEAD/R/query.R" class="external-link"><code>R/query.R</code></a></small>
     <div class="hidden name"><code>query.Rd</code></div>
     </div>
 
@@ -85,20 +85,28 @@ that do not return data, such as <code>UPDATE</code>, <code>DELETE</code>, etc.)
     <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
-    
-
-<dl><dt>res</dt><dd><p>A  <a href="MariaDBResult-class.html">MariaDBResult</a> object.</p></dd>
-</dl><dl><dt>n</dt><dd><p>Number of rows to retrieve. Use -1 to retrieve all rows.</p></dd>
-</dl><dl><dt>...</dt><dd><p>Unused. Needed for compatibility with generic.</p></dd>
-</dl><dl><dt>row.names</dt><dd><p>Either <code>TRUE</code>, <code>FALSE</code>, <code>NA</code> or a string.If <code>TRUE</code>, always translate row names to a column called "row_names".
+    <dl><dt>res</dt>
+<dd><p>A  <a href="MariaDBResult-class.html">MariaDBResult</a> object.</p></dd>
+<dt>n</dt>
+<dd><p>Number of rows to retrieve. Use -1 to retrieve all rows.</p></dd>
+<dt>...</dt>
+<dd><p>Unused. Needed for compatibility with generic.</p></dd>
+<dt>row.names</dt>
+<dd><p>Either <code>TRUE</code>, <code>FALSE</code>, <code>NA</code> or a string.</p>
+<p>If <code>TRUE</code>, always translate row names to a column called "row_names".
 If <code>FALSE</code>, never translate row names. If <code>NA</code>, translate
-rownames only if they're a character vector.A string is equivalent to <code>TRUE</code>, but allows you to override the
-default name.For backward compatibility, <code>NULL</code> is equivalent to <code>FALSE</code>.</p></dd>
-</dl><dl><dt>conn</dt><dd><p>an <a href="MariaDBConnection-class.html">MariaDBConnection</a> object.</p></dd>
-</dl><dl><dt>statement</dt><dd><p>a character vector of length one specifying the SQL
+rownames only if they're a character vector.</p>
+<p>A string is equivalent to <code>TRUE</code>, but allows you to override the
+default name.</p>
+<p>For backward compatibility, <code>NULL</code> is equivalent to <code>FALSE</code>.</p></dd>
+<dt>conn</dt>
+<dd><p>an <a href="MariaDBConnection-class.html">MariaDBConnection</a> object.</p></dd>
+<dt>statement</dt>
+<dd><p>a character vector of length one specifying the SQL
 statement that should be executed.  Only a single SQL statement should be
 provided.</p></dd>
-</dl><dl><dt>params</dt><dd><p>A list of query parameters to be substituted into
+<dt>params</dt>
+<dd><p>A list of query parameters to be substituted into
 a parameterised query.</p></dd>
 </dl></div>
     </div>
