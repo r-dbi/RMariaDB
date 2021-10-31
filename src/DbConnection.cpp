@@ -31,6 +31,8 @@ void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std
   LOG_VERBOSE;
 
   this->pConn_ = mysql_init(NULL);
+  bool reconnect = 1;
+  mysql_options(this->pConn_, MYSQL_OPT_RECONNECT, &reconnect);
   // Enable LOCAL INFILE for fast data ingest
   mysql_options(this->pConn_, MYSQL_OPT_LOCAL_INFILE, 0);
   // Default to UTF-8
