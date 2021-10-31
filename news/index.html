@@ -75,16 +75,9 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.1" id="rmariadb-111-2021-04-12">RMariaDB 1.1.1 (2021-04-12)<a class="anchor" aria-label="anchor" href="#rmariadb-111-2021-04-12"></a></h2>
 <div class="section level3">
-<h3 id="features-1-1-1">Features<a class="anchor" aria-label="anchor" href="#features-1-1-1"></a></h3>
-<ul><li>
-<code>BIT(1)</code> columns are returned as <code>logical</code> (<a href="https://github.com/r-dbi/RMariaDB/issues/84" class="external-link">#84</a>). <code>NULL</code> is mapped to <code>NA</code> for <code>bit(1)</code> columns (<a href="https://github.com/r-dbi/RMariaDB/issues/201" class="external-link">#201</a>, <a href="https://github.com/dirkschumacher" class="external-link">@dirkschumacher</a>).</li>
-<li>
-<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> now supports <code>timezone_out</code> argument. Explicitly setting <code>timezone</code> to <code>NULL</code> tries to detect the database time zone (<a href="https://github.com/r-dbi/RMariaDB/issues/116" class="external-link">#116</a>).</li>
-</ul></div>
-<div class="section level3">
 <h3 id="bug-fixes-1-1-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-1-1"></a></h3>
-<ul><li>Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (<a href="https://github.com/r-dbi/RMariaDB/issues/116" class="external-link">#116</a>).</li>
-<li>Timestamp roundtrip no longer fails on Windows i386 (<a href="https://github.com/r-dbi/RMariaDB/issues/117" class="external-link">#117</a>).</li>
+<ul><li>
+<code>NULL</code> is mapped to <code>NA</code> for <code>bit(1)</code> columns (<a href="https://github.com/r-dbi/RMariaDB/issues/201" class="external-link">#201</a>, <a href="https://github.com/dirkschumacher" class="external-link">@dirkschumacher</a>).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="internal-1-1-1">Internal<a class="anchor" aria-label="anchor" href="#internal-1-1-1"></a></h3>
@@ -96,7 +89,7 @@
 <div class="section level3">
 <h3 id="features-1-1-0">Features<a class="anchor" aria-label="anchor" href="#features-1-1-0"></a></h3>
 <ul><li>
-<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> now supports <code>timezone_out</code> argument. Explicitly setting <code>timezone</code> to <code>NULL</code> tries to detect the database time zone (<a href="https://github.com/r-dbi/RMariaDB/issues/116" class="external-link">#116</a>).</li>
+<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> now supports a <code>timezone_out</code> argument. Explicitly setting <code>timezone</code> to <code>NULL</code> tries to detect the database time zone (<a href="https://github.com/r-dbi/RMariaDB/issues/116" class="external-link">#116</a>).</li>
 <li>
 <code>BIT(1)</code> columns are returned as <code>logical</code> (<a href="https://github.com/r-dbi/RMariaDB/issues/84" class="external-link">#84</a>).</li>
 <li>
