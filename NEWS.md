@@ -85,19 +85,19 @@
 - Check that input to `dbWriteTable()` is a data frame (#160, @rossholmberg).
 
 
-# RMariaDB 1.0.9
+# RMariaDB 1.0.9 (2020-07-03)
 
 - Use `VARCHAR` as data type for string columns (#159).
 - Encode column names as UTF-8 (#109).
 
 
-# RMariaDB 1.0.8
+# RMariaDB 1.0.8 (2019-12-17)
 
 - Implement `dbGetInfo()` according to the specification.
 - Include information about `libssl-dev` in `configure` and `DESCRIPTION` (#101).
 
 
-# RMariaDB 1.0.7
+# RMariaDB 1.0.7 (2019-12-02)
 
 - Get rid of `auto_ptr`, which causes `R CMD check` warnings on R-devel.
 
