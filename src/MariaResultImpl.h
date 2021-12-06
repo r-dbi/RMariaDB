@@ -18,7 +18,7 @@ public:
 
   virtual int n_rows_affected() = 0;
   virtual int n_rows_fetched() = 0;
-  virtual bool complete() = 0;
+  virtual bool complete() const = 0;
 };
 
 #endif //RMARIADB_MARIARESULTIMPL_H

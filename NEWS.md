@@ -1,17 +1,31 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# RMariaDB 1.1.1.9001 (2021-09-05)
+# RMariaDB 1.1.2.9000 (2021-09-06)
+
+- Same as previous version.
+
+
+# RMariaDB 1.1.2 (2021-09-06)
+
+## Licensing
+
+- RMariaDB is now licensed under the MIT license (#213).
+
+## Features
+
+- `dbConnect()` normalizes all input paths (#197, @twentytitus).
+- `dbDataType()` returns `TIME(6)` for `difftime`, and `DATETIME(6)` for `POSIXt` columns, to create columns with microsecond precision by default (#214).
+
+## Documentation
+
+- Now referring to the `libmariadb-dev` Debian/Ubuntu package in documentation and configuration scripts (#219).
+- `?dbConnect` gains a section on secure passwords and the `.mylogin.cnf` file (#156).
+
+## Internal
+
+- Test MySQL and MariaDB Server and client libraries in all combinations on GitHub Actions (#224).
 
 - The `configure` script now queries the `RMARIADB_FORCE_MARIADBCONFIG` and `RMARIADB_FORCE_MYSQLCONFIG` environment variables to force use of `mariadb_config` or `mysql_config`, respectively (#218).
-- RMariaDB is now licensed under the MIT license (#213).
-- `dbDataType()` returns `TIME(6)` for `difftime`, and `DATETIME(6)` for `POSIXt` columns, to create columns with microsecond precision by default (#214).
-- `dbConnect()` normalizes all input paths (#197, @twentytitus).
-
-
-# RMariaDB 1.1.1.9000 (2021-04-12)
-
-- Remove BH dependency by inlining the header files (#208).
-- Map `NULL` to `NA` for `bit(1)` columns (#201, @dirkschumacher).
 
 
 # RMariaDB 1.1.1 (2021-04-12)
@@ -76,19 +90,19 @@
 - Check that input to `dbWriteTable()` is a data frame (#160, @rossholmberg).
 
 
-# RMariaDB 1.0.9
+# RMariaDB 1.0.9 (2020-07-03)
 
 - Use `VARCHAR` as data type for string columns (#159).
 - Encode column names as UTF-8 (#109).
 
 
-# RMariaDB 1.0.8
+# RMariaDB 1.0.8 (2019-12-17)
 
 - Implement `dbGetInfo()` according to the specification.
 - Include information about `libssl-dev` in `configure` and `DESCRIPTION` (#101).
 
 
-# RMariaDB 1.0.7
+# RMariaDB 1.0.7 (2019-12-02)
 
 - Get rid of `auto_ptr`, which causes `R CMD check` warnings on R-devel.
 

@@ -1,6 +1,6 @@
 Package: RMariaDB
-Title: Database Interface and 'MariaDB' Driver
-Version: 1.1.1.9001
+Title: Database Interface and MariaDB Driver
+Version: 1.1.2.9000
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -27,8 +27,8 @@ Authors@R:
              role = "fnd"),
       person(given = "RStudio",
              role = "cph"))
-Description: Implements a 'DBI'-compliant interface to 'MariaDB'
-    (<https://mariadb.org/>) and 'MySQL' (<https://www.mysql.com/>)
+Description: Implements a DBI-compliant interface to MariaDB
+    (<https://mariadb.org/>) and MySQL (<https://www.mysql.com/>)
     databases.
 License: MIT + file LICENSE
 URL: https://rmariadb.r-dbi.org,
@@ -58,7 +58,7 @@ NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9001
 SystemRequirements: libmariadb-client-lgpl-dev or
-    libmariadbclient-dev or libmysqlclient-dev, with libssl-dev (deb),
+    libmariadb-dev or libmysqlclient-dev, with libssl-dev (deb),
     mariadb-connector-c-devel or mariadb-devel (rpm),
     mariadb-connector-c or mysql-connector-c (brew)
 Collate: 

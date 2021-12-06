@@ -31,7 +31,7 @@ public:
 
   virtual int n_rows_affected();
   virtual int n_rows_fetched();
-  virtual bool complete();
+  virtual bool complete() const;
 
 private:
   void exec(const std::string& sql);

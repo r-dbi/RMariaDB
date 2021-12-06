@@ -112,6 +112,22 @@ Without installation, time zone support is restricted to UTC offset,
 which cannot take into account DST offsets.
 }
 
+\section{Secure passwords}{
+
+Avoid storing passwords hard-coded in the code, use e.g. the \pkg{keyring}
+package to store and retrieve passwords in a secure way.
+
+The MySQL client library (but not MariaDB) supports a \code{.mylogin.cnf} file
+that can be passed in the \code{default.file} argument.
+This file can contain an obfuscated password, which is not a secure way
+to store passwords but may be acceptable if the user is aware of the
+restrictions.
+The availability of this feature depends on the client library used
+for compiling the \pkg{RMariaDB} package.
+Windows and macOS binaries on CRAN are compiled against the MariaDB Connector/C
+client library which do not support this feature.
+}
+
 \examples{
 \dontrun{
 # Connect to a MariaDB database running locally

@@ -58,7 +58,7 @@ devtools::install_github("r-dbi/DBI")
 devtools::install_github("r-dbi/RMariaDB")
 ```
 
-Discussions associated with DBI and related database packages take place on [R-SIG-DB](https://stat.ethz.ch/mailman/listinfo/r-sig-db). 
+Discussions associated with DBI and related database packages take place on [R-SIG-DB](https://stat.ethz.ch/mailman/listinfo/r-sig-db).
 The website [Databases using R](https://db.rstudio.com/) describes the tools and best practices in this ecosystem.
 
 Installation from source on Linux or OS X currently requires [`MariaDB Connector/C`](https://downloads.mariadb.org/connector-c/), preferably in version 2.3.4/3.0.3 or later.
@@ -68,10 +68,10 @@ Alternatively, Oracle's [libmysqlclient](https://packages.debian.org/buster/defa
 
 ### Connector/C
 
-On recent __Debian__ or __Ubuntu__ install [libmariadbclient-dev](https://packages.debian.org/testing/libmariadbclient-dev).
+On recent __Debian__ or __Ubuntu__ install [libmariadb-dev](https://packages.debian.org/testing/libmariadb-dev).
 
 ```
-sudo apt-get install -y libmariadbclient-dev
+sudo apt-get install -y libmariadb-dev
 ```
 
 On __Fedora__,  __CentOS__ or __RHEL__ we need [mariadb-devel](https://src.fedoraproject.org/rpms/mariadb):
