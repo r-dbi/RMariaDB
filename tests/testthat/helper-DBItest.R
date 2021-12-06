@@ -15,7 +15,6 @@ DBItest::make_context(
     "data_raw",                                   # not an error: can't cast to blob type
 
     # bad tests
-    "list_objects_features",
     if (.Platform$OS.type == "windows" && .Platform$r_arch == "i386") "append_roundtrip_timestamp",
     if (.Platform$OS.type == "windows" && .Platform$r_arch == "i386") "roundtrip_timestamp",
 
