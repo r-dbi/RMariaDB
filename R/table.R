@@ -118,8 +118,8 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     if (!temporary) {
       found <- dbExistsTable(conn, name)
       if (found && !overwrite && !append) {
-        stop("Table ", name, " exists in database, and both overwrite and",
-          " append are FALSE", call. = FALSE)
+        stopc("Table ", name, " exists in database, and both overwrite and",
+          " append are FALSE")
       }
     } else {
       found <- FALSE

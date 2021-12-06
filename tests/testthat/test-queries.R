@@ -60,9 +60,11 @@ test_that("bit(1) fields support NA values (#201)", {
   on.exit(dbDisconnect(con))
 
   dbWriteTable(con, "testbit1",
-    data.frame(a = c(NA_integer_, 0:1), b = c(1, 2, 3)),
+    data.frame(a = c(NA_integer_, 0:1), b = 1:3),
     field.types = c(a = "BIT(1)"), overwrite = TRUE
   )
   result <- dbGetQuery(con, "SELECT a FROM testbit1 ORDER BY b")$a
   expect_equal(result, c(NA, FALSE, TRUE))
+
+  dbRemoveTable(con, "testbit1")
 })
