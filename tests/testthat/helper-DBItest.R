@@ -2,6 +2,7 @@ DBItest::make_context(
   MariaDB(),
   list(dbname = "test"),
   tweaks = DBItest::tweaks(
+    dbitest_version = "1.7.2",
     constructor_relax_args = TRUE,
     placeholder_pattern = "?",
     logical_return = function(x) as.integer(x),
@@ -15,6 +16,8 @@ DBItest::make_context(
 
     # bad tests
     "list_objects_features",
+    if (.Platform$OS.type == "windows" && .Platform$r_arch == "i386") "append_roundtrip_timestamp",
+    if (.Platform$OS.type == "windows" && .Platform$r_arch == "i386") "roundtrip_timestamp",
 
     NULL
   )

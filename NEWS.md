@@ -30,15 +30,9 @@
 
 # RMariaDB 1.1.1 (2021-04-12)
 
-## Features
-
-- `BIT(1)` columns are returned as `logical` (#84). `NULL` is mapped to `NA` for `bit(1)` columns (#201, @dirkschumacher).
-- `dbConnect()` now supports `timezone_out` argument. Explicitly setting `timezone` to `NULL` tries to detect the database time zone (#116).
-
 ## Bug fixes
 
-- Timestamp values are now written correctly if the database connection uses a time zone other than UTC. Deviations still might occur at DST boundaries, therefore it is still safer to use UTC as the database connection (#116).
-- Timestamp roundtrip no longer fails on Windows i386 (#117).
+- `NULL` is mapped to `NA` for `bit(1)` columns (#201, @dirkschumacher).
 
 ## Internal
 
@@ -49,7 +43,7 @@
 
 ## Features
 
-- `dbConnect()` now supports `timezone_out` argument. Explicitly setting `timezone` to `NULL` tries to detect the database time zone (#116).
+- `dbConnect()` now supports a `timezone_out` argument. Explicitly setting `timezone` to `NULL` tries to detect the database time zone (#116).
 - `BIT(1)` columns are returned as `logical` (#84).
 - `dbQuoteLiteral()` now correctly quotes difftime values (#188).
 
