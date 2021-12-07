@@ -16,12 +16,12 @@ runs:
       shell: bash
 
     - uses: ankane/setup-mariadb@v1
-      if: (inputs$matrix_config.mysql_server == '') || ! inputs$matrix_config.mysql_server
+      if: (inputs.matrix_config.mysql_server == '') || ! inputs.matrix_config.mysql_server
       with:
         mariadb-version: 10.5
 
     - uses: ankane/setup-mysql@v1
-      if: inputs$matrix_config.mysql_server
+      if: inputs.matrix_config.mysql_server
       with:
         mysql-version: 8.0
 
