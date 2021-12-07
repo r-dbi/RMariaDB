@@ -100,6 +100,8 @@ jobs:
         if: runner.os == 'macOS' && ((matrix.config.mysql_client != '' ) || matrix.config.mysql_client)
         run: |
           brew install mysql-client
+          echo 'export PATH="/usr/local/opt/mysql-client/bin:$PATH"' >> /Users/runner/.bash_profile
+          echo 'export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig"' >> /Users/runner/.bash_profile
 
       - name: Install MariaDB client (Linux)
         if: runner.os == 'Linux' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
