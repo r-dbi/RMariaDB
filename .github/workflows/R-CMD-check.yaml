@@ -51,9 +51,9 @@ jobs:
       # End custom: env vars
 
     steps:
-      - uses: ./.github/workflows/rate-limit
-
       - uses: actions/checkout@v2
+
+      - uses: ./.github/workflows/rate-limit
 
       # Begin custom: before install
       - name: Install and check MariaDB client (macOS)
