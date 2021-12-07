@@ -71,12 +71,13 @@ jobs:
         if: runner.os == 'macOS' && ((matrix.config.mysql_client != '' ) || matrix.config.mysql_client)
         run: |
           brew install mysql-client
-          echo 'export PATH="/usr/local/opt/mysql-client/bin:$PATH"' >> /Users/runner/.bashrc
-          echo 'export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig"' >> /Users/runner/.bashrc
+          echo 'export PATH="/usr/local/opt/mysql-client/bin:$PATH"' >> ~/.bashrc
+          echo 'export PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig"' >> ~/.bashrc
 
       - name: Check MySQL client (macOS)
         if: runner.os == 'macOS' && ((matrix.config.mysql_client != '' ) || matrix.config.mysql_client)
         run: |
+          cat ~/.bashrc
           env | sort
           echo "$@"
           echo PATH: $PATH
