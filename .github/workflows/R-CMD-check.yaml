@@ -79,7 +79,7 @@ jobs:
         run: |
           echo $PATH
           which mysql_config
-          mysql_config || true
+          mysql_config || true
 
       - name: Install and check MariaDB client (Linux)
         if: runner.os == 'Linux' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
