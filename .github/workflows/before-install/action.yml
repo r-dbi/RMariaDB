@@ -8,14 +8,14 @@ runs:
   using: "composite"
   steps:
     - name: Install and check MariaDB client (macOS)
-      if: runner.os == 'macOS' && ((inputs.matrix_config.mysql_client == '' ) || ! inputs.matrix_config.mysql_client)
+      if: runner.os == 'macOS' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
       run: |
         brew install mariadb-connector-c
         mariadb_config
       shell: bash
 
     - name: Install MySQL client (macOS)
-      if: runner.os == 'macOS' && ((inputs.matrix_config.mysql_client != '' ) || inputs.matrix_config.mysql_client)
+      if: runner.os == 'macOS' && ((matrix.config.mysql_client != '' ) || matrix.config.mysql_client)
       run: |
         brew install mysql-client
         echo PATH="/usr/local/opt/mysql-client/bin:${PATH}" | tee -a $GITHUB_ENV
@@ -23,7 +23,7 @@ runs:
       shell: bash
 
     - name: Check MySQL client (macOS)
-      if: runner.os == 'macOS' && ((inputs.matrix_config.mysql_client != '' ) || inputs.matrix_config.mysql_client)
+      if: runner.os == 'macOS' && ((matrix.config.mysql_client != '' ) || matrix.config.mysql_client)
       run: |
         echo $PATH
         which mysql_config
@@ -31,7 +31,7 @@ runs:
       shell: bash
 
     - name: Install and check MariaDB client (Linux)
-      if: runner.os == 'Linux' && ((inputs.matrix_config.mysql_client == '' ) || ! inputs.matrix_config.mysql_client)
+      if: runner.os == 'Linux' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
       run: |
         sudo apt purge -y libmysqlclient-dev
         sudo apt install -y libmariadb-dev
