@@ -87,32 +87,9 @@ jobs:
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
-      # Begin custom: after install
-      # Must happen after installing system dependencies,
-      # https://github.com/ankane/setup-mariadb/issues/2
-      - name: Purge MySQL server
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt purge -y mysql-server
-
-      - uses: ankane/setup-mariadb@v1
-        if: (matrix.config.mysql_server == '') || ! matrix.config.mysql_server
+      - uses: ./.github/workflows/after-install
         with:
-          mariadb-version: 10.5
-
-      - uses: ankane/setup-mysql@v1
-        if: matrix.config.mysql_server
-        with:
-          mysql-version: 8.0
-
-      # Use hard-coded time zone info so that it also works on Windows
-      - name: Create database, set it to UTF-8, add time zone info
-        run: |
-          mysql -e "CREATE DATABASE IF NOT EXISTS test; ALTER DATABASE test CHARACTER SET 'utf8'; FLUSH PRIVILEGES;"
-          mysql -D mysql < tools/tz.sql
-          mysql -e "SET GLOBAL time_zone = 'Europe/Zurich';"
-        shell: bash
-      # End custom: after install
+          matrix_config: matrix.config
 
       - uses: r-lib/actions/check-r-package@v1
         with:

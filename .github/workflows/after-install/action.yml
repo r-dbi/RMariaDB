@@ -1,0 +1,34 @@
+name: 'Actions to run after R packages are installed'
+inputs:
+  matrix_config:
+    description: Build matrix, pass matrix.config
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    # Must happen after installing system dependencies,
+    # https://github.com/ankane/setup-mariadb/issues/2
+    - name: Purge MySQL server
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt purge -y mysql-server
+      shell: bash
+
+    - uses: ankane/setup-mariadb@v1
+      if: (inputs$matrix_config.mysql_server == '') || ! inputs$matrix_config.mysql_server
+      with:
+        mariadb-version: 10.5
+
+    - uses: ankane/setup-mysql@v1
+      if: inputs$matrix_config.mysql_server
+      with:
+        mysql-version: 8.0
+
+    # Use hard-coded time zone info so that it also works on Windows
+    - name: Create database, set it to UTF-8, add time zone info
+      run: |
+        mysql -e "CREATE DATABASE IF NOT EXISTS test; ALTER DATABASE test CHARACTER SET 'utf8'; FLUSH PRIVILEGES;"
+        mysql -D mysql < tools/tz.sql
+        mysql -e "SET GLOBAL time_zone = 'Europe/Zurich';"
+      shell: bash

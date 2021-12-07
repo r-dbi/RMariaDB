@@ -1,4 +1,4 @@
-name: 'Check GitHub rate limits'
+name: 'Actions to run before R packages are installed'
 inputs:
   matrix_config:
     description: Build matrix, pass matrix.config
