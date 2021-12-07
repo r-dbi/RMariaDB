@@ -48,6 +48,7 @@ jobs:
       # Begin custom: env vars
       RMARIADB_FORCE_MARIADBCONFIG: ${{ matrix.config.RMARIADB_FORCE_MARIADBCONFIG }}
       RMARIADB_FORCE_MYSQLCONFIG: ${{ matrix.config.RMARIADB_FORCE_MYSQLCONFIG }}
+      RCMDCHECK_ERROR_ON: '"warning"'
       # End custom: env vars
 
     steps:
@@ -81,9 +82,7 @@ jobs:
 
       - uses: r-lib/actions/check-r-package@v1
         with:
-        # Begin custom: rcmdcheck error_on
-          error-on: '"warning"'
-        # End custom: rcmdcheck error_on
+          error-on: ${{ env.RCMDCHECK_ERROR_ON || '"note"' }}
 
       - name: Show test output
         if: always()
