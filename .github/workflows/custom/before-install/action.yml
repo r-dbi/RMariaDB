@@ -34,8 +34,9 @@ runs:
     - name: Install and check MariaDB client (Linux)
       if: runner.os == 'Linux' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
       run: |
-        sudo apt purge -y libmysqlclient-dev
-        sudo apt install -y libmariadb-dev
+        sudo apt-get purge -y libmysqlclient-dev
+        sudo apt-get update -y
+        sudo apt-get install -y libmariadb-dev
         mariadb_config
       shell: bash
 
