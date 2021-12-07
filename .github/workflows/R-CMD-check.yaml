@@ -36,8 +36,38 @@ jobs:
       max-parallel: 5
       matrix:
         config:
+          - {os: macOS-latest,   r: 'release'}
+
+          - {os: windows-latest, r: 'release'}
+          # Use 3.6 to trigger usage of RTools35
+          - {os: windows-latest, r: '3.6'}
+
+          - {os: ubuntu-20.04,   r: 'release'}
+
+          # Use older ubuntu to maximise backward compatibility
+          - {os: ubuntu-18.04,   r: 'devel', http-user-agent: 'release'}
+          - {os: ubuntu-18.04,   r: 'release'}
+          - {os: ubuntu-18.04,   r: 'oldrel-1'}
+
+          # Begin custom: R 3.6
+          - {os: ubuntu-18.04,   r: 'oldrel-2'}
+          # End custom: R 3.6
+
+          # Begin custom: R 3.5
+          - {os: ubuntu-18.04,   r: 'oldrel-3'}
+          # End custom: R 3.5
+
+          # Begin custom: R 3.4
+          - {os: ubuntu-18.04,   r: 'oldrel-4'}
+          # End custom: R 3.4
+
           # Begin custom: matrix elements
+          - { os: macOS-latest,   r: 'release',    mysql_client: false,   RMARIADB_FORCE_MARIADBCONFIG: 1,    desc: mariadb_config }
           - { os: macOS-latest,   r: 'release',    mysql_client: true,    RMARIADB_FORCE_MYSQLCONFIG: 1,      desc: mysql_config }
+          - { os: ubuntu-20.04,   r: 'release',    mysql_client: true,    mysql_server: true,                 desc: "MySQL server + client" }
+          - { os: ubuntu-20.04,   r: 'release',    mysql_client: true,    mysql_server: false,                desc: "MariaDB server, MySQL client" }
+          - { os: ubuntu-20.04,   r: 'release',    mysql_client: false,   mysql_server: true,                 desc: "MySQL server, MariaDB client" }
+          - { os: ubuntu-20.04,   r: 'release',    mysql_client: false,   mysql_server: false,                desc: "MariaDB server + client" }
           # End custom: matrix elements
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
