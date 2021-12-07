@@ -79,14 +79,6 @@ jobs:
           sudo ln -s $(which true) /usr/local/bin/qpdf
           sudo ln -s $(which true) /usr/local/bin/checkbashisms
 
-      - name: Session info
-        run: |
-          options(width = 100)
-          if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
-          pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
-        shell: Rscript {0}
-
       - uses: ./.github/workflows/after-install
         with:
           matrix_config: matrix.config
