@@ -54,6 +54,8 @@ jobs:
       - uses: actions/checkout@v2
 
       - uses: ./.github/workflows/rate-limit
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       # Begin custom: before install
       - name: Install and check MariaDB client (macOS)
@@ -158,3 +160,5 @@ jobs:
 
       - uses: ./.github/workflows/rate-limit
         if: always()
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
