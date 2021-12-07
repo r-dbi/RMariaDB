@@ -1,7 +1,7 @@
 name: 'Check GitHub rate limits'
 inputs:
   token:  # id of input
-    description: GitHub token, pass ${{ secrets.GITHUB_TOKEN }}
+    description: GitHub token, pass secrets.GITHUB_TOKEN
     required: true
 
 runs:
