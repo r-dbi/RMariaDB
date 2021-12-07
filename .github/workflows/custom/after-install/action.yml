@@ -1,8 +1,4 @@
 name: 'Actions to run after R packages are installed'
-inputs:
-  matrix_config:
-    description: Build matrix, pass matrix.config
-    required: true
 
 runs:
   using: "composite"
@@ -16,12 +12,12 @@ runs:
       shell: bash
 
     - uses: ankane/setup-mariadb@v1
-      if: (inputs.matrix_config.mysql_server == '') || ! inputs.matrix_config.mysql_server
+      if: (matrix.config.mysql_server == '') || ! matrix.config.mysql_server
       with:
         mariadb-version: 10.5
 
     - uses: ankane/setup-mysql@v1
-      if: inputs.matrix_config.mysql_server
+      if: matrix.config.mysql_server
       with:
         mysql-version: 8.0
 

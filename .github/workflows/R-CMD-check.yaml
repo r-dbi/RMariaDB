@@ -58,8 +58,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ./.github/workflows/custom/before-install
-        with:
-          matrix_config: matrix.config
 
       - uses: r-lib/actions/setup-pandoc@v1
 
@@ -80,8 +78,6 @@ jobs:
           sudo ln -s $(which true) /usr/local/bin/checkbashisms
 
       - uses: ./.github/workflows/custom/after-install
-        with:
-          matrix_config: matrix.config
 
       - uses: r-lib/actions/check-r-package@v1
         with:

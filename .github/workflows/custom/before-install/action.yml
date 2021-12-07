@@ -1,8 +1,4 @@
 name: 'Actions to run before R packages are installed'
-inputs:
-  matrix_config:
-    description: Build matrix, pass matrix.config
-    required: true
 
 runs:
   using: "composite"
