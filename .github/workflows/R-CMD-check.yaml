@@ -57,39 +57,9 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Begin custom: before install
-      - name: Are env vars exposed?
-        run: |
-          env | sort
-
-      # Begin custom: before install
-      - name: Install and check MariaDB client (macOS)
-        if: runner.os == 'macOS' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
-        run: |
-          brew install mariadb-connector-c
-          mariadb_config
-
-      - name: Install MySQL client (macOS)
-        if: runner.os == 'macOS' && ((matrix.config.mysql_client != '' ) || matrix.config.mysql_client)
-        run: |
-          brew install mysql-client
-          echo PATH="/usr/local/opt/mysql-client/bin:${PATH}" | tee -a $GITHUB_ENV
-          echo PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig" | tee -a $GITHUB_ENV
-
-      - name: Check MySQL client (macOS)
-        if: runner.os == 'macOS' && ((matrix.config.mysql_client != '' ) || matrix.config.mysql_client)
-        run: |
-          echo $PATH
-          which mysql_config
-          mysql_config || true
-
-      - name: Install and check MariaDB client (Linux)
-        if: runner.os == 'Linux' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
-        run: |
-          sudo apt purge -y libmysqlclient-dev
-          sudo apt install -y libmariadb-dev
-          mariadb_config
-      # End custom: before install
+      - uses: ./.github/workflows/before-install
+        with:
+          matrix_config: matrix.config
 
       - uses: r-lib/actions/setup-pandoc@v1
 

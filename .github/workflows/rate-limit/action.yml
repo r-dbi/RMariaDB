@@ -11,8 +11,3 @@ runs:
       run: |
         curl -s --header "authorization: Bearer ${{ inputs.token }}" https://api.github.com/rate_limit
       shell: bash
-
-    - name: Set env var
-      run: |
-        echo FOO_BAR=baz | tee -a $GITHUB_ENV
-      shell: bash
