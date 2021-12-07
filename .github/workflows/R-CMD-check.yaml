@@ -21,8 +21,42 @@ on:
 name: rcc
 
 jobs:
-  R-CMD-check:
+  R-CMD-check-smoke:
     runs-on: ${{ matrix.config.os }}
+
+    name: "Smoke test: ${{ matrix.config.os }} (${{ matrix.config.r }}) ${{ matrix.config.desc }}"
+
+    # Begin custom: services
+    # End custom: services
+
+    strategy:
+      fail-fast: false
+      # Ensure that the "cancel" workflow gets a chance to run quickly, even if we just pushed
+      matrix:
+        config:
+          # Smoke test with just one matrix entry
+          - {os: ubuntu-18.04,   r: 'release'}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ./.github/workflows/rate-limit
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ./.github/workflows/custom/before-install
+
+      - uses: ./.github/workflows/install
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ./.github/workflows/custom/after-install
+
+      - uses: ./.github/workflows/check
+
+  R-CMD-check-full:
+    runs-on: ${{ matrix.config.os }}
+    needs: R-CMD-check-smoke
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }}) ${{ matrix.config.desc }}
 
@@ -33,7 +67,6 @@ jobs:
       fail-fast: false
       # Ensure that the "cancel" workflow gets a chance to run quickly, even if we just pushed
       # Need to figure out how to smoke-test
-      max-parallel: 5
       matrix:
         config:
           - {os: macOS-latest,   r: 'release'}
@@ -46,7 +79,6 @@ jobs:
 
           # Use older ubuntu to maximise backward compatibility
           - {os: ubuntu-18.04,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-18.04,   r: 'release'}
           - {os: ubuntu-18.04,   r: 'oldrel-1'}
 
           # Begin custom: R 3.6
@@ -73,10 +105,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: ./.github/workflows/rate-limit
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: ./.github/workflows/custom/before-install
 
       - uses: ./.github/workflows/install
@@ -86,8 +114,3 @@ jobs:
       - uses: ./.github/workflows/custom/after-install
 
       - uses: ./.github/workflows/check
-
-      - uses: ./.github/workflows/rate-limit
-        if: always()
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
