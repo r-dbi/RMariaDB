@@ -45,11 +45,6 @@ jobs:
       RGL_USE_NULL: true
       _R_CHECK_SYSTEM_CLOCK_: false
       _R_CHECK_FUTURE_FILE_TIMESTAMPS_: false
-      # Begin custom: env vars
-      RMARIADB_FORCE_MARIADBCONFIG: ${{ matrix.config.RMARIADB_FORCE_MARIADBCONFIG }}
-      RMARIADB_FORCE_MYSQLCONFIG: ${{ matrix.config.RMARIADB_FORCE_MYSQLCONFIG }}
-      RCMDCHECK_ERROR_ON: '"warning"'
-      # End custom: env vars
 
     steps:
       - uses: actions/checkout@v2
