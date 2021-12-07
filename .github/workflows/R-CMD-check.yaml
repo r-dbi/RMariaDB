@@ -57,7 +57,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: ./.github/workflows/before-install
+      - uses: ./.github/workflows/custom/before-install
         with:
           matrix_config: matrix.config
 
@@ -79,7 +79,7 @@ jobs:
           sudo ln -s $(which true) /usr/local/bin/qpdf
           sudo ln -s $(which true) /usr/local/bin/checkbashisms
 
-      - uses: ./.github/workflows/after-install
+      - uses: ./.github/workflows/custom/after-install
         with:
           matrix_config: matrix.config
 
