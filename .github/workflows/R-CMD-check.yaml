@@ -91,6 +91,10 @@ jobs:
       - uses: actions/checkout@v2
 
       # Begin custom: before install
+      - name: Add fake qpdf and checkbashisms
+        if: runner.os == 'macOS'
+        run: |
+          brew install mariadb-connector-c
       # End custom: before install
 
       - uses: r-lib/actions/setup-pandoc@v1
