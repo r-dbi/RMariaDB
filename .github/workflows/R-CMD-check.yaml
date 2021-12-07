@@ -58,6 +58,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       # Begin custom: before install
+      - name: Are env vars exposed?
+        run: |
+          env | sort
+
+      # Begin custom: before install
       - name: Install and check MariaDB client (macOS)
         if: runner.os == 'macOS' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
         run: |
