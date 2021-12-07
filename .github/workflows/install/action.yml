@@ -36,3 +36,4 @@ runs:
       run: |
         sudo ln -s $(which true) /usr/local/bin/qpdf
         sudo ln -s $(which true) /usr/local/bin/checkbashisms
+      shell: bash
