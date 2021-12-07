@@ -51,7 +51,7 @@ jobs:
       # End custom: env vars
 
     steps:
-      - uses: .github/workflows/actions/rate-limit.yaml
+      - uses: .github/workflows/rate-limit
 
       - uses: actions/checkout@v2
 
@@ -156,5 +156,5 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
-      - uses: .github/workflows/actions/rate-limit.yaml
+      - uses: .github/workflows/rate-limit
         if: always()
