@@ -77,6 +77,8 @@ jobs:
       - name: Check MySQL client (macOS)
         if: runner.os == 'macOS' && ((matrix.config.mysql_client != '' ) || matrix.config.mysql_client)
         run: |
+          echo $PATH
+          echo $PKG_CONFIG_PATH
           mysql_config
 
       - name: Install and check MariaDB client (Linux)
