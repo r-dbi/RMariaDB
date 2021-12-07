@@ -26,6 +26,7 @@ runs:
     - uses: r-lib/actions/setup-r@v1
       with:
         r-version: ${{ matrix.config.r }}
+        install-r: ${{ inputs.install-r }}
         http-user-agent: ${{ matrix.config.http-user-agent }}
         use-public-rspm: true
 
@@ -33,7 +34,6 @@ runs:
       env:
         GITHUB_PAT: ${{ inputs.token }}
       with:
-        install-r: ${{ inputs.install-r }}
         extra-packages: rcmdcheck
 
     - name: Add fake qpdf and checkbashisms
