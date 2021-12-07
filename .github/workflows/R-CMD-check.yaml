@@ -49,6 +49,7 @@ jobs:
       - uses: ./.github/workflows/install
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          install-r: false
 
       - uses: ./.github/workflows/custom/after-install
 

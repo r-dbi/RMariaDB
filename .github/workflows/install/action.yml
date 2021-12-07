@@ -3,6 +3,10 @@ inputs:
   token:
     description: GitHub token, set to secrets.GITHUB_TOKEN
     required: true
+  install-r:
+    description: GitHub token, set to secrets.GITHUB_TOKEN
+    required: false
+    default: true
 
 runs:
   using: "composite"
@@ -29,6 +33,7 @@ runs:
       env:
         GITHUB_PAT: ${{ inputs.token }}
       with:
+        install-r: ${{ inputs.install-r }}
         extra-packages: rcmdcheck
 
     - name: Add fake qpdf and checkbashisms
