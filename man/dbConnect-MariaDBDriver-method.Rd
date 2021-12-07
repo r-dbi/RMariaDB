@@ -22,6 +22,7 @@
   ssl.capath = NULL,
   ssl.cipher = NULL,
   ...,
+  load_data_local_infile = FALSE,
   bigint = c("integer64", "integer", "numeric", "character"),
   timeout = 10,
   timezone = "+00:00",
@@ -77,6 +78,11 @@ the trusted SSL CA certificates in PEM format. Expanded with
 encryption.}
 
 \item{...}{Unused, needed for compatibility with generic.}
+
+\item{load_data_local_infile}{Set to \code{TRUE} to use \verb{LOAD DATA LOCAL INFILE}
+in \code{\link[=dbWriteTable]{dbWriteTable()}} and \code{\link[=dbAppendTable]{dbAppendTable()}} by default.
+This capability is disabled by default on the server side
+for recent versions of MySQL Server.}
 
 \item{bigint}{The R type that 64-bit integer types should be mapped to,
 default is \link[bit64:bit64-package]{bit64::integer64}, which allows the full range of 64 bit

@@ -156,14 +156,22 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     }
 
     if (nrow(value) > 0) {
-      out <- db_append_table(
-        conn = conn,
-        name = name,
-        value = value,
-        warn_factor = FALSE,
-        safe = TRUE,
-        transact = FALSE
-      )
+      if (conn@load_data_local_infile) {
+        out <- db_append_table(
+          conn = conn,
+          name = name,
+          value = value,
+          warn_factor = FALSE,
+          safe = TRUE,
+          transact = FALSE
+        )
+      } else {
+        out <- dbAppendTable(
+          conn = conn,
+          name = name,
+          value = value
+        )
+      }
 
       if (out < nrow(value)) {
         msg <- paste0("Error writing table: sent ", nrow(value), " rows, added ", out, " rows.")
@@ -257,7 +265,8 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
 #' @export
 #' @rdname mariadb-tables
 #' @details
-#' Pass `safe = FALSE` to `dbAppendTable()` to avoid transactions.
+#' When using `load_data_local_infile = TRUE` in [dbConnect()],
+#' pass `safe = FALSE` to `dbAppendTable()` to avoid transactions.
 #' Because `LOAD DATA INFILE` is used internally, this means that
 #' rows violating primary key constraints are now silently ignored.
 #' @importFrom utils write.table
@@ -268,6 +277,10 @@ setMethod("dbAppendTable", "MariaDBConnection",
     }
     stopifnot(is.character(name), length(name) == 1)
     stopifnot(is.data.frame(value))
+
+    if (!conn@load_data_local_infile) {
+      return(callNextMethod())
+    }
 
     db_append_table(conn, name, value, ..., warn_factor = TRUE, transact = TRUE)
   }

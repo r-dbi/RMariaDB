@@ -11,6 +11,7 @@ setClass("MariaDBConnection",
     ptr = "externalptr",
     host = "character",
     db = "character",
+    load_data_local_infile = "logical",
     bigint = "character",
     timezone = "character",
     timezone_out = "character"
