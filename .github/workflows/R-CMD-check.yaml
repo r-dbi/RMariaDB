@@ -51,10 +51,7 @@ jobs:
       # End custom: env vars
 
     steps:
-      - name: Check rate limits
-        run: |
-          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
-        shell: bash
+      - uses: .github/workflows/actions/rate-limit.yaml
 
       - uses: actions/checkout@v2
 
@@ -159,8 +156,5 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
-      - name: Check rate limits
+      - uses: .github/workflows/actions/rate-limit.yaml
         if: always()
-        run: |
-          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
-        shell: bash

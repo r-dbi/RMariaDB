@@ -1,0 +1,8 @@
+name: 'Check GitHub rate limits'
+runs:
+  using: "composite"
+  steps:
+    - name: Check rate limits
+      run: |
+        curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
+      shell: bash
