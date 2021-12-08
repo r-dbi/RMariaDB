@@ -1,4 +1,5 @@
 name: 'Actions to check an R package'
+inputs:
   results:
     description: Slug for check results
     required: true
