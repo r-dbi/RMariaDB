@@ -45,3 +45,9 @@ runs:
         echo "RMARIADB_FORCE_MARIADBCONFIG=${{ matrix.config.RMARIADB_FORCE_MARIADBCONFIG }}" | tee -a $GITHUB_ENV
         echo "RMARIADB_FORCE_MYSQLCONFIG=${{ matrix.config.RMARIADB_FORCE_MYSQLCONFIG }}" | tee -a $GITHUB_ENV
       shell: bash
+
+    - name: Use LOAD DATA LOCAL INFILE
+      #if: (matrix.config.mysql_server == '' ) || ! matrix.config.mysql_server
+      run: |
+        echo "RMARIADB_LOAD_DATA_LOCAL_INFILE=true" | tee -a $GITHUB_ENV
+      shell: bash
