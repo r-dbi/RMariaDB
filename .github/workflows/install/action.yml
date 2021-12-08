@@ -42,7 +42,7 @@ runs:
         http-user-agent: ${{ matrix.config.http-user-agent }}
         use-public-rspm: true
 
-    - uses: r-lib/actions/setup-r-dependencies@v1
+    - uses: cynkra/actions/setup-r-dependencies@master
       env:
         GITHUB_PAT: ${{ inputs.token }}
       with:
