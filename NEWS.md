@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RMariaDB 1.1.2.9001 (2021-12-08)
+
+- `dbWriteTable()` and `dbAppendTable()` are much faster thanks to `LOAD DATA LOCAL INFILE`. To activate this, `load_data_local_infile = TRUE` must be passed to `dbConnect()`. The readr package is required (#11, #223).
+- Update for compatibility with DBItest 1.7.2 (#228).
+
+
 # RMariaDB 1.1.2.9000 (2021-09-06)
 
 - Same as previous version.
