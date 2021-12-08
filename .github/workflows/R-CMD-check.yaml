@@ -22,9 +22,9 @@ name: rcc
 
 jobs:
   R-CMD-check-smoke:
-    runs-on: ${{ matrix.config.os }}
+    runs-on: ubuntu-latest
 
-    name: "Smoke test: ${{ matrix.config.os }} (stock R)"
+    name: "Smoke test: stock R"
 
     # Begin custom: services
     # End custom: services
