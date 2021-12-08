@@ -75,6 +75,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
           remotes::install_dev("${{ matrix.package }}", "https://cloud.r-project.org", upgrade = "always")
         shell: Rscript {0}
