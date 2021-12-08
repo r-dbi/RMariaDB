@@ -35,7 +35,7 @@ jobs:
       matrix:
         config:
           # Smoke test with just one matrix entry
-          - {os: ubuntu-18.04}
+          - {os: ubuntu-18.04,  desc: 'smoke test'}
 
     steps:
       - uses: actions/checkout@v2
