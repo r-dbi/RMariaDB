@@ -47,29 +47,17 @@
     </div>
 
     <table class="ref-index"><colgroup><col class="alias"><col class="title"></colgroup><tbody><tr><th colspan="2">
-          <h2 id="all-functions">All functions <a href="#all-functions" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p>
+          <h2 id="connecting-and-disconnecting">Connecting and disconnecting <a href="#connecting-and-disconnecting" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Connecting to and disconnecting from databases.</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="Client-flags.html">Client-flags</a></code> </p>
-        </td>
-        <td><p>Client flags</p></td>
-      </tr><tr><td>
-          <p><code><a href="RMariaDB-package.html">RMariaDB-package</a></code> </p>
-        </td>
-        <td><p>RMariaDB: Database Interface and MariaDB Driver</p></td>
-      </tr><tr><td>
           <p><code><a href="dbConnect-MariaDBDriver-method.html">dbConnect(<i>&lt;MariaDBDriver&gt;</i>)</a></code> <code><a href="dbConnect-MariaDBDriver-method.html">MariaDB()</a></code> </p>
         </td>
         <td><p>Connect/disconnect to a MariaDB DBMS</p></td>
       </tr><tr><td>
-          <p><code><a href="dbDataType.html">dbDataType(<i>&lt;MariaDBConnection&gt;</i>)</a></code> <code><a href="dbDataType.html">dbDataType(<i>&lt;MariaDBDriver&gt;</i>)</a></code> </p>
+          <p><code><a href="Client-flags.html">Client-flags</a></code> </p>
         </td>
-        <td><p>Determine the SQL Data Type of an S object</p></td>
-      </tr><tr><td>
-          <p><code><a href="mariadb-tables.html">dbReadTable(<i>&lt;MariaDBConnection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="mariadb-tables.html">dbWriteTable(<i>&lt;MariaDBConnection&gt;</i>,<i>&lt;character&gt;</i>,<i>&lt;data.frame&gt;</i>)</a></code> <code><a href="mariadb-tables.html">dbWriteTable(<i>&lt;MariaDBConnection&gt;</i>,<i>&lt;character&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="mariadb-tables.html">dbListTables(<i>&lt;MariaDBConnection&gt;</i>)</a></code> <code><a href="mariadb-tables.html">dbListObjects(<i>&lt;MariaDBConnection&gt;</i>)</a></code> <code><a href="mariadb-tables.html">dbExistsTable(<i>&lt;MariaDBConnection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="mariadb-tables.html">dbRemoveTable(<i>&lt;MariaDBConnection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Read and write MariaDB tables.</p></td>
+        <td><p>Client flags</p></td>
       </tr><tr><td>
           <p><code><a href="mariadbClientLibraryVersions.html">mariadbClientLibraryVersions()</a></code> </p>
         </td>
@@ -79,6 +67,22 @@
         </td>
         <td><p>Check if default database is available.</p></td>
       </tr><tr><td>
+          <p><code><a href="RMariaDB-package.html">RMariaDB-package</a></code> </p>
+        </td>
+        <td><p>RMariaDB: Database Interface and MariaDB Driver</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="tables">Tables <a href="#tables" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Reading and writing entire tables.</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="mariadb-tables.html">dbReadTable(<i>&lt;MariaDBConnection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="mariadb-tables.html">dbWriteTable(<i>&lt;MariaDBConnection&gt;</i>,<i>&lt;character&gt;</i>,<i>&lt;data.frame&gt;</i>)</a></code> <code><a href="mariadb-tables.html">dbWriteTable(<i>&lt;MariaDBConnection&gt;</i>,<i>&lt;character&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="mariadb-tables.html">dbListTables(<i>&lt;MariaDBConnection&gt;</i>)</a></code> <code><a href="mariadb-tables.html">dbListObjects(<i>&lt;MariaDBConnection&gt;</i>)</a></code> <code><a href="mariadb-tables.html">dbExistsTable(<i>&lt;MariaDBConnection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="mariadb-tables.html">dbRemoveTable(<i>&lt;MariaDBConnection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Read and write MariaDB tables.</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="results">Results <a href="#results" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>More control for sending queries and executing statements.</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
           <p><code><a href="query.html">dbFetch(<i>&lt;MariaDBResult&gt;</i>)</a></code> <code><a href="query.html">dbSendQuery(<i>&lt;MariaDBConnection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="query.html">dbSendStatement(<i>&lt;MariaDBConnection&gt;</i>,<i>&lt;character&gt;</i>)</a></code> <code><a href="query.html">dbBind(<i>&lt;MariaDBResult&gt;</i>)</a></code> <code><a href="query.html">dbClearResult(<i>&lt;MariaDBResult&gt;</i>)</a></code> <code><a href="query.html">dbGetStatement(<i>&lt;MariaDBResult&gt;</i>)</a></code> </p>
         </td>
         <td><p>Execute a SQL statement on a database connection.</p></td>
@@ -86,10 +90,22 @@
           <p><code><a href="result-meta.html">dbColumnInfo(<i>&lt;MariaDBResult&gt;</i>)</a></code> <code><a href="result-meta.html">dbGetRowsAffected(<i>&lt;MariaDBResult&gt;</i>)</a></code> <code><a href="result-meta.html">dbGetRowCount(<i>&lt;MariaDBResult&gt;</i>)</a></code> <code><a href="result-meta.html">dbHasCompleted(<i>&lt;MariaDBResult&gt;</i>)</a></code> </p>
         </td>
         <td><p>Database interface meta-data.</p></td>
-      </tr><tr><td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="transactions">Transactions <a href="#transactions" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Ensuring multiple statements are executed together, or not at all.</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
           <p><code><a href="transactions.html">dbBegin(<i>&lt;MariaDBConnection&gt;</i>)</a></code> <code><a href="transactions.html">dbCommit(<i>&lt;MariaDBConnection&gt;</i>)</a></code> <code><a href="transactions.html">dbRollback(<i>&lt;MariaDBConnection&gt;</i>)</a></code> </p>
         </td>
         <td><p>DBMS Transaction Management</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="sql">SQL <a href="#sql" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Tools for creating and parsing SQL queries.</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="dbDataType.html">dbDataType(<i>&lt;MariaDBConnection&gt;</i>)</a></code> <code><a href="dbDataType.html">dbDataType(<i>&lt;MariaDBDriver&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Determine the SQL Data Type of an S object</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
