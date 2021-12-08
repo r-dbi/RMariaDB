@@ -114,6 +114,7 @@ jobs:
 
       - uses: ./.github/workflows/install
         with:
+          r-version: ${{ matrix.config.r }}
           cache-version: rcc-main-1
           token: ${{ secrets.GITHUB_TOKEN }}
 

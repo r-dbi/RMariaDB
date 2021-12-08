@@ -3,6 +3,10 @@ inputs:
   token:
     description: GitHub token, set to secrets.GITHUB_TOKEN
     required: true
+  r-version:
+    description: Passed on to r-lib/actions/setup-r@v1
+    required: false
+    default: release
   install-r:
     description: Passed on to r-lib/actions/setup-r@v1
     required: false
@@ -10,7 +14,7 @@ inputs:
   cache-version:
     description: Passed on to r-lib/actions/setup-r-dependencies@v1
     required: false
-    default: true
+    default: 1
 
 runs:
   using: "composite"
@@ -29,7 +33,7 @@ runs:
 
     - uses: r-lib/actions/setup-r@v1
       with:
-        r-version: ${{ matrix.config.r }}
+        r-version: ${{ inputs.r-version }}
         install-r: ${{ inputs.install-r }}
         http-user-agent: ${{ matrix.config.http-user-agent }}
         use-public-rspm: true
