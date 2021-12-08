@@ -29,15 +29,6 @@ jobs:
     # Begin custom: services
     # End custom: services
 
-    strategy:
-      fail-fast: false
-      # Ensure that the "cancel" workflow gets a chance to run quickly, even if we just pushed
-      matrix:
-        config:
-          # Smoke test with just one matrix entry
-          # Need two values here, GHA bug?
-          - {os: ubuntu-18.04,  desc: 'smoke test'}
-
     steps:
       - uses: actions/checkout@v2
 
