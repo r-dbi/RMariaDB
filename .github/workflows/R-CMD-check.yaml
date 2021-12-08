@@ -35,6 +35,7 @@ jobs:
       matrix:
         config:
           # Smoke test with just one matrix entry
+          # Need two values here, GHA bug?
           - {os: ubuntu-18.04,  desc: 'smoke test'}
 
     steps:
