@@ -31,7 +31,8 @@ jobs:
         with:
           install-r: false
 
-      - uses: ./.github/workflows/dep-matrix
+      - id: set-matrix
+        uses: ./.github/workflows/dep-matrix
 
   check-matrix:
     runs-on: ubuntu-18.04
