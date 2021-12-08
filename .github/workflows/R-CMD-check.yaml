@@ -55,6 +55,8 @@ jobs:
       - uses: ./.github/workflows/custom/after-install
 
       - uses: ./.github/workflows/check
+        with:
+          results: ${{ runner.os }}-smoke-test
 
   R-CMD-check-full:
     runs-on: ${{ matrix.config.os }}
@@ -117,3 +119,5 @@ jobs:
       - uses: ./.github/workflows/custom/after-install
 
       - uses: ./.github/workflows/check
+        with:
+          results: ${{ runner.os }}-r${{ matrix.config.r }}

@@ -1,4 +1,7 @@
 name: 'Actions to check an R package'
+  results:
+    description: Slug for check results
+    required: true
 
 runs:
   using: "composite"
@@ -17,5 +20,5 @@ runs:
       if: failure()
       uses: actions/upload-artifact@main
       with:
-        name: ${{ runner.os }}-r${{ matrix.config.r }}-results
+        name: ${{ inputs.results }}-results
         path: check
