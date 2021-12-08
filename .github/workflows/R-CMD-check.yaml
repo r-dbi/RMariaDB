@@ -24,7 +24,7 @@ jobs:
   R-CMD-check-smoke:
     runs-on: ${{ matrix.config.os }}
 
-    name: "Smoke test: ${{ matrix.config.os }} (${{ matrix.config.r }}) ${{ matrix.config.desc }}"
+    name: "Smoke test: ${{ matrix.config.os }} (stock R)"
 
     # Begin custom: services
     # End custom: services
@@ -35,7 +35,7 @@ jobs:
       matrix:
         config:
           # Smoke test with just one matrix entry
-          - {os: ubuntu-18.04,   r: 'release'}
+          - {os: ubuntu-18.04}
 
     steps:
       - uses: actions/checkout@v2
@@ -83,6 +83,7 @@ jobs:
 
           # Use older ubuntu to maximise backward compatibility
           - {os: ubuntu-18.04,   r: 'devel', http-user-agent: 'release'}
+          - {os: ubuntu-18.04,   r: 'release'}
           - {os: ubuntu-18.04,   r: 'oldrel-1'}
 
           # Begin custom: R 3.6
