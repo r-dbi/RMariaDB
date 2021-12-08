@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.1.2.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.1.2.9001</span>
       </span>
     </div>
 
@@ -87,6 +87,9 @@
   temporary <span class="op">=</span> <span class="cn">FALSE</span>,
   <span class="va">...</span>
 <span class="op">)</span>
+
+<span class="co"># S4 method for MariaDBConnection</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbAppendTable.html" class="external-link">dbAppendTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">value</span>, <span class="va">...</span>, row.names <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
 
 <span class="co"># S4 method for MariaDBConnection</span>
 <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListTables.html" class="external-link">dbListTables</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">...</span><span class="op">)</span>
@@ -165,6 +168,13 @@ table doesn't exist.</p></dd>
     <h2>Value</h2>
     <p>A data.frame in the case of <code><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable()</a></code>; otherwise a logical
 indicating whether the operation was successful.</p>
+    </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>When using <code>load_data_local_infile = TRUE</code> in <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code>,
+pass <code>safe = FALSE</code> to <code><a href="https://dbi.r-dbi.org/reference/dbAppendTable.html" class="external-link">dbAppendTable()</a></code> to avoid transactions.
+Because <code>LOAD DATA INFILE</code> is used internally, this means that
+rows violating primary key constraints are now silently ignored.</p>
     </div>
     <div id="note">
     <h2>Note</h2>
