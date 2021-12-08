@@ -75,7 +75,7 @@ jobs:
           extra-packages: "rcmdcheck remotes"
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install dependencies
+      - name: Install dev version of ${{ matrix.package }}
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
