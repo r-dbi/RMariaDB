@@ -204,6 +204,7 @@ jobs:
       - uses: ./.github/workflows/install
         with:
           cache-version: rcc-dev-1
+          extra-packages: [ rcmdcheck, remotes ]
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
