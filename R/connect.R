@@ -140,6 +140,12 @@ setMethod("dbConnect", "MariaDBDriver",
       ssl.capath <- normalizePath(ssl.capath)
     }
 
+    if (isTRUE(load_data_local_infile)) {
+      if (!rlang::is_installed("readr")) {
+        stopc("`load_data_local_infile = TRUE` requires the readr package.")
+      }
+    }
+
     ptr <- connection_create(
       host, username, password, dbname, as.integer(port), unix.socket,
       as.integer(client.flag), groups, default.file,
@@ -153,7 +159,7 @@ setMethod("dbConnect", "MariaDBDriver",
       ptr = ptr,
       host = info$host,
       db = info$dbname,
-      load_data_local_infile = load_data_local_infile,
+      load_data_local_infile = isTRUE(load_data_local_infile),
       bigint = bigint
     )
 
