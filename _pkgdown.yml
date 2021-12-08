@@ -12,6 +12,37 @@ home:
     href: https://r-dbi.org
 
 
+reference:
+- title: Connecting and disconnecting
+  desc: Connecting to and disconnecting from databases.
+  contents:
+  - dbConnect,MariaDBDriver-method
+  - Client-flags
+  - mariadbClientLibraryVersions
+  - mariadbHasDefault
+  - RMariaDB-package
+
+- title: Tables
+  desc: Reading and writing entire tables.
+  contents:
+  - mariadb-tables
+
+- title: Results
+  desc: More control for sending queries and executing statements.
+  contents:
+  - dbFetch,MariaDBResult-method
+  - result-meta
+
+- title: Transactions
+  desc: Ensuring multiple statements are executed together, or not at all.
+  contents:
+  - transactions
+
+- title: SQL
+  desc: Tools for creating and parsing SQL queries.
+  contents:
+  - dbDataType,MariaDBConnection-method
+
 development:
   mode: auto
 
