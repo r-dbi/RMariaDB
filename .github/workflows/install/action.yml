@@ -4,7 +4,11 @@ inputs:
     description: GitHub token, set to secrets.GITHUB_TOKEN
     required: true
   install-r:
-    description: GitHub token, set to secrets.GITHUB_TOKEN
+    description: Passed on to r-lib/actions/setup-r@v1
+    required: false
+    default: true
+  cache-version:
+    description: Passed on to r-lib/actions/setup-r-dependencies@v1
     required: false
     default: true
 
@@ -35,6 +39,7 @@ runs:
         GITHUB_PAT: ${{ inputs.token }}
       with:
         extra-packages: rcmdcheck
+        cache-version: ${{ inputs.cache-version }}
 
     - name: Add fake qpdf and checkbashisms
       if: runner.os == 'Linux'

@@ -50,6 +50,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           install-r: false
+          cache-version: rcc-smoke-1
 
       - uses: ./.github/workflows/custom/after-install
 
@@ -110,6 +111,7 @@ jobs:
 
       - uses: ./.github/workflows/install
         with:
+          cache-version: rcc-main-1
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ./.github/workflows/custom/after-install
