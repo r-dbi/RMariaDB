@@ -1,0 +1,47 @@
+name: 'Actions to run before R packages are installed'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Define R CMD check error condition
+      run: |
+        echo 'RCMDCHECK_ERROR_ON="warning"' | tee -a $GITHUB_ENV
+      shell: bash
+
+    - name: Install and check MariaDB client (macOS)
+      if: runner.os == 'macOS' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
+      run: |
+        brew install mariadb-connector-c
+        mariadb_config
+      shell: bash
+
+    - name: Install MySQL client (macOS)
+      if: runner.os == 'macOS' && ((matrix.config.mysql_client != '' ) || matrix.config.mysql_client)
+      run: |
+        brew install mysql-client
+        echo PATH="/usr/local/opt/mysql-client/bin:${PATH}" | tee -a $GITHUB_ENV
+        echo PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig" | tee -a $GITHUB_ENV
+      shell: bash
+
+    - name: Check MySQL client (macOS)
+      if: runner.os == 'macOS' && ((matrix.config.mysql_client != '' ) || matrix.config.mysql_client)
+      run: |
+        echo $PATH
+        which mysql_config
+        mysql_config || true
+      shell: bash
+
+    - name: Install and check MariaDB client (Linux)
+      if: runner.os == 'Linux' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
+      run: |
+        sudo apt-get purge -y libmysqlclient-dev
+        sudo apt-get update -y
+        sudo apt-get install -y libmariadb-dev
+        mariadb_config
+      shell: bash
+
+    - name: Define client restrictons
+      run: |
+        echo "RMARIADB_FORCE_MARIADBCONFIG=${{ matrix.config.RMARIADB_FORCE_MARIADBCONFIG }}" | tee -a $GITHUB_ENV
+        echo "RMARIADB_FORCE_MYSQLCONFIG=${{ matrix.config.RMARIADB_FORCE_MYSQLCONFIG }}" | tee -a $GITHUB_ENV
+      shell: bash
