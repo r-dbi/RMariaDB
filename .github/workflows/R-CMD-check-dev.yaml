@@ -5,6 +5,7 @@ on:
     - cron:  '5 0 * * *' # only run on main branch
   push:
     branches:
+    - f-modular
     - "cran-*"
     tags:
     - "v*"
