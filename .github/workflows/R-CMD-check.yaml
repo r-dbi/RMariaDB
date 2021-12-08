@@ -21,8 +21,38 @@ on:
 name: rcc
 
 jobs:
-  R-CMD-check:
+  R-CMD-check-smoke:
+    runs-on: ubuntu-latest
+
+    name: "Smoke test: stock R"
+
+    # Begin custom: services
+    # End custom: services
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ./.github/workflows/rate-limit
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ./.github/workflows/custom/before-install
+
+      - uses: ./.github/workflows/install
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          install-r: false
+          cache-version: rcc-smoke-1
+
+      - uses: ./.github/workflows/custom/after-install
+
+      - uses: ./.github/workflows/check
+        with:
+          results: ${{ runner.os }}-smoke-test
+
+  R-CMD-check-full:
     runs-on: ${{ matrix.config.os }}
+    needs: R-CMD-check-smoke
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }}) ${{ matrix.config.desc }}
 
@@ -33,7 +63,6 @@ jobs:
       fail-fast: false
       # Ensure that the "cancel" workflow gets a chance to run quickly, even if we just pushed
       # Need to figure out how to smoke-test
-      max-parallel: 5
       matrix:
         config:
           - {os: macOS-latest,   r: 'release'}
@@ -69,130 +98,20 @@ jobs:
           - { os: ubuntu-20.04,   r: 'release',    mysql_client: false,   mysql_server: true,                 desc: "MySQL server, MariaDB client" }
           - { os: ubuntu-20.04,   r: 'release',    mysql_client: false,   mysql_server: false,                desc: "MariaDB server + client" }
           # End custom: matrix elements
-    env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      R_KEEP_PKG_SOURCE: yes
-      # prevent rgl issues because no X11 display is available
-      RGL_USE_NULL: true
-      _R_CHECK_SYSTEM_CLOCK_: false
-      _R_CHECK_FUTURE_FILE_TIMESTAMPS_: false
-      # Begin custom: env vars
-      RMARIADB_FORCE_MARIADBCONFIG: ${{ matrix.config.RMARIADB_FORCE_MARIADBCONFIG }}
-      RMARIADB_FORCE_MYSQLCONFIG: ${{ matrix.config.RMARIADB_FORCE_MYSQLCONFIG }}
-      # End custom: env vars
 
     steps:
-      - name: Check rate limits
-        run: |
-          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
-        shell: bash
-
       - uses: actions/checkout@v2
 
-      # Begin custom: before install
-      - name: Install and check MariaDB client (macOS)
-        if: runner.os == 'macOS' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
-        run: |
-          brew install mariadb-connector-c
-          mariadb_config
+      - uses: ./.github/workflows/custom/before-install
 
-      - name: Install MySQL client (macOS)
-        if: runner.os == 'macOS' && ((matrix.config.mysql_client != '' ) || matrix.config.mysql_client)
-        run: |
-          brew install mysql-client
-          echo PATH="/usr/local/opt/mysql-client/bin:${PATH}" | tee -a $GITHUB_ENV
-          echo PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig" | tee -a $GITHUB_ENV
-
-      - name: Check MySQL client (macOS)
-        if: runner.os == 'macOS' && ((matrix.config.mysql_client != '' ) || matrix.config.mysql_client)
-        run: |
-          echo $PATH
-          which mysql_config
-          mysql_config || true
-
-      - name: Install and check MariaDB client (Linux)
-        if: runner.os == 'Linux' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
-        run: |
-          sudo apt purge -y libmysqlclient-dev
-          sudo apt install -y libmariadb-dev
-          mariadb_config
-      # End custom: before install
-
-      - uses: r-lib/actions/setup-pandoc@v1
-
-      - uses: r-lib/actions/setup-r@v1
+      - uses: ./.github/workflows/install
         with:
           r-version: ${{ matrix.config.r }}
-          http-user-agent: ${{ matrix.config.http-user-agent }}
-          use-public-rspm: true
+          cache-version: rcc-main-1
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: r-lib/actions/setup-r-dependencies@v1
+      - uses: ./.github/workflows/custom/after-install
+
+      - uses: ./.github/workflows/check
         with:
-          extra-packages: rcmdcheck
-
-      - name: Add fake qpdf and checkbashisms
-        if: runner.os == 'Linux'
-        run: |
-          sudo ln -s $(which true) /usr/local/bin/qpdf
-          sudo ln -s $(which true) /usr/local/bin/checkbashisms
-
-      - name: Session info
-        run: |
-          options(width = 100)
-          if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
-          pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
-        shell: Rscript {0}
-
-      # Begin custom: after install
-      # Must happen after installing system dependencies,
-      # https://github.com/ankane/setup-mariadb/issues/2
-      - name: Purge MySQL server
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt purge -y mysql-server
-
-      - uses: ankane/setup-mariadb@v1
-        if: (matrix.config.mysql_server == '') || ! matrix.config.mysql_server
-        with:
-          mariadb-version: 10.5
-
-      - uses: ankane/setup-mysql@v1
-        if: matrix.config.mysql_server
-        with:
-          mysql-version: 8.0
-
-      # Use hard-coded time zone info so that it also works on Windows
-      - name: Create database, set it to UTF-8, add time zone info
-        run: |
-          mysql -e "CREATE DATABASE IF NOT EXISTS test; ALTER DATABASE test CHARACTER SET 'utf8'; FLUSH PRIVILEGES;"
-          mysql -D mysql < tools/tz.sql
-          mysql -e "SET GLOBAL time_zone = 'Europe/Zurich';"
-        shell: bash
-      # End custom: after install
-
-      - uses: r-lib/actions/check-r-package@v1
-        with:
-        # Begin custom: rcmdcheck error_on
-          error-on: '"warning"'
-        # End custom: rcmdcheck error_on
-
-      - name: Show test output
-        if: always()
-        run: |
-          find check -name '*.Rout*' -exec head -n 1000000 '{}' \; || true
-        shell: bash
-
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@main
-        with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check
-
-      - name: Check rate limits
-        if: always()
-        run: |
-          curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
-        shell: bash
+          results: ${{ runner.os }}-r${{ matrix.config.r }}
