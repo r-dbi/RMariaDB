@@ -156,11 +156,31 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
     }
 
     if (nrow(value) > 0) {
-      dbAppendTable(
-        conn = conn,
-        name = name,
-        value = value
-      )
+      if (conn@load_data_local_infile) {
+        out <- db_append_table(
+          conn = conn,
+          name = name,
+          value = value,
+          warn_factor = FALSE,
+          safe = TRUE,
+          transact = FALSE
+        )
+      } else {
+        out <- dbAppendTable(
+          conn = conn,
+          name = name,
+          value = value
+        )
+      }
+
+      if (out < nrow(value)) {
+        msg <- paste0("Error writing table: sent ", nrow(value), " rows, added ", out, " rows.")
+        if (need_transaction) {
+          stopc(msg)
+        } else {
+          warningc(msg)
+        }
+      }
     }
 
     if (need_transaction) {
@@ -242,6 +262,177 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "character"),
     invisible(TRUE)
   }
 )
+#' @export
+#' @rdname mariadb-tables
+#' @details
+#' When using `load_data_local_infile = TRUE` in [dbConnect()],
+#' pass `safe = FALSE` to `dbAppendTable()` to avoid transactions.
+#' Because `LOAD DATA INFILE` is used internally, this means that
+#' rows violating primary key constraints are now silently ignored.
+#' @importFrom utils write.table
+setMethod("dbAppendTable", "MariaDBConnection",
+  function(conn, name, value, ..., row.names = NULL) {
+    if (!is.null(row.names)) {
+      stop("Can't pass `row.names` to `dbAppendTable()`", call. = FALSE)
+    }
+    stopifnot(is.character(name), length(name) == 1)
+    stopifnot(is.data.frame(value))
+
+    if (!conn@load_data_local_infile) {
+      return(callNextMethod())
+    }
+
+    db_append_table(conn, name, value, ..., warn_factor = TRUE, transact = TRUE)
+  }
+)
+
+db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE, transact = TRUE) {
+  path <- tempfile("RMariaDB", fileext = ".tsv")
+  is_list <- vlapply(value, is.list)
+  colnames <- dbQuoteIdentifier(conn, names(value))
+  if (any(is_list)) {
+    set <- paste0(
+      "SET ",
+      paste0(
+        colnames[is_list], " = UNHEX(@X", which(is_list), ")",
+        collapse = ", "
+      )
+    )
+    colnames[is_list] <- paste0("@X", which(is_list))
+  } else {
+    set <- ""
+  }
+  quoted_name <- dbQuoteIdentifier(conn, name)
+  sql <- paste0(
+    "LOAD DATA LOCAL INFILE ", dbQuoteString(conn, path), "\n",
+    "IGNORE\n",
+    "INTO TABLE ", quoted_name, "\n",
+    "CHARACTER SET utf8 \n",
+    "(", paste0(colnames, collapse = ", "), ")",
+    set
+  )
+
+  file <- file(path, "wb")
+  on.exit(close(file))
+
+  readr::write_delim(
+    csv_quote(value, warn_factor, conn), file, quote = "none", delim = "\t", na = "\\N",
+    col_names = FALSE
+  )
+
+  # Close connection manually, unlink when done to save disk space
+  on.exit(unlink(path), add = FALSE)
+  close(file)
+
+  if (safe) {
+    if (transact) {
+      dbBegin(conn)
+      on.exit(dbRollback(conn), add = TRUE)
+    }
+
+    sql_count <- paste0("SELECT COUNT(*) FROM ", quoted_name)
+    count_before <- dbGetQuery(conn, sql_count)[[1]]
+
+    out <- dbExecute(conn, sql)
+
+    # Some servers don't return a record count here,
+    # need to count manually
+    if (out == 0) {
+      count_after <- dbGetQuery(conn, sql_count)[[1]]
+      out <- as.numeric(count_after - count_before)
+    }
+
+    if (transact) {
+      if (out < nrow(value)) {
+        stopc("Error writing table: sent ", nrow(value), " rows, added ", out, " rows.")
+      }
+      dbCommit(conn)
+    }
+
+    # Manual cleanup
+    unlink(path)
+    on.exit(NULL, add = FALSE)
+
+    out
+  } else {
+    dbExecute(conn, sql)
+  }
+}
+
+csv_quote <- function(x, warn_factor, conn) {
+  old <- options(digits.secs = 6)
+  on.exit(options(old))
+
+  x[] <- lapply(x, csv_quote_one, conn)
+  factor_to_string(x, warn = warn_factor)
+}
+
+csv_quote_one <- function(x, conn) {
+  if (inherits(x, "AsIs")) {
+    class(x) <- setdiff(class(x), "AsIs")
+  }
+
+  if (is.factor(x)) {
+    levels(x) <- csv_quote_char(levels(x))
+  } else if (is.character(x)) {
+    x <- csv_quote_char(x)
+  } else if (is.integer(x)) {
+    x_orig <- x
+    x <- as.character(x)
+    # Failure to load BIT(1) columns with a verbatim 0 (???)
+    # https://stackoverflow.com/a/17836602/946850
+    x[!is.na(x_orig) & x_orig == 0] <- ""
+  } else if (is.integer64(x)) {
+    x_orig <- x
+    x <- as.character(x)
+    # Failure to load BIT(1) columns with a verbatim 0 (???)
+    # https://stackoverflow.com/a/17836602/946850
+    x[!is.na(x_orig) & x_orig == 0] <- ""
+  } else if (is.numeric(x)) {
+    x_orig <- x
+    if (all_integerish(x)) {
+      x <- formatC(x, format = "d")
+    } else {
+      # https://dev.mysql.com/doc/refman/5.7/en/number-literals.html
+      x <- formatC(x, digits = 17, format = "E")
+    }
+    x[is.na(x_orig) | is.infinite(x_orig)] <- NA_character_
+  } else if (is.logical(x)) {
+    x <- as.character(as.integer(x))
+  } else if (inherits(x, "Date")) {
+    x <- as.character(x)
+  } else if (inherits(x, "difftime")) {
+    x <- hms::as_hms(x)
+    x <- as.character(x)
+  } else if (inherits(x, "POSIXt")) {
+    x <- format(x, format = "%Y-%m-%dT%H:%M:%OS", tz = conn@timezone)
+  } else if (inherits(x, "list")) {
+    x_orig <- x
+    x <- vcapply(x, function(x) paste(format(x), collapse = ""))
+    x[vlapply(x_orig, is.null)] <- NA_character_
+  } else {
+    stop("NYI: ", paste(class(x), collapse = "/"), call. = FALSE)
+  }
+
+  x
+}
+
+csv_quote_char <- function(x) {
+  x <- enc2utf8(x)
+  x <- gsub("\\", "\\\\", x, fixed = TRUE)
+  x <- gsub("\t", "\\t", x, fixed = TRUE)
+  x <- gsub("\r", "\\r", x, fixed = TRUE)
+  x <- gsub("\n", "\\n", x, fixed = TRUE)
+  x
+}
+
+all_integerish <- function(x) {
+  x <- x[!is.na(x)]
+  if (any(is.infinite(x))) {
+    return(FALSE)
+  }
+  all(x >= -2147483647) && all(x <= 2147483647) && all(x == as.integer(x))
+}
 
 #' @export
 #' @rdname mariadb-tables

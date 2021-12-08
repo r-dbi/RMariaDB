@@ -5,6 +5,7 @@
 \alias{dbReadTable,MariaDBConnection,character-method}
 \alias{dbWriteTable,MariaDBConnection,character,data.frame-method}
 \alias{dbWriteTable,MariaDBConnection,character,character-method}
+\alias{dbAppendTable,MariaDBConnection-method}
 \alias{dbListTables,MariaDBConnection-method}
 \alias{dbListObjects,MariaDBConnection-method}
 \alias{dbExistsTable,MariaDBConnection,character-method}
@@ -42,6 +43,8 @@
   temporary = FALSE,
   ...
 )
+
+\S4method{dbAppendTable}{MariaDBConnection}(conn, name, value, ..., row.names = NULL)
 
 \S4method{dbListTables}{MariaDBConnection}(conn, ...)
 
@@ -118,6 +121,12 @@ indicating whether the operation was successful.
 }
 \description{
 These methods read or write entire tables from a MariaDB database.
+}
+\details{
+When using \code{load_data_local_infile = TRUE} in \code{\link[=dbConnect]{dbConnect()}},
+pass \code{safe = FALSE} to \code{dbAppendTable()} to avoid transactions.
+Because \verb{LOAD DATA INFILE} is used internally, this means that
+rows violating primary key constraints are now silently ignored.
 }
 \note{
 The data.frame returned by \code{dbReadTable()} only has

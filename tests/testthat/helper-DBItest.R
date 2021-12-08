@@ -1,6 +1,9 @@
 DBItest::make_context(
   MariaDB(),
-  list(dbname = "test"),
+  list(
+    dbname = "test",
+    load_data_local_infile = (Sys.getenv("RMARIADB_LOAD_DATA_LOCAL_INFILE") != "")
+  ),
   tweaks = DBItest::tweaks(
     dbitest_version = "1.7.2",
     constructor_relax_args = TRUE,

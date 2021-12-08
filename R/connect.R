@@ -60,6 +60,10 @@ NULL
 #' @param ssl.cipher (optional) string list of permitted ciphers to use for SSL
 #'   encryption.
 #' @param ... Unused, needed for compatibility with generic.
+#' @param load_data_local_infile Set to `TRUE` to use `LOAD DATA LOCAL INFILE`
+#'   in [dbWriteTable()] and [dbAppendTable()] by default.
+#'   This capability is disabled by default on the server side
+#'   for recent versions of MySQL Server.
 #' @param bigint The R type that 64-bit integer types should be mapped to,
 #'   default is [bit64::integer64], which allows the full range of 64 bit
 #'   integers.
@@ -107,6 +111,7 @@ setMethod("dbConnect", "MariaDBDriver",
     unix.socket = NULL, port = 0, client.flag = 0,
     groups = "rs-dbi", default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
     ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...,
+    load_data_local_infile = FALSE,
     bigint = c("integer64", "integer", "numeric", "character"),
     timeout = 10, timezone = "+00:00", timezone_out = NULL) {
 
@@ -135,6 +140,12 @@ setMethod("dbConnect", "MariaDBDriver",
       ssl.capath <- normalizePath(ssl.capath)
     }
 
+    if (isTRUE(load_data_local_infile)) {
+      if (!rlang::is_installed("readr")) {
+        stopc("`load_data_local_infile = TRUE` requires the readr package.")
+      }
+    }
+
     ptr <- connection_create(
       host, username, password, dbname, as.integer(port), unix.socket,
       as.integer(client.flag), groups, default.file,
@@ -148,6 +159,7 @@ setMethod("dbConnect", "MariaDBDriver",
       ptr = ptr,
       host = info$host,
       db = info$dbname,
+      load_data_local_infile = isTRUE(load_data_local_infile),
       bigint = bigint
     )
 
@@ -206,7 +218,7 @@ check_tz <- function(timezone) {
 #' @export
 #' @import methods DBI
 #' @importFrom hms hms
-#' @importFrom bit64 integer64
+#' @importFrom bit64 integer64 is.integer64
 #' @rdname dbConnect-MariaDBDriver-method
 #' @examples
 #' if (mariadbHasDefault()) {
