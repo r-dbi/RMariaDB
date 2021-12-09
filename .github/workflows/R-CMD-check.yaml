@@ -31,9 +31,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - uses: ./.github/workflows/custom/before-install
 
       - uses: ./.github/workflows/install
@@ -43,6 +40,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ./.github/workflows/custom/after-install
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       - uses: ./.github/workflows/check
         with:
