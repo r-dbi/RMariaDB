@@ -7,7 +7,7 @@ public:
   virtual ~MariaResultSource();
 
 public:
-  virtual PGresult* get_result() = 0;
+  virtual void* get_result() = 0;
 };
 
 #endif //RMARIADB_MARIARESULTSOURCE_H
