@@ -1,5 +1,5 @@
-#ifndef RPOSTGRES_PQDATAFRAME_H
-#define RPOSTGRES_PQDATAFRAME_H
+#ifndef RMARIADB_MARIADATAFRAME_H
+#define RMARIADB_MARIADATAFRAME_H
 
 #include "DbDataFrame.h"
 
@@ -14,4 +14,4 @@ public:
   ~MariaDataFrame();
 };
 
-#endif //RPOSTGRES_PQDATAFRAME_H
+#endif //RMARIADB_MARIADATAFRAME_H

@@ -1,5 +1,5 @@
-#ifndef RPOSTGRES_PQRESULTSOURCE_H
-#define RPOSTGRES_PQRESULTSOURCE_H
+#ifndef RMARIADB_MARIARESULTSOURCE_H
+#define RMARIADB_MARIARESULTSOURCE_H
 
 class MariaResultSource {
 public:
@@ -10,4 +10,4 @@ public:
   virtual PGresult* get_result() = 0;
 };
 
-#endif //RPOSTGRES_PQRESULTSOURCE_H
+#endif //RMARIADB_MARIARESULTSOURCE_H
