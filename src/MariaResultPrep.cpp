@@ -199,7 +199,7 @@ List MariaResultPrep::fetch(int n_max) {
     }
 
     ++i;
-    if (i % 1000 == 0)
+    if (i % 1024 == 0)
       checkUserInterrupt();
   }
 
