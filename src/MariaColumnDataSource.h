@@ -33,7 +33,6 @@ public:
 
 private:
   static double convert_datetime(const char* val);
-  void* get_result() const;
   const char* get_result_value() const;
 };
 

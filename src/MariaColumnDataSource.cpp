@@ -1,5 +1,6 @@
 #include "pch.h"
 #include <boost/lexical_cast.hpp>
+#include "MariaTypes.h"
 #include "MariaColumnDataSource.h"
 #include "MariaResultSource.h"
 #include "MariaUtils.h"
@@ -197,10 +198,6 @@ double MariaColumnDataSource::convert_datetime(const char* val) {
   LOG_VERBOSE << ret;
 
   return ret;
-}
-
-PGresult* MariaColumnDataSource::get_result() const {
-  return result_source->get_result();
 }
 
 const char* MariaColumnDataSource::get_result_value() const {
