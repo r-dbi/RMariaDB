@@ -50,6 +50,7 @@ setMethod("dbFetch", "MariaDBResult",
     ret <- result_fetch(res@ptr, n = n)
     ret <- convert_bigint(ret, res@bigint)
     ret <- fix_timezone(ret, res@conn)
+    ret <- fix_blob(ret)
     ret <- sqlColumnToRownames(ret, row.names)
     set_tidy_names(ret)
   }
@@ -78,6 +79,15 @@ fix_timezone <- function(ret, conn) {
       x <- lubridate::force_tz(x, conn@timezone)
       lubridate::with_tz(x, conn@timezone_out)
     })
+  }
+
+  ret
+}
+
+fix_blob <- function(ret) {
+  is_blob <- which(vapply(ret, is.list, FUN.VALUE = logical(1)))
+  if (length(is_blob) > 0) {
+    ret[is_blob] <- lapply(ret[is_blob], blob::as_blob)
   }
 
   ret
