@@ -1,10 +1,10 @@
 #ifndef RPOSTGRES_PQRESULTSOURCE_H
 #define RPOSTGRES_PQRESULTSOURCE_H
 
-class PqResultSource {
+class MariaResultSource {
 public:
-  PqResultSource();
-  virtual ~PqResultSource();
+  MariaResultSource();
+  virtual ~MariaResultSource();
 
 public:
   virtual PGresult* get_result() = 0;

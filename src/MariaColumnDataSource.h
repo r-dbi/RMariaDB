@@ -3,16 +3,16 @@
 
 #include "DbColumnDataSource.h"
 
-class PqResultSource;
-class PqColumnDataSourceFactory;
+class MariaResultSource;
+class MariaColumnDataSourceFactory;
 
-class PqColumnDataSource : public DbColumnDataSource {
-  PqResultSource* result_source;
+class MariaColumnDataSource : public DbColumnDataSource {
+  MariaResultSource* result_source;
   const DATA_TYPE dt;
 
 public:
-  PqColumnDataSource(PqResultSource* result_source_, const DATA_TYPE dt_, const int j);
-  virtual ~PqColumnDataSource();
+  MariaColumnDataSource(MariaResultSource* result_source_, const DATA_TYPE dt_, const int j);
+  virtual ~MariaColumnDataSource();
 
 public:
   virtual DATA_TYPE get_data_type() const;

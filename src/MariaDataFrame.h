@@ -3,15 +3,15 @@
 
 #include "DbDataFrame.h"
 
-class PqResultSource;
+class MariaResultSource;
 
-class PqDataFrame : public DbDataFrame {
+class MariaDataFrame : public DbDataFrame {
 public:
-  PqDataFrame(PqResultSource* result_source,
+  MariaDataFrame(MariaResultSource* result_source,
               const std::vector<std::string>& names,
               const int n_max_,
               const std::vector<DATA_TYPE>& types);
-  ~PqDataFrame();
+  ~MariaDataFrame();
 };
 
 #endif //RPOSTGRES_PQDATAFRAME_H

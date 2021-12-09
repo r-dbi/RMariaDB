@@ -1,49 +1,49 @@
 #include "pch.h"
 #include <boost/lexical_cast.hpp>
-#include "PqColumnDataSource.h"
-#include "PqResultSource.h"
-#include "PqUtils.h"
+#include "MariaColumnDataSource.h"
+#include "MariaResultSource.h"
+#include "MariaUtils.h"
 
-PqColumnDataSource::PqColumnDataSource(PqResultSource* result_source_, const DATA_TYPE dt_, const int j) :
+MariaColumnDataSource::MariaColumnDataSource(MariaResultSource* result_source_, const DATA_TYPE dt_, const int j) :
   DbColumnDataSource(j),
   result_source(result_source_),
   dt(dt_)
 {
 }
 
-PqColumnDataSource::~PqColumnDataSource() {
+MariaColumnDataSource::~MariaColumnDataSource() {
 }
 
-DATA_TYPE PqColumnDataSource::get_data_type() const {
+DATA_TYPE MariaColumnDataSource::get_data_type() const {
   return dt;
 }
 
-DATA_TYPE PqColumnDataSource::get_decl_data_type() const {
+DATA_TYPE MariaColumnDataSource::get_decl_data_type() const {
   return dt;
 }
 
-bool PqColumnDataSource::is_null() const {
+bool MariaColumnDataSource::is_null() const {
   LOG_VERBOSE;
   return PQgetisnull(get_result(), 0, get_j()) != 0;
 }
 
-int PqColumnDataSource::fetch_bool() const {
+int MariaColumnDataSource::fetch_bool() const {
   LOG_VERBOSE << get_result_value();
   return (strcmp(get_result_value(), "t") == 0);
 }
 
 
-int PqColumnDataSource::fetch_int() const {
+int MariaColumnDataSource::fetch_int() const {
   LOG_VERBOSE << get_result_value();
   return atoi(get_result_value());
 }
 
-int64_t PqColumnDataSource::fetch_int64() const {
+int64_t MariaColumnDataSource::fetch_int64() const {
   LOG_VERBOSE;
   return boost::lexical_cast<int64_t>(get_result_value());
 }
 
-double PqColumnDataSource::fetch_real() const {
+double MariaColumnDataSource::fetch_real() const {
   LOG_VERBOSE << get_result_value();
 
   const char* value = get_result_value();
@@ -66,12 +66,12 @@ double PqColumnDataSource::fetch_real() const {
   }
 }
 
-SEXP PqColumnDataSource::fetch_string() const {
+SEXP MariaColumnDataSource::fetch_string() const {
   LOG_VERBOSE << get_result_value();
   return Rf_mkCharCE(get_result_value(), CE_UTF8);
 }
 
-SEXP PqColumnDataSource::fetch_blob() const {
+SEXP MariaColumnDataSource::fetch_blob() const {
   LOG_VERBOSE;
   const void* val = get_result_value();
 
@@ -86,7 +86,7 @@ SEXP PqColumnDataSource::fetch_blob() const {
   return bytes;
 }
 
-double PqColumnDataSource::fetch_date() const {
+double MariaColumnDataSource::fetch_date() const {
   LOG_VERBOSE;
   const char* val = get_result_value();
   int year = *val - 0x30;
@@ -105,17 +105,17 @@ double PqColumnDataSource::fetch_date() const {
   return days_from_civil(year, mon, mday);
 }
 
-double PqColumnDataSource::fetch_datetime_local() const {
+double MariaColumnDataSource::fetch_datetime_local() const {
   LOG_VERBOSE;
   return convert_datetime(get_result_value());
 }
 
-double PqColumnDataSource::fetch_datetime() const {
+double MariaColumnDataSource::fetch_datetime() const {
   LOG_VERBOSE;
   return convert_datetime(get_result_value());
 }
 
-double PqColumnDataSource::fetch_time() const {
+double MariaColumnDataSource::fetch_time() const {
   LOG_VERBOSE;
   const char* val = get_result_value();
   int hour = (*val - 0x30) * 10;
@@ -128,7 +128,7 @@ double PqColumnDataSource::fetch_time() const {
   return static_cast<double>(hour * 3600 + min * 60) + sec;
 }
 
-double PqColumnDataSource::convert_datetime(const char* val) {
+double MariaColumnDataSource::convert_datetime(const char* val) {
   struct tm date;
   date.tm_isdst = -1;
   date.tm_year = *val++ - 0x30;
@@ -199,11 +199,11 @@ double PqColumnDataSource::convert_datetime(const char* val) {
   return ret;
 }
 
-PGresult* PqColumnDataSource::get_result() const {
+PGresult* MariaColumnDataSource::get_result() const {
   return result_source->get_result();
 }
 
-const char* PqColumnDataSource::get_result_value() const {
+const char* MariaColumnDataSource::get_result_value() const {
   const char* val = PQgetvalue(get_result(), 0, get_j());
   LOG_VERBOSE << val;
   return val;

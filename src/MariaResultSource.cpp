@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "PqResultSource.h"
+#include "MariaResultSource.h"
 
-PqResultSource::PqResultSource() {
+MariaResultSource::MariaResultSource() {
 }
 
-PqResultSource::~PqResultSource() {
+MariaResultSource::~MariaResultSource() {
 }
