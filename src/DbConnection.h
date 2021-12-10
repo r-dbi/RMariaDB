@@ -45,7 +45,7 @@ public:
   bool is_current_result(const DbResult* pResult) const;
   bool has_query();
 
-  bool exec(std::string sql);
+  bool exec(const std::string& sql);
 
   void begin_transaction();
   void commit();

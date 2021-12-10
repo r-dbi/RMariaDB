@@ -175,7 +175,7 @@ bool DbConnection::has_query() {
   return pCurrentResult_ != NULL;
 }
 
-bool DbConnection::exec(std::string sql) {
+bool DbConnection::exec(const std::string& sql) {
   check_connection();
 
   if (mysql_real_query(pConn_, sql.data(), sql.size()) != 0)
