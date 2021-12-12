@@ -2,25 +2,19 @@
 
 # RMariaDB 1.2.0 (2021-12-12)
 
-- Same as previous version.
+## Features
 
+- BLOBs are returned as `blob::blob()` objects (#126, #243).
+- `dbWriteTable()` and `dbAppendTable()` are much faster thanks to `LOAD DATA LOCAL INFILE`. To activate this, `load_data_local_infile = TRUE` must be passed to `dbConnect()`. The readr package is required (#11, #223).
 
-# RMariaDB 1.1.2.9002 (2021-12-12)
+## Bug fixes
+
+- Writing dates prior to 1970 no longer crashes on Windows (#232, #245).
+
+## Internal
 
 - Add test for reading and writing JSON data type as string (#127, #246).
-- Writing dates prior to 1970 no longer crashes on Windows (#232, #245).
-- BLOBs are returned as `blob::blob()` objects (#126, #243).
-
-
-# RMariaDB 1.1.2.9001 (2021-12-08)
-
-- `dbWriteTable()` and `dbAppendTable()` are much faster thanks to `LOAD DATA LOCAL INFILE`. To activate this, `load_data_local_infile = TRUE` must be passed to `dbConnect()`. The readr package is required (#11, #223).
 - Update for compatibility with DBItest 1.7.2 (#228).
-
-
-# RMariaDB 1.1.2.9000 (2021-09-06)
-
-- Same as previous version.
 
 
 # RMariaDB 1.1.2 (2021-09-06)
