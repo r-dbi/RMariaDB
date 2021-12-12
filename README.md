@@ -3,7 +3,7 @@ RMariaDB
 
 <!-- badges: start -->
 [![rcc](https://github.com/r-dbi/RMariaDB/workflows/rcc/badge.svg)](https://github.com/r-dbi/RMariaDB/actions)
-[![Codecov test coverage](https://codecov.io/gh/r-dbi/RMariaDB/branch/master/graph/badge.svg)](https://codecov.io/gh/r-dbi/RMariaDB?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/r-dbi/RMariaDB/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-dbi/RMariaDB?branch=main)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
 <!-- badges: end -->
