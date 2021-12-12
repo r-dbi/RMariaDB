@@ -66,7 +66,7 @@ test_that("write dates prior to 1970", {
   con <- mariadbDefault()
   on.exit(dbDisconnect(con))
 
-  x <- data.frame(col1 = as.Date("1970-01-01") - 0:2)
+  x <- data.frame(col1 = as.Date("1970-01-01") + 2:-2)
 
   dbWriteTable(con, "t1", x, overwrite = TRUE, temporary = TRUE)
   expect_equal(dbReadTable(con, "t1"), x)

@@ -210,20 +210,23 @@ void MariaBinding::set_date_buffer(int j, const int date) {
   const int date_0 = date + 719468;
   const int era = (date_0 >= 0 ? date_0 : date_0 - 146096) / 146097;
   const unsigned doe = static_cast<unsigned>(date_0 - era * 146097);          // [0, 146096]
+  LOG_VERBOSE << doe;
   const unsigned yoe = (doe - doe/1460 + doe/36524 - doe/146096) / 365;  // [0, 399]
+  LOG_VERBOSE << yoe;
   const int y = static_cast<int>(yoe) + era * 400;
   const unsigned doy = doe - (365*yoe + yoe/4 - yoe/100);                // [0, 365]
   const unsigned mp = (5*doy + 2)/153;                                   // [0, 11]
   const unsigned d = doy - (153*mp+2)/5 + 1;                             // [1, 31]
   const unsigned m = mp < 10 ? mp+3 : mp-9;                              // [1, 12]
+  const unsigned yr = y + (m <= 2);
 
   // gmtime() fails for dates < 1970 on Windows
   LOG_VERBOSE << date_0;
-  LOG_VERBOSE << y;
+  LOG_VERBOSE << yr;
   LOG_VERBOSE << m;
   LOG_VERBOSE << d;
 
-  time_buffers[j].year = y;
+  time_buffers[j].year = yr;
   time_buffers[j].month = m;
   time_buffers[j].day = d;
 }
