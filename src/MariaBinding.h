@@ -29,7 +29,9 @@ public:
 private:
   void binding_update(int j, enum_field_types type, int size);
 
-  void set_date_time_buffer(int j, double time);
+  void clear_date_buffer(int j);
+  void set_date_buffer(int j, int date);
+  void clear_time_buffer(int j);
   void set_time_buffer(int j, double time);
 };
 
