@@ -62,12 +62,24 @@ test_that("converts NaN and Inf to NULL", {
   expect_equal(dbReadTable(con, "t1"), data.frame(col1 = c(NA, NA, 0, NA, NA)))
 })
 
-test_that("write dates prior to 1970", {
+test_that("write dates prior to 1970 (#232)", {
   con <- mariadbDefault()
   on.exit(dbDisconnect(con))
 
   x <- data.frame(col1 = as.Date("1970-01-01") + 2:-2)
 
   dbWriteTable(con, "t1", x, overwrite = TRUE, temporary = TRUE)
+  expect_equal(dbReadTable(con, "t1"), x)
+})
+
+test_that("writing and reading JSON (#127)", {
+  con <- mariadbDefault()
+  on.exit(dbDisconnect(con))
+
+  x <- data.frame(col1 = "[1,2,3]")
+
+  dbWriteTable(con, "t1", x, field.types = c(col1 = "json"), overwrite = TRUE, temporary = TRUE)
+  dbReadTable(con, "t1")
+
   expect_equal(dbReadTable(con, "t1"), x)
 })
