@@ -1,5 +1,4 @@
 #include "pch.h"
-#include <ctime>
 #include <math.h>
 #include "MariaBinding.h"
 #include "integer64.h"
@@ -146,9 +145,12 @@ bool MariaBinding::bind_next_row() {
         double val = REAL(col)[i];
         LOG_VERBOSE << val;
         if (types[j] == MY_DATE) {
-          set_date_time_buffer(j, ::floor(val) * 86400.0);
+          set_date_buffer(j, static_cast<int>(::floor(val)));
+          clear_time_buffer(j);
         } else {
-          set_date_time_buffer(j, val);
+          double days = ::floor(val / 86400.0);
+          set_date_buffer(j, static_cast<int>(days));
+          set_time_buffer(j, val - days * 86400.0);
         }
         LOG_VERBOSE;
         bindings[j].buffer_length = sizeof(MYSQL_TIME);
@@ -161,6 +163,7 @@ bool MariaBinding::bind_next_row() {
         break;
       } else {
         double val = REAL(col)[i];
+        clear_date_buffer(j);
         set_time_buffer(j, val);
         bindings[j].buffer_length = sizeof(MYSQL_TIME);
         bindings[j].buffer = &time_buffers[j];
@@ -193,30 +196,53 @@ void MariaBinding::binding_update(int j, enum_field_types type, int size) {
   bindings[j].is_null = &is_null[j];
 }
 
-void MariaBinding::set_date_time_buffer(int j, double time) {
-  time_t int_time = static_cast<time_t>(time);
+void MariaBinding::clear_date_buffer(int j) {
+  LOG_VERBOSE << j;
+  time_buffers[j].year = 0;
+  time_buffers[j].month = 0;
+  time_buffers[j].day = 0;
+}
 
-  LOG_VERBOSE << time;
-  LOG_VERBOSE << (time - ::floor(time));
-  struct tm* tm = gmtime(&int_time);
-  LOG_VERBOSE << tm->tm_year;
-  LOG_VERBOSE << tm->tm_mon;
-  LOG_VERBOSE << tm->tm_mday;
-  LOG_VERBOSE << tm->tm_hour;
-  LOG_VERBOSE << tm->tm_min;
-  LOG_VERBOSE << tm->tm_sec;
+void MariaBinding::set_date_buffer(int j, const int date) {
+  LOG_VERBOSE << date;
 
-  time_buffers[j].year = tm->tm_year + 1900;
-  time_buffers[j].month = tm->tm_mon + 1 ;
-  time_buffers[j].day = tm->tm_mday;
-  time_buffers[j].hour = tm->tm_hour;
-  time_buffers[j].minute = tm->tm_min;
-  time_buffers[j].second = tm->tm_sec;
-  time_buffers[j].second_part = static_cast<unsigned long>((time - ::floor(time)) * 1000000.0);
-  LOG_VERBOSE << time_buffers[j].second_part;
+  // https://howardhinnant.github.io/date_algorithms.html#civil_from_days
+  const int date_0 = date + 719468;
+  const int era = (date_0 >= 0 ? date_0 : date_0 - 146096) / 146097;
+  const unsigned doe = static_cast<unsigned>(date_0 - era * 146097);          // [0, 146096]
+  LOG_VERBOSE << doe;
+  const unsigned yoe = (doe - doe/1460 + doe/36524 - doe/146096) / 365;  // [0, 399]
+  LOG_VERBOSE << yoe;
+  const int y = static_cast<int>(yoe) + era * 400;
+  const unsigned doy = doe - (365*yoe + yoe/4 - yoe/100);                // [0, 365]
+  const unsigned mp = (5*doy + 2)/153;                                   // [0, 11]
+  const unsigned d = doy - (153*mp+2)/5 + 1;                             // [1, 31]
+  const unsigned m = mp < 10 ? mp+3 : mp-9;                              // [1, 12]
+  const unsigned yr = y + (m <= 2);
+
+  // gmtime() fails for dates < 1970 on Windows
+  LOG_VERBOSE << date_0;
+  LOG_VERBOSE << yr;
+  LOG_VERBOSE << m;
+  LOG_VERBOSE << d;
+
+  time_buffers[j].year = yr;
+  time_buffers[j].month = m;
+  time_buffers[j].day = d;
+}
+
+void MariaBinding::clear_time_buffer(int j) {
+  LOG_VERBOSE << j;
+  time_buffers[j].hour = 0;
+  time_buffers[j].minute = 0;
+  time_buffers[j].second = 0;
+  time_buffers[j].second_part = 0;
+  time_buffers[j].neg = 0;
 }
 
 void MariaBinding::set_time_buffer(int j, double time) {
+  LOG_VERBOSE << time;
+
   bool neg = false;
   if (time < 0) {
     neg = true;
@@ -229,9 +255,6 @@ void MariaBinding::set_time_buffer(int j, double time) {
   double hours = ::trunc(time / 3600.0);
   double minutes = whole_minutes - hours * 60.0;
 
-  time_buffers[j].year = 0;
-  time_buffers[j].month = 0;
-  time_buffers[j].day = 0;
   time_buffers[j].hour = static_cast<unsigned int>(hours);
   time_buffers[j].minute = static_cast<unsigned int>(minutes);
   time_buffers[j].second = static_cast<unsigned int>(seconds);
