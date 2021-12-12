@@ -18,7 +18,7 @@ generic functions."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aj
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
       </span>
     </div>
 
@@ -54,7 +54,8 @@ generic functions."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aj
 generic functions.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for MariaDBDriver</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for MariaDBDriver</span>
 <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span>
   <span class="va">drv</span>,
   dbname <span class="op">=</span> <span class="cn">NULL</span>,
@@ -72,6 +73,7 @@ generic functions.</p>
   ssl.capath <span class="op">=</span> <span class="cn">NULL</span>,
   ssl.cipher <span class="op">=</span> <span class="cn">NULL</span>,
   <span class="va">...</span>,
+  load_data_local_infile <span class="op">=</span> <span class="cn">FALSE</span>,
   bigint <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"integer64"</span>, <span class="st">"integer"</span>, <span class="st">"numeric"</span>, <span class="st">"character"</span><span class="op">)</span>,
   timeout <span class="op">=</span> <span class="fl">10</span>,
   timezone <span class="op">=</span> <span class="st">"+00:00"</span>,
@@ -79,8 +81,8 @@ generic functions.</p>
 <span class="op">)</span>
 
 <span class="fu">MariaDB</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>drv</dt>
@@ -130,6 +132,11 @@ the trusted SSL CA certificates in PEM format. Expanded with
 encryption.</p></dd>
 <dt>...</dt>
 <dd><p>Unused, needed for compatibility with generic.</p></dd>
+<dt>load_data_local_infile</dt>
+<dd><p>Set to <code>TRUE</code> to use <code>LOAD DATA LOCAL INFILE</code>
+in <code><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbAppendTable.html" class="external-link">dbAppendTable()</a></code> by default.
+This capability is disabled by default on the server side
+for recent versions of MySQL Server.</p></dd>
 <dt>bigint</dt>
 <dd><p>The R type that 64-bit integer types should be mapped to,
 default is <a href="https://rdrr.io/pkg/bit64/man/bit64-package.html" class="external-link">bit64::integer64</a>, which allows the full range of 64 bit
@@ -182,11 +189,10 @@ client library which do not support this feature.</p>
     <h2>References</h2>
     <p>Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/</p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"></div>
+    
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -200,7 +206,7 @@ client library which do not support this feature.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.9000.</p>
 </div>
 
       </footer></div>
