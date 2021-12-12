@@ -76,7 +76,7 @@ test_that("writing and reading JSON (#127)", {
   con <- mariadbDefault()
   on.exit(dbDisconnect(con))
 
-  x <- data.frame(col1 = "[1,2,3]")
+  x <- data.frame(col1 = "[1,2,3]", stringsAsFactors = FALSE)
 
   dbWriteTable(con, "t1", x, field.types = c(col1 = "json"), overwrite = TRUE, temporary = TRUE)
   dbReadTable(con, "t1")
