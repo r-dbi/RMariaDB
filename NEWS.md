@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RMariaDB 1.2.0 (2021-12-12)
+
+- Same as previous version.
+
+
 # RMariaDB 1.1.2.9002 (2021-12-12)
 
 - Add test for reading and writing JSON data type as string (#127, #246).
