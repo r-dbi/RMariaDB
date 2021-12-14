@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RMariaDB 1.2.0.9001 (2021-12-14)
+
+- Upgrade to mariadb-connector-c 3.2.5 on Windows, with built-in support for the `caching_sha2_password` plugin (#134, #248, @jeroen).
+
+
 # RMariaDB 1.2.0.9000 (2021-12-12)
 
 - Same as previous version.
