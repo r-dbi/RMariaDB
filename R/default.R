@@ -14,27 +14,31 @@
 #'   dbDisconnect(db)
 #' }
 mariadbHasDefault <- function() {
-  tryCatch({
-    mariadb_default()
-    TRUE
-  }, error = function(...) {
-    message(
-      "Could not initialise default MariaDB database. If MariaDB is running\n",
-      "check that you have a ~/.my.cnf file that contains a [rs-dbi] section\n",
-      "describing how to connect to a test database."
-    )
-    FALSE
-  })
+  tryCatch(
+    {
+      mariadb_default()
+      TRUE
+    },
+    error = function(...) {
+      message(
+        "Could not initialise default MariaDB database. If MariaDB is running\n",
+        "check that you have a ~/.my.cnf file that contains a [rs-dbi] section\n",
+        "describing how to connect to a test database."
+      )
+      FALSE
+    })
 }
 
 #' @export
 #' @rdname mariadbHasDefault
 mariadbDefault <- function() {
-  tryCatch({
-    mariadb_default()
-  }, error = function(...) {
-    testthat::skip("Test database not available")
-  })
+  tryCatch(
+    {
+      mariadb_default()
+    },
+    error = function(...) {
+      testthat::skip("Test database not available")
+    })
 }
 
 mariadb_default <- function(...) {

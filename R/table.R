@@ -25,13 +25,13 @@ NULL
 #' @param ... Unused, needed for compatibility with generic.
 #' @examples
 #' if (mariadbHasDefault()) {
-#' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
+#'   con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 #'
-#' # By default, row names are written in a column to row_names, and
-#' # automatically read back into the row.names()
-#' dbWriteTable(con, "mtcars", mtcars[1:5, ], temporary = TRUE)
-#' dbReadTable(con, "mtcars")
-#' dbReadTable(con, "mtcars", row.names = FALSE)
+#'   # By default, row names are written in a column to row_names, and
+#'   # automatically read back into the row.names()
+#'   dbWriteTable(con, "mtcars", mtcars[1:5, ], temporary = TRUE)
+#'   dbReadTable(con, "mtcars")
+#'   dbReadTable(con, "mtcars", row.names = FALSE)
 #' }
 #' @name mariadb-tables
 NULL
@@ -42,11 +42,11 @@ setMethod("dbReadTable", c("MariaDBConnection", "character"),
   function(conn, name, ..., row.names = FALSE, check.names = TRUE) {
     row.names <- compatRowNames(row.names)
 
-    if ((!is.logical(row.names) && !is.character(row.names)) || length(row.names) != 1L)  {
+    if ((!is.logical(row.names) && !is.character(row.names)) || length(row.names) != 1L) {
       stopc("`row.names` must be a logical scalar or a string")
     }
 
-    if (!is.logical(check.names) || length(check.names) != 1L)  {
+    if (!is.logical(check.names) || length(check.names) != 1L) {
       stopc("`check.names` must be a logical scalar")
     }
 
@@ -81,22 +81,22 @@ setMethod("dbWriteTable", c("MariaDBConnection", "character", "data.frame"),
            overwrite = FALSE, append = FALSE, ...,
            temporary = FALSE) {
 
-    if (!is.data.frame(value))  {
+    if (!is.data.frame(value)) {
       stopc("`value` must be data frame")
     }
 
     row.names <- compatRowNames(row.names)
 
-    if ((!is.logical(row.names) && !is.character(row.names)) || length(row.names) != 1L)  {
+    if ((!is.logical(row.names) && !is.character(row.names)) || length(row.names) != 1L) {
       stopc("`row.names` must be a logical scalar or a string")
     }
-    if (!is.logical(overwrite) || length(overwrite) != 1L || is.na(overwrite))  {
+    if (!is.logical(overwrite) || length(overwrite) != 1L || is.na(overwrite)) {
       stopc("`overwrite` must be a logical scalar")
     }
-    if (!is.logical(append) || length(append) != 1L || is.na(append))  {
+    if (!is.logical(append) || length(append) != 1L || is.na(append)) {
       stopc("`append` must be a logical scalar")
     }
-    if (!is.logical(temporary) || length(temporary) != 1L)  {
+    if (!is.logical(temporary) || length(temporary) != 1L) {
       stopc("`temporary` must be a logical scalar")
     }
     if (overwrite && append) {
@@ -463,7 +463,9 @@ setMethod("dbListObjects", c("MariaDBConnection", "ANY"), function(conn, prefix 
     )
   } else {
     unquoted <- dbUnquoteIdentifier(conn, prefix)
-    is_prefix <- vlapply(unquoted, function(x) { "schema" %in% names(x@name) && !("table" %in% names(x@name)) })
+    is_prefix <- vlapply(unquoted, function(x) {
+      "schema" %in% names(x@name) && !("table" %in% names(x@name))
+    })
     schemas <- vcapply(unquoted[is_prefix], function(x) x@name[["schema"]])
     if (length(schemas) > 0) {
       schema_strings <- dbQuoteString(conn, schemas)
@@ -500,14 +502,16 @@ setMethod("dbExistsTable", c("MariaDBConnection", "character"),
     if (!dbIsValid(conn)) {
       stopc("Invalid connection")
     }
-    tryCatch({
-      dbGetQuery(conn, paste0(
-        "SELECT NULL FROM ", dbQuoteIdentifier(conn, name), " WHERE FALSE"
-      ))
-      TRUE
-    }, error = function(...) {
-      FALSE
-    })
+    tryCatch(
+      {
+        dbGetQuery(conn, paste0(
+          "SELECT NULL FROM ", dbQuoteIdentifier(conn, name), " WHERE FALSE"
+        ))
+        TRUE
+      },
+      error = function(...) {
+        FALSE
+      })
   }
 )
 

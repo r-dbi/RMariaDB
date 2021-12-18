@@ -25,20 +25,20 @@ NULL
 #' @export
 #' @examples
 #' if (mariadbHasDefault()) {
-#' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
-#' dbWriteTable(con, "arrests", datasets::USArrests, temporary = TRUE)
+#'   con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
+#'   dbWriteTable(con, "arrests", datasets::USArrests, temporary = TRUE)
 #'
-#' # Run query to get results as dataframe
-#' dbGetQuery(con, "SELECT * FROM arrests limit 3")
+#'   # Run query to get results as dataframe
+#'   dbGetQuery(con, "SELECT * FROM arrests limit 3")
 #'
-#' # Send query to pull requests in batches
-#' res <- dbSendQuery(con, "SELECT * FROM arrests")
-#' data <- dbFetch(res, n = 2)
-#' data
-#' dbHasCompleted(res)
+#'   # Send query to pull requests in batches
+#'   res <- dbSendQuery(con, "SELECT * FROM arrests")
+#'   data <- dbFetch(res, n = 2)
+#'   data
+#'   dbHasCompleted(res)
 #'
-#' dbClearResult(res)
-#' dbDisconnect(con)
+#'   dbClearResult(res)
+#'   dbDisconnect(con)
 #' }
 #' @rdname query
 setMethod("dbFetch", "MariaDBResult",
@@ -171,21 +171,21 @@ setMethod("dbGetStatement", "MariaDBResult", function(res, ...) {
 #' @param ... Ignored. Needed for compatibility with generic
 #' @examples
 #' if (mariadbHasDefault()) {
-#' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
-#' dbWriteTable(con, "t1", datasets::USArrests, temporary = TRUE)
+#'   con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
+#'   dbWriteTable(con, "t1", datasets::USArrests, temporary = TRUE)
 #'
-#' rs <- dbSendQuery(con, "SELECT * FROM t1 WHERE UrbanPop >= 80")
-#' rs
+#'   rs <- dbSendQuery(con, "SELECT * FROM t1 WHERE UrbanPop >= 80")
+#'   rs
 #'
-#' dbGetStatement(rs)
-#' dbHasCompleted(rs)
-#' dbColumnInfo(rs)
+#'   dbGetStatement(rs)
+#'   dbHasCompleted(rs)
+#'   dbColumnInfo(rs)
 #'
-#' dbFetch(rs)
-#' rs
+#'   dbFetch(rs)
+#'   rs
 #'
-#' dbClearResult(rs)
-#' dbDisconnect(con)
+#'   dbClearResult(rs)
+#'   dbDisconnect(con)
 #' }
 #' @name result-meta
 NULL
