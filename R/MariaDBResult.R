@@ -20,4 +20,3 @@ setClass("MariaDBResult",
 setMethod("dbIsValid", "MariaDBResult", function(dbObj, ...) {
   result_valid(dbObj@ptr)
 })
-
