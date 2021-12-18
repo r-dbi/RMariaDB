@@ -153,4 +153,3 @@ CLIENT_MULTI_STATEMENTS  <- 65536
 #' @export
 CLIENT_MULTI_RESULTS     <- 131072
 # Enable/disable multi-results
-
