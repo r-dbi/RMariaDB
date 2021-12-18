@@ -14,9 +14,3 @@ setClass("MariaDBResult",
     conn = "MariaDBConnection"
   )
 )
-
-#' @rdname MariaDBResult-class
-#' @export
-setMethod("dbIsValid", "MariaDBResult", function(dbObj, ...) {
-  result_valid(dbObj@ptr)
-})
