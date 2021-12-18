@@ -139,12 +139,12 @@ message from the database driver.
 }
 \examples{
 if (mariadbHasDefault()) {
-con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
+  con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
 
-# By default, row names are written in a column to row_names, and
-# automatically read back into the row.names()
-dbWriteTable(con, "mtcars", mtcars[1:5, ], temporary = TRUE)
-dbReadTable(con, "mtcars")
-dbReadTable(con, "mtcars", row.names = FALSE)
+  # By default, row names are written in a column to row_names, and
+  # automatically read back into the row.names()
+  dbWriteTable(con, "mtcars", mtcars[1:5, ], temporary = TRUE)
+  dbReadTable(con, "mtcars")
+  dbReadTable(con, "mtcars", row.names = FALSE)
 }
 }

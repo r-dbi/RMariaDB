@@ -143,7 +143,7 @@ con <- dbConnect(RMariaDB::MariaDB(), host = "mydb.mycompany.com",
   user = "abc", password = "def")
 # But instead of supplying the username and password in code, it's usually
 # better to set up a group in your .my.cnf (usually located in your home
-directory). Then it's less likely you'll inadvertently share them.
+# directory). Then it's less likely you'll inadvertently share them.
 con <- dbConnect(RMariaDB::MariaDB(), group = "test")
 
 # Always cleanup by disconnecting the database
@@ -157,21 +157,21 @@ if (mariadbHasDefault()) {
   dbDisconnect(con)
 }
 if (mariadbHasDefault()) {
-# connect to a database and load some data
-con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
-dbWriteTable(con, "USArrests", datasets::USArrests, temporary = TRUE)
+  # connect to a database and load some data
+  con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
+  dbWriteTable(con, "USArrests", datasets::USArrests, temporary = TRUE)
 
-# query
-rs <- dbSendQuery(con, "SELECT * FROM USArrests")
-d1 <- dbFetch(rs, n = 10)      # extract data in chunks of 10 rows
-dbHasCompleted(rs)
-d2 <- dbFetch(rs, n = -1)      # extract all remaining data
-dbHasCompleted(rs)
-dbClearResult(rs)
-dbListTables(con)
+  # query
+  rs <- dbSendQuery(con, "SELECT * FROM USArrests")
+  d1 <- dbFetch(rs, n = 10)      # extract data in chunks of 10 rows
+  dbHasCompleted(rs)
+  d2 <- dbFetch(rs, n = -1)      # extract all remaining data
+  dbHasCompleted(rs)
+  dbClearResult(rs)
+  dbListTables(con)
 
-# clean up
-dbDisconnect(con)
+  # clean up
+  dbDisconnect(con)
 }
 }
 \references{

@@ -26,20 +26,20 @@ See documentation of generics for more details.
 }
 \examples{
 if (mariadbHasDefault()) {
-con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
-dbWriteTable(con, "t1", datasets::USArrests, temporary = TRUE)
+  con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
+  dbWriteTable(con, "t1", datasets::USArrests, temporary = TRUE)
 
-rs <- dbSendQuery(con, "SELECT * FROM t1 WHERE UrbanPop >= 80")
-rs
+  rs <- dbSendQuery(con, "SELECT * FROM t1 WHERE UrbanPop >= 80")
+  rs
 
-dbGetStatement(rs)
-dbHasCompleted(rs)
-dbColumnInfo(rs)
+  dbGetStatement(rs)
+  dbHasCompleted(rs)
+  dbColumnInfo(rs)
 
-dbFetch(rs)
-rs
+  dbFetch(rs)
+  rs
 
-dbClearResult(rs)
-dbDisconnect(con)
+  dbClearResult(rs)
+  dbDisconnect(con)
 }
 }
