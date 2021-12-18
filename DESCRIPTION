@@ -71,6 +71,7 @@ Collate:
     'RcppExports.R'
     'coerce.R'
     'connect.R'
+    'dbConnect_MariaDBDriver.R'
     'default.R'
     'export.R'
     'names.R'
