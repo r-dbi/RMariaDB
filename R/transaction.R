@@ -27,24 +27,3 @@ NULL
 #' }
 #' @name transactions
 NULL
-
-#' @export
-#' @rdname transactions
-setMethod("dbBegin", "MariaDBConnection", function(conn, ...) {
-  connection_begin_transaction(conn@ptr)
-  invisible(TRUE)
-})
-
-#' @export
-#' @rdname transactions
-setMethod("dbCommit", "MariaDBConnection", function(conn, ...) {
-  connection_commit(conn@ptr)
-  invisible(TRUE)
-})
-
-#' @export
-#' @rdname transactions
-setMethod("dbRollback", "MariaDBConnection", function(conn, ...) {
-  connection_rollback(conn@ptr)
-  invisible(TRUE)
-})
