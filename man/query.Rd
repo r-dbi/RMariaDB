@@ -4,7 +4,8 @@
 %   R/dbGetStatement_MariaDBResult.R,
 %   R/dbSendQuery_MariaDBConnection_character.R,
 %   R/dbSendStatement_MariaDBConnection_character.R
-\name{dbBind_MariaDBResult}
+\name{query}
+\alias{query}
 \alias{dbBind_MariaDBResult}
 \alias{dbBind,MariaDBResult-method}
 \alias{dbClearResult_MariaDBResult}

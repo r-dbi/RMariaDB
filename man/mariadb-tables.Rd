@@ -6,7 +6,8 @@
 %   R/dbRemoveTable_MariaDBConnection_character.R,
 %   R/dbWriteTable_MariaDBConnection_character_character.R,
 %   R/dbWriteTable_MariaDBConnection_character_data.frame.R, R/table.R
-\name{dbAppendTable_MariaDBConnection}
+\name{mariadb-tables}
+\alias{mariadb-tables}
 \alias{dbAppendTable_MariaDBConnection}
 \alias{dbAppendTable,MariaDBConnection-method}
 \alias{dbExistsTable_MariaDBConnection_character}
@@ -23,7 +24,6 @@
 \alias{dbWriteTable,MariaDBConnection,character,character-method}
 \alias{dbWriteTable_MariaDBConnection_character_data.frame}
 \alias{dbWriteTable,MariaDBConnection,character,data.frame-method}
-\alias{mariadb-tables}
 \title{Read and write MariaDB tables.}
 \usage{
 \S4method{dbAppendTable}{MariaDBConnection}(conn, name, value, ..., row.names = NULL)

@@ -6,7 +6,7 @@
 #' @param dbObj A [MariaDBDriver-class] or [MariaDBConnection-class] object.
 #' @param obj R/S-Plus object whose SQL type we want to determine.
 #' @param \dots any other parameters that individual methods may need.
-#' @rdname dbDataType
+#' @name dbDataType
 #' @examples
 #' dbDataType(RMariaDB::MariaDB(), "a")
 #' dbDataType(RMariaDB::MariaDB(), 1:3)

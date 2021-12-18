@@ -1,4 +1,4 @@
-#' @rdname result-meta
+#' @name result-meta
 #' @usage NULL
 dbColumnInfo_MariaDBResult <- function(res, ...) {
   df <- result_column_info(res@ptr)

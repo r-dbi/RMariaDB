@@ -6,7 +6,8 @@
 %   R/dbQuoteString_MariaDBConnection_SQL.R,
 %   R/dbQuoteString_MariaDBConnection_character.R,
 %   R/dbUnquoteIdentifier_MariaDBConnection_SQL.R, R/quote.R
-\name{dbQuoteIdentifier_MariaDBConnection_Id}
+\name{mariadb-quoting}
+\alias{mariadb-quoting}
 \alias{dbQuoteIdentifier_MariaDBConnection_Id}
 \alias{dbQuoteIdentifier,MariaDBConnection,Id-method}
 \alias{dbQuoteIdentifier_MariaDBConnection_SQL}
@@ -21,7 +22,6 @@
 \alias{dbQuoteString,MariaDBConnection,character-method}
 \alias{dbUnquoteIdentifier_MariaDBConnection_SQL}
 \alias{dbUnquoteIdentifier,MariaDBConnection,SQL-method}
-\alias{mariadb-quoting}
 \title{Quote MariaDB strings and identifiers.}
 \usage{
 \S4method{dbQuoteIdentifier}{MariaDBConnection,Id}(conn, x, ...)

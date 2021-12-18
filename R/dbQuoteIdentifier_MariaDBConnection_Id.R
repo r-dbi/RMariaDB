@@ -1,4 +1,4 @@
-#' @rdname mariadb-quoting
+#' @name mariadb-quoting
 #' @usage NULL
 dbQuoteIdentifier_MariaDBConnection_Id <- function(conn, x, ...) {
   stopifnot(all(names(x@name) %in% c("schema", "table")))

@@ -1,4 +1,4 @@
-#' @rdname query
+#' @name query
 #' @usage NULL
 dbBind_MariaDBResult <- function(res, params, ...) {
   if (!is.null(names(params))) {

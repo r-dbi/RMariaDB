@@ -1,4 +1,4 @@
-#' @rdname mariadb-tables
+#' @name mariadb-tables
 #' @details
 #' When using `load_data_local_infile = TRUE` in [dbConnect()],
 #' pass `safe = FALSE` to `dbAppendTable()` to avoid transactions.

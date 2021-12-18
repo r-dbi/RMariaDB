@@ -2,7 +2,8 @@
 % Please edit documentation in R/dbColumnInfo_MariaDBResult.R,
 %   R/dbGetRowCount_MariaDBResult.R, R/dbGetRowsAffected_MariaDBResult.R,
 %   R/dbHasCompleted_MariaDBResult.R, R/query.R
-\name{dbColumnInfo_MariaDBResult}
+\name{result-meta}
+\alias{result-meta}
 \alias{dbColumnInfo_MariaDBResult}
 \alias{dbColumnInfo,MariaDBResult-method}
 \alias{dbGetRowCount_MariaDBResult}
@@ -11,7 +12,6 @@
 \alias{dbGetRowsAffected,MariaDBResult-method}
 \alias{dbHasCompleted_MariaDBResult}
 \alias{dbHasCompleted,MariaDBResult-method}
-\alias{result-meta}
 \title{Database interface meta-data.}
 \usage{
 \S4method{dbColumnInfo}{MariaDBResult}(res, ...)
