@@ -92,7 +92,7 @@ NULL
 #'   user = "abc", password = "def")
 #' # But instead of supplying the username and password in code, it's usually
 #' # better to set up a group in your .my.cnf (usually located in your home
-#' directory). Then it's less likely you'll inadvertently share them.
+#' # directory). Then it's less likely you'll inadvertently share them.
 #' con <- dbConnect(RMariaDB::MariaDB(), group = "test")
 #'
 #' # Always cleanup by disconnecting the database
@@ -108,12 +108,12 @@ NULL
 #' @export
 setMethod("dbConnect", "MariaDBDriver",
   function(drv, dbname = NULL, username = NULL, password = NULL, host = NULL,
-    unix.socket = NULL, port = 0, client.flag = 0,
-    groups = "rs-dbi", default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
-    ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...,
-    load_data_local_infile = FALSE,
-    bigint = c("integer64", "integer", "numeric", "character"),
-    timeout = 10, timezone = "+00:00", timezone_out = NULL) {
+           unix.socket = NULL, port = 0, client.flag = 0,
+           groups = "rs-dbi", default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
+           ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...,
+           load_data_local_infile = FALSE,
+           bigint = c("integer64", "integer", "numeric", "character"),
+           timeout = 10, timezone = "+00:00", timezone_out = NULL) {
 
     bigint <- match.arg(bigint)
 
@@ -222,21 +222,21 @@ check_tz <- function(timezone) {
 #' @rdname dbConnect-MariaDBDriver-method
 #' @examples
 #' if (mariadbHasDefault()) {
-#' # connect to a database and load some data
-#' con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
-#' dbWriteTable(con, "USArrests", datasets::USArrests, temporary = TRUE)
+#'   # connect to a database and load some data
+#'   con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")
+#'   dbWriteTable(con, "USArrests", datasets::USArrests, temporary = TRUE)
 #'
-#' # query
-#' rs <- dbSendQuery(con, "SELECT * FROM USArrests")
-#' d1 <- dbFetch(rs, n = 10)      # extract data in chunks of 10 rows
-#' dbHasCompleted(rs)
-#' d2 <- dbFetch(rs, n = -1)      # extract all remaining data
-#' dbHasCompleted(rs)
-#' dbClearResult(rs)
-#' dbListTables(con)
+#'   # query
+#'   rs <- dbSendQuery(con, "SELECT * FROM USArrests")
+#'   d1 <- dbFetch(rs, n = 10)      # extract data in chunks of 10 rows
+#'   dbHasCompleted(rs)
+#'   d2 <- dbFetch(rs, n = -1)      # extract all remaining data
+#'   dbHasCompleted(rs)
+#'   dbClearResult(rs)
+#'   dbListTables(con)
 #'
-#' # clean up
-#' dbDisconnect(con)
+#'   # clean up
+#'   dbDisconnect(con)
 #' }
 MariaDB <- function() {
   new("MariaDBDriver")
