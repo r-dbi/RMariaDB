@@ -32,7 +32,7 @@ test_that("fractional seconds in datetime (#170)", {
     dataframe,
     overwrite = TRUE,
     temporary = TRUE,
-    field.types = c(DateTime="datetime(6)"),
+    field.types = c(DateTime = "datetime(6)"),
     row.names = FALSE
   )
 
