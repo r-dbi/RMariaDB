@@ -31,11 +31,3 @@ format.MariaDBConnection <- function(x, ...) {
 
   paste0("<MariaDBConnection> ", details)
 }
-
-# dbBegin()
-
-# dbCommit()
-
-# dbRollback()
-
-# other
