@@ -10,17 +10,6 @@ setClass("MariaDBDriver",
   contains = "DBIDriver",
 )
 
-#' @rdname MariaDBDriver-class
-setMethod("dbUnloadDriver", "MariaDBDriver", function(drv, ...) {
-  TRUE
-})
-
-#' @rdname MariaDBDriver-class
-#' @export
-setMethod("dbIsValid", "MariaDBDriver", function(dbObj, ...) {
-  TRUE
-})
-
 #' MariaDB Check for Compiled Versus Loaded Client Library Versions
 #'
 #' This function prints out the compiled and loaded client library versions.
@@ -35,18 +24,5 @@ mariadbClientLibraryVersions <- function() {
   version()
 }
 
-
-
 # Set during installation time for the correct library
 PACKAGE_VERSION <- utils::packageVersion(utils::packageName())
-
-#' @rdname MariaDBDriver-class
-#' @export
-setMethod("dbGetInfo", "MariaDBDriver", function(dbObj, ...) {
-  client_version <- names(version())[[2]]
-
-  list(
-    driver.version = PACKAGE_VERSION,
-    client.version = package_version(client_version)
-  )
-})
