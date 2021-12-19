@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RMariaDB 1.2.0.9002 (2021-12-19)
+
+- Make method definition more similar to S3. All `setMethod()` calls refer to top-level functions (#250).
+
+
 # RMariaDB 1.2.0.9001 (2021-12-14)
 
 - Upgrade to mariadb-connector-c 3.2.5 on Windows, with built-in support for the `caching_sha2_password` plugin (#134, #248, @jeroen).
