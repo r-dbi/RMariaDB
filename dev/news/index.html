@@ -84,7 +84,7 @@
 <ul><li>
 <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> normalizes all input paths (<a href="https://github.com/r-dbi/RMariaDB/issues/197" class="external-link">#197</a>, <a href="https://github.com/twentytitus" class="external-link">@twentytitus</a>).</li>
 <li>
-<code><a href="https://dbi.r-dbi.org/reference/dbDataType.html" class="external-link">dbDataType()</a></code> returns <code>TIME(6)</code> for <code>difftime</code>, and <code>DATETIME(6)</code> for <code>POSIXt</code> columns, to create columns with microsecond precision by default (<a href="https://github.com/r-dbi/RMariaDB/issues/214" class="external-link">#214</a>).</li>
+<code><a href="../reference/dbDataType.html">dbDataType()</a></code> returns <code>TIME(6)</code> for <code>difftime</code>, and <code>DATETIME(6)</code> for <code>POSIXt</code> columns, to create columns with microsecond precision by default (<a href="https://github.com/r-dbi/RMariaDB/issues/214" class="external-link">#214</a>).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="documentation-1-1-2">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-1-2"></a></h3>
@@ -156,9 +156,9 @@
 <div class="section level3">
 <h3 id="bug-fixes-1-0-10">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-0-10"></a></h3>
 <ul><li>
-<code><a href="https://dbi.r-dbi.org/reference/dbDataType.html" class="external-link">dbDataType()</a></code> returns <code>VARCHAR(1)</code> for length-0 character vectors.</li>
+<code><a href="../reference/dbDataType.html">dbDataType()</a></code> returns <code>VARCHAR(1)</code> for length-0 character vectors.</li>
 <li>
-<code><a href="https://dbi.r-dbi.org/reference/dbDataType.html" class="external-link">dbDataType()</a></code> returns <code>VARCHAR()</code> for factors.</li>
+<code><a href="../reference/dbDataType.html">dbDataType()</a></code> returns <code>VARCHAR()</code> for factors.</li>
 <li>
 <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbSendStatement.html" class="external-link">dbSendStatement()</a></code> clear the result set if <code><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind()</a></code> throws an error.</li>
 <li>Check that input to <code><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable()</a></code> is a data frame (<a href="https://github.com/r-dbi/RMariaDB/issues/160" class="external-link">#160</a>, <a href="https://github.com/rossholmberg" class="external-link">@rossholmberg</a>).</li>

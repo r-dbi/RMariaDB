@@ -44,7 +44,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Read and write MariaDB tables.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/r-dbi/RMariaDB/blob/HEAD/R/table.R" class="external-link"><code>R/table.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/r-dbi/RMariaDB/blob/HEAD/R/dbAppendTable_MariaDBConnection.R" class="external-link"><code>R/dbAppendTable_MariaDBConnection.R</code></a>, <a href="https://github.com/r-dbi/RMariaDB/blob/HEAD/R/dbExistsTable_MariaDBConnection_character.R" class="external-link"><code>R/dbExistsTable_MariaDBConnection_character.R</code></a>, <a href="https://github.com/r-dbi/RMariaDB/blob/HEAD/R/dbListObjects_MariaDBConnection_ANY.R" class="external-link"><code>R/dbListObjects_MariaDBConnection_ANY.R</code></a>, and 6 more</small>
     <div class="hidden name"><code>mariadb-tables.Rd</code></div>
     </div>
 
@@ -53,21 +53,23 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for MariaDBConnection,character</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S4 method for MariaDBConnection</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbAppendTable.html" class="external-link">dbAppendTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">value</span>, <span class="va">...</span>, row.names <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
+
+<span class="co"># S4 method for MariaDBConnection,character</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExistsTable.html" class="external-link">dbExistsTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">...</span><span class="op">)</span>
+
+<span class="co"># S4 method for MariaDBConnection</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListObjects.html" class="external-link">dbListObjects</a></span><span class="op">(</span><span class="va">conn</span>, prefix <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
+
+<span class="co"># S4 method for MariaDBConnection</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListTables.html" class="external-link">dbListTables</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">...</span><span class="op">)</span>
+
+<span class="co"># S4 method for MariaDBConnection,character</span>
 <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">...</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span>, check.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="co"># S4 method for MariaDBConnection,character,data.frame</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable</a></span><span class="op">(</span>
-  <span class="va">conn</span>,
-  <span class="va">name</span>,
-  <span class="va">value</span>,
-  field.types <span class="op">=</span> <span class="cn">NULL</span>,
-  row.names <span class="op">=</span> <span class="cn">FALSE</span>,
-  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,
-  append <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>,
-  temporary <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
+<span class="co"># S4 method for MariaDBConnection,character</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">...</span>, temporary <span class="op">=</span> <span class="cn">FALSE</span>, fail_if_missing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
 <span class="co"># S4 method for MariaDBConnection,character,character</span>
 <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable</a></span><span class="op">(</span>
@@ -88,20 +90,18 @@
   <span class="va">...</span>
 <span class="op">)</span>
 
-<span class="co"># S4 method for MariaDBConnection</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbAppendTable.html" class="external-link">dbAppendTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">value</span>, <span class="va">...</span>, row.names <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-
-<span class="co"># S4 method for MariaDBConnection</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListTables.html" class="external-link">dbListTables</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for MariaDBConnection</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbListObjects.html" class="external-link">dbListObjects</a></span><span class="op">(</span><span class="va">conn</span>, prefix <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for MariaDBConnection,character</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbExistsTable.html" class="external-link">dbExistsTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="co"># S4 method for MariaDBConnection,character</span>
-<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable</a></span><span class="op">(</span><span class="va">conn</span>, <span class="va">name</span>, <span class="va">...</span>, temporary <span class="op">=</span> <span class="cn">FALSE</span>, fail_if_missing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<span class="co"># S4 method for MariaDBConnection,character,data.frame</span>
+<span class="fu"><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable</a></span><span class="op">(</span>
+  <span class="va">conn</span>,
+  <span class="va">name</span>,
+  <span class="va">value</span>,
+  field.types <span class="op">=</span> <span class="cn">NULL</span>,
+  row.names <span class="op">=</span> <span class="cn">FALSE</span>,
+  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,
+  append <span class="op">=</span> <span class="cn">FALSE</span>,
+  <span class="va">...</span>,
+  temporary <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -111,6 +111,8 @@
 <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">DBI::dbConnect()</a></code></p></dd>
 <dt>name</dt>
 <dd><p>a character string specifying a table name.</p></dd>
+<dt>value</dt>
+<dd><p>A data frame.</p></dd>
 <dt>...</dt>
 <dd><p>Unused, needed for compatibility with generic.</p></dd>
 <dt>row.names</dt>
@@ -121,11 +123,20 @@ rownames only if they're a character vector.</p>
 <p>A string is equivalent to <code>TRUE</code>, but allows you to override the
 default name.</p>
 <p>For backward compatibility, <code>NULL</code> is equivalent to <code>FALSE</code>.</p></dd>
+<dt>prefix</dt>
+<dd><p>A fully qualified path in the database's namespace, or <code>NULL</code>.
+This argument will be processed with <code><a href="https://dbi.r-dbi.org/reference/dbUnquoteIdentifier.html" class="external-link">dbUnquoteIdentifier()</a></code>.
+If given the method will return all objects accessible through this prefix.</p></dd>
 <dt>check.names</dt>
 <dd><p>If <code>TRUE</code>, the default, column names will be
 converted to valid R identifiers.</p></dd>
-<dt>value</dt>
-<dd><p>A data frame.</p></dd>
+<dt>temporary</dt>
+<dd><p>If <code>TRUE</code>, creates a temporary table that expires
+when the connection is closed. For <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code>, only temporary
+tables are considered if this argument is set to <code>TRUE</code>.</p></dd>
+<dt>fail_if_missing</dt>
+<dd><p>If <code>FALSE</code>, <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code> succeeds if the
+table doesn't exist.</p></dd>
 <dt>field.types</dt>
 <dd><p>Optional, overrides default choices of field types,
 derived from the classes of the columns in the data frame.</p></dd>
@@ -136,10 +147,6 @@ or not. Its default is <code>FALSE</code>.</p></dd>
 <dd><p>a logical specifying whether to append to an existing table
 in the DBMS.  If appending, then the table (or temporary table)
 must exist, otherwise an error is reported. Its default is <code>FALSE</code>.</p></dd>
-<dt>temporary</dt>
-<dd><p>If <code>TRUE</code>, creates a temporary table that expires
-when the connection is closed. For <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code>, only temporary
-tables are considered if this argument is set to <code>TRUE</code>.</p></dd>
 <dt>header</dt>
 <dd><p>logical, does the input file have a header line? Default is the
 same heuristic used by <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table()</a></code>, i.e., <code>TRUE</code> if the first
@@ -156,13 +163,6 @@ the input file to create the proper table definition. Default is 50.</p></dd>
 <dt>quote</dt>
 <dd><p>the quote character used in the input file (defaults to
 <code>\"</code>.)</p></dd>
-<dt>prefix</dt>
-<dd><p>A fully qualified path in the database's namespace, or <code>NULL</code>.
-This argument will be processed with <code><a href="https://dbi.r-dbi.org/reference/dbUnquoteIdentifier.html" class="external-link">dbUnquoteIdentifier()</a></code>.
-If given the method will return all objects accessible through this prefix.</p></dd>
-<dt>fail_if_missing</dt>
-<dd><p>If <code>FALSE</code>, <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code> succeeds if the
-table doesn't exist.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
