@@ -2,22 +2,13 @@
 
 # RMariaDB 1.2.1 (2021-12-20)
 
-- Same as previous version.
-
-
-# RMariaDB 1.2.0.9002 (2021-12-19)
-
-- Make method definition more similar to S3. All `setMethod()` calls refer to top-level functions (#250).
-
-
-# RMariaDB 1.2.0.9001 (2021-12-14)
+## Features
 
 - Upgrade to mariadb-connector-c 3.2.5 on Windows, with built-in support for the `caching_sha2_password` plugin (#134, #248, @jeroen).
 
+## Internal
 
-# RMariaDB 1.2.0.9000 (2021-12-12)
-
-- Same as previous version.
+- Make method definition more similar to S3. All `setMethod()` calls refer to top-level functions (#250).
 
 
 # RMariaDB 1.2.0 (2021-12-12)
