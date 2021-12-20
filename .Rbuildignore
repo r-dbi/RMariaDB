@@ -39,3 +39,4 @@ src\/RCS
 ^configure.log$
 ^tests/testthat/testthat-problems\.rds$
 ^\.vscode$
+^CRAN-SUBMISSION$
