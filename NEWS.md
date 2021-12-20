@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RMariaDB 1.2.1 (2021-12-20)
+
+- Same as previous version.
+
+
 # RMariaDB 1.2.0.9002 (2021-12-19)
 
 - Make method definition more similar to S3. All `setMethod()` calls refer to top-level functions (#250).
