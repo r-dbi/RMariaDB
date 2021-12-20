@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.1</span>
       </span>
     </div>
 
@@ -48,6 +48,17 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.2.1" id="rmariadb-121-2021-12-20">RMariaDB 1.2.1 (2021-12-20)<a class="anchor" aria-label="anchor" href="#rmariadb-121-2021-12-20"></a></h2>
+<div class="section level3">
+<h3 id="features-1-2-1">Features<a class="anchor" aria-label="anchor" href="#features-1-2-1"></a></h3>
+<ul><li>Upgrade to mariadb-connector-c 3.2.5 on Windows, with built-in support for the <code>caching_sha2_password</code> plugin (<a href="https://github.com/r-dbi/RMariaDB/issues/134" class="external-link">#134</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/248" class="external-link">#248</a>, <a href="https://github.com/jeroen" class="external-link">@jeroen</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="internal-1-2-1">Internal<a class="anchor" aria-label="anchor" href="#internal-1-2-1"></a></h3>
+<ul><li>Make method definition more similar to S3. All <code><a href="https://rdrr.io/r/methods/setMethod.html" class="external-link">setMethod()</a></code> calls refer to top-level functions (<a href="https://github.com/r-dbi/RMariaDB/issues/250" class="external-link">#250</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.0" id="rmariadb-120-2021-12-12">RMariaDB 1.2.0 (2021-12-12)<a class="anchor" aria-label="anchor" href="#rmariadb-120-2021-12-12"></a></h2>
 <div class="section level3">
 <h3 id="features-1-2-0">Features<a class="anchor" aria-label="anchor" href="#features-1-2-0"></a></h3>
@@ -76,7 +87,7 @@
 <ul><li>
 <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> normalizes all input paths (<a href="https://github.com/r-dbi/RMariaDB/issues/197" class="external-link">#197</a>, <a href="https://github.com/twentytitus" class="external-link">@twentytitus</a>).</li>
 <li>
-<code><a href="https://dbi.r-dbi.org/reference/dbDataType.html" class="external-link">dbDataType()</a></code> returns <code>TIME(6)</code> for <code>difftime</code>, and <code>DATETIME(6)</code> for <code>POSIXt</code> columns, to create columns with microsecond precision by default (<a href="https://github.com/r-dbi/RMariaDB/issues/214" class="external-link">#214</a>).</li>
+<code><a href="../reference/dbDataType.html">dbDataType()</a></code> returns <code>TIME(6)</code> for <code>difftime</code>, and <code>DATETIME(6)</code> for <code>POSIXt</code> columns, to create columns with microsecond precision by default (<a href="https://github.com/r-dbi/RMariaDB/issues/214" class="external-link">#214</a>).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="documentation-1-1-2">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-1-2"></a></h3>
@@ -148,9 +159,9 @@
 <div class="section level3">
 <h3 id="bug-fixes-1-0-10">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-0-10"></a></h3>
 <ul><li>
-<code><a href="https://dbi.r-dbi.org/reference/dbDataType.html" class="external-link">dbDataType()</a></code> returns <code>VARCHAR(1)</code> for length-0 character vectors.</li>
+<code><a href="../reference/dbDataType.html">dbDataType()</a></code> returns <code>VARCHAR(1)</code> for length-0 character vectors.</li>
 <li>
-<code><a href="https://dbi.r-dbi.org/reference/dbDataType.html" class="external-link">dbDataType()</a></code> returns <code>VARCHAR()</code> for factors.</li>
+<code><a href="../reference/dbDataType.html">dbDataType()</a></code> returns <code>VARCHAR()</code> for factors.</li>
 <li>
 <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbSendStatement.html" class="external-link">dbSendStatement()</a></code> clear the result set if <code><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind()</a></code> throws an error.</li>
 <li>Check that input to <code><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable()</a></code> is a data frame (<a href="https://github.com/r-dbi/RMariaDB/issues/160" class="external-link">#160</a>, <a href="https://github.com/rossholmberg" class="external-link">@rossholmberg</a>).</li>
@@ -220,7 +231,7 @@
 <h2 class="page-header" data-toc-text="0.11-1" id="rmariadb-011-1-2016-03-24">RMariaDB 0.11-1 (2016-03-24)<a class="anchor" aria-label="anchor" href="#rmariadb-011-1-2016-03-24"></a></h2>
 <ul><li><p>RMariaDB fully supports DATE and DATETIME columns. On output, DATE columns will be converted to vectors of <code>Date</code>s and DATETIME will be converted to <code>POSIXct</code>. To faciliate correct computation of time zone, RMariaDB always sets the session timezone to UTC.</p></li>
 <li><p>RMariaDB has been rewritten (essentially from scratch) in C++ with Rcpp. This has considerably reduced the amount of code, and allow us to take advantage of the more sophisticated memory management tools available in Rcpp. This rewrite should yield some minor performance improvements, but most importantly protect against memory leaks and crashes. It also provides a better base for future development.</p></li>
-<li><p>Support for prepared queries: create prepared query with <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery()</a></code> and bind values with <code><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind()</a></code>. <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQuery()</a></code> also support inline parameterised queries, like <code>dbGetQuery(mariadbDefault(), "SELECT * FROM mtcars WHERE cyl = :cyl", params = list(cyl = 4))</code>. This has no performance benefits but protects you from SQL injection attacks.</p></li>
+<li><p>Support for prepared queries: create prepared query with <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery()</a></code> and bind values with <code><a href="https://dbi.r-dbi.org/reference/dbBind.html" class="external-link">dbBind()</a></code>. <code><a href="https://dbi.r-dbi.org/reference/dbSendQuery.html" class="external-link">dbSendQuery()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html" class="external-link">dbGetQuery()</a></code> also support inline parameterised queries, like <code>dbGetQuery(mariadbDefault(), "SELECT * FROM mtcars WHERE cyl = :cyl",     params = list(cyl = 4))</code>. This has no performance benefits but protects you from SQL injection attacks.</p></li>
 <li><p><code><a href="https://dbi.r-dbi.org/reference/dbListFields.html" class="external-link">dbListFields()</a></code> has been removed. Please use <code><a href="https://dbi.r-dbi.org/reference/dbColumnInfo.html" class="external-link">dbColumnInfo()</a></code> instead.</p></li>
 <li><p><code><a href="https://dbi.r-dbi.org/reference/dbGetInfo.html" class="external-link">dbGetInfo()</a></code> has been removed. Please use the individual metadata functions.</p></li>
 <li><p>Information formerly contain in <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> methods has now been integrated into <code><a href="https://rdrr.io/r/methods/show.html" class="external-link">show()</a></code> methods.</p></li>
