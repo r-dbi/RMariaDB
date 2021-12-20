@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RMariaDB 1.2.1.9000 (2021-12-20)
+
+- Same as previous version.
+
+
 # RMariaDB 1.2.1 (2021-12-20)
 
 - Same as previous version.
