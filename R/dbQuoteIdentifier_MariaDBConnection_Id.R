@@ -1,17 +1,12 @@
 #' @name mariadb-quoting
 #' @usage NULL
 dbQuoteIdentifier_MariaDBConnection_Id <- function(conn, x, ...) {
-  stopifnot(all(names(x@name) %in% c("schema", "table")))
+  components <- c("schema", "table", "column")
+  stopifnot(all(names(x@name) %in% components))
   stopifnot(!anyDuplicated(names(x@name)))
 
-  ret <- ""
-  if ("schema" %in% names(x@name)) {
-    ret <- paste0(ret, dbQuoteIdentifier(conn, x@name[["schema"]]), ".")
-  }
-  if ("table" %in% names(x@name)) {
-    ret <- paste0(ret, dbQuoteIdentifier(conn, x@name[["table"]]))
-  }
-  SQL(ret)
+  ret <- stats::na.omit(x@name[match(components, names(x@name))])
+  SQL(paste0(dbQuoteIdentifier(conn, ret), collapse = "."))
 }
 
 #' @rdname mariadb-quoting
