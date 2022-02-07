@@ -10,7 +10,7 @@ XPtr<DbConnectionPtr> connection_create(
   unsigned int port,
   const Nullable<std::string>& unix_socket,
   unsigned long client_flag,
-  const Nullable<std::string>& groups,
+  const Nullable<std::string>& group,
   const Nullable<std::string>& default_file,
   const Nullable<std::string>& ssl_key,
   const Nullable<std::string>& ssl_cert,
@@ -24,7 +24,7 @@ XPtr<DbConnectionPtr> connection_create(
   DbConnection* pConnPtr = new DbConnection;
   try {
     pConnPtr->connect(
-      host, user, password, db, port, unix_socket, client_flag, groups, default_file,
+      host, user, password, db, port, unix_socket, client_flag, group, default_file,
       ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher, timeout
     );
   } catch (...) {

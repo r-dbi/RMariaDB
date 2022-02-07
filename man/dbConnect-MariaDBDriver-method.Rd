@@ -17,7 +17,8 @@ MariaDB()
   unix.socket = NULL,
   port = 0,
   client.flag = 0,
-  groups = "rs-dbi",
+  group = "rs-dbi",
+  groups = NULL,
   default.file = NULL,
   ssl.key = NULL,
   ssl.cert = NULL,
@@ -34,7 +35,7 @@ MariaDB()
 }
 \arguments{
 \item{drv}{an object of class \linkS4class{MariaDBDriver} or
-\linkS4class{MariaDBConnection}.}
+\linkS4class{Mariaion}.}
 
 \item{dbname}{string with the database name or NULL. If not NULL, the
 connection sets the default database to this value.}
@@ -54,8 +55,10 @@ host is assumed.}
 \item{client.flag}{(optional) integer setting various MariaDB client flags,
 see \link{Client-flags} for details.}
 
-\item{groups}{string identifying a section in the \code{default.file} to use
+\item{group}{string identifying a section in the \code{default.file} to use
 for setting authentication parameters (see \code{\link[=MariaDB]{MariaDB()}}).}
+
+\item{groups}{deprecated, use \code{group} instead.}
 
 \item{default.file}{string of the filename with MariaDB client options,
 only relevant if \code{groups} is given. The default value depends on the
@@ -176,6 +179,7 @@ if (mariadbHasDefault()) {
   con
   dbDisconnect(con)
 }
+
 }
 \references{
 Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/

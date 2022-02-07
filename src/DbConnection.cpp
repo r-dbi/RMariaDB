@@ -22,7 +22,7 @@ DbConnection::~DbConnection() {
 void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std::string>& user,
                            const Nullable<std::string>& password, const Nullable<std::string>& db,
                            unsigned int port, const Nullable<std::string>& unix_socket,
-                           unsigned long client_flag, const Nullable<std::string>& groups,
+                           unsigned long client_flag, const Nullable<std::string>& group,
                            const Nullable<std::string>& default_file,
                            const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
                            const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
@@ -35,9 +35,9 @@ void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std
   mysql_options(this->pConn_, MYSQL_OPT_LOCAL_INFILE, 0);
   // Default to UTF-8
   mysql_options(this->pConn_, MYSQL_SET_CHARSET_NAME, "utf8mb4");
-  if (!groups.isNull())
+  if (!group.isNull())
     mysql_options(this->pConn_, MYSQL_READ_DEFAULT_GROUP,
-                  as<std::string>(groups).c_str());
+                  as<std::string>(group).c_str());
   if (!default_file.isNull())
     mysql_options(this->pConn_, MYSQL_READ_DEFAULT_FILE,
                   as<std::string>(default_file).c_str());
