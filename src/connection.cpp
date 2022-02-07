@@ -10,7 +10,7 @@ cpp11::external_pointer<DbConnectionPtr> connection_create(
   unsigned int port,
   const cpp11::sexp& unix_socket,
   unsigned long client_flag,
-  const cpp11::sexp& groups,
+  const cpp11::sexp& group,
   const cpp11::sexp& default_file,
   const cpp11::sexp& ssl_key,
   const cpp11::sexp& ssl_cert,
@@ -25,7 +25,7 @@ cpp11::external_pointer<DbConnectionPtr> connection_create(
   DbConnection* pConnPtr = new DbConnection;
   try {
     pConnPtr->connect(
-      host, user, password, db, port, unix_socket, client_flag, groups, default_file,
+      host, user, password, db, port, unix_socket, client_flag, group, default_file,
       ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher, timeout, reconnect
     );
   } catch (...) {
