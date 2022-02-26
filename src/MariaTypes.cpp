@@ -5,6 +5,7 @@
 bool all_raw(SEXP x);
 
 MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary, bool length1) {
+
   switch (type) {
   case MYSQL_TYPE_TINY:
   case MYSQL_TYPE_SHORT:
@@ -51,7 +52,8 @@ MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary,
   case MYSQL_TYPE_NULL:
     return MY_INT32;
   default:
-    throw std::runtime_error("Unimplemented MAX_NO_FIELD_TYPES");
+    warning("unrecognized field type %i imported as character", type);
+    return MY_STR;
   }
 }
 
