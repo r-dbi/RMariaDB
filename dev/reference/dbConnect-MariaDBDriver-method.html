@@ -79,7 +79,8 @@ generic functions.</p>
   bigint <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"integer64"</span>, <span class="st">"integer"</span>, <span class="st">"numeric"</span>, <span class="st">"character"</span><span class="op">)</span>,
   timeout <span class="op">=</span> <span class="fl">10</span>,
   timezone <span class="op">=</span> <span class="st">"+00:00"</span>,
-  timezone_out <span class="op">=</span> <span class="cn">NULL</span>
+  timezone_out <span class="op">=</span> <span class="cn">NULL</span>,
+  reconnect <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -157,6 +158,10 @@ The default is to use the value of the <code>timezone</code> argument,
 If you want to display datetime values in the local timezone,
 set to <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone()</a></code> or <code>""</code>.
 This setting does not change the time values returned, only their display.</p></dd>
+<dt>reconnect</dt>
+<dd><p>(experimental) Set to <code>TRUE</code> to use <code>MYSQL_OPT_RECONNECT</code> to enable
+automatic reconnection. This is experimental and could be dangerous if the connection
+is lost in the middle of a transaction.</p></dd>
 </dl></div>
     <div id="time-zones">
     <h2>Time zones</h2>
