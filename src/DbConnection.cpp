@@ -59,7 +59,7 @@ void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std
   }
   if (reconnect) {
     my_bool reconnect_ = 1;
-    mysql_options(this->pConn_, MYSQL_OPT_RECONNECT, (void *)reconnect_);
+    mysql_options(this->pConn_, MYSQL_OPT_RECONNECT, (void *)&reconnect_);
   }
 
   LOG_VERBOSE;
