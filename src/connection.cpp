@@ -17,7 +17,8 @@ XPtr<DbConnectionPtr> connection_create(
   const Nullable<std::string>& ssl_ca,
   const Nullable<std::string>& ssl_capath,
   const Nullable<std::string>& ssl_cipher,
-  int timeout
+  int timeout,
+  bool reconnect
 ) {
   LOG_VERBOSE;
 
@@ -25,7 +26,7 @@ XPtr<DbConnectionPtr> connection_create(
   try {
     pConnPtr->connect(
       host, user, password, db, port, unix_socket, client_flag, groups, default_file,
-      ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher, timeout
+      ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher, timeout, reconnect
     );
   } catch (...) {
     delete pConnPtr;

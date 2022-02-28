@@ -27,7 +27,7 @@ void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std
                            const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
                            const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
                            const Nullable<std::string>& ssl_cipher,
-                           int timeout) {
+                           int timeout, bool reconnect) {
   LOG_VERBOSE;
 
   this->pConn_ = mysql_init(NULL);
@@ -56,6 +56,10 @@ void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std
   if (timeout > 0) {
     mysql_options(this->pConn_, MYSQL_OPT_CONNECT_TIMEOUT,
                   &timeout);
+  }
+  if (reconnect) {
+    my_bool reconnect_ = 1;
+    mysql_options(this->pConn_, MYSQL_OPT_RECONNECT, (void *)&reconnect_);
   }
 
   LOG_VERBOSE;
