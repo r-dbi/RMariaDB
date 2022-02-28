@@ -77,6 +77,9 @@
 #'   If you want to display datetime values in the local timezone,
 #'   set to [Sys.timezone()] or `""`.
 #'   This setting does not change the time values returned, only their display.
+#' @param reconnect (experimental) Set to `TRUE` to use `MYSQL_OPT_RECONNECT` to enable
+#'   automatic reconnection. This is experimental and could be dangerous if the connection
+#'   is lost in the middle of a transaction.
 #' @references
 #' Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/
 #' @examples
@@ -111,7 +114,7 @@ dbConnect_MariaDBDriver <- function(drv, dbname = NULL, username = NULL, passwor
                                     ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...,
                                     load_data_local_infile = FALSE,
                                     bigint = c("integer64", "integer", "numeric", "character"),
-                                    timeout = 10, timezone = "+00:00", timezone_out = NULL) {
+                                    timeout = 10, timezone = "+00:00", timezone_out = NULL, reconnect = FALSE) {
   bigint <- match.arg(bigint)
 
   if (is.infinite(timeout)) {
@@ -143,11 +146,13 @@ dbConnect_MariaDBDriver <- function(drv, dbname = NULL, username = NULL, passwor
     }
   }
 
+  reconnect <- isTRUE(reconnect)
+
   ptr <- connection_create(
     host, username, password, dbname, as.integer(port), unix.socket,
     as.integer(client.flag), groups, default.file,
     ssl.key, ssl.cert, ssl.ca, ssl.capath, ssl.cipher,
-    timeout
+    timeout, reconnect
   )
 
   info <- connection_info(ptr)
