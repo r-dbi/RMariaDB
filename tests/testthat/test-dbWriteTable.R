@@ -36,9 +36,8 @@ test_that("dbAppendTable() works with Id", {
   con <- mariadbDefault()
   on.exit(dbDisconnect(con))
 
-  dbExecute(con, "drop table if exists T")
-  dbExecute(con, "create table T(n integer primary key)")
-  expect_equal(dbAppendTable(con, Id(table = "T"), data.frame(n = 1:10)), 10)
+  dbExecute(con, "CREATE TEMPORARY TABLE t1(n integer)")
+  expect_equal(dbAppendTable(con, Id(table = "t1"), data.frame(n = 1:10)), 10)
 })
 
 # Available only in MariaDB
