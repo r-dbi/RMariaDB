@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.1.9001</span>
       </span>
     </div>
 
@@ -47,6 +47,12 @@
       <small>Source: <a href="https://github.com/r-dbi/RMariaDB/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.2.1.9001" id="rmariadb-1219001-2022-05-14">RMariaDB 1.2.1.9001 (2022-05-14)<a class="anchor" aria-label="anchor" href="#rmariadb-1219001-2022-05-14"></a></h2>
+<ul><li>Actually enable <code>LOAD LOCAL INFILE</code> by setting the <code>MYSQL_OPT_LOCAL_INFILE</code> flag (<a href="https://github.com/r-dbi/RMariaDB/issues/265" class="external-link">#265</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/267" class="external-link">#267</a>).</li>
+<li>
+<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> gains <code>reconnect</code> argument that sets the <code>MYSQL_OPT_RECONNECT</code> option (<a href="https://github.com/r-dbi/RMariaDB/issues/261" class="external-link">#261</a>, <a href="https://github.com/renkun-ken" class="external-link">@renkun-ken</a>).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.1.9000" id="rmariadb-1219000-2021-12-20">RMariaDB 1.2.1.9000 (2021-12-20)<a class="anchor" aria-label="anchor" href="#rmariadb-1219000-2021-12-20"></a></h2>
 <ul><li>Same as previous version.</li></ul></div>
