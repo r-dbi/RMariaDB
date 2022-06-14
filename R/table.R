@@ -1,4 +1,4 @@
-#' @include MariaDBConnection.R
+ #' @include MariaDBConnection.R
 NULL
 
 #' Read and write MariaDB tables.
@@ -65,9 +65,9 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE, 
   file <- file(path, "wb")
   on.exit(close(file))
 
-  readr::write_delim(
-    csv_quote(value, warn_factor, conn), file, quote = "none", delim = "\t", na = "\\N",
-    col_names = FALSE
+  data.table::fwrite(
+    csv_quote(value, warn_factor, conn), file, sep = "\t", na = "\\N", logical01 = TRUE,
+    col.names = FALSE
   )
 
   # Close connection manually, unlink when done to save disk space
