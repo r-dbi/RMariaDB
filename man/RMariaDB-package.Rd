@@ -6,7 +6,7 @@
 \alias{RMariaDB-package}
 \title{RMariaDB: Database Interface and MariaDB Driver}
 \description{
-Implements a DBI-compliant interface to MariaDB (<https://mariadb.org/>) and MySQL (<https://www.mysql.com/>) databases.
+Implements a DBI-compliant interface to MariaDB (\url{https://mariadb.org/}) and MySQL (\url{https://www.mysql.com/}) databases.
 }
 \seealso{
 Useful links:
