@@ -52,7 +52,12 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE, 
   } else {
     set <- ""
   }
+
   quoted_name <- dbQuoteIdentifier(conn, name)
+  if (length(quoted_name) != 1) {
+    stop("Must pass one table name", call. = FALSE)
+  }
+
   sql <- paste0(
     "LOAD DATA LOCAL INFILE ", dbQuoteString(conn, path), "\n",
     "IGNORE\n",

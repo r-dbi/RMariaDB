@@ -32,6 +32,14 @@ test_that("dbAppendTable() throws error if constraint violated", {
   expect_error(dbAppendTable(con, "t1", x), "added 7 rows|Duplicate entry")
 })
 
+test_that("dbAppendTable() works with Id", {
+  con <- mariadbDefault()
+  on.exit(dbDisconnect(con))
+
+  dbExecute(con, "CREATE TEMPORARY TABLE t1(n integer)")
+  expect_equal(dbAppendTable(con, Id(table = "t1"), data.frame(n = 1:10)), 10)
+})
+
 # Available only in MariaDB
 test_that("can read file from disk", {
   con <- mariadbDefault()
