@@ -4,7 +4,7 @@
 
 ## Features 
 
-- `dbAppendTable()` accepts `Id` (#262).
+- `dbAppendTable()` accepts `Id` (#262, @renkun-ken).
 
 
 # RMariaDB 1.2.1.9001 (2022-05-14)
