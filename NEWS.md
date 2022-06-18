@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RMariaDB 1.2.1.9002 (2022-06-18)
+
+## Features 
+
+- `dbAppendTable()` accepts `Id` (#262).
+
+
 # RMariaDB 1.2.1.9001 (2022-05-14)
 
 - Actually enable `LOAD LOCAL INFILE` by setting the `MYSQL_OPT_LOCAL_INFILE` flag (#265, #267).
