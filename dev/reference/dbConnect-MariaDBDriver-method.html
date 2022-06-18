@@ -89,68 +89,106 @@ generic functions.</p>
     <dl><dt>drv</dt>
 <dd><p>an object of class <a href="MariaDBDriver-class.html">MariaDBDriver</a> or
 <a href="MariaDBConnection-class.html">MariaDBConnection</a>.</p></dd>
+
+
 <dt>dbname</dt>
 <dd><p>string with the database name or NULL. If not NULL, the
 connection sets the default database to this value.</p></dd>
+
+
 <dt>username, password</dt>
 <dd><p>Username and password. If username omitted,
 defaults to the current user. If password is omitted, only users
 without a password can log in.</p></dd>
+
+
 <dt>host</dt>
 <dd><p>string identifying the host machine running the MariaDB server or
 NULL. If NULL or the string <code>"localhost"</code>, a connection to the local
 host is assumed.</p></dd>
+
+
 <dt>unix.socket</dt>
 <dd><p>(optional) string of the unix socket or named pipe.</p></dd>
+
+
 <dt>port</dt>
 <dd><p>(optional) integer of the TCP/IP default port.</p></dd>
+
+
 <dt>client.flag</dt>
 <dd><p>(optional) integer setting various MariaDB client flags,
 see <a href="Client-flags.html">Client-flags</a> for details.</p></dd>
+
+
 <dt>groups</dt>
 <dd><p>string identifying a section in the <code>default.file</code> to use
 for setting authentication parameters (see <code>MariaDB()</code>).</p></dd>
+
+
 <dt>default.file</dt>
 <dd><p>string of the filename with MariaDB client options,
 only relevant if <code>groups</code> is given. The default value depends on the
 operating system (see references), on Linux and OS X the files
 <code>~/.my.cnf</code> and <code>~/.mylogin.cnf</code> are used. Expanded with <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code>.</p></dd>
+
+
 <dt>ssl.key</dt>
 <dd><p>(optional) string of the filename of the SSL key file to use.
 Expanded with <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code>.</p></dd>
+
+
 <dt>ssl.cert</dt>
 <dd><p>(optional) string of the filename of the SSL certificate to
 use. Expanded with <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code>.</p></dd>
+
+
 <dt>ssl.ca</dt>
 <dd><p>(optional) string of the filename of an SSL certificate
 authority file to use. Expanded with <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code>.</p></dd>
+
+
 <dt>ssl.capath</dt>
 <dd><p>(optional) string of the path to a directory containing
 the trusted SSL CA certificates in PEM format. Expanded with
 <code><a href="https://rdrr.io/r/base/normalizePath.html" class="external-link">normalizePath()</a></code>.</p></dd>
+
+
 <dt>ssl.cipher</dt>
 <dd><p>(optional) string list of permitted ciphers to use for SSL
 encryption.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Unused, needed for compatibility with generic.</p></dd>
+
+
 <dt>load_data_local_infile</dt>
 <dd><p>Set to <code>TRUE</code> to use <code>LOAD DATA LOCAL INFILE</code>
 in <code><a href="https://dbi.r-dbi.org/reference/dbWriteTable.html" class="external-link">dbWriteTable()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbAppendTable.html" class="external-link">dbAppendTable()</a></code> by default.
 This capability is disabled by default on the server side
 for recent versions of MySQL Server.</p></dd>
+
+
 <dt>bigint</dt>
 <dd><p>The R type that 64-bit integer types should be mapped to,
 default is <a href="https://rdrr.io/pkg/bit64/man/bit64-package.html" class="external-link">bit64::integer64</a>, which allows the full range of 64 bit
 integers.</p></dd>
+
+
 <dt>timeout</dt>
 <dd><p>Connection timeout, in seconds. Use <code>Inf</code> or a negative value
 for no timeout.</p></dd>
+
+
 <dt>timezone</dt>
 <dd><p>(optional) time zone for the connection,
 the default corresponds to UTC.
 Set this argument if your server or database is configured with a different
 time zone than UTC.
 Set to <code>NULL</code> to automatically determine the server time zone.</p></dd>
+
+
 <dt>timezone_out</dt>
 <dd><p>The time zone returned to R.
 The default is to use the value of the <code>timezone</code> argument,
@@ -158,10 +196,13 @@ The default is to use the value of the <code>timezone</code> argument,
 If you want to display datetime values in the local timezone,
 set to <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone()</a></code> or <code>""</code>.
 This setting does not change the time values returned, only their display.</p></dd>
+
+
 <dt>reconnect</dt>
 <dd><p>(experimental) Set to <code>TRUE</code> to use <code>MYSQL_OPT_RECONNECT</code> to enable
 automatic reconnection. This is experimental and could be dangerous if the connection
 is lost in the middle of a transaction.</p></dd>
+
 </dl></div>
     <div id="time-zones">
     <h2>Time zones</h2>
@@ -251,7 +292,7 @@ client library which do not support this feature.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.9000.</p>
 </div>
 
       </footer></div>
