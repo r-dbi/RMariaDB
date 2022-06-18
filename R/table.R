@@ -62,17 +62,13 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE, 
     set
   )
 
-  file <- file(path, "wb")
-  on.exit(close(file))
-
   data.table::fwrite(
-    csv_quote(value, warn_factor, conn), file, sep = "\t", na = "\\N", logical01 = TRUE,
+    csv_quote(value, warn_factor, conn), path, sep = "\t", na = "\\N", logical01 = TRUE,
     col.names = FALSE
   )
 
   # Close connection manually, unlink when done to save disk space
   on.exit(unlink(path), add = FALSE)
-  close(file)
 
   if (safe) {
     if (transact) {
@@ -98,10 +94,6 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE, 
       }
       dbCommit(conn)
     }
-
-    # Manual cleanup
-    unlink(path)
-    on.exit(NULL, add = FALSE)
 
     out
   } else {
