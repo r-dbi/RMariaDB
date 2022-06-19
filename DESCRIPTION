@@ -55,8 +55,6 @@ Suggests:
 LinkingTo: 
     plogr,
     Rcpp
-Remotes: 
-    r-dbi/DBI
 Encoding: UTF-8
 NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
