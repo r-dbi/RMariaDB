@@ -2,25 +2,15 @@
 
 # RMariaDB 1.2.2 (2022-06-19)
 
-- Internal changes only.
-
-
-# RMariaDB 1.2.1.9002 (2022-06-18)
-
 ## Features 
 
 - `dbAppendTable()` accepts `Id` (#262, @renkun-ken).
 
-
-# RMariaDB 1.2.1.9001 (2022-05-14)
-
-- Actually enable `LOAD LOCAL INFILE` by setting the `MYSQL_OPT_LOCAL_INFILE` flag (#265, #267).
 - `dbConnect()` gains `reconnect` argument that sets the `MYSQL_OPT_RECONNECT` option (#261, @renkun-ken).
 
+## Bug fixes
 
-# RMariaDB 1.2.1.9000 (2021-12-20)
-
-- Same as previous version.
+- Actually enable `LOAD LOCAL INFILE` by setting the `MYSQL_OPT_LOCAL_INFILE` flag (#265, #267).
 
 
 # RMariaDB 1.2.1 (2021-12-20)
