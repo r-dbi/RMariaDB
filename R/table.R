@@ -1,4 +1,4 @@
- #' @include MariaDBConnection.R
+#' @include MariaDBConnection.R
 NULL
 
 #' Read and write MariaDB tables.
@@ -66,7 +66,8 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE, 
   )
 
   data.table::fwrite(
-    csv_quote(value, warn_factor, conn), path, sep = "\t", na = "\\N", logical01 = TRUE,
+    csv_quote(value, warn_factor, conn), path,
+    sep = "\t", na = "\\N", logical01 = TRUE,
     col.names = FALSE
   )
 
@@ -144,8 +145,8 @@ csv_quote_one <- function(x, conn) {
     x[is.na(x_orig) | is.infinite(x_orig)] <- NA_character_
     # No need to quote logical values manually as data.table::fwrite provides
     # options for handling that
-  # } else if (is.logical(x)) {
-  #   x <- as.character(as.integer(x))
+    # } else if (is.logical(x)) {
+    #   x <- as.character(as.integer(x))
   } else if (inherits(x, "Date")) {
     x <- as.character(x)
   } else if (inherits(x, "difftime")) {
