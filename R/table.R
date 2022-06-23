@@ -56,6 +56,9 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE, 
   sql <- paste0(
     "LOAD DATA LOCAL INFILE ", dbQuoteString(conn, path), "\n",
     "IGNORE\n",
+    "FIELDS TERMINATED BY ", dbQuoteString(conn, "\t"), "\n",
+    "OPTIONALLY ENCLOSED BY ", dbQuoteString(conn, '"'), "\n",
+    "LINES TERMINATED BY ", dbQuoteString(conn, if (.Platform$OS.type == "windows") "\r\n" else "\n"), "\n",
     "INTO TABLE ", quoted_name, "\n",
     "CHARACTER SET utf8 \n",
     "(", paste0(colnames, collapse = ", "), ")",
@@ -139,8 +142,10 @@ csv_quote_one <- function(x, conn) {
       x <- formatC(x, digits = 17, format = "E")
     }
     x[is.na(x_orig) | is.infinite(x_orig)] <- NA_character_
-  } else if (is.logical(x)) {
-    x <- as.character(as.integer(x))
+    # No need to quote logical values manually as data.table::fwrite provides
+    # options for handling that
+  # } else if (is.logical(x)) {
+  #   x <- as.character(as.integer(x))
   } else if (inherits(x, "Date")) {
     x <- as.character(x)
   } else if (inherits(x, "difftime")) {
