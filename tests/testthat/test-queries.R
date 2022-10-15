@@ -47,7 +47,10 @@ test_that("fractional seconds in datetime (#170)", {
 test_that("timezone argument (#184)", {
   skip_on_cran()
 
-  conn <- mariadb_default(timezone = "+02:00")
+  expect_warning(
+    conn <- mariadb_default(timezone = "+02:00"),
+    "Invalid time zone"
+  )
   tz <- dbGetQuery(conn, "SELECT @@session.time_zone")
   expect_equal(tz[[1]], "+02:00")
   dbDisconnect(conn)
