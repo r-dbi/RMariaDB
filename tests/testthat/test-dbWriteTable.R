@@ -1,5 +1,3 @@
-context("dbWriteTable")
-
 # test_that("can't override existing table with default options", {
 #   con <- mariadbDefault()
 #

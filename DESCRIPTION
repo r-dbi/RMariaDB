@@ -47,10 +47,10 @@ Imports:
     Rcpp (>= 0.12.4),
     rlang
 Suggests: 
-    DBItest (>= 1.7.0),
+    DBItest (>= 1.7.2.9001),
     readr,
     rprojroot,
-    testthat,
+    testthat (>= 3.0.0),
     withr
 LinkingTo: 
     plogr,
@@ -123,3 +123,6 @@ Collate:
     'zzz.R'
 Config/autostyle/scope: line_breaks
 Config/autostyle/strict: false
+Config/testthat/edition: 3
+Remotes:  
+    r-dbi/DBItest
