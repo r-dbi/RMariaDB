@@ -2,6 +2,8 @@ image:
   file: .gitpod.Dockerfile
 tasks:
   - name: dependencies
+    before: |
+      PATH=$PATH:/usr/include
     init: |
       # Scriptlets, with custom Git config
       mv ~/.gitconfig ~/.gitconfig.gitpod
