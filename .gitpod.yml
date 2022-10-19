@@ -26,7 +26,7 @@ tasks:
       R -q -e 'install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))'
 
       ## Install devtools and R dependencies
-      R -q -e 'pak::pak("devtools", "languageserver", "styler"); pak::pak("deps::.", dependencies = TRUE)'
+      R -q -e 'pak::pak(c("devtools", "languageserver", "styler")); pak::pak("deps::.", dependencies = TRUE)'
 
       ## Start MariaDB server
       sudo service mysql start
