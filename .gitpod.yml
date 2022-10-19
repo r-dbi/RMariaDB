@@ -36,6 +36,10 @@ tasks:
       sudo mysql -e "CREATE USER '$USER'@'localhost' IDENTIFIED BY ''; GRANT ALL PRIVILEGES ON *.* TO '$USER'@'localhost'; FLUSH PRIVILEGES;"
       sudo mysql -D mysql < tools/tz.sql
       sudo mysql -e "SET GLOBAL time_zone = 'Europe/Zurich';"
+
+      ## Work around glitch with non-systemd systems
+      ln -s $(which true) ~/bin/timedatectl
+
 vscode:
   extensions:
     - ms-vscode.cpptools-extension-pack
