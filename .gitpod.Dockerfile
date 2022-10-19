@@ -7,5 +7,6 @@ RUN sudo apt install -y \
   r-base \
   ccache \
   cmake \
-  # Install dependencies for rlang packet
+  mariadb-server mariadb-client \
+  # Install dependencies for devtools package
   libharfbuzz-dev libfribidi-dev
