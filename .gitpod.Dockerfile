@@ -10,3 +10,6 @@ RUN sudo apt install -y \
   mariadb-server mariadb-client \
   # Install dependencies for devtools package
   libharfbuzz-dev libfribidi-dev
+
+# Work around glitch with non-systemd systems
+RUN ln -s $(which true) /usr/local/bin/timedatectl
