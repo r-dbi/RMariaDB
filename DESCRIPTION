@@ -110,3 +110,4 @@ Collate:
     'transaction.R'
     'utils.R'
     'zzz.R'
+    'cpp11.R'
