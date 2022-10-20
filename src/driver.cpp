@@ -9,17 +9,17 @@
 #endif
 
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 void driver_init() {
   mysql_library_init(0, NULL, NULL);
 }
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 void driver_done() {
   mysql_library_end();
 }
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 IntegerVector version() {
   return
     IntegerVector::create(
@@ -28,7 +28,7 @@ IntegerVector version() {
     );
 }
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 void init_logging(const std::string& log_level) {
   plog::init_r(log_level);
 }

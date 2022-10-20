@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "RMariaDB_types.h"
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 XPtr<DbConnectionPtr> connection_create(
   const Nullable<std::string>& host,
   const Nullable<std::string>& user,
@@ -38,13 +38,13 @@ XPtr<DbConnectionPtr> connection_create(
   return XPtr<DbConnectionPtr>(pConn, true);
 }
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 bool connection_valid(XPtr<DbConnectionPtr> con_) {
   DbConnectionPtr* con = con_.get();
   return con && con->get()->is_valid();
 }
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 void connection_release(XPtr<DbConnectionPtr> con_) {
   if (!connection_valid(con_)) {
     warning("Already disconnected");
@@ -56,14 +56,14 @@ void connection_release(XPtr<DbConnectionPtr> con_) {
   con_.release();
 }
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 List connection_info(DbConnection* con) {
   return con->info();
 }
 
 // Quoting
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 CharacterVector connection_quote_string(DbConnection* con, CharacterVector xs) {
   R_xlen_t n = xs.size();
   CharacterVector output(n);
@@ -78,22 +78,22 @@ CharacterVector connection_quote_string(DbConnection* con, CharacterVector xs) {
 
 // Transactions
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 void connection_begin_transaction(XPtr<DbConnectionPtr> con) {
   (*con)->begin_transaction();
 }
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 void connection_commit(XPtr<DbConnectionPtr> con) {
   (*con)->commit();
 }
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 void connection_rollback(XPtr<DbConnectionPtr> con) {
   (*con)->rollback();
 }
 
-// [[Rcpp::export]]
+[[cpp11::register]]
 bool connection_is_transacting(DbConnection* con) {
   return con->is_transacting();
 }
