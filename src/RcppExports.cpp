@@ -160,107 +160,6 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// result_create
-XPtr<DbResult> result_create(XPtr<DbConnectionPtr> con, std::string sql, bool is_statement);
-RcppExport SEXP _RMariaDB_result_create(SEXP conSEXP, SEXP sqlSEXP, SEXP is_statementSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<DbConnectionPtr> >::type con(conSEXP);
-    Rcpp::traits::input_parameter< std::string >::type sql(sqlSEXP);
-    Rcpp::traits::input_parameter< bool >::type is_statement(is_statementSEXP);
-    rcpp_result_gen = Rcpp::wrap(result_create(con, sql, is_statement));
-    return rcpp_result_gen;
-END_RCPP
-}
-// result_release
-void result_release(XPtr<DbResult> res);
-RcppExport SEXP _RMariaDB_result_release(SEXP resSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<DbResult> >::type res(resSEXP);
-    result_release(res);
-    return R_NilValue;
-END_RCPP
-}
-// result_valid
-bool result_valid(XPtr<DbResult> res_);
-RcppExport SEXP _RMariaDB_result_valid(SEXP res_SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtr<DbResult> >::type res_(res_SEXP);
-    rcpp_result_gen = Rcpp::wrap(result_valid(res_));
-    return rcpp_result_gen;
-END_RCPP
-}
-// result_fetch
-List result_fetch(DbResult* res, const int n);
-RcppExport SEXP _RMariaDB_result_fetch(SEXP resSEXP, SEXP nSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< DbResult* >::type res(resSEXP);
-    Rcpp::traits::input_parameter< const int >::type n(nSEXP);
-    rcpp_result_gen = Rcpp::wrap(result_fetch(res, n));
-    return rcpp_result_gen;
-END_RCPP
-}
-// result_bind
-void result_bind(DbResult* res, List params);
-RcppExport SEXP _RMariaDB_result_bind(SEXP resSEXP, SEXP paramsSEXP) {
-BEGIN_RCPP
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< DbResult* >::type res(resSEXP);
-    Rcpp::traits::input_parameter< List >::type params(paramsSEXP);
-    result_bind(res, params);
-    return R_NilValue;
-END_RCPP
-}
-// result_has_completed
-bool result_has_completed(DbResult* res);
-RcppExport SEXP _RMariaDB_result_has_completed(SEXP resSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< DbResult* >::type res(resSEXP);
-    rcpp_result_gen = Rcpp::wrap(result_has_completed(res));
-    return rcpp_result_gen;
-END_RCPP
-}
-// result_rows_fetched
-int result_rows_fetched(DbResult* res);
-RcppExport SEXP _RMariaDB_result_rows_fetched(SEXP resSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< DbResult* >::type res(resSEXP);
-    rcpp_result_gen = Rcpp::wrap(result_rows_fetched(res));
-    return rcpp_result_gen;
-END_RCPP
-}
-// result_rows_affected
-int result_rows_affected(DbResult* res);
-RcppExport SEXP _RMariaDB_result_rows_affected(SEXP resSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< DbResult* >::type res(resSEXP);
-    rcpp_result_gen = Rcpp::wrap(result_rows_affected(res));
-    return rcpp_result_gen;
-END_RCPP
-}
-// result_column_info
-List result_column_info(DbResult* res);
-RcppExport SEXP _RMariaDB_result_column_info(SEXP resSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< DbResult* >::type res(resSEXP);
-    rcpp_result_gen = Rcpp::wrap(result_column_info(res));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_RMariaDB_connection_create", (DL_FUNC) &_RMariaDB_connection_create, 16},
@@ -276,15 +175,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_RMariaDB_driver_done", (DL_FUNC) &_RMariaDB_driver_done, 0},
     {"_RMariaDB_version", (DL_FUNC) &_RMariaDB_version, 0},
     {"_RMariaDB_init_logging", (DL_FUNC) &_RMariaDB_init_logging, 1},
-    {"_RMariaDB_result_create", (DL_FUNC) &_RMariaDB_result_create, 3},
-    {"_RMariaDB_result_release", (DL_FUNC) &_RMariaDB_result_release, 1},
-    {"_RMariaDB_result_valid", (DL_FUNC) &_RMariaDB_result_valid, 1},
-    {"_RMariaDB_result_fetch", (DL_FUNC) &_RMariaDB_result_fetch, 2},
-    {"_RMariaDB_result_bind", (DL_FUNC) &_RMariaDB_result_bind, 2},
-    {"_RMariaDB_result_has_completed", (DL_FUNC) &_RMariaDB_result_has_completed, 1},
-    {"_RMariaDB_result_rows_fetched", (DL_FUNC) &_RMariaDB_result_rows_fetched, 1},
-    {"_RMariaDB_result_rows_affected", (DL_FUNC) &_RMariaDB_result_rows_affected, 1},
-    {"_RMariaDB_result_column_info", (DL_FUNC) &_RMariaDB_result_column_info, 1},
     {NULL, NULL, 0}
 };
 

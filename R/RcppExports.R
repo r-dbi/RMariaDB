@@ -53,39 +53,3 @@ init_logging <- function(log_level) {
     invisible(.Call(`_RMariaDB_init_logging`, log_level))
 }
 
-result_create <- function(con, sql, is_statement = FALSE) {
-    .Call(`_RMariaDB_result_create`, con, sql, is_statement)
-}
-
-result_release <- function(res) {
-    invisible(.Call(`_RMariaDB_result_release`, res))
-}
-
-result_valid <- function(res_) {
-    .Call(`_RMariaDB_result_valid`, res_)
-}
-
-result_fetch <- function(res, n) {
-    .Call(`_RMariaDB_result_fetch`, res, n)
-}
-
-result_bind <- function(res, params) {
-    invisible(.Call(`_RMariaDB_result_bind`, res, params))
-}
-
-result_has_completed <- function(res) {
-    .Call(`_RMariaDB_result_has_completed`, res)
-}
-
-result_rows_fetched <- function(res) {
-    .Call(`_RMariaDB_result_rows_fetched`, res)
-}
-
-result_rows_affected <- function(res) {
-    .Call(`_RMariaDB_result_rows_affected`, res)
-}
-
-result_column_info <- function(res) {
-    .Call(`_RMariaDB_result_column_info`, res)
-}
-

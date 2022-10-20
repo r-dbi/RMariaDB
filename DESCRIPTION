@@ -41,7 +41,6 @@ LinkingTo:
     cpp11,
     plogr,
     Rcpp
-SystemRequirements: C++11
 Config/autostyle/scope: line_breaks
 Config/autostyle/strict: false
 Config/testthat/edition: 3
@@ -52,7 +51,7 @@ RoxygenNote: 7.2.1
 SystemRequirements: libmariadb-client-lgpl-dev or libmariadb-dev or
     libmysqlclient-dev, with libssl-dev (deb), mariadb-connector-c-devel
     or mariadb-devel (rpm), mariadb-connector-c or mysql-connector-c
-    (brew)
+    (brew), C++11
 Collate: 
     'MariaDBConnection.R'
     'MariaDBDriver.R'

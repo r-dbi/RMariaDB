@@ -25,12 +25,12 @@ bool result_valid(cpp11::external_pointer<DbResult> res_) {
 
 // [[cpp11::register]]
 cpp11::list result_fetch(DbResult* res, const int n) {
-  return res->fetch(n);
+  return (SEXP)res->fetch(n);
 }
 
 // [[cpp11::register]]
 void result_bind(DbResult* res, cpp11::list params) {
-  res->bind(params);
+  res->bind((SEXP)params);
 }
 
 // [[cpp11::register]]
@@ -50,7 +50,7 @@ int result_rows_affected(DbResult* res) {
 
 // [[cpp11::register]]
 cpp11::list result_column_info(DbResult* res) {
-  return res->get_column_info();
+  return (SEXP)res->get_column_info();
 }
 
 namespace Rcpp {
