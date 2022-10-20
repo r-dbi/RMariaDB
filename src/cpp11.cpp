@@ -8,6 +8,104 @@ using namespace Rcpp;
 #include "cpp11/declarations.hpp"
 #include <R_ext/Visibility.h>
 
+// connection.cpp
+XPtr<DbConnectionPtr> connection_create(const Nullable<std::string>& host, const Nullable<std::string>& user, const Nullable<std::string>& password, const Nullable<std::string>& db, unsigned int port, const Nullable<std::string>& unix_socket, unsigned long client_flag, const Nullable<std::string>& groups, const Nullable<std::string>& default_file, const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert, const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath, const Nullable<std::string>& ssl_cipher, int timeout, bool reconnect);
+extern "C" SEXP _RMariaDB_connection_create(SEXP host, SEXP user, SEXP password, SEXP db, SEXP port, SEXP unix_socket, SEXP client_flag, SEXP groups, SEXP default_file, SEXP ssl_key, SEXP ssl_cert, SEXP ssl_ca, SEXP ssl_capath, SEXP ssl_cipher, SEXP timeout, SEXP reconnect) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(connection_create(cpp11::as_cpp<cpp11::decay_t<const Nullable<std::string>&>>(host), cpp11::as_cpp<cpp11::decay_t<const Nullable<std::string>&>>(user), cpp11::as_cpp<cpp11::decay_t<const Nullable<std::string>&>>(password), cpp11::as_cpp<cpp11::decay_t<const Nullable<std::string>&>>(db), cpp11::as_cpp<cpp11::decay_t<unsigned int>>(port), cpp11::as_cpp<cpp11::decay_t<const Nullable<std::string>&>>(unix_socket), cpp11::as_cpp<cpp11::decay_t<unsigned long>>(client_flag), cpp11::as_cpp<cpp11::decay_t<const Nullable<std::string>&>>(groups), cpp11::as_cpp<cpp11::decay_t<const Nullable<std::string>&>>(default_file), cpp11::as_cpp<cpp11::decay_t<const Nullable<std::string>&>>(ssl_key), cpp11::as_cpp<cpp11::decay_t<const Nullable<std::string>&>>(ssl_cert), cpp11::as_cpp<cpp11::decay_t<const Nullable<std::string>&>>(ssl_ca), cpp11::as_cpp<cpp11::decay_t<const Nullable<std::string>&>>(ssl_capath), cpp11::as_cpp<cpp11::decay_t<const Nullable<std::string>&>>(ssl_cipher), cpp11::as_cpp<cpp11::decay_t<int>>(timeout), cpp11::as_cpp<cpp11::decay_t<bool>>(reconnect)));
+  END_CPP11
+}
+// connection.cpp
+bool connection_valid(XPtr<DbConnectionPtr> con_);
+extern "C" SEXP _RMariaDB_connection_valid(SEXP con_) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(connection_valid(cpp11::as_cpp<cpp11::decay_t<XPtr<DbConnectionPtr>>>(con_)));
+  END_CPP11
+}
+// connection.cpp
+void connection_release(XPtr<DbConnectionPtr> con_);
+extern "C" SEXP _RMariaDB_connection_release(SEXP con_) {
+  BEGIN_CPP11
+    connection_release(cpp11::as_cpp<cpp11::decay_t<XPtr<DbConnectionPtr>>>(con_));
+    return R_NilValue;
+  END_CPP11
+}
+// connection.cpp
+List connection_info(DbConnection* con);
+extern "C" SEXP _RMariaDB_connection_info(SEXP con) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(connection_info(cpp11::as_cpp<cpp11::decay_t<DbConnection*>>(con)));
+  END_CPP11
+}
+// connection.cpp
+CharacterVector connection_quote_string(DbConnection* con, CharacterVector xs);
+extern "C" SEXP _RMariaDB_connection_quote_string(SEXP con, SEXP xs) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(connection_quote_string(cpp11::as_cpp<cpp11::decay_t<DbConnection*>>(con), cpp11::as_cpp<cpp11::decay_t<CharacterVector>>(xs)));
+  END_CPP11
+}
+// connection.cpp
+void connection_begin_transaction(XPtr<DbConnectionPtr> con);
+extern "C" SEXP _RMariaDB_connection_begin_transaction(SEXP con) {
+  BEGIN_CPP11
+    connection_begin_transaction(cpp11::as_cpp<cpp11::decay_t<XPtr<DbConnectionPtr>>>(con));
+    return R_NilValue;
+  END_CPP11
+}
+// connection.cpp
+void connection_commit(XPtr<DbConnectionPtr> con);
+extern "C" SEXP _RMariaDB_connection_commit(SEXP con) {
+  BEGIN_CPP11
+    connection_commit(cpp11::as_cpp<cpp11::decay_t<XPtr<DbConnectionPtr>>>(con));
+    return R_NilValue;
+  END_CPP11
+}
+// connection.cpp
+void connection_rollback(XPtr<DbConnectionPtr> con);
+extern "C" SEXP _RMariaDB_connection_rollback(SEXP con) {
+  BEGIN_CPP11
+    connection_rollback(cpp11::as_cpp<cpp11::decay_t<XPtr<DbConnectionPtr>>>(con));
+    return R_NilValue;
+  END_CPP11
+}
+// connection.cpp
+bool connection_is_transacting(DbConnection* con);
+extern "C" SEXP _RMariaDB_connection_is_transacting(SEXP con) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(connection_is_transacting(cpp11::as_cpp<cpp11::decay_t<DbConnection*>>(con)));
+  END_CPP11
+}
+// driver.cpp
+void driver_init();
+extern "C" SEXP _RMariaDB_driver_init() {
+  BEGIN_CPP11
+    driver_init();
+    return R_NilValue;
+  END_CPP11
+}
+// driver.cpp
+void driver_done();
+extern "C" SEXP _RMariaDB_driver_done() {
+  BEGIN_CPP11
+    driver_done();
+    return R_NilValue;
+  END_CPP11
+}
+// driver.cpp
+IntegerVector version();
+extern "C" SEXP _RMariaDB_version() {
+  BEGIN_CPP11
+    return cpp11::as_sexp(version());
+  END_CPP11
+}
+// driver.cpp
+void init_logging(const std::string& log_level);
+extern "C" SEXP _RMariaDB_init_logging(SEXP log_level) {
+  BEGIN_CPP11
+    init_logging(cpp11::as_cpp<cpp11::decay_t<const std::string&>>(log_level));
+    return R_NilValue;
+  END_CPP11
+}
 // result.cpp
 cpp11::external_pointer<DbResult> result_create(cpp11::external_pointer<DbConnectionPtr> con, std::string sql, bool is_statement);
 extern "C" SEXP _RMariaDB_result_create(SEXP con, SEXP sql, SEXP is_statement) {
@@ -75,21 +173,6 @@ extern "C" SEXP _RMariaDB_result_column_info(SEXP res) {
 }
 
 extern "C" {
-/* .Call calls */
-extern SEXP _RMariaDB_connection_begin_transaction(SEXP);
-extern SEXP _RMariaDB_connection_commit(SEXP);
-extern SEXP _RMariaDB_connection_create(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP _RMariaDB_connection_info(SEXP);
-extern SEXP _RMariaDB_connection_is_transacting(SEXP);
-extern SEXP _RMariaDB_connection_quote_string(SEXP, SEXP);
-extern SEXP _RMariaDB_connection_release(SEXP);
-extern SEXP _RMariaDB_connection_rollback(SEXP);
-extern SEXP _RMariaDB_connection_valid(SEXP);
-extern SEXP _RMariaDB_driver_done();
-extern SEXP _RMariaDB_driver_init();
-extern SEXP _RMariaDB_init_logging(SEXP);
-extern SEXP _RMariaDB_version();
-
 static const R_CallMethodDef CallEntries[] = {
     {"_RMariaDB_connection_begin_transaction", (DL_FUNC) &_RMariaDB_connection_begin_transaction,  1},
     {"_RMariaDB_connection_commit",            (DL_FUNC) &_RMariaDB_connection_commit,             1},
