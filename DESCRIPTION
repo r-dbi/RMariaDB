@@ -38,8 +38,10 @@ Suggests:
     testthat (>= 3.0.0),
     withr
 LinkingTo: 
+    cpp11,
     plogr,
     Rcpp
+SystemRequirements: C++11
 Config/autostyle/scope: line_breaks
 Config/autostyle/strict: false
 Config/testthat/edition: 3

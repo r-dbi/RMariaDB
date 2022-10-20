@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+#include <cpp11.hpp>
 #include <mysql.h>
 
 #include <plogr.h>

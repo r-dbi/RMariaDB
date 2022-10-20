@@ -36,8 +36,9 @@ add_library(RMariaDB
 
 target_include_directories(RMariaDB PUBLIC
     "/usr/share/R/include"
-    "/home/gitpod/R/x86_64-pc-linux-gnu-library/3.6/Rcpp/include/"
+    "/home/gitpod/R/x86_64-pc-linux-gnu-library/3.6/cpp11/include/"
     "/home/gitpod/R/x86_64-pc-linux-gnu-library/3.6/plogr/include/"
+    "/home/gitpod/R/x86_64-pc-linux-gnu-library/3.6/Rcpp/include/"
     ${POSTGRESSQL_PATH}
     ${MYSQL_PATH}
     "vendor"
