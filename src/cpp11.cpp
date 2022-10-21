@@ -114,10 +114,10 @@ extern "C" SEXP _RMariaDB_result_create(SEXP con, SEXP sql, SEXP is_statement) {
   END_CPP11
 }
 // result.cpp
-void result_release(XPtr<DbResult> res);
+void result_release(cpp11::external_pointer<DbResult> res);
 extern "C" SEXP _RMariaDB_result_release(SEXP res) {
   BEGIN_CPP11
-    result_release(cpp11::as_cpp<cpp11::decay_t<XPtr<DbResult>>>(res));
+    result_release(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<DbResult>>>(res));
     return R_NilValue;
   END_CPP11
 }
