@@ -14,7 +14,7 @@ result_create(cpp11::external_pointer<DbConnectionPtr> con, std::string sql, boo
 // TODO: figure out what is release in RSQLite
 [[cpp11::register]]
 void result_release(cpp11::external_pointer<DbResult> res) {
-  delete res.release();
+  res.reset();
 }
 
 [[cpp11::register]]
