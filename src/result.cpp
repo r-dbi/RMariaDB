@@ -52,15 +52,3 @@ int result_rows_affected(DbResult* res) {
 cpp11::list result_column_info(DbResult* res) {
   return (SEXP)res->get_column_info();
 }
-
-namespace Rcpp {
-
-template<>
-DbResult* as(SEXP x) {
-  DbResult* result = (DbResult*)(R_ExternalPtrAddr(x));
-  if (!result)
-    stop("Invalid result set");
-  return result;
-}
-
-}
