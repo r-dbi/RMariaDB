@@ -29,7 +29,7 @@ add_library(RMariaDB
   MariaTypes.cpp
   MariaTypes.h
   pch.h
-  RcppExports.cpp
+  cpp11.cpp
   result.cpp
   RMariaDB_types.h
 )
