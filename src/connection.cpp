@@ -2,7 +2,7 @@
 #include "RMariaDB_types.h"
 
 [[cpp11::register]]
-XPtr<DbConnectionPtr> connection_create(
+cpp11::external_pointer<DbConnectionPtr> connection_create(
   const Nullable<std::string>& host,
   const Nullable<std::string>& user,
   const Nullable<std::string>& password,
@@ -35,7 +35,7 @@ XPtr<DbConnectionPtr> connection_create(
 
   DbConnectionPtr* pConn = new DbConnectionPtr(pConnPtr);
 
-  return XPtr<DbConnectionPtr>(pConn, true);
+  return cpp11::external_pointer<DbConnectionPtr>(pConn, true);
 }
 
 [[cpp11::register]]
