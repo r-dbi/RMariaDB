@@ -39,13 +39,13 @@ cpp11::external_pointer<DbConnectionPtr> connection_create(
 }
 
 [[cpp11::register]]
-bool connection_valid(XPtr<DbConnectionPtr> con_) {
+bool connection_valid(cpp11::external_pointer<DbConnectionPtr> con_) {
   DbConnectionPtr* con = con_.get();
   return con && con->get()->is_valid();
 }
 
 [[cpp11::register]]
-void connection_release(XPtr<DbConnectionPtr> con_) {
+void connection_release(cpp11::external_pointer<DbConnectionPtr> con_) {
   if (!connection_valid(con_)) {
     warning("Already disconnected");
     return;
@@ -79,17 +79,17 @@ CharacterVector connection_quote_string(DbConnection* con, CharacterVector xs) {
 // Transactions
 
 [[cpp11::register]]
-void connection_begin_transaction(XPtr<DbConnectionPtr> con) {
+void connection_begin_transaction(cpp11::external_pointer<DbConnectionPtr> con) {
   (*con)->begin_transaction();
 }
 
 [[cpp11::register]]
-void connection_commit(XPtr<DbConnectionPtr> con) {
+void connection_commit(cpp11::external_pointer<DbConnectionPtr> con) {
   (*con)->commit();
 }
 
 [[cpp11::register]]
-void connection_rollback(XPtr<DbConnectionPtr> con) {
+void connection_rollback(cpp11::external_pointer<DbConnectionPtr> con) {
   (*con)->rollback();
 }
 

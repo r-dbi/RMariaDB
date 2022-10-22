@@ -16,17 +16,17 @@ extern "C" SEXP _RMariaDB_connection_create(SEXP host, SEXP user, SEXP password,
   END_CPP11
 }
 // connection.cpp
-bool connection_valid(XPtr<DbConnectionPtr> con_);
+bool connection_valid(cpp11::external_pointer<DbConnectionPtr> con_);
 extern "C" SEXP _RMariaDB_connection_valid(SEXP con_) {
   BEGIN_CPP11
-    return cpp11::as_sexp(connection_valid(cpp11::as_cpp<cpp11::decay_t<XPtr<DbConnectionPtr>>>(con_)));
+    return cpp11::as_sexp(connection_valid(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<DbConnectionPtr>>>(con_)));
   END_CPP11
 }
 // connection.cpp
-void connection_release(XPtr<DbConnectionPtr> con_);
+void connection_release(cpp11::external_pointer<DbConnectionPtr> con_);
 extern "C" SEXP _RMariaDB_connection_release(SEXP con_) {
   BEGIN_CPP11
-    connection_release(cpp11::as_cpp<cpp11::decay_t<XPtr<DbConnectionPtr>>>(con_));
+    connection_release(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<DbConnectionPtr>>>(con_));
     return R_NilValue;
   END_CPP11
 }
@@ -45,26 +45,26 @@ extern "C" SEXP _RMariaDB_connection_quote_string(SEXP con, SEXP xs) {
   END_CPP11
 }
 // connection.cpp
-void connection_begin_transaction(XPtr<DbConnectionPtr> con);
+void connection_begin_transaction(cpp11::external_pointer<DbConnectionPtr> con);
 extern "C" SEXP _RMariaDB_connection_begin_transaction(SEXP con) {
   BEGIN_CPP11
-    connection_begin_transaction(cpp11::as_cpp<cpp11::decay_t<XPtr<DbConnectionPtr>>>(con));
+    connection_begin_transaction(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<DbConnectionPtr>>>(con));
     return R_NilValue;
   END_CPP11
 }
 // connection.cpp
-void connection_commit(XPtr<DbConnectionPtr> con);
+void connection_commit(cpp11::external_pointer<DbConnectionPtr> con);
 extern "C" SEXP _RMariaDB_connection_commit(SEXP con) {
   BEGIN_CPP11
-    connection_commit(cpp11::as_cpp<cpp11::decay_t<XPtr<DbConnectionPtr>>>(con));
+    connection_commit(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<DbConnectionPtr>>>(con));
     return R_NilValue;
   END_CPP11
 }
 // connection.cpp
-void connection_rollback(XPtr<DbConnectionPtr> con);
+void connection_rollback(cpp11::external_pointer<DbConnectionPtr> con);
 extern "C" SEXP _RMariaDB_connection_rollback(SEXP con) {
   BEGIN_CPP11
-    connection_rollback(cpp11::as_cpp<cpp11::decay_t<XPtr<DbConnectionPtr>>>(con));
+    connection_rollback(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<DbConnectionPtr>>>(con));
     return R_NilValue;
   END_CPP11
 }
