@@ -33,13 +33,13 @@ public:
   int n_rows_fetched();
   int n_rows_affected();
 
-  void bind(const List& params);
+  void bind(const cpp11::list& params);
   List fetch(int n_max = -1);
 
   cpp11::list get_column_info();
 
 private:
-  void validate_params(const List& params) const;
+  void validate_params(const cpp11::list& params) const;
 };
 
 #endif // __RDBI_DB_RESULT__
