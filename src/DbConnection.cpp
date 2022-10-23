@@ -147,7 +147,7 @@ SEXP DbConnection::quote_string(const cpp11::r_string& input) {
 }
 
 SEXP DbConnection::get_null_string() {
-  static RObject null = Rf_mkCharCE("NULL", CE_UTF8);
+  static auto null = Rf_mkCharCE("NULL", CE_UTF8);
   return null;
 }
 
