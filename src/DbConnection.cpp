@@ -19,14 +19,14 @@ DbConnection::~DbConnection() {
   }
 }
 
-void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std::string>& user,
-                           const Nullable<std::string>& password, const Nullable<std::string>& db,
-                           unsigned int port, const Nullable<std::string>& unix_socket,
-                           unsigned long client_flag, const Nullable<std::string>& groups,
-                           const Nullable<std::string>& default_file,
-                           const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
-                           const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
-                           const Nullable<std::string>& ssl_cipher,
+void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
+                           const cpp11::sexp& password, const cpp11::sexp& db,
+                           unsigned int port, const cpp11::sexp& unix_socket,
+                           unsigned long client_flag, const cpp11::sexp& groups,
+                           const cpp11::sexp& default_file,
+                           const cpp11::sexp& ssl_key, const cpp11::sexp& ssl_cert,
+                           const cpp11::sexp& ssl_ca, const cpp11::sexp& ssl_capath,
+                           const cpp11::sexp& ssl_cipher,
                            int timeout, bool reconnect) {
   LOG_VERBOSE;
 
@@ -36,22 +36,22 @@ void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std
   mysql_options(this->pConn_, MYSQL_OPT_LOCAL_INFILE, &local_infile);
   // Default to UTF-8
   mysql_options(this->pConn_, MYSQL_SET_CHARSET_NAME, "utf8mb4");
-  if (!groups.isNull())
+  if (Rf_isNull(groups))
     mysql_options(this->pConn_, MYSQL_READ_DEFAULT_GROUP,
-                  as<std::string>(groups).c_str());
-  if (!default_file.isNull())
+                  cpp11::as_cpp<std::string>(groups).c_str());
+  if (!Rf_isNull(default_file))
     mysql_options(this->pConn_, MYSQL_READ_DEFAULT_FILE,
                   as<std::string>(default_file).c_str());
 
-  if (!ssl_key.isNull() || !ssl_cert.isNull() || !ssl_ca.isNull() ||
-      !ssl_capath.isNull() || !ssl_cipher.isNull()) {
+  if (!Rf_isNull(ssl_key) || !Rf_isNull(ssl_cert) || !Rf_isNull(ssl_ca) ||
+      !Rf_isNull(ssl_capath) || !Rf_isNull(ssl_cipher)) {
     mysql_ssl_set(
       this->pConn_,
-      ssl_key.isNull() ? NULL : as<std::string>(ssl_key).c_str(),
-      ssl_cert.isNull() ? NULL : as<std::string>(ssl_cert).c_str(),
-      ssl_ca.isNull() ? NULL : as<std::string>(ssl_ca).c_str(),
-      ssl_capath.isNull() ? NULL : as<std::string>(ssl_capath).c_str(),
-      ssl_cipher.isNull() ? NULL : as<std::string>(ssl_cipher).c_str()
+      Rf_isNull(ssl_key) ? NULL : cpp11::as_cpp<std::string>(ssl_key).c_str(),
+      Rf_isNull(ssl_cert) ? NULL : cpp11::as_cpp<std::string>(ssl_cert).c_str(),
+      Rf_isNull(ssl_ca) ? NULL : cpp11::as_cpp<std::string>(ssl_ca).c_str(),
+      Rf_isNull(ssl_capath) ? NULL : cpp11::as_cpp<std::string>(ssl_capath).c_str(),
+      Rf_isNull(ssl_cipher) ? NULL : cpp11::as_cpp<std::string>(ssl_cipher).c_str()
     );
   }
   if (timeout > 0) {
@@ -66,12 +66,12 @@ void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std
   LOG_VERBOSE;
 
   if (!mysql_real_connect(this->pConn_,
-                          host.isNull() ? NULL : as<std::string>(host).c_str(),
-                          user.isNull() ? NULL : as<std::string>(user).c_str(),
-                          password.isNull() ? NULL : as<std::string>(password).c_str(),
-                          db.isNull() ? NULL : as<std::string>(db).c_str(),
+                          Rf_isNull(host) ? NULL : cpp11::as_cpp<std::string>(host).c_str(),
+                          Rf_isNull(user) ? NULL : cpp11::as_cpp<std::string>(user).c_str(),
+                          Rf_isNull(password) ? NULL : cpp11::as_cpp<std::string>(password).c_str(),
+                          Rf_isNull(db) ? NULL : cpp11::as_cpp<std::string>(db).c_str(),
                           port,
-                          unix_socket.isNull() ? NULL : as<std::string>(unix_socket).c_str(),
+                          Rf_isNull(unix_socket) ? NULL : cpp11::as_cpp<std::string>(unix_socket).c_str(),
                           client_flag)) {
     std::string error = mysql_error(this->pConn_);
     mysql_close(this->pConn_);
