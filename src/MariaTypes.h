@@ -17,7 +17,7 @@ MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary,
 std::string type_name(MariaFieldType type);
 SEXPTYPE type_sexp(MariaFieldType type);
 
-std::string r_class(RObject x);
+std::string r_class(const cpp11::sexp& x);
 MariaFieldType variable_type_from_object(const cpp11::sexp& type);
 
 
