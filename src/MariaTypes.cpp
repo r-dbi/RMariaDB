@@ -139,8 +139,8 @@ MariaFieldType variable_type_from_object(const cpp11::sexp& type) {
 }
 
 bool all_raw(SEXP x) {
-  List xx(x);
-  for (R_xlen_t i = 0; i < xx.length(); ++i) {
+  cpp11::list xx(x);
+  for (R_xlen_t i = 0; i < xx.size(); ++i) {
     switch (TYPEOF(xx[i])) {
     case RAWSXP:
     case NILSXP:
