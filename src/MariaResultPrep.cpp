@@ -111,14 +111,15 @@ void MariaResultPrep::bind(const List& params) {
   bound_ = true;
 }
 
-List MariaResultPrep::get_column_info() {
-  CharacterVector names(nCols_), types(nCols_);
+cpp11::writable::list MariaResultPrep::get_column_info() {
+  using namespace cpp11::literals;
+  cpp11::writable::strings names(nCols_), types(nCols_);
   for (int i = 0; i < nCols_; i++) {
     names[i] = names_[i];
     types[i] = type_name(types_[i]);
   }
 
-  return List::create(_["name"] = names, _["type"] = types);
+  return cpp11::writable::list({"name"_nm = names, "type"_nm = types});
 }
 
 bool MariaResultPrep::has_result() const {
