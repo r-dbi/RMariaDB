@@ -16,24 +16,24 @@ cpp11::list df_resize(const cpp11::list& df, int n) {
   return out;
 }
 
-void df_s3(const List& df, const std::vector<MariaFieldType>& types) {
+void df_s3(const cpp11::list& df, const std::vector<MariaFieldType>& types) {
   R_xlen_t p = df.size();
 
   for (R_xlen_t j = 0; j < p; ++j) {
-    RObject col(df[j]);
+    cpp11::sexp col(df[j]);
     switch (types[j]) {
     case MY_DATE:
-      col.attr("class") = CharacterVector::create("Date");
+      col.attr("class") = cpp11::strings(cpp11::as_sexp(cpp11::r_string("Date")));
       break;
     case MY_DATE_TIME:
-      col.attr("class") = CharacterVector::create("POSIXct", "POSIXt");
+      col.attr("class") = cpp11::strings({"POSIXct", "POSIXt"});
       break;
     case MY_TIME:
-      col.attr("class") = CharacterVector::create("hms", "difftime");
+      col.attr("class") = cpp11::strings({"hms", "difftime"});
       col.attr("units") = "secs";
       break;
     case MY_INT64:
-      col.attr("class") = CharacterVector::create("integer64");
+      col.attr("class") = cpp11::strings(cpp11::as_sexp(cpp11::r_string("integer64")));
       break;
     default:
       break;
@@ -42,7 +42,7 @@ void df_s3(const List& df, const std::vector<MariaFieldType>& types) {
   }
 }
 
-cpp11::list df_create(const std::vector<MariaFieldType>& types, const std::vector<std::string>& names, int n) {
+cpp11::writable::list df_create(const std::vector<MariaFieldType>& types, const std::vector<std::string>& names, int n) {
   R_xlen_t p = types.size();
 
   cpp11::writable::list out(p);
