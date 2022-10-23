@@ -3,20 +3,20 @@
 
 [[cpp11::register]]
 cpp11::external_pointer<DbConnectionPtr> connection_create(
-  const Nullable<std::string>& host,
-  const Nullable<std::string>& user,
-  const Nullable<std::string>& password,
-  const Nullable<std::string>& db,
+  const cpp11::sexp& host,
+  const cpp11::sexp& user,
+  const cpp11::sexp& password,
+  const cpp11::sexp& db,
   unsigned int port,
-  const Nullable<std::string>& unix_socket,
+  const cpp11::sexp& unix_socket,
   unsigned long client_flag,
-  const Nullable<std::string>& groups,
-  const Nullable<std::string>& default_file,
-  const Nullable<std::string>& ssl_key,
-  const Nullable<std::string>& ssl_cert,
-  const Nullable<std::string>& ssl_ca,
-  const Nullable<std::string>& ssl_capath,
-  const Nullable<std::string>& ssl_cipher,
+  const cpp11::sexp& groups,
+  const cpp11::sexp& default_file,
+  const cpp11::sexp& ssl_key,
+  const cpp11::sexp& ssl_cert,
+  const cpp11::sexp& ssl_ca,
+  const cpp11::sexp& ssl_capath,
+  const cpp11::sexp& ssl_cipher,
   int timeout,
   bool reconnect
 ) {
