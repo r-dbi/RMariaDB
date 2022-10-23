@@ -18,7 +18,7 @@ std::string type_name(MariaFieldType type);
 SEXPTYPE type_sexp(MariaFieldType type);
 
 std::string r_class(RObject x);
-MariaFieldType variable_type_from_object(const RObject& type);
+MariaFieldType variable_type_from_object(const cpp11::sexp& type);
 
 
 #endif
