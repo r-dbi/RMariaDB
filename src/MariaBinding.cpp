@@ -25,7 +25,7 @@ void MariaBinding::setup(MYSQL_STMT* statement_) {
   time_buffers.resize(p);
 }
 
-void MariaBinding::init_binding(const List& params_) {
+void MariaBinding::init_binding(const cpp11::list& params_) {
   LOG_VERBOSE;
 
   params = params_;
@@ -41,8 +41,8 @@ void MariaBinding::init_binding(const List& params_) {
   i = 0;
 
   for (int j = 0; j < p; ++j) {
-    RObject param(params[j]);
-    MariaFieldType type = variable_type_from_object(param);
+    cpp11::sexp param(params[j]);
+    const auto type = variable_type_from_object(param);
     types[j] = type;
 
     LOG_VERBOSE << j << " -> " << type_name(type);
