@@ -25,7 +25,7 @@ bool result_valid(cpp11::external_pointer<DbResult> res_) {
 
 [[cpp11::register]]
 cpp11::list result_fetch(DbResult* res, const int n) {
-  return (SEXP)res->fetch(n);
+  return res->fetch(n);
 }
 
 [[cpp11::register]]
