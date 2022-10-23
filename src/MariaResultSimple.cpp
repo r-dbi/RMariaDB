@@ -29,10 +29,11 @@ void MariaResultSimple::bind(const List& /*params*/) {
   stop("This query is not supported by the prepared statement protocol, no parameters can be bound.");
 }
 
-List MariaResultSimple::get_column_info() {
-  CharacterVector names(0), types(0);
+cpp11::writable::list MariaResultSimple::get_column_info() {
+  using namespace cpp11::literals;
+  cpp11::writable::strings names(0_xl), types(0_xl);
 
-  return List::create(_["name"] = names, _["type"] = types);
+  return cpp11::writable::list({"name"_nm = names, "type"_nm = types});
 }
 
 List MariaResultSimple::fetch(int /*n_max*/) {

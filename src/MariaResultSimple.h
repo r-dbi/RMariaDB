@@ -25,7 +25,7 @@ public:
 
   virtual void bind(const List& params);
 
-  virtual List get_column_info();
+  virtual cpp11::writable::list get_column_info();
 
   virtual List fetch(int n_max = -1);
 
