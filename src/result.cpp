@@ -30,7 +30,7 @@ cpp11::list result_fetch(DbResult* res, const int n) {
 
 [[cpp11::register]]
 void result_bind(DbResult* res, cpp11::list params) {
-  res->bind((SEXP)params);
+  res->bind(params);
 }
 
 [[cpp11::register]]
