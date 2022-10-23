@@ -56,11 +56,11 @@ List DbResult::fetch(const int n_max) {
   return impl->fetch(n_max);
 }
 
-List DbResult::get_column_info() {
-  List out = impl->get_column_info();
+cpp11::list DbResult::get_column_info() {
+  auto out = impl->get_column_info();
 
-  out.attr("row.names") = IntegerVector::create(NA_INTEGER, -Rf_length(out[0]));
-  out.attr("class") = "data.frame";
+  out.attr("row.names") = cpp11::integers({NA_INTEGER, static_cast<int>(-Rf_length(out[0]))});
+  out.attr("class") =  "data.frame";
 
   return out;
 }

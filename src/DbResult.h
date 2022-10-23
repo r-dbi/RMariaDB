@@ -36,7 +36,7 @@ public:
   void bind(const List& params);
   List fetch(int n_max = -1);
 
-  List get_column_info();
+  cpp11::list get_column_info();
 
 private:
   void validate_params(const List& params) const;
