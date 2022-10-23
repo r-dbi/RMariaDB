@@ -92,7 +92,7 @@ extern "C" SEXP _RMariaDB_driver_done() {
   END_CPP11
 }
 // driver.cpp
-IntegerVector version();
+cpp11::integers version();
 extern "C" SEXP _RMariaDB_version() {
   BEGIN_CPP11
     return cpp11::as_sexp(version());

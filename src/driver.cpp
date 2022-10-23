@@ -20,12 +20,12 @@ void driver_done() {
 }
 
 [[cpp11::register]]
-IntegerVector version() {
+cpp11::integers version() {
   return
-    IntegerVector::create(
-      _[SERVER_VERSION] = MYSQL_VERSION_ID,
-      _[mysql_get_client_info()] = mysql_get_client_version()
-    );
+    cpp11::writable::integers({
+      cpp11::named_arg(SERVER_VERSION) = MYSQL_VERSION_ID,
+      cpp11::named_arg(mysql_get_client_info()) = mysql_get_client_version()
+    });
 }
 
 [[cpp11::register]]
