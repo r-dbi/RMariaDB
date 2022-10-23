@@ -31,7 +31,7 @@ extern "C" SEXP _RMariaDB_connection_release(SEXP con_) {
   END_CPP11
 }
 // connection.cpp
-List connection_info(DbConnection* con);
+cpp11::list connection_info(DbConnection* con);
 extern "C" SEXP _RMariaDB_connection_info(SEXP con) {
   BEGIN_CPP11
     return cpp11::as_sexp(connection_info(cpp11::as_cpp<cpp11::decay_t<DbConnection*>>(con)));

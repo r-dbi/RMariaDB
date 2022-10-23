@@ -33,7 +33,7 @@ public:
   bool is_valid();
   void check_connection();
 
-  List info();
+  cpp11::list info();
   MYSQL* get_conn();
 
   SEXP quote_string(const String& input);

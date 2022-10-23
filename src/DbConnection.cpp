@@ -109,18 +109,19 @@ void DbConnection::check_connection() {
   }
 }
 
-List DbConnection::info() {
+cpp11::list DbConnection::info() {
+  using namespace cpp11::literals;
   return
-    List::create(
-      _["host"] = std::string(pConn_->host),
-      _["username"] = std::string(pConn_->user),
-      _["dbname"] = std::string(pConn_->db ? pConn_->db : ""),
-      _["con.type"] = std::string(mysql_get_host_info(pConn_)),
-      _["db.version"] = std::string(mysql_get_server_info(pConn_)),
-      _["port"] = NA_INTEGER,
-      _["protocol.version"] = (int) mysql_get_proto_info(pConn_),
-      _["thread.id"] = (int) mysql_thread_id(pConn_)
-    );
+    cpp11::list({
+      "host"_nm = std::string(pConn_->host),
+      "username"_nm = std::string(pConn_->user),
+      "dbname"_nm = std::string(pConn_->db ? pConn_->db : ""),
+      "con.type"_nm = std::string(mysql_get_host_info(pConn_)),
+      "db.version"_nm = std::string(mysql_get_server_info(pConn_)),
+      "port"_nm = NA_INTEGER,
+      "protocol.version"_nm = (int) mysql_get_proto_info(pConn_),
+      "thread.id"_nm = (int) mysql_thread_id(pConn_)
+    });
 }
 
 MYSQL* DbConnection::get_conn() {

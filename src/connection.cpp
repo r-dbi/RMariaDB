@@ -57,7 +57,7 @@ void connection_release(cpp11::external_pointer<DbConnectionPtr> con_) {
 }
 
 [[cpp11::register]]
-List connection_info(DbConnection* con) {
+cpp11::list connection_info(DbConnection* con) {
   return con->info();
 }
 
