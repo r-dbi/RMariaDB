@@ -1,14 +1,21 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
-# RMariaDB 1.2.1.9001 (2022-05-14)
+# RMariaDB 1.2.2.9000 (2022-06-19)
 
-- Actually enable `LOAD LOCAL INFILE` by setting the `MYSQL_OPT_LOCAL_INFILE` flag (#265, #267).
+- Internal changes only.
+
+
+# RMariaDB 1.2.2 (2022-06-19)
+
+## Features 
+
+- `dbAppendTable()` accepts `Id` (#262, @renkun-ken).
+
 - `dbConnect()` gains `reconnect` argument that sets the `MYSQL_OPT_RECONNECT` option (#261, @renkun-ken).
 
+## Bug fixes
 
-# RMariaDB 1.2.1.9000 (2021-12-20)
-
-- Same as previous version.
+- Actually enable `LOAD LOCAL INFILE` by setting the `MYSQL_OPT_LOCAL_INFILE` flag (#265, #267).
 
 
 # RMariaDB 1.2.1 (2021-12-20)
