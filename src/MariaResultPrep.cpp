@@ -201,7 +201,7 @@ cpp11::list MariaResultPrep::fetch(int n_max) {
 
     ++i;
     if (i % 1024 == 0)
-      checkUserInterrupt();
+      cpp11::check_user_interrupt();
   }
 
   // Trim back to what we actually used
