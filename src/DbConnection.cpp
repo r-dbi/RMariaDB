@@ -128,18 +128,18 @@ MYSQL* DbConnection::get_conn() {
   return pConn_;
 }
 
-SEXP DbConnection::quote_string(const String& input) {
+SEXP DbConnection::quote_string(const cpp11::r_string& input) {
   if (input == NA_STRING)
     return get_null_string();
 
-  const char* input_cstr = input.get_cstring();
-  size_t input_len = strlen(input_cstr);
+  const auto input_str = static_cast<std::string>(input);
+  const auto input_len = input_str.size();
 
   // Create buffer with enough room to escape every character
   std::string output = "'";
   output.resize(input_len * 2 + 3);
 
-  size_t end = mysql_real_escape_string(pConn_, &output[1], input_cstr, input_len);
+  size_t end = mysql_real_escape_string(pConn_, &output[1], input_str.c_str(), input_len);
 
   output.resize(end + 1);
   output.append("'");

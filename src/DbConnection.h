@@ -36,7 +36,7 @@ public:
   cpp11::list info();
   MYSQL* get_conn();
 
-  SEXP quote_string(const String& input);
+  SEXP quote_string(const cpp11::r_string& input);
   static SEXP get_null_string();
 
   // Cancels previous query, if needed.
