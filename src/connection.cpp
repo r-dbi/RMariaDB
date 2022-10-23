@@ -97,21 +97,3 @@ void connection_rollback(cpp11::external_pointer<DbConnectionPtr> con) {
 bool connection_is_transacting(DbConnection* con) {
   return con->is_transacting();
 }
-
-
-// Specific functions
-
-
-// as() override
-
-namespace Rcpp {
-
-template<>
-DbConnection* as(SEXP x) {
-  DbConnectionPtr* connection = (DbConnectionPtr*)(R_ExternalPtrAddr(x));
-  if (!connection)
-    stop("Invalid connection");
-  return connection->get();
-}
-
-}
