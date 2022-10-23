@@ -23,7 +23,7 @@ public:
   virtual void send_query(const std::string& sql);
   virtual void close();
 
-  virtual void bind(const List& params);
+  virtual void bind(const cpp11::list& params);
 
   virtual cpp11::writable::list get_column_info();
 

@@ -23,7 +23,7 @@ void MariaResultSimple::close() {
   LOG_VERBOSE;
 }
 
-void MariaResultSimple::bind(const List& /*params*/) {
+void MariaResultSimple::bind(const cpp11::list& /*params*/) {
   LOG_VERBOSE;
 
   stop("This query is not supported by the prepared statement protocol, no parameters can be bound.");
