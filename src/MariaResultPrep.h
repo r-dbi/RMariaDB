@@ -41,7 +41,7 @@ public:
 
   virtual cpp11::writable::list get_column_info();
 
-  virtual List fetch(int n_max = -1);
+  virtual cpp11::list fetch(int n_max = -1);
 
   virtual int n_rows_affected();
   virtual int n_rows_fetched();

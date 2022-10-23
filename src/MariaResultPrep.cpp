@@ -166,7 +166,7 @@ bool MariaResultPrep::fetch_row() {
   return false;
 }
 
-List MariaResultPrep::fetch(int n_max) {
+cpp11::list MariaResultPrep::fetch(int n_max) {
   if (!bound_)
     stop("Query needs to be bound before fetching");
   if (!has_result()) {
@@ -177,7 +177,7 @@ List MariaResultPrep::fetch(int n_max) {
   }
 
   int n = (n_max < 0) ? 100 : n_max;
-  List out = df_create(types_, names_, n);
+  auto out = df_create(types_, names_, n);
   if (n == 0)
     return out;
 
