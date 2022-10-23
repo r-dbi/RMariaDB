@@ -97,7 +97,7 @@ void MariaResultPrep::bind(const cpp11::list& params) {
   rowsAffected_ = 0;
 
   bindingInput_.setup(pStatement_);
-  bindingInput_.init_binding((SEXP)params);
+  bindingInput_.init_binding(params);
 
   if (has_result()) {
     complete_ = true;
