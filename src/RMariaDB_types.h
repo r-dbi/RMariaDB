@@ -7,16 +7,6 @@
 #include "DbResult.h"
 #include "MariaBinding.h"
 
-namespace Rcpp {
-
-template<>
-DbConnection* as(SEXP x);
-
-template<>
-DbResult* as(SEXP x);
-
-}
-
 namespace cpp11 {
 
 template <typename T>
