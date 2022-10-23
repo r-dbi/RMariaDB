@@ -64,12 +64,12 @@ cpp11::list connection_info(DbConnection* con) {
 // Quoting
 
 [[cpp11::register]]
-CharacterVector connection_quote_string(DbConnection* con, CharacterVector xs) {
-  R_xlen_t n = xs.size();
-  CharacterVector output(n);
+cpp11::strings connection_quote_string(DbConnection* con, cpp11::strings xs) {
+  const auto n = xs.size();
+  cpp11::wtiable::strings output(n);
 
   for (R_xlen_t i = 0; i < n; ++i) {
-    String x = xs[i];
+    const auto& x = xs[i];
     output[i] = con->quote_string(x);
   }
 
