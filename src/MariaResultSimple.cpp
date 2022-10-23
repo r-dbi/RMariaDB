@@ -36,7 +36,7 @@ cpp11::writable::list MariaResultSimple::get_column_info() {
   return cpp11::writable::list({"name"_nm = names, "type"_nm = types});
 }
 
-List MariaResultSimple::fetch(int /*n_max*/) {
+cpp11::list MariaResultSimple::fetch(int /*n_max*/) {
   LOG_VERBOSE;
 
   warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
