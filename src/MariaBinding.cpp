@@ -31,11 +31,11 @@ void MariaBinding::init_binding(const cpp11::list& params_) {
   params = params_;
 
   if (params.size() == 0) {
-    stop("Query has no parameters");
+    cpp11::stop("Query has no parameters");
   }
 
   if (p != params.size()) {
-    stop("Number of params don't match (%i vs %i)", p, params.size());
+    cpp11::stop("Number of params don't match (%i vs %i)", p, params.size());
   }
 
   i = 0;

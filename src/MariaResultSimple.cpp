@@ -26,7 +26,7 @@ void MariaResultSimple::close() {
 void MariaResultSimple::bind(const cpp11::list& /*params*/) {
   LOG_VERBOSE;
 
-  stop("This query is not supported by the prepared statement protocol, no parameters can be bound.");
+  cpp11::stop("This query is not supported by the prepared statement protocol, no parameters can be bound.");
 }
 
 cpp11::writable::list MariaResultSimple::get_column_info() {
@@ -39,7 +39,7 @@ cpp11::writable::list MariaResultSimple::get_column_info() {
 cpp11::list MariaResultSimple::fetch(int /*n_max*/) {
   LOG_VERBOSE;
 
-  warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
+  cpp11::warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
   return df_create(std::vector<MariaFieldType>(), std::vector<std::string>(), 0);
 }
 

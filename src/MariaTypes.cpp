@@ -134,7 +134,7 @@ MariaFieldType variable_type_from_object(const cpp11::sexp& type) {
     break;
   }
 
-  stop("Unsupported column type %s", Rf_type2char(TYPEOF(type)));
+  cpp11::stop("Unsupported column type %s", Rf_type2char(TYPEOF(type)));
   return MY_STR;
 }
 

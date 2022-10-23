@@ -14,7 +14,7 @@ DbConnection::~DbConnection() {
   LOG_VERBOSE;
 
   if (is_valid()) {
-    warning("call dbDisconnect() when finished working with a connection");
+    cpp11::warning("call dbDisconnect() when finished working with a connection");
     disconnect();
   }
 }
@@ -77,7 +77,7 @@ void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std
     mysql_close(this->pConn_);
     this->pConn_ = NULL;
 
-    stop("Failed to connect: %s", error.c_str());
+    cpp11::stop("Failed to connect: %s", error.c_str());
   }
 }
 
@@ -85,7 +85,7 @@ void DbConnection::disconnect() {
   if (!is_valid()) return;
 
   if (has_query()) {
-    warning(
+    cpp11::warning(
       "%s\n%s",
       "There is a result object still in use.",
       "The connection will be automatically released when it is closed"
@@ -105,7 +105,7 @@ bool DbConnection::is_valid() {
 
 void DbConnection::check_connection() {
   if (!is_valid()) {
-    stop("Invalid or closed connection");
+    cpp11::stop("Invalid or closed connection");
   }
 }
 
@@ -157,7 +157,7 @@ void DbConnection::set_current_result(DbResult* pResult) {
 
   if (pCurrentResult_ != NULL) {
     if (pResult != NULL)
-      warning("Cancelling previous query");
+      cpp11::warning("Cancelling previous query");
 
     pCurrentResult_->close();
   }
@@ -185,7 +185,7 @@ bool DbConnection::exec(const std::string& sql) {
   check_connection();
 
   if (mysql_real_query(pConn_, sql.data(), sql.size()) != 0)
-    stop("Error executing query: %s", mysql_error(pConn_));
+    cpp11::stop("Error executing query: %s", mysql_error(pConn_));
 
   MYSQL_RES* res = mysql_store_result(pConn_);
   if (res != NULL)
@@ -197,14 +197,14 @@ bool DbConnection::exec(const std::string& sql) {
 }
 
 void DbConnection::begin_transaction() {
-  if (is_transacting()) stop("Nested transactions not supported.");
+  if (is_transacting()) cpp11::stop("Nested transactions not supported.");
   check_connection();
 
   transacting_ = true;
 }
 
 void DbConnection::commit() {
-  if (!is_transacting()) stop("Call dbBegin() to start a transaction.");
+  if (!is_transacting()) cpp11::stop("Call dbBegin() to start a transaction.");
   check_connection();
 
   mysql_commit(get_conn());
@@ -212,7 +212,7 @@ void DbConnection::commit() {
 }
 
 void DbConnection::rollback() {
-  if (!is_transacting()) stop("Call dbBegin() to start a transaction.");
+  if (!is_transacting()) cpp11::stop("Call dbBegin() to start a transaction.");
   check_connection();
 
   mysql_rollback(get_conn());

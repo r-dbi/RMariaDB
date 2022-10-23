@@ -19,7 +19,7 @@ MariaResultPrep::MariaResultPrep(const DbConnectionPtr& pConn, bool is_statement
 {
   pStatement_ = mysql_stmt_init(pConn_->get_conn());
   if (pStatement_ == NULL)
-    stop("Out of memory");
+    cpp11::stop("Out of memory");
 }
 
 MariaResultPrep::~MariaResultPrep() {
@@ -168,10 +168,10 @@ bool MariaResultPrep::fetch_row() {
 
 cpp11::list MariaResultPrep::fetch(int n_max) {
   if (!bound_)
-    stop("Query needs to be bound before fetching");
+    cpp11::stop("Query needs to be bound before fetching");
   if (!has_result()) {
     if (names_.size() == 0) {
-      warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
+      cpp11::warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
     }
     return df_create(types_, names_, 0);
   }
@@ -234,7 +234,7 @@ bool MariaResultPrep::complete() const {
 }
 
 void MariaResultPrep::throw_error() {
-  stop(
+  cpp11::stop(
     "%s [%i]",
     mysql_stmt_error(pStatement_),
     mysql_stmt_errno(pStatement_)
