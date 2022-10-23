@@ -12,7 +12,7 @@ public:
 
   virtual void bind(const List& params) = 0;
 
-  virtual List get_column_info() = 0;
+  virtual cpp11::writable::list get_column_info() = 0;
 
   virtual List fetch(int n_max = -1) = 0;
 
