@@ -47,7 +47,7 @@ bool connection_valid(cpp11::external_pointer<DbConnectionPtr> con_) {
 [[cpp11::register]]
 void connection_release(cpp11::external_pointer<DbConnectionPtr> con_) {
   if (!connection_valid(con_)) {
-    warning("Already disconnected");
+    cpp11::warning("Already disconnected");
     return;
   }
 
