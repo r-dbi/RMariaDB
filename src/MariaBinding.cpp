@@ -92,7 +92,7 @@ bool MariaBinding::bind_next_row() {
     LOG_VERBOSE << j << " -> " << type_name(types[j]);
 
     bool missing = false;
-    RObject col(params[j]);
+    cpp11::sexp col(params[j]);
 
     switch (types[j]) {
     case MY_LGL:
