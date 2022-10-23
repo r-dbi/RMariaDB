@@ -41,7 +41,7 @@ void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
                   cpp11::as_cpp<std::string>(groups).c_str());
   if (!Rf_isNull(default_file))
     mysql_options(this->pConn_, MYSQL_READ_DEFAULT_FILE,
-                  as<std::string>(default_file).c_str());
+                  cpp11::as_cpp<std::string>(default_file).c_str());
 
   if (!Rf_isNull(ssl_key) || !Rf_isNull(ssl_cert) || !Rf_isNull(ssl_ca) ||
       !Rf_isNull(ssl_capath) || !Rf_isNull(ssl_cipher)) {
