@@ -50,5 +50,5 @@ int result_rows_affected(DbResult* res) {
 
 [[cpp11::register]]
 cpp11::list result_column_info(DbResult* res) {
-  return (SEXP)res->get_column_info();
+  return res->get_column_info();
 }
