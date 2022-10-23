@@ -38,10 +38,10 @@ extern "C" SEXP _RMariaDB_connection_info(SEXP con) {
   END_CPP11
 }
 // connection.cpp
-CharacterVector connection_quote_string(DbConnection* con, CharacterVector xs);
+cpp11::strings connection_quote_string(DbConnection* con, cpp11::strings xs);
 extern "C" SEXP _RMariaDB_connection_quote_string(SEXP con, SEXP xs) {
   BEGIN_CPP11
-    return cpp11::as_sexp(connection_quote_string(cpp11::as_cpp<cpp11::decay_t<DbConnection*>>(con), cpp11::as_cpp<cpp11::decay_t<CharacterVector>>(xs)));
+    return cpp11::as_sexp(connection_quote_string(cpp11::as_cpp<cpp11::decay_t<DbConnection*>>(con), cpp11::as_cpp<cpp11::decay_t<cpp11::strings>>(xs)));
   END_CPP11
 }
 // connection.cpp

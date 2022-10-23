@@ -66,7 +66,7 @@ cpp11::list connection_info(DbConnection* con) {
 [[cpp11::register]]
 cpp11::strings connection_quote_string(DbConnection* con, cpp11::strings xs) {
   const auto n = xs.size();
-  cpp11::wtiable::strings output(n);
+  cpp11::writable::strings output(n);
 
   for (R_xlen_t i = 0; i < n; ++i) {
     const auto& x = xs[i];
