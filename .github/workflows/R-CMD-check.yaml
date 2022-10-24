@@ -121,6 +121,7 @@ jobs:
   # when they alone take as long as the smoke and full tests combined.
   # To achieve this, remove the "needs:" element below.
   rcc-windows:
+    if: ${{ false }}
     # Begin custom: early run
     needs: rcc-smoke
     # End custom: early run
@@ -166,7 +167,7 @@ jobs:
           results: ${{ runner.os }}-r${{ matrix.config.r }}
 
   rcc-full:
-    needs: rcc-smoke
+    #needs: rcc-smoke
 
     runs-on: ${{ matrix.config.os }}
 
