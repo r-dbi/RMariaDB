@@ -29,7 +29,6 @@ Imports:
     hms (>= 0.5.0),
     lubridate,
     methods,
-    Rcpp (>= 0.12.4),
     rlang
 Suggests: 
     DBItest (>= 1.7.2.9001),
@@ -39,8 +38,7 @@ Suggests:
     withr
 LinkingTo: 
     cpp11,
-    plogr,
-    Rcpp
+    plogr
 Config/autostyle/scope: line_breaks
 Config/autostyle/strict: false
 Config/testthat/edition: 3
@@ -57,10 +55,10 @@ Collate:
     'MariaDBDriver.R'
     'MariaDBResult.R'
     'RMariaDB-package.R'
-    'RcppExports.R'
     'coerce.R'
     'compatRowNames.R'
     'connect.R'
+    'cpp11.R'
     'dbAppendTable_MariaDBConnection.R'
     'dbBegin_MariaDBConnection.R'
     'dbBind_MariaDBResult.R'
@@ -110,4 +108,3 @@ Collate:
     'transaction.R'
     'utils.R'
     'zzz.R'
-    'cpp11.R'
