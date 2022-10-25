@@ -14,8 +14,6 @@ DbConnection::~DbConnection() {
   LOG_VERBOSE;
 
   if (is_valid()) {
-    // TODO: cpp11::warning is crushing in destructor
-    warning("call dbDisconnect() when finished working with a connection");
     disconnect();
   }
 }
