@@ -49,7 +49,8 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.2.9000" id="rmariadb-1229000-2022-06-19">RMariaDB 1.2.2.9000 (2022-06-19)<a class="anchor" aria-label="anchor" href="#rmariadb-1229000-2022-06-19"></a></h2>
-<ul><li>Internal changes only.</li></ul></div>
+<ul><li>Internal changes only.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.2" id="rmariadb-122-2022-06-19">RMariaDB 1.2.2 (2022-06-19)<a class="anchor" aria-label="anchor" href="#rmariadb-122-2022-06-19"></a></h2>
 <div class="section level3">
@@ -59,16 +60,19 @@
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-1-2-2">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-2-2"></a></h3>
-<ul><li>Actually enable <code>LOAD LOCAL INFILE</code> by setting the <code>MYSQL_OPT_LOCAL_INFILE</code> flag (<a href="https://github.com/r-dbi/RMariaDB/issues/265" class="external-link">#265</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/267" class="external-link">#267</a>).</li></ul></div>
+<ul><li>Actually enable <code>LOAD LOCAL INFILE</code> by setting the <code>MYSQL_OPT_LOCAL_INFILE</code> flag (<a href="https://github.com/r-dbi/RMariaDB/issues/265" class="external-link">#265</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/267" class="external-link">#267</a>).</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.1" id="rmariadb-121-2021-12-20">RMariaDB 1.2.1 (2021-12-20)<a class="anchor" aria-label="anchor" href="#rmariadb-121-2021-12-20"></a></h2>
 <div class="section level3">
 <h3 id="features-1-2-1">Features<a class="anchor" aria-label="anchor" href="#features-1-2-1"></a></h3>
-<ul><li>Upgrade to mariadb-connector-c 3.2.5 on Windows, with built-in support for the <code>caching_sha2_password</code> plugin (<a href="https://github.com/r-dbi/RMariaDB/issues/134" class="external-link">#134</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/248" class="external-link">#248</a>, <a href="https://github.com/jeroen" class="external-link">@jeroen</a>).</li></ul></div>
+<ul><li>Upgrade to mariadb-connector-c 3.2.5 on Windows, with built-in support for the <code>caching_sha2_password</code> plugin (<a href="https://github.com/r-dbi/RMariaDB/issues/134" class="external-link">#134</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/248" class="external-link">#248</a>, <a href="https://github.com/jeroen" class="external-link">@jeroen</a>).</li>
+</ul></div>
 <div class="section level3">
 <h3 id="internal-1-2-1">Internal<a class="anchor" aria-label="anchor" href="#internal-1-2-1"></a></h3>
-<ul><li>Make method definition more similar to S3. All <code><a href="https://rdrr.io/r/methods/setMethod.html" class="external-link">setMethod()</a></code> calls refer to top-level functions (<a href="https://github.com/r-dbi/RMariaDB/issues/250" class="external-link">#250</a>).</li></ul></div>
+<ul><li>Make method definition more similar to S3. All <code><a href="https://rdrr.io/r/methods/setMethod.html" class="external-link">setMethod()</a></code> calls refer to top-level functions (<a href="https://github.com/r-dbi/RMariaDB/issues/250" class="external-link">#250</a>).</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.0" id="rmariadb-120-2021-12-12">RMariaDB 1.2.0 (2021-12-12)<a class="anchor" aria-label="anchor" href="#rmariadb-120-2021-12-12"></a></h2>
@@ -80,7 +84,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-1-2-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-2-0"></a></h3>
-<ul><li>Writing dates prior to 1970 no longer crashes on Windows (<a href="https://github.com/r-dbi/RMariaDB/issues/232" class="external-link">#232</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/245" class="external-link">#245</a>).</li></ul></div>
+<ul><li>Writing dates prior to 1970 no longer crashes on Windows (<a href="https://github.com/r-dbi/RMariaDB/issues/232" class="external-link">#232</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/245" class="external-link">#245</a>).</li>
+</ul></div>
 <div class="section level3">
 <h3 id="internal-1-2-0">Internal<a class="anchor" aria-label="anchor" href="#internal-1-2-0"></a></h3>
 <ul><li>Add test for reading and writing JSON data type as string (<a href="https://github.com/r-dbi/RMariaDB/issues/127" class="external-link">#127</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/246" class="external-link">#246</a>).</li>
@@ -91,7 +96,8 @@
 <h2 class="page-header" data-toc-text="1.1.2" id="rmariadb-112-2021-09-06">RMariaDB 1.1.2 (2021-09-06)<a class="anchor" aria-label="anchor" href="#rmariadb-112-2021-09-06"></a></h2>
 <div class="section level3">
 <h3 id="licensing-1-1-2">Licensing<a class="anchor" aria-label="anchor" href="#licensing-1-1-2"></a></h3>
-<ul><li>RMariaDB is now licensed under the MIT license (<a href="https://github.com/r-dbi/RMariaDB/issues/213" class="external-link">#213</a>).</li></ul></div>
+<ul><li>RMariaDB is now licensed under the MIT license (<a href="https://github.com/r-dbi/RMariaDB/issues/213" class="external-link">#213</a>).</li>
+</ul></div>
 <div class="section level3">
 <h3 id="features-1-1-2">Features<a class="anchor" aria-label="anchor" href="#features-1-1-2"></a></h3>
 <ul><li>
@@ -116,10 +122,12 @@
 <div class="section level3">
 <h3 id="bug-fixes-1-1-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-1-1"></a></h3>
 <ul><li>
-<code>NULL</code> is mapped to <code>NA</code> for <code>bit(1)</code> columns (<a href="https://github.com/r-dbi/RMariaDB/issues/201" class="external-link">#201</a>, <a href="https://github.com/dirkschumacher" class="external-link">@dirkschumacher</a>).</li></ul></div>
+<code>NULL</code> is mapped to <code>NA</code> for <code>bit(1)</code> columns (<a href="https://github.com/r-dbi/RMariaDB/issues/201" class="external-link">#201</a>, <a href="https://github.com/dirkschumacher" class="external-link">@dirkschumacher</a>).</li>
+</ul></div>
 <div class="section level3">
 <h3 id="internal-1-1-1">Internal<a class="anchor" aria-label="anchor" href="#internal-1-1-1"></a></h3>
-<ul><li>Remove BH dependency by inlining the header files (<a href="https://github.com/r-dbi/RMariaDB/issues/208" class="external-link">#208</a>).</li></ul></div>
+<ul><li>Remove BH dependency by inlining the header files (<a href="https://github.com/r-dbi/RMariaDB/issues/208" class="external-link">#208</a>).</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.0" id="rmariadb-110-2021-01-05">RMariaDB 1.1.0 (2021-01-05)<a class="anchor" aria-label="anchor" href="#rmariadb-110-2021-01-05"></a></h2>
@@ -187,7 +195,8 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.7" id="rmariadb-107-2019-12-02">RMariaDB 1.0.7 (2019-12-02)<a class="anchor" aria-label="anchor" href="#rmariadb-107-2019-12-02"></a></h2>
-<ul><li>Get rid of <code>auto_ptr</code>, which causes <code>R CMD check</code> warnings on R-devel.</li></ul></div>
+<ul><li>Get rid of <code>auto_ptr</code>, which causes <code>R CMD check</code> warnings on R-devel.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.6" id="rmariadb-106-2018-05-05">RMariaDB 1.0.6 (2018-05-05)<a class="anchor" aria-label="anchor" href="#rmariadb-106-2018-05-05"></a></h2>
 <ul><li>Add support for <code>bigint</code> argument to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code>, supported values are <code>"integer64"</code>, <code>"integer"</code>, <code>"numeric"</code> and <code>"character"</code>. Large integers are returned as values of that type (r-dbi/DBItest#133).</li>
