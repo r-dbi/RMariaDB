@@ -83,14 +83,6 @@ void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
 void DbConnection::disconnect() {
   if (!is_valid()) return;
 
-  if (has_query()) {
-    cpp11::warning(
-      "%s\n%s",
-      "There is a result object still in use.",
-      "The connection will be automatically released when it is closed"
-    );
-  }
-
   try {
     mysql_close(get_conn());
   } catch (...) {};
