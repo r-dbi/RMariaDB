@@ -48,7 +48,7 @@ test_that("fractional seconds in time (#288)", {
   con <- mariadbDefault()
 
   time_str <- "09:30:01.123456"
-  time_hms <- hms::as_hms(time)
+  time_hms <- hms::as_hms(time_str)
   dataframe <- data.frame(Time = time_hms)
 
   dbWriteTable(
