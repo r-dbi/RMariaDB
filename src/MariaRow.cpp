@@ -192,12 +192,10 @@ double MariaRow::value_time(int j) {
     return NA_REAL;
 
   MYSQL_TIME* mytime = (MYSQL_TIME*) &buffers_[j][0];
-  return static_cast<double>(
-    static_cast<double>(mytime->hour) * 3600.0 +
-    static_cast<double>(mytime->minute) * 60.0 +
-    static_cast<double>(mytime->second) +
-    static_cast<double>(mytime->second_part) / 1000000.0
-  );
+  return static_cast<double>(mytime->hour) * 3600.0 +
+         static_cast<double>(mytime->minute) * 60.0 +
+         static_cast<double>(mytime->second) +
+         static_cast<double>(mytime->second_part) / 1000000.0;
 }
 
 void MariaRow::set_list_value(SEXP x, int i, int j) {
