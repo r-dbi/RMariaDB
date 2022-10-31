@@ -44,6 +44,31 @@ test_that("fractional seconds in datetime (#170)", {
   dbDisconnect(con)
 })
 
+test_that("fractional seconds in time (#288)", {
+  con <- mariadbDefault()
+
+  time_str <- "09:30:01.123456"
+  time_hms <- hms::as_hms(time_str)
+  dataframe <- data.frame(Time = time_hms)
+
+  dbWriteTable(
+    con,
+    "my_table",
+    dataframe,
+    overwrite = TRUE,
+    temporary = TRUE,
+    field.types = c(Time = "time(6)"),
+    row.names = FALSE
+  )
+
+  out <- dbReadTable(con, "my_table")
+  expect_equal(dataframe, out)
+  expect_equal(out$Time, time_hms)
+  expect_equal(format(out$Time), time_str)  
+
+  dbDisconnect(con)
+})
+
 test_that("timezone argument (#184)", {
   skip_on_cran()
 
