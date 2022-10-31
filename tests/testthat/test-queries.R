@@ -64,7 +64,7 @@ test_that("fractional seconds in time (#288)", {
   out <- dbReadTable(con, "my_table")
   expect_equal(dataframe, out)
   expect_equal(out$Time, time_hms)
-  expect_equal(format(out$Time), time_str)  
+  expect_equal(format(out$Time), time_str)
 
   dbDisconnect(con)
 })
