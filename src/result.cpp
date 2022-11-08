@@ -1,19 +1,17 @@
-#include "pch.h"
-#include "RMariaDB_types.h"
 #include "MariaResult.h"
-
+#include "RMariaDB_types.h"
+#include "pch.h"
 
 // [[Rcpp::export]]
-XPtr<DbResult> result_create(XPtr<DbConnectionPtr> con, std::string sql, bool is_statement = false) {
+XPtr<DbResult> result_create(XPtr<DbConnectionPtr> con, std::string sql,
+                             bool is_statement = false) {
   (*con)->check_connection();
   DbResult* res = MariaResult::create_and_send_query(*con, sql, is_statement);
   return XPtr<DbResult>(res, true);
 }
 
 // [[Rcpp::export]]
-void result_release(XPtr<DbResult> res) {
-  res.release();
-}
+void result_release(XPtr<DbResult> res) { res.release(); }
 
 // [[Rcpp::export]]
 bool result_valid(XPtr<DbResult> res_) {
@@ -22,43 +20,30 @@ bool result_valid(XPtr<DbResult> res_) {
 }
 
 // [[Rcpp::export]]
-List result_fetch(DbResult* res, const int n) {
-  return res->fetch(n);
-}
+List result_fetch(DbResult* res, const int n) { return res->fetch(n); }
 
 // [[Rcpp::export]]
-void result_bind(DbResult* res, List params) {
-  res->bind(params);
-}
+void result_bind(DbResult* res, List params) { res->bind(params); }
 
 // [[Rcpp::export]]
-bool result_has_completed(DbResult* res) {
-  return res->complete();
-}
+bool result_has_completed(DbResult* res) { return res->complete(); }
 
 // [[Rcpp::export]]
-int result_rows_fetched(DbResult* res) {
-  return res->n_rows_fetched();
-}
+int result_rows_fetched(DbResult* res) { return res->n_rows_fetched(); }
 
 // [[Rcpp::export]]
-int result_rows_affected(DbResult* res) {
-  return res->n_rows_affected();
-}
+int result_rows_affected(DbResult* res) { return res->n_rows_affected(); }
 
 // [[Rcpp::export]]
-List result_column_info(DbResult* res) {
-  return res->get_column_info();
-}
+List result_column_info(DbResult* res) { return res->get_column_info(); }
 
 namespace Rcpp {
 
-template<>
+template <>
 DbResult* as(SEXP x) {
   DbResult* result = (DbResult*)(R_ExternalPtrAddr(x));
-  if (!result)
-    stop("Invalid result set");
+  if (!result) stop("Invalid result set");
   return result;
 }
 
-}
+}  // namespace Rcpp

@@ -1,15 +1,12 @@
-#include "pch.h"
 #include "DbResult.h"
+
 #include "DbConnection.h"
 #include "DbResultImpl.h"
-
-
+#include "pch.h"
 
 // Construction ////////////////////////////////////////////////////////////////
 
-DbResult::DbResult(const DbConnectionPtr& pConn) :
-  pConn_(pConn)
-{
+DbResult::DbResult(const DbConnectionPtr& pConn) : pConn_(pConn) {
   pConn_->check_connection();
 
   // subclass constructor can throw, the destructor will remove the
@@ -22,27 +19,19 @@ DbResult::~DbResult() {
     if (is_active()) {
       pConn_->reset_current_result(this);
     }
-  } catch (...) {}
+  } catch (...) {
+  }
 }
-
 
 // Publics /////////////////////////////////////////////////////////////////////
 
-bool DbResult::complete() const {
-  return (impl == NULL) || impl->complete();
-}
+bool DbResult::complete() const { return (impl == NULL) || impl->complete(); }
 
-bool DbResult::is_active() const {
-  return pConn_->is_current_result(this);
-}
+bool DbResult::is_active() const { return pConn_->is_current_result(this); }
 
-int DbResult::n_rows_fetched() {
-  return impl->n_rows_fetched();
-}
+int DbResult::n_rows_fetched() { return impl->n_rows_fetched(); }
 
-int DbResult::n_rows_affected() {
-  return impl->n_rows_affected();
-}
+int DbResult::n_rows_affected() { return impl->n_rows_affected(); }
 
 void DbResult::bind(const List& params) {
   validate_params(params);
@@ -50,8 +39,7 @@ void DbResult::bind(const List& params) {
 }
 
 List DbResult::fetch(const int n_max) {
-  if (!is_active())
-    stop("Inactive result set");
+  if (!is_active()) stop("Inactive result set");
 
   return impl->fetch(n_max);
 }

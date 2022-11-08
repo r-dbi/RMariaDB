@@ -3,6 +3,7 @@
 
 #include <boost/container/vector.hpp>
 #include <boost/noncopyable.hpp>
+
 #include "MariaTypes.h"
 
 class MariaBinding : public boost::noncopyable {
@@ -16,17 +17,17 @@ class MariaBinding : public boost::noncopyable {
   std::vector<MariaFieldType> types;
   std::vector<MYSQL_TIME> time_buffers;
 
-public:
+ public:
   MariaBinding();
   ~MariaBinding();
 
-public:
+ public:
   void setup(MYSQL_STMT* statement_);
 
   void init_binding(const List& params);
   bool bind_next_row();
 
-private:
+ private:
   void binding_update(int j, enum_field_types type, int size);
 
   void clear_date_buffer(int j);

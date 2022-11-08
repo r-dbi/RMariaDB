@@ -1,8 +1,7 @@
-#include "pch.h"
 #include "MariaResultImpl.h"
 
-MariaResultImpl::MariaResultImpl() {
-}
+#include "pch.h"
 
-MariaResultImpl::~MariaResultImpl() {
-}
+MariaResultImpl::MariaResultImpl() {}
+
+MariaResultImpl::~MariaResultImpl() {}

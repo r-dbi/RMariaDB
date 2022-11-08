@@ -2,11 +2,10 @@
 #define __RDBI_DB_RESULT__
 
 #include <boost/noncopyable.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/scoped_ptr.hpp>
+#include <boost/shared_ptr.hpp>
 
 #include "DbResultImplDecl.h"
-
 
 class DbConnection;
 typedef boost::shared_ptr<DbConnection> DbConnectionPtr;
@@ -16,16 +15,16 @@ typedef boost::shared_ptr<DbConnection> DbConnectionPtr;
 class DbResult : boost::noncopyable {
   DbConnectionPtr pConn_;
 
-protected:
+ protected:
   boost::scoped_ptr<DbResultImpl> impl;
 
-protected:
+ protected:
   DbResult(const DbConnectionPtr& pConn);
 
-public:
+ public:
   ~DbResult();
 
-public:
+ public:
   void close();
 
   bool complete() const;
@@ -38,8 +37,8 @@ public:
 
   List get_column_info();
 
-private:
+ private:
   void validate_params(const List& params) const;
 };
 
-#endif // __RDBI_DB_RESULT__
+#endif  // __RDBI_DB_RESULT__

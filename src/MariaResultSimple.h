@@ -2,8 +2,9 @@
 #define __RMARIADB_MARIA_RESULT_SIMPLE__
 
 #include <boost/noncopyable.hpp>
-#include "MariaBinding.h"
+
 #include "DbResult.h"
+#include "MariaBinding.h"
 #include "MariaResultImpl.h"
 #include "MariaRow.h"
 #include "MariaTypes.h"
@@ -15,11 +16,11 @@ typedef boost::shared_ptr<DbConnection> DbConnectionPtr;
 class MariaResultSimple : boost::noncopyable, public MariaResultImpl {
   DbConnectionPtr pConn_;
 
-public:
+ public:
   MariaResultSimple(const DbConnectionPtr& pConn, bool is_statement);
   ~MariaResultSimple();
 
-public:
+ public:
   virtual void send_query(const std::string& sql);
   virtual void close();
 
@@ -33,7 +34,7 @@ public:
   virtual int n_rows_fetched();
   virtual bool complete() const;
 
-private:
+ private:
   void exec(const std::string& sql);
 };
 

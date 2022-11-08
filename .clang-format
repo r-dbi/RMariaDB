@@ -1,22 +1,3 @@
 Language: Cpp
 
 BasedOnStyle: Google
-BreakBeforeBraces: Custom
-# AllowShortIfStatementsOnASingleLine: Never
-# AllowAllConstructorInitializersOnNextLine: false
-# BreakConstructorInitializers: BeforeComma
-# KeepEmptyLinesAtTheStartOfBlocks: true
-# BraceWrapping:
-#   AfterCaseLabel: true
-#   AfterClass: true
-#   AfterControlStatement: true
-#   AfterEnum: true
-#   AfterExternBlock: true
-#   AfterFunction: true
-#   AfterNamespace: true
-#   AfterStruct: true
-#   BeforeCatch: true
-#   BeforeElse: true
-#   SplitEmptyFunction: false
-#   SplitEmptyNamespace: false
-#   SplitEmptyRecord: false

@@ -3,18 +3,20 @@
 
 #include "DbResult.h"
 
-
 // MariaResult -----------------------------------------------------------------
 
 class MariaResult : public DbResult {
-protected:
-  MariaResult(const DbConnectionPtr& pConn, const std::string& sql, bool is_statement);
+ protected:
+  MariaResult(const DbConnectionPtr& pConn, const std::string& sql,
+              bool is_statement);
 
-public:
-  static DbResult* create_and_send_query(const DbConnectionPtr& con, const std::string& sql, bool is_statement);
+ public:
+  static DbResult* create_and_send_query(const DbConnectionPtr& con,
+                                         const std::string& sql,
+                                         bool is_statement);
 
-public:
+ public:
   void close();
 };
 
-#endif // __RMARIADB_MARIA_RESULT__
+#endif  // __RMARIADB_MARIA_RESULT__

@@ -1,30 +1,28 @@
+#include "MariaResultPrep.h"
+
+#include <mysqld_error.h>
+
+#include "DbConnection.h"
+#include "MariaResult.h"
 #include "pch.h"
 
-#include "MariaResultPrep.h"
-#include "DbConnection.h"
-#include <mysqld_error.h>
-#include "MariaResult.h"
-
-MariaResultPrep::MariaResultPrep(const DbConnectionPtr& pConn, bool is_statement) :
-  pConn_(pConn),
-  pStatement_(NULL),
-  pSpec_(NULL),
-  rowsAffected_(0),
-  rowsFetched_(0),
-  nCols_(0),
-  nParams_(0),
-  bound_(false),
-  complete_(false),
-  is_statement_(is_statement)
-{
+MariaResultPrep::MariaResultPrep(const DbConnectionPtr& pConn,
+                                 bool is_statement)
+    : pConn_(pConn),
+      pStatement_(NULL),
+      pSpec_(NULL),
+      rowsAffected_(0),
+      rowsFetched_(0),
+      nCols_(0),
+      nParams_(0),
+      bound_(false),
+      complete_(false),
+      is_statement_(is_statement) {
   pStatement_ = mysql_stmt_init(pConn_->get_conn());
-  if (pStatement_ == NULL)
-    stop("Out of memory");
+  if (pStatement_ == NULL) stop("Out of memory");
 }
 
-MariaResultPrep::~MariaResultPrep() {
-  MariaResultPrep::close();
-}
+MariaResultPrep::~MariaResultPrep() { MariaResultPrep::close(); }
 
 void MariaResultPrep::send_query(const std::string& sql) {
   LOG_DEBUG << sql;
@@ -101,8 +99,7 @@ void MariaResultPrep::bind(const List& params) {
 
   if (has_result()) {
     complete_ = true;
-  }
-  else {
+  } else {
     while (bindingInput_.bind_next_row()) {
       execute();
     }
@@ -121,9 +118,7 @@ List MariaResultPrep::get_column_info() {
   return List::create(_["name"] = names, _["type"] = types);
 }
 
-bool MariaResultPrep::has_result() const {
-  return pSpec_ != NULL;
-}
+bool MariaResultPrep::has_result() const { return pSpec_ != NULL; }
 
 bool MariaResultPrep::step() {
   LOG_VERBOSE;
@@ -152,41 +147,40 @@ bool MariaResultPrep::fetch_row() {
   LOG_VERBOSE << result;
 
   switch (result) {
-  // We expect truncation whenever there's a string or blob
-  case MYSQL_DATA_TRUNCATED:
-  case 0:
-    return true;
-  case 1:
-    throw_error();
-  case MYSQL_NO_DATA:
-    complete_ = true;
-    return false;
+    // We expect truncation whenever there's a string or blob
+    case MYSQL_DATA_TRUNCATED:
+    case 0:
+      return true;
+    case 1:
+      throw_error();
+    case MYSQL_NO_DATA:
+      complete_ = true;
+      return false;
   }
   return false;
 }
 
 List MariaResultPrep::fetch(int n_max) {
-  if (!bound_)
-    stop("Query needs to be bound before fetching");
+  if (!bound_) stop("Query needs to be bound before fetching");
   if (!has_result()) {
     if (names_.size() == 0) {
-      warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
+      warning(
+          "Use dbExecute() instead of dbGetQuery() for statements, and also "
+          "avoid dbFetch()");
     }
     return df_create(types_, names_, 0);
   }
 
   int n = (n_max < 0) ? 100 : n_max;
   List out = df_create(types_, names_, n);
-  if (n == 0)
-    return out;
+  if (n == 0) return out;
 
   int i = 0;
 
   for (;;) {
     if (i >= n && n_max > 0) break;
 
-    if (!step())
-      break;
+    if (!step()) break;
 
     if (i >= n) {
       n *= 2;
@@ -199,8 +193,7 @@ List MariaResultPrep::fetch(int n_max) {
     }
 
     ++i;
-    if (i % 1024 == 0)
-      checkUserInterrupt();
+    if (i % 1024 == 0) checkUserInterrupt();
   }
 
   // Trim back to what we actually used
@@ -227,17 +220,12 @@ int MariaResultPrep::n_rows_fetched() {
 
 bool MariaResultPrep::complete() const {
   if (!bound_) return FALSE;
-  return
-    !has_result() || // query doesn't have results
-    complete_;       // we've fetched all available results
+  return !has_result() ||  // query doesn't have results
+         complete_;        // we've fetched all available results
 }
 
 void MariaResultPrep::throw_error() {
-  stop(
-    "%s [%i]",
-    mysql_stmt_error(pStatement_),
-    mysql_stmt_errno(pStatement_)
-  );
+  stop("%s [%i]", mysql_stmt_error(pStatement_), mysql_stmt_errno(pStatement_));
 }
 
 void MariaResultPrep::cache_metadata() {
@@ -251,9 +239,11 @@ void MariaResultPrep::cache_metadata() {
 
     bool binary = fields[i].charsetnr == 63;
     bool length1 = fields[i].length == 1;
-    MariaFieldType type = variable_type_from_field_type(fields[i].type, binary, length1);
+    MariaFieldType type =
+        variable_type_from_field_type(fields[i].type, binary, length1);
     types_.push_back(type);
 
-    LOG_VERBOSE << i << " -> " << fields[i].name << "(" << fields[i].type << ", " << binary << ") => " << type_name(type);
+    LOG_VERBOSE << i << " -> " << fields[i].name << "(" << fields[i].type
+                << ", " << binary << ") => " << type_name(type);
   }
 }
