@@ -4,35 +4,38 @@ get_filename_component(MYSQL_PATH ${MYSQL} DIRECTORY)
 find_file(POSTGRESSQL postgresql/plogr.h)
 get_filename_component(POSTGRESSQL_PATH ${POSTGRESSQL} DIRECTORY)
 
-add_library(RMariaDB
-  connection.cpp
-  DbConnection.cpp
-  DbConnection.h
-  DbResult.cpp
-  DbResult.h
-  DbResultImplDecl.h
-  DbResultImpl.h
-  driver.cpp
-  integer64.h
-  MariaBinding.cpp
-  MariaBinding.h
-  MariaResult.cpp
-  MariaResult.h
-  MariaResultImpl.cpp
-  MariaResultImpl.h
-  MariaResultPrep.cpp
-  MariaResultPrep.h
-  MariaResultSimple.cpp
-  MariaResultSimple.h
-  MariaRow.cpp
-  MariaRow.h
-  MariaTypes.cpp
-  MariaTypes.h
-  pch.h
-  RcppExports.cpp
-  result.cpp
-  RMariaDB_types.h
+set(SOURCES
+    connection.cpp
+    DbConnection.cpp
+    DbConnection.h
+    DbResult.cpp
+    DbResult.h
+    DbResultImplDecl.h
+    DbResultImpl.h
+    driver.cpp
+    integer64.h
+    MariaBinding.cpp
+    MariaBinding.h
+    MariaResult.cpp
+    MariaResult.h
+    MariaResultImpl.cpp
+    MariaResultImpl.h
+    MariaResultPrep.cpp
+    MariaResultPrep.h
+    MariaResultSimple.cpp
+    MariaResultSimple.h
+    MariaRow.cpp
+    MariaRow.h
+    MariaTypes.cpp
+    MariaTypes.h
+    pch.h
+    RcppExports.cpp
+    result.cpp
+    RMariaDB_types.h
 )
+
+add_library(RMariaDB ${SOURCES})
+add_clang_format_target(SOURCES ${SOURCES})
 
 target_include_directories(RMariaDB PUBLIC
     "/usr/share/R/include"
