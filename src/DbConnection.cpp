@@ -85,7 +85,7 @@ void DbConnection::disconnect() {
   if (!is_valid()) return;
 
   if (has_query()) {
-    cpp11::warning(std::string("There is a result object still in use.\n",
+    cpp11::warning(std::string("There is a result object still in use.\n"
       "The connection will be automatically released when it is closed"));
   }
 
