@@ -1,8 +1,8 @@
 find_file(MYSQL mysql/mysql.h)
 get_filename_component(MYSQL_PATH ${MYSQL} DIRECTORY)
 
-find_file(POSTGRESSQL postgresql/plogr.h)
-get_filename_component(POSTGRESSQL_PATH ${POSTGRESSQL} DIRECTORY)
+execute_process(COMMAND bash "-c" "Rscript -e 'cat(R.home(\"include\"))'" OUTPUT_VARIABLE R_INCLUDE)
+execute_process(COMMAND bash "-c" "Rscript -e 'cat(.libPaths()[[1]])'" OUTPUT_VARIABLE R_LIBRARIES_INCLUDE)
 
 add_library(RMariaDB
   connection.cpp
@@ -35,10 +35,9 @@ add_library(RMariaDB
 )
 
 target_include_directories(RMariaDB PUBLIC
-    "/usr/share/R/include"
-    "/home/gitpod/R/x86_64-pc-linux-gnu-library/3.6/Rcpp/include/"
-    "/home/gitpod/R/x86_64-pc-linux-gnu-library/3.6/plogr/include/"
-    ${POSTGRESSQL_PATH}
+    ${R_INCLUDE}
+    ${R_LIBRARIES_INCLUDE}/plogr/include
+    ${R_LIBRARIES_INCLUDE}/Rcpp/include
     ${MYSQL_PATH}
     "vendor"
 )
