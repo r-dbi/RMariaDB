@@ -2,15 +2,15 @@
 #define __RMARIADB_MARIA_TYPES__
 
 enum MariaFieldType {
-  MY_INT32,
-  MY_INT64,  // output only
-  MY_DBL,
-  MY_STR,
-  MY_DATE,
-  MY_DATE_TIME,
-  MY_TIME,
-  MY_RAW,
-  MY_LGL  // for BIT(1)
+	MY_INT32,
+	MY_INT64,  // output only
+	MY_DBL,
+	MY_STR,
+	MY_DATE,
+	MY_DATE_TIME,
+	MY_TIME,
+	MY_RAW,
+	MY_LGL  // for BIT(1)
 };
 
 MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary,

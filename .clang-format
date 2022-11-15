@@ -1,4 +1,8 @@
 BasedOnStyle: Google
 Language: Cpp
+TabWidth: 4
+IndentWidth: 4
+UseTab: ForIndentation
 AllowShortFunctionsOnASingleLine: None
 AllowShortIfStatementsOnASingleLine: Never
+AccessModifierOffset: -4

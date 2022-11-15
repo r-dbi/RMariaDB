@@ -14,28 +14,28 @@ class DbConnection;
 typedef boost::shared_ptr<DbConnection> DbConnectionPtr;
 
 class MariaResultSimple : boost::noncopyable, public MariaResultImpl {
-  DbConnectionPtr pConn_;
+	DbConnectionPtr pConn_;
 
- public:
-  MariaResultSimple(const DbConnectionPtr& pConn, bool is_statement);
-  ~MariaResultSimple();
+public:
+	MariaResultSimple(const DbConnectionPtr& pConn, bool is_statement);
+	~MariaResultSimple();
 
- public:
-  virtual void send_query(const std::string& sql);
-  virtual void close();
+public:
+	virtual void send_query(const std::string& sql);
+	virtual void close();
 
-  virtual void bind(const List& params);
+	virtual void bind(const List& params);
 
-  virtual List get_column_info();
+	virtual List get_column_info();
 
-  virtual List fetch(int n_max = -1);
+	virtual List fetch(int n_max = -1);
 
-  virtual int n_rows_affected();
-  virtual int n_rows_fetched();
-  virtual bool complete() const;
+	virtual int n_rows_affected();
+	virtual int n_rows_fetched();
+	virtual bool complete() const;
 
- private:
-  void exec(const std::string& sql);
+private:
+	void exec(const std::string& sql);
 };
 
 #endif
