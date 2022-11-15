@@ -1,3 +1,3 @@
-Language: Cpp
-
 BasedOnStyle: Google
+Language: Cpp
+AllowShortFunctionsOnASingleLine: None

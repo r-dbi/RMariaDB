@@ -22,7 +22,9 @@ MariaResultPrep::MariaResultPrep(const DbConnectionPtr& pConn,
   if (pStatement_ == NULL) stop("Out of memory");
 }
 
-MariaResultPrep::~MariaResultPrep() { MariaResultPrep::close(); }
+MariaResultPrep::~MariaResultPrep() {
+  MariaResultPrep::close();
+}
 
 void MariaResultPrep::send_query(const std::string& sql) {
   LOG_DEBUG << sql;
@@ -118,7 +120,9 @@ List MariaResultPrep::get_column_info() {
   return List::create(_["name"] = names, _["type"] = types);
 }
 
-bool MariaResultPrep::has_result() const { return pSpec_ != NULL; }
+bool MariaResultPrep::has_result() const {
+  return pSpec_ != NULL;
+}
 
 bool MariaResultPrep::step() {
   LOG_VERBOSE;

@@ -48,7 +48,9 @@ void connection_release(XPtr<DbConnectionPtr> con_) {
 }
 
 // [[Rcpp::export]]
-List connection_info(DbConnection* con) { return con->info(); }
+List connection_info(DbConnection* con) {
+  return con->info();
+}
 
 // Quoting
 
@@ -73,10 +75,14 @@ void connection_begin_transaction(XPtr<DbConnectionPtr> con) {
 }
 
 // [[Rcpp::export]]
-void connection_commit(XPtr<DbConnectionPtr> con) { (*con)->commit(); }
+void connection_commit(XPtr<DbConnectionPtr> con) {
+  (*con)->commit();
+}
 
 // [[Rcpp::export]]
-void connection_rollback(XPtr<DbConnectionPtr> con) { (*con)->rollback(); }
+void connection_rollback(XPtr<DbConnectionPtr> con) {
+  (*con)->rollback();
+}
 
 // [[Rcpp::export]]
 bool connection_is_transacting(DbConnection* con) {

@@ -2,6 +2,8 @@
 
 #include "pch.h"
 
-MariaResultImpl::MariaResultImpl() {}
+MariaResultImpl::MariaResultImpl() {
+}
 
-MariaResultImpl::~MariaResultImpl() {}
+MariaResultImpl::~MariaResultImpl() {
+}

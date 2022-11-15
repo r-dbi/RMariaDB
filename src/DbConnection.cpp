@@ -93,7 +93,9 @@ void DbConnection::disconnect() {
   pConn_ = NULL;
 }
 
-bool DbConnection::is_valid() { return !!get_conn(); }
+bool DbConnection::is_valid() {
+  return !!get_conn();
+}
 
 void DbConnection::check_connection() {
   if (!is_valid()) {
@@ -113,7 +115,9 @@ List DbConnection::info() {
       _["thread.id"] = (int)mysql_thread_id(pConn_));
 }
 
-MYSQL* DbConnection::get_conn() { return pConn_; }
+MYSQL* DbConnection::get_conn() {
+  return pConn_;
+}
 
 SEXP DbConnection::quote_string(const String& input) {
   if (input == NA_STRING) return get_null_string();
@@ -161,7 +165,9 @@ bool DbConnection::is_current_result(const DbResult* pResult) const {
   return pCurrentResult_ == pResult;
 }
 
-bool DbConnection::has_query() { return pCurrentResult_ != NULL; }
+bool DbConnection::has_query() {
+  return pCurrentResult_ != NULL;
+}
 
 bool DbConnection::exec(const std::string& sql) {
   check_connection();
@@ -200,7 +206,9 @@ void DbConnection::rollback() {
   transacting_ = false;
 }
 
-bool DbConnection::is_transacting() const { return transacting_; }
+bool DbConnection::is_transacting() const {
+  return transacting_;
+}
 
 void DbConnection::autocommit() {
   if (!is_transacting() && get_conn()) {

@@ -9,7 +9,9 @@ MariaResultSimple::MariaResultSimple(const DbConnectionPtr& pConn,
   (void)is_statement;
 }
 
-MariaResultSimple::~MariaResultSimple() { MariaResultSimple::close(); }
+MariaResultSimple::~MariaResultSimple() {
+  MariaResultSimple::close();
+}
 
 void MariaResultSimple::send_query(const std::string& sql) {
   LOG_DEBUG << sql;
@@ -17,7 +19,9 @@ void MariaResultSimple::send_query(const std::string& sql) {
   exec(sql);
 }
 
-void MariaResultSimple::close() { LOG_VERBOSE; }
+void MariaResultSimple::close() {
+  LOG_VERBOSE;
+}
 
 void MariaResultSimple::bind(const List& /*params*/) {
   LOG_VERBOSE;
@@ -43,10 +47,18 @@ List MariaResultSimple::fetch(int /*n_max*/) {
                    0);
 }
 
-int MariaResultSimple::n_rows_affected() { return 0; }
+int MariaResultSimple::n_rows_affected() {
+  return 0;
+}
 
-int MariaResultSimple::n_rows_fetched() { return 0; }
+int MariaResultSimple::n_rows_fetched() {
+  return 0;
+}
 
-bool MariaResultSimple::complete() const { return true; }
+bool MariaResultSimple::complete() const {
+  return true;
+}
 
-void MariaResultSimple::exec(const std::string& sql) { pConn_->exec(sql); }
+void MariaResultSimple::exec(const std::string& sql) {
+  pConn_->exec(sql);
+}

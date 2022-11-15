@@ -5,9 +5,11 @@
 #include "integer64.h"
 #include "pch.h"
 
-MariaRow::MariaRow() : pStatement_(NULL), n_(0) {}
+MariaRow::MariaRow() : pStatement_(NULL), n_(0) {
+}
 
-MariaRow::~MariaRow() {}
+MariaRow::~MariaRow() {
+}
 
 void MariaRow::setup(MYSQL_STMT* pStatement,
                      const std::vector<MariaFieldType>& types) {
@@ -105,7 +107,9 @@ void MariaRow::setup(MYSQL_STMT* pStatement,
   }
 }
 
-bool MariaRow::is_null(int j) { return nulls_[j] == 1; }
+bool MariaRow::is_null(int j) {
+  return nulls_[j] == 1;
+}
 
 int MariaRow::value_bool(int j) {
   if (is_null(j)) {
