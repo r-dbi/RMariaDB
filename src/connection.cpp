@@ -98,7 +98,8 @@ namespace Rcpp {
 template <>
 DbConnection* as(SEXP x) {
   DbConnectionPtr* connection = (DbConnectionPtr*)(R_ExternalPtrAddr(x));
-  if (!connection) stop("Invalid connection");
+  if (!connection)
+    stop("Invalid connection");
   return connection->get();
 }
 

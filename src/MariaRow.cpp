@@ -132,18 +132,21 @@ double MariaRow::value_double(int j) {
 }
 
 SEXP MariaRow::value_string(int j) {
-  if (is_null(j)) return NA_STRING;
+  if (is_null(j))
+    return NA_STRING;
 
   fetch_buffer(j);
   int len = static_cast<int>(buffers_[j].size());
-  if (len == 0) return R_BlankString;
+  if (len == 0)
+    return R_BlankString;
 
   const char* val = reinterpret_cast<const char*>(&buffers_[j][0]);
   return Rf_mkCharLenCE(val, len, CE_UTF8);
 }
 
 SEXP MariaRow::value_raw(int j) {
-  if (is_null(j)) return R_NilValue;
+  if (is_null(j))
+    return R_NilValue;
 
   fetch_buffer(j);
   SEXP bytes = Rf_allocVector(RAWSXP, lengths_[j]);
@@ -153,7 +156,8 @@ SEXP MariaRow::value_raw(int j) {
 }
 
 double MariaRow::value_date_time(int j) {
-  if (is_null(j)) return NA_REAL;
+  if (is_null(j))
+    return NA_REAL;
 
   MYSQL_TIME* mytime = (MYSQL_TIME*)&buffers_[j][0];
 
@@ -168,7 +172,8 @@ double MariaRow::value_date_time(int j) {
 }
 
 double MariaRow::value_date(int j) {
-  if (is_null(j)) return NA_REAL;
+  if (is_null(j))
+    return NA_REAL;
 
   MYSQL_TIME* mytime = (MYSQL_TIME*)&buffers_[j][0];
 
@@ -179,7 +184,8 @@ double MariaRow::value_date(int j) {
 }
 
 double MariaRow::value_time(int j) {
-  if (is_null(j)) return NA_REAL;
+  if (is_null(j))
+    return NA_REAL;
 
   MYSQL_TIME* mytime = (MYSQL_TIME*)&buffers_[j][0];
   return static_cast<double>(mytime->hour) * 3600.0 +
@@ -225,7 +231,8 @@ void MariaRow::fetch_buffer(int j) {
   LOG_VERBOSE << length;
 
   buffers_[j].resize(length);
-  if (length == 0) return;
+  if (length == 0)
+    return;
 
   bindings_[j].buffer = &buffers_[j][0];  // might have moved
   bindings_[j].buffer_length = length;

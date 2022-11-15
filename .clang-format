@@ -1,3 +1,4 @@
 BasedOnStyle: Google
 Language: Cpp
 AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never

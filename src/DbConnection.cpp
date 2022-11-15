@@ -78,7 +78,8 @@ void DbConnection::connect(
 }
 
 void DbConnection::disconnect() {
-  if (!is_valid()) return;
+  if (!is_valid())
+    return;
 
   if (has_query()) {
     warning("%s\n%s", "There is a result object still in use.",
@@ -120,7 +121,8 @@ MYSQL* DbConnection::get_conn() {
 }
 
 SEXP DbConnection::quote_string(const String& input) {
-  if (input == NA_STRING) return get_null_string();
+  if (input == NA_STRING)
+    return get_null_string();
 
   const char* input_cstr = input.get_cstring();
   size_t input_len = strlen(input_cstr);
@@ -143,10 +145,12 @@ SEXP DbConnection::get_null_string() {
 }
 
 void DbConnection::set_current_result(DbResult* pResult) {
-  if (pResult == pCurrentResult_) return;
+  if (pResult == pCurrentResult_)
+    return;
 
   if (pCurrentResult_ != NULL) {
-    if (pResult != NULL) warning("Cancelling previous query");
+    if (pResult != NULL)
+      warning("Cancelling previous query");
 
     pCurrentResult_->close();
   }
@@ -155,7 +159,8 @@ void DbConnection::set_current_result(DbResult* pResult) {
 
 void DbConnection::reset_current_result(DbResult* pResult) {
   // FIXME: What to do if not current result is reset?
-  if (pResult != pCurrentResult_) return;
+  if (pResult != pCurrentResult_)
+    return;
 
   pCurrentResult_->close();
   pCurrentResult_ = NULL;
@@ -176,7 +181,8 @@ bool DbConnection::exec(const std::string& sql) {
     stop("Error executing query: %s", mysql_error(pConn_));
 
   MYSQL_RES* res = mysql_store_result(pConn_);
-  if (res != NULL) mysql_free_result(res);
+  if (res != NULL)
+    mysql_free_result(res);
 
   autocommit();
 
@@ -184,14 +190,16 @@ bool DbConnection::exec(const std::string& sql) {
 }
 
 void DbConnection::begin_transaction() {
-  if (is_transacting()) stop("Nested transactions not supported.");
+  if (is_transacting())
+    stop("Nested transactions not supported.");
   check_connection();
 
   transacting_ = true;
 }
 
 void DbConnection::commit() {
-  if (!is_transacting()) stop("Call dbBegin() to start a transaction.");
+  if (!is_transacting())
+    stop("Call dbBegin() to start a transaction.");
   check_connection();
 
   mysql_commit(get_conn());
@@ -199,7 +207,8 @@ void DbConnection::commit() {
 }
 
 void DbConnection::rollback() {
-  if (!is_transacting()) stop("Call dbBegin() to start a transaction.");
+  if (!is_transacting())
+    stop("Call dbBegin() to start a transaction.");
   check_connection();
 
   mysql_rollback(get_conn());

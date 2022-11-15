@@ -19,7 +19,8 @@ MariaResultPrep::MariaResultPrep(const DbConnectionPtr& pConn,
       complete_(false),
       is_statement_(is_statement) {
   pStatement_ = mysql_stmt_init(pConn_->get_conn());
-  if (pStatement_ == NULL) stop("Out of memory");
+  if (pStatement_ == NULL)
+    stop("Out of memory");
 }
 
 MariaResultPrep::~MariaResultPrep() {
@@ -130,7 +131,8 @@ bool MariaResultPrep::step() {
   while (!fetch_row()) {
     LOG_VERBOSE;
 
-    if (!bindingInput_.bind_next_row()) return false;
+    if (!bindingInput_.bind_next_row())
+      return false;
     execute();
   }
 
@@ -143,7 +145,8 @@ bool MariaResultPrep::step() {
 bool MariaResultPrep::fetch_row() {
   LOG_VERBOSE;
 
-  if (complete_) return false;
+  if (complete_)
+    return false;
 
   LOG_VERBOSE << "mysql_stmt_fetch()";
   int result = mysql_stmt_fetch(pStatement_);
@@ -165,7 +168,8 @@ bool MariaResultPrep::fetch_row() {
 }
 
 List MariaResultPrep::fetch(int n_max) {
-  if (!bound_) stop("Query needs to be bound before fetching");
+  if (!bound_)
+    stop("Query needs to be bound before fetching");
   if (!has_result()) {
     if (names_.size() == 0) {
       warning(
@@ -177,14 +181,17 @@ List MariaResultPrep::fetch(int n_max) {
 
   int n = (n_max < 0) ? 100 : n_max;
   List out = df_create(types_, names_, n);
-  if (n == 0) return out;
+  if (n == 0)
+    return out;
 
   int i = 0;
 
   for (;;) {
-    if (i >= n && n_max > 0) break;
+    if (i >= n && n_max > 0)
+      break;
 
-    if (!step()) break;
+    if (!step())
+      break;
 
     if (i >= n) {
       n *= 2;
@@ -197,7 +204,8 @@ List MariaResultPrep::fetch(int n_max) {
     }
 
     ++i;
-    if (i % 1024 == 0) checkUserInterrupt();
+    if (i % 1024 == 0)
+      checkUserInterrupt();
   }
 
   // Trim back to what we actually used
@@ -211,19 +219,22 @@ List MariaResultPrep::fetch(int n_max) {
 }
 
 int MariaResultPrep::n_rows_affected() {
-  if (!bound_) return NA_INTEGER;
+  if (!bound_)
+    return NA_INTEGER;
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsAffected_);
 }
 
 int MariaResultPrep::n_rows_fetched() {
-  if (!bound_) return 0;
+  if (!bound_)
+    return 0;
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsFetched_);
 }
 
 bool MariaResultPrep::complete() const {
-  if (!bound_) return FALSE;
+  if (!bound_)
+    return FALSE;
   return !has_result() ||  // query doesn't have results
          complete_;        // we've fetched all available results
 }

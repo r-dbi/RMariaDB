@@ -47,7 +47,8 @@ void DbResult::bind(const List& params) {
 }
 
 List DbResult::fetch(const int n_max) {
-  if (!is_active()) stop("Inactive result set");
+  if (!is_active())
+    stop("Inactive result set");
 
   return impl->fetch(n_max);
 }
@@ -63,7 +64,8 @@ List DbResult::get_column_info() {
 
 void DbResult::close() {
   // Called from destructor
-  if (impl) impl->close();
+  if (impl)
+    impl->close();
 }
 
 // Privates ///////////////////////////////////////////////////////////////////

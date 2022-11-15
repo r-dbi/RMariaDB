@@ -84,7 +84,8 @@ void MariaBinding::init_binding(const List& params_) {
 bool MariaBinding::bind_next_row() {
   LOG_VERBOSE;
 
-  if (i >= n_rows) return false;
+  if (i >= n_rows)
+    return false;
 
   for (int j = 0; j < p; ++j) {
     LOG_VERBOSE << j << " -> " << type_name(types[j]);
