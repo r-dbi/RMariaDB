@@ -1,7 +1,7 @@
 BasedOnStyle: Google
 Language: Cpp
 TabWidth: 4
-IndentWidth: 2
+IndentWidth: 4
 UseTab: ForIndentation
 IndentCaseLabels: false
 AllowShortFunctionsOnASingleLine: None
