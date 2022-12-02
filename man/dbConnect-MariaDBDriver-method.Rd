@@ -29,7 +29,8 @@ MariaDB()
   bigint = c("integer64", "integer", "numeric", "character"),
   timeout = 10,
   timezone = "+00:00",
-  timezone_out = NULL
+  timezone_out = NULL,
+  reconnect = FALSE
 )
 }
 \arguments{
@@ -104,6 +105,10 @@ The default is to use the value of the \code{timezone} argument,
 If you want to display datetime values in the local timezone,
 set to \code{\link[=Sys.timezone]{Sys.timezone()}} or \code{""}.
 This setting does not change the time values returned, only their display.}
+
+\item{reconnect}{(experimental) Set to \code{TRUE} to use \code{MYSQL_OPT_RECONNECT} to enable
+automatic reconnection. This is experimental and could be dangerous if the connection
+is lost in the middle of a transaction.}
 }
 \description{
 These methods are straight-forward implementations of the corresponding

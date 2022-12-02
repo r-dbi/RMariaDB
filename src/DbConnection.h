@@ -28,7 +28,7 @@ public:
           const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
           const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
           const Nullable<std::string>& ssl_cipher,
-          int timeout);
+          int timeout, bool reconnect);
   void disconnect();
   bool is_valid();
   void check_connection();

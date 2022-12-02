@@ -40,3 +40,6 @@ src\/RCS
 ^tests/testthat/testthat-problems\.rds$
 ^\.vscode$
 ^CRAN-SUBMISSION$
+^\.gitpod\.yml$
+^\.gitpod\.Dockerfile$
+^CMakeLists\.txt$
