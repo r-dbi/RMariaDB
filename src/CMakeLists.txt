@@ -1,7 +1,7 @@
 find_file(MYSQL mysql/mysql.h)
 get_filename_component(MYSQL_PATH ${MYSQL} DIRECTORY)
 
-set(R_DEPENDENCIES Rcpp plogr)
+execute_process(COMMAND bash "-c" "Rscript -e 'x <- desc::desc_get_deps(); cat(x$package[x$type == \"LinkingTo\"], sep = \";\")'" OUTPUT_VARIABLE R_DEPENDENCIES)
 
 foreach(LIB_NAME IN LISTS R_DEPENDENCIES)
   list(APPEND R_DEPS "\"${LIB_NAME}\"")
