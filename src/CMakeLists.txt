@@ -1,9 +1,3 @@
-find_file(MYSQL mysql/mysql.h)
-get_filename_component(MYSQL_PATH ${MYSQL} DIRECTORY)
-
-execute_process(COMMAND bash "-c" "Rscript -e 'cat(R.home(\"include\"))'" OUTPUT_VARIABLE R_INCLUDE)
-execute_process(COMMAND bash "-c" "Rscript -e 'x <- desc::desc_get_deps(); pkgs <- x$package[x$type == \"LinkingTo\"]; paths <- file.path(.libPaths()[[1]], pkgs, \"include\"); cat(paths, sep = \";\")'" OUTPUT_VARIABLE R_LIBRARIES_INCLUDES)
-
 add_library(RMariaDB
   connection.cpp
   DbConnection.cpp
@@ -34,9 +28,18 @@ add_library(RMariaDB
   RMariaDB_types.h
 )
 
+execute_process(COMMAND bash "-c" "Rscript -e 'cat(R.home(\"include\"))'" OUTPUT_VARIABLE R_INCLUDE)
+execute_process(COMMAND bash "-c" "Rscript -e 'x <- desc::desc_get_deps(); pkgs <- x$package[x$type == \"LinkingTo\"]; paths <- file.path(.libPaths()[[1]], pkgs, \"include\"); cat(paths, sep = \";\")'" OUTPUT_VARIABLE R_LIBRARIES_INCLUDES)
+
 target_include_directories(RMariaDB PUBLIC
     ${R_INCLUDE}
     ${R_LIBRARIES_INCLUDES}
+)
+
+find_file(MYSQL mysql/mysql.h)
+get_filename_component(MYSQL_PATH ${MYSQL} DIRECTORY)
+
+target_include_directories(RMariaDB PUBLIC
     ${MYSQL_PATH}
     "vendor"
 )
