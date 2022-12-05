@@ -8,7 +8,7 @@ foreach(LIB_NAME IN LISTS R_DEPENDENCIES)
 endforeach()
 string(REPLACE ";" "," R_LIBRARIES "${R_DEPS}")
 
-execute_process(COMMAND bash "-c" "Rscript -e 'cat(R.home(\"include\"))'" OUTPUT_VARIABLE R_INCLUDE)w
+execute_process(COMMAND bash "-c" "Rscript -e 'cat(R.home(\"include\"))'" OUTPUT_VARIABLE R_INCLUDE)
 execute_process(COMMAND bash "-c" "Rscript -e 'writeLines(file.path(.libPaths()[[1]], c(${R_LIBRARIES}), \"include\"))'" OUTPUT_VARIABLE R_LIBRARIES_INCLUDES)
 string(REPLACE "\n" ";" R_LIBRARIES_INCLUDES ${R_LIBRARIES_INCLUDES})
 message("${R_LIBRARIES_INCLUDES}")
