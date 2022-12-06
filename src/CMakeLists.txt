@@ -35,12 +35,25 @@ add_library(RMariaDB
   result.cpp
 )
 
-execute_process(COMMAND bash "-c" "Rscript -e 'cat(R.home(\"include\"))'" OUTPUT_VARIABLE R_INCLUDE)
-execute_process(COMMAND bash "-c" "Rscript -e 'x <- desc::desc_get_deps(); pkgs <- x$package[x$type == \"LinkingTo\"]; paths <- file.path(.libPaths()[[1]], pkgs, \"include\"); cat(paths, sep = \";\")'" OUTPUT_VARIABLE R_LIBRARIES_INCLUDES)
+set(R_DEPENDENCIES Rcpp plogr)
 
-target_include_directories(RMariaDB PUBLIC
+execute_process(COMMAND bash "-c" "Rscript -e 'cat(R.home(\"include\"))'" OUTPUT_VARIABLE R_INCLUDE)
+execute_process(COMMAND bash "-c" "Rscript -e 'cat(.libPaths()[[1]])'" OUTPUT_VARIABLE R_LIBDIR)
+
+foreach(PKG_NAME IN LISTS R_DEPENDENCIES)
+  list(APPEND R_PKG_INCLUDE_LIST "${R_LIBDIR}/${PKG_NAME}/include")
+endforeach()
+message("${R_PKG_INCLUDE_LIST}")
+
+target_include_directories(RSQLite PUBLIC
+  ${R_PKG_INCLUDE_LIST}
   ${R_INCLUDE}
-  ${R_LIBRARIES_INCLUDES}
+  # Included by default
+  "."
+  "vendor"
 )
+
+get_target_property(include_dirs RSQLite INTERFACE_INCLUDE_DIRECTORIES)
+message("${include_dirs}")
 
 include(./custom.cmake OPTIONAL)
