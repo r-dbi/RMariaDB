@@ -2,7 +2,7 @@ pandoc: 2.19.2
 pkgdown: 2.0.6.9000
 pkgdown_sha: b2f4e766270fabc59d7a1b7d794975cfe4cecc5f
 articles: {}
-last_built: 2022-12-05T23:52Z
+last_built: 2022-12-06T00:03Z
 urls:
   reference: https://rmariadb.r-dbi.org/reference
   article: https://rmariadb.r-dbi.org/articles
