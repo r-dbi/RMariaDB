@@ -1,7 +1,8 @@
+#include "pch.h"
+
 #include "MariaTypes.h"
 
 #include "integer64.h"
-#include "pch.h"
 
 bool all_raw(SEXP x);
 

@@ -1,6 +1,7 @@
+#include "pch.h"
+
 #include "MariaResult.h"
 #include "RMariaDB_types.h"
-#include "pch.h"
 
 // [[Rcpp::export]]
 XPtr<DbResult> result_create(XPtr<DbConnectionPtr> con, std::string sql,

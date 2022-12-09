@@ -1,7 +1,8 @@
+#include "pch.h"
+
 #include "DbConnection.h"
 
 #include "DbResult.h"
-#include "pch.h"
 
 DbConnection::DbConnection()
     : pConn_(NULL), pCurrentResult_(NULL), transacting_(false) {

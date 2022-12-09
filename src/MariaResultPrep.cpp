@@ -1,10 +1,11 @@
+#include "pch.h"
+
 #include "MariaResultPrep.h"
 
 #include <mysqld_error.h>
 
 #include "DbConnection.h"
 #include "MariaResult.h"
-#include "pch.h"
 
 MariaResultPrep::MariaResultPrep(const DbConnectionPtr& pConn,
                                  bool is_statement)

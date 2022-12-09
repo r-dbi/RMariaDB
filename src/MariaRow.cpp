@@ -1,9 +1,10 @@
+#include "pch.h"
+
 #include "MariaRow.h"
 
 #include "MariaTypes.h"
 #include "MariaUtils.h"
 #include "integer64.h"
-#include "pch.h"
 
 MariaRow::MariaRow() : pStatement_(NULL), n_(0) {
 }

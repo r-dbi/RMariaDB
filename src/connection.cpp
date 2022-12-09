@@ -1,5 +1,6 @@
-#include "RMariaDB_types.h"
 #include "pch.h"
+
+#include "RMariaDB_types.h"
 
 // [[Rcpp::export]]
 XPtr<DbConnectionPtr> connection_create(

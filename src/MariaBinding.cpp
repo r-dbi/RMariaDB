@@ -1,9 +1,10 @@
+#include "pch.h"
+
 #include "MariaBinding.h"
 
 #include <math.h>
 
 #include "integer64.h"
-#include "pch.h"
 
 MariaBinding::MariaBinding() : statement(NULL), p(0), i(0), n_rows(0) {
 }

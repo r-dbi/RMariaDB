@@ -7,3 +7,6 @@ IndentCaseLabels: false
 AllowShortFunctionsOnASingleLine: None
 AllowShortIfStatementsOnASingleLine: Never
 AccessModifierOffset: -4
+IncludeCategories:
+  - Regex: '^((<|")(pch.h))'
+    Priority: -1
