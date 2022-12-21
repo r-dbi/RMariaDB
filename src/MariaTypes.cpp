@@ -1,10 +1,13 @@
 #include "pch.h"
+
 #include "MariaTypes.h"
+
 #include "integer64.h"
 
 bool all_raw(SEXP x);
 
-MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary, bool length1) {
+MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary,
+                                             bool length1) {
   switch (type) {
   case MYSQL_TYPE_TINY:
   case MYSQL_TYPE_SHORT:
@@ -122,16 +125,22 @@ MariaFieldType variable_type_from_object(const RObject& type) {
   case INTSXP:
     return MY_INT32;
   case REALSXP:
-    if (klass == "Date")     return MY_DATE;
-    if (klass == "POSIXt")   return MY_DATE_TIME;
-    if (klass == "difftime") return MY_TIME;
-    if (klass == "integer64") return MY_INT64;
+    if (klass == "Date")
+      return MY_DATE;
+    if (klass == "POSIXt")
+      return MY_DATE_TIME;
+    if (klass == "difftime")
+      return MY_TIME;
+    if (klass == "integer64")
+      return MY_INT64;
     return MY_DBL;
   case STRSXP:
     return MY_STR;
   case VECSXP:
-    if (klass == "blob")     return MY_RAW;
-    if (all_raw(type))       return MY_RAW;
+    if (klass == "blob")
+      return MY_RAW;
+    if (all_raw(type))
+      return MY_RAW;
     break;
   }
 

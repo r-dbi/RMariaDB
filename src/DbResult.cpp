@@ -1,15 +1,13 @@
 #include "pch.h"
+
 #include "DbResult.h"
+
 #include "DbConnection.h"
 #include "DbResultImpl.h"
 
-
-
 // Construction ////////////////////////////////////////////////////////////////
 
-DbResult::DbResult(const DbConnectionPtr& pConn) :
-  pConn_(pConn)
-{
+DbResult::DbResult(const DbConnectionPtr& pConn) : pConn_(pConn) {
   pConn_->check_connection();
 
   // subclass constructor can throw, the destructor will remove the
@@ -22,9 +20,9 @@ DbResult::~DbResult() {
     if (is_active()) {
       pConn_->reset_current_result(this);
     }
-  } catch (...) {}
+  } catch (...) {
+  }
 }
-
 
 // Publics /////////////////////////////////////////////////////////////////////
 
@@ -67,7 +65,8 @@ List DbResult::get_column_info() {
 
 void DbResult::close() {
   // Called from destructor
-  if (impl) impl->close();
+  if (impl)
+    impl->close();
 }
 
 // Privates ///////////////////////////////////////////////////////////////////

@@ -2,11 +2,11 @@
 #define RMARIADB_MARIARESULTIMPL_H
 
 class MariaResultImpl {
-public:
+  public:
   MariaResultImpl();
   virtual ~MariaResultImpl();
 
-public:
+  public:
   virtual void send_query(const std::string& sql) = 0;
   virtual void close() = 0;
 
@@ -21,4 +21,4 @@ public:
   virtual bool complete() const = 0;
 };
 
-#endif //RMARIADB_MARIARESULTIMPL_H
+#endif  // RMARIADB_MARIARESULTIMPL_H

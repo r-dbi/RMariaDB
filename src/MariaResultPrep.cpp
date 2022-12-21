@@ -1,22 +1,24 @@
 #include "pch.h"
 
 #include "MariaResultPrep.h"
-#include "DbConnection.h"
+
 #include <mysqld_error.h>
+
+#include "DbConnection.h"
 #include "MariaResult.h"
 
-MariaResultPrep::MariaResultPrep(const DbConnectionPtr& pConn, bool is_statement) :
-  pConn_(pConn),
-  pStatement_(NULL),
-  pSpec_(NULL),
-  rowsAffected_(0),
-  rowsFetched_(0),
-  nCols_(0),
-  nParams_(0),
-  bound_(false),
-  complete_(false),
-  is_statement_(is_statement)
-{
+MariaResultPrep::MariaResultPrep(const DbConnectionPtr& pConn,
+                                 bool is_statement)
+    : pConn_(pConn),
+      pStatement_(NULL),
+      pSpec_(NULL),
+      rowsAffected_(0),
+      rowsFetched_(0),
+      nCols_(0),
+      nParams_(0),
+      bound_(false),
+      complete_(false),
+      is_statement_(is_statement) {
   pStatement_ = mysql_stmt_init(pConn_->get_conn());
   if (pStatement_ == NULL)
     stop("Out of memory");
@@ -101,8 +103,7 @@ void MariaResultPrep::bind(const List& params) {
 
   if (has_result()) {
     complete_ = true;
-  }
-  else {
+  } else {
     while (bindingInput_.bind_next_row()) {
       execute();
     }
@@ -131,7 +132,8 @@ bool MariaResultPrep::step() {
   while (!fetch_row()) {
     LOG_VERBOSE;
 
-    if (!bindingInput_.bind_next_row()) return false;
+    if (!bindingInput_.bind_next_row())
+      return false;
     execute();
   }
 
@@ -144,7 +146,8 @@ bool MariaResultPrep::step() {
 bool MariaResultPrep::fetch_row() {
   LOG_VERBOSE;
 
-  if (complete_) return false;
+  if (complete_)
+    return false;
 
   LOG_VERBOSE << "mysql_stmt_fetch()";
   int result = mysql_stmt_fetch(pStatement_);
@@ -170,7 +173,10 @@ List MariaResultPrep::fetch(int n_max) {
     stop("Query needs to be bound before fetching");
   if (!has_result()) {
     if (names_.size() == 0) {
-      warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
+      warning(
+          "Use dbExecute() instead of dbGetQuery() for statements, and "
+          "also "
+          "avoid dbFetch()");
     }
     return df_create(types_, names_, 0);
   }
@@ -183,7 +189,8 @@ List MariaResultPrep::fetch(int n_max) {
   int i = 0;
 
   for (;;) {
-    if (i >= n && n_max > 0) break;
+    if (i >= n && n_max > 0)
+      break;
 
     if (!step())
       break;
@@ -214,30 +221,28 @@ List MariaResultPrep::fetch(int n_max) {
 }
 
 int MariaResultPrep::n_rows_affected() {
-  if (!bound_) return NA_INTEGER;
+  if (!bound_)
+    return NA_INTEGER;
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsAffected_);
 }
 
 int MariaResultPrep::n_rows_fetched() {
-  if (!bound_) return 0;
+  if (!bound_)
+    return 0;
   // FIXME: > 2^32 rows?
   return static_cast<int>(rowsFetched_);
 }
 
 bool MariaResultPrep::complete() const {
-  if (!bound_) return FALSE;
-  return
-    !has_result() || // query doesn't have results
-    complete_;       // we've fetched all available results
+  if (!bound_)
+    return FALSE;
+  return !has_result() ||  // query doesn't have results
+         complete_;        // we've fetched all available results
 }
 
 void MariaResultPrep::throw_error() {
-  stop(
-    "%s [%i]",
-    mysql_stmt_error(pStatement_),
-    mysql_stmt_errno(pStatement_)
-  );
+  stop("%s [%i]", mysql_stmt_error(pStatement_), mysql_stmt_errno(pStatement_));
 }
 
 void MariaResultPrep::cache_metadata() {
@@ -251,9 +256,11 @@ void MariaResultPrep::cache_metadata() {
 
     bool binary = fields[i].charsetnr == 63;
     bool length1 = fields[i].length == 1;
-    MariaFieldType type = variable_type_from_field_type(fields[i].type, binary, length1);
+    MariaFieldType type =
+        variable_type_from_field_type(fields[i].type, binary, length1);
     types_.push_back(type);
 
-    LOG_VERBOSE << i << " -> " << fields[i].name << "(" << fields[i].type << ", " << binary << ") => " << type_name(type);
+    LOG_VERBOSE << i << " -> " << fields[i].name << "(" << fields[i].type
+                << ", " << binary << ") => " << type_name(type);
   }
 }

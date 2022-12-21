@@ -1,10 +1,11 @@
 #include "pch.h"
-#include "RMariaDB_types.h"
-#include "MariaResult.h"
 
+#include "MariaResult.h"
+#include "RMariaDB_types.h"
 
 // [[Rcpp::export]]
-XPtr<DbResult> result_create(XPtr<DbConnectionPtr> con, std::string sql, bool is_statement = false) {
+XPtr<DbResult> result_create(XPtr<DbConnectionPtr> con, std::string sql,
+                             bool is_statement = false) {
   (*con)->check_connection();
   DbResult* res = MariaResult::create_and_send_query(*con, sql, is_statement);
   return XPtr<DbResult>(res, true);
@@ -53,7 +54,7 @@ List result_column_info(DbResult* res) {
 
 namespace Rcpp {
 
-template<>
+template <>
 DbResult* as(SEXP x) {
   DbResult* result = (DbResult*)(R_ExternalPtrAddr(x));
   if (!result)
@@ -61,4 +62,4 @@ DbResult* as(SEXP x) {
   return result;
 }
 
-}
+}  // namespace Rcpp

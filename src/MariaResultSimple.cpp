@@ -1,11 +1,12 @@
 #include "pch.h"
 
 #include "MariaResultSimple.h"
+
 #include "DbConnection.h"
 
-MariaResultSimple::MariaResultSimple(const DbConnectionPtr& pConn, bool is_statement) :
-  pConn_(pConn)
-{
+MariaResultSimple::MariaResultSimple(const DbConnectionPtr& pConn,
+                                     bool is_statement)
+    : pConn_(pConn) {
   (void)is_statement;
 }
 
@@ -26,7 +27,9 @@ void MariaResultSimple::close() {
 void MariaResultSimple::bind(const List& /*params*/) {
   LOG_VERBOSE;
 
-  stop("This query is not supported by the prepared statement protocol, no parameters can be bound.");
+  stop(
+      "This query is not supported by the prepared statement protocol, no "
+      "parameters can be bound.");
 }
 
 List MariaResultSimple::get_column_info() {
@@ -38,8 +41,12 @@ List MariaResultSimple::get_column_info() {
 List MariaResultSimple::fetch(int /*n_max*/) {
   LOG_VERBOSE;
 
-  warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
-  return df_create(std::vector<MariaFieldType>(), std::vector<std::string>(), 0);
+  warning(
+      "Use dbExecute() instead of dbGetQuery() for statements, and also "
+      "avoid "
+      "dbFetch()");
+  return df_create(std::vector<MariaFieldType>(), std::vector<std::string>(),
+                   0);
 }
 
 int MariaResultSimple::n_rows_affected() {

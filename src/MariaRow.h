@@ -1,8 +1,8 @@
 #ifndef __RMARIADB_MARIA_ROW__
 #define __RMARIADB_MARIA_ROW__
 
-#include <boost/core/noncopyable.hpp>
 #include <boost/container/vector.hpp>
+#include <boost/core/noncopyable.hpp>
 #include <boost/cstdint.hpp>
 
 #include "MariaTypes.h"
@@ -18,16 +18,17 @@ class MariaRow : public boost::noncopyable {
   std::vector<unsigned long> lengths_;
   boost::container::vector<my_bool> nulls_, errors_;
 
-public:
+  public:
   MariaRow();
   ~MariaRow();
 
-public:
+  public:
   void setup(MYSQL_STMT* pStatement, const std::vector<MariaFieldType>& types);
   void set_list_value(SEXP x, int i, int j);
 
-private:
-  // Value accessors -----------------------------------------------------------
+  private:
+  // Value accessors
+  // -----------------------------------------------------------
   bool is_null(int j);
 
   int value_int(int j);

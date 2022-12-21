@@ -1,12 +1,11 @@
 #include "pch.h"
+
 #include "DbConnection.h"
+
 #include "DbResult.h"
 
-DbConnection::DbConnection() :
-  pConn_(NULL),
-  pCurrentResult_(NULL),
-  transacting_(false)
-{
+DbConnection::DbConnection()
+    : pConn_(NULL), pCurrentResult_(NULL), transacting_(false) {
   LOG_VERBOSE;
 }
 
@@ -19,15 +18,16 @@ DbConnection::~DbConnection() {
   }
 }
 
-void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std::string>& user,
-                           const Nullable<std::string>& password, const Nullable<std::string>& db,
-                           unsigned int port, const Nullable<std::string>& unix_socket,
-                           unsigned long client_flag, const Nullable<std::string>& groups,
-                           const Nullable<std::string>& default_file,
-                           const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
-                           const Nullable<std::string>& ssl_ca, const Nullable<std::string>& ssl_capath,
-                           const Nullable<std::string>& ssl_cipher,
-                           int timeout, bool reconnect) {
+void DbConnection::connect(
+    const Nullable<std::string>& host, const Nullable<std::string>& user,
+    const Nullable<std::string>& password, const Nullable<std::string>& db,
+    unsigned int port, const Nullable<std::string>& unix_socket,
+    unsigned long client_flag, const Nullable<std::string>& groups,
+    const Nullable<std::string>& default_file,
+    const Nullable<std::string>& ssl_key, const Nullable<std::string>& ssl_cert,
+    const Nullable<std::string>& ssl_ca,
+    const Nullable<std::string>& ssl_capath,
+    const Nullable<std::string>& ssl_cipher, int timeout, bool reconnect) {
   LOG_VERBOSE;
 
   this->pConn_ = mysql_init(NULL);
@@ -46,33 +46,30 @@ void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std
   if (!ssl_key.isNull() || !ssl_cert.isNull() || !ssl_ca.isNull() ||
       !ssl_capath.isNull() || !ssl_cipher.isNull()) {
     mysql_ssl_set(
-      this->pConn_,
-      ssl_key.isNull() ? NULL : as<std::string>(ssl_key).c_str(),
-      ssl_cert.isNull() ? NULL : as<std::string>(ssl_cert).c_str(),
-      ssl_ca.isNull() ? NULL : as<std::string>(ssl_ca).c_str(),
-      ssl_capath.isNull() ? NULL : as<std::string>(ssl_capath).c_str(),
-      ssl_cipher.isNull() ? NULL : as<std::string>(ssl_cipher).c_str()
-    );
+        this->pConn_,
+        ssl_key.isNull() ? NULL : as<std::string>(ssl_key).c_str(),
+        ssl_cert.isNull() ? NULL : as<std::string>(ssl_cert).c_str(),
+        ssl_ca.isNull() ? NULL : as<std::string>(ssl_ca).c_str(),
+        ssl_capath.isNull() ? NULL : as<std::string>(ssl_capath).c_str(),
+        ssl_cipher.isNull() ? NULL : as<std::string>(ssl_cipher).c_str());
   }
   if (timeout > 0) {
-    mysql_options(this->pConn_, MYSQL_OPT_CONNECT_TIMEOUT,
-                  &timeout);
+    mysql_options(this->pConn_, MYSQL_OPT_CONNECT_TIMEOUT, &timeout);
   }
   if (reconnect) {
     my_bool reconnect_ = 1;
-    mysql_options(this->pConn_, MYSQL_OPT_RECONNECT, (void *)&reconnect_);
+    mysql_options(this->pConn_, MYSQL_OPT_RECONNECT, (void*)&reconnect_);
   }
 
   LOG_VERBOSE;
 
-  if (!mysql_real_connect(this->pConn_,
-                          host.isNull() ? NULL : as<std::string>(host).c_str(),
-                          user.isNull() ? NULL : as<std::string>(user).c_str(),
-                          password.isNull() ? NULL : as<std::string>(password).c_str(),
-                          db.isNull() ? NULL : as<std::string>(db).c_str(),
-                          port,
-                          unix_socket.isNull() ? NULL : as<std::string>(unix_socket).c_str(),
-                          client_flag)) {
+  if (!mysql_real_connect(
+          this->pConn_, host.isNull() ? NULL : as<std::string>(host).c_str(),
+          user.isNull() ? NULL : as<std::string>(user).c_str(),
+          password.isNull() ? NULL : as<std::string>(password).c_str(),
+          db.isNull() ? NULL : as<std::string>(db).c_str(), port,
+          unix_socket.isNull() ? NULL : as<std::string>(unix_socket).c_str(),
+          client_flag)) {
     std::string error = mysql_error(this->pConn_);
     mysql_close(this->pConn_);
     this->pConn_ = NULL;
@@ -82,19 +79,18 @@ void DbConnection::connect(const Nullable<std::string>& host, const Nullable<std
 }
 
 void DbConnection::disconnect() {
-  if (!is_valid()) return;
+  if (!is_valid())
+    return;
 
   if (has_query()) {
-    warning(
-      "%s\n%s",
-      "There is a result object still in use.",
-      "The connection will be automatically released when it is closed"
-    );
+    warning("%s\n%s", "There is a result object still in use.",
+            "The connection will be automatically released when it is closed");
   }
 
   try {
     mysql_close(get_conn());
-  } catch (...) {};
+  } catch (...) {
+  };
 
   pConn_ = NULL;
 }
@@ -110,17 +106,15 @@ void DbConnection::check_connection() {
 }
 
 List DbConnection::info() {
-  return
-    List::create(
+  return List::create(
       _["host"] = std::string(pConn_->host),
       _["username"] = std::string(pConn_->user),
       _["dbname"] = std::string(pConn_->db ? pConn_->db : ""),
       _["con.type"] = std::string(mysql_get_host_info(pConn_)),
       _["db.version"] = std::string(mysql_get_server_info(pConn_)),
       _["port"] = NA_INTEGER,
-      _["protocol.version"] = (int) mysql_get_proto_info(pConn_),
-      _["thread.id"] = (int) mysql_thread_id(pConn_)
-    );
+      _["protocol.version"] = (int)mysql_get_proto_info(pConn_),
+      _["thread.id"] = (int)mysql_thread_id(pConn_));
 }
 
 MYSQL* DbConnection::get_conn() {
@@ -138,7 +132,8 @@ SEXP DbConnection::quote_string(const String& input) {
   std::string output = "'";
   output.resize(input_len * 2 + 3);
 
-  size_t end = mysql_real_escape_string(pConn_, &output[1], input_cstr, input_len);
+  size_t end =
+      mysql_real_escape_string(pConn_, &output[1], input_cstr, input_len);
 
   output.resize(end + 1);
   output.append("'");
@@ -196,14 +191,16 @@ bool DbConnection::exec(const std::string& sql) {
 }
 
 void DbConnection::begin_transaction() {
-  if (is_transacting()) stop("Nested transactions not supported.");
+  if (is_transacting())
+    stop("Nested transactions not supported.");
   check_connection();
 
   transacting_ = true;
 }
 
 void DbConnection::commit() {
-  if (!is_transacting()) stop("Call dbBegin() to start a transaction.");
+  if (!is_transacting())
+    stop("Call dbBegin() to start a transaction.");
   check_connection();
 
   mysql_commit(get_conn());
@@ -211,7 +208,8 @@ void DbConnection::commit() {
 }
 
 void DbConnection::rollback() {
-  if (!is_transacting()) stop("Call dbBegin() to start a transaction.");
+  if (!is_transacting())
+    stop("Call dbBegin() to start a transaction.");
   check_connection();
 
   mysql_rollback(get_conn());

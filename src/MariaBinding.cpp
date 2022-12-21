@@ -1,13 +1,12 @@
 #include "pch.h"
-#include <math.h>
+
 #include "MariaBinding.h"
+
+#include <math.h>
+
 #include "integer64.h"
 
-MariaBinding::MariaBinding() :
-  statement(NULL),
-  p(0),
-  i(0),
-  n_rows(0) {
+MariaBinding::MariaBinding() : statement(NULL), p(0), i(0), n_rows(0) {
 }
 
 MariaBinding::~MariaBinding() {
@@ -86,7 +85,8 @@ void MariaBinding::init_binding(const List& params_) {
 bool MariaBinding::bind_next_row() {
   LOG_VERBOSE;
 
-  if (i >= n_rows) return false;
+  if (i >= n_rows)
+    return false;
 
   for (int j = 0; j < p; ++j) {
     LOG_VERBOSE << j << " -> " << type_name(types[j]);
@@ -126,17 +126,16 @@ bool MariaBinding::bind_next_row() {
         bindings[j].buffer_length = Rf_length(string);
       }
       break;
-    case MY_RAW:
-      {
-        SEXP raw = VECTOR_ELT(col, i);
-        if (Rf_isNull(raw)) {
-          missing = true;
-        } else {
-          bindings[j].buffer_length = Rf_length(raw);
-          bindings[j].buffer = RAW(raw);
-        }
-        break;
+    case MY_RAW: {
+      SEXP raw = VECTOR_ELT(col, i);
+      if (Rf_isNull(raw)) {
+        missing = true;
+      } else {
+        bindings[j].buffer_length = Rf_length(raw);
+        bindings[j].buffer = RAW(raw);
       }
+      break;
+    }
     case MY_DATE:
     case MY_DATE_TIME:
       if (ISNAN(REAL(col)[i])) {
@@ -209,15 +208,17 @@ void MariaBinding::set_date_buffer(int j, const int date) {
   // https://howardhinnant.github.io/date_algorithms.html#civil_from_days
   const int date_0 = date + 719468;
   const int era = (date_0 >= 0 ? date_0 : date_0 - 146096) / 146097;
-  const unsigned doe = static_cast<unsigned>(date_0 - era * 146097);          // [0, 146096]
+  const unsigned doe =
+      static_cast<unsigned>(date_0 - era * 146097);  // [0, 146096]
   LOG_VERBOSE << doe;
-  const unsigned yoe = (doe - doe/1460 + doe/36524 - doe/146096) / 365;  // [0, 399]
+  const unsigned yoe =
+      (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;  // [0, 399]
   LOG_VERBOSE << yoe;
   const int y = static_cast<int>(yoe) + era * 400;
-  const unsigned doy = doe - (365*yoe + yoe/4 - yoe/100);                // [0, 365]
-  const unsigned mp = (5*doy + 2)/153;                                   // [0, 11]
-  const unsigned d = doy - (153*mp+2)/5 + 1;                             // [1, 31]
-  const unsigned m = mp < 10 ? mp+3 : mp-9;                              // [1, 12]
+  const unsigned doy = doe - (365 * yoe + yoe / 4 - yoe / 100);  // [0, 365]
+  const unsigned mp = (5 * doy + 2) / 153;                       // [0, 11]
+  const unsigned d = doy - (153 * mp + 2) / 5 + 1;               // [1, 31]
+  const unsigned m = mp < 10 ? mp + 3 : mp - 9;                  // [1, 12]
   const unsigned yr = y + (m <= 2);
 
   // gmtime() fails for dates < 1970 on Windows
@@ -258,6 +259,7 @@ void MariaBinding::set_time_buffer(int j, double time) {
   time_buffers[j].hour = static_cast<unsigned int>(hours);
   time_buffers[j].minute = static_cast<unsigned int>(minutes);
   time_buffers[j].second = static_cast<unsigned int>(seconds);
-  time_buffers[j].second_part = static_cast<unsigned long>(frac_seconds * 1000000.0);
+  time_buffers[j].second_part =
+      static_cast<unsigned long>(frac_seconds * 1000000.0);
   time_buffers[j].neg = neg;
 }

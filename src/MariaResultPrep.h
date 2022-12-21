@@ -29,11 +29,11 @@ class MariaResultPrep : boost::noncopyable, public MariaResultImpl {
   MariaBinding bindingInput_;
   MariaRow bindingOutput_;
 
-public:
+  public:
   MariaResultPrep(const DbConnectionPtr& pConn, bool is_statement = false);
   ~MariaResultPrep();
 
-public:
+  public:
   virtual void send_query(const std::string& sql);
   virtual void close();
 
@@ -47,10 +47,10 @@ public:
   virtual int n_rows_fetched();
   virtual bool complete() const;
 
-public:
+  public:
   class UnsupportedPS : public std::exception {};
 
-private:
+  private:
   void execute();
 
   bool has_result() const;
@@ -58,7 +58,7 @@ private:
   bool fetch_row();
   void NORET throw_error();
 
-private:
+  private:
   void cache_metadata();
 };
 

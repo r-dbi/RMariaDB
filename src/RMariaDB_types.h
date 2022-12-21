@@ -9,12 +9,12 @@
 
 namespace Rcpp {
 
-template<>
+template <>
 DbConnection* as(SEXP x);
 
-template<>
+template <>
 DbResult* as(SEXP x);
 
-}
+}  // namespace Rcpp
 
 #endif
