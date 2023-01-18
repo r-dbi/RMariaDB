@@ -141,8 +141,8 @@ dbConnect_MariaDBDriver <- function(drv, dbname = NULL, username = NULL, passwor
   }
 
   if (isTRUE(load_data_local_infile)) {
-    if (!rlang::is_installed("readr")) {
-      stopc("`load_data_local_infile = TRUE` requires the readr package.")
+    if (!rlang::is_installed("data.table")) {
+      stopc("`load_data_local_infile = TRUE` requires the data.table package.")
     }
   }
 

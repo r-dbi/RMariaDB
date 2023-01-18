@@ -32,8 +32,8 @@ Imports:
     Rcpp (>= 0.12.4),
     rlang
 Suggests: 
+    data.table,
     DBItest (>= 1.7.2.9001),
-    readr,
     rprojroot,
     testthat (>= 3.0.0),
     withr
