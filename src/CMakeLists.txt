@@ -27,15 +27,15 @@ add_library(RMariaDB
   MariaUtils.cpp
   MariaUtils.h
   RMariaDB_types.h
-  RcppExports.cpp
   connection.cpp
+  cpp11.cpp
   driver.cpp
   integer64.h
   pch.h
   result.cpp
 )
 
-set(R_DEPENDENCIES Rcpp plogr)
+set(R_DEPENDENCIES cpp11 plogr)
 
 execute_process(COMMAND bash "-c" "Rscript -e 'cat(R.home(\"include\"))'" OUTPUT_VARIABLE R_INCLUDE)
 execute_process(COMMAND bash "-c" "Rscript -e 'cat(.libPaths()[[1]])'" OUTPUT_VARIABLE R_LIBDIR)

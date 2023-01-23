@@ -29,7 +29,6 @@ Imports:
     hms (>= 0.5.0),
     lubridate,
     methods,
-    Rcpp (>= 0.12.4),
     rlang
 Suggests: 
     DBItest (>= 1.7.2.9001),
@@ -38,8 +37,8 @@ Suggests:
     testthat (>= 3.0.0),
     withr
 LinkingTo: 
-    plogr,
-    Rcpp
+    cpp11,
+    plogr
 Config/autostyle/scope: line_breaks
 Config/autostyle/strict: false
 Config/testthat/edition: 3
@@ -50,16 +49,16 @@ RoxygenNote: 7.2.3
 SystemRequirements: libmariadb-client-lgpl-dev or libmariadb-dev or
     libmysqlclient-dev, with libssl-dev (deb), mariadb-connector-c-devel
     or mariadb-devel (rpm), mariadb-connector-c or mysql-connector-c
-    (brew)
+    (brew), C++11
 Collate: 
     'MariaDBConnection.R'
     'MariaDBDriver.R'
     'MariaDBResult.R'
     'RMariaDB-package.R'
-    'RcppExports.R'
     'coerce.R'
     'compatRowNames.R'
     'connect.R'
+    'cpp11.R'
     'dbAppendTable_MariaDBConnection.R'
     'dbBegin_MariaDBConnection.R'
     'dbBind_MariaDBResult.R'

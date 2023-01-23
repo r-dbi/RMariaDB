@@ -25,24 +25,24 @@ void MariaBinding::setup(MYSQL_STMT* statement_) {
   time_buffers.resize(p);
 }
 
-void MariaBinding::init_binding(const List& params_) {
+void MariaBinding::init_binding(const cpp11::list& params_) {
   LOG_VERBOSE;
 
   params = params_;
 
   if (params.size() == 0) {
-    stop("Query has no parameters");
+    cpp11::stop("Query has no parameters");
   }
 
   if (p != params.size()) {
-    stop("Number of params don't match (%i vs %i)", p, params.size());
+    cpp11::stop("Number of params don't match (%i vs %i)", p, params.size());
   }
 
   i = 0;
 
   for (int j = 0; j < p; ++j) {
-    RObject param(params[j]);
-    MariaFieldType type = variable_type_from_object(param);
+    cpp11::sexp param(params[j]);
+    const auto type = variable_type_from_object(param);
     types[j] = type;
 
     LOG_VERBOSE << j << " -> " << type_name(type);
@@ -92,7 +92,7 @@ bool MariaBinding::bind_next_row() {
     LOG_VERBOSE << j << " -> " << type_name(types[j]);
 
     bool missing = false;
-    RObject col(params[j]);
+    cpp11::sexp col(params[j]);
 
     switch (types[j]) {
     case MY_LGL:

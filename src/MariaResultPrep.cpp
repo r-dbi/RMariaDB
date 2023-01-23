@@ -19,7 +19,7 @@ MariaResultPrep::MariaResultPrep(const DbConnectionPtr& pConn, bool is_statement
 {
   pStatement_ = mysql_stmt_init(pConn_->get_conn());
   if (pStatement_ == NULL)
-    stop("Out of memory");
+    cpp11::stop("Out of memory");
 }
 
 MariaResultPrep::~MariaResultPrep() {
@@ -93,7 +93,7 @@ void MariaResultPrep::execute() {
   }
 }
 
-void MariaResultPrep::bind(const List& params) {
+void MariaResultPrep::bind(const cpp11::list& params) {
   rowsAffected_ = 0;
 
   bindingInput_.setup(pStatement_);
@@ -111,14 +111,15 @@ void MariaResultPrep::bind(const List& params) {
   bound_ = true;
 }
 
-List MariaResultPrep::get_column_info() {
-  CharacterVector names(nCols_), types(nCols_);
+cpp11::writable::list MariaResultPrep::get_column_info() {
+  using namespace cpp11::literals;
+  cpp11::writable::strings names(nCols_), types(nCols_);
   for (int i = 0; i < nCols_; i++) {
     names[i] = names_[i];
     types[i] = type_name(types_[i]);
   }
 
-  return List::create(_["name"] = names, _["type"] = types);
+  return cpp11::writable::list({"name"_nm = names, "type"_nm = types});
 }
 
 bool MariaResultPrep::has_result() const {
@@ -165,18 +166,18 @@ bool MariaResultPrep::fetch_row() {
   return false;
 }
 
-List MariaResultPrep::fetch(int n_max) {
+cpp11::list MariaResultPrep::fetch(int n_max) {
   if (!bound_)
-    stop("Query needs to be bound before fetching");
+    cpp11::stop("Query needs to be bound before fetching");
   if (!has_result()) {
     if (names_.size() == 0) {
-      warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
+      cpp11::warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
     }
     return df_create(types_, names_, 0);
   }
 
   int n = (n_max < 0) ? 100 : n_max;
-  List out = df_create(types_, names_, n);
+  auto out = df_create(types_, names_, n);
   if (n == 0)
     return out;
 
@@ -200,7 +201,7 @@ List MariaResultPrep::fetch(int n_max) {
 
     ++i;
     if (i % 1024 == 0)
-      checkUserInterrupt();
+      cpp11::check_user_interrupt();
   }
 
   // Trim back to what we actually used
@@ -233,7 +234,7 @@ bool MariaResultPrep::complete() const {
 }
 
 void MariaResultPrep::throw_error() {
-  stop(
+  cpp11::stop(
     "%s [%i]",
     mysql_stmt_error(pStatement_),
     mysql_stmt_errno(pStatement_)

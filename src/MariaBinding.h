@@ -7,7 +7,7 @@
 
 class MariaBinding : public boost::noncopyable {
   MYSQL_STMT* statement;
-  List params;
+  cpp11::list params;
 
   int p;
   R_xlen_t i, n_rows;
@@ -23,7 +23,7 @@ public:
 public:
   void setup(MYSQL_STMT* statement_);
 
-  void init_binding(const List& params);
+  void init_binding(const cpp11::list& params);
   bool bind_next_row();
 
 private:

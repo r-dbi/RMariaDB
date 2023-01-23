@@ -37,11 +37,11 @@ public:
   virtual void send_query(const std::string& sql);
   virtual void close();
 
-  virtual void bind(const List& params);
+  virtual void bind(const cpp11::list& params);
 
-  virtual List get_column_info();
+  virtual cpp11::writable::list get_column_info();
 
-  virtual List fetch(int n_max = -1);
+  virtual cpp11::list fetch(int n_max = -1);
 
   virtual int n_rows_affected();
   virtual int n_rows_fetched();
