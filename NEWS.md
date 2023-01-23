@@ -1,5 +1,37 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RMariaDB 1.2.2.9002 (2022-12-30)
+
+- Internal changes only.
+
+
+# RMariaDB 1.2.2.9001 (2022-12-24)
+
+## Features
+
+- Support `TIME` columns with subsecond precision (@renkun-ken, #288, #289).
+
+- Use testthat edition 3 (#285).
+
+## Uncategorized
+
+- Merge pull request #292 from Antonov548/r-headers.
+
+
+
+- Merge branch 'krlmlr'.
+
+feat: Configuration for https://gitpod.io
+
+
+- Harmonize yaml formatting.
+
+- Revert changes to matrix section.
+
+- Merged cran-1.2.2 into main.
+
+
+
 # RMariaDB 1.2.2.9000 (2022-06-19)
 
 - Internal changes only.
