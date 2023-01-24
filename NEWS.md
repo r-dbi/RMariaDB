@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RMariaDB 1.2.2.9003 (2023-01-24)
+
+## Chore
+
+- Replace Rcpp by cpp11 (@Antonov548, #286).
+
+- Update gitpod configuration.
+
+
 # RMariaDB 1.2.2.9002 (2022-12-30)
 
 - Internal changes only.
