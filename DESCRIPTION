@@ -32,6 +32,7 @@ Imports:
     rlang
 Suggests: 
     DBItest (>= 1.7.2.9001),
+    decor,
     readr,
     rprojroot,
     testthat (>= 3.0.0),
