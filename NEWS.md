@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# RMariaDB 1.2.2.9004 (2023-02-06)
+
+## Bug fixes
+
+- Indent.
+
+## Chore
+
+- Add decor as a dependency.
+
+- Install from `gitpod.yml` file.
+
+- Fix gitpod configuration.
+
+
 # RMariaDB 1.2.2.9003 (2023-01-24)
 
 ## Chore
