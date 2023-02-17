@@ -1,4 +1,9 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+
+# RMariaDB 1.2.2.9005 (2023-02-17)
+
+- Internal changes only.
+
 
 # RMariaDB 1.2.2.9004 (2023-02-06)
 
