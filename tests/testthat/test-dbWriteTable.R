@@ -86,7 +86,8 @@ test_that("writing and reading JSON (#127)", {
 
   dbWriteTable(con, "t1", x, field.types = c(col1 = "json"), overwrite = TRUE, temporary = TRUE)
 
-  expect_warning(d <- dbReadTable(con, "t1"))
+  # FIXME: warning conditional on database version
+  expect_warning(d <- dbReadTable(con, "t1"), NA)
 
   # MySQL 8 returns "[1, 2, 3]", while MariaDB returns "[1,2,3]"
   d$col1 <- gsub('\\s', '', d$col1)
