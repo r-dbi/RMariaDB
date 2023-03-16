@@ -52,7 +52,7 @@ MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary,
   case MYSQL_TYPE_NULL:
     return MY_INT32;
   default:
-    warning("unrecognized field type %i imported as character", type);
+    cpp11::warning("unrecognized field type %i imported as character", type);
     return MY_STR;
   }
 }
