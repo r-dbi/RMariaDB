@@ -1,14 +1,82 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# RMariaDB 1.2.1.9001 (2022-05-14)
+# RMariaDB 1.2.2.9005 (2023-02-17)
 
-- Actually enable `LOAD LOCAL INFILE` by setting the `MYSQL_OPT_LOCAL_INFILE` flag (#265, #267).
+- Internal changes only.
+
+
+# RMariaDB 1.2.2.9004 (2023-02-06)
+
+## Bug fixes
+
+- Indent.
+
+## Chore
+
+- Add decor as a dependency.
+
+- Install from `gitpod.yml` file.
+
+- Fix gitpod configuration.
+
+
+# RMariaDB 1.2.2.9003 (2023-01-24)
+
+## Chore
+
+- Replace Rcpp by cpp11 (@Antonov548, #286).
+
+- Update gitpod configuration.
+
+
+# RMariaDB 1.2.2.9002 (2022-12-30)
+
+- Internal changes only.
+
+
+# RMariaDB 1.2.2.9001 (2022-12-24)
+
+## Features
+
+- Support `TIME` columns with subsecond precision (@renkun-ken, #288, #289).
+
+- Use testthat edition 3 (#285).
+
+## Uncategorized
+
+- Merge pull request #292 from Antonov548/r-headers.
+
+
+
+- Merge branch 'krlmlr'.
+
+feat: Configuration for https://gitpod.io
+
+
+- Harmonize yaml formatting.
+
+- Revert changes to matrix section.
+
+- Merged cran-1.2.2 into main.
+
+
+
+# RMariaDB 1.2.2.9000 (2022-06-19)
+
+- Internal changes only.
+
+
+# RMariaDB 1.2.2 (2022-06-19)
+
+## Features 
+
+- `dbAppendTable()` accepts `Id` (#262, @renkun-ken).
+
 - `dbConnect()` gains `reconnect` argument that sets the `MYSQL_OPT_RECONNECT` option (#261, @renkun-ken).
 
+## Bug fixes
 
-# RMariaDB 1.2.1.9000 (2021-12-20)
-
-- Same as previous version.
+- Actually enable `LOAD LOCAL INFILE` by setting the `MYSQL_OPT_LOCAL_INFILE` flag (#265, #267).
 
 
 # RMariaDB 1.2.1 (2021-12-20)

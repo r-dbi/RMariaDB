@@ -1,38 +1,23 @@
 Package: RMariaDB
 Title: Database Interface and MariaDB Driver
-Version: 1.2.1.9001
-Authors@R: 
-    c(person(given = "Kirill",
-             family = "M\u00fcller",
-             role = c("aut", "cre"),
-             email = "krlmlr+r@mailbox.org",
-             comment = c(ORCID = "0000-0002-1416-3412")),
-      person(given = "Jeroen",
-             family = "Ooms",
-             role = "aut",
-             comment = c(ORCID = "0000-0002-4035-0289")),
-      person(given = "David",
-             family = "James",
-             role = "aut"),
-      person(given = "Saikat",
-             family = "DebRoy",
-             role = "aut"),
-      person(given = "Hadley",
-             family = "Wickham",
-             role = "aut"),
-      person(given = "Jeffrey",
-             family = "Horner",
-             role = "aut"),
-      person(given = "R Consortium",
-             role = "fnd"),
-      person(given = "RStudio",
-             role = "cph"))
+Version: 1.2.2.9005
+Authors@R: c(
+    person("Kirill", "Müller", , "kirill@cynkra.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-1416-3412")),
+    person("Jeroen", "Ooms", role = "aut",
+           comment = c(ORCID = "0000-0002-4035-0289")),
+    person("David", "James", role = "aut"),
+    person("Saikat", "DebRoy", role = "aut"),
+    person("Hadley", "Wickham", role = "aut"),
+    person("Jeffrey", "Horner", role = "aut"),
+    person("R Consortium", role = "fnd"),
+    person("RStudio", role = "cph")
+  )
 Description: Implements a DBI-compliant interface to MariaDB
     (<https://mariadb.org/>) and MySQL (<https://www.mysql.com/>)
     databases.
 License: MIT + file LICENSE
-URL: https://rmariadb.r-dbi.org,
-    https://github.com/r-dbi/RMariaDB,
+URL: https://rmariadb.r-dbi.org, https://github.com/r-dbi/RMariaDB,
     https://downloads.mariadb.org/connector-c/
 BugReports: https://github.com/r-dbi/RMariaDB/issues
 Depends: 
@@ -40,38 +25,41 @@ Depends:
 Imports: 
     bit64,
     blob,
-    DBI (>= 1.1.0),
+    DBI (>= 1.1.3),
     hms (>= 0.5.0),
     lubridate,
     methods,
-    Rcpp (>= 0.12.4),
     rlang
 Suggests: 
-    DBItest (>= 1.7.0),
+    DBItest (>= 1.7.2.9001),
+    decor,
     readr,
     rprojroot,
-    testthat,
+    testthat (>= 3.0.0),
     withr
 LinkingTo: 
-    plogr,
-    Rcpp
+    cpp11,
+    plogr
+Config/autostyle/scope: line_breaks
+Config/autostyle/strict: false
+Config/testthat/edition: 3
 Encoding: UTF-8
 NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
-SystemRequirements: libmariadb-client-lgpl-dev or
-    libmariadb-dev or libmysqlclient-dev, with libssl-dev (deb),
-    mariadb-connector-c-devel or mariadb-devel (rpm),
-    mariadb-connector-c or mysql-connector-c (brew)
+RoxygenNote: 7.2.3
+SystemRequirements: libmariadb-client-lgpl-dev or libmariadb-dev or
+    libmysqlclient-dev, with libssl-dev (deb), mariadb-connector-c-devel
+    or mariadb-devel (rpm), mariadb-connector-c or mysql-connector-c
+    (brew), C++11
 Collate: 
     'MariaDBConnection.R'
     'MariaDBDriver.R'
     'MariaDBResult.R'
     'RMariaDB-package.R'
-    'RcppExports.R'
     'coerce.R'
     'compatRowNames.R'
     'connect.R'
+    'cpp11.R'
     'dbAppendTable_MariaDBConnection.R'
     'dbBegin_MariaDBConnection.R'
     'dbBind_MariaDBResult.R'
@@ -121,5 +109,3 @@ Collate:
     'transaction.R'
     'utils.R'
     'zzz.R'
-Config/autostyle/scope: line_breaks
-Config/autostyle/strict: false
