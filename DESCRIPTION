@@ -50,7 +50,7 @@ RoxygenNote: 7.2.3
 SystemRequirements: libmariadb-client-lgpl-dev or libmariadb-dev or
     libmysqlclient-dev, with libssl-dev (deb), mariadb-connector-c-devel
     or mariadb-devel (rpm), mariadb-connector-c or mysql-connector-c
-    (brew), C++11
+    (brew)
 Collate: 
     'MariaDBConnection.R'
     'MariaDBDriver.R'
