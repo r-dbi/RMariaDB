@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.2.2.9006 (2023-03-24)
+
+## Chore
+
+- Drop C++11 specification.
+
+
 # RMariaDB 1.2.2.9005 (2023-02-17)
 
 - Internal changes only.
