@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.2.2.9007 (2023-03-29)
+
+## Chore
+
+- Use Ubuntu 22.04.
+
+
 # RMariaDB 1.2.2.9006 (2023-03-24)
 
 ## Chore
