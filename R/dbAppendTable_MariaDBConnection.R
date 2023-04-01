@@ -10,7 +10,6 @@ dbAppendTable_MariaDBConnection <- function(conn, name, value, ..., row.names = 
   if (!is.null(row.names)) {
     stop("Can't pass `row.names` to `dbAppendTable()`", call. = FALSE)
   }
-  stopifnot(is.character(name), length(name) == 1)
   stopifnot(is.data.frame(value))
 
   if (!conn@load_data_local_infile) {

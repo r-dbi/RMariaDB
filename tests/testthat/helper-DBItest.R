@@ -21,8 +21,8 @@ DBItest::make_context(
     "list_objects_features",
 
     # bad tests
-    if (.Platform$OS.type == "windows" && .Platform$r_arch == "i386") "append_roundtrip_timestamp",
-    if (.Platform$OS.type == "windows" && .Platform$r_arch == "i386") "roundtrip_timestamp",
+    if ((.Platform$OS.type == "windows" && .Platform$r_arch == "i386") || packageVersion("DBItest") < "1.7.2") "append_roundtrip_timestamp",
+    if ((.Platform$OS.type == "windows" && .Platform$r_arch == "i386") || packageVersion("DBItest") < "1.7.2") "roundtrip_timestamp",
 
     NULL
   )
