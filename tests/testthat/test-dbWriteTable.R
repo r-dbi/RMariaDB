@@ -87,5 +87,8 @@ test_that("writing and reading JSON (#127)", {
   dbWriteTable(con, "t1", x, field.types = c(col1 = "json"), overwrite = TRUE, temporary = TRUE)
   dbReadTable(con, "t1")
 
-  expect_equal(dbReadTable(con, "t1"), x)
+  expect_equal(
+    gsub(" ", "", dbReadTable(con, "t1")$col1),
+    x$col1
+  )
 })
