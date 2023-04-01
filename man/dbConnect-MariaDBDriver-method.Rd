@@ -18,7 +18,6 @@ MariaDB()
   port = 0,
   client.flag = 0,
   group = "rs-dbi",
-  groups = NULL,
   default.file = NULL,
   ssl.key = NULL,
   ssl.cert = NULL,
@@ -26,6 +25,7 @@ MariaDB()
   ssl.capath = NULL,
   ssl.cipher = NULL,
   ...,
+  groups = NULL,
   load_data_local_infile = FALSE,
   bigint = c("integer64", "integer", "numeric", "character"),
   timeout = 10,
@@ -59,8 +59,6 @@ see \link{Client-flags} for details.}
 \item{group}{string identifying a section in the \code{default.file} to use
 for setting authentication parameters (see \code{\link[=MariaDB]{MariaDB()}}).}
 
-\item{groups}{deprecated, use \code{group} instead.}
-
 \item{default.file}{string of the filename with MariaDB client options,
 only relevant if \code{groups} is given. The default value depends on the
 operating system (see references), on Linux and OS X the files
@@ -83,6 +81,8 @@ the trusted SSL CA certificates in PEM format. Expanded with
 encryption.}
 
 \item{...}{Unused, needed for compatibility with generic.}
+
+\item{groups}{deprecated, use \code{group} instead.}
 
 \item{load_data_local_infile}{Set to \code{TRUE} to use \verb{LOAD DATA LOCAL INFILE}
 in \code{\link[=dbWriteTable]{dbWriteTable()}} and \code{\link[=dbAppendTable]{dbAppendTable()}} by default.

@@ -108,14 +108,14 @@
 #'   dbDisconnect(con)
 #' }
 #'
-#' @importFrom rlang '%||%'
 #' @usage NULL
 #' @rdname dbConnect-MariaDBDriver-method
 dbConnect_MariaDBDriver <- function(drv, dbname = NULL, username = NULL, password = NULL, host = NULL,
                                     unix.socket = NULL, port = 0, client.flag = 0,
-                                    group = "rs-dbi", groups = NULL, default.file = NULL,
+                                    group = "rs-dbi", default.file = NULL,
                                     ssl.key = NULL, ssl.cert = NULL,  ssl.ca = NULL, ssl.capath = NULL,
                                     ssl.cipher = NULL, ...,
+                                    groups = NULL,
                                     load_data_local_infile = FALSE,
                                     bigint = c("integer64", "integer", "numeric", "character"),
                                     timeout = 10, timezone = "+00:00", timezone_out = NULL, reconnect = FALSE) {
@@ -155,13 +155,14 @@ dbConnect_MariaDBDriver <- function(drv, dbname = NULL, username = NULL, passwor
       "Argument `groups` is deprecated, use `group` instead. ",
       "Note that when `groups` is used, it takes precedence over `group`."
     )
+    group <- groups
   }
 
   reconnect <- isTRUE(reconnect)
 
   ptr <- connection_create(
     host, username, password, dbname, as.integer(port), unix.socket,
-    as.integer(client.flag), groups %||% group, default.file,
+    as.integer(client.flag), group, default.file,
     ssl.key, ssl.cert, ssl.ca, ssl.capath, ssl.cipher,
     timeout, reconnect
   )
