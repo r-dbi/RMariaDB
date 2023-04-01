@@ -1,4 +1,79 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+
+# RMariaDB 1.2.2.9007 (2023-03-29)
+
+## Chore
+
+- Use Ubuntu 22.04.
+
+
+# RMariaDB 1.2.2.9006 (2023-03-24)
+
+## Chore
+
+- Drop C++11 specification.
+
+
+# RMariaDB 1.2.2.9005 (2023-02-17)
+
+- Internal changes only.
+
+
+# RMariaDB 1.2.2.9004 (2023-02-06)
+
+## Bug fixes
+
+- Indent.
+
+## Chore
+
+- Add decor as a dependency.
+
+- Install from `gitpod.yml` file.
+
+- Fix gitpod configuration.
+
+
+# RMariaDB 1.2.2.9003 (2023-01-24)
+
+## Chore
+
+- Replace Rcpp by cpp11 (@Antonov548, #286).
+
+- Update gitpod configuration.
+
+
+# RMariaDB 1.2.2.9002 (2022-12-30)
+
+- Internal changes only.
+
+
+# RMariaDB 1.2.2.9001 (2022-12-24)
+
+## Features
+
+- Support `TIME` columns with subsecond precision (@renkun-ken, #288, #289).
+
+- Use testthat edition 3 (#285).
+
+## Uncategorized
+
+- Merge pull request #292 from Antonov548/r-headers.
+
+
+
+- Merge branch 'krlmlr'.
+
+feat: Configuration for https://gitpod.io
+
+
+- Harmonize yaml formatting.
+
+- Revert changes to matrix section.
+
+- Merged cran-1.2.2 into main.
+
+
 
 # RMariaDB 1.2.2.9000 (2022-06-19)
 

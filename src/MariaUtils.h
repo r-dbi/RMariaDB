@@ -3,12 +3,12 @@
 
 // Generic data frame utils ----------------------------------------------------
 
-List df_resize(const List& df, int n);
+cpp11::list df_resize(const cpp11::list& df, int n);
 
 // Set up S3 classes correctly
-void df_s3(const List& df, const std::vector<MariaFieldType>& types);
+void df_s3(const cpp11::list& df, const std::vector<MariaFieldType>& types);
 
-List df_create(const std::vector<MariaFieldType>& types,
+cpp11::writable::list df_create(const std::vector<MariaFieldType>& types,
                const std::vector<std::string>& names,
                int n);
 
