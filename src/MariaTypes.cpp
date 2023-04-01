@@ -51,7 +51,7 @@ MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary,
   case MYSQL_TYPE_NULL:
     return MY_INT32;
   default:
-    throw std::runtime_error("Unimplemented MAX_NO_FIELD_TYPES");
+    cpp11::stop("Unimplemented MAX_NO_FIELD_TYPES: %d", type);
   }
 }
 
