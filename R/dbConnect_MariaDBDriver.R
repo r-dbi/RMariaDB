@@ -26,7 +26,7 @@
 #' client library which do not support this feature.
 #'
 #' @param drv an object of class [MariaDBDriver-class] or
-#'   [Mariaion-class].
+#'   [MariaDBConnection-class].
 #' @param username,password Username and password. If username omitted,
 #'   defaults to the current user. If password is omitted, only users
 #'   without a password can log in.

@@ -36,7 +36,7 @@ MariaDB()
 }
 \arguments{
 \item{drv}{an object of class \linkS4class{MariaDBDriver} or
-\linkS4class{Mariaion}.}
+\linkS4class{MariaDBConnection}.}
 
 \item{dbname}{string with the database name or NULL. If not NULL, the
 connection sets the default database to this value.}
