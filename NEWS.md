@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.2.2.9008 (2023-04-02)
+
+## Bug fixes
+
+- Fix querying JSON values for MySQL Server.
+
+## Chore
+
+- Better `MAX_NO_FIELD_TYPES` error message.
+
+
 # RMariaDB 1.2.2.9007 (2023-03-29)
 
 ## Chore
