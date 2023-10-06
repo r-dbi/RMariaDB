@@ -42,5 +42,10 @@ mariadbDefault <- function() {
 }
 
 mariadb_default <- function(...) {
-  dbConnect(MariaDB(), dbname = "test", ...)
+  rlang::inject(dbConnect(MariaDB(), !!!mariadb_default_args, ...))
 }
+
+mariadb_default_args <- as.list(c(
+  dbname = "test",
+  NULL
+))
