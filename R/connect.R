@@ -26,6 +26,11 @@ check_tz <- function(timezone) {
 }
 
 #' @export
+#' @param mysql Set to `TRUE` to indicate the intent to connect to a MySQL server.
+#'   The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect
+#'   and other details vary.
+#'   The default is to assume a MariaDB server.
+#'
 #' @import methods DBI
 #' @importFrom hms hms
 #' @importFrom bit64 integer64 is.integer64
@@ -48,8 +53,12 @@ check_tz <- function(timezone) {
 #'   # clean up
 #'   dbDisconnect(con)
 #' }
-MariaDB <- function() {
-  new("MariaDBDriver")
+MariaDB <- function(mysql = FALSE) {
+  if (isTRUE(mysql)) {
+    new("MySQLDriver")
+  } else {
+    new("MariaDBDriver")
+  }
 }
 
 #' Client flags

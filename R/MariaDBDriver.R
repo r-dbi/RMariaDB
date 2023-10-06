@@ -10,6 +10,12 @@ setClass("MariaDBDriver",
   contains = "DBIDriver",
 )
 
+#' @export
+#' @keywords internal
+setClass("MySQLDriver",
+  contains = "MariaDBDriver",
+)
+
 #' MariaDB Check for Compiled Versus Loaded Client Library Versions
 #'
 #' This function prints out the compiled and loaded client library versions.

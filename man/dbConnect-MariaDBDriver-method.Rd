@@ -6,7 +6,7 @@
 \alias{dbConnect,MariaDBDriver-method}
 \title{Connect/disconnect to a MariaDB DBMS}
 \usage{
-MariaDB()
+MariaDB(mysql = FALSE)
 
 \S4method{dbConnect}{MariaDBDriver}(
   drv,
@@ -34,6 +34,11 @@ MariaDB()
 )
 }
 \arguments{
+\item{mysql}{Set to \code{TRUE} to indicate the intent to connect to a MySQL server.
+The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect
+and other details vary.
+The default is to assume a MariaDB server.}
+
 \item{drv}{an object of class \linkS4class{MariaDBDriver} or
 \linkS4class{MariaDBConnection}.}
 

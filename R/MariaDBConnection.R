@@ -18,6 +18,12 @@ setClass("MariaDBConnection",
   )
 )
 
+#' @export
+#' @keywords internal
+setClass("MySQLConnection",
+  contains = "MariaDBConnection"
+)
+
 # format()
 #' @export
 #' @rdname MariaDBConnection-class

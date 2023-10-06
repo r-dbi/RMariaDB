@@ -157,7 +157,13 @@ dbConnect_MariaDBDriver <- function(drv, dbname = NULL, username = NULL, passwor
 
   info <- connection_info(ptr)
 
-  conn <- new("MariaDBConnection",
+  if (is(drv, "MySQLDriver")) {
+    class <- "MySQLConnection"
+  } else {
+    class <- "MariaDBConnection"
+  }
+
+  conn <- new(class,
     ptr = ptr,
     host = info$host,
     db = info$dbname,
