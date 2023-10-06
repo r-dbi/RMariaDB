@@ -39,8 +39,9 @@
 #' @param port (optional) integer of the TCP/IP default port.
 #' @param client.flag (optional) integer setting various MariaDB client flags,
 #'   see [Client-flags] for details.
-#' @param groups string identifying a section in the `default.file` to use
+#' @param group string identifying a section in the `default.file` to use
 #'   for setting authentication parameters (see [MariaDB()]).
+#' @param groups deprecated, use `group` instead.
 #' @param default.file string of the filename with MariaDB client options,
 #'   only relevant if `groups` is given. The default value depends on the
 #'   operating system (see references), on Linux and OS X the files
@@ -106,12 +107,15 @@
 #'   con
 #'   dbDisconnect(con)
 #' }
+#'
 #' @usage NULL
 #' @rdname dbConnect-MariaDBDriver-method
 dbConnect_MariaDBDriver <- function(drv, dbname = NULL, username = NULL, password = NULL, host = NULL,
                                     unix.socket = NULL, port = 0, client.flag = 0,
-                                    groups = "rs-dbi", default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
-                                    ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...,
+                                    group = "rs-dbi", default.file = NULL,
+                                    ssl.key = NULL, ssl.cert = NULL,  ssl.ca = NULL, ssl.capath = NULL,
+                                    ssl.cipher = NULL, ...,
+                                    groups = NULL,
                                     load_data_local_infile = FALSE,
                                     bigint = c("integer64", "integer", "numeric", "character"),
                                     timeout = 10, timezone = "+00:00", timezone_out = NULL, reconnect = FALSE) {
@@ -146,11 +150,19 @@ dbConnect_MariaDBDriver <- function(drv, dbname = NULL, username = NULL, passwor
     }
   }
 
+  if (!is.null(groups)) {
+    warning(
+      "Argument `groups` is deprecated, use `group` instead. ",
+      "Note that when `groups` is used, it takes precedence over `group`."
+    )
+    group <- groups
+  }
+
   reconnect <- isTRUE(reconnect)
 
   ptr <- connection_create(
     host, username, password, dbname, as.integer(port), unix.socket,
-    as.integer(client.flag), groups, default.file,
+    as.integer(client.flag), group, default.file,
     ssl.key, ssl.cert, ssl.ca, ssl.capath, ssl.cipher,
     timeout, reconnect
   )
