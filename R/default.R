@@ -38,7 +38,19 @@ mariadbDefault <- function() {
     },
     error = function(...) {
       testthat::skip("Test database not available")
-    })
+    }
+  )
+}
+
+mysqlDefault <- function() {
+  tryCatch(
+    {
+      mariadb_default(mysql = TRUE)
+    },
+    error = function(...) {
+      testthat::skip("Test database not available")
+    }
+  )
 }
 
 mariadb_default <- function(..., mysql = FALSE) {
