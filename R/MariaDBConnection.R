@@ -1,7 +1,18 @@
 #' Class MariaDBConnection.
 #'
-#' `MariaDBConnection` objects are usually created by
-#' [DBI::dbConnect()]
+#' `"MariaDBConnection"` objects are usually created by [DBI::dbConnect()].
+#' They represent a connection to a MariaDB or MySQL database.
+#'
+#' The `"MySQLConnection"` class is a subclass of `"MariaDBConnection"`.
+#' Objects of that class are created by `dbConnect(MariaDB(mysql = TRUE), ...)` to indicate
+#' that the server is a MySQL server.
+#' The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect
+#' and other details vary.
+#' The default is to assume a MariaDB server.
+#'
+#' The older \pkg{RMySQL} package also implements the `"MySQLConnection"` class.
+#' If both packages are loaded, the class of the connection object is determined by the
+#' package that was loaded first.
 #'
 #' @export
 #' @keywords internal
@@ -20,6 +31,7 @@ setClass("MariaDBConnection",
 
 #' @export
 #' @keywords internal
+#' @rdname MariaDBConnection-class
 setClass("MySQLConnection",
   contains = "MariaDBConnection"
 )
