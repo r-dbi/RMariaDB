@@ -14,7 +14,7 @@ runs:
     - uses: ankane/setup-mariadb@v1
       if: (matrix.config.mysql_server == '') || ! matrix.config.mysql_server
       with:
-        mariadb-version: "11.0"
+        mariadb-version: "11.1"
 
     - uses: ankane/setup-mysql@v1
       if: matrix.config.mysql_server
