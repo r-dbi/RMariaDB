@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.2.2.9008 (2023-04-02)
+
+## Bug fixes
+
+- Fix querying JSON values for MySQL Server.
+
+## Chore
+
+- Better `MAX_NO_FIELD_TYPES` error message.
+
+
+# RMariaDB 1.2.2.9007 (2023-03-29)
+
+## Chore
+
+- Use Ubuntu 22.04.
+
+
+# RMariaDB 1.2.2.9006 (2023-03-24)
+
+## Chore
+
+- Drop C++11 specification.
+
+
 # RMariaDB 1.2.2.9005 (2023-02-17)
 
 - Internal changes only.
