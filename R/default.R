@@ -70,5 +70,8 @@ mariadb_default <- function(...) {
 
 mariadb_default_args <- as.list(c(
   dbname = "test",
+  # host = "192.168.64.2",
+  # user = "compose",
+  # password = "YourStrong!Passw0rd",
   NULL
 ))
