@@ -53,8 +53,19 @@ mysqlDefault <- function() {
   )
 }
 
-mariadb_default <- function(..., mysql = FALSE) {
-  rlang::inject(dbConnect(MariaDB(mysql), !!!mariadb_default_args, ...))
+mariadbForceDefault <- function() {
+  tryCatch(
+    {
+      mariadb_default(mysql = FALSE)
+    },
+    error = function(...) {
+      testthat::skip("Test database not available")
+    }
+  )
+}
+
+mariadb_default <- function(...) {
+  rlang::inject(dbConnect(MariaDB(), !!!mariadb_default_args, ...))
 }
 
 mariadb_default_args <- as.list(c(

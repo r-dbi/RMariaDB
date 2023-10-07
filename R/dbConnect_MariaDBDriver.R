@@ -80,6 +80,12 @@
 #' @param reconnect (experimental) Set to `TRUE` to use `MYSQL_OPT_RECONNECT` to enable
 #'   automatic reconnection. This is experimental and could be dangerous if the connection
 #'   is lost in the middle of a transaction.
+#' @param mysql Set to `TRUE`/`FALSE` to connect to a MySQL server or to a MariaDB server,
+#'   respectively.
+#'   The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect
+#'   and other details vary.
+#'   The default is to assume MariaDB if the version is >= 10.0.0, and MySQL otherwise.
+#'
 #' @references
 #' Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/
 #' @examples
@@ -108,13 +114,31 @@
 #' }
 #' @usage NULL
 #' @rdname dbConnect-MariaDBDriver-method
-dbConnect_MariaDBDriver <- function(drv, dbname = NULL, username = NULL, password = NULL, host = NULL,
-                                    unix.socket = NULL, port = 0, client.flag = 0,
-                                    groups = "rs-dbi", default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
-                                    ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...,
-                                    load_data_local_infile = FALSE,
-                                    bigint = c("integer64", "integer", "numeric", "character"),
-                                    timeout = 10, timezone = "+00:00", timezone_out = NULL, reconnect = FALSE) {
+dbConnect_MariaDBDriver <- function(
+    drv,
+    dbname = NULL,
+    username = NULL,
+    password = NULL,
+    host = NULL,
+    unix.socket = NULL,
+    port = 0,
+    client.flag = 0,
+    groups = "rs-dbi",
+    default.file = NULL,
+    ssl.key = NULL,
+    ssl.cert = NULL,
+    ssl.ca = NULL,
+    ssl.capath = NULL,
+    ssl.cipher = NULL,
+    ...,
+    load_data_local_infile = FALSE,
+    bigint = c("integer64", "integer", "numeric", "character"),
+    timeout = 10,
+    timezone = "+00:00",
+    timezone_out = NULL,
+    reconnect = FALSE,
+    mysql = NULL) {
+  #
   bigint <- match.arg(bigint)
 
   if (is.infinite(timeout)) {
@@ -157,13 +181,17 @@ dbConnect_MariaDBDriver <- function(drv, dbname = NULL, username = NULL, passwor
 
   info <- connection_info(ptr)
 
-  if (is(drv, "MySQLDriver")) {
-    class <- "MySQLConnection"
-  } else {
-    class <- "MariaDBConnection"
+  if (is.null(mysql)) {
+    mysql <- (info$db.version.int < 100000)
   }
 
-  conn <- new(class,
+  if (isTRUE(mysql)) {
+    new <- MySQLConnection
+  } else {
+    new <- MariaDBConnection
+  }
+
+  conn <- new(
     ptr = ptr,
     host = info$host,
     db = info$dbname,

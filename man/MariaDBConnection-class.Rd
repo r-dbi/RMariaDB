@@ -5,6 +5,8 @@
 \docType{class}
 \name{MariaDBConnection-class}
 \alias{MariaDBConnection-class}
+\alias{MariaDBConnection}
+\alias{MySQLConnection}
 \alias{MySQLConnection-class}
 \alias{format.MariaDBConnection}
 \alias{dbDisconnect_MariaDBConnection}
@@ -33,11 +35,11 @@ They represent a connection to a MariaDB or MySQL database.
 }
 \details{
 The \code{"MySQLConnection"} class is a subclass of \code{"MariaDBConnection"}.
-Objects of that class are created by \code{dbConnect(MariaDB(mysql = TRUE), ...)} to indicate
-that the server is a MySQL server.
+Objects of that class are created by \code{dbConnect(MariaDB(), ..., mysql = TRUE)}
+to indicate that the server is a MySQL server.
 The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect
 and other details vary.
-The default is to assume a MariaDB server.
+The default is to detect the server type based on the version number.
 
 The older \pkg{RMySQL} package also implements the \code{"MySQLConnection"} class.
 If both packages are loaded, the class of the connection object is determined by the

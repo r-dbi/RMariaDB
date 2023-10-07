@@ -1,5 +1,5 @@
 test_that("Connecting with mysql = FALSE", {
-  con <- mariadbDefault()
+  con <- mariadbForceDefault()
   on.exit(dbDisconnect(con))
 
   expect_s4_class(con, "MariaDBConnection")
@@ -13,3 +13,11 @@ test_that("Connecting with mysql = TRUE", {
   expect_s4_class(con, "MariaDBConnection")
   expect_s4_class(con, "MySQLConnection")
 })
+
+test_that("Connecting with mysql unset", {
+  con <- mariadbDefault()
+  on.exit(dbDisconnect(con))
+
+  expect_s4_class(con, "MariaDBConnection")
+})
+

@@ -6,7 +6,7 @@
 \alias{dbConnect,MariaDBDriver-method}
 \title{Connect/disconnect to a MariaDB DBMS}
 \usage{
-MariaDB(mysql = FALSE)
+MariaDB()
 
 \S4method{dbConnect}{MariaDBDriver}(
   drv,
@@ -30,15 +30,11 @@ MariaDB(mysql = FALSE)
   timeout = 10,
   timezone = "+00:00",
   timezone_out = NULL,
-  reconnect = FALSE
+  reconnect = FALSE,
+  mysql = NULL
 )
 }
 \arguments{
-\item{mysql}{Set to \code{TRUE} to indicate the intent to connect to a MySQL server.
-The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect
-and other details vary.
-The default is to assume a MariaDB server.}
-
 \item{drv}{an object of class \linkS4class{MariaDBDriver} or
 \linkS4class{MariaDBConnection}.}
 
@@ -114,6 +110,12 @@ This setting does not change the time values returned, only their display.}
 \item{reconnect}{(experimental) Set to \code{TRUE} to use \code{MYSQL_OPT_RECONNECT} to enable
 automatic reconnection. This is experimental and could be dangerous if the connection
 is lost in the middle of a transaction.}
+
+\item{mysql}{Set to \code{TRUE}/\code{FALSE} to connect to a MySQL server or to a MariaDB server,
+respectively.
+The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect
+and other details vary.
+The default is to assume MariaDB if the version is >= 10.0.0, and MySQL otherwise.}
 }
 \description{
 These methods are straight-forward implementations of the corresponding

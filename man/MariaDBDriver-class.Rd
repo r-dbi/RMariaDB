@@ -4,7 +4,6 @@
 \docType{class}
 \name{MariaDBDriver-class}
 \alias{MariaDBDriver-class}
-\alias{MySQLDriver-class}
 \alias{dbGetInfo_MariaDBDriver}
 \alias{dbGetInfo,MariaDBDriver-method}
 \alias{dbIsValid_MariaDBDriver}
@@ -23,16 +22,5 @@
 An MariaDB driver implementing the R database (DBI) API.
 This class should always be initialized with the \code{\link[=MariaDB]{MariaDB()}} function.
 It returns a singleton that allows you to connect to MariaDB.
-}
-\details{
-The \code{"MySQLDriver"} class is a subclass of \code{"MariaDBDriver"}.
-It is created by \code{MariaDB(mysql = TRUE)} to indicate intent to connect to a MySQL server.
-The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect
-and other details vary.
-The default is to assume a MariaDB server.
-
-The older \pkg{RMySQL} package also implements the \code{"MySQLDriver"} class.
-If both packages are loaded, the class of the connection object is determined by the
-package that was loaded first.
 }
 \keyword{internal}
