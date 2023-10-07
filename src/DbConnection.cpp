@@ -115,6 +115,7 @@ cpp11::list DbConnection::info() {
       "dbname"_nm = std::string(pConn_->db ? pConn_->db : ""),
       "con.type"_nm = std::string(mysql_get_host_info(pConn_)),
       "db.version"_nm = std::string(mysql_get_server_info(pConn_)),
+      "db.version.int"_nm = (int) mysql_get_server_version(pConn_),
       "port"_nm = NA_INTEGER,
       "protocol.version"_nm = (int) mysql_get_proto_info(pConn_),
       "thread.id"_nm = (int) mysql_thread_id(pConn_)

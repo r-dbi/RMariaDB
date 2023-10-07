@@ -38,7 +38,30 @@ mariadbDefault <- function() {
     },
     error = function(...) {
       testthat::skip("Test database not available")
-    })
+    }
+  )
+}
+
+mysqlDefault <- function() {
+  tryCatch(
+    {
+      mariadb_default(mysql = TRUE)
+    },
+    error = function(...) {
+      testthat::skip("Test database not available")
+    }
+  )
+}
+
+mariadbForceDefault <- function() {
+  tryCatch(
+    {
+      mariadb_default(mysql = FALSE)
+    },
+    error = function(...) {
+      testthat::skip("Test database not available")
+    }
+  )
 }
 
 mariadb_default <- function(...) {
@@ -47,5 +70,8 @@ mariadb_default <- function(...) {
 
 mariadb_default_args <- as.list(c(
   dbname = "test",
+  # host = "192.168.64.2",
+  # user = "compose",
+  # password = "YourStrong!Passw0rd",
   NULL
 ))
