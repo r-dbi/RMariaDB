@@ -11,8 +11,8 @@
 #' The default is to detect the server type based on the version number.
 #'
 #' The older \pkg{RMySQL} package also implements the `"MySQLConnection"` class.
-#' If both packages are loaded, the class of the connection object is determined by the
-#' package that was loaded first.
+#' The S4 system is able to distinguish between \pkg{RMariaDB} and \pkg{RMySQL} objects
+#' even if both packages are loaded.
 #'
 #' @keywords internal
 MariaDBConnection <- setClass("MariaDBConnection",
