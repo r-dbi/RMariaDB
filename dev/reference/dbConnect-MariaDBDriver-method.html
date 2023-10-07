@@ -80,7 +80,8 @@ generic functions.</p>
 <span>  timeout <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  timezone <span class="op">=</span> <span class="st">"+00:00"</span>,</span>
 <span>  timezone_out <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  reconnect <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  reconnect <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  mysql <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -202,6 +203,14 @@ This setting does not change the time values returned, only their display.</p></
 <dd><p>(experimental) Set to <code>TRUE</code> to use <code>MYSQL_OPT_RECONNECT</code> to enable
 automatic reconnection. This is experimental and could be dangerous if the connection
 is lost in the middle of a transaction.</p></dd>
+
+
+<dt>mysql</dt>
+<dd><p>Set to <code>TRUE</code>/<code>FALSE</code> to connect to a MySQL server or to a MariaDB server,
+respectively.
+The <span class="pkg">RMariaDB</span> package supports both MariaDB and MySQL servers, but the SQL dialect
+and other details vary.
+The default is to assume MariaDB if the version is &gt;= 10.0.0, and MySQL otherwise.</p></dd>
 
 </dl></div>
     <div id="time-zones">
