@@ -20,4 +20,3 @@ test_that("Connecting with mysql unset", {
 
   expect_s4_class(con, "MariaDBConnection")
 })
-
