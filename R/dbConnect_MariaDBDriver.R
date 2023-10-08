@@ -182,7 +182,15 @@ dbConnect_MariaDBDriver <- function(
   info <- connection_info(ptr)
 
   if (is.null(mysql)) {
-    mysql <- (info$db.version.int < 100000)
+    if (info$db.version.int >= 100000) {
+      mysql <- FALSE
+    } else if (grepl("^5[.][0-9]+[.][0-9]+-.*mariadb", info$db.version, ignore.case = TRUE)) {
+      # MariaDB built against MySQL libraries will report a 5.x version number
+      # https://github.com/OpenNebula/one/issues/3924
+      mysql <- FALSE
+    } else {
+      mysql <- TRUE
+    }
   }
 
   if (isTRUE(mysql)) {
