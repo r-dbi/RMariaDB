@@ -40,8 +40,6 @@ Suggests:
 LinkingTo: 
     cpp11,
     plogr
-Remotes: 
-    r-lib/testthat@f-dev-withr
 Config/autostyle/scope: line_breaks
 Config/autostyle/strict: false
 Config/testthat/edition: 3
