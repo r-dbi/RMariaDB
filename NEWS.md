@@ -2,47 +2,26 @@
 
 # RMariaDB 1.3.0 (2023-10-08)
 
-## Bug fixes
-
-- Improve detection of MariaDB when linking against MySQL libraries.
-- Return JSON as string on MySQL (#296).
-- Fix querying JSON values for MySQL Server.
-- Indent.
-
 ## Features
 
-- Connections now inherit from `"MySQLConnection"` if a MySQL server is detected (server version \< 10.0). The new `mysql` argument to `dbConnect()` allows overriding the autodetection (#303).
-- Use string as default for unknown column type (@LeeMendelowitz, #260).
+- Connections now inherit from `"MySQLConnection"` if a MySQL server is detected (server version \< 10.0 or server description contains `"MariaDB"`). The new `mysql` argument to `dbConnect()` allows overriding the autodetection (#303).
+- Use string as default for JSON (#296) and all unknown column types (@LeeMendelowitz, #260).
 - Support `TIME` columns with subsecond precision (@renkun-ken, #288, #289).
-- Use testthat edition 3 (#285).
+
+## Documentation
+
+- Better `MAX_NO_FIELD_TYPES` error message.
 
 ## Chore
 
-- Upgrade MariaDB on CI/CD (#299).
-- Extract `mariadb_default_args`.
 - Update Windows libs to new location (#301).
-- Better `MAX_NO_FIELD_TYPES` error message.
-- Use Ubuntu 22.04.
-- Drop C++11 specification.
-- Add decor as a dependency.
-- Install from `gitpod.yml` file.
-- Fix gitpod configuration.
 - Replace Rcpp by cpp11 (@Antonov548, #286).
-- Update gitpod configuration.
+- Add decor as a dependency.
 
 ## Testing
 
 - Skip tests if packages are not available (#304).
-
-## Uncategorized
-
-- Internal changes only.
-- Merge pull request #292 from Antonov548/r-headers.
-- Merge branch 'krlmlr'.
-feat: Configuration for https://gitpod.io
-- Harmonize yaml formatting.
-- Revert changes to matrix section.
-- Merged cran-1.2.2 into main.
+- Use testthat edition 3 (#285).
 
 
 # RMariaDB 1.2.2 (2022-06-19)
