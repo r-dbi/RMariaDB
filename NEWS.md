@@ -1,5 +1,32 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.2.2.9009 (2023-10-08)
+
+## Bug fixes
+
+- Improve detection of MariaDB when linking against MySQL libraries.
+
+- Return JSON as string on MySQL (#296).
+
+## Features
+
+- Connections now inherit from `"MySQLConnection"` if a MySQL server is detected (server version \< 10.0). The new `mysql` argument to `dbConnect()` allows overriding the autodetection (#303).
+
+- Use string as default for unknown column type (@LeeMendelowitz, #260).
+
+## Chore
+
+- Upgrade MariaDB on CI/CD (#299).
+
+- Extract `mariadb_default_args`.
+
+- Update Windows libs to new location (#301).
+
+## Testing
+
+- Skip tests if packages are not available (#304).
+
+
 # RMariaDB 1.2.2.9008 (2023-04-02)
 
 ## Bug fixes
