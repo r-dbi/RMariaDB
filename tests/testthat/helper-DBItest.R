@@ -1,4 +1,4 @@
-DBItest::make_context(
+if (rlang::is_installed("DBItest")) DBItest::make_context(
   MariaDB(),
   c(
     mariadb_default_args,
