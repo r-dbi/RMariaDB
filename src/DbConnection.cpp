@@ -36,7 +36,7 @@ void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
   mysql_options(this->pConn_, MYSQL_OPT_LOCAL_INFILE, &local_infile);
   // Default to UTF-8
   mysql_options(this->pConn_, MYSQL_SET_CHARSET_NAME, "utf8mb4");
-  if (Rf_isNull(groups))
+  if (!Rf_isNull(groups))
     mysql_options(this->pConn_, MYSQL_READ_DEFAULT_GROUP,
                   cpp11::as_cpp<std::string>(groups).c_str());
   if (!Rf_isNull(default_file))
