@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.2.9008</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.2.9009</span>
       </span>
     </div>
 
@@ -47,6 +47,29 @@
       <small>Source: <a href="https://github.com/r-dbi/RMariaDB/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.2.2.9009" id="rmariadb-1229009-2023-10-08">RMariaDB 1.2.2.9009 (2023-10-08)<a class="anchor" aria-label="anchor" href="#rmariadb-1229009-2023-10-08"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-2-2-9009">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-2-2-9009"></a></h3>
+<ul><li><p>Improve detection of MariaDB when linking against MySQL libraries.</p></li>
+<li><p>Return JSON as string on MySQL (<a href="https://github.com/r-dbi/RMariaDB/issues/296" class="external-link">#296</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="features-1-2-2-9009">Features<a class="anchor" aria-label="anchor" href="#features-1-2-2-9009"></a></h3>
+<ul><li><p>Connections now inherit from <code>"MySQLConnection"</code> if a MySQL server is detected (server version &lt; 10.0). The new <code>mysql</code> argument to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> allows overriding the autodetection (<a href="https://github.com/r-dbi/RMariaDB/issues/303" class="external-link">#303</a>).</p></li>
+<li><p>Use string as default for unknown column type (<a href="https://github.com/LeeMendelowitz" class="external-link">@LeeMendelowitz</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/260" class="external-link">#260</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="chore-1-2-2-9009">Chore<a class="anchor" aria-label="anchor" href="#chore-1-2-2-9009"></a></h3>
+<ul><li><p>Upgrade MariaDB on CI/CD (<a href="https://github.com/r-dbi/RMariaDB/issues/299" class="external-link">#299</a>).</p></li>
+<li><p>Extract <code>mariadb_default_args</code>.</p></li>
+<li><p>Update Windows libs to new location (<a href="https://github.com/r-dbi/RMariaDB/issues/301" class="external-link">#301</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="testing-1-2-2-9009">Testing<a class="anchor" aria-label="anchor" href="#testing-1-2-2-9009"></a></h3>
+<ul><li>Skip tests if packages are not available (<a href="https://github.com/r-dbi/RMariaDB/issues/304" class="external-link">#304</a>).</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.2.9008" id="rmariadb-1229008-2023-04-02">RMariaDB 1.2.2.9008 (2023-04-02)<a class="anchor" aria-label="anchor" href="#rmariadb-1229008-2023-04-02"></a></h2>
 <div class="section level3">
