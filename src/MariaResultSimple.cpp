@@ -40,7 +40,7 @@ cpp11::list MariaResultSimple::fetch(int /*n_max*/) {
   LOG_VERBOSE;
 
   warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
-  return (SEXP)df_create(std::vector<MariaFieldType>(), std::vector<std::string>(), 0);
+  return df_create(std::vector<MariaFieldType>(), std::vector<std::string>(), 0);
 }
 
 int MariaResultSimple::n_rows_affected() {
