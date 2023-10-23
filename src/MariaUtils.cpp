@@ -52,7 +52,7 @@ List df_create(const std::vector<MariaFieldType>& types, const std::vector<std::
   }
   out.attr("names") = names_utf8;
   out.attr("class") = "data.frame";
-  out.attr("row.names") = IntegerVector::create(NA_INTEGER, -n);
+  out.attr("row.names") = cpp11::integers({NA_INTEGER, -n});
 
   for (R_xlen_t j = 0; j < p; ++j) {
     out[j] = Rf_allocVector(type_sexp(types[j]), n);
