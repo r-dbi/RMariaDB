@@ -1,7 +1,7 @@
 #' @rdname query
 #' @usage NULL
-dbSendStatement_MariaDBConnection_character <- function(conn, statement, params = NULL, ...) {
-  dbSend(conn, statement, params, is_statement = TRUE)
+dbSendStatement_MariaDBConnection_character <- function(conn, statement, params = NULL, ..., immediate = FALSE) {
+  dbSend(conn, statement, params, is_statement = TRUE, immediate)
 }
 
 #' @rdname query

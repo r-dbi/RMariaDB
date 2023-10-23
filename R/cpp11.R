@@ -52,8 +52,8 @@ init_logging <- function(log_level) {
   invisible(.Call(`_RMariaDB_init_logging`, log_level))
 }
 
-result_create <- function(con, sql, is_statement) {
-  .Call(`_RMariaDB_result_create`, con, sql, is_statement)
+result_create <- function(con, sql, is_statement, immediate) {
+  .Call(`_RMariaDB_result_create`, con, sql, is_statement, immediate)
 }
 
 result_release <- function(res) {
