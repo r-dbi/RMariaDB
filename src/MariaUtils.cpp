@@ -45,10 +45,12 @@ void df_s3(const List& df, const std::vector<MariaFieldType>& types) {
 List df_create(const std::vector<MariaFieldType>& types, const std::vector<std::string>& names, int n) {
   R_xlen_t p = types.size();
 
-  List out(p);
-  StringVector names_utf8 = wrap(names);
+  cpp11::writable::list out(p);
+  auto names_utf8 = static_cast<cpp11::writable::strings>(cpp11::as_sexp(names));
   for (int j = 0; j < names_utf8.size(); ++j) {
-    names_utf8[j] = Rf_mkCharCE(names_utf8[j], CE_UTF8);
+    const cpp11::r_string name = names_utf8[j];
+    const auto name_str = static_cast<std::string>(name);
+    names_utf8[j] = Rf_mkCharCE(name_str.c_str(), CE_UTF8);
   }
   out.attr("names") = names_utf8;
   out.attr("class") = "data.frame";
@@ -57,7 +59,7 @@ List df_create(const std::vector<MariaFieldType>& types, const std::vector<std::
   for (R_xlen_t j = 0; j < p; ++j) {
     out[j] = Rf_allocVector(type_sexp(types[j]), n);
   }
-  return out;
+  return (SEXP)out;
 }
 
 // From https://stackoverflow.com/a/40914871/946850:
