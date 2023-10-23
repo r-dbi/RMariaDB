@@ -5,9 +5,9 @@
 
 [[cpp11::register]]
 cpp11::external_pointer<DbResult>
-result_create(cpp11::external_pointer<DbConnectionPtr> con, std::string sql, bool is_statement = false) {
+result_create(cpp11::external_pointer<DbConnectionPtr> con, std::string sql, bool is_statement = false, bool immediate = false) {
   (*con)->check_connection();
-  DbResult* res = MariaResult::create_and_send_query(*con, sql, is_statement);
+  DbResult* res = MariaResult::create_and_send_query(*con, sql, is_statement, immediate);
   return cpp11::external_pointer<DbResult>(res, true);
 }
 

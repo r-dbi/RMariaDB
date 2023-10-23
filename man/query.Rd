@@ -28,12 +28,12 @@
 
 \S4method{dbGetStatement}{MariaDBResult}(res, ...)
 
-\S4method{dbSendQuery}{MariaDBConnection,character}(conn, statement, params = NULL, ...)
+\S4method{dbSendQuery}{MariaDBConnection,character}(conn, statement, params = NULL, ..., immediate = FALSE)
 
-\S4method{dbSendStatement}{MariaDBConnection,character}(conn, statement, params = NULL, ...)
+\S4method{dbSendStatement}{MariaDBConnection,character}(conn, statement, params = NULL, ..., immediate = FALSE)
 }
 \arguments{
-\item{res}{A  \linkS4class{MariaDBResult} object.}
+\item{res}{A \linkS4class{MariaDBResult} object.}
 
 \item{params}{A list of query parameters to be substituted into
 a parameterised query.}
@@ -53,11 +53,16 @@ default name.
 
 For backward compatibility, \code{NULL} is equivalent to \code{FALSE}.}
 
-\item{conn}{an \linkS4class{MariaDBConnection} object.}
+\item{conn}{A \linkS4class{MariaDBConnection} object.}
 
-\item{statement}{a character vector of length one specifying the SQL
+\item{statement}{A character vector of length one specifying the SQL
 statement that should be executed.  Only a single SQL statement should be
 provided.}
+
+\item{immediate}{If TRUE, uses the \code{mysql_real_query()} API
+instead of \code{mysql_stmt_init()}.
+This allows passing multiple statements (with \link{CLIENT_MULTI_STATEMENTS})
+and turns off the ability to pass parameters.}
 }
 \description{
 To retrieve results a chunk at a time, use \code{\link[=dbSendQuery]{dbSendQuery()}},

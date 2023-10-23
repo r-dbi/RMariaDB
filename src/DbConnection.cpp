@@ -185,9 +185,11 @@ bool DbConnection::exec(const std::string& sql) {
   if (mysql_real_query(pConn_, sql.data(), sql.size()) != 0)
     cpp11::stop("Error executing query: %s", mysql_error(pConn_));
 
-  MYSQL_RES* res = mysql_store_result(pConn_);
-  if (res != NULL)
-    mysql_free_result(res);
+  do {
+    MYSQL_RES* res = mysql_store_result(pConn_);
+    if (res != NULL)
+      mysql_free_result(res);
+  } while (mysql_next_result(pConn_) == 0);
 
   autocommit();
 

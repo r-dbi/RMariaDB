@@ -104,10 +104,10 @@ extern "C" SEXP _RMariaDB_init_logging(SEXP log_level) {
   END_CPP11
 }
 // result.cpp
-cpp11::external_pointer<DbResult> result_create(cpp11::external_pointer<DbConnectionPtr> con, std::string sql, bool is_statement);
-extern "C" SEXP _RMariaDB_result_create(SEXP con, SEXP sql, SEXP is_statement) {
+cpp11::external_pointer<DbResult> result_create(cpp11::external_pointer<DbConnectionPtr> con, std::string sql, bool is_statement, bool immediate);
+extern "C" SEXP _RMariaDB_result_create(SEXP con, SEXP sql, SEXP is_statement, SEXP immediate) {
   BEGIN_CPP11
-    return cpp11::as_sexp(result_create(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<DbConnectionPtr>>>(con), cpp11::as_cpp<cpp11::decay_t<std::string>>(sql), cpp11::as_cpp<cpp11::decay_t<bool>>(is_statement)));
+    return cpp11::as_sexp(result_create(cpp11::as_cpp<cpp11::decay_t<cpp11::external_pointer<DbConnectionPtr>>>(con), cpp11::as_cpp<cpp11::decay_t<std::string>>(sql), cpp11::as_cpp<cpp11::decay_t<bool>>(is_statement), cpp11::as_cpp<cpp11::decay_t<bool>>(immediate)));
   END_CPP11
 }
 // result.cpp
@@ -185,7 +185,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_RMariaDB_init_logging",                 (DL_FUNC) &_RMariaDB_init_logging,                  1},
     {"_RMariaDB_result_bind",                  (DL_FUNC) &_RMariaDB_result_bind,                   2},
     {"_RMariaDB_result_column_info",           (DL_FUNC) &_RMariaDB_result_column_info,            1},
-    {"_RMariaDB_result_create",                (DL_FUNC) &_RMariaDB_result_create,                 3},
+    {"_RMariaDB_result_create",                (DL_FUNC) &_RMariaDB_result_create,                 4},
     {"_RMariaDB_result_fetch",                 (DL_FUNC) &_RMariaDB_result_fetch,                  2},
     {"_RMariaDB_result_has_completed",         (DL_FUNC) &_RMariaDB_result_has_completed,          1},
     {"_RMariaDB_result_release",               (DL_FUNC) &_RMariaDB_result_release,                1},
