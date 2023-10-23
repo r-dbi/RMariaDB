@@ -4,7 +4,7 @@
 List df_resize(const List& df, int n) {
   R_xlen_t p = df.size();
 
-  List out(p);
+  cpp11::writable::list out(p);
   for (R_xlen_t j = 0; j < p; ++j) {
     out[j] = Rf_lengthgets(df[j], n);
   }
@@ -13,7 +13,7 @@ List df_resize(const List& df, int n) {
   out.attr("class") = df.attr("class");
   out.attr("row.names") = IntegerVector::create(NA_INTEGER, -n);
 
-  return out;
+  return (SEXP)out;
 }
 
 void df_s3(const List& df, const std::vector<MariaFieldType>& types) {
