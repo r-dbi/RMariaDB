@@ -42,7 +42,9 @@ void df_s3(const cpp11::list& df, const std::vector<MariaFieldType>& types) {
   }
 }
 
-cpp11::writable::list df_create(const std::vector<MariaFieldType>& types, const std::vector<std::string>& names, int n) {
+// Memory leak if cpp11::writable::list is returned?
+// https://github.com/r-dbi/RMariaDB/issues/309
+cpp11::list df_create(const std::vector<MariaFieldType>& types, const std::vector<std::string>& names, int n) {
   R_xlen_t p = types.size();
 
   cpp11::writable::list out(p);

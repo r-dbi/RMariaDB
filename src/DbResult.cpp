@@ -57,7 +57,9 @@ cpp11::list DbResult::fetch(const int n_max) {
 }
 
 cpp11::list DbResult::get_column_info() {
-  auto out = impl->get_column_info();
+  // Memory leak if cpp11::writable::list is returned?
+  // https://github.com/r-dbi/RMariaDB/issues/309
+  cpp11::writable::list out = impl->get_column_info();
 
   out.attr("row.names") = cpp11::integers({NA_INTEGER, static_cast<int>(-Rf_length(out[0]))});
   out.attr("class") =  "data.frame";
