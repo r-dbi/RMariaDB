@@ -173,13 +173,13 @@ List MariaResultPrep::fetch(int n_max) {
     if (names_.size() == 0) {
       warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
     }
-    return df_create(types_, names_, 0);
+    return (SEXP)df_create(types_, names_, 0);
   }
 
   int n = (n_max < 0) ? 100 : n_max;
   List out = df_create(types_, names_, n);
   if (n == 0)
-    return out;
+    return (SEXP)out;
 
   int i = 0;
 
@@ -211,7 +211,7 @@ List MariaResultPrep::fetch(int n_max) {
   // Set up S3 classes
   df_s3(out, types_);
 
-  return out;
+  return (SEXP)out;
 }
 
 int MariaResultPrep::n_rows_affected() {
