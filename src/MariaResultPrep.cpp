@@ -111,7 +111,7 @@ void MariaResultPrep::bind(const cpp11::list& params) {
   bound_ = true;
 }
 
-cpp11::writable::list MariaResultPrep::get_column_info() {
+cpp11::list MariaResultPrep::get_column_info() {
   using namespace cpp11::literals;
   cpp11::writable::strings names(nCols_), types(nCols_);
   for (int i = 0; i < nCols_; i++) {
