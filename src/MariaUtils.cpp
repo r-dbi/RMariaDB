@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "MariaTypes.h"
 
-List df_resize(const List& df, int n) {
-  R_xlen_t p = df.size();
+cpp11::list df_resize(const cpp11::list& df, int n) {
+  const R_xlen_t p = df.size();
 
   cpp11::writable::list out(p);
   for (R_xlen_t j = 0; j < p; ++j) {
@@ -16,7 +16,7 @@ List df_resize(const List& df, int n) {
   return (SEXP)out;
 }
 
-void df_s3(const List& df, const std::vector<MariaFieldType>& types) {
+void df_s3(const cpp11::list& df, const std::vector<MariaFieldType>& types) {
   R_xlen_t p = df.size();
 
   for (R_xlen_t j = 0; j < p; ++j) {
@@ -42,7 +42,7 @@ void df_s3(const List& df, const std::vector<MariaFieldType>& types) {
   }
 }
 
-List df_create(const std::vector<MariaFieldType>& types, const std::vector<std::string>& names, int n) {
+cpp11::writable::list df_create(const std::vector<MariaFieldType>& types, const std::vector<std::string>& names, int n) {
   R_xlen_t p = types.size();
 
   cpp11::writable::list out(p);
