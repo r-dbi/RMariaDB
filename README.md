@@ -80,7 +80,7 @@ On __Fedora__,  __CentOS__ or __RHEL__ we need [mariadb-devel](https://src.fedor
 sudo yum install mariadb-devel
 ````
 
-On __OS X__ use [mariadb-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/mariadb-connector-c.rb) from Homebrew:
+On __OS X__ use [mariadb-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/m/mariadb-connector-c.rb) from Homebrew:
 
 ```
 brew install mariadb-connector-c
@@ -104,7 +104,7 @@ sudo yum install mysql-devel
 Follow [instructions](https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/) to enable the MySQL yum repository if the above command attempts to install MariaDB files.
 
 
-On __OS X__ use [mysql-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/mysql-connector-c++.rb) from Homebrew:
+On __OS X__ use [mysql-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/m/mysql-connector-c++.rb) from Homebrew:
 
 ```
 brew install mysql-connector-c++

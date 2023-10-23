@@ -7,122 +7,28 @@
 - `dbConnection(groups = )` works as documented again, regression introduced in RMariaDB 1.3.0 (@pekkarr, #306).
 
 
-# RMariaDB 1.2.2.9009 (2023-10-08)
-
-## Bug fixes
-
-- Improve detection of MariaDB when linking against MySQL libraries.
-
-- Return JSON as string on MySQL (#296).
+# RMariaDB 1.3.0 (2023-10-08)
 
 ## Features
 
-- Connections now inherit from `"MySQLConnection"` if a MySQL server is detected (server version \< 10.0). The new `mysql` argument to `dbConnect()` allows overriding the autodetection (#303).
+- Connections now inherit from `"MySQLConnection"` if a MySQL server is detected (server version \< 10.0 or server description contains `"MariaDB"`). The new `mysql` argument to `dbConnect()` allows overriding the autodetection (#303).
+- Use string as default for JSON (#296) and all unknown column types (@LeeMendelowitz, #260).
+- Support `TIME` columns with subsecond precision (@renkun-ken, #288, #289).
 
-- Use string as default for unknown column type (@LeeMendelowitz, #260).
+## Documentation
+
+- Better `MAX_NO_FIELD_TYPES` error message.
 
 ## Chore
 
-- Upgrade MariaDB on CI/CD (#299).
-
-- Extract `mariadb_default_args`.
-
 - Update Windows libs to new location (#301).
+- Replace Rcpp by cpp11 (@Antonov548, #286).
+- Add decor as a dependency.
 
 ## Testing
 
 - Skip tests if packages are not available (#304).
-
-
-# RMariaDB 1.2.2.9008 (2023-04-02)
-
-## Bug fixes
-
-- Fix querying JSON values for MySQL Server.
-
-## Chore
-
-- Better `MAX_NO_FIELD_TYPES` error message.
-
-
-# RMariaDB 1.2.2.9007 (2023-03-29)
-
-## Chore
-
-- Use Ubuntu 22.04.
-
-
-# RMariaDB 1.2.2.9006 (2023-03-24)
-
-## Chore
-
-- Drop C++11 specification.
-
-
-# RMariaDB 1.2.2.9005 (2023-02-17)
-
-- Internal changes only.
-
-
-# RMariaDB 1.2.2.9004 (2023-02-06)
-
-## Bug fixes
-
-- Indent.
-
-## Chore
-
-- Add decor as a dependency.
-
-- Install from `gitpod.yml` file.
-
-- Fix gitpod configuration.
-
-
-# RMariaDB 1.2.2.9003 (2023-01-24)
-
-## Chore
-
-- Replace Rcpp by cpp11 (@Antonov548, #286).
-
-- Update gitpod configuration.
-
-
-# RMariaDB 1.2.2.9002 (2022-12-30)
-
-- Internal changes only.
-
-
-# RMariaDB 1.2.2.9001 (2022-12-24)
-
-## Features
-
-- Support `TIME` columns with subsecond precision (@renkun-ken, #288, #289).
-
 - Use testthat edition 3 (#285).
-
-## Uncategorized
-
-- Merge pull request #292 from Antonov548/r-headers.
-
-
-
-- Merge branch 'krlmlr'.
-
-feat: Configuration for https://gitpod.io
-
-
-- Harmonize yaml formatting.
-
-- Revert changes to matrix section.
-
-- Merged cran-1.2.2 into main.
-
-
-
-# RMariaDB 1.2.2.9000 (2022-06-19)
-
-- Internal changes only.
 
 
 # RMariaDB 1.2.2 (2022-06-19)
