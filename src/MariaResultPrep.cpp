@@ -166,7 +166,7 @@ bool MariaResultPrep::fetch_row() {
   return false;
 }
 
-List MariaResultPrep::fetch(int n_max) {
+cpp11::list MariaResultPrep::fetch(int n_max) {
   if (!bound_)
     stop("Query needs to be bound before fetching");
   if (!has_result()) {

@@ -34,7 +34,7 @@ public:
   int n_rows_affected();
 
   void bind(const cpp11::list& params);
-  List fetch(int n_max = -1);
+  cpp11::list fetch(int n_max = -1);
 
   cpp11::list get_column_info();
 

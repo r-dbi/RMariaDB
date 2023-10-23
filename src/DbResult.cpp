@@ -49,7 +49,7 @@ void DbResult::bind(const cpp11::list& params) {
   impl->bind(params);
 }
 
-List DbResult::fetch(const int n_max) {
+cpp11::list DbResult::fetch(const int n_max) {
   if (!is_active())
     stop("Inactive result set");
 
