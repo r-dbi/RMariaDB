@@ -11,7 +11,7 @@ List df_resize(const List& df, int n) {
 
   out.attr("names") = df.attr("names");
   out.attr("class") = df.attr("class");
-  out.attr("row.names") = IntegerVector::create(NA_INTEGER, -n);
+  out.attr("row.names") = cpp11::integers({NA_INTEGER, -n});
 
   return (SEXP)out;
 }
