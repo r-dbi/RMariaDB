@@ -43,4 +43,4 @@ src\/RCS
 ^\.gitpod\.yml$
 ^\.gitpod\.Dockerfile$
 ^CMakeLists\.txt$
-^build$
+^vscode-.*build$

@@ -40,7 +40,7 @@ MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary,
   case MYSQL_TYPE_VAR_STRING:
   case MYSQL_TYPE_VARCHAR:
     return binary ? MY_RAW : MY_STR;
-  case MYSQL_TYPE_JSON:
+  case 245: // MYSQL_TYPE_JSON not defined in CentOS 7
     return MY_STR;
   case MYSQL_TYPE_BLOB:
   case MYSQL_TYPE_TINY_BLOB:

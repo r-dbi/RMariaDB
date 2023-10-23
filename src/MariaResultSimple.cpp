@@ -29,7 +29,7 @@ void MariaResultSimple::bind(const cpp11::list& /*params*/) {
   cpp11::stop("This query is not supported by the prepared statement protocol, no parameters can be bound.");
 }
 
-cpp11::writable::list MariaResultSimple::get_column_info() {
+cpp11::list MariaResultSimple::get_column_info() {
   using namespace cpp11::literals;
   cpp11::writable::strings names(0_xl), types(0_xl);
 

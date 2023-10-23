@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.2.2.9010 (2023-10-10)
+
+## Bug fixes
+
+- `dbConnection(groups = )` works as documented again, regression introduced in RMariaDB 1.3.0 (@pekkarr, #306).
+
+
 # RMariaDB 1.3.0 (2023-10-08)
 
 ## Features
