@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.0.9000 (2023-10-24)
+
+## Features
+
+- Support `dbSendStatement(immediate = TRUE)` and `dbExecute(immediate = TRUE)`, needs `CLIENT_MULTI_STATEMENTS` (#147, #312).
+
+## Documentation
+
+- Update docs for client flags (#313).
+
+## Uncategorized
+
+- Merge branch 'cran-1.3.0'.
+
+- Merge branch 'main' into cran-1.3.0.
+
+
 # RMariaDB 1.2.2.9010 (2023-10-10)
 
 ## Bug fixes
