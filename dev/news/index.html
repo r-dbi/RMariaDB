@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">RMariaDB</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.2.2.9010</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.3.0.9001</span>
       </span>
     </div>
 
@@ -48,6 +48,30 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.3.0.9001" id="rmariadb-1309001-2023-10-26">RMariaDB 1.3.0.9001 (2023-10-26)<a class="anchor" aria-label="anchor" href="#rmariadb-1309001-2023-10-26"></a></h2>
+<div class="section level3">
+<h3 id="chore-1-3-0-9001">Chore<a class="anchor" aria-label="anchor" href="#chore-1-3-0-9001"></a></h3>
+<ul><li>Resurrect missing NEWS items.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.3.0.9000" id="rmariadb-1309000-2023-10-24">RMariaDB 1.3.0.9000 (2023-10-24)<a class="anchor" aria-label="anchor" href="#rmariadb-1309000-2023-10-24"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-3-0-9000">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-3-0-9000"></a></h3>
+<ul><li><p>Fix memory leak (<a href="https://github.com/r-dbi/RMariaDB/issues/309" class="external-link">#309</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/311" class="external-link">#311</a>).</p></li>
+<li><p>Fix compilation on CentOS 7 (<a href="https://github.com/r-dbi/RMariaDB/issues/310" class="external-link">#310</a>).</p></li>
+<li><p><code>dbConnection(groups = )</code> works as documented again, regression introduced in RMariaDB 1.3.0 (<a href="https://github.com/pekkarr" class="external-link">@pekkarr</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/306" class="external-link">#306</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="features-1-3-0-9000">Features<a class="anchor" aria-label="anchor" href="#features-1-3-0-9000"></a></h3>
+<ul><li>Support <code>dbSendStatement(immediate = TRUE)</code> and <code>dbExecute(immediate = TRUE)</code>, needs <code>CLIENT_MULTI_STATEMENTS</code> (<a href="https://github.com/r-dbi/RMariaDB/issues/147" class="external-link">#147</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/312" class="external-link">#312</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-1-3-0-9000">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-3-0-9000"></a></h3>
+<ul><li>Update docs for client flags (<a href="https://github.com/r-dbi/RMariaDB/issues/313" class="external-link">#313</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.2.9010" id="rmariadb-1229010-2023-10-10">RMariaDB 1.2.2.9010 (2023-10-10)<a class="anchor" aria-label="anchor" href="#rmariadb-1229010-2023-10-10"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-1-2-2-9010">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-2-2-9010"></a></h3>
@@ -56,103 +80,29 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.2.9009" id="rmariadb-1229009-2023-10-08">RMariaDB 1.2.2.9009 (2023-10-08)<a class="anchor" aria-label="anchor" href="#rmariadb-1229009-2023-10-08"></a></h2>
+<h2 class="page-header" data-toc-text="1.3.0" id="rmariadb-130-2023-10-08">RMariaDB 1.3.0 (2023-10-08)<a class="anchor" aria-label="anchor" href="#rmariadb-130-2023-10-08"></a></h2>
 <div class="section level3">
-<h3 id="bug-fixes-1-2-2-9009">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-2-2-9009"></a></h3>
-<ul><li><p>Improve detection of MariaDB when linking against MySQL libraries.</p></li>
-<li><p>Return JSON as string on MySQL (<a href="https://github.com/r-dbi/RMariaDB/issues/296" class="external-link">#296</a>).</p></li>
+<h3 id="features-1-3-0">Features<a class="anchor" aria-label="anchor" href="#features-1-3-0"></a></h3>
+<ul><li>Connections now inherit from <code>"MySQLConnection"</code> if a MySQL server is detected (server version &lt; 10.0 or server description contains <code>"MariaDB"</code>). The new <code>mysql</code> argument to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> allows overriding the autodetection (<a href="https://github.com/r-dbi/RMariaDB/issues/303" class="external-link">#303</a>).</li>
+<li>Use string as default for JSON (<a href="https://github.com/r-dbi/RMariaDB/issues/296" class="external-link">#296</a>) and all unknown column types (<a href="https://github.com/LeeMendelowitz" class="external-link">@LeeMendelowitz</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/260" class="external-link">#260</a>).</li>
+<li>Support <code>TIME</code> columns with subsecond precision (<a href="https://github.com/renkun-ken" class="external-link">@renkun-ken</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/288" class="external-link">#288</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/289" class="external-link">#289</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="features-1-2-2-9009">Features<a class="anchor" aria-label="anchor" href="#features-1-2-2-9009"></a></h3>
-<ul><li><p>Connections now inherit from <code>"MySQLConnection"</code> if a MySQL server is detected (server version &lt; 10.0). The new <code>mysql</code> argument to <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code> allows overriding the autodetection (<a href="https://github.com/r-dbi/RMariaDB/issues/303" class="external-link">#303</a>).</p></li>
-<li><p>Use string as default for unknown column type (<a href="https://github.com/LeeMendelowitz" class="external-link">@LeeMendelowitz</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/260" class="external-link">#260</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-2-2-9009">Chore<a class="anchor" aria-label="anchor" href="#chore-1-2-2-9009"></a></h3>
-<ul><li><p>Upgrade MariaDB on CI/CD (<a href="https://github.com/r-dbi/RMariaDB/issues/299" class="external-link">#299</a>).</p></li>
-<li><p>Extract <code>mariadb_default_args</code>.</p></li>
-<li><p>Update Windows libs to new location (<a href="https://github.com/r-dbi/RMariaDB/issues/301" class="external-link">#301</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-1-2-2-9009">Testing<a class="anchor" aria-label="anchor" href="#testing-1-2-2-9009"></a></h3>
-<ul><li>Skip tests if packages are not available (<a href="https://github.com/r-dbi/RMariaDB/issues/304" class="external-link">#304</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.2.9008" id="rmariadb-1229008-2023-04-02">RMariaDB 1.2.2.9008 (2023-04-02)<a class="anchor" aria-label="anchor" href="#rmariadb-1229008-2023-04-02"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-2-2-9008">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-2-2-9008"></a></h3>
-<ul><li>Fix querying JSON values for MySQL Server.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-2-2-9008">Chore<a class="anchor" aria-label="anchor" href="#chore-1-2-2-9008"></a></h3>
+<h3 id="documentation-1-3-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-3-0"></a></h3>
 <ul><li>Better <code>MAX_NO_FIELD_TYPES</code> error message.</li>
 </ul></div>
-</div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.2.9007" id="rmariadb-1229007-2023-03-29">RMariaDB 1.2.2.9007 (2023-03-29)<a class="anchor" aria-label="anchor" href="#rmariadb-1229007-2023-03-29"></a></h2>
 <div class="section level3">
-<h3 id="chore-1-2-2-9007">Chore<a class="anchor" aria-label="anchor" href="#chore-1-2-2-9007"></a></h3>
-<ul><li>Use Ubuntu 22.04.</li>
+<h3 id="chore-1-3-0">Chore<a class="anchor" aria-label="anchor" href="#chore-1-3-0"></a></h3>
+<ul><li>Update Windows libs to new location (<a href="https://github.com/r-dbi/RMariaDB/issues/301" class="external-link">#301</a>).</li>
+<li>Replace Rcpp by cpp11 (<a href="https://github.com/Antonov548" class="external-link">@Antonov548</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/286" class="external-link">#286</a>).</li>
+<li>Add decor as a dependency.</li>
 </ul></div>
-</div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.2.9006" id="rmariadb-1229006-2023-03-24">RMariaDB 1.2.2.9006 (2023-03-24)<a class="anchor" aria-label="anchor" href="#rmariadb-1229006-2023-03-24"></a></h2>
 <div class="section level3">
-<h3 id="chore-1-2-2-9006">Chore<a class="anchor" aria-label="anchor" href="#chore-1-2-2-9006"></a></h3>
-<ul><li>Drop C++11 specification.</li>
+<h3 id="testing-1-3-0">Testing<a class="anchor" aria-label="anchor" href="#testing-1-3-0"></a></h3>
+<ul><li>Skip tests if packages are not available (<a href="https://github.com/r-dbi/RMariaDB/issues/304" class="external-link">#304</a>).</li>
+<li>Use testthat edition 3 (<a href="https://github.com/r-dbi/RMariaDB/issues/285" class="external-link">#285</a>).</li>
 </ul></div>
 </div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.2.9005" id="rmariadb-1229005-2023-02-17">RMariaDB 1.2.2.9005 (2023-02-17)<a class="anchor" aria-label="anchor" href="#rmariadb-1229005-2023-02-17"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.2.9004" id="rmariadb-1229004-2023-02-06">RMariaDB 1.2.2.9004 (2023-02-06)<a class="anchor" aria-label="anchor" href="#rmariadb-1229004-2023-02-06"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-2-2-9004">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-2-2-9004"></a></h3>
-<ul><li>Indent.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-1-2-2-9004">Chore<a class="anchor" aria-label="anchor" href="#chore-1-2-2-9004"></a></h3>
-<ul><li><p>Add decor as a dependency.</p></li>
-<li><p>Install from <code>gitpod.yml</code> file.</p></li>
-<li><p>Fix gitpod configuration.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.2.9003" id="rmariadb-1229003-2023-01-24">RMariaDB 1.2.2.9003 (2023-01-24)<a class="anchor" aria-label="anchor" href="#rmariadb-1229003-2023-01-24"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-2-2-9003">Chore<a class="anchor" aria-label="anchor" href="#chore-1-2-2-9003"></a></h3>
-<ul><li><p>Replace Rcpp by cpp11 (<a href="https://github.com/Antonov548" class="external-link">@Antonov548</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/286" class="external-link">#286</a>).</p></li>
-<li><p>Update gitpod configuration.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.2.9002" id="rmariadb-1229002-2022-12-30">RMariaDB 1.2.2.9002 (2022-12-30)<a class="anchor" aria-label="anchor" href="#rmariadb-1229002-2022-12-30"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.2.9001" id="rmariadb-1229001-2022-12-24">RMariaDB 1.2.2.9001 (2022-12-24)<a class="anchor" aria-label="anchor" href="#rmariadb-1229001-2022-12-24"></a></h2>
-<div class="section level3">
-<h3 id="features-1-2-2-9001">Features<a class="anchor" aria-label="anchor" href="#features-1-2-2-9001"></a></h3>
-<ul><li><p>Support <code>TIME</code> columns with subsecond precision (<a href="https://github.com/renkun-ken" class="external-link">@renkun-ken</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/288" class="external-link">#288</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/289" class="external-link">#289</a>).</p></li>
-<li><p>Use testthat edition 3 (<a href="https://github.com/r-dbi/RMariaDB/issues/285" class="external-link">#285</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-1-2-2-9001">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-1-2-2-9001"></a></h3>
-<ul><li><p>Merge pull request <a href="https://github.com/r-dbi/RMariaDB/issues/292" class="external-link">#292</a> from Antonov548/r-headers.</p></li>
-<li><p>Merge branch ‘krlmlr’.</p></li>
-</ul><p>feat: Configuration for <a href="https://gitpod.io" class="external-link uri">https://gitpod.io</a></p>
-<ul><li><p>Harmonize yaml formatting.</p></li>
-<li><p>Revert changes to matrix section.</p></li>
-<li><p>Merged cran-1.2.2 into main.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.2.9000" id="rmariadb-1229000-2022-06-19">RMariaDB 1.2.2.9000 (2022-06-19)<a class="anchor" aria-label="anchor" href="#rmariadb-1229000-2022-06-19"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.2" id="rmariadb-122-2022-06-19">RMariaDB 1.2.2 (2022-06-19)<a class="anchor" aria-label="anchor" href="#rmariadb-122-2022-06-19"></a></h2>
 <div class="section level3">
