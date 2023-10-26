@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.0.9001 (2023-10-26)
+
+## Chore
+
+- Resurrect missing NEWS items.
+
+
 # RMariaDB 1.3.0.9000 (2023-10-24)
 
 ## Bug fixes
