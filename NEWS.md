@@ -2,19 +2,15 @@
 
 # RMariaDB 1.3.1 (2023-10-26)
 
+## Features
+
+- Support `dbSendStatement(immediate = TRUE)` and `dbExecute(immediate = TRUE)`, needs `CLIENT_MULTI_STATEMENTS` (#147, #312).
+
 ## Bug fixes
 
 - Fix memory leak (#309, #311).
 - Fix compilation on CentOS 7 (#310).
 - `dbConnection(groups = )` works as documented again, regression introduced in RMariaDB 1.3.0 (@pekkarr, #306).
-
-## Features
-
-- Support `dbSendStatement(immediate = TRUE)` and `dbExecute(immediate = TRUE)`, needs `CLIENT_MULTI_STATEMENTS` (#147, #312).
-
-## Chore
-
-- Resurrect missing NEWS items.
 
 ## Documentation
 
