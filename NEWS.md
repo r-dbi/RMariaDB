@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.1.9000 (2023-10-27)
+
+- Merge branch 'cran-1.3.1'.
+
+
 # RMariaDB 1.3.1 (2023-10-26)
 
 ## Features
