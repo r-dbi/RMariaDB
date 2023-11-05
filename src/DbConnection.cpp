@@ -43,16 +43,20 @@ void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
     mysql_options(this->pConn_, MYSQL_READ_DEFAULT_FILE,
                   cpp11::as_cpp<std::string>(default_file).c_str());
 
-  if (!Rf_isNull(ssl_key) || !Rf_isNull(ssl_cert) || !Rf_isNull(ssl_ca) ||
-      !Rf_isNull(ssl_capath) || !Rf_isNull(ssl_cipher)) {
-    mysql_ssl_set(
-      this->pConn_,
-      Rf_isNull(ssl_key) ? NULL : cpp11::as_cpp<std::string>(ssl_key).c_str(),
-      Rf_isNull(ssl_cert) ? NULL : cpp11::as_cpp<std::string>(ssl_cert).c_str(),
-      Rf_isNull(ssl_ca) ? NULL : cpp11::as_cpp<std::string>(ssl_ca).c_str(),
-      Rf_isNull(ssl_capath) ? NULL : cpp11::as_cpp<std::string>(ssl_capath).c_str(),
-      Rf_isNull(ssl_cipher) ? NULL : cpp11::as_cpp<std::string>(ssl_cipher).c_str()
-    );
+  if (!Rf_isNull(ssl_key)) {
+    mysql_options(this->pConn_, MYSQL_OPT_SSL_KEY,    cpp11::as_cpp<std::string>(ssl_key).c_str());
+  }
+  if (!Rf_isNull(ssl_cert)) {
+    mysql_options(this->pConn_, MYSQL_OPT_SSL_CERT,   cpp11::as_cpp<std::string>(ssl_cert).c_str());
+  }
+  if (!Rf_isNull(ssl_ca)) {
+    mysql_options(this->pConn_, MYSQL_OPT_SSL_CA,     cpp11::as_cpp<std::string>(ssl_ca).c_str());
+  }
+  if (!Rf_isNull(ssl_capath)) {
+    mysql_options(this->pConn_, MYSQL_OPT_SSL_CAPATH, cpp11::as_cpp<std::string>(ssl_capath).c_str());
+  }
+  if (!Rf_isNull(ssl_cipher)) {
+    mysql_options(this->pConn_, MYSQL_OPT_SSL_CIPHER, cpp11::as_cpp<std::string>(ssl_cipher).c_str());
   }
   if (timeout > 0) {
     mysql_options(this->pConn_, MYSQL_OPT_CONNECT_TIMEOUT,
