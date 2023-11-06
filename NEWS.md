@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.1.9001 (2023-11-06)
+
+## Chore
+
+- Avoid deprecated `mysql_ssl_set()` (#319).
+
+- Add Aviator configuration.
+
+
 # RMariaDB 1.3.1.9000 (2023-10-27)
 
 - Merge branch 'cran-1.3.1'.
