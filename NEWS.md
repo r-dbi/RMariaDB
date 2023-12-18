@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.1.9002 (2023-12-18)
+
+## Bug fixes
+
+- Re-added flaky test.
+
+  This reverts commit acf22bdffa398400ed360fd0fc9926c2753c7b60.
+
+- Revert me, avoid flaky test for now.
+
+
 # RMariaDB 1.3.1.9001 (2023-11-06)
 
 ## Chore
