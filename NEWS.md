@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.1.9003 (2024-01-15)
+
+- Internal changes only.
+
+
 # RMariaDB 1.3.1.9002 (2023-12-18)
 
 ## Bug fixes
