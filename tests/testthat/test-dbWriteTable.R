@@ -14,7 +14,7 @@ test_that("dbWriteTable() throws error if constraint violated", {
 
   x <- data.frame(col1 = 1:10, col2 = letters[1:10])
 
-  dbWriteTable(con, "t1", x[1:3, ], overwrite = TRUE)
+  dbWriteTable(con, "t1", x[1:3, ], overwrite = TRUE, temporary = TRUE)
   dbExecute(con, "CREATE UNIQUE INDEX t1_c1_c2_idx ON t1(col1, col2(1))")
   expect_error(dbWriteTable(con, "t1", x, append = TRUE), "added 7 rows|Duplicate entry")
 })
@@ -25,7 +25,7 @@ test_that("dbAppendTable() throws error if constraint violated", {
 
   x <- data.frame(col1 = 1:10, col2 = letters[1:10])
 
-  dbWriteTable(con, "t1", x[1:3, ], overwrite = TRUE)
+  dbWriteTable(con, "t1", x[1:3, ], overwrite = TRUE, temporary = TRUE)
   dbExecute(con, "CREATE UNIQUE INDEX t1_c1_c2_idx ON t1(col1, col2(1))")
   expect_error(dbAppendTable(con, "t1", x), "added 7 rows|Duplicate entry")
 })
