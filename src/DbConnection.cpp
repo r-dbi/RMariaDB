@@ -48,10 +48,10 @@ void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
 #if MYSQL_VERSION_ID >= 80000 && MYSQL_VERSION_ID < 100000
     // MySQL 8.0 deprecated the enforce SSL flag in prefernce to defining an SSL MODE
     unsigned int ssl_mode_ = SSL_MODE_REQUIRED;
-    mysql_options(this->pConn_, MYSQL_OPT_SSL_MODE, (void *)&ssl_mode_);
+    mysql_options(this->pConn_, MYSQL_OPT_SSL_MODE, &ssl_mode_);
 #else    
     my_bool use_ssl_ = 1;
-    mysql_options(this->pConn_, MYSQL_OPT_SSL_ENFORCE, (void *)&use_ssl_);
+    mysql_options(this->pConn_, MYSQL_OPT_SSL_ENFORCE, &use_ssl_);
 #endif
     // From MySQL manual: Do not set this option within an application program; it is set internally in the client library.
     // Instead the application program should set mysql_options
@@ -63,7 +63,7 @@ void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
     // Also, MySQL 8.0 has the ability to just verify the server CA, but our interface doesn't define that.
     // If that is the desired SSL mode, then configure that via a defaults file or group definition.
     unsigned int ssl_mode_ = SSL_MODE_VERIFY_IDENTITY;
-    mysql_options(this->pConn_, MYSQL_OPT_SSL_MODE, (void *)&ssl_mode_);
+    mysql_options(this->pConn_, MYSQL_OPT_SSL_MODE, &ssl_mode_);
 #else    
     my_bool verify_server_cert_ = 1;
     mysql_options(this->pConn_, MYSQL_OPT_SSL_VERIFY_SERVER_CERT, (void *)&verify_server_cert_);
@@ -91,7 +91,7 @@ void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
   }
   if (reconnect) {
     my_bool reconnect_ = 1;
-    mysql_options(this->pConn_, MYSQL_OPT_RECONNECT, (void *)&reconnect_);
+    mysql_options(this->pConn_, MYSQL_OPT_RECONNECT, &reconnect_);
   }
 
   LOG_VERBOSE;
@@ -139,17 +139,22 @@ void DbConnection::check_connection() {
 
 cpp11::list DbConnection::info() {
   using namespace cpp11::literals;
+  const char *ssl_cipher = mysql_get_ssl_cipher(pConn_);
   return
     cpp11::list({
       "host"_nm = std::string(pConn_->host),
+      "port"_nm = (pConn_->port != 0) ? pConn_->port : NA_INTEGER,
       "username"_nm = std::string(pConn_->user),
       "dbname"_nm = std::string(pConn_->db ? pConn_->db : ""),
       "con.type"_nm = std::string(mysql_get_host_info(pConn_)),
+      "ssl.cipher"_nm = (ssl_cipher != NULL) ? cpp11::as_sexp(std::string(ssl_cipher)) : R_NilValue,
       "db.version"_nm = std::string(mysql_get_server_info(pConn_)),
       "db.version.int"_nm = (int) mysql_get_server_version(pConn_),
-      "port"_nm = NA_INTEGER,
       "protocol.version"_nm = (int) mysql_get_proto_info(pConn_),
-      "thread.id"_nm = (int) mysql_thread_id(pConn_)
+      "thread.id"_nm = (int) mysql_thread_id(pConn_),
+      "client.flag"_nm = pConn_->client_flag,
+      "server.capabilities"_nm = pConn_->server_capabilities,
+      "status"_nm = (int) pConn_->status
     });
 }
 
