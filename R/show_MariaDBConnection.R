@@ -16,8 +16,8 @@ show_MariaDBConnection <- function(object) {
     }
     cat("  Thread Id:      ", info$thread.id, "\n", sep = "")
     cat("  Client Version: ", info$client.version, "\n", sep = "")
-    cat("  Server Version: ", info$db.version, "\n", sep = "")
     cat("  Client Flags:   ", format(as.hexmode(info$client.flag), width=8, upper.case=T), "\n", sep = "")
+    cat("  Server Version: ", info$db.version, "\n", sep = "")
     cat("  Capabilities:   ", format(as.hexmode(info$server.capabilities), width=8, upper.case=T), "\n", sep = "")
     cat("  SQL Status:     ", format(as.hexmode(info$status), width=8, upper.case=T), "\n", sep = "")
   } else {
