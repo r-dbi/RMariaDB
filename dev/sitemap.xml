@@ -1,78 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://rmariadb.r-dbi.org/CODE_OF_CONDUCT.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/CONTRIBUTING.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/CONTRIBUTING.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/ISSUE_TEMPLATE.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/ISSUE_TEMPLATE.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/LICENSE-text.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/LICENSE.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/authors.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/authors.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/index.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/index.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/news/index.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/news/index.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/Client-flags.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/Client-flags.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/MariaDBConnection-class.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/MariaDBConnection-class.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/MariaDBDriver-class.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/MariaDBDriver-class.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/MariaDBResult-class.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/MariaDBResult-class.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/RMariaDB-package.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/RMariaDB-package.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/dbConnect-MariaDBDriver-method.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/dbConnect-MariaDBDriver-method.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/dbDataType.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/dbDataType.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/index.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/mariadb-quoting.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/mariadb-quoting.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/mariadb-tables.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/mariadb-tables.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/mariadbClientLibraryVersions.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/mariadbClientLibraryVersions.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/mariadbHasDefault.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/mariadbHasDefault.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/query.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/query.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/reexports.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/reexports.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/result-meta.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/result-meta.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/reference/transactions.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/reference/transactions.html</loc>
   </url>
   <url>
-    <loc>https://rmariadb.r-dbi.org/security.html</loc>
+    <loc>https://rmariadb.r-dbi.org/dev/security.html</loc>
   </url>
 </urlset>
