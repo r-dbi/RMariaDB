@@ -39,8 +39,9 @@
 #' @param port (optional) integer of the TCP/IP default port.
 #' @param client.flag (optional) integer setting various MariaDB client flags,
 #'   see [Client-flags] for details.
-#' @param groups string identifying a section in the `default.file` to use
+#' @param group string identifying a section in the `default.file` to use
 #'   for setting authentication parameters (see [MariaDB()]).
+#' @param groups deprecated, use `group` instead.
 #' @param default.file string of the filename with MariaDB client options,
 #'   only relevant if `groups` is given. The default value depends on the
 #'   operating system (see references), on Linux and OS X the files
@@ -80,6 +81,12 @@
 #' @param reconnect (experimental) Set to `TRUE` to use `MYSQL_OPT_RECONNECT` to enable
 #'   automatic reconnection. This is experimental and could be dangerous if the connection
 #'   is lost in the middle of a transaction.
+#' @param mysql Set to `TRUE`/`FALSE` to connect to a MySQL server or to a MariaDB server,
+#'   respectively.
+#'   The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect
+#'   and other details vary.
+#'   The default is to assume MariaDB if the version is >= 10.0.0, and MySQL otherwise.
+#'
 #' @references
 #' Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/
 #' @examples
@@ -106,15 +113,35 @@
 #'   con
 #'   dbDisconnect(con)
 #' }
+#'
 #' @usage NULL
 #' @rdname dbConnect-MariaDBDriver-method
-dbConnect_MariaDBDriver <- function(drv, dbname = NULL, username = NULL, password = NULL, host = NULL,
-                                    unix.socket = NULL, port = 0, client.flag = 0,
-                                    groups = "rs-dbi", default.file = NULL, ssl.key = NULL, ssl.cert = NULL,
-                                    ssl.ca = NULL, ssl.capath = NULL, ssl.cipher = NULL, ...,
-                                    load_data_local_infile = FALSE,
-                                    bigint = c("integer64", "integer", "numeric", "character"),
-                                    timeout = 10, timezone = "+00:00", timezone_out = NULL, reconnect = FALSE) {
+dbConnect_MariaDBDriver <- function(
+    drv,
+    dbname = NULL,
+    username = NULL,
+    password = NULL,
+    host = NULL,
+    unix.socket = NULL,
+    port = 0,
+    client.flag = 0,
+    group = "rs-dbi",
+    default.file = NULL,
+    ssl.key = NULL,
+    ssl.cert = NULL,
+    ssl.ca = NULL,
+    ssl.capath = NULL,
+    ssl.cipher = NULL,
+    ...,
+    groups = NULL,
+    load_data_local_infile = FALSE,
+    bigint = c("integer64", "integer", "numeric", "character"),
+    timeout = 10,
+    timezone = "+00:00",
+    timezone_out = NULL,
+    reconnect = FALSE,
+    mysql = NULL) {
+  #
   bigint <- match.arg(bigint)
 
   if (is.infinite(timeout)) {
@@ -146,18 +173,43 @@ dbConnect_MariaDBDriver <- function(drv, dbname = NULL, username = NULL, passwor
     }
   }
 
+  if (!is.null(groups)) {
+    warningc("Argument `groups` is deprecated, use `group` instead. ")
+    if (missing(group)) {
+      group <- groups
+    }
+  }
+
   reconnect <- isTRUE(reconnect)
 
   ptr <- connection_create(
     host, username, password, dbname, as.integer(port), unix.socket,
-    as.integer(client.flag), groups, default.file,
+    as.integer(client.flag), group, default.file,
     ssl.key, ssl.cert, ssl.ca, ssl.capath, ssl.cipher,
     timeout, reconnect
   )
 
   info <- connection_info(ptr)
 
-  conn <- new("MariaDBConnection",
+  if (is.null(mysql)) {
+    if (info$db.version.int >= 100000) {
+      mysql <- FALSE
+    } else if (grepl("^5[.][0-9]+[.][0-9]+-.*mariadb", info$db.version, ignore.case = TRUE)) {
+      # MariaDB built against MySQL libraries will report a 5.x version number
+      # https://github.com/OpenNebula/one/issues/3924
+      mysql <- FALSE
+    } else {
+      mysql <- TRUE
+    }
+  }
+
+  if (isTRUE(mysql)) {
+    new <- MySQLConnection
+  } else {
+    new <- MariaDBConnection
+  }
+
+  conn <- new(
     ptr = ptr,
     host = info$host,
     db = info$dbname,

@@ -39,12 +39,12 @@ fix_blob <- function(ret) {
   ret
 }
 
-dbSend <- function(conn, statement, params = NULL, is_statement) {
+dbSend <- function(conn, statement, params = NULL, is_statement, immediate) {
   statement <- enc2utf8(statement)
 
   rs <- new("MariaDBResult",
     sql = statement,
-    ptr = result_create(conn@ptr, statement, is_statement),
+    ptr = result_create(conn@ptr, statement, is_statement, immediate),
     bigint = conn@bigint,
     conn = conn
   )

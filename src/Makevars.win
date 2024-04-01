@@ -1,11 +1,14 @@
-VERSION = 3.2.5
-RWINLIB = ../windows/libmariadbclient-$(VERSION)
-TLS_LIBS ?= -lssl -lcrypto
+RWINLIB = ../windows/libmariadbclient
 
-CXX_STD=CXX11
+ifeq ($(R_COMPILED_BY),gcc 8.3.0)
+TLS_LIBS = -lssl -lcrypto
+endif
+
 PKG_CPPFLAGS = -I$(RWINLIB)/include/mariadb -Ivendor -DRCPP_DEFAULT_INCLUDE_CALL=false -DRCPP_USING_UTF8_ERROR_STRING -DBOOST_NO_AUTO_PTR
-PKG_LIBS= -L$(RWINLIB)/lib${R_ARCH}${CRT} \
-	-lmariadbclient $(TLS_LIBS) -lz -lsecur32 -lshlwapi -lcrypt32 -lgdi32 -lws2_32 -pthread
+PKG_LIBS = \
+	-L$(RWINLIB)/lib$(R_ARCH) \
+	-L$(RWINLIB)/lib \
+	-lmariadbclient $(TLS_LIBS) -lz -lbcrypt -lsecur32 -lshlwapi -lcrypt32 -lgdi32 -lws2_32 -pthread
 
 # Necessary, so that the behavior of make called without arguments
 # is not changed:
@@ -18,4 +21,4 @@ clean:
 	rm -f $(SHLIB) $(OBJECTS)
 
 winlibs:
-	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R" $(VERSION)
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"

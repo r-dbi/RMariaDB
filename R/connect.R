@@ -55,8 +55,8 @@ MariaDB <- function() {
 #' Client flags
 #'
 #' Use for the `client.flag` argument to [dbConnect()], multiple flags can be
-#' combined with a bitwise or (see [Logic]).  The flags are provided for
-#' completeness.
+#' combined with `+` or [bitwOr()].
+#' The flags are provided for completeness.
 #'
 #' @seealso
 #' The `flags` argument at https://mariadb.com/kb/en/library/mysql_real_connect.
@@ -68,7 +68,7 @@ MariaDB <- function() {
 #' con1 <- dbConnect(MariaDB(), client.flag = CLIENT_COMPRESS)
 #' con2 <- dbConnect(
 #'   MariaDB(),
-#'   client.flag = CLIENT_COMPRESS | CLIENT_SECURE_CONNECTION
+#'   client.flag = bitwOr(CLIENT_COMPRESS, CLIENT_SECURE_CONNECTION)
 #' )
 #' }
 #'

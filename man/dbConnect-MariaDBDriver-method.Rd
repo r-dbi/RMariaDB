@@ -17,7 +17,7 @@ MariaDB()
   unix.socket = NULL,
   port = 0,
   client.flag = 0,
-  groups = "rs-dbi",
+  group = "rs-dbi",
   default.file = NULL,
   ssl.key = NULL,
   ssl.cert = NULL,
@@ -25,12 +25,14 @@ MariaDB()
   ssl.capath = NULL,
   ssl.cipher = NULL,
   ...,
+  groups = NULL,
   load_data_local_infile = FALSE,
   bigint = c("integer64", "integer", "numeric", "character"),
   timeout = 10,
   timezone = "+00:00",
   timezone_out = NULL,
-  reconnect = FALSE
+  reconnect = FALSE,
+  mysql = NULL
 )
 }
 \arguments{
@@ -55,7 +57,7 @@ host is assumed.}
 \item{client.flag}{(optional) integer setting various MariaDB client flags,
 see \link{Client-flags} for details.}
 
-\item{groups}{string identifying a section in the \code{default.file} to use
+\item{group}{string identifying a section in the \code{default.file} to use
 for setting authentication parameters (see \code{\link[=MariaDB]{MariaDB()}}).}
 
 \item{default.file}{string of the filename with MariaDB client options,
@@ -80,6 +82,8 @@ the trusted SSL CA certificates in PEM format. Expanded with
 encryption.}
 
 \item{...}{Unused, needed for compatibility with generic.}
+
+\item{groups}{deprecated, use \code{group} instead.}
 
 \item{load_data_local_infile}{Set to \code{TRUE} to use \verb{LOAD DATA LOCAL INFILE}
 in \code{\link[=dbWriteTable]{dbWriteTable()}} and \code{\link[=dbAppendTable]{dbAppendTable()}} by default.
@@ -109,6 +113,12 @@ This setting does not change the time values returned, only their display.}
 \item{reconnect}{(experimental) Set to \code{TRUE} to use \code{MYSQL_OPT_RECONNECT} to enable
 automatic reconnection. This is experimental and could be dangerous if the connection
 is lost in the middle of a transaction.}
+
+\item{mysql}{Set to \code{TRUE}/\code{FALSE} to connect to a MySQL server or to a MariaDB server,
+respectively.
+The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect
+and other details vary.
+The default is to assume MariaDB if the version is >= 10.0.0, and MySQL otherwise.}
 }
 \description{
 These methods are straight-forward implementations of the corresponding
@@ -181,6 +191,7 @@ if (mariadbHasDefault()) {
   con
   dbDisconnect(con)
 }
+
 }
 \references{
 Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/

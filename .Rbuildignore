@@ -43,3 +43,5 @@ src\/RCS
 ^\.gitpod\.yml$
 ^\.gitpod\.Dockerfile$
 ^CMakeLists\.txt$
+^vscode-.*build$
+^\.aviator/config\.yml$

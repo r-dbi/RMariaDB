@@ -5,6 +5,7 @@
 bool all_raw(SEXP x);
 
 MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary, bool length1) {
+
   switch (type) {
   case MYSQL_TYPE_TINY:
   case MYSQL_TYPE_SHORT:
@@ -39,6 +40,8 @@ MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary,
   case MYSQL_TYPE_VAR_STRING:
   case MYSQL_TYPE_VARCHAR:
     return binary ? MY_RAW : MY_STR;
+  case 245: // MYSQL_TYPE_JSON not defined in CentOS 7
+    return MY_STR;
   case MYSQL_TYPE_BLOB:
   case MYSQL_TYPE_TINY_BLOB:
   case MYSQL_TYPE_MEDIUM_BLOB:
@@ -51,7 +54,8 @@ MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary,
   case MYSQL_TYPE_NULL:
     return MY_INT32;
   default:
-    throw std::runtime_error("Unimplemented MAX_NO_FIELD_TYPES");
+    cpp11::warning("unrecognized field type %i imported as character", type);
+    return MY_STR;
   }
 }
 
@@ -103,18 +107,17 @@ SEXPTYPE type_sexp(MariaFieldType type) {
   throw std::runtime_error("Invalid typeSEXP");
 }
 
-std::string r_class(RObject x) {
-  RObject klass_(x.attr("class"));
+std::string r_class(const cpp11::sexp& x) {
+  cpp11::sexp klass_(x.attr("class"));
   std::string klass;
   if (klass_ == R_NilValue)
     return "";
-
-  CharacterVector klassv = as<CharacterVector>(klass_);
-  return std::string(klassv[klassv.length() - 1]);
+  const auto klassv = cpp11::as_cpp<cpp11::strings>(klass_);
+  return std::string(klassv[klassv.size() - 1]);
 }
 
-MariaFieldType variable_type_from_object(const RObject& type) {
-  std::string klass = r_class(type);
+MariaFieldType variable_type_from_object(const cpp11::sexp& type) {
+  const auto klass = r_class(type);
 
   switch (TYPEOF(type)) {
   case LGLSXP:
@@ -135,13 +138,13 @@ MariaFieldType variable_type_from_object(const RObject& type) {
     break;
   }
 
-  stop("Unsupported column type %s", Rf_type2char(TYPEOF(type)));
+  cpp11::stop("Unsupported column type %s", Rf_type2char(TYPEOF(type)));
   return MY_STR;
 }
 
 bool all_raw(SEXP x) {
-  List xx(x);
-  for (R_xlen_t i = 0; i < xx.length(); ++i) {
+  cpp11::list xx(x);
+  for (R_xlen_t i = 0; i < xx.size(); ++i) {
     switch (TYPEOF(xx[i])) {
     case RAWSXP:
     case NILSXP:

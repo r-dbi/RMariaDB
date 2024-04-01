@@ -11,10 +11,16 @@ runs:
         sudo apt purge -y mysql-server
       shell: bash
 
+    - name: Purge mariadb-connector-c if it exists
+      if: runner.os == 'macOS'
+      run: |
+        brew unlink mariadb-connector-c || true
+      shell: bash
+
     - uses: ankane/setup-mariadb@v1
       if: (matrix.config.mysql_server == '') || ! matrix.config.mysql_server
       with:
-        mariadb-version: 10.5
+        mariadb-version: "11.1"
 
     - uses: ankane/setup-mysql@v1
       if: matrix.config.mysql_server

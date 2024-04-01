@@ -1,8 +1,79 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# RMariaDB 1.2.2.9000 (2022-06-19)
+# RMariaDB 1.3.1.9004 (2024-01-24)
 
 - Internal changes only.
+
+
+# RMariaDB 1.3.1.9003 (2024-01-15)
+
+- Internal changes only.
+
+
+# RMariaDB 1.3.1.9002 (2023-12-18)
+
+## Bug fixes
+
+- Re-added flaky test.
+
+  This reverts commit acf22bdffa398400ed360fd0fc9926c2753c7b60.
+
+- Revert me, avoid flaky test for now.
+
+
+# RMariaDB 1.3.1.9001 (2023-11-06)
+
+## Chore
+
+- Avoid deprecated `mysql_ssl_set()` (#319).
+
+- Add Aviator configuration.
+
+
+# RMariaDB 1.3.1.9000 (2023-10-27)
+
+- Merge branch 'cran-1.3.1'.
+
+
+# RMariaDB 1.3.1 (2023-10-26)
+
+## Features
+
+- Support `dbSendStatement(immediate = TRUE)` and `dbExecute(immediate = TRUE)`, needs `CLIENT_MULTI_STATEMENTS` (#147, #312).
+
+## Bug fixes
+
+- Fix memory leak (#309, #311).
+- Fix compilation on CentOS 7 (#310).
+- `dbConnection(groups = )` works as documented again, regression introduced in RMariaDB 1.3.0 (@pekkarr, #306).
+
+## Documentation
+
+- Update docs for client flags (#313).
+
+
+# RMariaDB 1.3.0 (2023-10-08)
+
+## Features
+
+- Connections now inherit from `"MySQLConnection"` if a MySQL server is detected (server version \< 10.0 or server description contains `"MariaDB"`). The new `mysql` argument to `dbConnect()` allows overriding the autodetection (#303).
+- Use string as default for JSON (#296) and all unknown column types (@LeeMendelowitz, #260).
+- Support `TIME` columns with subsecond precision (@renkun-ken, #288, #289).
+
+## Documentation
+
+- Better `MAX_NO_FIELD_TYPES` error message.
+
+## Chore
+
+- Update Windows libs to new location (#301).
+- Replace Rcpp by cpp11 (@Antonov548, #286).
+- Add decor as a dependency.
+
+## Testing
+
+- Skip tests if packages are not available (#304).
+- Use testthat edition 3 (#285).
 
 
 # RMariaDB 1.2.2 (2022-06-19)

@@ -1,8 +1,8 @@
-DBItest::make_context(
+if (rlang::is_installed("DBItest")) DBItest::make_context(
   MariaDB(),
-  list(
-    dbname = "test",
-    load_data_local_infile = (Sys.getenv("RMARIADB_LOAD_DATA_LOCAL_INFILE") != "")
+  c(
+    mariadb_default_args,
+    list(load_data_local_infile = (Sys.getenv("RMARIADB_LOAD_DATA_LOCAL_INFILE") != "") && rlang::is_installed("readr"))
   ),
   tweaks = DBItest::tweaks(
     dbitest_version = "1.7.2",
