@@ -45,12 +45,30 @@ void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
 
   // Set SSL options
   if (client_flag & CLIENT_SSL) {
+#if MYSQL_VERSION_ID >= 80000 && MYSQL_VERSION_ID < 100000
+    // MySQL 8.0 deprecated the enforce SSL flag in prefernce to defining an SSL MODE
+    unsigned int ssl_mode_ = SSL_MODE_REQUIRED;
+    mysql_options(this->pConn_, MYSQL_OPT_SSL_MODE, (void *)&ssl_mode_);
+#else    
     my_bool use_ssl_ = 1;
     mysql_options(this->pConn_, MYSQL_OPT_SSL_ENFORCE, (void *)&use_ssl_);
+#endif
+    // From MySQL manual: Do not set this option within an application program; it is set internally in the client library.
+    // Instead the application program should set mysql_options
+    client_flag &= ~CLIENT_SSL;
   }
   if (client_flag & CLIENT_SSL_VERIFY_SERVER_CERT) {
+#if MYSQL_VERSION_ID >= 80000 && MYSQL_VERSION_ID < 100000
+    // Note: in MySQL 8.0, there is only mode, so we "upgrade" the mode to verify identity.
+    // Also, MySQL 8.0 has the ability to just verify the server CA, but our interface doesn't define that.
+    // If that is the desired SSL mode, then configure that via a defaults file or group definition.
+    unsigned int ssl_mode_ = SSL_MODE_VERIFY_IDENTITY;
+    mysql_options(this->pConn_, MYSQL_OPT_SSL_MODE, (void *)&ssl_mode_);
+#else    
     my_bool verify_server_cert_ = 1;
     mysql_options(this->pConn_, MYSQL_OPT_SSL_VERIFY_SERVER_CERT, (void *)&verify_server_cert_);
+#endif
+    client_flag &= ~CLIENT_SSL_VERIFY_SERVER_CERT;
   }
   if (!Rf_isNull(ssl_key)) {
     mysql_options(this->pConn_, MYSQL_OPT_SSL_KEY,    cpp11::as_cpp<std::string>(ssl_key).c_str());
