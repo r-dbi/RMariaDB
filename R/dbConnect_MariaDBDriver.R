@@ -174,11 +174,10 @@ dbConnect_MariaDBDriver <- function(
   }
 
   if (!is.null(groups)) {
-    warning(
-      "Argument `groups` is deprecated, use `group` instead. ",
-      "Note that when `groups` is used, it takes precedence over `group`."
-    )
-    group <- groups
+    warningc("Argument `groups` is deprecated, use `group` instead. ")
+    if (missing(group)) {
+      group <- groups
+    }
   }
 
   reconnect <- isTRUE(reconnect)
