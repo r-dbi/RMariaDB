@@ -21,7 +21,7 @@
 
 ## Features
 
-- Connections now inherit from `"MySQLConnection"` if a MySQL server is detected (server version \< 10.0 or server description contains `"MariaDB"`). The new `mysql` argument to `dbConnect()` allows overriding the autodetection (#303).
+- Connections now inherit from `"MySQLConnection"` if a MySQL server is detected (server version \< 10.0 and server description does not contain `"MariaDB"`). The new `mysql` argument to `dbConnect()` allows overriding the autodetection (#303).
 - Use string as default for JSON (#296) and all unknown column types (@LeeMendelowitz, #260).
 - Support `TIME` columns with subsecond precision (@renkun-ken, #288, #289).
 
