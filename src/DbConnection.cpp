@@ -22,7 +22,7 @@ DbConnection::~DbConnection() {
 void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
                            const cpp11::sexp& password, const cpp11::sexp& db,
                            unsigned int port, const cpp11::sexp& unix_socket,
-                           unsigned long client_flag, const cpp11::sexp& groups,
+                           unsigned long client_flag, const cpp11::sexp& group,
                            const cpp11::sexp& default_file,
                            const cpp11::sexp& ssl_key, const cpp11::sexp& ssl_cert,
                            const cpp11::sexp& ssl_ca, const cpp11::sexp& ssl_capath,
@@ -36,9 +36,9 @@ void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
   mysql_options(this->pConn_, MYSQL_OPT_LOCAL_INFILE, &local_infile);
   // Default to UTF-8
   mysql_options(this->pConn_, MYSQL_SET_CHARSET_NAME, "utf8mb4");
-  if (!Rf_isNull(groups))
+  if (!Rf_isNull(group))
     mysql_options(this->pConn_, MYSQL_READ_DEFAULT_GROUP,
-                  cpp11::as_cpp<std::string>(groups).c_str());
+                  cpp11::as_cpp<std::string>(group).c_str());
   if (!Rf_isNull(default_file))
     mysql_options(this->pConn_, MYSQL_READ_DEFAULT_FILE,
                   cpp11::as_cpp<std::string>(default_file).c_str());

@@ -24,7 +24,7 @@ public:
   void
   connect(const cpp11::sexp& host, const cpp11::sexp& user, const cpp11::sexp& password,
           const cpp11::sexp& db, unsigned int port, const cpp11::sexp& unix_socket,
-          unsigned long client_flag, const cpp11::sexp& groups, const cpp11::sexp& default_file,
+          unsigned long client_flag, const cpp11::sexp& group, const cpp11::sexp& default_file,
           const cpp11::sexp& ssl_key, const cpp11::sexp& ssl_cert,
           const cpp11::sexp& ssl_ca, const cpp11::sexp& ssl_capath,
           const cpp11::sexp& ssl_cipher,

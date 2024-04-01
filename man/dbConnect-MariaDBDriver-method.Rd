@@ -17,7 +17,7 @@ MariaDB()
   unix.socket = NULL,
   port = 0,
   client.flag = 0,
-  groups = "rs-dbi",
+  group = "rs-dbi",
   default.file = NULL,
   ssl.key = NULL,
   ssl.cert = NULL,
@@ -25,6 +25,7 @@ MariaDB()
   ssl.capath = NULL,
   ssl.cipher = NULL,
   ...,
+  groups = NULL,
   load_data_local_infile = FALSE,
   bigint = c("integer64", "integer", "numeric", "character"),
   timeout = 10,
@@ -56,7 +57,7 @@ host is assumed.}
 \item{client.flag}{(optional) integer setting various MariaDB client flags,
 see \link{Client-flags} for details.}
 
-\item{groups}{string identifying a section in the \code{default.file} to use
+\item{group}{string identifying a section in the \code{default.file} to use
 for setting authentication parameters (see \code{\link[=MariaDB]{MariaDB()}}).}
 
 \item{default.file}{string of the filename with MariaDB client options,
@@ -81,6 +82,8 @@ the trusted SSL CA certificates in PEM format. Expanded with
 encryption.}
 
 \item{...}{Unused, needed for compatibility with generic.}
+
+\item{groups}{deprecated, use \code{group} instead.}
 
 \item{load_data_local_infile}{Set to \code{TRUE} to use \verb{LOAD DATA LOCAL INFILE}
 in \code{\link[=dbWriteTable]{dbWriteTable()}} and \code{\link[=dbAppendTable]{dbAppendTable()}} by default.
@@ -188,6 +191,7 @@ if (mariadbHasDefault()) {
   con
   dbDisconnect(con)
 }
+
 }
 \references{
 Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/

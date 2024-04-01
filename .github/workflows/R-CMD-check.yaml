@@ -136,7 +136,8 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: 'release'}
+          # https://github.com/ankane/setup-mariadb/issues/15
+          # - {os: windows-latest, r: 'release'}
           # Use 4.1 to trigger usage of RTools40
           - {os: windows-latest, r: '4.1'}
           - {os: windows-latest, r: '4.2'}
