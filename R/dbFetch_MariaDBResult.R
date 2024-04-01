@@ -51,7 +51,7 @@ dbFetch_MariaDBResult <- function(res, n = -1, ..., row.names = FALSE) {
   ret <- fix_timezone(ret, res@conn)
   ret <- fix_blob(ret)
   ret <- sqlColumnToRownames(ret, row.names)
-  set_tidy_names(ret)
+  ret
 }
 
 #' @rdname query
