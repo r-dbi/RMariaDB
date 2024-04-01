@@ -102,7 +102,6 @@ Collate:
     'dbWriteTable_MariaDBConnection_character_data.frame.R'
     'default.R'
     'export.R'
-    'names.R'
     'query.R'
     'quote.R'
     'show_MariaDBConnection.R'
