@@ -148,6 +148,8 @@ cpp11::list DbConnection::info() {
       "dbname"_nm = std::string(pConn_->db ? pConn_->db : ""),
       "con.type"_nm = std::string(mysql_get_host_info(pConn_)),
       "ssl.cipher"_nm = (ssl_cipher != NULL) ? cpp11::as_sexp(std::string(ssl_cipher)) : R_NilValue,
+      "client.version"_nm = std::string(mysql_get_client_info()),
+      "client.version.int"_nm = (int) mysql_get_client_version(),
       "db.version"_nm = std::string(mysql_get_server_info(pConn_)),
       "db.version.int"_nm = (int) mysql_get_server_version(pConn_),
       "protocol.version"_nm = (int) mysql_get_proto_info(pConn_),
