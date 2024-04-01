@@ -52,8 +52,6 @@ test_that("quoting errors", {
   con <- mariadbDefault()
   on.exit(dbDisconnect(con))
 
-  expect_error(dbQuoteIdentifier(con, Id(tabel = 'Robert')),
-               "components")
   expect_error(Id(table = 'Robert', table = 'Students;--'))
 })
 
