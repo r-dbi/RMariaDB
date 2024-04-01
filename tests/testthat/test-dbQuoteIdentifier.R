@@ -54,8 +54,7 @@ test_that("quoting errors", {
 
   expect_error(dbQuoteIdentifier(con, Id(tabel = 'Robert')),
                "components")
-  expect_error(dbQuoteIdentifier(con, Id(table = 'Robert', table = 'Students;--')),
-               "Duplicated")
+  expect_error(Id(table = 'Robert', table = 'Students;--'))
 })
 
 test_that("unquoting identifier - SQL with quotes", {
