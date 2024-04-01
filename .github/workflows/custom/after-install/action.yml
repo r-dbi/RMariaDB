@@ -17,6 +17,17 @@ runs:
         brew unlink mariadb-connector-c || true
       shell: bash
 
+    - name: Check curl
+      run: |
+        which curl
+      shell: bash
+
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+      with:
+        detached: true
+        limit-access-to-actor: true
+
     - uses: ankane/setup-mariadb@v1
       if: (matrix.config.mysql_server == '') || ! matrix.config.mysql_server
       with:
