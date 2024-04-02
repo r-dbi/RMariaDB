@@ -17,6 +17,12 @@ runs:
         brew unlink mariadb-connector-c || true
       shell: bash
 
+    - name: Update apt
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt update
+      shell: bash
+
     - uses: ankane/setup-mariadb@v1
       if: (matrix.config.mysql_server == '') || ! matrix.config.mysql_server
       with:
