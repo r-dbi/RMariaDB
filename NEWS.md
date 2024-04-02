@@ -1,5 +1,44 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.1.9005 (2024-04-02)
+
+## Bug fixes
+
+- `dbConnect()` can enable SSL based on `client_flag` again (@d-hansen, #322).
+
+- Fix `dbQuoteIdentifier()` for `Id()` objects (#323).
+
+## Features
+
+- Breaking change: Avoid appending a numeric suffix to duplicate column names (#321, #327).
+
+- Breaking change: Deprecate `dbConnect(groups = )` in favor of `dbConnect(group = )`, with a warning and compatibility code (@rorynolan, #258).
+
+## Chore
+
+- Improve `dbQuoteIdentifier()` for `Id()` objects (#324).
+
+- Add Aviator configuration.
+
+## Continuous integration
+
+- Turn off Windows for now (#326).
+
+## Documentation
+
+- Use dbitemplate (@maelle, #320).
+
+## Testing
+
+- Test for quoting columns with `dbQuoteIdentifier()` (@dpprdan, #254, #255).
+
+## Breaking changes
+
+- Breaking change: Avoid appending a numeric suffix to duplicate column names (#321, #327).
+
+- Breaking change: Deprecate `dbConnect(groups = )` in favor of `dbConnect(group = )`, with a warning and compatibility code (@rorynolan, #258).
+
+
 # RMariaDB 1.3.1.9004 (2024-01-24)
 
 - Internal changes only.
