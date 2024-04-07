@@ -145,7 +145,8 @@ CLIENT_RESERVED     <- 16384
 
 #' @export
 CLIENT_RESERVED2    <- 32768
-# Old flag for 4.1 authentication
+# Old flag for 4.1 authentication - this was deprecated in MySQL 5.7
+CLIENT_SECURE_CONNECTION <- CLIENT_RESERVED2
 
 #' @export
 CLIENT_MULTI_STATEMENTS  <- 65536
