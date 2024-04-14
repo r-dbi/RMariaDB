@@ -25,7 +25,7 @@
 Use for the \code{client.flag} argument to \code{\link[=dbConnect]{dbConnect()}}, multiple flags can be
 combined with \code{+} or \code{\link[=bitwOr]{bitwOr()}}.
 The flags are provided for completeness.
-Set the flag CLIENT_SSL to require SSL on the connection.
+To enforce SSL for the DB connection, add the flag \code{CLIENT_SSL}.
 }
 \examples{
 \dontrun{

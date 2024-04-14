@@ -158,4 +158,3 @@ CLIENT_MULTI_RESULTS     <- 131072
 #' @export
 CLIENT_SSL_VERIFY_SERVER_CERT <- 1073741824
 # Enable/disable verifying server SSL certificate
-
