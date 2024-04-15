@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.1.9006 (2024-04-15)
+
+## Features
+
+- Improve enforcement of SSL for `dbConnect()` and the output when printing connections (@d-hansen, #328).
+
+
 # RMariaDB 1.3.1.9005 (2024-04-02)
 
 ## Bug fixes
