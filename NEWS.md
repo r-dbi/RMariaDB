@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.1.9007 (2024-04-16)
+
+## Documentation
+
+- Set BS version explicitly for now (@maelle, #330).
+
+- Add alias.
+
+
 # RMariaDB 1.3.1.9006 (2024-04-15)
 
 ## Features
