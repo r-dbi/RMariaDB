@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.1.9008 (2024-05-02)
+
+## Bug fixes
+
+- `dbWriteTable()` and `dbAppendTable()` on a connection with `load_data_local_infile = TRUE` uses the `utf8mb4` instead of the more restricted `utf8mb3` encoding (@ecoffingould, #332, #333).
+
+
 # RMariaDB 1.3.1.9007 (2024-04-16)
 
 ## Documentation
