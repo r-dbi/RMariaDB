@@ -2,8 +2,9 @@
 
 # RMariaDB 1.3.2 (2024-05-26)
 
-## Breaking changes
+## Features
 
+- Improve enforcement of SSL for `dbConnect()` and the output when printing connections (@d-hansen, #328).
 - Breaking change: Avoid appending a numeric suffix to duplicate column names (#321, #327).
 - Breaking change: Deprecate `dbConnect(groups = )` in favor of `dbConnect(group = )`, with a warning and compatibility code (@rorynolan, #258).
 
@@ -12,20 +13,10 @@
 - `dbWriteTable()` and `dbAppendTable()` on a connection with `load_data_local_infile = TRUE` uses the `utf8mb4` instead of the more restricted `utf8mb3` encoding (@ecoffingould, #332, #333).
 - `dbConnect()` can enable SSL based on `client_flag` again (@d-hansen, #322).
 - Fix `dbQuoteIdentifier()` for `Id()` objects (#323).
-- Re-added flaky test.
-  This reverts commit acf22bdffa398400ed360fd0fc9926c2753c7b60.
-- Revert me, avoid flaky test for now.
-
-## Features
-
-- Improve enforcement of SSL for `dbConnect()` and the output when printing connections (@d-hansen, #328).
-- Breaking change: Avoid appending a numeric suffix to duplicate column names (#321, #327).
-- Breaking change: Deprecate `dbConnect(groups = )` in favor of `dbConnect(group = )`, with a warning and compatibility code (@rorynolan, #258).
 
 ## Chore
 
 - Improve `dbQuoteIdentifier()` for `Id()` objects (#324).
-- Add Aviator configuration.
 - Avoid deprecated `mysql_ssl_set()` (#319).
 
 ## Continuous integration
@@ -34,18 +25,11 @@
 
 ## Documentation
 
-- Set BS version explicitly for now (@maelle, #330).
-- Add alias.
 - Use dbitemplate (@maelle, #320).
 
 ## Testing
 
 - Test for quoting columns with `dbQuoteIdentifier()` (@dpprdan, #254, #255).
-
-## Uncategorized
-
-- Internal changes only.
-- Merge branch 'cran-1.3.1'.
 
 
 # RMariaDB 1.3.1 (2023-10-26)
