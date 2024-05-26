@@ -1,47 +1,23 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# RMariaDB 1.3.1.9008 (2024-05-02)
-
-## Bug fixes
-
-- `dbWriteTable()` and `dbAppendTable()` on a connection with `load_data_local_infile = TRUE` uses the `utf8mb4` instead of the more restricted `utf8mb3` encoding (@ecoffingould, #332, #333).
-
-
-# RMariaDB 1.3.1.9007 (2024-04-16)
-
-## Documentation
-
-- Set BS version explicitly for now (@maelle, #330).
-
-- Add alias.
-
-
-# RMariaDB 1.3.1.9006 (2024-04-15)
+# RMariaDB 1.3.2 (2024-05-26)
 
 ## Features
 
 - Improve enforcement of SSL for `dbConnect()` and the output when printing connections (@d-hansen, #328).
-
-
-# RMariaDB 1.3.1.9005 (2024-04-02)
+- Breaking change: Avoid appending a numeric suffix to duplicate column names (#321, #327).
+- Breaking change: Deprecate `dbConnect(groups = )` in favor of `dbConnect(group = )`, with a warning and compatibility code (@rorynolan, #258).
 
 ## Bug fixes
 
+- `dbWriteTable()` and `dbAppendTable()` on a connection with `load_data_local_infile = TRUE` uses the `utf8mb4` instead of the more restricted `utf8mb3` encoding (@ecoffingould, #332, #333).
 - `dbConnect()` can enable SSL based on `client_flag` again (@d-hansen, #322).
-
 - Fix `dbQuoteIdentifier()` for `Id()` objects (#323).
-
-## Features
-
-- Breaking change: Avoid appending a numeric suffix to duplicate column names (#321, #327).
-
-- Breaking change: Deprecate `dbConnect(groups = )` in favor of `dbConnect(group = )`, with a warning and compatibility code (@rorynolan, #258).
 
 ## Chore
 
 - Improve `dbQuoteIdentifier()` for `Id()` objects (#324).
-
-- Add Aviator configuration.
+- Avoid deprecated `mysql_ssl_set()` (#319).
 
 ## Continuous integration
 
@@ -54,47 +30,6 @@
 ## Testing
 
 - Test for quoting columns with `dbQuoteIdentifier()` (@dpprdan, #254, #255).
-
-## Breaking changes
-
-- Breaking change: Avoid appending a numeric suffix to duplicate column names (#321, #327).
-
-- Breaking change: Deprecate `dbConnect(groups = )` in favor of `dbConnect(group = )`, with a warning and compatibility code (@rorynolan, #258).
-
-
-# RMariaDB 1.3.1.9004 (2024-01-24)
-
-- Internal changes only.
-
-
-# RMariaDB 1.3.1.9003 (2024-01-15)
-
-- Internal changes only.
-
-
-# RMariaDB 1.3.1.9002 (2023-12-18)
-
-## Bug fixes
-
-- Re-added flaky test.
-
-  This reverts commit acf22bdffa398400ed360fd0fc9926c2753c7b60.
-
-- Revert me, avoid flaky test for now.
-
-
-# RMariaDB 1.3.1.9001 (2023-11-06)
-
-## Chore
-
-- Avoid deprecated `mysql_ssl_set()` (#319).
-
-- Add Aviator configuration.
-
-
-# RMariaDB 1.3.1.9000 (2023-10-27)
-
-- Merge branch 'cran-1.3.1'.
 
 
 # RMariaDB 1.3.1 (2023-10-26)
