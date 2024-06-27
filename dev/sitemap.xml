@@ -1,78 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/ISSUE_TEMPLATE.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/Client-flags.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/MariaDBConnection-class.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/MariaDBDriver-class.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/MariaDBResult-class.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/RMariaDB-package.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/dbConnect-MariaDBDriver-method.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/dbDataType.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/mariadb-quoting.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/mariadb-tables.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/mariadbClientLibraryVersions.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/mariadbHasDefault.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/query.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/result-meta.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/reference/transactions.html</loc>
-  </url>
-  <url>
-    <loc>https://rmariadb.r-dbi.org/dev/security.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://rmariadb.r-dbi.org/dev/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/CONTRIBUTING.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/ISSUE_TEMPLATE.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/LICENSE-text.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/LICENSE.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/authors.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/index.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/news/index.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/Client-flags.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/MariaDBConnection-class.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/MariaDBDriver-class.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/MariaDBResult-class.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/RMariaDB-package.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/dbConnect-MariaDBDriver-method.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/dbDataType.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/index.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/mariadb-quoting.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/mariadb-tables.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/mariadbClientLibraryVersions.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/mariadbHasDefault.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/query.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/reexports.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/result-meta.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/reference/transactions.html</loc></url>
+<url><loc>https://rmariadb.r-dbi.org/dev/security.html</loc></url>
 </urlset>
+
