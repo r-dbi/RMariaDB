@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.2.9001 (2024-06-28)
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/r-dbi/RMariaDB/actions/runs/9692458109
+
+## Continuous integration
+
+- Avoid checking bashisms on Windows.
+
+- Allow NOTEs on R-devel.
+
+- Better commit message.
+
+- Bump versions, better default, consume custom matrix.
+
+- Recent updates.
+
+- Prepare for dynamic check matrix.
+
+
 # RMariaDB 1.3.2.9000 (2024-05-26)
 
 - Merge branch 'cran-1.3.2'.
