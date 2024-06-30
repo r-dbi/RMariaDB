@@ -1,6 +1,6 @@
 Package: RMariaDB
 Title: Database Interface and MariaDB Driver
-Version: 1.3.2.9001
+Version: 1.3.2.9002
 Authors@R: c(
     person("Kirill", "Müller", , "kirill@cynkra.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-1416-3412")),

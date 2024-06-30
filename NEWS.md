@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.2.9002 (2024-06-30)
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/r-dbi/RMariaDB/actions/runs/9728433906
+
+
 # RMariaDB 1.3.2.9001 (2024-06-28)
 
 ## Chore
