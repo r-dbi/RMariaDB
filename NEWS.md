@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.2.9003 (2024-07-02)
+
+## Continuous integration
+
+- Fix on Windows, tweak lock workflow.
+
+
 # RMariaDB 1.3.2.9002 (2024-06-30)
 
 ## Chore
