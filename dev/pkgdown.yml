@@ -1,8 +1,8 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9.9000
-pkgdown_sha: a98c134518cc9f5006f9ce17d4b6fc29ea37b56b
+pkgdown: 2.1.0.9000
+pkgdown_sha: f20a64976d359c3f763c34f92cae9c0bc87ba5be
 articles: {}
-last_built: 2024-07-01T18:03Z
+last_built: 2024-07-09T08:23Z
 urls:
   reference: https://rmariadb.r-dbi.org/reference
   article: https://rmariadb.r-dbi.org/articles
