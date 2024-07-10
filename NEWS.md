@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.2.9004 (2024-07-10)
+
+## Bug fixes
+
+- `dbQuoteIdentifier()` removes the `def` catalog component again, regression introduced in RMariaDB 1.3.1 (#337, #339).
+
+
 # RMariaDB 1.3.2.9003 (2024-07-02)
 
 ## Continuous integration
