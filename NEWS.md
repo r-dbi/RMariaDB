@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.2.9005 (2024-08-02)
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/r-dbi/RMariaDB/actions/runs/10208511607
+
+## Continuous integration
+
+- Use dev roxygen2 and decor.
+
+
 # RMariaDB 1.3.2.9004 (2024-07-10)
 
 ## Bug fixes
