@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.2.9006 (2024-08-06)
+
+## Continuous integration
+
+- Inline action.
+
+
 # RMariaDB 1.3.2.9005 (2024-08-02)
 
 ## Chore
