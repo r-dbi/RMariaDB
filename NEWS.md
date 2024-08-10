@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.2.9007 (2024-08-10)
+
+## Continuous integration
+
+- Use v2 instead of master.
+
+
 # RMariaDB 1.3.2.9006 (2024-08-06)
 
 ## Continuous integration
