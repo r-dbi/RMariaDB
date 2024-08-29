@@ -1,5 +1,59 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.2.9008 (2024-08-17)
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/r-dbi/RMariaDB/actions/runs/10425483372
+
+## Continuous integration
+
+- Sync with latest developments.
+
+
+# RMariaDB 1.3.2.9007 (2024-08-10)
+
+## Continuous integration
+
+- Use v2 instead of master.
+
+
+# RMariaDB 1.3.2.9006 (2024-08-06)
+
+## Continuous integration
+
+- Inline action.
+
+
+# RMariaDB 1.3.2.9005 (2024-08-02)
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/r-dbi/RMariaDB/actions/runs/10208511607
+
+## Continuous integration
+
+- Use dev roxygen2 and decor.
+
+
+# RMariaDB 1.3.2.9004 (2024-07-10)
+
+## Bug fixes
+
+- `dbQuoteIdentifier()` removes the `def` catalog component again, regression introduced in RMariaDB 1.3.1 (#337, #339).
+
+
+# RMariaDB 1.3.2.9003 (2024-07-02)
+
+## Continuous integration
+
+- Fix on Windows, tweak lock workflow.
+
+
 # RMariaDB 1.3.2.9002 (2024-06-30)
 
 ## Chore

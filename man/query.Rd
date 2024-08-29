@@ -65,13 +65,13 @@ This allows passing multiple statements (with \link{CLIENT_MULTI_STATEMENTS})
 and turns off the ability to pass parameters.}
 }
 \description{
-To retrieve results a chunk at a time, use \code{\link[=dbSendQuery]{dbSendQuery()}},
-\code{\link[=dbFetch]{dbFetch()}}, then \code{\link[=dbClearResult]{dbClearResult()}}. Alternatively, if you want all the
-results (and they'll fit in memory) use \code{\link[=dbGetQuery]{dbGetQuery()}} which sends,
+To retrieve results a chunk at a time, use \code{\link[DBI:dbSendQuery]{DBI::dbSendQuery()}},
+\code{\link[DBI:dbFetch]{DBI::dbFetch()}}, then \code{\link[DBI:dbClearResult]{DBI::dbClearResult()}}. Alternatively, if you want all the
+results (and they'll fit in memory) use \code{\link[DBI:dbGetQuery]{DBI::dbGetQuery()}} which sends,
 fetches and clears for you. For data manipulation queries (i.e. queries
 that do not return data, such as \code{UPDATE}, \code{DELETE}, etc.),
-\code{\link[=dbSendStatement]{dbSendStatement()}} serves as a counterpart to \code{\link[=dbSendQuery]{dbSendQuery()}}, while
-\code{\link[=dbExecute]{dbExecute()}} corresponds to \code{\link[=dbGetQuery]{dbGetQuery()}}.
+\code{\link[DBI:dbSendStatement]{DBI::dbSendStatement()}} serves as a counterpart to \code{\link[DBI:dbSendQuery]{DBI::dbSendQuery()}}, while
+\code{\link[DBI:dbExecute]{DBI::dbExecute()}} corresponds to \code{\link[DBI:dbGetQuery]{DBI::dbGetQuery()}}.
 }
 \examples{
 if (mariadbHasDefault()) {

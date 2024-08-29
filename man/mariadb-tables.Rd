@@ -137,7 +137,7 @@ indicating whether the operation was successful.
 These methods read or write entire tables from a MariaDB database.
 }
 \details{
-When using \code{load_data_local_infile = TRUE} in \code{\link[=dbConnect]{dbConnect()}},
+When using \code{load_data_local_infile = TRUE} in \code{\link[DBI:dbConnect]{DBI::dbConnect()}},
 pass \code{safe = FALSE} to \code{dbAppendTable()} to avoid transactions.
 Because \verb{LOAD DATA INFILE} is used internally, this means that
 rows violating primary key constraints are now silently ignored.

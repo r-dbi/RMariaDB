@@ -86,7 +86,7 @@ encryption.}
 \item{groups}{deprecated, use \code{group} instead.}
 
 \item{load_data_local_infile}{Set to \code{TRUE} to use \verb{LOAD DATA LOCAL INFILE}
-in \code{\link[=dbWriteTable]{dbWriteTable()}} and \code{\link[=dbAppendTable]{dbAppendTable()}} by default.
+in \code{\link[DBI:dbWriteTable]{DBI::dbWriteTable()}} and \code{\link[DBI:dbAppendTable]{DBI::dbAppendTable()}} by default.
 This capability is disabled by default on the server side
 for recent versions of MySQL Server.}
 
