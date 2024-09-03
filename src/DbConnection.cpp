@@ -49,9 +49,18 @@ void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
     // MySQL 8.0 deprecated the enforce SSL flag in prefernce to defining an SSL MODE
     unsigned int ssl_mode_ = SSL_MODE_REQUIRED;
     mysql_options(this->pConn_, MYSQL_OPT_SSL_MODE, &ssl_mode_);
-#else    
+#elif MYSQL_VERSION_ID >= 50700
     my_bool use_ssl_ = 1;
     mysql_options(this->pConn_, MYSQL_OPT_SSL_ENFORCE, &use_ssl_);
+#else
+    mysql_ssl_set(
+      this->pConn_,
+      Rf_isNull(ssl_key) ? NULL : cpp11::as_cpp<std::string>(ssl_key).c_str(),
+      Rf_isNull(ssl_cert) ? NULL : cpp11::as_cpp<std::string>(ssl_cert).c_str(),
+      Rf_isNull(ssl_ca) ? NULL : cpp11::as_cpp<std::string>(ssl_ca).c_str(),
+      Rf_isNull(ssl_capath) ? NULL : cpp11::as_cpp<std::string>(ssl_capath).c_str(),
+      Rf_isNull(ssl_cipher) ? NULL : cpp11::as_cpp<std::string>(ssl_cipher).c_str()
+    );
 #endif
     // From MySQL manual: Do not set this option within an application program; it is set internally in the client library.
     // Instead the application program should set mysql_options
@@ -70,6 +79,7 @@ void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
 #endif
     client_flag &= ~CLIENT_SSL_VERIFY_SERVER_CERT;
   }
+#if MYSQL_VERSION_ID >= 50700
   if (!Rf_isNull(ssl_key)) {
     mysql_options(this->pConn_, MYSQL_OPT_SSL_KEY,    cpp11::as_cpp<std::string>(ssl_key).c_str());
   }
@@ -85,6 +95,7 @@ void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
   if (!Rf_isNull(ssl_cipher)) {
     mysql_options(this->pConn_, MYSQL_OPT_SSL_CIPHER, cpp11::as_cpp<std::string>(ssl_cipher).c_str());
   }
+#endif
   if (timeout > 0) {
     mysql_options(this->pConn_, MYSQL_OPT_CONNECT_TIMEOUT,
                   &timeout);
