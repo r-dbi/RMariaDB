@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.2.9010 (2024-09-04)
+
+## Features
+
+  - Add back SSL support for MariaDB 5.5.68 (@d-hansen, #336, #338).
+
+## Continuous integration
+
+  - Bump MariaDB version to fix checks (#344).
+
+
 # RMariaDB 1.3.2.9009 (2024-08-31)
 
 ## Continuous integration
