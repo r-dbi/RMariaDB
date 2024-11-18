@@ -1,4 +1,4 @@
-RMariaDB 1.3.2.9900
+RMariaDB 1.3.3
 
 ## Cran Repository Policy
 
