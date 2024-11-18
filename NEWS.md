@@ -10,49 +10,6 @@
 
 - Add back SSL support for MariaDB 5.5.68 (@d-hansen, #336, #338).
 
-## Chore
-
-- Auto-update from GitHub Actions.
-  Run: https://github.com/r-dbi/RMariaDB/actions/runs/10425483372
-  Run: https://github.com/r-dbi/RMariaDB/actions/runs/10208511607
-  Run: https://github.com/r-dbi/RMariaDB/actions/runs/9728433906
-  Run: https://github.com/r-dbi/RMariaDB/actions/runs/9692458109
-
-## Continuous integration
-
-- Remove Aviator.
-- Use stable pak (#349).
-- Import from actions-sync, check carefully (#348).
-- Use pkgdown branch (#347).
-  - ci: Use pkgdown branch
-  - ci: Updates from duckdb
-  - ci: Trigger run
-  - ci: Latest changes
-  - chore: Auto-update from GitHub Actions
-  Run: https://github.com/r-dbi/RMariaDB/actions/runs/11753599313
-- Install via R CMD INSTALL ., not pak (#346).
-  - ci: Install via R CMD INSTALL ., not pak
-  - ci: Bump version of upload-artifact action
-- Bump MariaDB version to fix checks (#344).
-- Install local package for pkgdown builds.
-- Improve support for protected branches with fledge.
-- Improve support for protected branches, without fledge.
-- Sync with latest developments.
-- Use v2 instead of master.
-- Inline action.
-- Use dev roxygen2 and decor.
-- Fix on Windows, tweak lock workflow.
-- Avoid checking bashisms on Windows.
-- Allow NOTEs on R-devel.
-- Better commit message.
-- Bump versions, better default, consume custom matrix.
-- Recent updates.
-- Prepare for dynamic check matrix.
-
-## Uncategorized
-
-- Merge branch 'cran-1.3.2'.
-
 
 # RMariaDB 1.3.2 (2024-05-26)
 
