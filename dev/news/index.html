@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">RMariaDB</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.2.9011</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.2.9900</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,130 +29,63 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/r-dbi/RMariaDB/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/r-dbi/RMariaDB/blob/cran-1.3.2.9900/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.3.2.9011" id="rmariadb-1329011-2024-09-15">RMariaDB 1.3.2.9011 (2024-09-15)<a class="anchor" aria-label="anchor" href="#rmariadb-1329011-2024-09-15"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.3.2.9900" id="rmariadb-1329900-2024-11-18">RMariaDB 1.3.2.9900 (2024-11-18)<a class="anchor" aria-label="anchor" href="#rmariadb-1329900-2024-11-18"></a></h2>
 <div class="section level3">
-<h3 id="continuous-integration-1-3-2-9011">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-1-3-2-9011"></a></h3>
-<ul><li>
-<p>Install via R CMD INSTALL ., not pak (<a href="https://github.com/r-dbi/RMariaDB/issues/346" class="external-link">#346</a>).</p>
-<ul><li><p>ci: Install via R CMD INSTALL ., not pak</p></li>
-<li><p>ci: Bump version of upload-artifact action</p></li>
-</ul></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.3.2.9010" id="rmariadb-1329010-2024-09-04">RMariaDB 1.3.2.9010 (2024-09-04)<a class="anchor" aria-label="anchor" href="#rmariadb-1329010-2024-09-04"></a></h2>
-<div class="section level3">
-<h3 id="features-1-3-2-9010">Features<a class="anchor" aria-label="anchor" href="#features-1-3-2-9010"></a></h3>
-<ul><li>Add back SSL support for MariaDB 5.5.68 (<a href="https://github.com/d-hansen" class="external-link">@d-hansen</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/336" class="external-link">#336</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/338" class="external-link">#338</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="continuous-integration-1-3-2-9010">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-1-3-2-9010"></a></h3>
-<ul><li>Bump MariaDB version to fix checks (<a href="https://github.com/r-dbi/RMariaDB/issues/344" class="external-link">#344</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.3.2.9009" id="rmariadb-1329009-2024-08-31">RMariaDB 1.3.2.9009 (2024-08-31)<a class="anchor" aria-label="anchor" href="#rmariadb-1329009-2024-08-31"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-1-3-2-9009">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-1-3-2-9009"></a></h3>
-<ul><li><p>Install local package for pkgdown builds.</p></li>
-<li><p>Improve support for protected branches with fledge.</p></li>
-<li><p>Improve support for protected branches, without fledge.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.3.2.9008" id="rmariadb-1329008-2024-08-17">RMariaDB 1.3.2.9008 (2024-08-17)<a class="anchor" aria-label="anchor" href="#rmariadb-1329008-2024-08-17"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-3-2-9008">Chore<a class="anchor" aria-label="anchor" href="#chore-1-3-2-9008"></a></h3>
-<ul><li>
-<p>Auto-update from GitHub Actions.</p>
-<p>Run: <a href="https://github.com/r-dbi/RMariaDB/actions/runs/10425483372" class="external-link uri">https://github.com/r-dbi/RMariaDB/actions/runs/10425483372</a></p>
-</li>
-</ul></div>
-<div class="section level3">
-<h3 id="continuous-integration-1-3-2-9008">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-1-3-2-9008"></a></h3>
-<ul><li>Sync with latest developments.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.3.2.9007" id="rmariadb-1329007-2024-08-10">RMariaDB 1.3.2.9007 (2024-08-10)<a class="anchor" aria-label="anchor" href="#rmariadb-1329007-2024-08-10"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-1-3-2-9007">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-1-3-2-9007"></a></h3>
-<ul><li>Use v2 instead of master.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.3.2.9006" id="rmariadb-1329006-2024-08-06">RMariaDB 1.3.2.9006 (2024-08-06)<a class="anchor" aria-label="anchor" href="#rmariadb-1329006-2024-08-06"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-1-3-2-9006">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-1-3-2-9006"></a></h3>
-<ul><li>Inline action.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.3.2.9005" id="rmariadb-1329005-2024-08-02">RMariaDB 1.3.2.9005 (2024-08-02)<a class="anchor" aria-label="anchor" href="#rmariadb-1329005-2024-08-02"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-3-2-9005">Chore<a class="anchor" aria-label="anchor" href="#chore-1-3-2-9005"></a></h3>
-<ul><li>
-<p>Auto-update from GitHub Actions.</p>
-<p>Run: <a href="https://github.com/r-dbi/RMariaDB/actions/runs/10208511607" class="external-link uri">https://github.com/r-dbi/RMariaDB/actions/runs/10208511607</a></p>
-</li>
-</ul></div>
-<div class="section level3">
-<h3 id="continuous-integration-1-3-2-9005">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-1-3-2-9005"></a></h3>
-<ul><li>Use dev roxygen2 and decor.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.3.2.9004" id="rmariadb-1329004-2024-07-10">RMariaDB 1.3.2.9004 (2024-07-10)<a class="anchor" aria-label="anchor" href="#rmariadb-1329004-2024-07-10"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-1-3-2-9004">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-3-2-9004"></a></h3>
+<h3 id="bug-fixes-1-3-2-9900">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-3-2-9900"></a></h3>
 <ul><li>
 <code><a href="https://dbi.r-dbi.org/reference/dbQuoteIdentifier.html" class="external-link">dbQuoteIdentifier()</a></code> removes the <code>def</code> catalog component again, regression introduced in RMariaDB 1.3.1 (<a href="https://github.com/r-dbi/RMariaDB/issues/337" class="external-link">#337</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/339" class="external-link">#339</a>).</li>
 </ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.3.2.9003" id="rmariadb-1329003-2024-07-02">RMariaDB 1.3.2.9003 (2024-07-02)<a class="anchor" aria-label="anchor" href="#rmariadb-1329003-2024-07-02"></a></h2>
 <div class="section level3">
-<h3 id="continuous-integration-1-3-2-9003">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-1-3-2-9003"></a></h3>
-<ul><li>Fix on Windows, tweak lock workflow.</li>
+<h3 id="features-1-3-2-9900">Features<a class="anchor" aria-label="anchor" href="#features-1-3-2-9900"></a></h3>
+<ul><li>Add back SSL support for MariaDB 5.5.68 (<a href="https://github.com/d-hansen" class="external-link">@d-hansen</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/336" class="external-link">#336</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/338" class="external-link">#338</a>).</li>
 </ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.3.2.9002" id="rmariadb-1329002-2024-06-30">RMariaDB 1.3.2.9002 (2024-06-30)<a class="anchor" aria-label="anchor" href="#rmariadb-1329002-2024-06-30"></a></h2>
 <div class="section level3">
-<h3 id="chore-1-3-2-9002">Chore<a class="anchor" aria-label="anchor" href="#chore-1-3-2-9002"></a></h3>
-<ul><li>
-<p>Auto-update from GitHub Actions.</p>
-<p>Run: <a href="https://github.com/r-dbi/RMariaDB/actions/runs/9728433906" class="external-link uri">https://github.com/r-dbi/RMariaDB/actions/runs/9728433906</a></p>
-</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.3.2.9001" id="rmariadb-1329001-2024-06-28">RMariaDB 1.3.2.9001 (2024-06-28)<a class="anchor" aria-label="anchor" href="#rmariadb-1329001-2024-06-28"></a></h2>
-<div class="section level3">
-<h3 id="chore-1-3-2-9001">Chore<a class="anchor" aria-label="anchor" href="#chore-1-3-2-9001"></a></h3>
-<ul><li>
-<p>Auto-update from GitHub Actions.</p>
-<p>Run: <a href="https://github.com/r-dbi/RMariaDB/actions/runs/9692458109" class="external-link uri">https://github.com/r-dbi/RMariaDB/actions/runs/9692458109</a></p>
+<h3 id="chore-1-3-2-9900">Chore<a class="anchor" aria-label="anchor" href="#chore-1-3-2-9900"></a></h3>
+<ul><li>Auto-update from GitHub Actions. Run: <a href="https://github.com/r-dbi/RMariaDB/actions/runs/10425483372" class="external-link uri">https://github.com/r-dbi/RMariaDB/actions/runs/10425483372</a> Run: <a href="https://github.com/r-dbi/RMariaDB/actions/runs/10208511607" class="external-link uri">https://github.com/r-dbi/RMariaDB/actions/runs/10208511607</a> Run: <a href="https://github.com/r-dbi/RMariaDB/actions/runs/9728433906" class="external-link uri">https://github.com/r-dbi/RMariaDB/actions/runs/9728433906</a> Run: <a href="https://github.com/r-dbi/RMariaDB/actions/runs/9692458109" class="external-link uri">https://github.com/r-dbi/RMariaDB/actions/runs/9692458109</a>
 </li>
 </ul></div>
 <div class="section level3">
-<h3 id="continuous-integration-1-3-2-9001">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-1-3-2-9001"></a></h3>
-<ul><li><p>Avoid checking bashisms on Windows.</p></li>
-<li><p>Allow NOTEs on R-devel.</p></li>
-<li><p>Better commit message.</p></li>
-<li><p>Bump versions, better default, consume custom matrix.</p></li>
-<li><p>Recent updates.</p></li>
-<li><p>Prepare for dynamic check matrix.</p></li>
+<h3 id="continuous-integration-1-3-2-9900">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-1-3-2-9900"></a></h3>
+<ul><li>Remove Aviator.</li>
+<li>Use stable pak (<a href="https://github.com/r-dbi/RMariaDB/issues/349" class="external-link">#349</a>).</li>
+<li>Import from actions-sync, check carefully (<a href="https://github.com/r-dbi/RMariaDB/issues/348" class="external-link">#348</a>).</li>
+<li>Use pkgdown branch (<a href="https://github.com/r-dbi/RMariaDB/issues/347" class="external-link">#347</a>).
+<ul><li>ci: Use pkgdown branch</li>
+<li>ci: Updates from duckdb</li>
+<li>ci: Trigger run</li>
+<li>ci: Latest changes</li>
+<li>chore: Auto-update from GitHub Actions Run: <a href="https://github.com/r-dbi/RMariaDB/actions/runs/11753599313" class="external-link uri">https://github.com/r-dbi/RMariaDB/actions/runs/11753599313</a>
+</li>
+</ul></li>
+<li>Install via R CMD INSTALL ., not pak (<a href="https://github.com/r-dbi/RMariaDB/issues/346" class="external-link">#346</a>).
+<ul><li>ci: Install via R CMD INSTALL ., not pak</li>
+<li>ci: Bump version of upload-artifact action</li>
+</ul></li>
+<li>Bump MariaDB version to fix checks (<a href="https://github.com/r-dbi/RMariaDB/issues/344" class="external-link">#344</a>).</li>
+<li>Install local package for pkgdown builds.</li>
+<li>Improve support for protected branches with fledge.</li>
+<li>Improve support for protected branches, without fledge.</li>
+<li>Sync with latest developments.</li>
+<li>Use v2 instead of master.</li>
+<li>Inline action.</li>
+<li>Use dev roxygen2 and decor.</li>
+<li>Fix on Windows, tweak lock workflow.</li>
+<li>Avoid checking bashisms on Windows.</li>
+<li>Allow NOTEs on R-devel.</li>
+<li>Better commit message.</li>
+<li>Bump versions, better default, consume custom matrix.</li>
+<li>Recent updates.</li>
+<li>Prepare for dynamic check matrix.</li>
 </ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.3.2.9000" id="rmariadb-1329000-2024-05-26">RMariaDB 1.3.2.9000 (2024-05-26)<a class="anchor" aria-label="anchor" href="#rmariadb-1329000-2024-05-26"></a></h2>
+<div class="section level3">
+<h3 id="uncategorized-1-3-2-9900">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-1-3-2-9900"></a></h3>
 <ul><li>Merge branch ‘cran-1.3.2’.</li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.3.2" id="rmariadb-132-2024-05-26">RMariaDB 1.3.2 (2024-05-26)<a class="anchor" aria-label="anchor" href="#rmariadb-132-2024-05-26"></a></h2>
 <div class="section level3">
