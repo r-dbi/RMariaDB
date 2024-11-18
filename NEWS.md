@@ -1,152 +1,55 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# RMariaDB 1.3.2.9012 (2024-11-18)
-
-## Continuous integration
-
-- Remove Aviator.
-
-- Use stable pak (#349).
-
-- Import from actions-sync, check carefully (#348).
-
-- Use pkgdown branch (#347).
-
-  - ci: Use pkgdown branch
-
-  - ci: Updates from duckdb
-
-  - ci: Trigger run
-
-  - ci: Trigger run
-
-  - ci: Latest changes
-
-  - chore: Auto-update from GitHub Actions
-
-  Run: https://github.com/r-dbi/RMariaDB/actions/runs/11753599313
-
-
-# RMariaDB 1.3.2.9011 (2024-09-15)
-
-## Continuous integration
-
-  - Install via R CMD INSTALL ., not pak (#346).
-    
-      - ci: Install via R CMD INSTALL ., not pak
-    
-      - ci: Bump version of upload-artifact action
-
-
-# RMariaDB 1.3.2.9010 (2024-09-04)
-
-## Features
-
-  - Add back SSL support for MariaDB 5.5.68 (@d-hansen, #336, #338).
-
-## Continuous integration
-
-  - Bump MariaDB version to fix checks (#344).
-
-
-# RMariaDB 1.3.2.9009 (2024-08-31)
-
-## Continuous integration
-
-  - Install local package for pkgdown builds.
-
-  - Improve support for protected branches with fledge.
-
-  - Improve support for protected branches, without fledge.
-
-
-# RMariaDB 1.3.2.9008 (2024-08-17)
-
-## Chore
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/r-dbi/RMariaDB/actions/runs/10425483372
-
-## Continuous integration
-
-- Sync with latest developments.
-
-
-# RMariaDB 1.3.2.9007 (2024-08-10)
-
-## Continuous integration
-
-- Use v2 instead of master.
-
-
-# RMariaDB 1.3.2.9006 (2024-08-06)
-
-## Continuous integration
-
-- Inline action.
-
-
-# RMariaDB 1.3.2.9005 (2024-08-02)
-
-## Chore
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/r-dbi/RMariaDB/actions/runs/10208511607
-
-## Continuous integration
-
-- Use dev roxygen2 and decor.
-
-
-# RMariaDB 1.3.2.9004 (2024-07-10)
+# RMariaDB 1.3.2.9900 (2024-11-18)
 
 ## Bug fixes
 
 - `dbQuoteIdentifier()` removes the `def` catalog component again, regression introduced in RMariaDB 1.3.1 (#337, #339).
 
+## Features
 
-# RMariaDB 1.3.2.9003 (2024-07-02)
-
-## Continuous integration
-
-- Fix on Windows, tweak lock workflow.
-
-
-# RMariaDB 1.3.2.9002 (2024-06-30)
+- Add back SSL support for MariaDB 5.5.68 (@d-hansen, #336, #338).
 
 ## Chore
 
 - Auto-update from GitHub Actions.
-
+  Run: https://github.com/r-dbi/RMariaDB/actions/runs/10425483372
+  Run: https://github.com/r-dbi/RMariaDB/actions/runs/10208511607
   Run: https://github.com/r-dbi/RMariaDB/actions/runs/9728433906
-
-
-# RMariaDB 1.3.2.9001 (2024-06-28)
-
-## Chore
-
-- Auto-update from GitHub Actions.
-
   Run: https://github.com/r-dbi/RMariaDB/actions/runs/9692458109
 
 ## Continuous integration
 
+- Remove Aviator.
+- Use stable pak (#349).
+- Import from actions-sync, check carefully (#348).
+- Use pkgdown branch (#347).
+  - ci: Use pkgdown branch
+  - ci: Updates from duckdb
+  - ci: Trigger run
+  - ci: Latest changes
+  - chore: Auto-update from GitHub Actions
+  Run: https://github.com/r-dbi/RMariaDB/actions/runs/11753599313
+- Install via R CMD INSTALL ., not pak (#346).
+  - ci: Install via R CMD INSTALL ., not pak
+  - ci: Bump version of upload-artifact action
+- Bump MariaDB version to fix checks (#344).
+- Install local package for pkgdown builds.
+- Improve support for protected branches with fledge.
+- Improve support for protected branches, without fledge.
+- Sync with latest developments.
+- Use v2 instead of master.
+- Inline action.
+- Use dev roxygen2 and decor.
+- Fix on Windows, tweak lock workflow.
 - Avoid checking bashisms on Windows.
-
 - Allow NOTEs on R-devel.
-
 - Better commit message.
-
 - Bump versions, better default, consume custom matrix.
-
 - Recent updates.
-
 - Prepare for dynamic check matrix.
 
-
-# RMariaDB 1.3.2.9000 (2024-05-26)
+## Uncategorized
 
 - Merge branch 'cran-1.3.2'.
 
