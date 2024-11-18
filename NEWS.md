@@ -10,13 +10,6 @@
 
 - Add back SSL support for MariaDB 5.5.68 (@d-hansen, #336, #338).
 
-## Uncategorized
-
-- CRAN comments.
-- Bump version to 1.3.2.9900.
-- Add rhub.
-- NEWS.
-
 
 # RMariaDB 1.3.2 (2024-05-26)
 
