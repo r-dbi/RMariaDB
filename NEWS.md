@@ -1,5 +1,32 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.2.9012 (2024-11-18)
+
+## Continuous integration
+
+- Remove Aviator.
+
+- Use stable pak (#349).
+
+- Import from actions-sync, check carefully (#348).
+
+- Use pkgdown branch (#347).
+
+  - ci: Use pkgdown branch
+
+  - ci: Updates from duckdb
+
+  - ci: Trigger run
+
+  - ci: Trigger run
+
+  - ci: Latest changes
+
+  - chore: Auto-update from GitHub Actions
+
+  Run: https://github.com/r-dbi/RMariaDB/actions/runs/11753599313
+
+
 # RMariaDB 1.3.2.9011 (2024-09-15)
 
 ## Continuous integration
