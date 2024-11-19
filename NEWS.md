@@ -1,17 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# RMariaDB 1.3.2.9901 (2024-11-18)
-
-- CRAN comments.
-
-- Bump version to 1.3.2.9900.
-
-- Add rhub.
-
-- NEWS.
-
-
-# RMariaDB 1.3.2.9900 (2024-11-18)
+# RMariaDB 1.3.3 (2024-11-18)
 
 ## Bug fixes
 
