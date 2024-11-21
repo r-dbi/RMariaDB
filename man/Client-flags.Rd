@@ -23,7 +23,7 @@
 \alias{CLIENT_SSL_VERIFY_SERVER_CERT}
 \title{Client flags}
 \description{
-Use for the \code{client.flag} argument to \code{\link[=dbConnect]{dbConnect()}}, multiple flags can be
+Use for the \code{client.flag} argument to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}, multiple flags can be
 combined with \code{+} or \code{\link[=bitwOr]{bitwOr()}}.
 The flags are provided for completeness.
 To enforce SSL for the DB connection, add the flag \code{CLIENT_SSL}.
