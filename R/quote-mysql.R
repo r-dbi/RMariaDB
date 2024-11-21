@@ -5,4 +5,3 @@
 #' @keywords internal
 #' @name mysql-quoting
 NULL
-

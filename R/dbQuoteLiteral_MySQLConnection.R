@@ -6,9 +6,9 @@ dbQuoteLiteral_MySQLConnection <- function(conn, x, ...) {
 
   if (inherits(x, "POSIXt")) {
     return(dbQuoteString(
-    conn,
-    strftime(as.POSIXct(x), "%Y%m%d%H%M%S", tz = "UTC")
-  ))
+      conn,
+      strftime(as.POSIXct(x), "%Y%m%d%H%M%S", tz = "UTC")
+    ))
   }
   callNextMethod()
 }
