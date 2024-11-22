@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">RMariaDB</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.2.9900</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.3.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,14 +33,25 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.3.2.9900" id="rmariadb-1329900-2024-11-18">RMariaDB 1.3.2.9900 (2024-11-18)<a class="anchor" aria-label="anchor" href="#rmariadb-1329900-2024-11-18"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.3.3.9000" id="rmariadb-1339000-2024-11-22">RMariaDB 1.3.3.9000 (2024-11-22)<a class="anchor" aria-label="anchor" href="#rmariadb-1339000-2024-11-22"></a></h2>
 <div class="section level3">
-<h3 id="bug-fixes-1-3-2-9900">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-3-2-9900"></a></h3>
+<h3 id="bug-fixes-1-3-3-9000">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-3-3-9000"></a></h3>
+<ul><li>Adjust datetime format in <code><a href="https://dbi.r-dbi.org/reference/dbQuoteLiteral.html" class="external-link">dbQuoteLiteral()</a></code> for <code>MySQLConnection</code> (<a href="https://github.com/jjaeschke" class="external-link">@jjaeschke</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/353" class="external-link">#353</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="continuous-integration-1-3-3-9000">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-1-3-3-9000"></a></h3>
+<ul><li>Correctly detect branch protection (<a href="https://github.com/r-dbi/RMariaDB/issues/354" class="external-link">#354</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.3" id="rmariadb-133-2024-11-18">RMariaDB 1.3.3 (2024-11-18)<a class="anchor" aria-label="anchor" href="#rmariadb-133-2024-11-18"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-3-3">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-3-3"></a></h3>
 <ul><li>
 <code><a href="https://dbi.r-dbi.org/reference/dbQuoteIdentifier.html" class="external-link">dbQuoteIdentifier()</a></code> removes the <code>def</code> catalog component again, regression introduced in RMariaDB 1.3.1 (<a href="https://github.com/r-dbi/RMariaDB/issues/337" class="external-link">#337</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/339" class="external-link">#339</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="features-1-3-2-9900">Features<a class="anchor" aria-label="anchor" href="#features-1-3-2-9900"></a></h3>
+<h3 id="features-1-3-3">Features<a class="anchor" aria-label="anchor" href="#features-1-3-3"></a></h3>
 <ul><li>Add back SSL support for MariaDB 5.5.68 (<a href="https://github.com/d-hansen" class="external-link">@d-hansen</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/336" class="external-link">#336</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/338" class="external-link">#338</a>).</li>
 </ul></div>
 </div>
