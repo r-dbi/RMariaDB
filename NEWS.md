@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.3.9000 (2024-11-22)
+
+## Bug fixes
+
+- Adjust datetime format in `dbQuoteLiteral()` for `MySQLConnection` (@jjaeschke, #353).
+
+## Continuous integration
+
+- Correctly detect branch protection (#354).
+
+
 # RMariaDB 1.3.3 (2024-11-18)
 
 ## Bug fixes
