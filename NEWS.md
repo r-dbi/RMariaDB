@@ -1,5 +1,78 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.3.9001 (2024-12-06)
+
+## Bug fixes
+
+- Adjust datetime format in `dbQuoteLiteral()` for `MySQLConnection` (@jjaeschke, #353).
+
+- `dbQuoteIdentifier()` removes the `def` catalog component again, regression introduced in RMariaDB 1.3.1 (#337, #339).
+
+## Features
+
+- Add back SSL support for MariaDB 5.5.68 (@d-hansen, #336, #338).
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/r-dbi/RMariaDB/actions/runs/10425483372
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/r-dbi/RMariaDB/actions/runs/10208511607
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/r-dbi/RMariaDB/actions/runs/9728433906
+
+## Continuous integration
+
+- Ignore errors when removing pkg-config on macOS (#364).
+
+- Explicit permissions (#362).
+
+- Use styler from main branch (#360).
+
+- Need to install R on Ubuntu 24.04 (#358).
+
+- Use Ubuntu 24.04 and styler PR (#356).
+
+- Correctly detect branch protection (#354).
+
+- Remove Aviator.
+
+- Use stable pak (#349).
+
+- Import from actions-sync, check carefully (#348).
+
+- Use pkgdown branch (#347).
+
+- Install via R CMD INSTALL ., not pak (#346).
+
+- Bump MariaDB version to fix checks (#344).
+
+- Install local package for pkgdown builds.
+
+- Improve support for protected branches with fledge.
+
+- Improve support for protected branches, without fledge.
+
+- Sync with latest developments.
+
+- Use v2 instead of master.
+
+- Inline action.
+
+- Use dev roxygen2 and decor.
+
+- Fix on Windows, tweak lock workflow.
+
+## Uncategorized
+
+- PLACEHOLDER https://github.com/r-dbi/RMariaDB/pull/16 (#16).
+
+
 # RMariaDB 1.3.3.9000 (2024-11-22)
 
 ## Bug fixes
