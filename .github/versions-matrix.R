@@ -8,4 +8,4 @@ mysql_combos <- data.frame(
   desc = c("mariadb_config", "mysql_config", "MySQL server", "MariaDB server, MySQL client", "MySQL server, MariaDB client", "MariaDB server + client")
 )
 windows_versions <- data.frame(os = "windows-latest", r = r_versions[4:5])
-rbind(mysql_combos, windows_versions)
+list(mysql_combos, windows_versions)
