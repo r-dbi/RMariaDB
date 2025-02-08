@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.3.9002 (2025-02-08)
+
+## Windows
+
+- Use mariadbclient from Rtools if available (#383).
+
+
 # RMariaDB 1.3.3.9001 (2024-12-12)
 
 ## Continuous integration
