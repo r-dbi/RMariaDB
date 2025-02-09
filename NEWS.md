@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.3.9003 (2025-02-09)
+
+## Continuous integration
+
+- Fix.
+
+- Fix typo.
+
+- Add old Windows.
+
+
 # RMariaDB 1.3.3.9002 (2025-02-08)
 
 ## Windows
