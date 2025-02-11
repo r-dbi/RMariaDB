@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">RMariaDB</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,9 +29,40 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/r-dbi/RMariaDB/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/r-dbi/RMariaDB/blob/cran-1.3.4/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.4" id="rmariadb-134-2025-02-11">RMariaDB 1.3.4 (2025-02-11)<a class="anchor" aria-label="anchor" href="#rmariadb-134-2025-02-11"></a></h2>
+<div class="section level3">
+<h3 id="windows-1-3-4">Windows<a class="anchor" aria-label="anchor" href="#windows-1-3-4"></a></h3>
+<ul><li>Use mariadbclient from Rtools if available (<a href="https://github.com/r-dbi/RMariaDB/issues/383" class="external-link">#383</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-1-3-4">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-3-4"></a></h3>
+<ul><li>Adjust datetime format in <code><a href="https://dbi.r-dbi.org/reference/dbQuoteLiteral.html" class="external-link">dbQuoteLiteral()</a></code> for <code>MySQLConnection</code> (<a href="https://github.com/jjaeschke" class="external-link">@jjaeschke</a>, <a href="https://github.com/r-dbi/RMariaDB/issues/353" class="external-link">#353</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="continuous-integration-1-3-4">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-1-3-4"></a></h3>
+<ul><li><p>Fix.</p></li>
+<li><p>Fix typo.</p></li>
+<li><p>Add old Windows.</p></li>
+<li><p>Avoid failure in fledge workflow if no changes (<a href="https://github.com/r-dbi/RMariaDB/issues/378" class="external-link">#378</a>).</p></li>
+<li><p>Fetch tags for fledge workflow to avoid unnecessary NEWS entries (<a href="https://github.com/r-dbi/RMariaDB/issues/376" class="external-link">#376</a>).</p></li>
+<li><p>Use larger retry count for lock-threads workflow (<a href="https://github.com/r-dbi/RMariaDB/issues/374" class="external-link">#374</a>).</p></li>
+<li><p>Add <code>mariadb_config</code> to <code>$PATH</code> on macOS.</p></li>
+<li><p>Ignore errors when removing pkg-config on macOS (<a href="https://github.com/r-dbi/RMariaDB/issues/364" class="external-link">#364</a>).</p></li>
+<li><p>Explicit permissions (<a href="https://github.com/r-dbi/RMariaDB/issues/362" class="external-link">#362</a>).</p></li>
+<li><p>Use styler from main branch (<a href="https://github.com/r-dbi/RMariaDB/issues/360" class="external-link">#360</a>).</p></li>
+<li><p>Need to install R on Ubuntu 24.04 (<a href="https://github.com/r-dbi/RMariaDB/issues/358" class="external-link">#358</a>).</p></li>
+<li><p>Use Ubuntu 24.04 and styler PR (<a href="https://github.com/r-dbi/RMariaDB/issues/356" class="external-link">#356</a>).</p></li>
+<li><p>Correctly detect branch protection (<a href="https://github.com/r-dbi/RMariaDB/issues/354" class="external-link">#354</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="uncategorized-1-3-4">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-1-3-4"></a></h3>
+<ul><li>Ci: Fix macOS (<a href="https://github.com/r-dbi/RMariaDB/issues/16" class="external-link">#16</a>) (<a href="https://github.com/r-dbi/RMariaDB/issues/357" class="external-link">#357</a>).</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.3.3" id="rmariadb-133-2024-11-18">RMariaDB 1.3.3 (2024-11-18)<a class="anchor" aria-label="anchor" href="#rmariadb-133-2024-11-18"></a></h2>
 <div class="section level3">
