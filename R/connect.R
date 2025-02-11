@@ -57,6 +57,7 @@ MariaDB <- function() {
 #' Use for the `client.flag` argument to [dbConnect()], multiple flags can be
 #' combined with `+` or [bitwOr()].
 #' The flags are provided for completeness.
+#' To enforce SSL for the DB connection, add the flag `CLIENT_SSL`.
 #'
 #' @seealso
 #' The `flags` argument at https://mariadb.com/kb/en/library/mysql_real_connect.
@@ -68,15 +69,15 @@ MariaDB <- function() {
 #' con1 <- dbConnect(MariaDB(), client.flag = CLIENT_COMPRESS)
 #' con2 <- dbConnect(
 #'   MariaDB(),
-#'   client.flag = bitwOr(CLIENT_COMPRESS, CLIENT_SECURE_CONNECTION)
+#'   client.flag = bitwOr(CLIENT_COMPRESS, CLIENT_SSL)
 #' )
 #' }
 #'
 #' @aliases CLIENT_LONG_PASSWORD CLIENT_FOUND_ROWS CLIENT_LONG_FLAG
 #' CLIENT_CONNECT_WITH_DB CLIENT_NO_SCHEMA CLIENT_COMPRESS CLIENT_ODBC
 #' CLIENT_LOCAL_FILES CLIENT_IGNORE_SPACE CLIENT_PROTOCOL_41 CLIENT_INTERACTIVE
-#' CLIENT_SSL CLIENT_IGNORE_SIGPIPE CLIENT_TRANSACTIONS CLIENT_RESERVED
-#' CLIENT_SECURE_CONNECTION CLIENT_MULTI_STATEMENTS CLIENT_MULTI_RESULTS
+#' CLIENT_SSL CLIENT_IGNORE_SIGPIPE CLIENT_TRANSACTIONS CLIENT_RESERVED CLIENT_RESERVED2
+#' CLIENT_MULTI_STATEMENTS CLIENT_MULTI_RESULTS CLIENT_SSL_VERIFY_SERVER_CERT
 #' @name Client-flags
 NULL
 
@@ -143,8 +144,8 @@ CLIENT_RESERVED     <- 16384
 # Old flag for 4.1 protocol
 
 #' @export
-CLIENT_SECURE_CONNECTION <- 32768
-# New 4.1 authentication
+CLIENT_RESERVED2    <- 32768
+# Old flag for 4.1 authentication
 
 #' @export
 CLIENT_MULTI_STATEMENTS  <- 65536
@@ -153,3 +154,7 @@ CLIENT_MULTI_STATEMENTS  <- 65536
 #' @export
 CLIENT_MULTI_RESULTS     <- 131072
 # Enable/disable multi-results
+
+#' @export
+CLIENT_SSL_VERIFY_SERVER_CERT <- 1073741824
+# Enable/disable verifying server SSL certificate

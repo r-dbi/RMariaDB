@@ -17,14 +17,16 @@
 \alias{CLIENT_IGNORE_SIGPIPE}
 \alias{CLIENT_TRANSACTIONS}
 \alias{CLIENT_RESERVED}
-\alias{CLIENT_SECURE_CONNECTION}
+\alias{CLIENT_RESERVED2}
 \alias{CLIENT_MULTI_STATEMENTS}
 \alias{CLIENT_MULTI_RESULTS}
+\alias{CLIENT_SSL_VERIFY_SERVER_CERT}
 \title{Client flags}
 \description{
-Use for the \code{client.flag} argument to \code{\link[=dbConnect]{dbConnect()}}, multiple flags can be
+Use for the \code{client.flag} argument to \code{\link[DBI:dbConnect]{DBI::dbConnect()}}, multiple flags can be
 combined with \code{+} or \code{\link[=bitwOr]{bitwOr()}}.
 The flags are provided for completeness.
+To enforce SSL for the DB connection, add the flag \code{CLIENT_SSL}.
 }
 \examples{
 \dontrun{
@@ -33,7 +35,7 @@ library(RMariaDB)
 con1 <- dbConnect(MariaDB(), client.flag = CLIENT_COMPRESS)
 con2 <- dbConnect(
   MariaDB(),
-  client.flag = bitwOr(CLIENT_COMPRESS, CLIENT_SECURE_CONNECTION)
+  client.flag = bitwOr(CLIENT_COMPRESS, CLIENT_SSL)
 )
 }
 

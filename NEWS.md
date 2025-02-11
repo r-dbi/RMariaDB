@@ -1,38 +1,102 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# RMariaDB 1.3.1.9004 (2024-01-24)
+# RMariaDB 1.3.3.9003 (2025-02-09)
 
-- Internal changes only.
+## Continuous integration
+
+- Fix.
+
+- Fix typo.
+
+- Add old Windows.
 
 
-# RMariaDB 1.3.1.9003 (2024-01-15)
+# RMariaDB 1.3.3.9002 (2025-02-08)
 
-- Internal changes only.
+## Windows
+
+- Use mariadbclient from Rtools if available (#383).
 
 
-# RMariaDB 1.3.1.9002 (2023-12-18)
+# RMariaDB 1.3.3.9001 (2024-12-12)
+
+## Continuous integration
+
+- Avoid failure in fledge workflow if no changes (#378).
+
+- Fetch tags for fledge workflow to avoid unnecessary NEWS entries (#376).
+
+- Use larger retry count for lock-threads workflow (#374).
+
+- Add `mariadb_config` to `$PATH` on macOS.
+
+- Ignore errors when removing pkg-config on macOS (#364).
+
+- Explicit permissions (#362).
+
+- Use styler from main branch (#360).
+
+- Need to install R on Ubuntu 24.04 (#358).
+
+- Use Ubuntu 24.04 and styler PR (#356).
+
+## Uncategorized
+
+- Ci: Fix macOS (#16) (#357).
+
+
+# RMariaDB 1.3.3.9000 (2024-11-22)
 
 ## Bug fixes
 
-- Re-added flaky test.
+- Adjust datetime format in `dbQuoteLiteral()` for `MySQLConnection` (@jjaeschke, #353).
 
-  This reverts commit acf22bdffa398400ed360fd0fc9926c2753c7b60.
+## Continuous integration
 
-- Revert me, avoid flaky test for now.
+- Correctly detect branch protection (#354).
 
 
-# RMariaDB 1.3.1.9001 (2023-11-06)
+# RMariaDB 1.3.3 (2024-11-18)
+
+## Bug fixes
+
+- `dbQuoteIdentifier()` removes the `def` catalog component again, regression introduced in RMariaDB 1.3.1 (#337, #339).
+
+## Features
+
+- Add back SSL support for MariaDB 5.5.68 (@d-hansen, #336, #338).
+
+
+# RMariaDB 1.3.2 (2024-05-26)
+
+## Features
+
+- Improve enforcement of SSL for `dbConnect()` and the output when printing connections (@d-hansen, #328).
+- Breaking change: Avoid appending a numeric suffix to duplicate column names (#321, #327).
+- Breaking change: Deprecate `dbConnect(groups = )` in favor of `dbConnect(group = )`, with a warning and compatibility code (@rorynolan, #258).
+
+## Bug fixes
+
+- `dbWriteTable()` and `dbAppendTable()` on a connection with `load_data_local_infile = TRUE` uses the `utf8mb4` instead of the more restricted `utf8mb3` encoding (@ecoffingould, #332, #333).
+- `dbConnect()` can enable SSL based on `client_flag` again (@d-hansen, #322).
+- Fix `dbQuoteIdentifier()` for `Id()` objects (#323).
 
 ## Chore
 
+- Improve `dbQuoteIdentifier()` for `Id()` objects (#324).
 - Avoid deprecated `mysql_ssl_set()` (#319).
 
-- Add Aviator configuration.
+## Continuous integration
 
+- Turn off Windows for now (#326).
 
-# RMariaDB 1.3.1.9000 (2023-10-27)
+## Documentation
 
-- Merge branch 'cran-1.3.1'.
+- Use dbitemplate (@maelle, #320).
+
+## Testing
+
+- Test for quoting columns with `dbQuoteIdentifier()` (@dpprdan, #254, #255).
 
 
 # RMariaDB 1.3.1 (2023-10-26)

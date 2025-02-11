@@ -18,7 +18,14 @@ runs:
         fi
       shell: bash
 
-    - name: Install and check MariaDB client (macOS)
+    - name: Install MariaDB client (macOS)
+      if: runner.os == 'macOS' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
+      run: |
+        brew install mariadb-connector-c
+        echo PATH="/opt/homebrew/opt/mariadb-connector-c/bin:${PATH}" | tee -a $GITHUB_ENV
+      shell: bash
+
+    - name: Check MariaDB client (macOS)
       if: runner.os == 'macOS' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
       run: |
         brew install mariadb-connector-c

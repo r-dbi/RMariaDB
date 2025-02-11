@@ -103,6 +103,16 @@
 #' # directory). Then it's less likely you'll inadvertently share them.
 #' con <- dbConnect(RMariaDB::MariaDB(), group = "test")
 #'
+#' # To connect to a remote database and require the use of SSL
+#' (and an example of using environment variables for your sensitive info)
+#' con <- dbConnect(RMariaDB::MariaDB(),
+#'   dbname = Sys.getenv('DB_NAME'),
+#'   host = Sys.getenv('DB_HOST'),
+#'   user = Sys.getenv('DB_USER'),
+#'   password = Sys.getenv('DB_PASSWORD'),
+#'   client.flag = CLIENT_SSL
+#' )
+#'
 #' # Always cleanup by disconnecting the database
 #' dbDisconnect(con)
 #' }

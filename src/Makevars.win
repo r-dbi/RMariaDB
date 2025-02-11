@@ -1,24 +1,29 @@
-RWINLIB = ../windows/libmariadbclient
+PKG_CONFIG_NAME = libmariadbclient
+PKG_CONFIG ?= $(BINPREF)pkg-config
+PKG_LIBS := $(shell $(PKG_CONFIG) --libs $(PKG_CONFIG_NAME))
+EXTRA_CFLAGS = -DRCPP_DEFAULT_INCLUDE_CALL=false -DRCPP_USING_UTF8_ERROR_STRING -DBOOST_NO_AUTO_PTR
 
+# Remove hack when dropping support for R-4.1
 ifeq ($(R_COMPILED_BY),gcc 8.3.0)
-TLS_LIBS = -lssl -lcrypto
+RTOOLS40_LIBS = -lssl -lcrypto
 endif
 
-PKG_CPPFLAGS = -I$(RWINLIB)/include/mariadb -Ivendor -DRCPP_DEFAULT_INCLUDE_CALL=false -DRCPP_USING_UTF8_ERROR_STRING -DBOOST_NO_AUTO_PTR
-PKG_LIBS = \
-	-L$(RWINLIB)/lib$(R_ARCH) \
-	-L$(RWINLIB)/lib \
-	-lmariadbclient $(TLS_LIBS) -lz -lbcrypt -lsecur32 -lshlwapi -lcrypt32 -lgdi32 -lws2_32 -pthread
+ifneq ($(PKG_LIBS),)
+$(info using $(PKG_CONFIG_NAME) from Rtools)
+PKG_CPPFLAGS := $(shell $(PKG_CONFIG) --cflags $(PKG_CONFIG_NAME)) $(EXTRA_CFLAGS)
+else
+RWINLIB = ../windows/libmariadbclient
+PKG_CPPFLAGS = -I$(RWINLIB)/include/mariadb -Ivendor $(EXTRA_CFLAGS)
+PKG_LIBS = -L$(RWINLIB)/lib$(R_ARCH) -L$(RWINLIB)/lib \
+	-lmariadbclient $(RTOOLS40_LIBS) -lz -lbcrypt -lsecur32 -lshlwapi -lcrypt32 -lgdi32 -lws2_32 -pthread
+endif
 
-# Necessary, so that the behavior of make called without arguments
-# is not changed:
-$(SHLIB):
+all: $(SHLIB)
 
-# We need winlibs (=headers) already for compiling each .o file
-$(OBJECTS): winlibs
+$(OBJECTS): $(RWINLIB)
+
+$(RWINLIB):
+	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"
 
 clean:
 	rm -f $(SHLIB) $(OBJECTS)
-
-winlibs:
-	"${R_HOME}/bin${R_ARCH_BIN}/Rscript.exe" "../tools/winlibs.R"

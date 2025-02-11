@@ -86,7 +86,7 @@ encryption.}
 \item{groups}{deprecated, use \code{group} instead.}
 
 \item{load_data_local_infile}{Set to \code{TRUE} to use \verb{LOAD DATA LOCAL INFILE}
-in \code{\link[=dbWriteTable]{dbWriteTable()}} and \code{\link[=dbAppendTable]{dbAppendTable()}} by default.
+in \code{\link[DBI:dbWriteTable]{DBI::dbWriteTable()}} and \code{\link[DBI:dbAppendTable]{DBI::dbAppendTable()}} by default.
 This capability is disabled by default on the server side
 for recent versions of MySQL Server.}
 
@@ -180,6 +180,16 @@ con <- dbConnect(RMariaDB::MariaDB(),
 # better to set up a group in your .my.cnf (usually located in your home
 # directory). Then it's less likely you'll inadvertently share them.
 con <- dbConnect(RMariaDB::MariaDB(), group = "test")
+
+# To connect to a remote database and require the use of SSL
+(and an example of using environment variables for your sensitive info)
+con <- dbConnect(RMariaDB::MariaDB(),
+  dbname = Sys.getenv('DB_NAME'),
+  host = Sys.getenv('DB_HOST'),
+  user = Sys.getenv('DB_USER'),
+  password = Sys.getenv('DB_PASSWORD'),
+  client.flag = CLIENT_SSL
+)
 
 # Always cleanup by disconnecting the database
 dbDisconnect(con)

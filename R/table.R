@@ -65,7 +65,7 @@ db_append_table <- function(conn, name, value, warn_factor = TRUE, safe = TRUE, 
     "OPTIONALLY ENCLOSED BY ", dbQuoteString(conn, '"'), "\n",
     "LINES TERMINATED BY ", dbQuoteString(conn, if (.Platform$OS.type == "windows") "\r\n" else "\n"), "\n",
     "INTO TABLE ", quoted_name, "\n",
-    "CHARACTER SET utf8 \n",
+    "CHARACTER SET utf8mb4 \n",
     "(", paste0(colnames, collapse = ", "), ")",
     set
   )
