@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# RMariaDB 1.3.3.9900 (2025-02-24)
+# RMariaDB 1.3.4 (2025-02-24)
 
 ## Windows
 
@@ -9,38 +9,6 @@
 ## Bug fixes
 
 - Adjust datetime format in `dbQuoteLiteral()` for `MySQLConnection` (@jjaeschke, #353).
-
-## Continuous integration
-
-- Fix.
-
-- Fix typo.
-
-- Add old Windows.
-
-- Avoid failure in fledge workflow if no changes (#378).
-
-- Fetch tags for fledge workflow to avoid unnecessary NEWS entries (#376).
-
-- Use larger retry count for lock-threads workflow (#374).
-
-- Add `mariadb_config` to `$PATH` on macOS.
-
-- Ignore errors when removing pkg-config on macOS (#364).
-
-- Explicit permissions (#362).
-
-- Use styler from main branch (#360).
-
-- Need to install R on Ubuntu 24.04 (#358).
-
-- Use Ubuntu 24.04 and styler PR (#356).
-
-- Correctly detect branch protection (#354).
-
-## Uncategorized
-
-- Ci: Fix macOS (#16) (#357).
 
 
 # RMariaDB 1.3.3 (2024-11-18)
