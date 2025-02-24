@@ -1,6 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# RMariaDB 1.3.3.9003 (2025-02-09)
+# RMariaDB 1.3.3.9900 (2025-02-24)
+
+## Windows
+
+- Use mariadbclient from Rtools if available (#383).
+
+## Bug fixes
+
+- Adjust datetime format in `dbQuoteLiteral()` for `MySQLConnection` (@jjaeschke, #353).
 
 ## Continuous integration
 
@@ -9,18 +17,6 @@
 - Fix typo.
 
 - Add old Windows.
-
-
-# RMariaDB 1.3.3.9002 (2025-02-08)
-
-## Windows
-
-- Use mariadbclient from Rtools if available (#383).
-
-
-# RMariaDB 1.3.3.9001 (2024-12-12)
-
-## Continuous integration
 
 - Avoid failure in fledge workflow if no changes (#378).
 
@@ -40,20 +36,11 @@
 
 - Use Ubuntu 24.04 and styler PR (#356).
 
+- Correctly detect branch protection (#354).
+
 ## Uncategorized
 
 - Ci: Fix macOS (#16) (#357).
-
-
-# RMariaDB 1.3.3.9000 (2024-11-22)
-
-## Bug fixes
-
-- Adjust datetime format in `dbQuoteLiteral()` for `MySQLConnection` (@jjaeschke, #353).
-
-## Continuous integration
-
-- Correctly detect branch protection (#354).
 
 
 # RMariaDB 1.3.3 (2024-11-18)
