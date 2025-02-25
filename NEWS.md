@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.4.9000 (2025-02-25)
+
+- Switching to development version.
+
+
 # RMariaDB 1.3.4 (2025-02-24)
 
 ## Windows
