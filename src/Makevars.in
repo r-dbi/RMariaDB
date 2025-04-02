@@ -1,2 +1,7 @@
 PKG_CPPFLAGS=@cflags@ -Ivendor -DBOOST_NO_AUTO_PTR @plogr@
 PKG_LIBS=@libs@
+
+all: cleanup
+
+cleanup: $(SHLIB)
+	@rm -Rf ../.deps
