@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.4.9001 (2025-04-30)
+
+## Continuous integration
+
+- Permissions, better tests for missing suggests, lints (#404).
+
+- Only fail covr builds if token is given (#401).
+
+- Always use `_R_CHECK_FORCE_SUGGESTS_=false` (#400).
+
+- Correct installation of xml2 (#397).
+
+- Explain (#395).
+
+- Add xml2 for covr, print testthat results (#394).
+
+- Sync (#393).
+
+
 # RMariaDB 1.3.4.9000 (2025-02-25)
 
 - Switching to development version.
