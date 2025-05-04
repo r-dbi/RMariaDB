@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.4.9002 (2025-05-04)
+
+## Continuous integration
+
+- Enhance permissions for workflow (#406).
+
+
 # RMariaDB 1.3.4.9001 (2025-04-30)
 
 ## Continuous integration
