@@ -13,7 +13,7 @@ enum MariaFieldType {
   MY_LGL     // for BIT(1)
 };
 
-MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary, bool length1);
+MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary, bool length1, bool is_unsigned);
 std::string type_name(MariaFieldType type);
 SEXPTYPE type_sexp(MariaFieldType type);
 
