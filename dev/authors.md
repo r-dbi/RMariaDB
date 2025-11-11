@@ -28,12 +28,12 @@ Source:
 
 Müller K, Ooms J, James D, DebRoy S, Wickham H, Horner J (2025).
 *RMariaDB: Database Interface and MariaDB Driver*. R package version
-1.3.4.9002, <https://rmariadb.r-dbi.org>.
+1.3.4.9003, <https://rmariadb.r-dbi.org>.
 
     @Manual{,
       title = {RMariaDB: Database Interface and MariaDB Driver},
       author = {Kirill Müller and Jeroen Ooms and David James and Saikat DebRoy and Hadley Wickham and Jeffrey Horner},
       year = {2025},
-      note = {R package version 1.3.4.9002},
+      note = {R package version 1.3.4.9003},
       url = {https://rmariadb.r-dbi.org},
     }

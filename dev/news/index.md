@@ -1,5 +1,25 @@
 # Changelog
 
+## RMariaDB 1.3.4.9003 (2025-11-10)
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#411](https://github.com/r-dbi/RMariaDB/issues/411)).
+
+### Continuous integration
+
+- Use workflows for fledge
+  ([\#415](https://github.com/r-dbi/RMariaDB/issues/415)).
+
+- Sync ([\#414](https://github.com/r-dbi/RMariaDB/issues/414)).
+
+- Cleanup and fix macOS
+  ([\#410](https://github.com/r-dbi/RMariaDB/issues/410)).
+
+- Format with air, check detritus, better handling of `extra-packages`
+  ([\#409](https://github.com/r-dbi/RMariaDB/issues/409)).
+
 ## RMariaDB 1.3.4.9002 (2025-05-04)
 
 ### Continuous integration
