@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.4.9004 (2025-11-12)
+
+## Continuous integration
+
+- Fix reviewdog and add commenting workflow (#417).
+
+
 # RMariaDB 1.3.4.9003 (2025-11-10)
 
 ## Chore
