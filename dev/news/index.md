@@ -1,5 +1,12 @@
 # Changelog
 
+## RMariaDB 1.3.4.9004 (2025-11-12)
+
+### Continuous integration
+
+- Fix reviewdog and add commenting workflow
+  ([\#417](https://github.com/r-dbi/RMariaDB/issues/417)).
+
 ## RMariaDB 1.3.4.9003 (2025-11-10)
 
 ### Chore
