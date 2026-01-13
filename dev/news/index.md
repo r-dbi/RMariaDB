@@ -1,5 +1,12 @@
 # Changelog
 
+## RMariaDB 1.3.4.9005 (2025-11-17)
+
+### Continuous integration
+
+- Install binaries from r-universe for dev workflow
+  ([\#419](https://github.com/r-dbi/RMariaDB/issues/419)).
+
 ## RMariaDB 1.3.4.9004 (2025-11-12)
 
 ### Continuous integration
