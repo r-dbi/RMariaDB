@@ -4,12 +4,19 @@
 
 bool all_raw(SEXP x);
 
-MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary, bool length1) {
+MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary, bool length1, bool is_unsigned) {
+  if (type == MYSQL_TYPE_LONG) {
+    if (is_unsigned) {
+      // For unsigned ints, promote it to a double
+      return MY_DBL;
+    } else {
+      return MY_INT32;
+    }
+  }
 
   switch (type) {
   case MYSQL_TYPE_TINY:
   case MYSQL_TYPE_SHORT:
-  case MYSQL_TYPE_LONG:
   case MYSQL_TYPE_INT24:
   case MYSQL_TYPE_YEAR:
     return MY_INT32;
