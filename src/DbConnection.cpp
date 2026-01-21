@@ -31,6 +31,8 @@ void DbConnection::connect(const cpp11::sexp& host, const cpp11::sexp& user,
   LOG_VERBOSE;
 
   this->pConn_ = mysql_init(NULL);
+  bool reconnect = 1;
+  mysql_options(this->pConn_, MYSQL_OPT_RECONNECT, &reconnect);
   // Enable LOCAL INFILE for fast data ingest
   unsigned int local_infile = 1;
   mysql_options(this->pConn_, MYSQL_OPT_LOCAL_INFILE, &local_infile);
