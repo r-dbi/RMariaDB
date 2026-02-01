@@ -1,5 +1,16 @@
 # Changelog
 
+## RMariaDB 1.3.4.9006 (2026-01-14)
+
+### Continuous integration
+
+- Fix comment ([\#424](https://github.com/r-dbi/RMariaDB/issues/424)).
+
+- Tweaks ([\#423](https://github.com/r-dbi/RMariaDB/issues/423)).
+
+- Test all R versions on branches that start with cran-
+  ([\#422](https://github.com/r-dbi/RMariaDB/issues/422)).
+
 ## RMariaDB 1.3.4.9005 (2025-11-17)
 
 ### Continuous integration
