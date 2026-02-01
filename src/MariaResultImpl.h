@@ -21,4 +21,4 @@ public:
   virtual bool complete() const = 0;
 };
 
-#endif //RMARIADB_MARIARESULTIMPL_H
+#endif  // RMARIADB_MARIARESULTIMPL_H

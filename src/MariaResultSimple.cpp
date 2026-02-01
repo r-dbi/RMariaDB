@@ -3,9 +3,11 @@
 #include "MariaResultSimple.h"
 #include "DbConnection.h"
 
-MariaResultSimple::MariaResultSimple(const DbConnectionPtr& pConn, bool is_statement) :
-  pConn_(pConn)
-{
+MariaResultSimple::MariaResultSimple(
+  const DbConnectionPtr& pConn,
+  bool is_statement
+)
+    : pConn_(pConn) {
   (void)is_statement;
 }
 
@@ -26,21 +28,31 @@ void MariaResultSimple::close() {
 void MariaResultSimple::bind(const cpp11::list& /*params*/) {
   LOG_VERBOSE;
 
-  cpp11::stop("This query is not supported by the prepared statement protocol, no parameters can be bound.");
+  cpp11::stop(
+    "This query is not supported by the prepared statement protocol, no "
+    "parameters can be bound."
+  );
 }
 
 cpp11::list MariaResultSimple::get_column_info() {
   using namespace cpp11::literals;
   cpp11::writable::strings names(0_xl), types(0_xl);
 
-  return cpp11::writable::list({"name"_nm = names, "type"_nm = types});
+  return cpp11::writable::list({ "name"_nm = names, "type"_nm = types });
 }
 
 cpp11::list MariaResultSimple::fetch(int /*n_max*/) {
   LOG_VERBOSE;
 
-  cpp11::warning("Use dbExecute() instead of dbGetQuery() for statements, and also avoid dbFetch()");
-  return df_create(std::vector<MariaFieldType>(), std::vector<std::string>(), 0);
+  cpp11::warning(
+    "Use dbExecute() instead of dbGetQuery() for statements, and also avoid "
+    "dbFetch()"
+  );
+  return df_create(
+    std::vector<MariaFieldType>(),
+    std::vector<std::string>(),
+    0
+  );
 }
 
 int MariaResultSimple::n_rows_affected() {

@@ -4,8 +4,11 @@
 
 bool all_raw(SEXP x);
 
-MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary, bool length1) {
-
+MariaFieldType variable_type_from_field_type(
+  enum_field_types type,
+  bool binary,
+  bool length1
+) {
   switch (type) {
   case MYSQL_TYPE_TINY:
   case MYSQL_TYPE_SHORT:
@@ -40,7 +43,7 @@ MariaFieldType variable_type_from_field_type(enum_field_types type, bool binary,
   case MYSQL_TYPE_VAR_STRING:
   case MYSQL_TYPE_VARCHAR:
     return binary ? MY_RAW : MY_STR;
-  case 245: // MYSQL_TYPE_JSON not defined in CentOS 7
+  case 245:  // MYSQL_TYPE_JSON not defined in CentOS 7
     return MY_STR;
   case MYSQL_TYPE_BLOB:
   case MYSQL_TYPE_TINY_BLOB:
@@ -110,8 +113,9 @@ SEXPTYPE type_sexp(MariaFieldType type) {
 std::string r_class(const cpp11::sexp& x) {
   cpp11::sexp klass_(x.attr("class"));
   std::string klass;
-  if (klass_ == R_NilValue)
+  if (klass_ == R_NilValue) {
     return "";
+  }
   const auto klassv = cpp11::as_cpp<cpp11::strings>(klass_);
   return std::string(klassv[klassv.size() - 1]);
 }
@@ -125,16 +129,28 @@ MariaFieldType variable_type_from_object(const cpp11::sexp& type) {
   case INTSXP:
     return MY_INT32;
   case REALSXP:
-    if (klass == "Date")     return MY_DATE;
-    if (klass == "POSIXt")   return MY_DATE_TIME;
-    if (klass == "difftime") return MY_TIME;
-    if (klass == "integer64") return MY_INT64;
+    if (klass == "Date") {
+      return MY_DATE;
+    }
+    if (klass == "POSIXt") {
+      return MY_DATE_TIME;
+    }
+    if (klass == "difftime") {
+      return MY_TIME;
+    }
+    if (klass == "integer64") {
+      return MY_INT64;
+    }
     return MY_DBL;
   case STRSXP:
     return MY_STR;
   case VECSXP:
-    if (klass == "blob")     return MY_RAW;
-    if (all_raw(type))       return MY_RAW;
+    if (klass == "blob") {
+      return MY_RAW;
+    }
+    if (all_raw(type)) {
+      return MY_RAW;
+    }
     break;
   }
 

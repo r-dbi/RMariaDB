@@ -25,8 +25,22 @@ cpp11::external_pointer<DbConnectionPtr> connection_create(
   DbConnection* pConnPtr = new DbConnection;
   try {
     pConnPtr->connect(
-      host, user, password, db, port, unix_socket, client_flag, group, default_file,
-      ssl_key, ssl_cert, ssl_ca, ssl_capath, ssl_cipher, timeout, reconnect
+      host,
+      user,
+      password,
+      db,
+      port,
+      unix_socket,
+      client_flag,
+      group,
+      default_file,
+      ssl_key,
+      ssl_cert,
+      ssl_ca,
+      ssl_capath,
+      ssl_cipher,
+      timeout,
+      reconnect
     );
   } catch (...) {
     delete pConnPtr;
@@ -79,7 +93,9 @@ cpp11::strings connection_quote_string(DbConnection* con, cpp11::strings xs) {
 // Transactions
 
 [[cpp11::register]]
-void connection_begin_transaction(cpp11::external_pointer<DbConnectionPtr> con) {
+void connection_begin_transaction(
+  cpp11::external_pointer<DbConnectionPtr> con
+) {
   (*con)->begin_transaction();
 }
 
