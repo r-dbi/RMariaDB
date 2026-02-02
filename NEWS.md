@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.4.9007 (2026-02-02)
+
+## Chore
+
+- Build-ignore.
+
+- Auto-update from GitHub Actions (#426).
+
+- Format C++ code with clang-format.
+
+
 # RMariaDB 1.3.4.9006 (2026-01-14)
 
 ## Continuous integration
