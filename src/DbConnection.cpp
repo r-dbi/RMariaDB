@@ -3,13 +3,9 @@
 #include "DbResult.h"
 
 DbConnection::DbConnection()
-    : pConn_(NULL), pCurrentResult_(NULL), transacting_(false) {
-  LOG_VERBOSE;
-}
+    : pConn_(NULL), pCurrentResult_(NULL), transacting_(false) {}
 
 DbConnection::~DbConnection() {
-  LOG_VERBOSE;
-
   if (is_valid()) {
     cpp11::warning(
       std::string("call dbDisconnect() when finished working with a connection")
@@ -36,8 +32,6 @@ void DbConnection::connect(
   int timeout,
   bool reconnect
 ) {
-  LOG_VERBOSE;
-
   this->pConn_ = mysql_init(NULL);
   // Enable LOCAL INFILE for fast data ingest
   unsigned int local_infile = 1;
@@ -148,8 +142,6 @@ void DbConnection::connect(
     my_bool reconnect_ = 1;
     mysql_options(this->pConn_, MYSQL_OPT_RECONNECT, &reconnect_);
   }
-
-  LOG_VERBOSE;
 
   if (!mysql_real_connect(
         this->pConn_,

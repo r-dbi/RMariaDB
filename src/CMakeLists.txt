@@ -35,7 +35,7 @@ add_library(RMariaDB
   result.cpp
 )
 
-set(R_DEPENDENCIES cpp11 plogr)
+set(R_DEPENDENCIES cpp11)
 
 execute_process(COMMAND bash "-c" "Rscript -e 'cat(R.home(\"include\"))'" OUTPUT_VARIABLE R_INCLUDE)
 execute_process(COMMAND bash "-c" "Rscript -e 'cat(.libPaths()[[1]])'" OUTPUT_VARIABLE R_LIBDIR)

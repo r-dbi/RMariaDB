@@ -95,14 +95,6 @@ extern "C" SEXP _RMariaDB_version() {
     return cpp11::as_sexp(version());
   END_CPP11
 }
-// driver.cpp
-void init_logging(const std::string& log_level);
-extern "C" SEXP _RMariaDB_init_logging(SEXP log_level) {
-  BEGIN_CPP11
-    init_logging(cpp11::as_cpp<cpp11::decay_t<const std::string&>>(log_level));
-    return R_NilValue;
-  END_CPP11
-}
 // result.cpp
 cpp11::external_pointer<DbResult> result_create(cpp11::external_pointer<DbConnectionPtr> con, std::string sql, bool is_statement, bool immediate);
 extern "C" SEXP _RMariaDB_result_create(SEXP con, SEXP sql, SEXP is_statement, SEXP immediate) {
@@ -182,7 +174,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_RMariaDB_connection_valid",             (DL_FUNC) &_RMariaDB_connection_valid,              1},
     {"_RMariaDB_driver_done",                  (DL_FUNC) &_RMariaDB_driver_done,                   0},
     {"_RMariaDB_driver_init",                  (DL_FUNC) &_RMariaDB_driver_init,                   0},
-    {"_RMariaDB_init_logging",                 (DL_FUNC) &_RMariaDB_init_logging,                  1},
     {"_RMariaDB_result_bind",                  (DL_FUNC) &_RMariaDB_result_bind,                   2},
     {"_RMariaDB_result_column_info",           (DL_FUNC) &_RMariaDB_result_column_info,            1},
     {"_RMariaDB_result_create",                (DL_FUNC) &_RMariaDB_result_create,                 4},
