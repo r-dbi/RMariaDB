@@ -1,6 +1,7 @@
 #ifndef __RMARIADB_MARIA_ROW__
 #define __RMARIADB_MARIA_ROW__
 
+#include <vector>
 #include <boost/core/noncopyable.hpp>
 #include <boost/container/vector.hpp>
 #include <boost/cstdint.hpp>
