@@ -10,57 +10,7 @@
 
 - Remove plogr (#428).
 
-- Build-ignore.
-
-- Auto-update from GitHub Actions (#426).
-
 - Format C++ code with clang-format.
-
-- Auto-update from GitHub Actions (#411).
-
-## Continuous integration
-
-- Please.
-
-- Use clang-format-21.
-
-- Fix comment (#424).
-
-- Tweaks (#423).
-
-- Test all R versions on branches that start with cran- (#422).
-
-- Install binaries from r-universe for dev workflow (#419).
-
-- Fix reviewdog and add commenting workflow (#417).
-
-- Use workflows for fledge (#415).
-
-- Sync (#414).
-
-- Cleanup and fix macOS (#410).
-
-- Format with air, check detritus, better handling of `extra-packages` (#409).
-
-- Enhance permissions for workflow (#406).
-
-- Permissions, better tests for missing suggests, lints (#404).
-
-- Only fail covr builds if token is given (#401).
-
-- Always use `_R_CHECK_FORCE_SUGGESTS_=false` (#400).
-
-- Correct installation of xml2 (#397).
-
-- Explain (#395).
-
-- Add xml2 for covr, print testthat results (#394).
-
-- Sync (#393).
-
-## Uncategorized
-
-- Switching to development version.
 
 
 # RMariaDB 1.3.4 (2025-02-24)
@@ -160,7 +110,7 @@
 
 # RMariaDB 1.2.2 (2022-06-19)
 
-## Features 
+## Features
 
 - `dbAppendTable()` accepts `Id` (#262, @renkun-ken).
 
