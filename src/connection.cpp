@@ -20,8 +20,6 @@ cpp11::external_pointer<DbConnectionPtr> connection_create(
   int timeout,
   bool reconnect
 ) {
-  LOG_VERBOSE;
-
   DbConnection* pConnPtr = new DbConnection;
   try {
     pConnPtr->connect(

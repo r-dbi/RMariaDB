@@ -16,18 +16,12 @@ MariaResultSimple::~MariaResultSimple() {
 }
 
 void MariaResultSimple::send_query(const std::string& sql) {
-  LOG_DEBUG << sql;
-
   exec(sql);
 }
 
-void MariaResultSimple::close() {
-  LOG_VERBOSE;
-}
+void MariaResultSimple::close() {}
 
 void MariaResultSimple::bind(const cpp11::list& /*params*/) {
-  LOG_VERBOSE;
-
   cpp11::stop(
     "This query is not supported by the prepared statement protocol, no "
     "parameters can be bound."
@@ -42,8 +36,6 @@ cpp11::list MariaResultSimple::get_column_info() {
 }
 
 cpp11::list MariaResultSimple::fetch(int /*n_max*/) {
-  LOG_VERBOSE;
-
   cpp11::warning(
     "Use dbExecute() instead of dbGetQuery() for statements, and also avoid "
     "dbFetch()"

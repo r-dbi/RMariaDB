@@ -25,8 +25,3 @@ cpp11::integers version() {
       cpp11::named_arg(mysql_get_client_info()) = mysql_get_client_version() }
   );
 }
-
-[[cpp11::register]]
-void init_logging(const std::string& log_level) {
-  plog::init_r(log_level);
-}

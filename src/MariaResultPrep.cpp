@@ -30,9 +30,6 @@ MariaResultPrep::~MariaResultPrep() {
 }
 
 void MariaResultPrep::send_query(const std::string& sql) {
-  LOG_DEBUG << sql;
-
-  LOG_DEBUG << "mysql_stmt_prepare()";
   if (mysql_stmt_prepare(pStatement_, sql.data(), sql.size()) != 0) {
     if (mysql_stmt_errno(pStatement_) == ER_UNSUPPORTED_PS) {
       throw UnsupportedPS();
@@ -42,7 +39,6 @@ void MariaResultPrep::send_query(const std::string& sql) {
   }
 
   nParams_ = static_cast<int>(mysql_stmt_param_count(pStatement_));
-  LOG_DEBUG << nParams_;
 
   // Need to set pSpec_ before calling execute()
   pSpec_ = mysql_stmt_result_metadata(pStatement_);
@@ -75,23 +71,16 @@ void MariaResultPrep::close() {
 }
 
 void MariaResultPrep::execute() {
-  LOG_VERBOSE;
-
   complete_ = false;
 
-  LOG_DEBUG << "mysql_stmt_execute()";
   if (mysql_stmt_execute(pStatement_) != 0) {
-    LOG_VERBOSE;
     throw_error();
   }
-  LOG_VERBOSE << "has_result()";
   if (!has_result() && !is_statement_) {
-    LOG_VERBOSE;
     // try again after mysql_stmt_execute, in case pSpec_ == NULL
     pSpec_ = mysql_stmt_result_metadata(pStatement_);
   }
   if (!has_result()) {
-    LOG_VERBOSE;
     rowsAffected_ += mysql_stmt_affected_rows(pStatement_);
   }
 }
@@ -129,11 +118,7 @@ bool MariaResultPrep::has_result() const {
 }
 
 bool MariaResultPrep::step() {
-  LOG_VERBOSE;
-
   while (!fetch_row()) {
-    LOG_VERBOSE;
-
     if (!bindingInput_.bind_next_row()) {
       return false;
     }
@@ -142,21 +127,15 @@ bool MariaResultPrep::step() {
 
   rowsFetched_++;
 
-  LOG_VERBOSE << rowsFetched_;
   return true;
 }
 
 bool MariaResultPrep::fetch_row() {
-  LOG_VERBOSE;
-
   if (complete_) {
     return false;
   }
 
-  LOG_VERBOSE << "mysql_stmt_fetch()";
   int result = mysql_stmt_fetch(pStatement_);
-
-  LOG_VERBOSE << result;
 
   switch (result) {
   // We expect truncation whenever there's a string or blob
@@ -262,8 +241,6 @@ void MariaResultPrep::throw_error() {
 }
 
 void MariaResultPrep::cache_metadata() {
-  LOG_VERBOSE;
-
   nCols_ = mysql_num_fields(pSpec_);
   MYSQL_FIELD* fields = mysql_fetch_fields(pSpec_);
 
@@ -275,8 +252,5 @@ void MariaResultPrep::cache_metadata() {
     MariaFieldType type =
       variable_type_from_field_type(fields[i].type, binary, length1);
     types_.push_back(type);
-
-    LOG_VERBOSE << i << " -> " << fields[i].name << "(" << fields[i].type
-                << ", " << binary << ") => " << type_name(type);
   }
 }

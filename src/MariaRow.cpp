@@ -13,8 +13,6 @@ void MariaRow::setup(
   MYSQL_STMT* pStatement,
   const std::vector<MariaFieldType>& types
 ) {
-  LOG_VERBOSE;
-
   pStatement_ = pStatement;
   types_ = types;
   n_ = static_cast<int>(types_.size());
@@ -26,8 +24,6 @@ void MariaRow::setup(
   errors_.resize(n_);
 
   for (int j = 0; j < n_; ++j) {
-    LOG_VERBOSE << j << " -> " << type_name(types_[j]);
-
     // http://dev.mysql.com/doc/refman/5.0/en/c-api-prepared-statement-type-codes.html
     switch (types_[j]) {
     case MY_INT32:
@@ -84,28 +80,13 @@ void MariaRow::setup(
     bindings_[j].is_null = &nulls_[j];
     bindings_[j].is_unsigned = true;
     bindings_[j].error = &errors_[j];
-
-    LOG_VERBOSE << bindings_[j].buffer_length;
-    LOG_VERBOSE << bindings_[j].buffer;
-    LOG_VERBOSE << bindings_[j].length;
-    LOG_VERBOSE << (void*)bindings_[j].is_null;
-    LOG_VERBOSE << bindings_[j].is_unsigned;
-    LOG_VERBOSE << (void*)bindings_[j].error;
   }
 
-  LOG_DEBUG << "mysql_stmt_bind_result()";
   if (mysql_stmt_bind_result(pStatement, &bindings_[0]) != 0) {
     cpp11::stop("Error binding result: %s", mysql_stmt_error(pStatement));
   }
 
-  for (int j = 0; j < n_; ++j) {
-    LOG_VERBOSE << bindings_[j].buffer_length;
-    LOG_VERBOSE << bindings_[j].buffer;
-    LOG_VERBOSE << bindings_[j].length;
-    LOG_VERBOSE << (void*)bindings_[j].is_null;
-    LOG_VERBOSE << bindings_[j].is_unsigned;
-    LOG_VERBOSE << (void*)bindings_[j].error;
-  }
+  for (int j = 0; j < n_; ++j) {}
 }
 
 bool MariaRow::is_null(int j) {
@@ -172,7 +153,6 @@ double MariaRow::value_date_time(int j) {
                      static_cast<double>(mytime->minute) * 60.0 +
                      static_cast<double>(mytime->second) +
                      static_cast<double>(mytime->second_part) / 1000000.0;
-  LOG_VERBOSE << date_time;
   return date_time;
 }
 
@@ -185,7 +165,6 @@ double MariaRow::value_date(int j) {
 
   const int days = days_from_civil(mytime->year, mytime->month, mytime->day);
   double date_time = static_cast<double>(days);
-  LOG_VERBOSE << date_time;
   return date_time;
 }
 
@@ -236,7 +215,6 @@ void MariaRow::set_list_value(SEXP x, int i, int j) {
 
 void MariaRow::fetch_buffer(int j) {
   unsigned long length = lengths_[j];
-  LOG_VERBOSE << length;
 
   buffers_[j].resize(length);
   if (length == 0) {
@@ -246,16 +224,7 @@ void MariaRow::fetch_buffer(int j) {
   bindings_[j].buffer = &buffers_[j][0];  // might have moved
   bindings_[j].buffer_length = length;
 
-  LOG_VERBOSE << bindings_[j].buffer_length;
-  LOG_VERBOSE << bindings_[j].buffer;
-  LOG_VERBOSE << bindings_[j].length;
-  LOG_VERBOSE << (void*)bindings_[j].is_null;
-  LOG_VERBOSE << bindings_[j].is_unsigned;
-  LOG_VERBOSE << (void*)bindings_[j].error;
-
-  LOG_DEBUG << "mysql_stmt_fetch_column()";
   int result = mysql_stmt_fetch_column(pStatement_, &bindings_[j], j, 0);
-  LOG_VERBOSE << result;
 
   if (result != 0) {
     cpp11::stop("Error fetching buffer: %s", mysql_stmt_error(pStatement_));

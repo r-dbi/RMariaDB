@@ -38,8 +38,7 @@ Suggests:
     testthat (>= 3.0.0),
     withr
 LinkingTo: 
-    cpp11,
-    plogr
+    cpp11
 Config/Needs/website: 
     r-dbi/dbitemplate
 Config/autostyle/scope: line_breaks
