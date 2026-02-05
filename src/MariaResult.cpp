@@ -3,19 +3,21 @@
 #include "MariaResultPrep.h"
 #include "MariaResultSimple.h"
 
-
 // Construction ////////////////////////////////////////////////////////////////
 
-MariaResult::MariaResult(const DbConnectionPtr& pConn, const std::string& sql, bool is_statement, bool immediate) :
-  DbResult(pConn)
-{
+MariaResult::MariaResult(
+  const DbConnectionPtr& pConn,
+  const std::string& sql,
+  bool is_statement,
+  bool immediate
+)
+    : DbResult(pConn) {
   boost::scoped_ptr<MariaResultImpl> res;
   if (!immediate) {
     try {
       res.reset(new MariaResultPrep(pConn, is_statement));
       res->send_query(sql);
-    }
-    catch (const MariaResultPrep::UnsupportedPS& e) {
+    } catch (const MariaResultPrep::UnsupportedPS& e) {
       immediate = TRUE;
       res.reset(NULL);
     }
@@ -33,7 +35,12 @@ MariaResult::MariaResult(const DbConnectionPtr& pConn, const std::string& sql, b
   res.swap(impl);
 }
 
-DbResult* MariaResult::create_and_send_query(const DbConnectionPtr& con, const std::string& sql, bool is_statement, bool immediate) {
+DbResult* MariaResult::create_and_send_query(
+  const DbConnectionPtr& con,
+  const std::string& sql,
+  bool is_statement,
+  bool immediate
+) {
   return new MariaResult(con, sql, is_statement, immediate);
 }
 

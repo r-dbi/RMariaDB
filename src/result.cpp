@@ -2,12 +2,16 @@
 #include "RMariaDB_types.h"
 #include "MariaResult.h"
 
-
 [[cpp11::register]]
-cpp11::external_pointer<DbResult>
-result_create(cpp11::external_pointer<DbConnectionPtr> con, std::string sql, bool is_statement = false, bool immediate = false) {
+cpp11::external_pointer<DbResult> result_create(
+  cpp11::external_pointer<DbConnectionPtr> con,
+  std::string sql,
+  bool is_statement = false,
+  bool immediate = false
+) {
   (*con)->check_connection();
-  DbResult* res = MariaResult::create_and_send_query(*con, sql, is_statement, immediate);
+  DbResult* res =
+    MariaResult::create_and_send_query(*con, sql, is_statement, immediate);
   return cpp11::external_pointer<DbResult>(res, true);
 }
 
