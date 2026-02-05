@@ -1,4 +1,4 @@
-PKG_CPPFLAGS=@cflags@ -Ivendor -DBOOST_NO_AUTO_PTR @plogr@
+PKG_CPPFLAGS=@cflags@ -Ivendor -DBOOST_NO_AUTO_PTR
 PKG_LIBS=@libs@
 
 all: cleanup
