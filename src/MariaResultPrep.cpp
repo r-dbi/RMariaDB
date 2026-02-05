@@ -252,7 +252,5 @@ void MariaResultPrep::cache_metadata() {
     MariaFieldType type =
       variable_type_from_field_type(fields[i].type, binary, length1);
     types_.push_back(type);
-
-    << ", " << binary << ") => " << type_name(type);
   }
 }
