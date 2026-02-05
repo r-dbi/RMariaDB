@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.4.9008 (2026-02-05)
+
+## Bug fixes
+
+- Correctly return `TIME` values before the epoch (@JoelNWilkins, #421).
+
+## Chore
+
+- Remove plogr (#428).
+
+## Continuous integration
+
+- Please.
+
+- Use clang-format-21.
+
+
 # RMariaDB 1.3.4.9007 (2026-02-02)
 
 ## Chore
