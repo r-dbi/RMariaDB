@@ -1,5 +1,23 @@
 # Changelog
 
+## RMariaDB 1.3.4.9008 (2026-02-05)
+
+### Bug fixes
+
+- Correctly return `TIME` values before the epoch
+  ([@JoelNWilkins](https://github.com/JoelNWilkins),
+  [\#421](https://github.com/r-dbi/RMariaDB/issues/421)).
+
+### Chore
+
+- Remove plogr ([\#428](https://github.com/r-dbi/RMariaDB/issues/428)).
+
+### Continuous integration
+
+- Please.
+
+- Use clang-format-21.
+
 ## RMariaDB 1.3.4.9007 (2026-02-02)
 
 ### Chore
