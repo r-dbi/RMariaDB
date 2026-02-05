@@ -1,6 +1,7 @@
 #ifndef __RMARIADB_MARIA_BINDING__
 #define __RMARIADB_MARIA_BINDING__
 
+#include <vector>
 #include <boost/container/vector.hpp>
 #include <boost/noncopyable.hpp>
 #include "MariaTypes.h"
