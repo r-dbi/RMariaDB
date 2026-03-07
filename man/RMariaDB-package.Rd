@@ -23,6 +23,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Kirill Müller \email{kirill@cynkra.com} (\href{https://orcid.org/0000-0002-1416-3412}{ORCID})
   \item Jeroen Ooms (\href{https://orcid.org/0000-0002-4035-0289}{ORCID})
   \item David James
   \item Saikat DebRoy
