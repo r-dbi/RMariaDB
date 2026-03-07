@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# RMariaDB 1.3.4.9008 (2026-02-05)
+# RMariaDB 1.3.5 (2026-02-05)
 
 ## Bug fixes
 
@@ -10,95 +10,7 @@
 
 - Remove plogr (#428).
 
-## Continuous integration
-
-- Please.
-
-- Use clang-format-21.
-
-
-# RMariaDB 1.3.4.9007 (2026-02-02)
-
-## Chore
-
-- Build-ignore.
-
-- Auto-update from GitHub Actions (#426).
-
 - Format C++ code with clang-format.
-
-
-# RMariaDB 1.3.4.9006 (2026-01-14)
-
-## Continuous integration
-
-- Fix comment (#424).
-
-- Tweaks (#423).
-
-- Test all R versions on branches that start with cran- (#422).
-
-
-# RMariaDB 1.3.4.9005 (2025-11-17)
-
-## Continuous integration
-
-- Install binaries from r-universe for dev workflow (#419).
-
-
-# RMariaDB 1.3.4.9004 (2025-11-12)
-
-## Continuous integration
-
-- Fix reviewdog and add commenting workflow (#417).
-
-
-# RMariaDB 1.3.4.9003 (2025-11-10)
-
-## Chore
-
-- Auto-update from GitHub Actions (#411).
-
-## Continuous integration
-
-- Use workflows for fledge (#415).
-
-- Sync (#414).
-
-- Cleanup and fix macOS (#410).
-
-- Format with air, check detritus, better handling of `extra-packages` (#409).
-
-
-# RMariaDB 1.3.4.9002 (2025-05-04)
-
-## Continuous integration
-
-- Enhance permissions for workflow (#406).
-
-
-# RMariaDB 1.3.4.9001 (2025-04-30)
-
-## Continuous integration
-
-- Permissions, better tests for missing suggests, lints (#404).
-
-- Only fail covr builds if token is given (#401).
-
-- Always use `_R_CHECK_FORCE_SUGGESTS_=false` (#400).
-
-- Correct installation of xml2 (#397).
-
-- Explain (#395).
-
-- Add xml2 for covr, print testthat results (#394).
-
-- Sync (#393).
-
-
-# RMariaDB 1.3.4.9000 (2025-02-25)
-
-- Switching to development version.
 
 
 # RMariaDB 1.3.4 (2025-02-24)
@@ -198,7 +110,7 @@
 
 # RMariaDB 1.2.2 (2022-06-19)
 
-## Features 
+## Features
 
 - `dbAppendTable()` accepts `Id` (#262, @renkun-ken).
 
