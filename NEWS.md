@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.4.9009 (2026-03-08)
+
+## Chore
+
+- Auto-update from GitHub Actions (#430).
+
+
 # RMariaDB 1.3.4.9008 (2026-02-05)
 
 ## Bug fixes
