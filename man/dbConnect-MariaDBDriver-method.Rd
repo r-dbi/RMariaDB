@@ -91,7 +91,7 @@ This capability is disabled by default on the server side
 for recent versions of MySQL Server.}
 
 \item{bigint}{The R type that 64-bit integer types should be mapped to,
-default is \link[bit64:bit64-package]{bit64::integer64}, which allows the full range of 64 bit
+default is \link[bit64:integer64]{bit64::integer64}, which allows the full range of 64 bit
 integers.}
 
 \item{timeout}{Connection timeout, in seconds. Use \code{Inf} or a negative value
