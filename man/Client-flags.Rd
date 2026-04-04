@@ -2,25 +2,6 @@
 % Please edit documentation in R/connect.R
 \name{Client-flags}
 \alias{Client-flags}
-\alias{CLIENT_LONG_PASSWORD}
-\alias{CLIENT_FOUND_ROWS}
-\alias{CLIENT_LONG_FLAG}
-\alias{CLIENT_CONNECT_WITH_DB}
-\alias{CLIENT_NO_SCHEMA}
-\alias{CLIENT_COMPRESS}
-\alias{CLIENT_ODBC}
-\alias{CLIENT_LOCAL_FILES}
-\alias{CLIENT_IGNORE_SPACE}
-\alias{CLIENT_PROTOCOL_41}
-\alias{CLIENT_INTERACTIVE}
-\alias{CLIENT_SSL}
-\alias{CLIENT_IGNORE_SIGPIPE}
-\alias{CLIENT_TRANSACTIONS}
-\alias{CLIENT_RESERVED}
-\alias{CLIENT_RESERVED2}
-\alias{CLIENT_MULTI_STATEMENTS}
-\alias{CLIENT_MULTI_RESULTS}
-\alias{CLIENT_SSL_VERIFY_SERVER_CERT}
 \title{Client flags}
 \description{
 Use for the \code{client.flag} argument to \code{\link[DBI:dbConnect]{dbConnect()}}, multiple flags can be
