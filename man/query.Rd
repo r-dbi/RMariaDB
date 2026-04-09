@@ -33,7 +33,7 @@
 \S4method{dbSendStatement}{MariaDBConnection,character}(conn, statement, params = NULL, ..., immediate = FALSE)
 }
 \arguments{
-\item{res}{A \linkS4class{MariaDBResult} object.}
+\item{res}{A \link[=MariaDBResult-class]{MariaDBResult} object.}
 
 \item{params}{A list of query parameters to be substituted into
 a parameterised query.}
@@ -53,7 +53,7 @@ default name.
 
 For backward compatibility, \code{NULL} is equivalent to \code{FALSE}.}
 
-\item{conn}{A \linkS4class{MariaDBConnection} object.}
+\item{conn}{A \link[=MariaDBConnection-class]{MariaDBConnection} object.}
 
 \item{statement}{A character vector of length one specifying the SQL
 statement that should be executed.  Only a single SQL statement should be
