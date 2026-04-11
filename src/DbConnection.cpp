@@ -157,10 +157,10 @@ void DbConnection::connect(
         client_flag
       )) {
     std::string error = mysql_error(this->pConn_);
+    std::string hint(mysql_errno(this->pConn_) == 2026 ? "\nTo suppress this try seting envvar MARIADB_TLS_DISABLE_PEER_VERIFICATION=1" : "");
     mysql_close(this->pConn_);
     this->pConn_ = NULL;
-
-    cpp11::stop("Failed to connect: %s", error.c_str());
+    cpp11::stop("Failed to connect: %s%s", error.c_str(), hint.c_str());
   }
 }
 
