@@ -69,7 +69,7 @@
 )
 }
 \arguments{
-\item{conn}{a \linkS4class{MariaDBConnection} object, produced by
+\item{conn}{a \link[=MariaDBConnection-class]{MariaDBConnection} object, produced by
 \code{\link[DBI:dbConnect]{DBI::dbConnect()}}}
 
 \item{name}{a character string specifying a table name.}
