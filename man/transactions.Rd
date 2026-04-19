@@ -19,7 +19,7 @@
 \S4method{dbRollback}{MariaDBConnection}(conn, ...)
 }
 \arguments{
-\item{conn}{a \linkS4class{MariaDBConnection} object, as produced by
+\item{conn}{a \link[=MariaDBConnection-class]{MariaDBConnection} object, as produced by
 \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 
 \item{...}{Unused.}
