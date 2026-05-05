@@ -170,8 +170,8 @@ otherwise a logical indicating whether the operation was successful.
 ## Details
 
 When using `load_data_local_infile = TRUE` in
-[`DBI::dbConnect()`](https://dbi.r-dbi.org/reference/dbConnect.html),
-pass `safe = FALSE` to
+[`dbConnect()`](https://dbi.r-dbi.org/reference/dbConnect.html), pass
+`safe = FALSE` to
 [`dbAppendTable()`](https://dbi.r-dbi.org/reference/dbAppendTable.html)
 to avoid transactions. Because `LOAD DATA INFILE` is used internally,
 this means that rows violating primary key constraints are now silently

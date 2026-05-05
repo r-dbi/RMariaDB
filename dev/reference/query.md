@@ -1,22 +1,20 @@
 # Execute a SQL statement on a database connection.
 
 To retrieve results a chunk at a time, use
-[`DBI::dbSendQuery()`](https://dbi.r-dbi.org/reference/dbSendQuery.html),
-[`DBI::dbFetch()`](https://dbi.r-dbi.org/reference/dbFetch.html), then
-[`DBI::dbClearResult()`](https://dbi.r-dbi.org/reference/dbClearResult.html).
+[`dbSendQuery()`](https://dbi.r-dbi.org/reference/dbSendQuery.html),
+[`dbFetch()`](https://dbi.r-dbi.org/reference/dbFetch.html), then
+[`dbClearResult()`](https://dbi.r-dbi.org/reference/dbClearResult.html).
 Alternatively, if you want all the results (and they'll fit in memory)
-use
-[`DBI::dbGetQuery()`](https://dbi.r-dbi.org/reference/dbGetQuery.html)
+use [`dbGetQuery()`](https://dbi.r-dbi.org/reference/dbGetQuery.html)
 which sends, fetches and clears for you. For data manipulation queries
 (i.e. queries that do not return data, such as `UPDATE`, `DELETE`,
 etc.),
-[`DBI::dbSendStatement()`](https://dbi.r-dbi.org/reference/dbSendStatement.html)
+[`dbSendStatement()`](https://dbi.r-dbi.org/reference/dbSendStatement.html)
 serves as a counterpart to
-[`DBI::dbSendQuery()`](https://dbi.r-dbi.org/reference/dbSendQuery.html),
-while
-[`DBI::dbExecute()`](https://dbi.r-dbi.org/reference/dbExecute.html)
+[`dbSendQuery()`](https://dbi.r-dbi.org/reference/dbSendQuery.html),
+while [`dbExecute()`](https://dbi.r-dbi.org/reference/dbExecute.html)
 corresponds to
-[`DBI::dbGetQuery()`](https://dbi.r-dbi.org/reference/dbGetQuery.html).
+[`dbGetQuery()`](https://dbi.r-dbi.org/reference/dbGetQuery.html).
 
 ## Usage
 

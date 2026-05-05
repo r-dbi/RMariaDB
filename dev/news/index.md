@@ -1,5 +1,40 @@
 # Changelog
 
+## RMariaDB 1.3.4.9013 (2026-05-04)
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#524](https://github.com/r-dbi/RMariaDB/issues/524)).
+
+## RMariaDB 1.3.4.9012 (2026-04-25)
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#522](https://github.com/r-dbi/RMariaDB/issues/522)).
+
+## RMariaDB 1.3.4.9011 (2026-04-24)
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#434](https://github.com/r-dbi/RMariaDB/issues/434)).
+
+## RMariaDB 1.3.4.9010 (2026-03-12)
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#432](https://github.com/r-dbi/RMariaDB/issues/432)).
+
+## RMariaDB 1.3.4.9009 (2026-03-08)
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#430](https://github.com/r-dbi/RMariaDB/issues/430)).
+
 ## RMariaDB 1.3.4.9008 (2026-02-05)
 
 ### Bug fixes

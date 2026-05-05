@@ -1,7 +1,7 @@
 # Client flags
 
 Use for the `client.flag` argument to
-[`DBI::dbConnect()`](https://dbi.r-dbi.org/reference/dbConnect.html),
+[`dbConnect()`](https://dbi.r-dbi.org/reference/dbConnect.html),
 multiple flags can be combined with `+` or
 [`bitwOr()`](https://rdrr.io/r/base/bitwise.html). The flags are
 provided for completeness. To enforce SSL for the DB connection, add the

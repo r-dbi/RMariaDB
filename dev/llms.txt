@@ -9,6 +9,7 @@ as a replacement for the old
 ## Hello World
 
 ``` r
+
 library(DBI)
 # Connect to my-db as defined in ~/.my.cnf
 con <- dbConnect(RMariaDB::MariaDB(), group = "my-db")
@@ -44,12 +45,14 @@ Binary packages for **OS X** or **Windows** can be installed directly
 from CRAN:
 
 ``` r
+
 install.packages("RMariaDB")
 ```
 
 The development version from github:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("r-dbi/DBI")
 devtools::install_github("r-dbi/RMariaDB")
