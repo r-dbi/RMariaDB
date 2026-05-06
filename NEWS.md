@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.4.9014 (2026-05-06)
+
+## Continuous integration
+
+- Cosmetics.
+
+- Bump action versions.
+
+- Align fledge workflow.
+
+- Harmonize.
+
+
 # RMariaDB 1.3.4.9013 (2026-05-04)
 
 ## Chore
