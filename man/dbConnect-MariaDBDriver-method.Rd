@@ -93,11 +93,13 @@ for recent versions of MySQL Server.}
 
 \item{bigint}{The R type that 64-bit integer types should be mapped to,
 default is \link[bit64:integer64]{bit64::integer64}, which allows the full range of 64 bit
-integers.}
+integers. \verb{INT UNSIGNED} columns are governed by \code{unsigned_int}, not this
+argument.}
 
 \item{unsigned_int}{The R type that \verb{INT UNSIGNED} columns should be mapped
 to, default is \link[bit64:integer64]{bit64::integer64}, which safely represents the full
-unsigned 32-bit range.}
+unsigned 32-bit range. Does not affect \verb{BIGINT UNSIGNED} columns, which
+are governed by \code{bigint}.}
 
 \item{timeout}{Connection timeout, in seconds. Use \code{Inf} or a negative value
 for no timeout.}
