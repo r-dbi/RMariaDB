@@ -257,5 +257,12 @@ void MariaResultPrep::cache_metadata() {
       is_unsigned
     );
     types_.push_back(type);
+    is_unsigned_int_.push_back(
+      fields[i].type == MYSQL_TYPE_LONG && is_unsigned
+    );
   }
+}
+
+std::vector<bool> MariaResultPrep::get_is_unsigned_int() const {
+  return is_unsigned_int_;
 }
