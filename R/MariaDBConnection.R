@@ -23,6 +23,7 @@ MariaDBConnection <- setClass("MariaDBConnection",
     db = "character",
     load_data_local_infile = "logical",
     bigint = "character",
+    unsigned_int = "character",
     timezone = "character",
     timezone_out = "character"
   )

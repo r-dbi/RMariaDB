@@ -46,6 +46,7 @@ dbSend <- function(conn, statement, params = NULL, is_statement, immediate) {
     sql = statement,
     ptr = result_create(conn@ptr, statement, is_statement, immediate),
     bigint = conn@bigint,
+    unsigned_int = conn@unsigned_int,
     conn = conn
   )
 
