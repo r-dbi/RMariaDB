@@ -1,5 +1,23 @@
 # Changelog
 
+## RMariaDB 1.3.4.9015 (2026-05-13)
+
+### Chore
+
+- Add ccache to `.gitignore` and `.Rbuildignore`.
+
+### Continuous integration
+
+- Create snapshot update PR against correct branch.
+
+- Add reference to `/apply-patch` workflow in commit message.
+
+- Clarify rationale for not deploying on schedule.
+
+- Only run fledge on pushes to main.
+
+- Tweak fledge workflow and ccache action.
+
 ## RMariaDB 1.3.4.9014 (2026-05-06)
 
 ### Continuous integration
