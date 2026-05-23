@@ -1,5 +1,10 @@
 # Changelog
 
+## RMariaDB 1.3.4.9016 (2026-05-16)
+
+- Ci: Unify fledge.yaml across cynkratemplate and fledge
+  ([\#86](https://github.com/r-dbi/RMariaDB/issues/86)).
+
 ## RMariaDB 1.3.4.9015 (2026-05-13)
 
 ### Chore
