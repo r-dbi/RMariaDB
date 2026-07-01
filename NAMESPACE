@@ -72,9 +72,13 @@ exportMethods(show)
 import(DBI)
 import(methods)
 importFrom(DBI,Id)
-importFrom(bit64,integer64)
-importFrom(bit64,is.integer64)
+importFrom(bit64,
+  integer64,
+  is.integer64
+)
 importFrom(hms,hms)
-importFrom(utils,read.table)
-importFrom(utils,write.table)
+importFrom(utils,
+  read.table,
+  write.table
+)
 useDynLib(RMariaDB, .registration = TRUE)
