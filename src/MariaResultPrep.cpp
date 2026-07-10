@@ -249,8 +249,20 @@ void MariaResultPrep::cache_metadata() {
 
     bool binary = fields[i].charsetnr == 63;
     bool length1 = fields[i].length == 1;
-    MariaFieldType type =
-      variable_type_from_field_type(fields[i].type, binary, length1);
+    bool is_unsigned = (fields[i].flags & UNSIGNED_FLAG) != 0;
+    MariaFieldType type = variable_type_from_field_type(
+      fields[i].type,
+      binary,
+      length1,
+      is_unsigned
+    );
     types_.push_back(type);
+    is_unsigned_int_.push_back(
+      fields[i].type == MYSQL_TYPE_LONG && is_unsigned
+    );
   }
+}
+
+std::vector<bool> MariaResultPrep::get_is_unsigned_int() const {
+  return is_unsigned_int_;
 }

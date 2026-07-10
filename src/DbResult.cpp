@@ -64,6 +64,10 @@ cpp11::list DbResult::get_column_info() {
   return out;
 }
 
+std::vector<bool> DbResult::get_is_unsigned_int() {
+  return impl->get_is_unsigned_int();
+}
+
 void DbResult::close() {
   // Called from destructor
   if (impl) {
