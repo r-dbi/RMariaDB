@@ -33,7 +33,6 @@ Imports:
 Suggests: 
     DBItest (>= 1.7.2.9001),
     decor,
-    purrr,
     readr,
     rprojroot,
     testthat (>= 3.0.0),
