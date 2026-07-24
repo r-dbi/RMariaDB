@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.4.9019 (2026-07-24)
+
+## Bug fixes
+
+### ci
+
+- Emit empty package matrix when there are no (rev)deps.
+
+## Continuous integration
+
+- Run on Ubuntu 26.04.
+
+- Align workflows with template.
+
+## Uncategorized
+
+- Ci: Harden `format-suggest` against `pull_request_target` pwn requests (#93).
+
+
 # RMariaDB 1.3.4.9018 (2026-07-02)
 
 ## Chore
