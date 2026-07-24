@@ -6,7 +6,9 @@ dbDataType_MariaDBDriver <- function(dbObj, obj, ...) {
   if (inherits(obj, "Date")) return("DATE")
   if (inherits(obj, "difftime")) return("TIME(6)")
   if (inherits(obj, "integer64")) return("BIGINT")
-  if (is.data.frame(obj)) return(callNextMethod(dbObj, obj))
+  if (is.data.frame(obj)) {
+    return(vapply(obj, dbDataType, dbObj = dbObj, FUN.VALUE = character(1)))
+  }
 
   switch(typeof(obj),
     logical = "TINYINT", # works better than BIT(1), https://stackoverflow.com/q/289727/946850
