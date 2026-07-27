@@ -1,5 +1,20 @@
 # Changelog
 
+## RMariaDB 1.3.4.9018 (2026-07-02)
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#538](https://github.com/r-dbi/RMariaDB/issues/538)).
+
+## RMariaDB 1.3.4.9017 (2026-05-24)
+
+### Continuous integration
+
+- Update ccache-action reference.
+
+- Bump action version.
+
 ## RMariaDB 1.3.4.9016 (2026-05-16)
 
 - Ci: Unify fledge.yaml across cynkratemplate and fledge
