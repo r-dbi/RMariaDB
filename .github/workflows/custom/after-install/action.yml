@@ -3,13 +3,13 @@ name: 'Custom steps to run after R packages are installed'
 runs:
   using: "composite"
   steps:
-    # Must happen after installing system dependencies,
-    # https://github.com/ankane/setup-mariadb/issues/2
-    - name: Purge MySQL server
-      if: runner.os == 'Linux'
-      run: |
-        sudo apt purge -y mysql-server
-      shell: bash
+    # No need to purge the MySQL server first anymore
+    # (https://github.com/ankane/setup-mariadb/issues/2):
+    # setup-mariadb stops `mysql.service` and wipes `/var/lib/mysql` itself,
+    # and its `mariadb-server` package conflicts with `mysql-server`,
+    # so apt removes the latter.
+    # Purging beforehand deletes the systemd unit
+    # that setup-mariadb wants to stop, which makes the action fail.
 
     - name: Purge mariadb-connector-c if it exists
       if: runner.os == 'macOS'
@@ -17,15 +17,32 @@ runs:
         brew unlink mariadb-connector-c || true
       shell: bash
 
+    # Version pins follow what ankane's actions support on ubuntu-26.04:
+    # MariaDB 12.3 (default) and 11.8, MySQL 8.4 only.
+    # 11.8 and 8.4 are also available on the other runner images in the matrix.
     - uses: ankane/setup-mariadb@v1
       if: (matrix.config.mysql_server == '') || ! matrix.config.mysql_server
       with:
-        mariadb-version: "11.4"
+        mariadb-version: "11.8"
 
     - uses: ankane/setup-mysql@v1
       if: matrix.config.mysql_server
       with:
-        mysql-version: 8.0
+        mysql-version: "8.4"
+
+    - name: Install and check MariaDB client (Linux)
+      # Bare `mariadb_config` segfaults with the `libmariadb-dev` shipped by
+      # Ubuntu 26.04 (1:11.8.6-5ubuntu0.1), so query the individual settings
+      # that `configure` uses instead.
+      if: runner.os == 'Linux' && ((matrix.config.mysql_client == '') || ! matrix.config.mysql_client)
+      run: |
+        sudo apt-get purge -y libmysqlclient-dev
+        sudo apt-get update -y
+        sudo apt-get install -y libmariadb-dev
+        mariadb_config --version
+        mariadb_config --cflags
+        mariadb_config --libs
+      shell: bash
 
     # Use hard-coded time zone info so that it also works on Windows
     - name: Create database, set it to UTF-8, add time zone info
