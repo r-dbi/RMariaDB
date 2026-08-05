@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">RMariaDB</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.4.9018</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.4.9019</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,30 @@
       <small>Source: <a href="https://github.com/r-dbi/RMariaDB/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.4.9019" id="rmariadb-1349019-2026-07-28">RMariaDB 1.3.4.9019 (2026-07-28)<a class="anchor" aria-label="anchor" href="#rmariadb-1349019-2026-07-28"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-1-3-4-9019">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-3-4-9019"></a></h3>
+<div class="section level4">
+<h4 id="ci-1-3-4-9019">ci<a class="anchor" aria-label="anchor" href="#ci-1-3-4-9019"></a></h4>
+<ul><li>Emit empty package matrix when there are no (rev)deps.</li>
+</ul></div>
+</div>
+<div class="section level3">
+<h3 id="continuous-integration-1-3-4-9019">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-1-3-4-9019"></a></h3>
+<ul><li><p>Adapt database setup to what ankane’s actions offer on Ubuntu 26.04 (<a href="https://github.com/r-dbi/RMariaDB/issues/548" class="external-link">#548</a>).</p></li>
+<li><p>Lock down <code>format-suggest</code> egress (audit → block).</p></li>
+<li><p>Run on Ubuntu 26.04.</p></li>
+<li><p>Align workflows with template.</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="uncategorized-1-3-4-9019">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-1-3-4-9019"></a></h3>
+<ul><li><p>Ci: Run all smoke-test checks even when one fails (<a href="https://github.com/r-dbi/RMariaDB/issues/97" class="external-link">#97</a>).</p></li>
+<li><p>Ci: Apply matrix <code>env</code> vars in the workflow, not in custom actions (<a href="https://github.com/r-dbi/RMariaDB/issues/95" class="external-link">#95</a>).</p></li>
+<li><p>Ci: Link the responsible workflow run in snapshot update PRs (<a href="https://github.com/r-dbi/RMariaDB/issues/96" class="external-link">#96</a>).</p></li>
+<li><p>Ci: Harden <code>format-suggest</code> against <code>pull_request_target</code> pwn requests (<a href="https://github.com/r-dbi/RMariaDB/issues/93" class="external-link">#93</a>).</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.3.4.9018" id="rmariadb-1349018-2026-07-02">RMariaDB 1.3.4.9018 (2026-07-02)<a class="anchor" aria-label="anchor" href="#rmariadb-1349018-2026-07-02"></a></h2>
 <div class="section level3">

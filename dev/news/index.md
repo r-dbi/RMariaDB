@@ -1,5 +1,38 @@
 # Changelog
 
+## RMariaDB 1.3.4.9019 (2026-07-28)
+
+### Bug fixes
+
+#### ci
+
+- Emit empty package matrix when there are no (rev)deps.
+
+### Continuous integration
+
+- Adapt database setup to what ankane’s actions offer on Ubuntu 26.04
+  ([\#548](https://github.com/r-dbi/RMariaDB/issues/548)).
+
+- Lock down `format-suggest` egress (audit → block).
+
+- Run on Ubuntu 26.04.
+
+- Align workflows with template.
+
+### Uncategorized
+
+- Ci: Run all smoke-test checks even when one fails
+  ([\#97](https://github.com/r-dbi/RMariaDB/issues/97)).
+
+- Ci: Apply matrix `env` vars in the workflow, not in custom actions
+  ([\#95](https://github.com/r-dbi/RMariaDB/issues/95)).
+
+- Ci: Link the responsible workflow run in snapshot update PRs
+  ([\#96](https://github.com/r-dbi/RMariaDB/issues/96)).
+
+- Ci: Harden `format-suggest` against `pull_request_target` pwn requests
+  ([\#93](https://github.com/r-dbi/RMariaDB/issues/93)).
+
 ## RMariaDB 1.3.4.9018 (2026-07-02)
 
 ### Chore
