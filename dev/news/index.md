@@ -1,5 +1,27 @@
 # Changelog
 
+## RMariaDB 1.3.4.9020 (2026-08-05)
+
+### Chore
+
+- Auto-update from GitHub Actions
+  ([\#550](https://github.com/r-dbi/RMariaDB/issues/550)).
+
+### Continuous integration
+
+- Remove unused pr-commands workflow.
+
+### Uncategorized
+
+- Ci: Give every workflow and job an explicit `permissions` block
+  ([\#103](https://github.com/r-dbi/RMariaDB/issues/103)).
+
+- Ci: Pass workflow context through the environment, not into script
+  text ([\#102](https://github.com/r-dbi/RMariaDB/issues/102)).
+
+- Ci: Add a Windows arm64 (`windows-11-arm`) check on R-release
+  ([\#99](https://github.com/r-dbi/RMariaDB/issues/99)).
+
 ## RMariaDB 1.3.4.9019 (2026-07-28)
 
 ### Bug fixes
