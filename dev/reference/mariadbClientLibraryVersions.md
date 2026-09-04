@@ -19,6 +19,6 @@ client library version.
 
 ``` r
 mariadbClientLibraryVersions()
-#> 11.8.8-MariaDB          3.4.9 
-#>         110808          30409 
+#> 11.8.9-MariaDB         3.4.10 
+#>         110809          30410 
 ```

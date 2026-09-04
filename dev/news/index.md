@@ -1,5 +1,15 @@
 # Changelog
 
+## RMariaDB 1.3.4.9022 (2026-08-08)
+
+### Continuous integration
+
+- Wrap the commit status update into an action.
+
+- Route ccache through one-word compiler wrappers on Unix.
+
+- Name every step and restore the log entry `setup-pandoc` swallows.
+
 ## RMariaDB 1.3.4.9021 (2026-08-06)
 
 ### Continuous integration
