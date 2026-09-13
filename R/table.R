@@ -5,22 +5,16 @@ NULL
 #'
 #' These methods read or write entire tables from a MariaDB database.
 #'
-#' @return A data.frame in the case of `dbReadTable()`; otherwise a logical
-#' indicating whether the operation was successful.
-#' @note The data.frame returned by `dbReadTable()` only has
-#' primitive data, e.g., it does not coerce character data to factors.
-#' Temporary tables are ignored for `dbExistsTable()` and `dbListTables()` due to
-#' limitations of the underlying C API. For this reason, a prior existence check
-#' is performed only before creating a regular persistent table; an attempt to
-#' create a temporary table with an already existing name will fail with a
-#' message from the database driver.
+#' @return A data.frame in the case of `dbReadTable()`; otherwise a logical indicating whether the operation was successful.
+#' @note The data.frame returned by `dbReadTable()` only has primitive data, e.g., it does not coerce character data to factors.
+#' Temporary tables are ignored for `dbExistsTable()` and `dbListTables()` due to limitations of the underlying C API.
+#' For this reason, a prior existence check is performed only before creating a regular persistent table;
+#' an attempt to create a temporary table with an already existing name will fail with a message from the database driver.
 #'
 #'
-#' @param conn a [MariaDBConnection-class] object, produced by
-#'   [DBI::dbConnect()]
+#' @param conn a [MariaDBConnection-class] object, produced by [DBI::dbConnect()]
 #' @param name a character string specifying a table name.
-#' @param check.names If `TRUE`, the default, column names will be
-#'   converted to valid R identifiers.
+#' @param check.names If `TRUE`, the default, column names will be converted to valid R identifiers.
 #' @inheritParams DBI::sqlRownamesToColumn
 #' @param ... Unused, needed for compatibility with generic.
 #' @examples
