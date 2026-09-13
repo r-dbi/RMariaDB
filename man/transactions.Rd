@@ -25,7 +25,7 @@
 }
 \description{
 Commits or roll backs the current transaction in an MariaDB connection.
-Note that in MariaDB DDL statements (e.g. \verb{CREATE TABLE}) cannot be rolled back.
+ Note that in MariaDB DDL statements (e.g. \verb{CREATE TABLE}) cannot be rolled back.
 }
 \examples{
 if (mariadbHasDefault()) {
