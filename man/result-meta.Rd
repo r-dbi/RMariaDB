@@ -26,7 +26,7 @@
 \item{res}{An object of class \link[=MariaDBResult-class]{MariaDBResult}}
 
 \item{...}{Ignored.
-Needed for compatibility with generic}
+ Needed for compatibility with generic}
 }
 \description{
 See documentation of generics for more details.

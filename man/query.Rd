@@ -38,10 +38,10 @@
 \item{params}{A list of query parameters to be substituted into a parameterised query.}
 
 \item{...}{Unused.
-Needed for compatibility with generic.}
+ Needed for compatibility with generic.}
 
 \item{n}{Number of rows to retrieve.
-Use -1 to retrieve all rows.}
+ Use -1 to retrieve all rows.}
 
 \item{row.names}{Either \code{TRUE}, \code{FALSE}, \code{NA} or a string.
 
@@ -60,14 +60,14 @@ For backward compatibility, \code{NULL} is equivalent to \code{FALSE}.}
 that should be executed.  Only a single SQL statement should be provided.}
 
 \item{immediate}{If TRUE, uses the \code{mysql_real_query()} API instead of \code{mysql_stmt_init()}.
-This allows passing multiple statements (with \link{CLIENT_MULTI_STATEMENTS}) and turns off the ability to pass parameters.}
+ This allows passing multiple statements (with \link{CLIENT_MULTI_STATEMENTS}) and turns off the ability to pass parameters.}
 }
 \description{
 To retrieve results a chunk at a time, use \code{\link[DBI:dbSendQuery]{dbSendQuery()}},
 \code{\link[DBI:dbFetch]{dbFetch()}}, then \code{\link[DBI:dbClearResult]{dbClearResult()}}.
-Alternatively, if you want all the results (and they'll fit in memory) use \code{\link[DBI:dbGetQuery]{dbGetQuery()}} which sends,
+ Alternatively, if you want all the results (and they'll fit in memory) use \code{\link[DBI:dbGetQuery]{dbGetQuery()}} which sends,
 fetches and clears for you.
-For data manipulation queries (i.e. queries that do not return data, such as \code{UPDATE}, \code{DELETE}, etc.),
+ For data manipulation queries (i.e. queries that do not return data, such as \code{UPDATE}, \code{DELETE}, etc.),
 \code{\link[DBI:dbSendStatement]{dbSendStatement()}} serves as a counterpart to \code{\link[DBI:dbSendQuery]{dbSendQuery()}}, while \code{\link[DBI:dbExecute]{dbExecute()}} corresponds to \code{\link[DBI:dbGetQuery]{dbGetQuery()}}.
 }
 \examples{

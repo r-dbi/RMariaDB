@@ -31,15 +31,15 @@
 }
 \description{
 \code{"MariaDBConnection"} objects are usually created by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.
-They represent a connection to a MariaDB or MySQL database.
+ They represent a connection to a MariaDB or MySQL database.
 }
 \details{
 The \code{"MySQLConnection"} class is a subclass of \code{"MariaDBConnection"}.
-Objects of that class are created by \code{dbConnect(MariaDB(), ..., mysql = TRUE)} to indicate that the server is a MySQL server.
-The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect and other details vary.
-The default is to detect the server type based on the version number.
+ Objects of that class are created by \code{dbConnect(MariaDB(), ..., mysql = TRUE)} to indicate that the server is a MySQL server.
+ The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect and other details vary.
+ The default is to detect the server type based on the version number.
 
 The older \pkg{RMySQL} package also implements the \code{"MySQLConnection"} class.
-The S4 system is able to distinguish between \pkg{RMariaDB} and \pkg{RMySQL} objects even if both packages are loaded.
+ The S4 system is able to distinguish between \pkg{RMariaDB} and \pkg{RMySQL} objects even if both packages are loaded.
 }
 \keyword{internal}

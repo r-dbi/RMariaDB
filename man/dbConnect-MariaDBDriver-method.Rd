@@ -39,14 +39,14 @@ MariaDB()
 \item{drv}{an object of class \link[=MariaDBDriver-class]{MariaDBDriver} or \link[=MariaDBConnection-class]{MariaDBConnection}.}
 
 \item{dbname}{string with the database name or NULL.
-If not NULL, the connection sets the default database to this value.}
+ If not NULL, the connection sets the default database to this value.}
 
 \item{username, password}{Username and password.
-If username omitted, defaults to the current user.
-If password is omitted, only users without a password can log in.}
+ If username omitted, defaults to the current user.
+ If password is omitted, only users without a password can log in.}
 
 \item{host}{string identifying the host machine running the MariaDB server or NULL.
-If NULL or the string \code{"localhost"}, a connection to the local host is assumed.}
+ If NULL or the string \code{"localhost"}, a connection to the local host is assumed.}
 
 \item{unix.socket}{(optional) string of the unix socket or named pipe.}
 
@@ -59,21 +59,21 @@ see \link{Client-flags} for details.}
 
 \item{default.file}{string of the filename with MariaDB client options,
 only relevant if \code{groups} is given.
-The default value depends on the operating system (see references),
+ The default value depends on the operating system (see references),
 on Linux and OS X the files \verb{~/.my.cnf} and \verb{~/.mylogin.cnf} are used.
-Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
+ Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.key}{(optional) string of the filename of the SSL key file to use.
-Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
+ Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.cert}{(optional) string of the filename of the SSL certificate to use.
-Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
+ Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.ca}{(optional) string of the filename of an SSL certificate authority file to use.
-Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
+ Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.capath}{(optional) string of the path to a directory containing the trusted SSL CA certificates in PEM format.
-Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
+ Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 
 \item{ssl.cipher}{(optional) string list of permitted ciphers to use for SSL encryption.}
 
@@ -82,33 +82,33 @@ Expanded with \code{\link[=normalizePath]{normalizePath()}}.}
 \item{groups}{deprecated, use \code{group} instead.}
 
 \item{load_data_local_infile}{Set to \code{TRUE} to use \verb{LOAD DATA LOCAL INFILE} in \code{\link[DBI:dbWriteTable]{dbWriteTable()}} and \code{\link[DBI:dbAppendTable]{dbAppendTable()}} by default.
-This capability is disabled by default on the server side for recent versions of MySQL Server.}
+ This capability is disabled by default on the server side for recent versions of MySQL Server.}
 
 \item{bigint}{The R type that 64-bit integer types should be mapped to,
 default is \link[bit64:integer64]{bit64::integer64}, which allows the full range of 64 bit integers.}
 
 \item{timeout}{Connection timeout, in seconds.
-Use \code{Inf} or a negative value for no timeout.}
+ Use \code{Inf} or a negative value for no timeout.}
 
 \item{timezone}{(optional) time zone for the connection,
 the default corresponds to UTC.
-Set this argument if your server or database is configured with a different time zone than UTC.
-Set to \code{NULL} to automatically determine the server time zone.}
+ Set this argument if your server or database is configured with a different time zone than UTC.
+ Set to \code{NULL} to automatically determine the server time zone.}
 
 \item{timezone_out}{The time zone returned to R.
 The default is to use the value of the \code{timezone} argument,
 \code{"+00:00"} is converted to \code{"UTC"}
 If you want to display datetime values in the local timezone,
 set to \code{\link[=Sys.timezone]{Sys.timezone()}} or \code{""}.
-This setting does not change the time values returned, only their display.}
+ This setting does not change the time values returned, only their display.}
 
 \item{reconnect}{(experimental) Set to \code{TRUE} to use \code{MYSQL_OPT_RECONNECT} to enable automatic reconnection.
-This is experimental and could be dangerous if the connection is lost in the middle of a transaction.}
+ This is experimental and could be dangerous if the connection is lost in the middle of a transaction.}
 
 \item{mysql}{Set to \code{TRUE}/\code{FALSE} to connect to a MySQL server or to a MariaDB server,
 respectively.
-The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect and other details vary.
-The default is to assume MariaDB if the version is >= 10.0.0, and MySQL otherwise.}
+ The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect and other details vary.
+ The default is to assume MariaDB if the version is >= 10.0.0, and MySQL otherwise.}
 }
 \description{
 These methods are straight-forward implementations of the corresponding generic functions.
@@ -117,8 +117,8 @@ These methods are straight-forward implementations of the corresponding generic 
 
 MySQL and MariaDB support named time zones,
 they must be installed on the server.
-See \url{https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html} for more details.
-Without installation, time zone support is restricted to UTC offset,
+ See \url{https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html} for more details.
+ Without installation, time zone support is restricted to UTC offset,
 which cannot take into account DST offsets.
 }
 
@@ -129,10 +129,10 @@ use e.g. the \pkg{keyring} package to store and retrieve passwords in a secure w
 
 The MySQL client library (but not MariaDB) supports a \code{.mylogin.cnf} file
 that can be passed in the \code{default.file} argument.
-This file can contain an obfuscated password,
+ This file can contain an obfuscated password,
 which is not a secure way to store passwords but may be acceptable if the user is aware of the restrictions.
-The availability of this feature depends on the client library used for compiling the \pkg{RMariaDB} package.
-Windows and macOS binaries on CRAN are compiled against the MariaDB Connector/C client library
+ The availability of this feature depends on the client library used for compiling the \pkg{RMariaDB} package.
+ Windows and macOS binaries on CRAN are compiled against the MariaDB Connector/C client library
 which do not support this feature.
 }
 
