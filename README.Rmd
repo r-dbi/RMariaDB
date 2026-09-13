@@ -1,12 +1,15 @@
+---
+output: cynkratemplate::readme_document
+---
 
 <!-- README.md and index.md are generated from README.Rmd.
      Edit that file and render it the usual way: rmarkdown::render(), devtools::build_readme(), or the Knit button.
      The cynkratemplate package must be installed; it supplies the output format. -->
 
-# RMariaDB
+RMariaDB
+======
 
 <!-- badges: start -->
-
 [![rcc](https://github.com/r-dbi/RMariaDB/workflows/rcc/badge.svg)](https://github.com/r-dbi/RMariaDB/actions)
 [![Codecov test coverage](https://codecov.io/gh/r-dbi/RMariaDB/graph/badge.svg)](https://app.codecov.io/gh/r-dbi/RMariaDB/tree/main)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/RMariaDB)](https://cran.r-project.org/package=RMariaDB)
@@ -43,7 +46,7 @@ It is explicitly not trying to:
 
 ## Hello World
 
-``` r
+```R
 library(DBI)
 # Connect to my-db as defined in ~/.my.cnf
 con <- dbConnect(RMariaDB::MariaDB(), group = "my-db")
@@ -75,15 +78,15 @@ dbDisconnect(con)
 
 ## Installation
 
-Binary packages for **OS X** or **Windows** can be installed directly from CRAN:
+Binary packages for __OS X__ or __Windows__ can be installed directly from CRAN:
 
-``` r
+```r
 install.packages("RMariaDB")
 ```
 
 The development version from github:
 
-``` r
+```R
 # install.packages("pak")
 pak::pak("r-dbi/DBI")
 pak::pak("r-dbi/RMariaDB")
@@ -97,36 +100,52 @@ preferably in version 2.3.4/3.0.3 or later.
 With older versions, character and blob columns do not work reliably.
 Alternatively, Oracle's [libmysqlclient](https://packages.debian.org/buster/default-libmysqlclient-dev) can be used.
 
+
 ### Connector/C
 
-On recent **Debian** or **Ubuntu** install [libmariadb-dev](https://packages.debian.org/testing/libmariadb-dev).
+On recent __Debian__ or __Ubuntu__ install [libmariadb-dev](https://packages.debian.org/testing/libmariadb-dev).
 
-    sudo apt-get install -y libmariadb-dev
+```
+sudo apt-get install -y libmariadb-dev
+```
 
-On **Fedora**, **CentOS** or **RHEL** we need [mariadb-devel](https://src.fedoraproject.org/rpms/mariadb):
+On __Fedora__,  __CentOS__ or __RHEL__ we need [mariadb-devel](https://src.fedoraproject.org/rpms/mariadb):
 
-    sudo yum install mariadb-devel
+```
+sudo yum install mariadb-devel
+````
 
-On **OS X** use [mariadb-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/m/mariadb-connector-c.rb) from Homebrew:
+On __OS X__ use [mariadb-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/m/mariadb-connector-c.rb) from Homebrew:
 
-    brew install mariadb-connector-c
+```
+brew install mariadb-connector-c
+```
+
 
 ### MySQL client library
 
-On recent **Debian** or **Ubuntu** install [libmysqlclient-dev](https://packages.debian.org/buster/default-libmysqlclient-dev).
+On recent __Debian__ or __Ubuntu__ install [libmysqlclient-dev](https://packages.debian.org/buster/default-libmysqlclient-dev).
 
-    sudo apt-get install -y libmysqlclient-dev
+```
+sudo apt-get install -y libmysqlclient-dev
+```
 
-On **Fedora**, **CentOS** or **RHEL** we need mysql-devel, see <https://apps.fedoraproject.org/packages/mysql-devel>:
+On __Fedora__,  __CentOS__ or __RHEL__ we need mysql-devel, see https://apps.fedoraproject.org/packages/mysql-devel:
 
-    sudo yum install mysql-devel
+```
+sudo yum install mysql-devel
+```
 
 Follow [instructions](https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/) to enable the MySQL yum repository
 if the above command attempts to install MariaDB files.
 
-On **OS X** use [mysql-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/m/mysql-connector-c++.rb) from Homebrew:
 
-    brew install mysql-connector-c++
+On __OS X__ use [mysql-connector-c](https://github.com/Homebrew/homebrew-core/blob/master/Formula/m/mysql-connector-c++.rb) from Homebrew:
+
+```
+brew install mysql-connector-c++
+```
+
 
 ## MariaDB configuration file
 
@@ -134,19 +153,23 @@ Instead of specifying a username and password in calls to `dbConnect()`,
 it's better to set up a MariaDB configuration file that names the databases that you connect to most commonly.
 This file should live in `~/.my.cnf` and look like:
 
-    [database_name]
-    option1=value1
-    option2=value2
+```
+[database_name]
+option1=value1
+option2=value2
+```
 
 If you want to run the examples,
 you'll need to set the proper options in the `[rs-dbi]` group of any MariaDB option file,
 such as /etc/my.cnf or the .my.cnf file in your home directory.
 For a default single user install of MariaDB, the following code should work:
 
-    [rs-dbi]
-    database="test"
-    user="root"
-    password=""
+```
+[rs-dbi]
+database="test"
+user="root"
+password=""
+```
 
 ## Acknowledgements
 
@@ -156,7 +179,7 @@ Arend P. van der Veen, Felix Weninger, J. T. Lindgren, Crespin Miller, and Micha
 for comments, suggestions, bug reports, and patches to the original [RMySQL](https://cran.r-project.org/package=RMySQL) package,
 and to all contributors (of [code](https://github.com/r-dbi/RMariaDB/graphs/contributors) and discussions) to this package.
 
-------------------------------------------------------------------------
+---
 
 Please note that the 'RMariaDB' project is released with a [Contributor Code of Conduct](https://rmariadb.r-dbi.org/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
