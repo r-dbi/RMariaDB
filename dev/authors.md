@@ -24,7 +24,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/r-dbi/RMariaDB/blob/cran-1.3.5/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/r-dbi/RMariaDB/blob/main/DESCRIPTION)
 
 Müller K, Ooms J, James D, DebRoy S, Wickham H, Horner J (2026).
 *RMariaDB: Database Interface and MariaDB Driver*. R package version
