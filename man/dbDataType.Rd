@@ -21,8 +21,7 @@
 \item{\dots}{any other parameters that individual methods may need.}
 }
 \description{
-This method is a straight-forward implementation of the corresponding
-generic function.
+This method is a straight-forward implementation of the corresponding generic function.
 }
 \examples{
 dbDataType(RMariaDB::MariaDB(), "a")

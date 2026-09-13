@@ -10,7 +10,6 @@
 \S4method{dbIsValid}{MariaDBResult}(dbObj, ...)
 }
 \description{
-MariaDB's query results class.  This classes encapsulates the result of an SQL
-query or statement.
+MariaDB's query results class.  This classes encapsulates the result of an SQL query or statement.
 }
 \keyword{internal}

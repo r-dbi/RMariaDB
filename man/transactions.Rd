@@ -19,15 +19,13 @@
 \S4method{dbRollback}{MariaDBConnection}(conn, ...)
 }
 \arguments{
-\item{conn}{a \link[=MariaDBConnection-class]{MariaDBConnection} object, as produced by
-\code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
+\item{conn}{a \link[=MariaDBConnection-class]{MariaDBConnection} object, as produced by \code{\link[DBI:dbConnect]{DBI::dbConnect()}}.}
 
 \item{...}{Unused.}
 }
 \description{
 Commits or roll backs the current transaction in an MariaDB connection.
-Note that in MariaDB DDL statements (e.g. \verb{CREATE TABLE}) cannot
-be rolled back.
+Note that in MariaDB DDL statements (e.g. \verb{CREATE TABLE}) cannot be rolled back.
 }
 \examples{
 if (mariadbHasDefault()) {
