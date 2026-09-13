@@ -4,7 +4,7 @@ NULL
 #' DBMS Transaction Management
 #'
 #' Commits or roll backs the current transaction in an MariaDB connection.
-#' Note that in MariaDB DDL statements (e.g. `CREATE TABLE`) cannot be rolled back.
+#'  Note that in MariaDB DDL statements (e.g. `CREATE TABLE`) cannot be rolled back.
 #'
 #' @param conn a [MariaDBConnection-class] object, as produced by [DBI::dbConnect()].
 #' @param ... Unused.

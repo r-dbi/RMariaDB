@@ -1,11 +1,11 @@
 #' Execute a SQL statement on a database connection.
 #'
 #' To retrieve results a chunk at a time, use [dbSendQuery()],
-#' [dbFetch()], then [dbClearResult()].
-#' Alternatively, if you want all the results (and they'll fit in memory) use [dbGetQuery()] which sends,
-#' fetches and clears for you.
-#' For data manipulation queries (i.e. queries that do not return data, such as \code{UPDATE}, \code{DELETE}, etc.),
-#' [dbSendStatement()] serves as a counterpart to [dbSendQuery()], while [dbExecute()] corresponds to [dbGetQuery()].
+#'  [dbFetch()], then [dbClearResult()].
+#'  Alternatively, if you want all the results (and they'll fit in memory) use [dbGetQuery()] which sends,
+#'  fetches and clears for you.
+#'  For data manipulation queries (i.e. queries that do not return data, such as \code{UPDATE}, \code{DELETE}, etc.),
+#'  [dbSendStatement()] serves as a counterpart to [dbSendQuery()], while [dbExecute()] corresponds to [dbGetQuery()].
 #'
 #' @param conn A [MariaDBConnection-class] object.
 #' @param res A [MariaDBResult-class] object.

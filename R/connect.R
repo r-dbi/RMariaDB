@@ -55,11 +55,11 @@ MariaDB <- function() {
 #' Client flags
 #'
 #' Use for the `client.flag` argument to [dbConnect()], multiple flags can be combined with `+` or [bitwOr()].
-#' The flags are provided for completeness.
-#' To enforce SSL for the DB connection, add the flag `CLIENT_SSL`.
+#'  The flags are provided for completeness.
+#'  To enforce SSL for the DB connection, add the flag `CLIENT_SSL`.
 #'
 #' @seealso
-#' The `flags` argument at https://mariadb.com/kb/en/library/mysql_real_connect.
+#'  The `flags` argument at https://mariadb.com/kb/en/library/mysql_real_connect.
 #'
 #' @examples
 #' \dontrun{
