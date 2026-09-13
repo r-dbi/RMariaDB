@@ -16,7 +16,8 @@ enum MariaFieldType {
 MariaFieldType variable_type_from_field_type(
   enum_field_types type,
   bool binary,
-  bool length1
+  bool length1,
+  bool is_unsigned
 );
 std::string type_name(MariaFieldType type);
 SEXPTYPE type_sexp(MariaFieldType type);

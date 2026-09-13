@@ -26,6 +26,7 @@ class MariaResultPrep : boost::noncopyable, public MariaResultImpl {
 
   std::vector<MariaFieldType> types_;
   std::vector<std::string> names_;
+  std::vector<bool> is_unsigned_int_;
   MariaBinding bindingInput_;
   MariaRow bindingOutput_;
 
@@ -40,6 +41,7 @@ public:
   virtual void bind(const cpp11::list& params);
 
   virtual cpp11::list get_column_info();
+  virtual std::vector<bool> get_is_unsigned_int() const;
 
   virtual cpp11::list fetch(int n_max = -1);
 

@@ -2,9 +2,9 @@
 #' @include MariaDBResult.R
 NULL
 
-convert_bigint <- function(df, bigint) {
+convert_bigint <- function(df, bigint, is_unsigned_int = rep(FALSE, length(df))) {
   if (bigint == "integer64") return(df)
-  is_int64 <- which(vlapply(df, inherits, "integer64"))
+  is_int64 <- which(vlapply(df, inherits, "integer64") & !is_unsigned_int)
   if (length(is_int64) == 0) return(df)
 
   as_bigint <- switch(bigint,
@@ -14,6 +14,21 @@ convert_bigint <- function(df, bigint) {
   )
 
   df[is_int64] <- suppressWarnings(lapply(df[is_int64], as_bigint))
+  df
+}
+
+convert_unsigned_int <- function(df, unsigned_int, is_unsigned_int) {
+  if (unsigned_int == "integer64") return(df)
+  idx <- which(is_unsigned_int)
+  if (length(idx) == 0) return(df)
+
+  as_target <- switch(unsigned_int,
+    integer = as.integer,
+    numeric = as.numeric,
+    character = as.character
+  )
+
+  df[idx] <- suppressWarnings(lapply(df[idx], as_target))
   df
 }
 
@@ -46,6 +61,7 @@ dbSend <- function(conn, statement, params = NULL, is_statement, immediate) {
     sql = statement,
     ptr = result_create(conn@ptr, statement, is_statement, immediate),
     bigint = conn@bigint,
+    unsigned_int = conn@unsigned_int,
     conn = conn
   )
 

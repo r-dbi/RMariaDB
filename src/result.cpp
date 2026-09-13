@@ -56,3 +56,13 @@ int result_rows_affected(DbResult* res) {
 cpp11::list result_column_info(DbResult* res) {
   return res->get_column_info();
 }
+
+[[cpp11::register]]
+cpp11::logicals result_is_unsigned_int(DbResult* res) {
+  std::vector<bool> flags = res->get_is_unsigned_int();
+  cpp11::writable::logicals out(static_cast<R_xlen_t>(flags.size()));
+  for (size_t i = 0; i < flags.size(); ++i) {
+    out[static_cast<R_xlen_t>(i)] = static_cast<bool>(flags[i]);
+  }
+  return out;
+}

@@ -83,3 +83,7 @@ result_rows_affected <- function(res) {
 result_column_info <- function(res) {
   .Call(`_RMariaDB_result_column_info`, res)
 }
+
+result_is_unsigned_int <- function(res) {
+  .Call(`_RMariaDB_result_is_unsigned_int`, res)
+}

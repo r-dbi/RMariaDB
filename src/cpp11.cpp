@@ -160,6 +160,13 @@ extern "C" SEXP _RMariaDB_result_column_info(SEXP res) {
     return cpp11::as_sexp(result_column_info(cpp11::as_cpp<cpp11::decay_t<DbResult*>>(res)));
   END_CPP11
 }
+// result.cpp
+cpp11::logicals result_is_unsigned_int(DbResult* res);
+extern "C" SEXP _RMariaDB_result_is_unsigned_int(SEXP res) {
+  BEGIN_CPP11
+    return cpp11::as_sexp(result_is_unsigned_int(cpp11::as_cpp<cpp11::decay_t<DbResult*>>(res)));
+  END_CPP11
+}
 
 extern "C" {
 static const R_CallMethodDef CallEntries[] = {
@@ -179,6 +186,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_RMariaDB_result_create",                (DL_FUNC) &_RMariaDB_result_create,                 4},
     {"_RMariaDB_result_fetch",                 (DL_FUNC) &_RMariaDB_result_fetch,                  2},
     {"_RMariaDB_result_has_completed",         (DL_FUNC) &_RMariaDB_result_has_completed,          1},
+    {"_RMariaDB_result_is_unsigned_int",       (DL_FUNC) &_RMariaDB_result_is_unsigned_int,        1},
     {"_RMariaDB_result_release",               (DL_FUNC) &_RMariaDB_result_release,                1},
     {"_RMariaDB_result_rows_affected",         (DL_FUNC) &_RMariaDB_result_rows_affected,          1},
     {"_RMariaDB_result_rows_fetched",          (DL_FUNC) &_RMariaDB_result_rows_fetched,           1},

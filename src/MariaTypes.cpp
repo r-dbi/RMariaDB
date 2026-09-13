@@ -7,8 +7,16 @@ bool all_raw(SEXP x);
 MariaFieldType variable_type_from_field_type(
   enum_field_types type,
   bool binary,
-  bool length1
+  bool length1,
+  bool is_unsigned
 ) {
+  // INT UNSIGNED (uint32) overflows R's signed int32; widen to int64.
+  // Narrower unsigned ints fit in int32; BIGINT UNSIGNED is handled by
+  // MYSQL_TYPE_LONGLONG below.
+  if (type == MYSQL_TYPE_LONG && is_unsigned) {
+    return MY_INT64;
+  }
+
   switch (type) {
   case MYSQL_TYPE_TINY:
   case MYSQL_TYPE_SHORT:
