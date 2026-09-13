@@ -3,23 +3,23 @@
 #' These methods are straight-forward implementations of the corresponding generic functions.
 #'
 #' @section Time zones:
-#'  MySQL and MariaDB support named time zones,
-#'  they must be installed on the server.
-#'  See <https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html> for more details.
-#'  Without installation, time zone support is restricted to UTC offset,
-#'  which cannot take into account DST offsets.
+#' MySQL and MariaDB support named time zones,
+#' they must be installed on the server.
+#' See <https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html> for more details.
+#' Without installation, time zone support is restricted to UTC offset,
+#' which cannot take into account DST offsets.
 #'
 #' @section Secure passwords:
-#'  Avoid storing passwords hard-coded in the code,
-#'  use e.g. the \pkg{keyring} package to store and retrieve passwords in a secure way.
+#' Avoid storing passwords hard-coded in the code,
+#' use e.g. the \pkg{keyring} package to store and retrieve passwords in a secure way.
 #'
 #' The MySQL client library (but not MariaDB) supports a `.mylogin.cnf` file
-#'  that can be passed in the `default.file` argument.
-#'  This file can contain an obfuscated password,
-#'  which is not a secure way to store passwords but may be acceptable if the user is aware of the restrictions.
-#'  The availability of this feature depends on the client library used for compiling the \pkg{RMariaDB} package.
-#'  Windows and macOS binaries on CRAN are compiled against the MariaDB Connector/C client library
-#'  which do not support this feature.
+#' that can be passed in the `default.file` argument.
+#' This file can contain an obfuscated password,
+#' which is not a secure way to store passwords but may be acceptable if the user is aware of the restrictions.
+#' The availability of this feature depends on the client library used for compiling the \pkg{RMariaDB} package.
+#' Windows and macOS binaries on CRAN are compiled against the MariaDB Connector/C client library
+#' which do not support this feature.
 #'
 #' @param drv an object of class [MariaDBDriver-class] or [MariaDBConnection-class].
 #' @param username,password Username and password.
@@ -74,7 +74,7 @@
 #'   The default is to assume MariaDB if the version is >= 10.0.0, and MySQL otherwise.
 #'
 #' @references
-#'  Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/
+#' Configuration files: https://mariadb.com/kb/en/library/configuring-mariadb-with-mycnf/
 #' @examples
 #' \dontrun{
 #' # Connect to a MariaDB database running locally

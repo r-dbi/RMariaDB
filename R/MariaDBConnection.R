@@ -1,15 +1,15 @@
 #' Class MariaDBConnection.
 #'
 #' `"MariaDBConnection"` objects are usually created by [DBI::dbConnect()].
-#'  They represent a connection to a MariaDB or MySQL database.
+#' They represent a connection to a MariaDB or MySQL database.
 #'
 #' The `"MySQLConnection"` class is a subclass of `"MariaDBConnection"`.
-#'  Objects of that class are created by `dbConnect(MariaDB(), ..., mysql = TRUE)` to indicate that the server is a MySQL server.
-#'  The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect and other details vary.
-#'  The default is to detect the server type based on the version number.
+#' Objects of that class are created by `dbConnect(MariaDB(), ..., mysql = TRUE)` to indicate that the server is a MySQL server.
+#' The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect and other details vary.
+#' The default is to detect the server type based on the version number.
 #'
 #' The older \pkg{RMySQL} package also implements the `"MySQLConnection"` class.
-#'  The S4 system is able to distinguish between \pkg{RMariaDB} and \pkg{RMySQL} objects even if both packages are loaded.
+#' The S4 system is able to distinguish between \pkg{RMariaDB} and \pkg{RMySQL} objects even if both packages are loaded.
 #'
 #' @keywords internal
 MariaDBConnection <- setClass("MariaDBConnection",
