@@ -53,9 +53,9 @@ install.packages("RMariaDB")
 The development version from github:
 
 ```R
-# install.packages("devtools")
-devtools::install_github("r-dbi/DBI")
-devtools::install_github("r-dbi/RMariaDB")
+# install.packages("pak")
+pak::pak("r-dbi/DBI")
+pak::pak("r-dbi/RMariaDB")
 ```
 
 Discussions associated with DBI and related database packages take place on [R-SIG-DB](https://stat.ethz.ch/mailman/listinfo/r-sig-db).
