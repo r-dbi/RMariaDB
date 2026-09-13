@@ -1,5 +1,12 @@
 # Changelog
 
+## RMariaDB 1.3.5.9001 (2026-09-13)
+
+### Chore
+
+- Record the v1.3.5 release on the mainline
+  ([\#429](https://github.com/r-dbi/RMariaDB/issues/429)).
+
 ## RMariaDB 1.3.4.9024 (2026-09-13)
 
 ### Bug fixes
@@ -198,7 +205,7 @@
 - Auto-update from GitHub Actions
   ([\#430](https://github.com/r-dbi/RMariaDB/issues/430)).
 
-## RMariaDB 1.3.4.9008 (2026-02-05)
+## RMariaDB 1.3.5 (2026-02-05)
 
 ### Bug fixes
 
@@ -210,101 +217,7 @@
 
 - Remove plogr ([\#428](https://github.com/r-dbi/RMariaDB/issues/428)).
 
-### Continuous integration
-
-- Please.
-
-- Use clang-format-21.
-
-## RMariaDB 1.3.4.9007 (2026-02-02)
-
-### Chore
-
-- Build-ignore.
-
-- Auto-update from GitHub Actions
-  ([\#426](https://github.com/r-dbi/RMariaDB/issues/426)).
-
 - Format C++ code with clang-format.
-
-## RMariaDB 1.3.4.9006 (2026-01-14)
-
-### Continuous integration
-
-- Fix comment ([\#424](https://github.com/r-dbi/RMariaDB/issues/424)).
-
-- Tweaks ([\#423](https://github.com/r-dbi/RMariaDB/issues/423)).
-
-- Test all R versions on branches that start with cran-
-  ([\#422](https://github.com/r-dbi/RMariaDB/issues/422)).
-
-## RMariaDB 1.3.4.9005 (2025-11-17)
-
-### Continuous integration
-
-- Install binaries from r-universe for dev workflow
-  ([\#419](https://github.com/r-dbi/RMariaDB/issues/419)).
-
-## RMariaDB 1.3.4.9004 (2025-11-12)
-
-### Continuous integration
-
-- Fix reviewdog and add commenting workflow
-  ([\#417](https://github.com/r-dbi/RMariaDB/issues/417)).
-
-## RMariaDB 1.3.4.9003 (2025-11-10)
-
-### Chore
-
-- Auto-update from GitHub Actions
-  ([\#411](https://github.com/r-dbi/RMariaDB/issues/411)).
-
-### Continuous integration
-
-- Use workflows for fledge
-  ([\#415](https://github.com/r-dbi/RMariaDB/issues/415)).
-
-- Sync ([\#414](https://github.com/r-dbi/RMariaDB/issues/414)).
-
-- Cleanup and fix macOS
-  ([\#410](https://github.com/r-dbi/RMariaDB/issues/410)).
-
-- Format with air, check detritus, better handling of `extra-packages`
-  ([\#409](https://github.com/r-dbi/RMariaDB/issues/409)).
-
-## RMariaDB 1.3.4.9002 (2025-05-04)
-
-### Continuous integration
-
-- Enhance permissions for workflow
-  ([\#406](https://github.com/r-dbi/RMariaDB/issues/406)).
-
-## RMariaDB 1.3.4.9001 (2025-04-30)
-
-### Continuous integration
-
-- Permissions, better tests for missing suggests, lints
-  ([\#404](https://github.com/r-dbi/RMariaDB/issues/404)).
-
-- Only fail covr builds if token is given
-  ([\#401](https://github.com/r-dbi/RMariaDB/issues/401)).
-
-- Always use `_R_CHECK_FORCE_SUGGESTS_=false`
-  ([\#400](https://github.com/r-dbi/RMariaDB/issues/400)).
-
-- Correct installation of xml2
-  ([\#397](https://github.com/r-dbi/RMariaDB/issues/397)).
-
-- Explain ([\#395](https://github.com/r-dbi/RMariaDB/issues/395)).
-
-- Add xml2 for covr, print testthat results
-  ([\#394](https://github.com/r-dbi/RMariaDB/issues/394)).
-
-- Sync ([\#393](https://github.com/r-dbi/RMariaDB/issues/393)).
-
-## RMariaDB 1.3.4.9000 (2025-02-25)
-
-- Switching to development version.
 
 ## RMariaDB 1.3.4 (2025-02-24)
 
