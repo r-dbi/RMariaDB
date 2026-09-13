@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.4.9024 (2026-09-13)
+
+## Bug fixes
+
+### ci
+
+- Drop the ARM64 Windows entry, which has no MariaDB server (#555).
+
+## Features
+
+### ci
+
+- Align the `revdep2`, `revdep4` and `revdepx` subsystems with `rigraph`.
+
+## Uncategorized
+
+- Perf(revdepx): Compile the revdeps' checks through ccache.
+
+- Fix(ci): Survive an archived CRAN package, and install it from where it still lives.
+
+- Ci: Fail the roxygenize step on roxygen2 warnings (#111).
+
+
 # RMariaDB 1.3.4.9023 (2026-09-05)
 
 ## Bug fixes
