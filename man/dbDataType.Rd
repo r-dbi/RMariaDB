@@ -14,7 +14,7 @@
 \S4method{dbDataType}{MariaDBDriver}(dbObj, obj, ...)
 }
 \arguments{
-\item{dbObj}{A \linkS4class{MariaDBDriver} or \linkS4class{MariaDBConnection} object.}
+\item{dbObj}{A \link[=MariaDBDriver-class]{MariaDBDriver} or \link[=MariaDBConnection-class]{MariaDBConnection} object.}
 
 \item{obj}{R/S-Plus object whose SQL type we want to determine.}
 

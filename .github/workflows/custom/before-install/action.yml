@@ -8,14 +8,17 @@ runs:
         echo '_R_CHECK_PKG_SIZES_=FALSE' | tee -a $GITHUB_ENV
       shell: bash
 
-    - name: Clean up broken mysql apt
-      # FIXME: Remove if package becomes unavailable
+    - name: Install legacy time zone data (Linux)
+      # Ubuntu 26.04 no longer ships the backward-compatibility zone names
+      # (PST8PDT, EST5EDT, US/Pacific, ...) in `tzdata`;
+      # they moved to the separate `tzdata-legacy` package.
+      # DBItest exercises PST8PDT,
+      # and without the package `lubridate::with_tz()` warns
+      # "Unrecognized time zone", which fails the round-trip timestamp tests.
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update
-        if [ $(lsb_release --short --codename) == 'focal' ]; then
-          sudo apt-get install mysql-common=5.8+1.0.5ubuntu2 --allow-downgrades
-        fi
+        sudo apt-get install -y tzdata-legacy
       shell: bash
 
     - name: Install MariaDB client (macOS)
@@ -29,7 +32,9 @@ runs:
       if: runner.os == 'macOS' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
       run: |
         brew install mariadb-connector-c
-        mariadb_config
+        mariadb_config --version
+        mariadb_config --cflags
+        mariadb_config --libs
       shell: bash
 
     - name: Install MySQL client (macOS)
@@ -48,14 +53,13 @@ runs:
         mysql_config || true
       shell: bash
 
-    - name: Install and check MariaDB client (Linux)
-      if: runner.os == 'Linux' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
-      run: |
-        sudo apt-get purge -y libmysqlclient-dev
-        sudo apt-get update -y
-        sudo apt-get install -y libmariadb-dev
-        mariadb_config
-      shell: bash
+    # The Linux client is installed in the after-install action,
+    # after the database server has been set up:
+    # on Ubuntu 26.04 `libmariadb-dev` pulls in `mariadb-common`,
+    # which conflicts with `mysql-server` and therefore uninstalls it
+    # (including its systemd unit) --
+    # `ankane/setup-mariadb` expects the image's MySQL to still be there
+    # so that it can stop it before installing MariaDB.
 
     - name: Define client restrictons
       run: |

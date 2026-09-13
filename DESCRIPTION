@@ -1,6 +1,6 @@
 Package: RMariaDB
 Title: Database Interface and MariaDB Driver
-Version: 1.3.5
+Version: 1.3.5.9001
 Authors@R: c(
     person("Kirill", "Müller", , "kirill@cynkra.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-1416-3412")),
@@ -44,10 +44,17 @@ Config/Needs/website:
 Config/autostyle/scope: line_breaks
 Config/autostyle/strict: false
 Config/testthat/edition: 3
+Config/gha/filter: os != "windows-11-arm"
+Config/comment/gha/filter: No MariaDB server exists for ARM64 Windows, and the
+    DBItest suite needs a live one -- it connects in
+    tests/testthat/helper-DBItest.R and has no path that skips when the server
+    is absent. ankane/setup-mariadb falls back to the winx64 MSI there and
+    msiexec cannot install it, so the entry dies in after-install after about
+    four and a half minutes. Drop this filter once MariaDB publishes an ARM64
+    Windows server.
 Encoding: UTF-8
 NeedsCompilation: yes
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3.9000
 SystemRequirements: libmariadb-client-lgpl-dev or libmariadb-dev or
     libmysqlclient-dev, with libssl-dev (deb), mariadb-connector-c-devel
     or mariadb-devel (rpm), mariadb-connector-c or mysql-connector-c
@@ -111,3 +118,4 @@ Collate:
     'transaction.R'
     'utils.R'
     'zzz.R'
+Config/roxygen2/version: 8.1.0.9000

@@ -45,3 +45,4 @@ src\/RCS
 ^CMakeLists\.txt$
 ^vscode-.*build$
 ^\.clang-format$
+^\.ccache$

@@ -1,5 +1,203 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.5.9001 (2026-09-13)
+
+## Chore
+
+- Record the v1.3.5 release on the mainline (#429).
+
+# RMariaDB 1.3.4.9024 (2026-09-13)
+
+## Bug fixes
+
+### ci
+
+- Drop the ARM64 Windows entry, which has no MariaDB server (#555).
+
+## Features
+
+### ci
+
+- Align the `revdep2`, `revdep4` and `revdepx` subsystems with `rigraph`.
+
+## Uncategorized
+
+- Perf(revdepx): Compile the revdeps' checks through ccache.
+
+- Fix(ci): Survive an archived CRAN package, and install it from where it still lives.
+
+- Ci: Fail the roxygenize step on roxygen2 warnings (#111).
+
+
+# RMariaDB 1.3.4.9023 (2026-09-05)
+
+## Bug fixes
+
+### ci
+
+- Backport kit fixes from `rigraph`, `duckdb-r` and `dm`.
+
+
+# RMariaDB 1.3.4.9022 (2026-08-08)
+
+## Continuous integration
+
+- Wrap the commit status update into an action.
+
+- Route ccache through one-word compiler wrappers on Unix.
+
+- Name every step and restore the log entry `setup-pandoc` swallows.
+
+
+# RMariaDB 1.3.4.9021 (2026-08-06)
+
+## Continuous integration
+
+- Add sharded `revdep2` workflow.
+
+## Uncategorized
+
+- Ci: Harden `workflow_run` workflows against untrusted pull requests (#106).
+
+- Ci: Pin third-party actions to commits and let Renovate keep them pinned (#105).
+
+
+# RMariaDB 1.3.4.9020 (2026-08-05)
+
+## Chore
+
+- Auto-update from GitHub Actions (#550).
+
+## Continuous integration
+
+- Remove unused pr-commands workflow.
+
+## Uncategorized
+
+- Ci: Give every workflow and job an explicit `permissions` block (#103).
+
+- Ci: Pass workflow context through the environment, not into script text (#102).
+
+- Ci: Add a Windows arm64 (`windows-11-arm`) check on R-release (#99).
+
+
+# RMariaDB 1.3.4.9019 (2026-07-28)
+
+## Bug fixes
+
+### ci
+
+- Emit empty package matrix when there are no (rev)deps.
+
+## Continuous integration
+
+- Adapt database setup to what ankane's actions offer on Ubuntu 26.04 (#548).
+
+- Lock down `format-suggest` egress (audit → block).
+
+- Run on Ubuntu 26.04.
+
+- Align workflows with template.
+
+## Uncategorized
+
+- Ci: Run all smoke-test checks even when one fails (#97).
+
+- Ci: Apply matrix `env` vars in the workflow, not in custom actions (#95).
+
+- Ci: Link the responsible workflow run in snapshot update PRs (#96).
+
+- Ci: Harden `format-suggest` against `pull_request_target` pwn requests (#93).
+
+
+# RMariaDB 1.3.4.9018 (2026-07-02)
+
+## Chore
+
+- Auto-update from GitHub Actions (#538).
+
+
+# RMariaDB 1.3.4.9017 (2026-05-24)
+
+## Continuous integration
+
+- Update ccache-action reference.
+
+- Bump action version.
+
+
+# RMariaDB 1.3.4.9016 (2026-05-16)
+
+- Ci: Unify fledge.yaml across cynkratemplate and fledge (#86).
+
+
+# RMariaDB 1.3.4.9015 (2026-05-13)
+
+## Chore
+
+- Add ccache to `.gitignore` and `.Rbuildignore`.
+
+## Continuous integration
+
+- Create snapshot update PR against correct branch.
+
+- Add reference to `/apply-patch` workflow in commit message.
+
+- Clarify rationale for not deploying on schedule.
+
+- Only run fledge on pushes to main.
+
+- Tweak fledge workflow and ccache action.
+
+
+# RMariaDB 1.3.4.9014 (2026-05-06)
+
+## Continuous integration
+
+- Cosmetics.
+
+- Bump action versions.
+
+- Align fledge workflow.
+
+- Harmonize.
+
+
+# RMariaDB 1.3.4.9013 (2026-05-04)
+
+## Chore
+
+- Auto-update from GitHub Actions (#524).
+
+
+# RMariaDB 1.3.4.9012 (2026-04-25)
+
+## Chore
+
+- Auto-update from GitHub Actions (#522).
+
+
+# RMariaDB 1.3.4.9011 (2026-04-24)
+
+## Chore
+
+- Auto-update from GitHub Actions (#434).
+
+
+# RMariaDB 1.3.4.9010 (2026-03-12)
+
+## Chore
+
+- Auto-update from GitHub Actions (#432).
+
+
+# RMariaDB 1.3.4.9009 (2026-03-08)
+
+## Chore
+
+- Auto-update from GitHub Actions (#430).
+
+
 # RMariaDB 1.3.5 (2026-02-05)
 
 ## Bug fixes
@@ -110,7 +308,7 @@
 
 # RMariaDB 1.2.2 (2022-06-19)
 
-## Features
+## Features 
 
 - `dbAppendTable()` accepts `Id` (#262, @renkun-ken).
 

@@ -36,8 +36,8 @@ MariaDB()
 )
 }
 \arguments{
-\item{drv}{an object of class \linkS4class{MariaDBDriver} or
-\linkS4class{MariaDBConnection}.}
+\item{drv}{an object of class \link[=MariaDBDriver-class]{MariaDBDriver} or
+\link[=MariaDBConnection-class]{MariaDBConnection}.}
 
 \item{dbname}{string with the database name or NULL. If not NULL, the
 connection sets the default database to this value.}
@@ -86,12 +86,12 @@ encryption.}
 \item{groups}{deprecated, use \code{group} instead.}
 
 \item{load_data_local_infile}{Set to \code{TRUE} to use \verb{LOAD DATA LOCAL INFILE}
-in \code{\link[DBI:dbWriteTable]{DBI::dbWriteTable()}} and \code{\link[DBI:dbAppendTable]{DBI::dbAppendTable()}} by default.
+in \code{\link[DBI:dbWriteTable]{dbWriteTable()}} and \code{\link[DBI:dbAppendTable]{dbAppendTable()}} by default.
 This capability is disabled by default on the server side
 for recent versions of MySQL Server.}
 
 \item{bigint}{The R type that 64-bit integer types should be mapped to,
-default is \link[bit64:bit64-package]{bit64::integer64}, which allows the full range of 64 bit
+default is \link[bit64:integer64]{bit64::integer64}, which allows the full range of 64 bit
 integers.}
 
 \item{timeout}{Connection timeout, in seconds. Use \code{Inf} or a negative value

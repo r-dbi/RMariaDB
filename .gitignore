@@ -20,3 +20,4 @@ TAGS
 /.vscode/
 /CRAN-SUBMISSION
 /vscode-*build/
+.ccache/
