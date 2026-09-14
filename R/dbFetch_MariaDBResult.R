@@ -47,7 +47,9 @@ dbFetch_MariaDBResult <- function(res, n = -1, ..., row.names = FALSE) {
   if (is.infinite(n)) n <- -1
   if (trunc(n) != n) stopc("n must be a whole number")
   ret <- result_fetch(res@ptr, n = n)
-  ret <- convert_bigint(ret, res@bigint)
+  is_unsigned_int <- result_is_unsigned_int(res@ptr)
+  ret <- convert_bigint(ret, res@bigint, is_unsigned_int)
+  ret <- convert_unsigned_int(ret, res@unsigned_int, is_unsigned_int)
   ret <- fix_timezone(ret, res@conn)
   ret <- fix_blob(ret)
   ret <- sqlColumnToRownames(ret, row.names)

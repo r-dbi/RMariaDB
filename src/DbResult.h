@@ -37,6 +37,8 @@ public:
 
   cpp11::list get_column_info();
 
+  std::vector<bool> get_is_unsigned_int();
+
 private:
   void validate_params(const cpp11::list& params) const;
 };

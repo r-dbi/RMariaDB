@@ -11,6 +11,7 @@ setClass("MariaDBResult",
     ptr = "externalptr",
     sql = "character",
     bigint = "character",
+    unsigned_int = "character",
     conn = "MariaDBConnection"
   )
 )

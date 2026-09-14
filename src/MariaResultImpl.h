@@ -13,6 +13,7 @@ public:
   virtual void bind(const cpp11::list& params) = 0;
 
   virtual cpp11::list get_column_info() = 0;
+  virtual std::vector<bool> get_is_unsigned_int() const = 0;
 
   virtual cpp11::list fetch(int n_max = -1) = 0;
 

@@ -59,6 +59,11 @@ bool MariaResultSimple::complete() const {
   return true;
 }
 
+std::vector<bool> MariaResultSimple::get_is_unsigned_int() const {
+  // Simple path never returns typed rows; no column metadata to report.
+  return std::vector<bool>();
+}
+
 void MariaResultSimple::exec(const std::string& sql) {
   pConn_->exec(sql);
 }

@@ -64,7 +64,12 @@
 #'   for recent versions of MySQL Server.
 #' @param bigint The R type that 64-bit integer types should be mapped to,
 #'   default is [bit64::integer64], which allows the full range of 64 bit
-#'   integers.
+#'   integers. `INT UNSIGNED` columns are governed by `unsigned_int`, not this
+#'   argument.
+#' @param unsigned_int The R type that `INT UNSIGNED` columns should be mapped
+#'   to, default is [bit64::integer64], which safely represents the full
+#'   unsigned 32-bit range. Does not affect `BIGINT UNSIGNED` columns, which
+#'   are governed by `bigint`.
 #' @param timeout Connection timeout, in seconds. Use `Inf` or a negative value
 #'   for no timeout.
 #' @param timezone (optional) time zone for the connection,
@@ -146,6 +151,7 @@ dbConnect_MariaDBDriver <- function(
     groups = NULL,
     load_data_local_infile = FALSE,
     bigint = c("integer64", "integer", "numeric", "character"),
+    unsigned_int = c("integer64", "integer", "numeric", "character"),
     timeout = 10,
     timezone = "+00:00",
     timezone_out = NULL,
@@ -153,6 +159,7 @@ dbConnect_MariaDBDriver <- function(
     mysql = NULL) {
   #
   bigint <- match.arg(bigint)
+  unsigned_int <- match.arg(unsigned_int)
 
   if (is.infinite(timeout)) {
     timeout <- -1L
@@ -224,7 +231,8 @@ dbConnect_MariaDBDriver <- function(
     host = info$host,
     db = info$dbname,
     load_data_local_infile = isTRUE(load_data_local_infile),
-    bigint = bigint
+    bigint = bigint,
+    unsigned_int = unsigned_int
   )
 
   on.exit(dbDisconnect(conn))
