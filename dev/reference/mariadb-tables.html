@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">RMariaDB</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.5.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.5.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,8 +95,7 @@
 
 
 <dl><dt id="arg-conn">conn<a class="anchor" aria-label="anchor" href="#arg-conn"></a></dt>
-<dd><p>a <a href="MariaDBConnection-class.html">MariaDBConnection</a> object, produced by
-<code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">DBI::dbConnect()</a></code></p></dd>
+<dd><p>a <a href="MariaDBConnection-class.html">MariaDBConnection</a> object, produced by <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">DBI::dbConnect()</a></code></p></dd>
 
 
 <dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
@@ -128,19 +127,16 @@ If given the method will return all objects accessible through this prefix.</p><
 
 
 <dt id="arg-check-names">check.names<a class="anchor" aria-label="anchor" href="#arg-check-names"></a></dt>
-<dd><p>If <code>TRUE</code>, the default, column names will be
-converted to valid R identifiers.</p></dd>
+<dd><p>If <code>TRUE</code>, the default, column names will be converted to valid R identifiers.</p></dd>
 
 
 <dt id="arg-temporary">temporary<a class="anchor" aria-label="anchor" href="#arg-temporary"></a></dt>
-<dd><p>If <code>TRUE</code>, creates a temporary table that expires
-when the connection is closed. For <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code>, only temporary
-tables are considered if this argument is set to <code>TRUE</code>.</p></dd>
+<dd><p>If <code>TRUE</code>, creates a temporary table that expires when the connection is closed.
+For <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code>, only temporary tables are considered if this argument is set to <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg-fail-if-missing">fail_if_missing<a class="anchor" aria-label="anchor" href="#arg-fail-if-missing"></a></dt>
-<dd><p>If <code>FALSE</code>, <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code> succeeds if the
-table doesn't exist.</p></dd>
+<dd><p>If <code>FALSE</code>, <code><a href="https://dbi.r-dbi.org/reference/dbRemoveTable.html" class="external-link">dbRemoveTable()</a></code> succeeds if the table doesn't exist.</p></dd>
 
 
 <dt id="arg-field-types">field.types<a class="anchor" aria-label="anchor" href="#arg-field-types"></a></dt>
@@ -149,25 +145,24 @@ derived from the classes of the columns in the data frame.</p></dd>
 
 
 <dt id="arg-overwrite">overwrite<a class="anchor" aria-label="anchor" href="#arg-overwrite"></a></dt>
-<dd><p>a logical specifying whether to overwrite an existing table
-or not. Its default is <code>FALSE</code>.</p></dd>
+<dd><p>a logical specifying whether to overwrite an existing table or not.
+Its default is <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-append">append<a class="anchor" aria-label="anchor" href="#arg-append"></a></dt>
-<dd><p>a logical specifying whether to append to an existing table
-in the DBMS.  If appending, then the table (or temporary table)
-must exist, otherwise an error is reported. Its default is <code>FALSE</code>.</p></dd>
+<dd><p>a logical specifying whether to append to an existing table in the DBMS.  If appending,
+then the table (or temporary table) must exist, otherwise an error is reported.
+Its default is <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-header">header<a class="anchor" aria-label="anchor" href="#arg-header"></a></dt>
-<dd><p>logical, does the input file have a header line? Default is the
-same heuristic used by <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table()</a></code>, i.e., <code>TRUE</code> if the first
-line has one fewer column that the second line.</p></dd>
+<dd><p>logical, does the input file have a header line?
+Default is the same heuristic used by <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table()</a></code>, i.e., <code>TRUE</code> if the first line has one fewer column that the second line.</p></dd>
 
 
 <dt id="arg-nrows">nrows<a class="anchor" aria-label="anchor" href="#arg-nrows"></a></dt>
-<dd><p>number of lines to rows to import using <code>read.table</code> from
-the input file to create the proper table definition. Default is 50.</p></dd>
+<dd><p>number of lines to rows to import using <code>read.table</code> from the input file to create the proper table definition.
+Default is 50.</p></dd>
 
 
 <dt id="arg-sep">sep<a class="anchor" aria-label="anchor" href="#arg-sep"></a></dt>
@@ -183,31 +178,25 @@ the input file to create the proper table definition. Default is 50.</p></dd>
 
 
 <dt id="arg-quote">quote<a class="anchor" aria-label="anchor" href="#arg-quote"></a></dt>
-<dd><p>the quote character used in the input file (defaults to
-<code>\"</code>.)</p></dd>
+<dd><p>the quote character used in the input file (defaults to <code>\"</code>.)</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data.frame in the case of <code><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable()</a></code>; otherwise a logical
-indicating whether the operation was successful.</p>
+    <p>A data.frame in the case of <code><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable()</a></code>; otherwise a logical indicating whether the operation was successful.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>When using <code>load_data_local_infile = TRUE</code> in <code><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect()</a></code>,
 pass <code>safe = FALSE</code> to <code><a href="https://dbi.r-dbi.org/reference/dbAppendTable.html" class="external-link">dbAppendTable()</a></code> to avoid transactions.
-Because <code>LOAD DATA INFILE</code> is used internally, this means that
-rows violating primary key constraints are now silently ignored.</p>
+Because <code>LOAD DATA INFILE</code> is used internally, this means that rows violating primary key constraints are now silently ignored.</p>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>The data.frame returned by <code><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable()</a></code> only has
-primitive data, e.g., it does not coerce character data to factors.
-Temporary tables are ignored for <code><a href="https://dbi.r-dbi.org/reference/dbExistsTable.html" class="external-link">dbExistsTable()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbListTables.html" class="external-link">dbListTables()</a></code> due to
-limitations of the underlying C API. For this reason, a prior existence check
-is performed only before creating a regular persistent table; an attempt to
-create a temporary table with an already existing name will fail with a
-message from the database driver.</p>
+    <p>The data.frame returned by <code><a href="https://dbi.r-dbi.org/reference/dbReadTable.html" class="external-link">dbReadTable()</a></code> only has primitive data, e.g., it does not coerce character data to factors.
+Temporary tables are ignored for <code><a href="https://dbi.r-dbi.org/reference/dbExistsTable.html" class="external-link">dbExistsTable()</a></code> and <code><a href="https://dbi.r-dbi.org/reference/dbListTables.html" class="external-link">dbListTables()</a></code> due to limitations of the underlying C API.
+For this reason, a prior existence check is performed only before creating a regular persistent table;
+an attempt to create a temporary table with an already existing name will fail with a message from the database driver.</p>
     </div>
 
     <div class="section level2">
