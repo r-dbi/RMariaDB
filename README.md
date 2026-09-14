@@ -59,11 +59,11 @@ devtools::install_github("r-dbi/RMariaDB")
 ```
 
 Discussions associated with DBI and related database packages take place on [R-SIG-DB](https://stat.ethz.ch/mailman/listinfo/r-sig-db).
-The website [Databases using R](https://db.rstudio.com/) describes the tools and best practices in this ecosystem.
+The website [Databases using R](https://solutions.posit.co/connections/db/) describes the tools and best practices in this ecosystem.
 
-Installation from source on Linux or OS X currently requires [`MariaDB Connector/C`](https://downloads.mariadb.org/connector-c/), preferably in version 2.3.4/3.0.3 or later.
+Installation from source on Linux or OS X currently requires [`MariaDB Connector/C`](https://mariadb.com/kb/en/mariadb-connector-c/), preferably in version 2.3.4/3.0.3 or later.
 With older versions, character and blob columns do not work reliably.
-Alternatively, Oracle's [libmysqlclient](https://packages.debian.org/buster/default-libmysqlclient-dev) can be used.
+Alternatively, Oracle's [libmysqlclient](https://packages.debian.org/stable/default-libmysqlclient-dev) can be used.
 
 
 ### Connector/C
@@ -89,13 +89,13 @@ brew install mariadb-connector-c
 
 ### MySQL client library
 
-On recent __Debian__ or __Ubuntu__ install [libmysqlclient-dev](https://packages.debian.org/buster/default-libmysqlclient-dev).
+On recent __Debian__ or __Ubuntu__ install [libmysqlclient-dev](https://packages.debian.org/stable/default-libmysqlclient-dev).
 
 ```
 sudo apt-get install -y libmysqlclient-dev
 ```
 
-On __Fedora__,  __CentOS__ or __RHEL__ we need mysql-devel, see https://apps.fedoraproject.org/packages/mysql-devel:
+On __Fedora__,  __CentOS__ or __RHEL__ we need `mysql-devel`:
 
 ```
 sudo yum install mysql-devel
