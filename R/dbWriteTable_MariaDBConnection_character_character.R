@@ -3,13 +3,11 @@
 #' @param sep field separator character
 #' @param eol End-of-line separator
 #' @param skip number of lines to skip before reading data in the input file.
-#' @param quote the quote character used in the input file (defaults to
-#'    `\"`.)
-#' @param header logical, does the input file have a header line? Default is the
-#'    same heuristic used by `read.table()`, i.e., `TRUE` if the first
-#'    line has one fewer column that the second line.
-#' @param nrows number of lines to rows to import using `read.table` from
-#'   the input file to create the proper table definition. Default is 50.
+#' @param quote the quote character used in the input file (defaults to `\"`.)
+#' @param header logical, does the input file have a header line?
+#'    Default is the same heuristic used by `read.table()`, i.e., `TRUE` if the first line has one fewer column that the second line.
+#' @param nrows number of lines to rows to import using `read.table` from the input file to create the proper table definition.
+#'   Default is 50.
 #' @usage NULL
 dbWriteTable_MariaDBConnection_character_character <- function(conn, name, value, field.types = NULL, overwrite = FALSE,
                                                                append = FALSE, header = TRUE, row.names = FALSE, nrows = 50,

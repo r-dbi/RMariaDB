@@ -1,76 +1,64 @@
 #' Connect/disconnect to a MariaDB DBMS
 #'
-#' These methods are straight-forward implementations of the corresponding
-#' generic functions.
+#' These methods are straight-forward implementations of the corresponding generic functions.
 #'
 #' @section Time zones:
 #' MySQL and MariaDB support named time zones,
 #' they must be installed on the server.
-#' See <https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html>
-#' for more details.
+#' See <https://dev.mysql.com/doc/mysql-g11n-excerpt/8.0/en/time-zone-support.html> for more details.
 #' Without installation, time zone support is restricted to UTC offset,
 #' which cannot take into account DST offsets.
 #'
 #' @section Secure passwords:
-#' Avoid storing passwords hard-coded in the code, use e.g. the \pkg{keyring}
-#' package to store and retrieve passwords in a secure way.
+#' Avoid storing passwords hard-coded in the code,
+#' use e.g. the \pkg{keyring} package to store and retrieve passwords in a secure way.
 #'
 #' The MySQL client library (but not MariaDB) supports a `.mylogin.cnf` file
 #' that can be passed in the `default.file` argument.
-#' This file can contain an obfuscated password, which is not a secure way
-#' to store passwords but may be acceptable if the user is aware of the
-#' restrictions.
-#' The availability of this feature depends on the client library used
-#' for compiling the \pkg{RMariaDB} package.
-#' Windows and macOS binaries on CRAN are compiled against the MariaDB Connector/C
-#' client library which do not support this feature.
+#' This file can contain an obfuscated password,
+#' which is not a secure way to store passwords but may be acceptable if the user is aware of the restrictions.
+#' The availability of this feature depends on the client library used for compiling the \pkg{RMariaDB} package.
+#' Windows and macOS binaries on CRAN are compiled against the MariaDB Connector/C client library
+#' which do not support this feature.
 #'
-#' @param drv an object of class [MariaDBDriver-class] or
-#'   [MariaDBConnection-class].
-#' @param username,password Username and password. If username omitted,
-#'   defaults to the current user. If password is omitted, only users
-#'   without a password can log in.
-#' @param dbname string with the database name or NULL. If not NULL, the
-#'   connection sets the default database to this value.
-#' @param host string identifying the host machine running the MariaDB server or
-#'   NULL. If NULL or the string `"localhost"`, a connection to the local
-#'   host is assumed.
+#' @param drv an object of class [MariaDBDriver-class] or [MariaDBConnection-class].
+#' @param username,password Username and password.
+#'   If username omitted, defaults to the current user.
+#'   If password is omitted, only users without a password can log in.
+#' @param dbname string with the database name or NULL.
+#'   If not NULL, the connection sets the default database to this value.
+#' @param host string identifying the host machine running the MariaDB server or NULL.
+#'   If NULL or the string `"localhost"`, a connection to the local host is assumed.
 #' @param unix.socket (optional) string of the unix socket or named pipe.
 #' @param port (optional) integer of the TCP/IP default port.
 #' @param client.flag (optional) integer setting various MariaDB client flags,
 #'   see [Client-flags] for details.
-#' @param group string identifying a section in the `default.file` to use
-#'   for setting authentication parameters (see [MariaDB()]).
+#' @param group string identifying a section in the `default.file` to use for setting authentication parameters (see [MariaDB()]).
 #' @param groups deprecated, use `group` instead.
 #' @param default.file string of the filename with MariaDB client options,
-#'   only relevant if `groups` is given. The default value depends on the
-#'   operating system (see references), on Linux and OS X the files
-#'   `~/.my.cnf` and `~/.mylogin.cnf` are used. Expanded with [normalizePath()].
+#'   only relevant if `groups` is given.
+#'   The default value depends on the operating system (see references),
+#'   on Linux and OS X the files `~/.my.cnf` and `~/.mylogin.cnf` are used.
+#'   Expanded with [normalizePath()].
 #' @param ssl.key (optional) string of the filename of the SSL key file to use.
 #'   Expanded with [normalizePath()].
-#' @param ssl.cert (optional) string of the filename of the SSL certificate to
-#'   use. Expanded with [normalizePath()].
-#' @param ssl.ca (optional) string of the filename of an SSL certificate
-#'   authority file to use. Expanded with [normalizePath()].
-#' @param ssl.capath (optional) string of the path to a directory containing
-#'   the trusted SSL CA certificates in PEM format. Expanded with
-#'   [normalizePath()].
-#' @param ssl.cipher (optional) string list of permitted ciphers to use for SSL
-#'   encryption.
+#' @param ssl.cert (optional) string of the filename of the SSL certificate to use.
+#'   Expanded with [normalizePath()].
+#' @param ssl.ca (optional) string of the filename of an SSL certificate authority file to use.
+#'   Expanded with [normalizePath()].
+#' @param ssl.capath (optional) string of the path to a directory containing the trusted SSL CA certificates in PEM format.
+#'   Expanded with [normalizePath()].
+#' @param ssl.cipher (optional) string list of permitted ciphers to use for SSL encryption.
 #' @param ... Unused, needed for compatibility with generic.
-#' @param load_data_local_infile Set to `TRUE` to use `LOAD DATA LOCAL INFILE`
-#'   in [dbWriteTable()] and [dbAppendTable()] by default.
-#'   This capability is disabled by default on the server side
-#'   for recent versions of MySQL Server.
+#' @param load_data_local_infile Set to `TRUE` to use `LOAD DATA LOCAL INFILE` in [dbWriteTable()] and [dbAppendTable()] by default.
+#'   This capability is disabled by default on the server side for recent versions of MySQL Server.
 #' @param bigint The R type that 64-bit integer types should be mapped to,
-#'   default is [bit64::integer64], which allows the full range of 64 bit
-#'   integers.
-#' @param timeout Connection timeout, in seconds. Use `Inf` or a negative value
-#'   for no timeout.
+#'   default is [bit64::integer64], which allows the full range of 64 bit integers.
+#' @param timeout Connection timeout, in seconds.
+#'   Use `Inf` or a negative value for no timeout.
 #' @param timezone (optional) time zone for the connection,
 #'   the default corresponds to UTC.
-#'   Set this argument if your server or database is configured with a different
-#'   time zone than UTC.
+#'   Set this argument if your server or database is configured with a different time zone than UTC.
 #'   Set to `NULL` to automatically determine the server time zone.
 #' @param timezone_out The time zone returned to R.
 #'   The default is to use the value of the `timezone` argument,
@@ -78,13 +66,11 @@
 #'   If you want to display datetime values in the local timezone,
 #'   set to [Sys.timezone()] or `""`.
 #'   This setting does not change the time values returned, only their display.
-#' @param reconnect (experimental) Set to `TRUE` to use `MYSQL_OPT_RECONNECT` to enable
-#'   automatic reconnection. This is experimental and could be dangerous if the connection
-#'   is lost in the middle of a transaction.
+#' @param reconnect (experimental) Set to `TRUE` to use `MYSQL_OPT_RECONNECT` to enable automatic reconnection.
+#'   This is experimental and could be dangerous if the connection is lost in the middle of a transaction.
 #' @param mysql Set to `TRUE`/`FALSE` to connect to a MySQL server or to a MariaDB server,
 #'   respectively.
-#'   The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect
-#'   and other details vary.
+#'   The \pkg{RMariaDB} package supports both MariaDB and MySQL servers, but the SQL dialect and other details vary.
 #'   The default is to assume MariaDB if the version is >= 10.0.0, and MySQL otherwise.
 #'
 #' @references

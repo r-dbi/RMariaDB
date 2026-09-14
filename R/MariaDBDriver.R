@@ -14,9 +14,8 @@ setClass("MariaDBDriver",
 #'
 #' This function prints out the compiled and loaded client library versions.
 #'
-#' @return A named integer vector of length two, the first element
-#'   representing the compiled library version and the second element
-#'   representing the loaded client library version.
+#' @return A named integer vector of length two,
+#'   the first element representing the compiled library version and the second element representing the loaded client library version.
 #' @export
 #' @examples
 #' mariadbClientLibraryVersions()
