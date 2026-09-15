@@ -96,7 +96,7 @@ If given the method will return all objects accessible through this prefix.}
 \item{check.names}{If \code{TRUE}, the default, column names will be converted to valid R identifiers.}
 
 \item{temporary}{If \code{TRUE}, creates a temporary table that expires when the connection is closed.
-For \code{dbRemoveTable()}, only temporary tables are considered if this argument is set to \code{TRUE}.}
+ For \code{dbRemoveTable()}, only temporary tables are considered if this argument is set to \code{TRUE}.}
 
 \item{fail_if_missing}{If \code{FALSE}, \code{dbRemoveTable()} succeeds if the table doesn't exist.}
 
@@ -104,17 +104,17 @@ For \code{dbRemoveTable()}, only temporary tables are considered if this argumen
 derived from the classes of the columns in the data frame.}
 
 \item{overwrite}{a logical specifying whether to overwrite an existing table or not.
-Its default is \code{FALSE}.}
+ Its default is \code{FALSE}.}
 
 \item{append}{a logical specifying whether to append to an existing table in the DBMS.  If appending,
 then the table (or temporary table) must exist, otherwise an error is reported.
-Its default is \code{FALSE}.}
+ Its default is \code{FALSE}.}
 
 \item{header}{logical, does the input file have a header line?
-Default is the same heuristic used by \code{read.table()}, i.e., \code{TRUE} if the first line has one fewer column that the second line.}
+ Default is the same heuristic used by \code{read.table()}, i.e., \code{TRUE} if the first line has one fewer column that the second line.}
 
 \item{nrows}{number of lines to rows to import using \code{read.table} from the input file to create the proper table definition.
-Default is 50.}
+ Default is 50.}
 
 \item{sep}{field separator character}
 
@@ -133,12 +133,12 @@ These methods read or write entire tables from a MariaDB database.
 \details{
 When using \code{load_data_local_infile = TRUE} in \code{\link[DBI:dbConnect]{dbConnect()}},
 pass \code{safe = FALSE} to \code{dbAppendTable()} to avoid transactions.
-Because \verb{LOAD DATA INFILE} is used internally, this means that rows violating primary key constraints are now silently ignored.
+ Because \verb{LOAD DATA INFILE} is used internally, this means that rows violating primary key constraints are now silently ignored.
 }
 \note{
 The data.frame returned by \code{dbReadTable()} only has primitive data, e.g., it does not coerce character data to factors.
-Temporary tables are ignored for \code{dbExistsTable()} and \code{dbListTables()} due to limitations of the underlying C API.
-For this reason, a prior existence check is performed only before creating a regular persistent table;
+ Temporary tables are ignored for \code{dbExistsTable()} and \code{dbListTables()} due to limitations of the underlying C API.
+ For this reason, a prior existence check is performed only before creating a regular persistent table;
 an attempt to create a temporary table with an already existing name will fail with a message from the database driver.
 }
 \examples{
