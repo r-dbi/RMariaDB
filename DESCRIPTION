@@ -31,6 +31,7 @@ Imports:
     methods,
     rlang
 Suggests: 
+    data.table,
     DBItest (>= 1.7.2.9001),
     decor,
     readr,
