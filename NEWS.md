@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.5.9003 (2026-09-15)
+
+## Documentation
+
+- Break lines at meaning boundaries (#559).
+
+- Drop the branch from the coverage badge (#558).
+
+- Use `pak::pak()` for the development install (#556).
+
+
 # RMariaDB 1.3.5.9002 (2026-09-13)
 
 ## Chore
