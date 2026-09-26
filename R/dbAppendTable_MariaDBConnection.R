@@ -2,8 +2,7 @@
 #' @details
 #' When using `load_data_local_infile = TRUE` in [dbConnect()],
 #' pass `safe = FALSE` to `dbAppendTable()` to avoid transactions.
-#' Because `LOAD DATA INFILE` is used internally, this means that
-#' rows violating primary key constraints are now silently ignored.
+#' Because `LOAD DATA INFILE` is used internally, this means that rows violating primary key constraints are now silently ignored.
 #' @importFrom utils write.table
 #' @usage NULL
 dbAppendTable_MariaDBConnection <- function(conn, name, value, ..., row.names = NULL) {

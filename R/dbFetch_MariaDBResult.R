@@ -1,27 +1,24 @@
 #' Execute a SQL statement on a database connection.
 #'
 #' To retrieve results a chunk at a time, use [dbSendQuery()],
-#' [dbFetch()], then [dbClearResult()]. Alternatively, if you want all the
-#' results (and they'll fit in memory) use [dbGetQuery()] which sends,
-#' fetches and clears for you. For data manipulation queries (i.e. queries
-#' that do not return data, such as \code{UPDATE}, \code{DELETE}, etc.),
-#' [dbSendStatement()] serves as a counterpart to [dbSendQuery()], while
-#' [dbExecute()] corresponds to [dbGetQuery()].
+#' [dbFetch()], then [dbClearResult()].
+#' Alternatively, if you want all the results (and they'll fit in memory) use [dbGetQuery()] which sends,
+#' fetches and clears for you.
+#' For data manipulation queries (i.e. queries that do not return data, such as \code{UPDATE}, \code{DELETE}, etc.),
+#' [dbSendStatement()] serves as a counterpart to [dbSendQuery()], while [dbExecute()] corresponds to [dbGetQuery()].
 #'
 #' @param conn A [MariaDBConnection-class] object.
 #' @param res A [MariaDBResult-class] object.
 #' @inheritParams DBI::sqlRownamesToColumn
-#' @param n Number of rows to retrieve. Use -1 to retrieve all rows.
-#' @param params A list of query parameters to be substituted into
-#'   a parameterised query.
-#' @param statement A character vector of length one specifying the SQL
-#'   statement that should be executed.  Only a single SQL statement should be
-#'   provided.
-#' @param ... Unused. Needed for compatibility with generic.
-#' @param immediate If TRUE, uses the `mysql_real_query()` API
-#'   instead of `mysql_stmt_init()`.
-#'   This allows passing multiple statements (with [CLIENT_MULTI_STATEMENTS])
-#'   and turns off the ability to pass parameters.
+#' @param n Number of rows to retrieve.
+#'   Use -1 to retrieve all rows.
+#' @param params A list of query parameters to be substituted into a parameterised query.
+#' @param statement A character vector of length one specifying the SQL statement
+#'   that should be executed.  Only a single SQL statement should be provided.
+#' @param ... Unused.
+#'   Needed for compatibility with generic.
+#' @param immediate If TRUE, uses the `mysql_real_query()` API instead of `mysql_stmt_init()`.
+#'   This allows passing multiple statements (with [CLIENT_MULTI_STATEMENTS]) and turns off the ability to pass parameters.
 #' @examples
 #' if (mariadbHasDefault()) {
 #'   con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")

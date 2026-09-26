@@ -1,7 +1,6 @@
 #' Class MariaDBResult
 #'
-#' MariaDB's query results class.  This classes encapsulates the result of an SQL
-#' query or statement.
+#' MariaDB's query results class.  This classes encapsulates the result of an SQL query or statement.
 #'
 #' @export
 #' @keywords internal

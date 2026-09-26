@@ -1,6 +1,5 @@
 #' @rdname mariadb-tables
-#' @param fail_if_missing If `FALSE`, `dbRemoveTable()` succeeds if the
-#'   table doesn't exist.
+#' @param fail_if_missing If `FALSE`, `dbRemoveTable()` succeeds if the table doesn't exist.
 #' @usage NULL
 dbRemoveTable_MariaDBConnection_character <- function(conn, name, ..., temporary = FALSE, fail_if_missing = TRUE) {
   extra <- list(...)

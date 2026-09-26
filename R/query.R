@@ -64,7 +64,8 @@ dbSend <- function(conn, statement, params = NULL, is_statement, immediate) {
 #' See documentation of generics for more details.
 #'
 #' @param res An object of class [MariaDBResult-class]
-#' @param ... Ignored. Needed for compatibility with generic
+#' @param ... Ignored.
+#'   Needed for compatibility with generic
 #' @examples
 #' if (mariadbHasDefault()) {
 #'   con <- dbConnect(RMariaDB::MariaDB(), dbname = "test")

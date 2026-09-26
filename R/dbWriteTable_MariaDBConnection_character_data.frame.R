@@ -1,15 +1,14 @@
 #' @inheritParams DBI::sqlRownamesToColumn
-#' @param overwrite a logical specifying whether to overwrite an existing table
-#'   or not. Its default is `FALSE`.
-#' @param append a logical specifying whether to append to an existing table
-#'   in the DBMS.  If appending, then the table (or temporary table)
-#'   must exist, otherwise an error is reported. Its default is `FALSE`.
+#' @param overwrite a logical specifying whether to overwrite an existing table or not.
+#'   Its default is `FALSE`.
+#' @param append a logical specifying whether to append to an existing table in the DBMS.  If appending,
+#'   then the table (or temporary table) must exist, otherwise an error is reported.
+#'   Its default is `FALSE`.
 #' @param value A data frame.
 #' @param field.types Optional, overrides default choices of field types,
 #'   derived from the classes of the columns in the data frame.
-#' @param temporary If `TRUE`, creates a temporary table that expires
-#'   when the connection is closed. For `dbRemoveTable()`, only temporary
-#'   tables are considered if this argument is set to `TRUE`.
+#' @param temporary If `TRUE`, creates a temporary table that expires when the connection is closed.
+#'   For `dbRemoveTable()`, only temporary tables are considered if this argument is set to `TRUE`.
 #' @rdname mariadb-tables
 #' @usage NULL
 dbWriteTable_MariaDBConnection_character_data.frame <- function(conn, name, value, field.types = NULL, row.names = FALSE,
