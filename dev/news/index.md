@@ -1,5 +1,19 @@
 # Changelog
 
+## RMariaDB 1.3.5.9003 (2026-09-15)
+
+### Documentation
+
+- Break lines at meaning boundaries
+  ([\#559](https://github.com/r-dbi/RMariaDB/issues/559)).
+
+- Drop the branch from the coverage badge
+  ([\#558](https://github.com/r-dbi/RMariaDB/issues/558)).
+
+- Use [`pak::pak()`](https://pak.r-lib.org/reference/pak.html) for the
+  development install
+  ([\#556](https://github.com/r-dbi/RMariaDB/issues/556)).
+
 ## RMariaDB 1.3.5.9002 (2026-09-13)
 
 ### Chore
