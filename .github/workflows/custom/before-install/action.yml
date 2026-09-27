@@ -1,0 +1,74 @@
+name: 'Custom steps to run before R packages are installed'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Define R CMD check error condition
+      run: |
+        echo '_R_CHECK_PKG_SIZES_=FALSE' | tee -a $GITHUB_ENV
+      shell: bash
+
+    - name: Install legacy time zone data (Linux)
+      # Ubuntu 26.04 no longer ships the backward-compatibility zone names
+      # (PST8PDT, EST5EDT, US/Pacific, ...) in `tzdata`;
+      # they moved to the separate `tzdata-legacy` package.
+      # DBItest exercises PST8PDT,
+      # and without the package `lubridate::with_tz()` warns
+      # "Unrecognized time zone", which fails the round-trip timestamp tests.
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y tzdata-legacy
+      shell: bash
+
+    - name: Install MariaDB client (macOS)
+      if: runner.os == 'macOS' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
+      run: |
+        brew install mariadb-connector-c
+        echo PATH="/opt/homebrew/opt/mariadb-connector-c/bin:${PATH}" | tee -a $GITHUB_ENV
+      shell: bash
+
+    - name: Check MariaDB client (macOS)
+      if: runner.os == 'macOS' && ((matrix.config.mysql_client == '' ) || ! matrix.config.mysql_client)
+      run: |
+        brew install mariadb-connector-c
+        mariadb_config --version
+        mariadb_config --cflags
+        mariadb_config --libs
+      shell: bash
+
+    - name: Install MySQL client (macOS)
+      if: runner.os == 'macOS' && ((matrix.config.mysql_client != '' ) || matrix.config.mysql_client)
+      run: |
+        brew install mysql-client
+        echo PATH="/usr/local/opt/mysql-client/bin:${PATH}" | tee -a $GITHUB_ENV
+        echo PKG_CONFIG_PATH="/usr/local/opt/mysql-client/lib/pkgconfig" | tee -a $GITHUB_ENV
+      shell: bash
+
+    - name: Check MySQL client (macOS)
+      if: runner.os == 'macOS' && ((matrix.config.mysql_client != '' ) || matrix.config.mysql_client)
+      run: |
+        echo $PATH
+        which mysql_config
+        mysql_config || true
+      shell: bash
+
+    # The Linux client is installed in the after-install action,
+    # after the database server has been set up:
+    # on Ubuntu 26.04 `libmariadb-dev` pulls in `mariadb-common`,
+    # which conflicts with `mysql-server` and therefore uninstalls it
+    # (including its systemd unit) --
+    # `ankane/setup-mariadb` expects the image's MySQL to still be there
+    # so that it can stop it before installing MariaDB.
+
+    - name: Define client restrictons
+      run: |
+        echo "RMARIADB_FORCE_MARIADBCONFIG=${{ matrix.config.RMARIADB_FORCE_MARIADBCONFIG }}" | tee -a $GITHUB_ENV
+        echo "RMARIADB_FORCE_MYSQLCONFIG=${{ matrix.config.RMARIADB_FORCE_MYSQLCONFIG }}" | tee -a $GITHUB_ENV
+      shell: bash
+
+    - name: Use LOAD DATA LOCAL INFILE
+      if: (matrix.config.mysql_server == '' ) || ! matrix.config.mysql_server
+      run: |
+        echo "RMARIADB_LOAD_DATA_LOCAL_INFILE=true" | tee -a $GITHUB_ENV
+      shell: bash
