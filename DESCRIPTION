@@ -17,8 +17,7 @@ Description: Implements a DBI-compliant interface to MariaDB
     (<https://mariadb.org/>) and MySQL (<https://www.mysql.com/>)
     databases.
 License: MIT + file LICENSE
-URL: https://rmariadb.r-dbi.org, https://github.com/r-dbi/RMariaDB,
-    https://downloads.mariadb.org/connector-c/
+URL: https://rmariadb.r-dbi.org, https://github.com/r-dbi/RMariaDB
 BugReports: https://github.com/r-dbi/RMariaDB/issues
 Depends: 
     R (>= 2.8.0)
