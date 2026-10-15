@@ -46,3 +46,5 @@ src\/RCS
 ^vscode-.*build$
 ^\.clang-format$
 ^\.ccache$
+^index\.md$
+^README\.Rmd$
