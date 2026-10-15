@@ -20,7 +20,7 @@ bug, create an associated issue and illustrate the bug with a minimal
 ### Pull request process
 
 *  We recommend that you create a Git branch for each pull request (PR).  
-*  Look at the Travis and AppVeyor build status before and after making changes.
+*  Look at the GitHub Actions check status before and after making changes.
 The `README` should contain badges for any continuous integration services used
 by the package.  
 *  We use [roxygen2](https://cran.r-project.org/package=roxygen2), with
