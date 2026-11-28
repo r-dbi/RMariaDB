@@ -15,7 +15,7 @@ permissions: {}
 jobs:
   gate:
     if: github.repository == 'r-dbi/RMariaDB'
-    uses: krlmlr/r-release-actions/.github/workflows/release-gate.yaml@0200cf4e63fd7f7394acbc3741988d70bae49276 # main, no release yet
+    uses: krlmlr/r-release-actions/.github/workflows/release-gate.yaml@main
     permissions:
       actions: read
       contents: read
