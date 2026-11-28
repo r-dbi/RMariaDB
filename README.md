@@ -9,8 +9,32 @@ RMariaDB
 <!-- badges: end -->
 
 RMariaDB is a database interface and MariaDB driver for R.
-This version is aimed at full compliance with the [DBI specification](https://cran.r-project.org/package=DBI/vignettes/spec.html),
+This version is aimed at full compliance with the [DBI specification](https://dbi.r-dbi.org/articles/spec.html),
 as a replacement for the old [RMySQL](https://cran.r-project.org/package=RMySQL) package.
+
+## Goals and non-goals
+
+RMariaDB aims to:
+
+- implement the [DBI specification](https://dbi.r-dbi.org/articles/spec.html) for MariaDB and MySQL,
+  and to keep proving it by running the `DBItest` suite as part of its own tests
+- serve as a replacement for the old RMySQL package
+- speak to both MariaDB and MySQL servers, which differ in SQL dialect and in other details
+- map MariaDB types to R types that do not lose information:
+  64-bit integers via `bit64`, binary columns via `blob`, and date-time columns with an explicit connection time zone
+- support parameterised queries through `dbBind()` and the `params` argument,
+  so that values never have to be pasted into the SQL string
+
+It is explicitly not trying to:
+
+- define what the database interface looks like:
+  the generics, their semantics and the specification are DBI's, this package supplies the MariaDB implementation
+- translate R code into SQL: queries are handed to `dbSendQuery()` and friends as SQL strings
+- carry forward the RMySQL extensions that DBI does not define:
+  `dbApply()`, `dbMoreResults()` and `dbNextResults()` were removed as finished experiments
+- bundle a client library: the package is built against MariaDB Connector/C or `libmysqlclient`, which has to be installed on the system
+- store your credentials: connection parameters come from `dbConnect()` or a MariaDB option file,
+  and passwords are better kept in something like `keyring`
 
 ## Hello World
 
