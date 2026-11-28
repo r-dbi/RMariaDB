@@ -24,6 +24,21 @@ if (rlang::is_installed("DBItest")) DBItest::make_context(
     if ((.Platform$OS.type == "windows" && .Platform$r_arch == "i386") || packageVersion("DBItest") < "1.7.2") "append_roundtrip_timestamp",
     if ((.Platform$OS.type == "windows" && .Platform$r_arch == "i386") || packageVersion("DBItest") < "1.7.2") "roundtrip_timestamp",
 
+    # Enabled by dbitest_version = "1.8.3.6", not yet supported:
+    "fetch_na_rows",                              # dbFetch(n = NA) errors
+    "reexport",                                   # the Arrow generics are not reexported from DBI
+    # The default dbCreateTableArrow() creates zero-width character columns:
+    # "Data too long for column"
+    "arrow_write_table_arrow_overwrite",
+    "arrow_write_table_arrow_overwrite_missing",
+    "arrow_write_table_arrow_append",
+    "arrow_write_table_arrow_append_new",
+    "arrow_write_table_arrow_temporary_1",
+    "arrow_write_table_arrow_visible_in_other_connection_[123]",
+    "arrow_(write|append)_table_arrow_roundtrip_(keywords|quotes|character|character_native|factor)",
+    # nanoarrow warns about loss of precision in the conversion to double()
+    "arrow_(write|append)_table_arrow_roundtrip_timestamp_extended",
+
     NULL
   )
 )
