@@ -1,5 +1,3 @@
-<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
-
 # RMariaDB 1.3.5.9007 (2026-11-28)
 
 ## Chore
