@@ -5,7 +5,7 @@ if (rlang::is_installed("DBItest")) DBItest::make_context(
     list(load_data_local_infile = (Sys.getenv("RMARIADB_LOAD_DATA_LOCAL_INFILE") != "") && rlang::is_installed("readr"))
   ),
   tweaks = DBItest::tweaks(
-    dbitest_version = "1.8.3.6",
+    dbitest_version = "1.9.0",
     constructor_relax_args = TRUE,
     placeholder_pattern = "?",
     logical_return = function(x) as.integer(x),
@@ -24,7 +24,7 @@ if (rlang::is_installed("DBItest")) DBItest::make_context(
     if ((.Platform$OS.type == "windows" && .Platform$r_arch == "i386") || packageVersion("DBItest") < "1.7.2") "append_roundtrip_timestamp",
     if ((.Platform$OS.type == "windows" && .Platform$r_arch == "i386") || packageVersion("DBItest") < "1.7.2") "roundtrip_timestamp",
 
-    # Enabled by dbitest_version = "1.8.3.6", not yet supported:
+    # Enabled by dbitest_version = "1.9.0", not yet supported:
     "fetch_na_rows",                              # dbFetch(n = NA) errors
     "reexport",                                   # the Arrow generics are not reexported from DBI
     # The default dbCreateTableArrow() creates zero-width character columns:
