@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# RMariaDB 1.3.5.9007 (2026-11-28)
+
+## Chore
+
+- Tidy DESCRIPTION with usethis::use_tidy_description() (#575).
+
+## Continuous integration
+
+- Sync the workflows with cynkra/cynkratemplate (#574).
+
+
 # RMariaDB 1.3.5.9006 (2026-11-27)
 
 ## Continuous integration
